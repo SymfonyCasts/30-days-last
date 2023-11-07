@@ -21,7 +21,7 @@ composer install
 
 ### Database Setup
 
-The code comes with a `docker-compose.yaml` file and we recommend using
+The code comes with a `compose.yaml` file (for Docker) and we recommend using
 Docker to boot a database container. You will still have PHP installed
 locally, but you'll connect to a database inside Docker. This is optional,
 but I think you'll love it!
@@ -30,7 +30,7 @@ First, make sure you have [Docker installed](https://docs.docker.com/get-docker/
 and running. To start the container, run:
 
 ```
-docker-compose up -d
+docker compose up -d
 ```
 
 Next, build the database and the schema with:

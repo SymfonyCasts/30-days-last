@@ -1,0 +1,12 @@
+diff --git a/assets/app.js b/assets/app.js
+index 058ef4d..524a9ed 100644
+--- a/assets/app.js
++++ b/assets/app.js
+@@ -6,6 +6,6 @@
+  */
+ import './styles/app.css'
+ 
+-import alienGreeting from './lib/alien-greeting.js';
++import alienGreeting from './lib/alien-greeting';
+ 
+ alienGreeting('Give us all your candy!', false);

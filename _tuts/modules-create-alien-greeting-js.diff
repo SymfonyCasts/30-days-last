@@ -1,0 +1,9 @@
+diff --git a/assets/lib/alien-greeting.js b/assets/lib/alien-greeting.js
+new file mode 100644
+index 0000000..c86e6ad
+--- /dev/null
++++ b/assets/lib/alien-greeting.js
+@@ -0,0 +1,3 @@
++export default function (message, inPeace = false) {
++    console.log(`${message}! ${inPeace ? '👽' : '👾'}`);
++}

@@ -1,0 +1,29 @@
+diff --git a/assets/app.js b/assets/app.js
+index e3b03ad..058ef4d 100644
+--- a/assets/app.js
++++ b/assets/app.js
+@@ -6,4 +6,6 @@
+  */
+ import './styles/app.css'
+ 
+-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉')
++import alienGreeting from './lib/alien-greeting.js';
++
++alienGreeting('Give us all your candy!', false);
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index 5ead64b..579a577 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -9,12 +9,6 @@
+ 
+         {% block javascripts %}
+             {{ importmap('app') }}
+-
+-            <script type="module">
+-                import alienGreeting from '{{ asset('lib/alien-greeting.js') }}';
+-
+-                alienGreeting('Give us all your candy!', false);
+-            </script>
+         {% endblock %}
+     </head>
+     <body>

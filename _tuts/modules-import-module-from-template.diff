@@ -1,0 +1,17 @@
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index 579a577..5ead64b 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -9,6 +9,12 @@
+ 
+         {% block javascripts %}
+             {{ importmap('app') }}
++
++            <script type="module">
++                import alienGreeting from '{{ asset('lib/alien-greeting.js') }}';
++
++                alienGreeting('Give us all your candy!', false);
++            </script>
+         {% endblock %}
+     </head>
+     <body>

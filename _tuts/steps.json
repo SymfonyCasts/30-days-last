@@ -1,0 +1,55 @@
+{
+    "steps": [
+        {
+            "id": "start",
+            "name": "start",
+            "description": null
+        },
+        {
+            "id": "assetmapper-install-it",
+            "name": "AssetMapper: install it",
+            "description": null
+        },
+        {
+            "id": "assetmapper-add-logo",
+            "name": "AssetMapper: Add logo",
+            "description": null
+        },
+        {
+            "id": "assetmapper-render-logo",
+            "name": "AssetMapper: Render logo",
+            "description": null
+        },
+        {
+            "id": "assetmapper-install-asset-component",
+            "name": "AssetMapper: Install asset component",
+            "description": null
+        },
+        {
+            "id": "modules-create-alien-greeting-js",
+            "name": "Modules: Create alien-greeting.js",
+            "description": null
+        },
+        {
+            "id": "modules-import-module-from-template",
+            "name": "Modules: Import module from template",
+            "description": null
+        },
+        {
+            "id": "modules-move-import-into-app-js",
+            "name": "Modules: Move import into app.js",
+            "description": null
+        },
+        {
+            "id": "modules-typo-the-import",
+            "name": "Modules: Typo the import",
+            "description": null
+        },
+        {
+            "id": "modules-fix-the-typo",
+            "name": "Modules: fix the typo",
+            "description": null
+        }
+    ],
+    "sha": "df102a2e27f2d1fa59e6405c268c9a2abefaafa0"
+}

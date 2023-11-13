@@ -47,7 +47,7 @@ final class VoyageFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'leaveAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'leaveAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeBetween('+1 day', '+1 year')),
             'planet' => PlanetFactory::new(),
             'purpose' => self::faker()->text(255),
         ];

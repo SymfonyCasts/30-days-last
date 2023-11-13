@@ -29,6 +29,22 @@ use Zenstruck\Foundry\RepositoryProxy;
  */
 final class PlanetFactory extends ModelFactory
 {
+    public const PLANET_NAMES = [
+        'Mercury',
+        'Venus',
+        'Earth',
+        'Mars',
+        'Jupiter',
+        'Saturn',
+        'Uranus',
+        'Neptune',
+        // and some from other solar systems!
+        'Proxima Centauri b',
+        'Kepler-186f',
+        'Kepler-62e',
+        'Kepler-62f',
+    ];
+
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
      *
@@ -49,7 +65,7 @@ final class PlanetFactory extends ModelFactory
         return [
             'description' => self::faker()->text(),
             'lightYearsFromEarth' => self::faker()->randomFloat(),
-            'name' => self::faker()->text(255),
+            'name' => self::faker()->randomElement(self::PLANET_NAMES),
         ];
     }
 

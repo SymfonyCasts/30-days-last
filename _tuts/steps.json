@@ -139,7 +139,22 @@
             "id": "ux-install-tom-select-css",
             "name": "UX: install tom-select CSS",
             "description": null
+        },
+        {
+            "id": "ux-activate-on-planet-field",
+            "name": "UX: Activate on planet field",
+            "description": null
+        },
+        {
+            "id": "ux-paste-in-some-styling",
+            "name": "UX: Paste in some styling",
+            "description": null
+        },
+        {
+            "id": "ux-make-controller-lazy",
+            "name": "UX: Make controller lazy",
+            "description": null
         }
     ],
-    "sha": "44045a61a26af61abfb197006b79bbc96ae34c5f"
+    "sha": "93333ae4decf322e2655eeb93a6d446ea9a113ac"
 }

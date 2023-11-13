@@ -1,0 +1,13 @@
+diff --git a/assets/controllers.json b/assets/controllers.json
+index 1f6fc3a..06b78e2 100644
+--- a/assets/controllers.json
++++ b/assets/controllers.json
+@@ -3,7 +3,7 @@
+         "@symfony/ux-autocomplete": {
+             "autocomplete": {
+                 "enabled": true,
+-                "fetch": "eager",
++                "fetch": "lazy",
+                 "autoimport": {
+                     "tom-select/dist/css/tom-select.default.css": true,
+                     "tom-select/dist/css/tom-select.bootstrap5.css": false

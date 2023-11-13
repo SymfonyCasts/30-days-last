@@ -1,0 +1,63 @@
+diff --git a/assets/styles/app.css b/assets/styles/app.css
+index f52a8ac..2318938 100644
+--- a/assets/styles/app.css
++++ b/assets/styles/app.css
+@@ -5,3 +5,58 @@
+ body {
+     background-color: skyblue;
+ }
++
++/* tom-select custom styling */
++/* Base Styles for Dark Mode */
++.ts-wrapper {
++  @apply border-gray-600;
++}
++.ts-wrapper .ts-control,
++.ts-wrapper.single .ts-control,
++.ts-wrapper.single.input-active .ts-control,
++.full .ts-control,
++.ts-dropdown {
++  @apply bg-gray-800 text-white !important;
++  box-shadow: none !important;
++  background-image: none !important;
++  border: none !important;
++}
++
++/* Specific Style for the Input Field */
++.ts-wrapper .ts-control > input,
++.ts-wrapper.single .ts-control > input {
++  @apply bg-transparent text-white;
++}
++
++.ts-wrapper .ts-dropdown .option {
++  @apply bg-gray-800 text-white;
++}
++
++/* Active and Hover States for Dropdown Items */
++.ts-wrapper .ts-dropdown .active,
++.ts-wrapper .ts-dropdown [data-selectable]:hover {
++  @apply bg-gray-700 text-white;
++}
++
++/* Disabled and Focus States */
++.ts-wrapper.disabled .ts-control,
++.ts-wrapper.focus .ts-control {
++  @apply bg-gray-700 text-gray-400 border-gray-500;
++}
++
++/* Multi-select Tags Style */
++.ts-wrapper.multi .ts-control > div {
++  @apply bg-gray-600 text-white;
++}
++
++/* Border Radius Adjustments */
++.ts-wrapper .ts-control,
++.ts-wrapper .ts-dropdown,
++.ts-wrapper .ts-control > div {
++  @apply rounded-md;
++}
++
++/* Dropdown Box Shadow */
++.ts-wrapper .ts-dropdown {
++  @apply shadow-md;
++}

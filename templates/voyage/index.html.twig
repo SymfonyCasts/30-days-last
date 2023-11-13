@@ -1,37 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Voyage index{% endblock %}
+{% block title %}Manage Voyages{% endblock %}
 
 {% block body %}
-    <h1>Voyage index</h1>
+<div class="m-4 p-4 bg-gray-800 rounded-lg">
+    <h1 class="text-xl font-semibold text-white mb-4">Voyages</h1>
 
-    <table class="table">
-        <thead>
+    <table class="min-w-full bg-gray-800 text-white">
+        <thead class="border-b border-gray-700">
             <tr>
-                <th>Id</th>
-                <th>Purpose</th>
-                <th>LeaveAt</th>
-                <th>actions</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Id</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Purpose</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">LeaveAt</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Actions</th>
             </tr>
         </thead>
-        <tbody>
-        {% for voyage in voyages %}
-            <tr>
-                <td>{{ voyage.id }}</td>
-                <td>{{ voyage.purpose }}</td>
-                <td>{{ voyage.leaveAt ? voyage.leaveAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_voyage_show', {'id': voyage.id}) }}">show</a>
-                    <a href="{{ path('app_voyage_edit', {'id': voyage.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
+        <tbody class="bg-gray-700 divide-y divide-gray-600">
+            {% for voyage in voyages %}
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ voyage.id }}</td>
+                    <td class="px-6 py-4">{{ voyage.purpose }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ voyage.leaveAt ? voyage.leaveAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <a href="{{ path('app_voyage_show', {'id': voyage.id}) }}" class="text-blue-400 hover:text-blue-600">show</a>
+                        <a href="{{ path('app_voyage_edit', {'id': voyage.id}) }}" class="ml-4 text-yellow-400 hover:text-yellow-600">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="px-6 py-4 whitespace-nowrap text-center text-gray-400">No records found</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_voyage_new') }}">Create new</a>
+    <a href="{{ path('app_voyage_new') }}" class="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+        Create new
+    </a>
+</div>
 {% endblock %}

@@ -101,6 +101,16 @@
             "description": null
         },
         {
+            "id": "tailwind-install-form-theme-bundle",
+            "name": "Tailwind: Install form-theme bundle",
+            "description": null
+        },
+        {
+            "id": "tailwind-configure-and-use-form-theme",
+            "name": "Tailwind: Configure & use form theme",
+            "description": null
+        },
+        {
             "id": "stimulus-install-stimulus-bundle",
             "name": "Stimulus: install stimulus-bundle",
             "description": null
@@ -131,5 +141,5 @@
             "description": null
         }
     ],
-    "sha": "8a7750cb954b6a3b5f452821164df8ab98800d6f"
+    "sha": "44045a61a26af61abfb197006b79bbc96ae34c5f"
 }

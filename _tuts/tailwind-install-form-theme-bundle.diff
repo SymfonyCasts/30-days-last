@@ -1,0 +1,123 @@
+diff --git a/composer.json b/composer.json
+index 5b94d8b..0d340ce 100644
+--- a/composer.json
++++ b/composer.json
+@@ -24,6 +24,7 @@
+         "symfony/validator": "6.4.x-dev",
+         "symfony/yaml": "6.4.x-dev",
+         "symfonycasts/tailwind-bundle": "dev-main",
++        "tales-from-a-dev/flowbite-bundle": "dev-main",
+         "twig/extra-bundle": "^2.12|^3.0",
+         "twig/twig": "^2.12|^3.0"
+     },
+diff --git a/composer.lock b/composer.lock
+index dcb4cd9..3b5375b 100644
+--- a/composer.lock
++++ b/composer.lock
+@@ -4,7 +4,7 @@
+         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+         "This file is @generated automatically"
+     ],
+-    "content-hash": "b89d5cff1119263d38d5607b8fd3cc61",
++    "content-hash": "35f0aa87aa9cb1249acd19cc4b178fd6",
+     "packages": [
+         {
+             "name": "composer/semver",
+@@ -5894,6 +5894,65 @@
+             },
+             "time": "2023-11-08T19:29:49+00:00"
+         },
++        {
++            "name": "tales-from-a-dev/flowbite-bundle",
++            "version": "dev-main",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/tales-from-a-dev/flowbite-bundle.git",
++                "reference": "54f6e0854d4ada2794eb1b6df30c6089df1dfbce"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/tales-from-a-dev/flowbite-bundle/zipball/54f6e0854d4ada2794eb1b6df30c6089df1dfbce",
++                "reference": "54f6e0854d4ada2794eb1b6df30c6089df1dfbce",
++                "shasum": ""
++            },
++            "require": {
++                "php": ">=8.2",
++                "symfony/http-kernel": "^6.2",
++                "symfony/twig-bridge": "^6.2"
++            },
++            "require-dev": {
++                "friendsofphp/php-cs-fixer": "^3.15",
++                "phpunit/phpunit": "^10.0",
++                "symfony/form": "^6.2",
++                "symfony/intl": "^6.2",
++                "symfony/security-csrf": "^6.2",
++                "symfony/translation": "^6.2"
++            },
++            "default-branch": true,
++            "type": "symfony-bundle",
++            "autoload": {
++                "psr-4": {
++                    "TalesFromADev\\FlowbiteBundle\\": "src/"
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "Romain Monteil",
++                    "email": "monteil.romain@gmail.com"
++                }
++            ],
++            "description": "A Symfony form theme for Flowbite",
++            "homepage": "https://github.com/tales-from-a-dev/flowbite-bundle",
++            "keywords": [
++                "bundle",
++                "flowbite",
++                "form",
++                "symfony",
++                "theme"
++            ],
++            "support": {
++                "issues": "https://github.com/tales-from-a-dev/flowbite-bundle/issues",
++                "source": "https://github.com/tales-from-a-dev/flowbite-bundle/tree/v0.2.5"
++            },
++            "time": "2023-06-21T15:29:10+00:00"
++        },
+         {
+             "name": "twig/extra-bundle",
+             "version": "3.x-dev",
+@@ -6811,6 +6870,7 @@
+         "symfony/validator": 20,
+         "symfony/yaml": 20,
+         "symfonycasts/tailwind-bundle": 20,
++        "tales-from-a-dev/flowbite-bundle": 20,
+         "symfony/debug-bundle": 20,
+         "symfony/stopwatch": 20,
+         "symfony/web-profiler-bundle": 20
+diff --git a/config/bundles.php b/config/bundles.php
+index 5fd504a..b7c1af7 100644
+--- a/config/bundles.php
++++ b/config/bundles.php
+@@ -14,4 +14,5 @@ return [
+     Zenstruck\Foundry\ZenstruckFoundryBundle::class => ['dev' => true, 'test' => true],
+     Symfonycasts\TailwindBundle\SymfonycastsTailwindBundle::class => ['all' => true],
+     Knp\Bundle\TimeBundle\KnpTimeBundle::class => ['all' => true],
++    TalesFromADev\FlowbiteBundle\FlowbiteBundle::class => ['all' => true],
+ ];
+diff --git a/symfony.lock b/symfony.lock
+index 39f9159..84b0d7b 100644
+--- a/symfony.lock
++++ b/symfony.lock
+@@ -199,6 +199,9 @@
+     "symfonycasts/tailwind-bundle": {
+         "version": "dev-main"
+     },
++    "tales-from-a-dev/flowbite-bundle": {
++        "version": "dev-main"
++    },
+     "twig/extra-bundle": {
+         "version": "v3.7.1"
+     },

@@ -1,0 +1,23 @@
+diff --git a/config/packages/twig.yaml b/config/packages/twig.yaml
+index f9f4cc5..25e9797 100644
+--- a/config/packages/twig.yaml
++++ b/config/packages/twig.yaml
+@@ -1,5 +1,6 @@
+ twig:
+     default_path: '%kernel.project_dir%/templates'
++    form_themes: ['@Flowbite/form/default.html.twig']
+ 
+ when@test:
+     twig:
+diff --git a/tailwind.config.js b/tailwind.config.js
+index bb226fb..b7248cb 100644
+--- a/tailwind.config.js
++++ b/tailwind.config.js
+@@ -3,6 +3,7 @@ module.exports = {
+   content: [
+     "./assets/**/*.js",
+     "./templates/**/*.html.twig",
++    "./vendor/tales-from-a-dev/flowbite-bundle/templates/**/*.html.twig",
+   ],
+   theme: {
+     extend: {},

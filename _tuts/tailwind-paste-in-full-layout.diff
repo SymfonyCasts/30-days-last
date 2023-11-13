@@ -44,7 +44,7 @@ index 579a577..a7ffeb7 100644
      </body>
  </html>
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 73b104b..efab32f 100644
+index 73b104b..7c9c098 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -3,5 +3,66 @@
@@ -94,7 +94,7 @@ index 73b104b..efab32f 100644
 +                    <tbody>
 +                        {% for voyage in voyages %}
 +                        <tr class="border-b border-gray-700 {% if loop.index is odd %} bg-gray-800 {% else %} bg-gray-700 {% endif %}">
-+                            <td class="p-2">{{ voyage.purpose }}</td>
++                            <td class="p-4">{{ voyage.purpose }}</td>
 +                            <td class="px-2 whitespace-nowrap">
 +                                <img
 +                                    src="{{ asset('images/'~voyage.planet.imageFilename) }}"

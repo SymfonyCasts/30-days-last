@@ -14865,7 +14865,7 @@ literal 0
 HcmV?d00001
 
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index efab32f..60ad754 100644
+index 7c9c098..c448905 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -18,7 +18,7 @@

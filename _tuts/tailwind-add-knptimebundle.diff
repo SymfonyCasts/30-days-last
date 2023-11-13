@@ -282,7 +282,7 @@ index 7064e79..39f9159 100644
          "version": "6.4",
          "recipe": {
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 60ad754..e2c8cf7 100644
+index c448905..69e4666 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -53,7 +53,7 @@

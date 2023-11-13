@@ -11,7 +11,7 @@ index 36400c2..9e0c3a8 100644
          "twig/twig": "^2.12|^3.0"
      },
 diff --git a/composer.lock b/composer.lock
-index 601b271..4f22a5a 100644
+index 096ebc3..25586dd 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
@@ -23,7 +23,7 @@ index 601b271..4f22a5a 100644
      "packages": [
          {
              "name": "composer/semver",
-@@ -4296,6 +4296,67 @@
+@@ -4302,6 +4302,67 @@
              ],
              "time": "2023-08-16T06:22:46+00:00"
          },
@@ -91,7 +91,7 @@ index 601b271..4f22a5a 100644
          {
              "name": "symfony/property-access",
              "version": "6.4.x-dev",
-@@ -5601,6 +5662,61 @@
+@@ -5607,6 +5668,61 @@
              ],
              "time": "2023-11-06T11:00:25+00:00"
          },
@@ -153,7 +153,7 @@ index 601b271..4f22a5a 100644
          {
              "name": "twig/extra-bundle",
              "version": "3.x-dev",
-@@ -6208,67 +6324,6 @@
+@@ -6217,67 +6333,6 @@
              ],
              "time": "2023-10-31T18:23:49+00:00"
          },
@@ -221,7 +221,7 @@ index 601b271..4f22a5a 100644
          {
              "name": "symfony/web-profiler-bundle",
              "version": "6.4.x-dev",
-@@ -6574,6 +6629,7 @@
+@@ -6583,6 +6638,7 @@
          "symfony/twig-bundle": 20,
          "symfony/validator": 20,
          "symfony/yaml": 20,

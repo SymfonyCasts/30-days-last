@@ -1,0 +1,13 @@
+diff --git a/importmap.php b/importmap.php
+index 84cb339..bd4624f 100644
+--- a/importmap.php
++++ b/importmap.php
+@@ -30,4 +30,8 @@ return [
+     'tom-select' => [
+         'version' => '2.3.1',
+     ],
++    'tom-select/dist/css/tom-select.default.css' => [
++        'version' => '2.3.1',
++        'type' => 'css',
++    ],
+ ];

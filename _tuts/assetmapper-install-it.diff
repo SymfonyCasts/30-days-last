@@ -48,7 +48,7 @@ index e41ffb1..899b08d 100644
          "symfony/dotenv": "6.4.x-dev",
          "symfony/flex": "^2",
 diff --git a/composer.lock b/composer.lock
-index 1254a64..7a67616 100644
+index bea8d2c..af9df23 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,8 +4,90 @@
@@ -143,7 +143,7 @@ index 1254a64..7a67616 100644
          {
              "name": "doctrine/cache",
              "version": "2.2.x-dev",
-@@ -1641,6 +1723,85 @@
+@@ -1647,6 +1729,85 @@
              },
              "time": "2021-07-14T16:46:02+00:00"
          },
@@ -153,12 +153,12 @@ index 1254a64..7a67616 100644
 +            "source": {
 +                "type": "git",
 +                "url": "https://github.com/symfony/asset-mapper.git",
-+                "reference": "f85d3d00f2c19b3536f1e4e8cc93e930f0589204"
++                "reference": "93e7adcdc5db720eb8099d85ed79165f2d38f725"
 +            },
 +            "dist": {
 +                "type": "zip",
-+                "url": "https://api.github.com/repos/symfony/asset-mapper/zipball/f85d3d00f2c19b3536f1e4e8cc93e930f0589204",
-+                "reference": "f85d3d00f2c19b3536f1e4e8cc93e930f0589204",
++                "url": "https://api.github.com/repos/symfony/asset-mapper/zipball/93e7adcdc5db720eb8099d85ed79165f2d38f725",
++                "reference": "93e7adcdc5db720eb8099d85ed79165f2d38f725",
 +                "shasum": ""
 +            },
 +            "require": {
@@ -224,14 +224,14 @@ index 1254a64..7a67616 100644
 +                    "type": "tidelift"
 +                }
 +            ],
-+            "time": "2023-11-06T10:32:35+00:00"
++            "time": "2023-11-10T07:35:33+00:00"
 +        },
          {
              "name": "symfony/cache",
              "version": "6.4.x-dev",
-@@ -2984,6 +3145,178 @@
+@@ -2990,6 +3151,178 @@
              ],
-             "time": "2023-11-07T15:05:05+00:00"
+             "time": "2023-11-09T14:41:31+00:00"
          },
 +        {
 +            "name": "symfony/http-client",
@@ -332,12 +332,12 @@ index 1254a64..7a67616 100644
 +            "source": {
 +                "type": "git",
 +                "url": "https://github.com/symfony/http-client-contracts.git",
-+                "reference": "c58b55bbca7422e19ed51667313834b67b098517"
++                "reference": "697f1d16c15d3f86970f59b043278f4d7f5eb25e"
 +            },
 +            "dist": {
 +                "type": "zip",
-+                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/c58b55bbca7422e19ed51667313834b67b098517",
-+                "reference": "c58b55bbca7422e19ed51667313834b67b098517",
++                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/697f1d16c15d3f86970f59b043278f4d7f5eb25e",
++                "reference": "697f1d16c15d3f86970f59b043278f4d7f5eb25e",
 +                "shasum": ""
 +            },
 +            "require": {
@@ -403,7 +403,7 @@ index 1254a64..7a67616 100644
 +                    "type": "tidelift"
 +                }
 +            ],
-+            "time": "2023-07-29T13:12:44+00:00"
++            "time": "2023-11-02T09:13:47+00:00"
 +        },
          {
              "name": "symfony/http-foundation",

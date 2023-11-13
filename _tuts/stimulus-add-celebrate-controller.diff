@@ -28,10 +28,10 @@ index 0000000..832f17b
 +    }
 +}
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 36b4f73..d78e2e7 100644
+index a7ffeb7..caf4875 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -18,7 +18,10 @@
+@@ -17,7 +17,10 @@
                  <nav class="flex items-center justify-between mb-4">
                      <div class="flex items-center">
                          <!-- Placeholder for the logo -->
@@ -41,5 +41,5 @@ index 36b4f73..d78e2e7 100644
 +                            {{ stimulus_action('celebrate', 'poof', 'mouseover') }}
 +                            class="h-8 w-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                          <span class="text-xl ml-3">Space Inviters</span>
-                         <a href="#" class="ml-6 hover:text-gray-400">Voyages</a>
-                         <a href="#" class="ml-4 hover:text-gray-400">Planets</a>
+                         <a href="{{ path('app_voyage_index') }}" class="ml-6 hover:text-gray-400">Voyages</a>
+                         <a href="{{ path('app_planet_index') }}" class="ml-4 hover:text-gray-400">Planets</a>

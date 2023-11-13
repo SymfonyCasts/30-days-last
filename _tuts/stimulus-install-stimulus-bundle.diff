@@ -51,10 +51,10 @@ index 0000000..e847027
 +    }
 +}
 diff --git a/composer.json b/composer.json
-index 9e0c3a8..62beb9f 100644
+index 5b94d8b..5d60ae3 100644
 --- a/composer.json
 +++ b/composer.json
-@@ -19,6 +19,7 @@
+@@ -20,6 +20,7 @@
          "symfony/monolog-bundle": "^3.0",
          "symfony/runtime": "6.4.x-dev",
          "symfony/security-csrf": "6.4.x-dev",
@@ -63,21 +63,38 @@ index 9e0c3a8..62beb9f 100644
          "symfony/validator": "6.4.x-dev",
          "symfony/yaml": "6.4.x-dev",
 diff --git a/composer.lock b/composer.lock
-index 4f22a5a..3c283e8 100644
+index dcb4cd9..98bb51f 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "38d3781a95a2e6529019d428bda0581d",
-+    "content-hash": "df14a60632552ef2837d7752d547d2b0",
+-    "content-hash": "b89d5cff1119263d38d5607b8fd3cc61",
++    "content-hash": "728f0c5592b01906aefaa2576abd7632",
      "packages": [
          {
              "name": "composer/semver",
-@@ -4915,6 +4915,76 @@
+@@ -659,6 +659,7 @@
+                 "doctrine/doctrine-bundle": "^2.4",
+                 "doctrine/migrations": "^3.2",
+                 "php": "^7.2|^8.0",
++                "symfony/deprecation-contracts": "^2.1 || ^3",
+                 "symfony/framework-bundle": "^5.4 || ^6.0 || ^7.0"
+             },
+             "require-dev": {
+@@ -673,6 +674,8 @@
+                 "phpunit/phpunit": "^8.5|^9.5",
+                 "psalm/plugin-phpunit": "^0.18.4",
+                 "psalm/plugin-symfony": "^3 || ^5",
++                "symfony/phpunit-bridge": "^6.3 || ^7",
++                "symfony/var-exporter": "^5.4 || ^6 || ^7",
+                 "vimeo/psalm": "^4.30 || ^5.15"
+             },
+             "type": "symfony-bundle",
+@@ -4997,6 +5000,76 @@
              ],
-             "time": "2023-07-29T13:12:44+00:00"
+             "time": "2023-07-30T20:28:31+00:00"
          },
 +        {
 +            "name": "symfony/stimulus-bundle",
@@ -85,12 +102,12 @@ index 4f22a5a..3c283e8 100644
 +            "source": {
 +                "type": "git",
 +                "url": "https://github.com/symfony/stimulus-bundle.git",
-+                "reference": "f6c8ff81b7b2ae82327f4a71c5f9377eb31f83f1"
++                "reference": "3a7d47bf3369be75940665846fdd12fb33eeb5c3"
 +            },
 +            "dist": {
 +                "type": "zip",
-+                "url": "https://api.github.com/repos/symfony/stimulus-bundle/zipball/f6c8ff81b7b2ae82327f4a71c5f9377eb31f83f1",
-+                "reference": "f6c8ff81b7b2ae82327f4a71c5f9377eb31f83f1",
++                "url": "https://api.github.com/repos/symfony/stimulus-bundle/zipball/3a7d47bf3369be75940665846fdd12fb33eeb5c3",
++                "reference": "3a7d47bf3369be75940665846fdd12fb33eeb5c3",
 +                "shasum": ""
 +            },
 +            "require": {
@@ -131,7 +148,7 @@ index 4f22a5a..3c283e8 100644
 +                "symfony-ux"
 +            ],
 +            "support": {
-+                "source": "https://github.com/symfony/stimulus-bundle/tree/v2.13.0"
++                "source": "https://github.com/symfony/stimulus-bundle/tree/2.x"
 +            },
 +            "funding": [
 +                {
@@ -147,12 +164,12 @@ index 4f22a5a..3c283e8 100644
 +                    "type": "tidelift"
 +                }
 +            ],
-+            "time": "2023-11-07T21:10:32+00:00"
++            "time": "2023-11-13T18:33:08+00:00"
 +        },
          {
              "name": "symfony/stopwatch",
              "version": "6.4.x-dev",
-@@ -6626,6 +6696,7 @@
+@@ -6807,6 +6880,7 @@
          "symfony/framework-bundle": 20,
          "symfony/runtime": 20,
          "symfony/security-csrf": 20,
@@ -161,13 +178,13 @@ index 4f22a5a..3c283e8 100644
          "symfony/validator": 20,
          "symfony/yaml": 20,
 diff --git a/config/bundles.php b/config/bundles.php
-index d8894f2..1914abb 100644
+index 5fd504a..c4b29df 100644
 --- a/config/bundles.php
 +++ b/config/bundles.php
-@@ -13,4 +13,5 @@ return [
-     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
+@@ -14,4 +14,5 @@ return [
      Zenstruck\Foundry\ZenstruckFoundryBundle::class => ['dev' => true, 'test' => true],
      Symfonycasts\TailwindBundle\SymfonycastsTailwindBundle::class => ['all' => true],
+     Knp\Bundle\TimeBundle\KnpTimeBundle::class => ['all' => true],
 +    Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
  ];
 diff --git a/importmap.php b/importmap.php
@@ -186,10 +203,10 @@ index 0c489cc..6023f8e 100644
 +    ],
  ];
 diff --git a/symfony.lock b/symfony.lock
-index 7064e79..b034dd2 100644
+index 39f9159..1cb7006 100644
 --- a/symfony.lock
 +++ b/symfony.lock
-@@ -142,6 +142,20 @@
+@@ -145,6 +145,20 @@
              "config/routes.yaml"
          ]
      },
@@ -207,11 +224,11 @@ index 7064e79..b034dd2 100644
 +            "assets/controllers/hello_controller.js"
 +        ]
 +    },
-     "symfony/twig-bundle": {
+     "symfony/translation": {
          "version": "6.4",
          "recipe": {
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index fe1d3fc..36b4f73 100644
+index a7ffeb7..cd85996 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -5,6 +5,7 @@

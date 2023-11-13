@@ -91,8 +91,23 @@
             "description": null
         },
         {
+            "id": "tailwind-complete-planet-image",
+            "name": "Tailwind: Complete planet image",
+            "description": null
+        },
+        {
+            "id": "tailwind-add-knptimebundle",
+            "name": "Tailwind: Add KnpTimeBundle",
+            "description": null
+        },
+        {
             "id": "stimulus-install-stimulus-bundle",
             "name": "Stimulus: install stimulus-bundle",
+            "description": null
+        },
+        {
+            "id": "stimulus-remove-ux-controller-link-tags",
+            "name": "Stimulus: Remove ux_controller_link_tags",
             "description": null
         },
         {
@@ -109,7 +124,12 @@
             "id": "ux-install-ux-autocomplete",
             "name": "UX: install ux-autocomplete",
             "description": null
+        },
+        {
+            "id": "ux-install-tom-select-css",
+            "name": "UX: install tom-select CSS",
+            "description": null
         }
     ],
-    "sha": "764c650f23e6e0da258a4c6279ecf9da792df1e4"
+    "sha": "8a7750cb954b6a3b5f452821164df8ab98800d6f"
 }

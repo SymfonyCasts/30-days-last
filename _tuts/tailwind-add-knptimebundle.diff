@@ -1,0 +1,299 @@
+diff --git a/composer.json b/composer.json
+index 9e0c3a8..5b94d8b 100644
+--- a/composer.json
++++ b/composer.json
+@@ -9,6 +9,7 @@
+         "doctrine/doctrine-bundle": "^2.10",
+         "doctrine/doctrine-migrations-bundle": "^3.2",
+         "doctrine/orm": "^2.16",
++        "knplabs/knp-time-bundle": "dev-main",
+         "symfony/asset": "6.4.*",
+         "symfony/asset-mapper": "6.4.*",
+         "symfony/console": "6.4.x-dev",
+diff --git a/composer.lock b/composer.lock
+index 25586dd..dcb4cd9 100644
+--- a/composer.lock
++++ b/composer.lock
+@@ -4,7 +4,7 @@
+         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+         "This file is @generated automatically"
+     ],
+-    "content-hash": "38d3781a95a2e6529019d428bda0581d",
++    "content-hash": "b89d5cff1119263d38d5607b8fd3cc61",
+     "packages": [
+         {
+             "name": "composer/semver",
+@@ -1416,6 +1416,82 @@
+             },
+             "time": "2023-08-16T21:49:04+00:00"
+         },
++        {
++            "name": "knplabs/knp-time-bundle",
++            "version": "dev-main",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/KnpLabs/KnpTimeBundle.git",
++                "reference": "69cb36a9f22ac8432e8532c9ae84e92d46820d96"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/KnpLabs/KnpTimeBundle/zipball/69cb36a9f22ac8432e8532c9ae84e92d46820d96",
++                "reference": "69cb36a9f22ac8432e8532c9ae84e92d46820d96",
++                "shasum": ""
++            },
++            "require": {
++                "php": ">=8.1",
++                "symfony/config": "^5.4|^6.0|^7.0",
++                "symfony/dependency-injection": "^5.4|^6.0|^7.0",
++                "symfony/translation": "^5.4|^6.0|^7.0"
++            },
++            "conflict": {
++                "phpunit/phpunit": "<8.0"
++            },
++            "require-dev": {
++                "phpstan/phpstan": "^1.11",
++                "phpunit/phpunit": "^9.6",
++                "symfony/framework-bundle": "^5.4|^6.0|^7.0",
++                "symfony/phpunit-bridge": "^5.4|^6.0|^7.0",
++                "symfony/twig-bundle": "^5.4|^6.0|^7.0"
++            },
++            "suggest": {
++                "symfony/twig-bundle": "to use the Twig `time_diff()` function and `|time_diff`/`|duration` filter"
++            },
++            "default-branch": true,
++            "type": "symfony-bundle",
++            "extra": {
++                "branch-alias": {
++                    "dev-master": "2.x-dev"
++                }
++            },
++            "autoload": {
++                "psr-4": {
++                    "Knp\\Bundle\\TimeBundle\\": "src/"
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "KnpLabs Team",
++                    "homepage": "https://knplabs.com"
++                },
++                {
++                    "name": "Symfony Community",
++                    "homepage": "https://github.com/KnpLabs/KnpTimeBundle/contributors"
++                }
++            ],
++            "description": "Making your dates and durations look sensible and descriptive",
++            "homepage": "https://github.com/KnpLabs/KnpTimeBundle",
++            "keywords": [
++                "bundle",
++                "date",
++                "descriptive time",
++                "duration",
++                "knp",
++                "knplabs",
++                "time"
++            ],
++            "support": {
++                "issues": "https://github.com/KnpLabs/KnpTimeBundle/issues",
++                "source": "https://github.com/KnpLabs/KnpTimeBundle/tree/v2.2.0"
++            },
++            "time": "2023-11-13T19:38:34+00:00"
++        },
+         {
+             "name": "monolog/monolog",
+             "version": "dev-main",
+@@ -5069,6 +5145,101 @@
+             ],
+             "time": "2023-11-09T08:51:37+00:00"
+         },
++        {
++            "name": "symfony/translation",
++            "version": "6.4.x-dev",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/symfony/translation.git",
++                "reference": "8057a62933f5609340a4f8c36feeec88c09ea024"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/symfony/translation/zipball/8057a62933f5609340a4f8c36feeec88c09ea024",
++                "reference": "8057a62933f5609340a4f8c36feeec88c09ea024",
++                "shasum": ""
++            },
++            "require": {
++                "php": ">=8.1",
++                "symfony/deprecation-contracts": "^2.5|^3",
++                "symfony/polyfill-mbstring": "~1.0",
++                "symfony/translation-contracts": "^2.5|^3.0"
++            },
++            "conflict": {
++                "symfony/config": "<5.4",
++                "symfony/console": "<5.4",
++                "symfony/dependency-injection": "<5.4",
++                "symfony/http-client-contracts": "<2.5",
++                "symfony/http-kernel": "<5.4",
++                "symfony/service-contracts": "<2.5",
++                "symfony/twig-bundle": "<5.4",
++                "symfony/yaml": "<5.4"
++            },
++            "provide": {
++                "symfony/translation-implementation": "2.3|3.0"
++            },
++            "require-dev": {
++                "nikic/php-parser": "^4.13",
++                "psr/log": "^1|^2|^3",
++                "symfony/config": "^5.4|^6.0|^7.0",
++                "symfony/console": "^5.4|^6.0|^7.0",
++                "symfony/dependency-injection": "^5.4|^6.0|^7.0",
++                "symfony/finder": "^5.4|^6.0|^7.0",
++                "symfony/http-client-contracts": "^2.5|^3.0",
++                "symfony/http-kernel": "^5.4|^6.0|^7.0",
++                "symfony/intl": "^5.4|^6.0|^7.0",
++                "symfony/polyfill-intl-icu": "^1.21",
++                "symfony/routing": "^5.4|^6.0|^7.0",
++                "symfony/service-contracts": "^2.5|^3",
++                "symfony/yaml": "^5.4|^6.0|^7.0"
++            },
++            "type": "library",
++            "autoload": {
++                "files": [
++                    "Resources/functions.php"
++                ],
++                "psr-4": {
++                    "Symfony\\Component\\Translation\\": ""
++                },
++                "exclude-from-classmap": [
++                    "/Tests/"
++                ]
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "Fabien Potencier",
++                    "email": "fabien@symfony.com"
++                },
++                {
++                    "name": "Symfony Community",
++                    "homepage": "https://symfony.com/contributors"
++                }
++            ],
++            "description": "Provides tools to internationalize your application",
++            "homepage": "https://symfony.com",
++            "support": {
++                "source": "https://github.com/symfony/translation/tree/6.4"
++            },
++            "funding": [
++                {
++                    "url": "https://symfony.com/sponsor",
++                    "type": "custom"
++                },
++                {
++                    "url": "https://github.com/fabpot",
++                    "type": "github"
++                },
++                {
++                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
++                    "type": "tidelift"
++                }
++            ],
++            "time": "2023-10-28T23:12:08+00:00"
++        },
+         {
+             "name": "symfony/translation-contracts",
+             "version": "dev-main",
+@@ -6629,6 +6800,7 @@
+     "aliases": [],
+     "minimum-stability": "dev",
+     "stability-flags": {
++        "knplabs/knp-time-bundle": 20,
+         "symfony/console": 20,
+         "symfony/dotenv": 20,
+         "symfony/form": 20,
+diff --git a/config/bundles.php b/config/bundles.php
+index d8894f2..5fd504a 100644
+--- a/config/bundles.php
++++ b/config/bundles.php
+@@ -13,4 +13,5 @@ return [
+     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
+     Zenstruck\Foundry\ZenstruckFoundryBundle::class => ['dev' => true, 'test' => true],
+     Symfonycasts\TailwindBundle\SymfonycastsTailwindBundle::class => ['all' => true],
++    Knp\Bundle\TimeBundle\KnpTimeBundle::class => ['all' => true],
+ ];
+diff --git a/config/packages/translation.yaml b/config/packages/translation.yaml
+new file mode 100644
+index 0000000..888f0ba
+--- /dev/null
++++ b/config/packages/translation.yaml
+@@ -0,0 +1,15 @@
++framework:
++    default_locale: en
++    translator:
++        default_path: '%kernel.project_dir%/translations'
++        fallbacks:
++            - en
++#        providers:
++#            crowdin:
++#                dsn: '%env(CROWDIN_DSN)%'
++#            loco:
++#                dsn: '%env(LOCO_DSN)%'
++#            lokalise:
++#                dsn: '%env(LOKALISE_DSN)%'
++#            phrase:
++#                dsn: '%env(PHRASE_DSN)%'
+diff --git a/symfony.lock b/symfony.lock
+index 7064e79..39f9159 100644
+--- a/symfony.lock
++++ b/symfony.lock
+@@ -38,6 +38,9 @@
+             "migrations/.gitignore"
+         ]
+     },
++    "knplabs/knp-time-bundle": {
++        "version": "dev-main"
++    },
+     "symfony/asset-mapper": {
+         "version": "6.4",
+         "recipe": {
+@@ -142,6 +145,19 @@
+             "config/routes.yaml"
+         ]
+     },
++    "symfony/translation": {
++        "version": "6.4",
++        "recipe": {
++            "repo": "github.com/symfony/recipes",
++            "branch": "main",
++            "version": "6.3",
++            "ref": "64fe617084223633e1dedf9112935d8c95410d3e"
++        },
++        "files": [
++            "config/packages/translation.yaml",
++            "translations/.gitignore"
++        ]
++    },
+     "symfony/twig-bundle": {
+         "version": "6.4",
+         "recipe": {
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index 60ad754..e2c8cf7 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -53,7 +53,7 @@
+                                     class="inline-block w-8 h-8 rounded-full bg-gray-600 ml-2"
+                                 >
+                             </td>
+-                            <td class="px-2 whitespace-nowrap">{{ voyage.leaveAt|date('Y-m-d') }}</td>
++                            <td class="px-2 whitespace-nowrap">{{ voyage.leaveAt|ago }}</td>
+                         </tr>
+                         {% endfor %}
+                     </tbody>
+diff --git a/translations/.gitignore b/translations/.gitignore
+new file mode 100644
+index 0000000..e69de29

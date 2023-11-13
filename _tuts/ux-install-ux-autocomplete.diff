@@ -20,10 +20,10 @@ index a1c6e90..1f6fc3a 100644
      "entrypoints": []
  }
 diff --git a/composer.json b/composer.json
-index 62beb9f..bdec8ac 100644
+index 5d60ae3..1e2fa31 100644
 --- a/composer.json
 +++ b/composer.json
-@@ -21,6 +21,7 @@
+@@ -22,6 +22,7 @@
          "symfony/security-csrf": "6.4.x-dev",
          "symfony/stimulus-bundle": "2.x-dev",
          "symfony/twig-bundle": "6.4.x-dev",
@@ -32,19 +32,19 @@ index 62beb9f..bdec8ac 100644
          "symfony/yaml": "6.4.x-dev",
          "symfonycasts/tailwind-bundle": "dev-main",
 diff --git a/composer.lock b/composer.lock
-index 3c283e8..5184014 100644
+index 98bb51f..36bbb86 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "df14a60632552ef2837d7752d547d2b0",
-+    "content-hash": "6fbb26bd73e976d552aaab8d8ba50575",
+-    "content-hash": "728f0c5592b01906aefaa2576abd7632",
++    "content-hash": "52a52fd4058194de45e3ad44c31dd35a",
      "packages": [
          {
              "name": "composer/semver",
-@@ -5405,6 +5405,98 @@
+@@ -5585,6 +5585,98 @@
              ],
              "time": "2023-11-07T14:57:07+00:00"
          },
@@ -54,12 +54,12 @@ index 3c283e8..5184014 100644
 +            "source": {
 +                "type": "git",
 +                "url": "https://github.com/symfony/ux-autocomplete.git",
-+                "reference": "6b21ca8dbe60bc499ada3b1c438c43daa0a0876e"
++                "reference": "6e2a25a580eda54903905e90097e4384c77d960d"
 +            },
 +            "dist": {
 +                "type": "zip",
-+                "url": "https://api.github.com/repos/symfony/ux-autocomplete/zipball/6b21ca8dbe60bc499ada3b1c438c43daa0a0876e",
-+                "reference": "6b21ca8dbe60bc499ada3b1c438c43daa0a0876e",
++                "url": "https://api.github.com/repos/symfony/ux-autocomplete/zipball/6e2a25a580eda54903905e90097e4384c77d960d",
++                "reference": "6e2a25a580eda54903905e90097e4384c77d960d",
 +                "shasum": ""
 +            },
 +            "require": {
@@ -122,7 +122,7 @@ index 3c283e8..5184014 100644
 +                "symfony-ux"
 +            ],
 +            "support": {
-+                "source": "https://github.com/symfony/ux-autocomplete/tree/v2.13.1"
++                "source": "https://github.com/symfony/ux-autocomplete/tree/2.x"
 +            },
 +            "funding": [
 +                {
@@ -138,12 +138,12 @@ index 3c283e8..5184014 100644
 +                    "type": "tidelift"
 +                }
 +            ],
-+            "time": "2023-11-09T07:28:48+00:00"
++            "time": "2023-11-12T21:55:15+00:00"
 +        },
          {
              "name": "symfony/validator",
              "version": "6.4.x-dev",
-@@ -6698,6 +6790,7 @@
+@@ -6882,6 +6974,7 @@
          "symfony/security-csrf": 20,
          "symfony/stimulus-bundle": 20,
          "symfony/twig-bundle": 20,
@@ -152,12 +152,12 @@ index 3c283e8..5184014 100644
          "symfony/yaml": 20,
          "symfonycasts/tailwind-bundle": 20,
 diff --git a/config/bundles.php b/config/bundles.php
-index 1914abb..7c294f0 100644
+index c4b29df..8a520cb 100644
 --- a/config/bundles.php
 +++ b/config/bundles.php
-@@ -14,4 +14,5 @@ return [
-     Zenstruck\Foundry\ZenstruckFoundryBundle::class => ['dev' => true, 'test' => true],
+@@ -15,4 +15,5 @@ return [
      Symfonycasts\TailwindBundle\SymfonycastsTailwindBundle::class => ['all' => true],
+     Knp\Bundle\TimeBundle\KnpTimeBundle::class => ['all' => true],
      Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
 +    Symfony\UX\Autocomplete\AutocompleteBundle::class => ['all' => true],
  ];
@@ -171,26 +171,22 @@ index 0000000..da6b261
 +    resource: '@AutocompleteBundle/config/routes.php'
 +    prefix: '/autocomplete'
 diff --git a/importmap.php b/importmap.php
-index 6023f8e..d89a08d 100644
+index 6023f8e..84cb339 100644
 --- a/importmap.php
 +++ b/importmap.php
-@@ -27,4 +27,11 @@ return [
+@@ -27,4 +27,7 @@ return [
      '@symfony/stimulus-bundle' => [
          'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
      ],
 +    'tom-select' => [
 +        'version' => '2.3.1',
 +    ],
-+    'tom-select/dist/css/tom-select.min.css' => [
-+        'version' => '2.3.1',
-+        'type' => 'css',
-+    ],
  ];
 diff --git a/symfony.lock b/symfony.lock
-index b034dd2..7e5cef7 100644
+index 1cb7006..99eaa0e 100644
 --- a/symfony.lock
 +++ b/symfony.lock
-@@ -169,6 +169,18 @@
+@@ -185,6 +185,18 @@
              "templates/base.html.twig"
          ]
      },

@@ -11,7 +11,7 @@ index 899b08d..36400c2 100644
          "symfony/console": "6.4.x-dev",
          "symfony/dotenv": "6.4.x-dev",
 diff --git a/composer.lock b/composer.lock
-index 7a67616..601b271 100644
+index af9df23..096ebc3 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
@@ -23,7 +23,7 @@ index 7a67616..601b271 100644
      "packages": [
          {
              "name": "composer/semver",
-@@ -1723,6 +1723,75 @@
+@@ -1729,6 +1729,75 @@
              },
              "time": "2021-07-14T16:46:02+00:00"
          },

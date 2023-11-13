@@ -1,4 +1,18 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="flex justify-between items-center mt-4">
+        <button class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+            {{ button_label|default('Save') }}
+        </button>
+
+        <div class="flex items-center space-x-4">
+            <a href="{{ path('app_planet_index') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                Back to list
+            </a>
+
+            {% if isUpdate %}
+                {{ include('planet/_delete_form.html.twig') }}
+            {% endif %}
+        </div>
+    </div>
 {{ form_end(form) }}

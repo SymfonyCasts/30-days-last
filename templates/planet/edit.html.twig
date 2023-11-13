@@ -6,10 +6,6 @@
 <div class="m-4 p-4 bg-gray-800 rounded-lg">
     <h1 class="text-xl font-semibold text-white mb-4">Edit Planet</h1>
 
-    {{ include('planet/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_planet_index') }}">back to list</a>
-
-    {{ include('planet/_delete_form.html.twig') }}
+    {{ include('planet/_form.html.twig', { isUpdate: true }) }}
 </div>
 {% endblock %}

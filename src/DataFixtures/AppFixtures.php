@@ -13,9 +13,11 @@ class AppFixtures extends Fixture
     {
         PlanetFactory::createMany(5);
 
-        VoyageFactory::createMany(30, [
-            'planet' => PlanetFactory::random(),
-        ]);
+        VoyageFactory::createMany(30, function () {
+            return [
+                'planet' => PlanetFactory::random(),
+            ];
+        });
 
         $manager->flush();
     }

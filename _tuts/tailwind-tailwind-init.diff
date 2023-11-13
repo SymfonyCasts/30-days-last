@@ -1,0 +1,29 @@
+diff --git a/assets/styles/app.css b/assets/styles/app.css
+index dd6181a..f52a8ac 100644
+--- a/assets/styles/app.css
++++ b/assets/styles/app.css
+@@ -1,3 +1,7 @@
++@tailwind base;
++@tailwind components;
++@tailwind utilities;
++
+ body {
+     background-color: skyblue;
+ }
+diff --git a/tailwind.config.js b/tailwind.config.js
+new file mode 100644
+index 0000000..bb226fb
+--- /dev/null
++++ b/tailwind.config.js
+@@ -0,0 +1,11 @@
++/** @type {import('tailwindcss').Config} */
++module.exports = {
++  content: [
++    "./assets/**/*.js",
++    "./templates/**/*.html.twig",
++  ],
++  theme: {
++    extend: {},
++  },
++  plugins: [],
++}

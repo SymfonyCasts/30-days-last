@@ -49,7 +49,67 @@
             "id": "modules-fix-the-typo",
             "name": "Modules: fix the typo",
             "description": null
+        },
+        {
+            "id": "3rdpartylib-add-js-confetti-example",
+            "name": "3rdPartyLib: Add js-confetti example",
+            "description": null
+        },
+        {
+            "id": "3rdpartylib-importmap-require-lib",
+            "name": "3rdPartyLib: importmap:require lib",
+            "description": null
+        },
+        {
+            "id": "css-add-alien-greeting-css",
+            "name": "CSS: Add alien-greeting.css",
+            "description": null
+        },
+        {
+            "id": "css-delayed-css",
+            "name": "CSS: delayed CSS",
+            "description": null
+        },
+        {
+            "id": "tailwind-install-bundle",
+            "name": "Tailwind: Install bundle",
+            "description": null
+        },
+        {
+            "id": "tailwind-tailwind-init",
+            "name": "Tailwind: tailwind:init",
+            "description": null
+        },
+        {
+            "id": "tailwind-use-a-class-on-the-h1",
+            "name": "Tailwind: Use a class on the h1",
+            "description": null
+        },
+        {
+            "id": "tailwind-paste-in-full-layout",
+            "name": "Tailwind: Paste in full layout",
+            "description": null
+        },
+        {
+            "id": "stimulus-install-stimulus-bundle",
+            "name": "Stimulus: install stimulus-bundle",
+            "description": null
+        },
+        {
+            "id": "stimulus-add-celebrate-controller",
+            "name": "Stimulus: Add celebrate controller",
+            "description": null
+        },
+        {
+            "id": "stimulus-lazy-controller",
+            "name": "Stimulus: Lazy controller",
+            "description": null
+        },
+        {
+            "id": "ux-install-ux-autocomplete",
+            "name": "UX: install ux-autocomplete",
+            "description": null
         }
     ],
-    "sha": "df102a2e27f2d1fa59e6405c268c9a2abefaafa0"
+    "sha": "764c650f23e6e0da258a4c6279ecf9da792df1e4"
 }

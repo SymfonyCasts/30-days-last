@@ -1,0 +1,14 @@
+diff --git a/assets/app.js b/assets/app.js
+index ef75f79..91c6f5b 100644
+--- a/assets/app.js
++++ b/assets/app.js
+@@ -6,5 +6,9 @@
+  */
+ import './styles/app.css';
+ import alienGreeting from './lib/alien-greeting.js';
++import JSConfetti from 'js-confetti';
++
++const jsConfetti = new JSConfetti();
++jsConfetti.addConfetti();
+ 
+ alienGreeting('Give us all your candy!', false);

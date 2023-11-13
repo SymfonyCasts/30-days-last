@@ -1,0 +1,156 @@
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index 579a577..fe1d3fc 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -11,9 +11,37 @@
+             {{ importmap('app') }}
+         {% endblock %}
+     </head>
+-    <body>
+-        <img src="{{ asset('images/logo.png') }}" alt="Space Inviters Logo" />
++    <body class="bg-black text-white font-mono">
++        <div class="container mx-auto min-h-screen flex flex-col">
++            <header class="my-8 px-4">
++                <nav class="flex items-center justify-between mb-4">
++                    <div class="flex items-center">
++                        <!-- Placeholder for the logo -->
++                        <svg class="h-8 w-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
++                        <span class="text-xl ml-3">Space Inviters</span>
++                        <a href="#" class="ml-6 hover:text-gray-400">Voyages</a>
++                        <a href="#" class="ml-4 hover:text-gray-400">Planets</a>
++                    </div>
++                    <div class="flex items-center">
++                        <div class="relative">
++                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
++                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
++                            </div>
++                            <input type="search" placeholder="Cmd+K Search" class="px-4 py-2 pl-10 rounded bg-gray-800 text-white placeholder-gray-400 w-full" />
++                        </div>
++                    </div>
++                </nav>
++            </header>
+ 
+-        {% block body %}{% endblock %}
++            <!-- Make sure the main tag takes up the remaining height -->
++            <main class="flex-grow">{% block body %}{% endblock %}</main>
++
++            <!-- Footer -->
++            <footer class="py-4 mt-6 bg-gray-800 text-center">
++                <div class="text-sm">
++                    With <svg class="inline-block w-4 h-4 text-red-600 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 3.22l-.61-.6a5.5 5.5 0 00-7.78 7.78l7.39 7.4 7.39-7.4a5.5 5.5 0 00-7.78-7.78l-.61.61z"/></svg> from Symfonycasts.
++                </div>
++            </footer>
++        </div>
+     </body>
+ </html>
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index 73b104b..ecefa18 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -3,5 +3,105 @@
+ {% block title %}Space Inviters!{% endblock %}
+ 
+ {% block body %}
+-    <h1 class="text-3xl">Space Inviters: Plan your voyage and come in peace!</h1>
++    <div class="flex">
++        <aside class="hidden md:block md:w-64 bg-gray-900 px-4 py-6">
++            <h2 class="text-xl text-white font-semibold mb-6">Planets</h2>
++            <nav>
++                <ul>
++                    <li class="mb-4 group">
++                        <a href="#" class="block transform transition duration-300 ease-in-out hover:translate-x-2 hover:bg-gray-700 rounded">
++                            <div class="flex justify-between items-start p-2">
++                                <div>
++                                    <span class="text-white">Mercury</span>
++                                    <span class="block text-gray-400 text-sm">0.39 light years</span>
++                                </div>
++                                <span class="flex-shrink-0 w-8 h-8 bg-gray-600 rounded-full group-hover:bg-gray-500 transition duration-300 ease-in-out"></span>
++                            </div>
++                        </a>
++                    </li>
++                    <li class="mb-4 group">
++                        <a href="#" class="block transform transition duration-300 ease-in-out hover:translate-x-2 hover:bg-gray-700 rounded">
++                            <div class="flex justify-between items-start p-2">
++                                <div>
++                                    <span class="text-white">Venus</span>
++                                    <span class="block text-gray-400 text-sm">0.72 light years</span>
++                                </div>
++                                <span class="flex-shrink-0 w-8 h-8 bg-gray-500 rounded-full group-hover:bg-gray-400 transition duration-300 ease-in-out"></span>
++                            </div>
++                        </a>
++                    </li>
++                    <li class="mb-4 group">
++                        <a href="#" class="block transform transition duration-300 ease-in-out hover:translate-x-2 hover:bg-gray-700 rounded">
++                            <div class="flex justify-between items-start p-2">
++                                <div>
++                                    <span class="text-white">Earth</span>
++                                    <span class="block text-gray-400 text-sm">1 light year</span>
++                                </div>
++                                <span class="flex-shrink-0 w-8 h-8 bg-blue-600 rounded-full group-hover:bg-blue-500 transition duration-300 ease-in-out"></span>
++                            </div>
++                        </a>
++                    </li>
++                    <li class="mb-4 group">
++                        <a href="#" class="block transform transition duration-300 ease-in-out hover:translate-x-2 hover:bg-gray-700 rounded">
++                            <div class="flex justify-between items-start p-2">
++                                <div>
++                                    <span class="text-white">Mars</span>
++                                    <span class="block text-gray-400 text-sm">1.52 light years</span>
++                                </div>
++                                <span class="flex-shrink-0 w-8 h-8 bg-red-600 rounded-full group-hover:bg-red-500 transition duration-300 ease-in-out"></span>
++                            </div>
++                        </a>
++                    </li>
++                </ul>
++            </nav>
++        </aside>
++
++        <section class="flex-1 ml-10">
++            <div class="mb-6">
++                <input type="search" placeholder="Search voyages" class="px-4 py-2 rounded bg-gray-800 text-white placeholder-gray-400 w-full" />
++            </div>
++            <div class="bg-gray-800 p-4 rounded">
++                <table class="w-full text-white">
++                    <thead>
++                        <tr>
++                            <th class="text-left py-2">Name</th>
++                            <th class="text-left py-2">Planet</th>
++                            <th class="text-left py-2">Departing</th>
++                        </tr>
++                    </thead>
++                    <tbody>
++                        <tr class="border-b border-gray-700">
++                            <td class="py-2">Galactic Getaway</td>
++                            <td>Mars</td>
++                            <td>2023-12-01</td>
++                        </tr>
++                        <tr class="border-b border-gray-700">
++                            <td class="py-2">Stellar Cruise</td>
++                            <td>Venus</td>
++                            <td>2024-01-15</td>
++                        </tr>
++                        <tr class="border-b border-gray-700">
++                            <td class="py-2">Asteroid Adventure</td>
++                            <td>Ceres</td>
++                            <td>2024-02-10</td>
++                        </tr>
++                        <tr class="border-b border-gray-700">
++                            <td class="py-2">Moonwalk Mission</td>
++                            <td>Luna</td>
++                            <td>2023-11-23</td>
++                        </tr>
++                        <tr class="border-b border-gray-700">
++                            <td class="py-2">Sunspot Safari</td>
++                            <td>Mercury</td>
++                            <td>2024-03-30</td>
++                        </tr>
++                    </tbody>
++                </table>
++            </div>
++            <div class="flex items-center mt-6 space-x-4">
++                <a href="#" class="block py-2 px-4 bg-gray-700 text-white rounded hover:bg-gray-600">Previous</a>
++                <a href="#" class="block py-2 px-4 bg-gray-700 text-white rounded hover:bg-gray-600">Next</a>
++            </div>
++        </section>
++    </div>
+ {% endblock %}

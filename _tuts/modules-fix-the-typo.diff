@@ -1,11 +1,11 @@
 diff --git a/assets/app.js b/assets/app.js
-index 524a9ed..058ef4d 100644
+index 47b9f0f..ef75f79 100644
 --- a/assets/app.js
 +++ b/assets/app.js
-@@ -6,6 +6,6 @@
+@@ -5,6 +5,6 @@
+  * which should already be in your base.html.twig.
   */
- import './styles/app.css'
- 
+ import './styles/app.css';
 -import alienGreeting from './lib/alien-greeting';
 +import alienGreeting from './lib/alien-greeting.js';
  

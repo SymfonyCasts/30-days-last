@@ -1,0 +1,211 @@
+diff --git a/assets/controllers.json b/assets/controllers.json
+index a1c6e90..1f6fc3a 100644
+--- a/assets/controllers.json
++++ b/assets/controllers.json
+@@ -1,4 +1,15 @@
+ {
+-    "controllers": [],
++    "controllers": {
++        "@symfony/ux-autocomplete": {
++            "autocomplete": {
++                "enabled": true,
++                "fetch": "eager",
++                "autoimport": {
++                    "tom-select/dist/css/tom-select.default.css": true,
++                    "tom-select/dist/css/tom-select.bootstrap5.css": false
++                }
++            }
++        }
++    },
+     "entrypoints": []
+ }
+diff --git a/composer.json b/composer.json
+index 62beb9f..bdec8ac 100644
+--- a/composer.json
++++ b/composer.json
+@@ -21,6 +21,7 @@
+         "symfony/security-csrf": "6.4.x-dev",
+         "symfony/stimulus-bundle": "2.x-dev",
+         "symfony/twig-bundle": "6.4.x-dev",
++        "symfony/ux-autocomplete": "2.x-dev",
+         "symfony/validator": "6.4.x-dev",
+         "symfony/yaml": "6.4.x-dev",
+         "symfonycasts/tailwind-bundle": "dev-main",
+diff --git a/composer.lock b/composer.lock
+index 3c283e8..5184014 100644
+--- a/composer.lock
++++ b/composer.lock
+@@ -4,7 +4,7 @@
+         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+         "This file is @generated automatically"
+     ],
+-    "content-hash": "df14a60632552ef2837d7752d547d2b0",
++    "content-hash": "6fbb26bd73e976d552aaab8d8ba50575",
+     "packages": [
+         {
+             "name": "composer/semver",
+@@ -5405,6 +5405,98 @@
+             ],
+             "time": "2023-11-07T14:57:07+00:00"
+         },
++        {
++            "name": "symfony/ux-autocomplete",
++            "version": "2.x-dev",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/symfony/ux-autocomplete.git",
++                "reference": "6b21ca8dbe60bc499ada3b1c438c43daa0a0876e"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/symfony/ux-autocomplete/zipball/6b21ca8dbe60bc499ada3b1c438c43daa0a0876e",
++                "reference": "6b21ca8dbe60bc499ada3b1c438c43daa0a0876e",
++                "shasum": ""
++            },
++            "require": {
++                "php": ">=8.1",
++                "symfony/dependency-injection": "^6.3|^7.0",
++                "symfony/http-foundation": "^6.3|^7.0",
++                "symfony/http-kernel": "^6.3|^7.0",
++                "symfony/property-access": "^6.3|^7.0",
++                "symfony/string": "^6.3|^7.0"
++            },
++            "conflict": {
++                "doctrine/orm": "2.9.0 || 2.9.1"
++            },
++            "require-dev": {
++                "doctrine/collections": "^1.6.8|^2.0",
++                "doctrine/doctrine-bundle": "^2.4.3",
++                "doctrine/orm": "^2.9.4",
++                "fakerphp/faker": "^1.22",
++                "mtdowling/jmespath.php": "^2.6",
++                "symfony/form": "^6.3|^7.0",
++                "symfony/framework-bundle": "^6.3|^7.0",
++                "symfony/maker-bundle": "^1.40",
++                "symfony/options-resolver": "^6.3|^7.0",
++                "symfony/phpunit-bridge": "^6.3|^7.0",
++                "symfony/process": "^6.3|^7.0",
++                "symfony/security-bundle": "^6.3|^7.0",
++                "symfony/security-csrf": "^6.3|^7.0",
++                "symfony/twig-bundle": "^6.3|^7.0",
++                "symfony/uid": "^6.3|^7.0",
++                "twig/twig": "^2.14.7|^3.0.4",
++                "zenstruck/browser": "^1.1",
++                "zenstruck/foundry": "^1.33"
++            },
++            "default-branch": true,
++            "type": "symfony-bundle",
++            "extra": {
++                "thanks": {
++                    "name": "symfony/ux",
++                    "url": "https://github.com/symfony/ux"
++                }
++            },
++            "autoload": {
++                "psr-4": {
++                    "Symfony\\UX\\Autocomplete\\": "src/"
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "Symfony Community",
++                    "homepage": "https://symfony.com/contributors"
++                }
++            ],
++            "description": "JavaScript Autocomplete functionality for Symfony",
++            "homepage": "https://symfony.com",
++            "keywords": [
++                "symfony-ux"
++            ],
++            "support": {
++                "source": "https://github.com/symfony/ux-autocomplete/tree/v2.13.1"
++            },
++            "funding": [
++                {
++                    "url": "https://symfony.com/sponsor",
++                    "type": "custom"
++                },
++                {
++                    "url": "https://github.com/fabpot",
++                    "type": "github"
++                },
++                {
++                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
++                    "type": "tidelift"
++                }
++            ],
++            "time": "2023-11-09T07:28:48+00:00"
++        },
+         {
+             "name": "symfony/validator",
+             "version": "6.4.x-dev",
+@@ -6698,6 +6790,7 @@
+         "symfony/security-csrf": 20,
+         "symfony/stimulus-bundle": 20,
+         "symfony/twig-bundle": 20,
++        "symfony/ux-autocomplete": 20,
+         "symfony/validator": 20,
+         "symfony/yaml": 20,
+         "symfonycasts/tailwind-bundle": 20,
+diff --git a/config/bundles.php b/config/bundles.php
+index 1914abb..7c294f0 100644
+--- a/config/bundles.php
++++ b/config/bundles.php
+@@ -14,4 +14,5 @@ return [
+     Zenstruck\Foundry\ZenstruckFoundryBundle::class => ['dev' => true, 'test' => true],
+     Symfonycasts\TailwindBundle\SymfonycastsTailwindBundle::class => ['all' => true],
+     Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
++    Symfony\UX\Autocomplete\AutocompleteBundle::class => ['all' => true],
+ ];
+diff --git a/config/routes/ux_autocomplete.yaml b/config/routes/ux_autocomplete.yaml
+new file mode 100644
+index 0000000..da6b261
+--- /dev/null
++++ b/config/routes/ux_autocomplete.yaml
+@@ -0,0 +1,3 @@
++ux_autocomplete:
++    resource: '@AutocompleteBundle/config/routes.php'
++    prefix: '/autocomplete'
+diff --git a/importmap.php b/importmap.php
+index 6023f8e..d89a08d 100644
+--- a/importmap.php
++++ b/importmap.php
+@@ -27,4 +27,11 @@ return [
+     '@symfony/stimulus-bundle' => [
+         'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
+     ],
++    'tom-select' => [
++        'version' => '2.3.1',
++    ],
++    'tom-select/dist/css/tom-select.min.css' => [
++        'version' => '2.3.1',
++        'type' => 'css',
++    ],
+ ];
+diff --git a/symfony.lock b/symfony.lock
+index b034dd2..7e5cef7 100644
+--- a/symfony.lock
++++ b/symfony.lock
+@@ -169,6 +169,18 @@
+             "templates/base.html.twig"
+         ]
+     },
++    "symfony/ux-autocomplete": {
++        "version": "2.9999999",
++        "recipe": {
++            "repo": "github.com/symfony/recipes",
++            "branch": "main",
++            "version": "2.6",
++            "ref": "07d9602b7231ba355f484305d6cea58310c01741"
++        },
++        "files": [
++            "config/routes/ux_autocomplete.yaml"
++        ]
++    },
+     "symfony/validator": {
+         "version": "6.4",
+         "recipe": {

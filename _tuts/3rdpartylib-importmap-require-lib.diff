@@ -1,0 +1,29 @@
+diff --git a/importmap.php b/importmap.php
+index 6d29807..0c489cc 100644
+--- a/importmap.php
++++ b/importmap.php
+@@ -1,13 +1,13 @@
+ <?php
+ 
+ /**
+- * Returns the import map for this application.
++ * Returns the importmap for this application.
+  *
+  * - "path" is a path inside the asset mapper system. Use the
+  *     "debug:asset-map" command to see the full list of paths.
+  *
+- *  - "entrypoint" (JavaScript only) set to true for any module that will
+- *      be used as an "entrypoint" (and passed to the importmap() Twig function).
++ * - "entrypoint" (JavaScript only) set to true for any module that will
++ *     be used as an "entrypoint" (and passed to the importmap() Twig function).
+  *
+  * The "importmap:require" command can be used to add new entries to this file.
+  *
+@@ -18,4 +18,7 @@ return [
+         'path' => './assets/app.js',
+         'entrypoint' => true,
+     ],
++    'js-confetti' => [
++        'version' => '0.11.0',
++    ],
+ ];

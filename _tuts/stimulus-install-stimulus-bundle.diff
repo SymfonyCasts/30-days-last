@@ -1,0 +1,224 @@
+diff --git a/assets/app.js b/assets/app.js
+index 91c6f5b..03295f9 100644
+--- a/assets/app.js
++++ b/assets/app.js
+@@ -1,3 +1,4 @@
++import './bootstrap.js';
+ /*
+  * Welcome to your app's main JavaScript file!
+  *
+diff --git a/assets/bootstrap.js b/assets/bootstrap.js
+new file mode 100644
+index 0000000..d4e50c9
+--- /dev/null
++++ b/assets/bootstrap.js
+@@ -0,0 +1,5 @@
++import { startStimulusApp } from '@symfony/stimulus-bundle';
++
++const app = startStimulusApp();
++// register any custom, 3rd party controllers here
++// app.register('some_controller_name', SomeImportedController);
+diff --git a/assets/controllers.json b/assets/controllers.json
+new file mode 100644
+index 0000000..a1c6e90
+--- /dev/null
++++ b/assets/controllers.json
+@@ -0,0 +1,4 @@
++{
++    "controllers": [],
++    "entrypoints": []
++}
+diff --git a/assets/controllers/hello_controller.js b/assets/controllers/hello_controller.js
+new file mode 100644
+index 0000000..e847027
+--- /dev/null
++++ b/assets/controllers/hello_controller.js
+@@ -0,0 +1,16 @@
++import { Controller } from '@hotwired/stimulus';
++
++/*
++ * This is an example Stimulus controller!
++ *
++ * Any element with a data-controller="hello" attribute will cause
++ * this controller to be executed. The name "hello" comes from the filename:
++ * hello_controller.js -> "hello"
++ *
++ * Delete this file or adapt it for your use!
++ */
++export default class extends Controller {
++    connect() {
++        this.element.textContent = 'Hello Stimulus! Edit me in assets/controllers/hello_controller.js';
++    }
++}
+diff --git a/composer.json b/composer.json
+index 9e0c3a8..62beb9f 100644
+--- a/composer.json
++++ b/composer.json
+@@ -19,6 +19,7 @@
+         "symfony/monolog-bundle": "^3.0",
+         "symfony/runtime": "6.4.x-dev",
+         "symfony/security-csrf": "6.4.x-dev",
++        "symfony/stimulus-bundle": "2.x-dev",
+         "symfony/twig-bundle": "6.4.x-dev",
+         "symfony/validator": "6.4.x-dev",
+         "symfony/yaml": "6.4.x-dev",
+diff --git a/composer.lock b/composer.lock
+index 4f22a5a..3c283e8 100644
+--- a/composer.lock
++++ b/composer.lock
+@@ -4,7 +4,7 @@
+         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+         "This file is @generated automatically"
+     ],
+-    "content-hash": "38d3781a95a2e6529019d428bda0581d",
++    "content-hash": "df14a60632552ef2837d7752d547d2b0",
+     "packages": [
+         {
+             "name": "composer/semver",
+@@ -4915,6 +4915,76 @@
+             ],
+             "time": "2023-07-29T13:12:44+00:00"
+         },
++        {
++            "name": "symfony/stimulus-bundle",
++            "version": "2.x-dev",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/symfony/stimulus-bundle.git",
++                "reference": "f6c8ff81b7b2ae82327f4a71c5f9377eb31f83f1"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/symfony/stimulus-bundle/zipball/f6c8ff81b7b2ae82327f4a71c5f9377eb31f83f1",
++                "reference": "f6c8ff81b7b2ae82327f4a71c5f9377eb31f83f1",
++                "shasum": ""
++            },
++            "require": {
++                "php": ">=8.1",
++                "symfony/config": "^5.4|^6.0|^7.0",
++                "symfony/dependency-injection": "^5.4|^6.0|^7.0",
++                "symfony/deprecation-contracts": "^2.0|^3.0",
++                "symfony/finder": "^5.4|^6.0|^7.0",
++                "symfony/http-kernel": "^5.4|^6.0|^7.0",
++                "twig/twig": "^2.15.3|^3.4.3"
++            },
++            "require-dev": {
++                "symfony/asset-mapper": "^6.3|^7.0",
++                "symfony/framework-bundle": "^5.4|^6.0|^7.0",
++                "symfony/phpunit-bridge": "^5.4|^6.0|^7.0",
++                "symfony/twig-bundle": "^5.4|^6.0|^7.0",
++                "zenstruck/browser": "^1.4"
++            },
++            "default-branch": true,
++            "type": "symfony-bundle",
++            "autoload": {
++                "psr-4": {
++                    "Symfony\\UX\\StimulusBundle\\": "src"
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "Symfony Community",
++                    "homepage": "https://symfony.com/contributors"
++                }
++            ],
++            "description": "Integration with your Symfony app & Stimulus!",
++            "keywords": [
++                "symfony-ux"
++            ],
++            "support": {
++                "source": "https://github.com/symfony/stimulus-bundle/tree/v2.13.0"
++            },
++            "funding": [
++                {
++                    "url": "https://symfony.com/sponsor",
++                    "type": "custom"
++                },
++                {
++                    "url": "https://github.com/fabpot",
++                    "type": "github"
++                },
++                {
++                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
++                    "type": "tidelift"
++                }
++            ],
++            "time": "2023-11-07T21:10:32+00:00"
++        },
+         {
+             "name": "symfony/stopwatch",
+             "version": "6.4.x-dev",
+@@ -6626,6 +6696,7 @@
+         "symfony/framework-bundle": 20,
+         "symfony/runtime": 20,
+         "symfony/security-csrf": 20,
++        "symfony/stimulus-bundle": 20,
+         "symfony/twig-bundle": 20,
+         "symfony/validator": 20,
+         "symfony/yaml": 20,
+diff --git a/config/bundles.php b/config/bundles.php
+index d8894f2..1914abb 100644
+--- a/config/bundles.php
++++ b/config/bundles.php
+@@ -13,4 +13,5 @@ return [
+     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
+     Zenstruck\Foundry\ZenstruckFoundryBundle::class => ['dev' => true, 'test' => true],
+     Symfonycasts\TailwindBundle\SymfonycastsTailwindBundle::class => ['all' => true],
++    Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
+ ];
+diff --git a/importmap.php b/importmap.php
+index 0c489cc..6023f8e 100644
+--- a/importmap.php
++++ b/importmap.php
+@@ -21,4 +21,10 @@ return [
+     'js-confetti' => [
+         'version' => '0.11.0',
+     ],
++    '@hotwired/stimulus' => [
++        'version' => '3.2.2',
++    ],
++    '@symfony/stimulus-bundle' => [
++        'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
++    ],
+ ];
+diff --git a/symfony.lock b/symfony.lock
+index 7064e79..b034dd2 100644
+--- a/symfony.lock
++++ b/symfony.lock
+@@ -142,6 +142,20 @@
+             "config/routes.yaml"
+         ]
+     },
++    "symfony/stimulus-bundle": {
++        "version": "2.9999999",
++        "recipe": {
++            "repo": "github.com/symfony/recipes",
++            "branch": "main",
++            "version": "2.9",
++            "ref": "05c45071c7ecacc1e48f94bc43c1f8d4405fb2b2"
++        },
++        "files": [
++            "assets/bootstrap.js",
++            "assets/controllers.json",
++            "assets/controllers/hello_controller.js"
++        ]
++    },
+     "symfony/twig-bundle": {
+         "version": "6.4",
+         "recipe": {
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index fe1d3fc..36b4f73 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -5,6 +5,7 @@
+         <title>{% block title %}Welcome!{% endblock %}</title>
+         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+         {% block stylesheets %}
++            {{ ux_controller_link_tags() }}
+         {% endblock %}
+ 
+         {% block javascripts %}

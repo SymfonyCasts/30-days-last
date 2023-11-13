@@ -1,0 +1,11 @@
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index ad6b53b..73b104b 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -3,5 +3,5 @@
+ {% block title %}Space Inviters!{% endblock %}
+ 
+ {% block body %}
+-    <h1>Space Inviters: Plan your voyage and come in peace!</h1>
++    <h1 class="text-3xl">Space Inviters: Plan your voyage and come in peace!</h1>
+ {% endblock %}

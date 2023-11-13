@@ -1,0 +1,12 @@
+diff --git a/assets/controllers/celebrate_controller.js b/assets/controllers/celebrate_controller.js
+index 832f17b..3ce2e0f 100644
+--- a/assets/controllers/celebrate_controller.js
++++ b/assets/controllers/celebrate_controller.js
+@@ -1,6 +1,7 @@
+ import { Controller } from '@hotwired/stimulus';
+ import JSConfetti from 'js-confetti';
+ 
++/* stimulusFetch: 'lazy' */
+ export default class extends Controller {
+     poof() {
+         const jsConfetti = new JSConfetti();

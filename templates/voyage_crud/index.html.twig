@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voyage index{% endblock %}
+
+{% block body %}
+    <h1>Voyage index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Purpose</th>
+                <th>LeaveAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for voyage in voyages %}
+            <tr>
+                <td>{{ voyage.id }}</td>
+                <td>{{ voyage.purpose }}</td>
+                <td>{{ voyage.leaveAt ? voyage.leaveAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_voyage_crud_show', {'id': voyage.id}) }}">show</a>
+                    <a href="{{ path('app_voyage_crud_edit', {'id': voyage.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_voyage_crud_new') }}">Create new</a>
+{% endblock %}

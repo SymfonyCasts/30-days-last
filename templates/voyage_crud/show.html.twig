@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voyage{% endblock %}
+
+{% block body %}
+    <h1>Voyage</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ voyage.id }}</td>
+            </tr>
+            <tr>
+                <th>Purpose</th>
+                <td>{{ voyage.purpose }}</td>
+            </tr>
+            <tr>
+                <th>LeaveAt</th>
+                <td>{{ voyage.leaveAt ? voyage.leaveAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_voyage_crud_index') }}">back to list</a>
+
+    <a href="{{ path('app_voyage_crud_edit', {'id': voyage.id}) }}">edit</a>
+
+    {{ include('voyage_crud/_delete_form.html.twig') }}
+{% endblock %}

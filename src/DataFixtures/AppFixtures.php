@@ -11,11 +11,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        foreach (PlanetFactory::PLANET_NAMES as $name) {
-            PlanetFactory::new([
-                'name' => $name,
-            ])->create();
-        }
+        PlanetFactory::createMany(5);
 
         VoyageFactory::createMany(30, [
             'planet' => PlanetFactory::random(),

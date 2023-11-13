@@ -23,6 +23,9 @@ class Planet
     #[ORM\Column]
     private ?float $lightYearsFromEarth = null;
 
+    #[ORM\Column()]
+    private ?string $imageFilename = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +63,18 @@ class Planet
     public function setLightYearsFromEarth(float $lightYearsFromEarth): static
     {
         $this->lightYearsFromEarth = $lightYearsFromEarth;
+
+        return $this;
+    }
+
+    public function getImageFilename(): ?string
+    {
+        return $this->imageFilename;
+    }
+
+    public function setImageFilename(string $imageFilename): static
+    {
+        $this->imageFilename = $imageFilename;
 
         return $this;
     }

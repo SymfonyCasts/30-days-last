@@ -66,6 +66,7 @@ final class PlanetFactory extends ModelFactory
             'description' => self::faker()->text(),
             'lightYearsFromEarth' => self::faker()->randomFloat(),
             'name' => self::faker()->randomElement(self::PLANET_NAMES),
+            'imageFilename' => 'planet-'.self::faker()->numberBetween(1, 4).'.png',
         ];
     }
 

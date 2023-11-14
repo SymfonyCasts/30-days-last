@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Voyage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -24,7 +25,14 @@ class VoyageRepository extends ServiceEntityRepository
     /**
      * @return Voyage[]
      */
-    public function findByQuery(?string $query): array
+    public function findBySearch(?string $query): array
+    {
+        return $this->findBySearchQueryBuilder($query)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findBySearchQueryBuilder(?string $query): QueryBuilder
     {
         $qb = $this->createQueryBuilder('v');
 
@@ -33,6 +41,6 @@ class VoyageRepository extends ServiceEntityRepository
                 ->setParameter('query', '%' . $query . '%');
         }
 
-        return $qb->getQuery()->getResult();
+        return $qb;
     }
 }

@@ -15,7 +15,7 @@ class MainController extends AbstractController
     public function homepage(VoyageRepository $voyageRepository, PlanetRepository $planetRepository, Request $request): Response
     {
         $query = $request->query->get('query');
-        $voyages = $voyageRepository->findByQuery($query);
+        $voyages = $voyageRepository->findBySearch($query);
 
         return $this->render('main/homepage.html.twig', [
             'voyages' => $voyages,

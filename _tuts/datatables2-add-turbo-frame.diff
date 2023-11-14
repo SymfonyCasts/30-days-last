@@ -1,0 +1,170 @@
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index 00d9969..f0e5d9e 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -53,86 +53,88 @@
+                 >
+                 <div class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
+             </form>
+-            <div class="bg-gray-800 p-4 rounded">
+-                <table class="w-full text-white">
+-                    <thead>
+-                        <tr>
+-                            <th class="text-left py-2">
+-                                <a href="{{ path('app_homepage', {
+-                                    ...app.request.query.all(),
+-                                    sort: 'purpose',
+-                                    sortDirection: sort == 'purpose' and sortDirection == 'asc' ? 'desc' : 'asc',
+-                                }) }}">
+-                                    Purpose {{ _self.sortArrow('purpose', sort, sortDirection) }}
+-                                </a>
+-                            </th>
+-                            <th class="text-left py-2 pr-4">Planet</th>
+-                            <th class="text-left py-2">
+-                                <a href="{{ path('app_homepage', {
+-                                    ...app.request.query.all(),
+-                                    sort: 'leaveAt',
+-                                    sortDirection: sort == 'leaveAt' and sortDirection == 'asc' ? 'desc' : 'asc',
+-                                }) }}">
+-                                    Departing {{ _self.sortArrow('leaveAt', sort, sortDirection) }}
+-                                </a>
+-                            </th>
+-                        </tr>
+-                    </thead>
+-                    <tbody>
+-                        {% for voyage in voyages %}
+-                        <tr class="border-b border-gray-700 {% if loop.index is odd %} bg-gray-800 {% else %} bg-gray-700 {% endif %}">
+-                            <td class="p-4">{{ voyage.purpose }}</td>
+-                            <td class="px-2 whitespace-nowrap">
+-                                <div
+-                                    {{ stimulus_controller('popover') }}
+-                                    {{
+-                                        stimulus_action('popover', 'show', 'mouseenter')
+-                                        |stimulus_action('popover', 'hide', 'mouseleave')
+-                                    }}
+-                                    class="relative"
+-                                >
+-                                    <img
+-                                        src="{{ asset('images/'~voyage.planet.imageFilename) }}"
+-                                        alt="Image of {{ voyage.planet.name }}"
+-                                        class="inline-block w-8 h-8 rounded-full bg-gray-600 ml-2"
++            <turbo-frame id="voyage-list">
++                <div class="bg-gray-800 p-4 rounded">
++                    <table class="w-full text-white">
++                        <thead>
++                            <tr>
++                                <th class="text-left py-2">
++                                    <a href="{{ path('app_homepage', {
++                                        ...app.request.query.all(),
++                                        sort: 'purpose',
++                                        sortDirection: sort == 'purpose' and sortDirection == 'asc' ? 'desc' : 'asc',
++                                    }) }}">
++                                        Purpose {{ _self.sortArrow('purpose', sort, sortDirection) }}
++                                    </a>
++                                </th>
++                                <th class="text-left py-2 pr-4">Planet</th>
++                                <th class="text-left py-2">
++                                    <a href="{{ path('app_homepage', {
++                                        ...app.request.query.all(),
++                                        sort: 'leaveAt',
++                                        sortDirection: sort == 'leaveAt' and sortDirection == 'asc' ? 'desc' : 'asc',
++                                    }) }}">
++                                        Departing {{ _self.sortArrow('leaveAt', sort, sortDirection) }}
++                                    </a>
++                                </th>
++                            </tr>
++                        </thead>
++                        <tbody>
++                            {% for voyage in voyages %}
++                            <tr class="border-b border-gray-700 {% if loop.index is odd %} bg-gray-800 {% else %} bg-gray-700 {% endif %}">
++                                <td class="p-4">{{ voyage.purpose }}</td>
++                                <td class="px-2 whitespace-nowrap">
++                                    <div
++                                        {{ stimulus_controller('popover') }}
++                                        {{
++                                            stimulus_action('popover', 'show', 'mouseenter')
++                                            |stimulus_action('popover', 'hide', 'mouseleave')
++                                        }}
++                                        class="relative"
+                                     >
+-
+-                                    <template {{ stimulus_target('popover', 'content') }}>
+-                                        <div
+-                                            {{ stimulus_target('popover', 'card') }}
+-                                            class="max-w-sm rounded shadow-lg bg-gray-900 absolute left-0 bottom-8"
++                                        <img
++                                            src="{{ asset('images/'~voyage.planet.imageFilename) }}"
++                                            alt="Image of {{ voyage.planet.name }}"
++                                            class="inline-block w-8 h-8 rounded-full bg-gray-600 ml-2"
+                                         >
+-                                            <turbo-frame loading="lazy" id="planet-card-{{ voyage.planet.id }}" target="_top" src="{{ path('app_planet_show_card', {
+-                                                'id': voyage.planet.id,
+-                                            }) }}">
+-                                                <div class="p-10">
+-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+-                                                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+-                                                       <path d="M12 3a9 9 0 1 0 9 9"></path>
+-                                                    </svg>
+-                                                </div>
+-                                            </turbo-frame>
+-                                        </div>
+-                                    </template>
+-                                </div>
+-                            </td>
+-                            <td class="px-2 whitespace-nowrap">{{ voyage.leaveAt|ago }}</td>
+-                        </tr>
+-                        {% endfor %}
+-                    </tbody>
+-                </table>
+-            </div>
+-            <div class="flex items-center mt-6 space-x-4">
+-                {% if voyages.hasPreviousPage %}
+-                    <a href="{{ pagerfanta_page_url(voyages, voyages.previousPage) }}" class="block py-2 px-4 bg-gray-700 text-white rounded hover:bg-gray-600">Previous</a>
+-                {% endif %}
+-                {% if voyages.hasNextPage %}
+-                    <a href="{{ pagerfanta_page_url(voyages, voyages.nextPage) }}" class="block py-2 px-4 bg-gray-700 text-white rounded hover:bg-gray-600">Next</a>
+-                {% endif %}
+-                <div class="ml-4">
+-                    Page {{ voyages.currentPage }}/{{ voyages.nbPages }}
++
++                                        <template {{ stimulus_target('popover', 'content') }}>
++                                            <div
++                                                {{ stimulus_target('popover', 'card') }}
++                                                class="max-w-sm rounded shadow-lg bg-gray-900 absolute left-0 bottom-8"
++                                            >
++                                                <turbo-frame loading="lazy" id="planet-card-{{ voyage.planet.id }}" target="_top" src="{{ path('app_planet_show_card', {
++                                                    'id': voyage.planet.id,
++                                                }) }}">
++                                                    <div class="p-10">
++                                                        <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
++                                                           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
++                                                           <path d="M12 3a9 9 0 1 0 9 9"></path>
++                                                        </svg>
++                                                    </div>
++                                                </turbo-frame>
++                                            </div>
++                                        </template>
++                                    </div>
++                                </td>
++                                <td class="px-2 whitespace-nowrap">{{ voyage.leaveAt|ago }}</td>
++                            </tr>
++                            {% endfor %}
++                        </tbody>
++                    </table>
+                 </div>
+-            </div>
++                <div class="flex items-center mt-6 space-x-4">
++                    {% if voyages.hasPreviousPage %}
++                        <a href="{{ pagerfanta_page_url(voyages, voyages.previousPage) }}" class="block py-2 px-4 bg-gray-700 text-white rounded hover:bg-gray-600">Previous</a>
++                    {% endif %}
++                    {% if voyages.hasNextPage %}
++                        <a href="{{ pagerfanta_page_url(voyages, voyages.nextPage) }}" class="block py-2 px-4 bg-gray-700 text-white rounded hover:bg-gray-600">Next</a>
++                    {% endif %}
++                    <div class="ml-4">
++                        Page {{ voyages.currentPage }}/{{ voyages.nbPages }}
++                    </div>
++                </div>
++            </turbo-frame>
+         </section>
+     </div>
+ {% endblock %}

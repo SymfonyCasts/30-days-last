@@ -1,0 +1,12 @@
+diff --git a/assets/bootstrap.js b/assets/bootstrap.js
+index d4e50c9..6ec965e 100644
+--- a/assets/bootstrap.js
++++ b/assets/bootstrap.js
+@@ -1,5 +1,5 @@
+ import { startStimulusApp } from '@symfony/stimulus-bundle';
++import Popover from 'stimulus-popover';
+ 
+ const app = startStimulusApp();
+-// register any custom, 3rd party controllers here
+-// app.register('some_controller_name', SomeImportedController);
++app.register('popover', Popover);

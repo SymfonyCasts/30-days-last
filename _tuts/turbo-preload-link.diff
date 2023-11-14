@@ -1,0 +1,13 @@
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index b0e58b8..dc7e43b 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -22,7 +22,7 @@
+                             {{ stimulus_action('celebrate', 'poof', 'mouseover') }}
+                             class="h-8 w-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                         <a href="{{ path('app_homepage') }}" class="text-xl ml-3">Space Inviters</a>
+-                        <a href="{{ path('app_voyage_index') }}" class="ml-6 hover:text-gray-400">Voyages</a>
++                        <a href="{{ path('app_voyage_index') }}" data-turbo-preload class="ml-6 hover:text-gray-400">Voyages</a>
+                         <a href="{{ path('app_planet_index') }}" class="ml-4 hover:text-gray-400">Planets</a>
+                     </div>
+                     <div class="flex items-center">

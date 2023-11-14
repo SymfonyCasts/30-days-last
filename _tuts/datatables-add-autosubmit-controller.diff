@@ -1,0 +1,23 @@
+diff --git a/assets/controllers/autosubmit_controller.js b/assets/controllers/autosubmit_controller.js
+new file mode 100644
+index 0000000..0816a44
+--- /dev/null
++++ b/assets/controllers/autosubmit_controller.js
+@@ -0,0 +1,17 @@
++import { Controller } from "@hotwired/stimulus"
++import debounce from 'debounce'
++
++// Connects to data-controller="autosubmit"
++export default class extends Controller {
++  initialize() {
++    this.debouncedSubmit = debounce(this.debouncedSubmit.bind(this), 300)
++  }
++
++  submit(e) {
++    this.element.requestSubmit()
++  }
++
++  debouncedSubmit() {
++    this.submit()
++  }
++}

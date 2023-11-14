@@ -1,0 +1,22 @@
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index ee3a657..0af0797 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -55,7 +55,7 @@
+                                         class="inline-block w-8 h-8 rounded-full bg-gray-600 ml-2"
+                                     >
+ 
+-                                    <template {{ stimulus_target('popover', 'content') }}>
++                                    <div {{ stimulus_target('popover', 'content') }}>
+                                         <div
+                                             {{ stimulus_target('popover', 'card') }}
+                                             class="max-w-sm rounded shadow-lg bg-gray-900 absolute left-0 bottom-8"
+@@ -64,7 +64,7 @@
+                                                 'id': voyage.planet.id,
+                                             }) }}"></turbo-frame>
+                                         </div>
+-                                    </template>
++                                    </div>
+                                 </div>
+                             </td>
+                             <td class="px-2 whitespace-nowrap">{{ voyage.leaveAt|ago }}</td>

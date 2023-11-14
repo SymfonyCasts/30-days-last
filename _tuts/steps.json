@@ -156,6 +156,21 @@
             "description": null
         },
         {
+            "id": "turbo-install-ux-turbo",
+            "name": "Turbo: install ux-turbo",
+            "description": null
+        },
+        {
+            "id": "turbo-show-how-to-disable-drive",
+            "name": "Turbo: Show how to disable drive",
+            "description": null
+        },
+        {
+            "id": "turbo-preload-link",
+            "name": "Turbo: preload link",
+            "description": null
+        },
+        {
             "id": "frames-add-frame-around-planets",
             "name": "Frames: Add frame around planets",
             "description": null
@@ -184,7 +199,152 @@
             "id": "frames-add-tailwind-variant",
             "name": "Frames: Add Tailwind variant",
             "description": null
+        },
+        {
+            "id": "popover-install-stimulus-popover",
+            "name": "Popover: Install stimulus-popover",
+            "description": null
+        },
+        {
+            "id": "popover-register-controller",
+            "name": "Popover: Register controller",
+            "description": null
+        },
+        {
+            "id": "popover-add-basic-popover",
+            "name": "Popover: Add basic popover",
+            "description": null
+        },
+        {
+            "id": "popover-better-styling",
+            "name": "Popover: better styling",
+            "description": null
+        },
+        {
+            "id": "popover-arrow-css",
+            "name": "Popover: arrow CSS",
+            "description": null
+        },
+        {
+            "id": "popover-copy-to-own-endpoint",
+            "name": "Popover: Copy to own endpoint",
+            "description": null
+        },
+        {
+            "id": "popover-adjust-variables",
+            "name": "Popover: Adjust variables",
+            "description": null
+        },
+        {
+            "id": "popover-target-the-frame",
+            "name": "Popover: target the frame",
+            "description": null
+        },
+        {
+            "id": "popover-template-div",
+            "name": "Popover: template -> div",
+            "description": null
+        },
+        {
+            "id": "popover-loading-lazy",
+            "name": "Popover: loading=\"lazy\"",
+            "description": null
+        },
+        {
+            "id": "popover-back-to-template",
+            "name": "Popover: Back to template",
+            "description": null
+        },
+        {
+            "id": "popover-add-loading",
+            "name": "Popover: Add loading",
+            "description": null
+        },
+        {
+            "id": "popover-override-controller",
+            "name": "Popover: Override controller",
+            "description": null
+        },
+        {
+            "id": "datatables-add-autosubmit-controller",
+            "name": "DataTables: add autosubmit controller",
+            "description": null
+        },
+        {
+            "id": "datatables-use-autosubmit",
+            "name": "DataTables: Use autosubmit",
+            "description": null
+        },
+        {
+            "id": "datatables-install-debounce",
+            "name": "DataTables: install debounce",
+            "description": null
+        },
+        {
+            "id": "datatables-autofocus",
+            "name": "DataTables: autofocus",
+            "description": null
+        },
+        {
+            "id": "datatables-installing-pagerfanta",
+            "name": "DataTables: Installing pagerfanta",
+            "description": null
+        },
+        {
+            "id": "datatables-use-pagerfanta",
+            "name": "DataTables: Use pagerfanta",
+            "description": null
+        },
+        {
+            "id": "datatables-render-pagination-links",
+            "name": "DataTables: Render pagination links",
+            "description": null
+        },
+        {
+            "id": "datatables-use-has-next-prev-page",
+            "name": "DataTables: Use has next\/prev page",
+            "description": null
+        },
+        {
+            "id": "datatables-render-pages-manually",
+            "name": "DataTables: Render pages manually",
+            "description": null
+        },
+        {
+            "id": "datatables-add-column-sorting",
+            "name": "DataTables: Add column sorting",
+            "description": null
+        },
+        {
+            "id": "datatables2-add-turbo-frame",
+            "name": "DataTables2: Add turbo-frame",
+            "description": null
+        },
+        {
+            "id": "datatables2-target-the-planet-link",
+            "name": "DataTables2: Target the planet link",
+            "description": null
+        },
+        {
+            "id": "datatables2-target-form-onto-frame",
+            "name": "DataTables2: Target form onto frame",
+            "description": null
+        },
+        {
+            "id": "datatables2-add-loading-variant",
+            "name": "DataTables2: Add loading variant",
+            "description": null
+        },
+        {
+            "id": "datatables2-remove-sleep",
+            "name": "DataTables2: Remove sleep",
+            "description": null
+        },
+        {
+            "id": "datatables2-data-turbo-action-advance",
+            "name": "DataTables2: data-turbo-action=advance",
+            "description": null
         }
     ],
-    "sha": "f64024a9d4d9f9ffb728ab5231d14d8d6ac9810a"
+    "sha": "3c537cdc3ecb822da58325ed67a29c4336ebc4f4"
 }

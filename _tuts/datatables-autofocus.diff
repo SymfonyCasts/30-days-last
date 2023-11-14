@@ -1,0 +1,12 @@
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index d61456b..0e56d36 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -26,6 +26,7 @@
+                     placeholder="Search voyages"
+                     class="w-1/3 px-4 py-2 rounded bg-gray-800 text-white placeholder-gray-400"
+                     {{ stimulus_action('autosubmit', 'debouncedSubmit') }}
++                    autofocus
+                 >
+                 <div class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
+             </form>

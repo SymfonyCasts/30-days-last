@@ -1,0 +1,12 @@
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index 0e56d36..76f7bdb 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -84,6 +84,7 @@
+                 </table>
+             </div>
+             <div class="flex items-center mt-6 space-x-4">
++                {{ pagerfanta(voyages) }}
+                 <a href="#" class="block py-2 px-4 bg-gray-700 text-white rounded hover:bg-gray-600">Previous</a>
+                 <a href="#" class="block py-2 px-4 bg-gray-700 text-white rounded hover:bg-gray-600">Next</a>
+             </div>

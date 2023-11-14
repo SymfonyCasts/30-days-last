@@ -1,0 +1,13 @@
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index 82c8a5b..ee3a657 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -60,7 +60,7 @@
+                                             {{ stimulus_target('popover', 'card') }}
+                                             class="max-w-sm rounded shadow-lg bg-gray-900 absolute left-0 bottom-8"
+                                         >
+-                                            <turbo-frame id="planet-card-{{ voyage.planet.id }}" src="{{ path('app_planet_show_card', {
++                                            <turbo-frame id="planet-card-{{ voyage.planet.id }}" target="_top" src="{{ path('app_planet_show_card', {
+                                                 'id': voyage.planet.id,
+                                             }) }}"></turbo-frame>
+                                         </div>

@@ -1,0 +1,12 @@
+diff --git a/importmap.php b/importmap.php
+index 274db26..e3b3acd 100644
+--- a/importmap.php
++++ b/importmap.php
+@@ -40,4 +40,7 @@ return [
+     'stimulus-popover' => [
+         'version' => '6.2.0',
+     ],
++    'debounce' => [
++        'version' => '1.2.1',
++    ],
+ ];

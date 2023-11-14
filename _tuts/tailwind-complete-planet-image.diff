@@ -14864,16 +14864,16 @@ X#FWl5?-m42tuuJK`njxgN@xNA&vf#n
 literal 0
 HcmV?d00001
 
-diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 5e93926..ffa0388 100644
---- a/templates/main/homepage.html.twig
-+++ b/templates/main/homepage.html.twig
-@@ -20,7 +20,7 @@
-                                     </div>
-                                     <img
-                                         class="flex-shrink-0 w-8 h-8 bg-gray-600 rounded-full group-hover:bg-gray-500 transition duration-300 ease-in-out"
--                                        src="#"
-+                                        src="{{ asset('images/'~planet.imageFilename) }}"
-                                         alt="Image of {{ planet.name }}"
-                                     >
-                                 </div>
+diff --git a/templates/main/_planet_list.html.twig b/templates/main/_planet_list.html.twig
+index 52ca04a..b60b1cb 100644
+--- a/templates/main/_planet_list.html.twig
++++ b/templates/main/_planet_list.html.twig
+@@ -11,7 +11,7 @@
+                     </div>
+                     <img
+                         class="flex-shrink-0 w-8 h-8 bg-gray-600 rounded-full group-hover:bg-gray-500 transition duration-300 ease-in-out"
+-                        src="#"
++                        src="{{ asset('images/'~planet.imageFilename) }}"
+                         alt="Image of {{ planet.name }}"
+                     >
+                 </div>

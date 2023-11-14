@@ -1,0 +1,17 @@
+diff --git a/assets/styles/app.css b/assets/styles/app.css
+index 2318938..c66913b 100644
+--- a/assets/styles/app.css
++++ b/assets/styles/app.css
+@@ -60,3 +60,12 @@ body {
+ .ts-wrapper .ts-dropdown {
+   @apply shadow-md;
+ }
++
++[data-popover-target=card]:after {
++    content: "";
++    position: absolute;
++    top: 100%;
++    left: 1rem;
++    border-width: .75rem;
++    @apply border-t-white dark:border-t-gray-900 border-transparent;
++}

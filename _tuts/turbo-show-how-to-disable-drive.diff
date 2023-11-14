@@ -1,0 +1,18 @@
+diff --git a/assets/app.js b/assets/app.js
+index 4237e72..d29b1c0 100644
+--- a/assets/app.js
++++ b/assets/app.js
+@@ -1,11 +1,7 @@
++import * as Turbo from '@hotwired/turbo';
+ import './bootstrap.js';
+-/*
+- * Welcome to your app's main JavaScript file!
+- *
+- * This file will be included onto the page via the importmap() Twig function,
+- * which should already be in your base.html.twig.
+- */
+ import './styles/app.css';
+ import alienGreeting from './lib/alien-greeting.js';
+ 
++//Turbo.session.drive = false;
+ alienGreeting('Give us all your candy!', false);

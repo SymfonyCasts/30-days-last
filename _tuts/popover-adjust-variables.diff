@@ -1,0 +1,18 @@
+diff --git a/templates/planet/_card.html.twig b/templates/planet/_card.html.twig
+index 0f2fecb..b745c25 100644
+--- a/templates/planet/_card.html.twig
++++ b/templates/planet/_card.html.twig
+@@ -1,10 +1,10 @@
+ <turbo-frame id="planet-card-{{ planet.id }}">
+     <div class="px-6 py-4">
+         <h4>
+-            <a class="hover:text-blue-300 transition-colors duration-100" href="{{ path('app_planet_show', { id: voyage.planet.id }) }}">
+-                {{ voyage.planet.name }}
++            <a class="hover:text-blue-300 transition-colors duration-100" href="{{ path('app_planet_show', { id: planet.id }) }}">
++                {{ planet.name }}
+             </a>
+         </h4>
+-        <small>{{ voyage.planet.lightYearsFromEarth|round|number_format }} ly</small>
++        <small>{{ planet.lightYearsFromEarth|round|number_format }} ly</small>
+     </div>
+ </turbo-frame>

@@ -1,0 +1,90 @@
+diff --git a/src/Controller/MainController.php b/src/Controller/MainController.php
+index ca22f96..ecef2f4 100644
+--- a/src/Controller/MainController.php
++++ b/src/Controller/MainController.php
+@@ -17,8 +17,13 @@ class MainController extends AbstractController
+     public function homepage(VoyageRepository $voyageRepository, PlanetRepository $planetRepository, Request $request): Response
+     {
+         $query = $request->query->get('query');
++        $sort = $request->query->get('sort', 'leaveAt');
++        $sortDirection = $request->query->get('sortDirection', 'ASC');
++        $validSorts = ['purpose', 'leaveAt'];
++        $sort = in_array($sort, $validSorts) ? $sort : 'leaveAt';
++
+         $pager = Pagerfanta::createForCurrentPageWithMaxPerPage(
+-            new QueryAdapter($voyageRepository->findBySearchQueryBuilder($query)),
++            new QueryAdapter($voyageRepository->findBySearchQueryBuilder($query, $sort, $sortDirection)),
+             $request->query->getInt('page', 1),
+             10
+         );
+@@ -26,6 +31,8 @@ class MainController extends AbstractController
+         return $this->render('main/homepage.html.twig', [
+             'voyages' => $pager,
+             'planets' => $planetRepository->findAll(),
++            'sort' => $sort,
++            'sortDirection' => $sortDirection,
+         ]);
+     }
+ }
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index 9def390..00d9969 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -2,6 +2,29 @@
+ 
+ {% block title %}Space Inviters!{% endblock %}
+ 
++{% macro sortArrow(sortName, sort, sortDirection) %}
++    {% if sort == sortName %}
++        {% if sortDirection == 'asc' %}
++            <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-4 h-4" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
++               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
++               <path d="M6 15l6 -6l6 6"></path>
++            </svg>
++        {% else %}
++            <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-4 h-4" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
++               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
++               <path d="M6 9l6 6l6 -6"></path>
++            </svg>
++        {% endif %}
++    {% else %}
++        <!-- up and down arrow svg -->
++        <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-4 h-4 text-slate-300" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
++           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
++           <path d="M8 9l4 -4l4 4"></path>
++           <path d="M16 15l-4 4l-4 -4"></path>
++        </svg>
++    {% endif %}
++{% endmacro %}
++
+ {% block body %}
+     <div class="flex">
+         <aside class="hidden md:block md:w-64 bg-gray-900 px-2 py-6">
+@@ -34,9 +57,25 @@
+                 <table class="w-full text-white">
+                     <thead>
+                         <tr>
+-                            <th class="text-left py-2">Name</th>
++                            <th class="text-left py-2">
++                                <a href="{{ path('app_homepage', {
++                                    ...app.request.query.all(),
++                                    sort: 'purpose',
++                                    sortDirection: sort == 'purpose' and sortDirection == 'asc' ? 'desc' : 'asc',
++                                }) }}">
++                                    Purpose {{ _self.sortArrow('purpose', sort, sortDirection) }}
++                                </a>
++                            </th>
+                             <th class="text-left py-2 pr-4">Planet</th>
+-                            <th class="text-left py-2">Departing</th>
++                            <th class="text-left py-2">
++                                <a href="{{ path('app_homepage', {
++                                    ...app.request.query.all(),
++                                    sort: 'leaveAt',
++                                    sortDirection: sort == 'leaveAt' and sortDirection == 'asc' ? 'desc' : 'asc',
++                                }) }}">
++                                    Departing {{ _self.sortArrow('leaveAt', sort, sortDirection) }}
++                                </a>
++                            </th>
+                         </tr>
+                     </thead>
+                     <tbody>

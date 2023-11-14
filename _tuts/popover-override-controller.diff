@@ -1,0 +1,33 @@
+diff --git a/assets/bootstrap.js b/assets/bootstrap.js
+index 6ec965e..03c7842 100644
+--- a/assets/bootstrap.js
++++ b/assets/bootstrap.js
+@@ -1,5 +1,4 @@
+ import { startStimulusApp } from '@symfony/stimulus-bundle';
+-import Popover from 'stimulus-popover';
+ 
+ const app = startStimulusApp();
+-app.register('popover', Popover);
++// app.register('popover', Popover);
+diff --git a/assets/controllers/popover_controller.js b/assets/controllers/popover_controller.js
+new file mode 100644
+index 0000000..e327114
+--- /dev/null
++++ b/assets/controllers/popover_controller.js
+@@ -0,0 +1,16 @@
++import Popover from 'stimulus-popover';
++
++export default class extends Popover {
++    async show(t) {
++        if (this.hasCardTarget) {
++            this.cardTarget.classList.remove('hidden');
++            return;
++        }
++
++        super.show(t);
++    }
++
++    hide() {
++        this.hasCardTarget && this.cardTarget.classList.add('hidden');
++    }
++}

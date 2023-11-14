@@ -1,0 +1,39 @@
+diff --git a/src/Controller/MainController.php b/src/Controller/MainController.php
+index ecef2f4..f7f44da 100644
+--- a/src/Controller/MainController.php
++++ b/src/Controller/MainController.php
+@@ -21,6 +21,7 @@ class MainController extends AbstractController
+         $sortDirection = $request->query->get('sortDirection', 'ASC');
+         $validSorts = ['purpose', 'leaveAt'];
+         $sort = in_array($sort, $validSorts) ? $sort : 'leaveAt';
++        sleep(1);
+ 
+         $pager = Pagerfanta::createForCurrentPageWithMaxPerPage(
+             new QueryAdapter($voyageRepository->findBySearchQueryBuilder($query, $sort, $sortDirection)),
+diff --git a/tailwind.config.js b/tailwind.config.js
+index cfbf534..4bfd8e7 100644
+--- a/tailwind.config.js
++++ b/tailwind.config.js
+@@ -12,7 +12,8 @@ module.exports = {
+   },
+   plugins: [
+     plugin(function({ addVariant }) {
+-      addVariant('turbo-frame', 'turbo-frame[src] &')
++      addVariant('turbo-frame', 'turbo-frame[src] &');
++      addVariant('busy', '[busy] &');
+     }),
+   ],
+ }
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index 8bf9929..0168161 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -55,7 +55,7 @@
+                 <div class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
+             </form>
+             <turbo-frame id="voyage-list">
+-                <div class="bg-gray-800 p-4 rounded">
++                <div class="bg-gray-800 p-4 rounded busy:opacity-50 busy:blur-sm">
+                     <table class="w-full text-white">
+                         <thead>
+                             <tr>

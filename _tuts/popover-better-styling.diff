@@ -1,0 +1,13 @@
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index fdc5bc5..6a7a910 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -58,7 +58,7 @@
+                                     <template {{ stimulus_target('popover', 'content') }}>
+                                         <div
+                                             {{ stimulus_target('popover', 'card') }}
+-                                            class="bg-gray-900 absolute"
++                                            class="max-w-sm rounded shadow-lg bg-gray-900 absolute left-0 bottom-8"
+                                         >
+                                             <div class="px-6 py-4">
+                                                 <h4>

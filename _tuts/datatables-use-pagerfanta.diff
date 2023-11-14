@@ -1,0 +1,30 @@
+diff --git a/src/Controller/MainController.php b/src/Controller/MainController.php
+index c1c9742..ca22f96 100644
+--- a/src/Controller/MainController.php
++++ b/src/Controller/MainController.php
+@@ -4,6 +4,8 @@ namespace App\Controller;
+ 
+ use App\Repository\PlanetRepository;
+ use App\Repository\VoyageRepository;
++use Pagerfanta\Doctrine\ORM\QueryAdapter;
++use Pagerfanta\Pagerfanta;
+ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+ use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\Response;
+@@ -15,10 +17,14 @@ class MainController extends AbstractController
+     public function homepage(VoyageRepository $voyageRepository, PlanetRepository $planetRepository, Request $request): Response
+     {
+         $query = $request->query->get('query');
+-        $voyages = $voyageRepository->findBySearch($query);
++        $pager = Pagerfanta::createForCurrentPageWithMaxPerPage(
++            new QueryAdapter($voyageRepository->findBySearchQueryBuilder($query)),
++            $request->query->getInt('page', 1),
++            10
++        );
+ 
+         return $this->render('main/homepage.html.twig', [
+-            'voyages' => $voyages,
++            'voyages' => $pager,
+             'planets' => $planetRepository->findAll(),
+         ]);
+     }

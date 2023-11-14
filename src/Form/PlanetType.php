@@ -18,10 +18,11 @@ class PlanetType extends AbstractType
             ->add('lightYearsFromEarth')
             ->add('imageFilename', ChoiceType::class, [
                 'choices' => [
-                    'planet-1.png' => 'Planet 1',
-                    'planet-2.png' => 'Planet 2',
-                    'planet-3.png' => 'Planet 3',
-                    'planet-4.png' => 'Planet 4',
+                    'Choose an image...' => '',
+                    'Planet 1' => 'planet-1.png',
+                    'Planet 2' => 'planet-2.png',
+                    'Planet 3' => 'planet-3.png',
+                    'Planet 4' => 'planet-4.png',
                 ]
             ])
         ;

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Planet;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,6 +16,14 @@ class PlanetType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('lightYearsFromEarth')
+            ->add('imageFilename', ChoiceType::class, [
+                'choices' => [
+                    'planet-1.png' => 'Planet 1',
+                    'planet-2.png' => 'Planet 2',
+                    'planet-3.png' => 'Planet 3',
+                    'planet-4.png' => 'Planet 4',
+                ]
+            ])
         ;
     }
 

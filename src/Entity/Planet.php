@@ -43,7 +43,7 @@ class Planet
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -55,7 +55,7 @@ class Planet
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
 
@@ -67,7 +67,7 @@ class Planet
         return $this->lightYearsFromEarth;
     }
 
-    public function setLightYearsFromEarth(float $lightYearsFromEarth): static
+    public function setLightYearsFromEarth(?float $lightYearsFromEarth): static
     {
         $this->lightYearsFromEarth = $lightYearsFromEarth;
 
@@ -79,7 +79,7 @@ class Planet
         return $this->imageFilename;
     }
 
-    public function setImageFilename(string $imageFilename): static
+    public function setImageFilename(?string $imageFilename): static
     {
         $this->imageFilename = $imageFilename;
 

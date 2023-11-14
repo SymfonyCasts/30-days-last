@@ -49,7 +49,7 @@ class Voyage
         return $this->purpose;
     }
 
-    public function setPurpose(string $purpose): static
+    public function setPurpose(?string $purpose): static
     {
         $this->purpose = $purpose;
 
@@ -61,7 +61,7 @@ class Voyage
         return $this->leaveAt;
     }
 
-    public function setLeaveAt(\DateTimeImmutable $leaveAt): static
+    public function setLeaveAt(?\DateTimeImmutable $leaveAt): static
     {
         $this->leaveAt = $leaveAt;
 

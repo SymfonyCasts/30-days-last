@@ -9,8 +9,14 @@
     <table class="min-w-full bg-gray-800 text-white">
         <tbody class="bg-gray-700 divide-y divide-gray-600">
             <tr>
-                <th class="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Id</th>
-                <td class="px-6 py-4 whitespace-nowrap">{{ planet.id }}</td>
+                <th class="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Photo</th>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <img
+                        class="flex-shrink-0 w-8 h-8 bg-gray-600 rounded-full group-hover:bg-gray-500 transition duration-300 ease-in-out"
+                        src="{{ asset('images/'~planet.imageFilename) }}"
+                        alt="Image of {{ planet.name }}"
+                    >
+                </td>
             </tr>
             <tr>
                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Name</th>
@@ -21,7 +27,7 @@
                 <td class="px-6 py-4 whitespace-nowrap">{{ planet.description }}</td>
             </tr>
             <tr>
-                <th class="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">LightYearsFromEarth</th>
+                <th class="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Distance</th>
                 <td class="px-6 py-4 whitespace-nowrap">{{ planet.lightYearsFromEarth }}</td>
             </tr>
         </tbody>

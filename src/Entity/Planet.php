@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\PlanetRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: PlanetRepository::class)]
 class Planet
@@ -15,15 +17,20 @@ class Planet
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[NotBlank]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[NotBlank]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[NotBlank]
+    #[GreaterThanOrEqual(0)]
     private ?float $lightYearsFromEarth = null;
 
     #[ORM\Column()]
+    #[NotBlank]
     private ?string $imageFilename = null;
 
     public function getId(): ?int

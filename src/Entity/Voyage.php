@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\VoyageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: VoyageRepository::class)]
 class Voyage
@@ -15,12 +16,15 @@ class Voyage
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[NotBlank]
     private ?Planet $planet = null;
 
     #[ORM\Column(length: 255)]
+    #[NotBlank]
     private ?string $purpose = null;
 
     #[ORM\Column]
+    #[NotBlank]
     private ?\DateTimeImmutable $leaveAt = null;
 
     public function getId(): ?int

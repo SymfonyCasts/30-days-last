@@ -21,28 +21,18 @@ class VoyageRepository extends ServiceEntityRepository
         parent::__construct($registry, Voyage::class);
     }
 
-//    /**
-//     * @return Voyage[] Returns an array of Voyage objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('v')
-//            ->andWhere('v.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('v.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Voyage[]
+     */
+    public function findByQuery(?string $query): array
+    {
+        $qb = $this->createQueryBuilder('v');
 
-//    public function findOneBySomeField($value): ?Voyage
-//    {
-//        return $this->createQueryBuilder('v')
-//            ->andWhere('v.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        if ($query) {
+            $qb->andWhere('v.purpose LIKE :query')
+                ->setParameter('query', '%' . $query . '%');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 }

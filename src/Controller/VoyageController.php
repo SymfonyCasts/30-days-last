@@ -33,6 +33,8 @@ class VoyageController extends AbstractController
             $entityManager->persist($voyage);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Bon voyage!');
+
             return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -59,6 +61,8 @@ class VoyageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'Voyage updated!');
+
             return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -74,6 +78,8 @@ class VoyageController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$voyage->getId(), $request->request->get('_token'))) {
             $entityManager->remove($voyage);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Voyage deleted!');
         }
 
         return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);

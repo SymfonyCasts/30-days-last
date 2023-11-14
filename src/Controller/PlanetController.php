@@ -33,6 +33,8 @@ class PlanetController extends AbstractController
             $entityManager->persist($planet);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Planet created - wow!');
+
             return $this->redirectToRoute('app_planet_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -59,6 +61,8 @@ class PlanetController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'Planet updated!');
+
             return $this->redirectToRoute('app_planet_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -74,6 +78,8 @@ class PlanetController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$planet->getId(), $request->request->get('_token'))) {
             $entityManager->remove($planet);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Planet deleted! Yikes!');
         }
 
         return $this->redirectToRoute('app_planet_index', [], Response::HTTP_SEE_OTHER);

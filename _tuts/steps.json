@@ -154,7 +154,37 @@
             "id": "ux-make-controller-lazy",
             "name": "UX: Make controller lazy",
             "description": null
+        },
+        {
+            "id": "frames-add-frame-around-planets",
+            "name": "Frames: Add frame around planets",
+            "description": null
+        },
+        {
+            "id": "frames-add-frame-in-show-template",
+            "name": "Frames: Add frame in show template",
+            "description": null
+        },
+        {
+            "id": "frames-add-back-link",
+            "name": "Frames: Add back link",
+            "description": null
+        },
+        {
+            "id": "frames-add-edit-link",
+            "name": "Frames: Add edit link",
+            "description": null
+        },
+        {
+            "id": "frames-target-edit-link-to-top",
+            "name": "Frames: Target edit link to _top",
+            "description": null
+        },
+        {
+            "id": "frames-add-tailwind-variant",
+            "name": "Frames: Add Tailwind variant",
+            "description": null
         }
     ],
-    "sha": "93333ae4decf322e2655eeb93a6d446ea9a113ac"
+    "sha": "f64024a9d4d9f9ffb728ab5231d14d8d6ac9810a"
 }

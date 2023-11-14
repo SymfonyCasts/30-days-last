@@ -1,0 +1,15 @@
+diff --git a/templates/planet/show.html.twig b/templates/planet/show.html.twig
+index f4d3d37..f9645c8 100644
+--- a/templates/planet/show.html.twig
++++ b/templates/planet/show.html.twig
+@@ -32,6 +32,10 @@
+                 </tr>
+             </tbody>
+         </table>
++
++        <div class="mt-2">
++            <a href="{{ path('app_homepage') }}">&lt;-- Back</a>
++        </div>
+     </turbo-frame>
+ 
+     <div class="flex space-x-4 mt-4">

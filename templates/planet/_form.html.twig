@@ -12,7 +12,7 @@
             Back to list
         </a>
         <div class="inline-block">
-            {% if form.vars.data.id %}
+            {% if form.vars.data.id|default %}
                 {{ include('planet/_delete_form.html.twig') }}
             {% endif %}
         </div>

@@ -1,8 +1,8 @@
 diff --git a/src/Controller/PlanetController.php b/src/Controller/PlanetController.php
-index dd5ed50..1875000 100644
+index 1c5a760..e1f85f7 100644
 --- a/src/Controller/PlanetController.php
 +++ b/src/Controller/PlanetController.php
-@@ -50,6 +50,14 @@ class PlanetController extends AbstractController
+@@ -52,6 +52,14 @@ class PlanetController extends AbstractController
          ]);
      }
  

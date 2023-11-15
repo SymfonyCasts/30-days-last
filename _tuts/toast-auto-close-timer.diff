@@ -1,0 +1,38 @@
+diff --git a/assets/controllers/closeable_controller.js b/assets/controllers/closeable_controller.js
+index 4345d10..f3fba33 100644
+--- a/assets/controllers/closeable_controller.js
++++ b/assets/controllers/closeable_controller.js
+@@ -1,6 +1,18 @@
+ import { Controller } from '@hotwired/stimulus';
+ 
+ export default class extends Controller {
++    static values = {
++        auto: Number,
++    };
++
++    connect() {
++        if (this.autoValue) {
++            setTimeout(() => {
++                this.close();
++            }, this.autoValue);
++        }
++    }
++
+     close() {
+         this.element.remove();
+     }
+diff --git a/templates/_flash.html.twig b/templates/_flash.html.twig
+index 828238e..a265486 100644
+--- a/templates/_flash.html.twig
++++ b/templates/_flash.html.twig
+@@ -1,7 +1,9 @@
+ <div
+     class="fixed top-5 right-5 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 opacity-100 transition-opacity duration-500"
+     role="alert"
+-    {{ stimulus_controller('closeable') }}
++    {{ stimulus_controller('closeable', {
++        auto: 5000,
++    }) }}
+ >
+     <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">

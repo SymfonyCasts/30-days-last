@@ -1,0 +1,15 @@
+diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
+index 810fb19..b6f48dc 100644
+--- a/src/Controller/VoyageController.php
++++ b/src/Controller/VoyageController.php
+@@ -19,7 +19,9 @@ class VoyageController extends AbstractController
+     {
+         return $this->render('voyage/index.html.twig', [
+             'voyages' => $voyageRepository->findBy([], ['id' => 'DESC']),
+-            'form' => $this->createForm(VoyageType::class),
++            'form' => $this->createForm(VoyageType::class, null, [
++                'action' => $this->generateUrl('app_voyage_new'),
++            ]),
+         ]);
+     }
+ 

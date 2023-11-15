@@ -1,0 +1,23 @@
+diff --git a/assets/controllers/closeable_controller.js b/assets/controllers/closeable_controller.js
+index 3a84766..975b77e 100644
+--- a/assets/controllers/closeable_controller.js
++++ b/assets/controllers/closeable_controller.js
+@@ -22,6 +22,17 @@ export default class extends Controller {
+     }
+ 
+     close() {
+-        this.element.remove();
++        this.element.style.opacity = 0;
++
++        let handler;
++        this.element.addEventListener('transitionend', handler = (event) => {
++            // ignore events from children
++            if (event.target !== this.element) {
++                return;
++            }
++
++            this.element.remove();
++            this.element.removeEventListener('transitionend', handler);
++        });
+     }
+ }

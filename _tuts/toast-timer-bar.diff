@@ -1,0 +1,38 @@
+diff --git a/assets/controllers/closeable_controller.js b/assets/controllers/closeable_controller.js
+index f3fba33..3a84766 100644
+--- a/assets/controllers/closeable_controller.js
++++ b/assets/controllers/closeable_controller.js
+@@ -5,11 +5,19 @@ export default class extends Controller {
+         auto: Number,
+     };
+ 
++    static targets = ['timerbar']
++
+     connect() {
+         if (this.autoValue) {
+             setTimeout(() => {
+                 this.close();
+             }, this.autoValue);
++
++            if (this.hasTimerbarTarget) {
++                setTimeout(() => {
++                    this.timerbarTarget.style.width = 0;
++                }, 10);
++            }
+         }
+     }
+ 
+diff --git a/templates/_flash.html.twig b/templates/_flash.html.twig
+index a265486..807318a 100644
+--- a/templates/_flash.html.twig
++++ b/templates/_flash.html.twig
+@@ -23,4 +23,9 @@
+             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+         </svg>
+     </button>
++
++    <div
++        class="absolute bottom-0 left-0 h-1 bg-green-500 w-full transition-all duration-[5000ms] ease-linear"
++        {{ stimulus_target('closeable', 'timerbar') }}
++    ></div>
+ </div>

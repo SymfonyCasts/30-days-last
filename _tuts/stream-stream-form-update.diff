@@ -1,0 +1,52 @@
+diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
+index b6f48dc..7d0dd41 100644
+--- a/src/Controller/VoyageController.php
++++ b/src/Controller/VoyageController.php
+@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+ use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\Response;
+ use Symfony\Component\Routing\Annotation\Route;
++use Symfony\UX\Turbo\TurboBundle;
+ 
+ #[Route('/voyage')]
+ class VoyageController extends AbstractController
+@@ -41,6 +42,13 @@ class VoyageController extends AbstractController
+             return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
+         }
+ 
++        if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
++            // If the request comes from Turbo, set the content type as text/vnd.turbo-stream.html and only send the HTML to update
++            $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
++
++            return $this->renderBlock('voyage/new.html.twig', 'success_stream', ['form' => $form]);
++        }
++
+         return $this->render('voyage/new.html.twig', [
+             'voyage' => $voyage,
+             'form' => $form,
+diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
+index 62eadbf..947e2b8 100644
+--- a/templates/voyage/_form.html.twig
++++ b/templates/voyage/_form.html.twig
+@@ -1,4 +1,4 @@
+-<div class="relative">
++<div class="relative" id="voyage-form">
+     {{ form_start(form) }}
+         {{ form_widget(form) }}
+ 
+diff --git a/templates/voyage/new.html.twig b/templates/voyage/new.html.twig
+index b8a3f9c..38f6a19 100644
+--- a/templates/voyage/new.html.twig
++++ b/templates/voyage/new.html.twig
+@@ -9,3 +9,11 @@
+         {{ include('voyage/_form.html.twig') }}
+     </div>
+ {% endblock %}
++
++{% block success_stream %}
++    <turbo-stream action="replace" target="voyage-form">
++        <template>
++            {{ include('voyage/_form.html.twig') }}
++        </template>
++    </turbo-stream>
++{% endblock %}

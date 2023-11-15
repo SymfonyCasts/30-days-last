@@ -344,7 +344,62 @@
             "id": "datatables2-data-turbo-action-advance",
             "name": "DataTables2: data-turbo-action=advance",
             "description": null
+        },
+        {
+            "id": "toast-render-flash-messages",
+            "name": "Toast: Render flash messages",
+            "description": null
+        },
+        {
+            "id": "toast-better-markup",
+            "name": "Toast: Better markup",
+            "description": null
+        },
+        {
+            "id": "toast-closeable-controller",
+            "name": "Toast: Closeable controller",
+            "description": null
+        },
+        {
+            "id": "toast-auto-close-timer",
+            "name": "Toast: Auto-close timer",
+            "description": null
+        },
+        {
+            "id": "toast-timer-bar",
+            "name": "Toast: Timer bar",
+            "description": null
+        },
+        {
+            "id": "toast-add-css-transition",
+            "name": "Toast: Add CSS transition",
+            "description": null
+        },
+        {
+            "id": "toast-hide-timerbar-on-close",
+            "name": "Toast: Hide timerbar on close",
+            "description": null
+        },
+        {
+            "id": "stream-add-form-to-voyage-index",
+            "name": "Stream: Add form to voyage index",
+            "description": null
+        },
+        {
+            "id": "stream-add-form-action",
+            "name": "Stream: Add form action",
+            "description": null
+        },
+        {
+            "id": "stream-stream-form-update",
+            "name": "Stream: Stream form update",
+            "description": null
+        },
+        {
+            "id": "stream-fix-action-on-all-pages",
+            "name": "Stream: Fix action on all pages",
+            "description": null
         }
     ],
-    "sha": "3c537cdc3ecb822da58325ed67a29c4336ebc4f4"
+    "sha": "2d77a84ef683e2c06b3be9b9b6300db7815241c9"
 }

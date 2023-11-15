@@ -136,29 +136,3 @@ index 73b104b..e58ccf0 100644
 +        </section>
 +    </div>
  {% endblock %}
-diff --git a/templates/planet/show.html.twig b/templates/planet/show.html.twig
-index 5f2895c..e8b0393 100644
---- a/templates/planet/show.html.twig
-+++ b/templates/planet/show.html.twig
-@@ -24,7 +24,7 @@
-             </tr>
-             <tr>
-                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Description</th>
--                <td class="px-6 py-4 whitespace-nowrap">{{ planet.description }}</td>
-+                <td class="px-6 py-4">{{ planet.description }}</td>
-             </tr>
-             <tr>
-                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Distance</th>
-diff --git a/templates/voyage/show.html.twig b/templates/voyage/show.html.twig
-index 5b8f4ae..4e294a6 100644
---- a/templates/voyage/show.html.twig
-+++ b/templates/voyage/show.html.twig
-@@ -14,7 +14,7 @@
-             </tr>
-             <tr>
-                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Purpose</th>
--                <td class="px-6 py-4 whitespace-nowrap">{{ voyage.purpose }}</td>
-+                <td class="px-6 py-4">{{ voyage.purpose }}</td>
-             </tr>
-             <tr>
-                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">LeaveAt</th>

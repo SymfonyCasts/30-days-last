@@ -1,0 +1,18 @@
+diff --git a/assets/controllers/modal_controller.js b/assets/controllers/modal_controller.js
+index 920005e..89e2f63 100644
+--- a/assets/controllers/modal_controller.js
++++ b/assets/controllers/modal_controller.js
+@@ -5,11 +5,11 @@ export default class extends Controller {
+ 
+     open() {
+         this.dialogTarget.showModal();
+-        document.body.classList.add('overflow-hidden');
++        document.body.classList.add('overflow-hidden', 'blur-sm');
+     }
+ 
+     close() {
+         this.dialogTarget.close();
+-        document.body.classList.remove('overflow-hidden');
++        document.body.classList.remove('overflow-hidden', 'blur-sm');
+     }
+ }

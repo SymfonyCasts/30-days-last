@@ -1,0 +1,12 @@
+diff --git a/assets/controllers/modal_controller.js b/assets/controllers/modal_controller.js
+index 4be7891..e432130 100644
+--- a/assets/controllers/modal_controller.js
++++ b/assets/controllers/modal_controller.js
+@@ -4,6 +4,6 @@ export default class extends Controller {
+     static targets = ['dialog'];
+ 
+     open() {
+-        this.dialogTarget.show();
++        this.dialogTarget.showModal();
+     }
+ }

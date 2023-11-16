@@ -1,0 +1,26 @@
+diff --git a/assets/controllers/modal_controller.js b/assets/controllers/modal_controller.js
+index d8349fe..920005e 100644
+--- a/assets/controllers/modal_controller.js
++++ b/assets/controllers/modal_controller.js
+@@ -7,4 +7,9 @@ export default class extends Controller {
+         this.dialogTarget.showModal();
+         document.body.classList.add('overflow-hidden');
+     }
++
++    close() {
++        this.dialogTarget.close();
++        document.body.classList.remove('overflow-hidden');
++    }
+ }
+diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
+index c56435c..9600cd3 100644
+--- a/templates/voyage/index.html.twig
++++ b/templates/voyage/index.html.twig
+@@ -21,6 +21,7 @@
+         <dialog
+             class="bg-gray-800 rounded-lg shadow-xl inset-0 w-full lg:w-1/2 backdrop:bg-slate-600 backdrop:opacity-80"
+             {{ stimulus_target('modal', 'dialog') }}
++            {{ stimulus_action('modal', 'close', 'close') }}
+         >
+             <div class="text-white space-y-4 p-5">
+                 <div class="flex justify-between items-center">

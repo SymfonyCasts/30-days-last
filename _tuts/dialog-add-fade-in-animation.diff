@@ -1,0 +1,36 @@
+diff --git a/tailwind.config.js b/tailwind.config.js
+index b212fba..2336988 100644
+--- a/tailwind.config.js
++++ b/tailwind.config.js
+@@ -8,7 +8,17 @@ module.exports = {
+     "./vendor/tales-from-a-dev/flowbite-bundle/templates/**/*.html.twig",
+   ],
+   theme: {
+-    extend: {},
++    extend: {
++      animation: {
++        'fade-in': 'fadeIn .5s ease-out;',
++      },
++      keyframes: {
++        fadeIn: {
++          '0%': { opacity: 0 },
++          '100%': { opacity: 1 },
++        },
++      },
++    },
+   },
+   plugins: [
+     plugin(function({ addVariant }) {
+diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
+index e447091..afe36b6 100644
+--- a/templates/voyage/index.html.twig
++++ b/templates/voyage/index.html.twig
+@@ -20,7 +20,7 @@
+         </button>
+ 
+         <dialog
+-            class="bg-gray-800 rounded-lg shadow-xl inset-0 w-full lg:w-1/2 backdrop:bg-slate-600 backdrop:opacity-80"
++            class="bg-gray-800 rounded-lg shadow-xl inset-0 w-full lg:w-1/2 animate-fade-in backdrop:bg-slate-600 backdrop:opacity-80"
+             {{ stimulus_target('modal', 'dialog') }}
+             {{ stimulus_action('modal', 'close', 'close') }}
+         >

@@ -474,7 +474,67 @@
             "id": "stream-stream-on-edit",
             "name": "Stream: Stream on edit",
             "description": null
+        },
+        {
+            "id": "dialog-add-new-button",
+            "name": "Dialog: Add new button",
+            "description": null
+        },
+        {
+            "id": "dialog-add-a-dialog-element",
+            "name": "Dialog: Add a dialog element",
+            "description": null
+        },
+        {
+            "id": "dialog-make-it-prettier",
+            "name": "Dialog: Make it prettier",
+            "description": null
+        },
+        {
+            "id": "dialog-add-close",
+            "name": "Dialog: Add close",
+            "description": null
+        },
+        {
+            "id": "dialog-add-modal-controller",
+            "name": "Dialog: Add modal controller",
+            "description": null
+        },
+        {
+            "id": "dialog-open-modal",
+            "name": "Dialog: open modal",
+            "description": null
+        },
+        {
+            "id": "dialog-style-backdrop",
+            "name": "Dialog: Style backdrop",
+            "description": null
+        },
+        {
+            "id": "dialog-remove-body-scroll",
+            "name": "Dialog: remove body scroll",
+            "description": null
+        },
+        {
+            "id": "dialog-remove-overflow-on-close",
+            "name": "Dialog: Remove overflow on close",
+            "description": null
+        },
+        {
+            "id": "dialog-blur-background",
+            "name": "Dialog: blur background",
+            "description": null
+        },
+        {
+            "id": "dialog-click-outside-handling",
+            "name": "Dialog: Click outside handling",
+            "description": null
+        },
+        {
+            "id": "dialog-add-fade-in-animation",
+            "name": "Dialog: Add fade-in animation",
+            "description": null
         }
     ],
-    "sha": "3987ac989b5ef5094e2947b02071a4b3e8f29bfa"
+    "sha": "35d4c84ec29d41cfcb3e95e16c970b92dc13002d"
 }

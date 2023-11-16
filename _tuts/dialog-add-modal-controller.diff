@@ -1,0 +1,43 @@
+diff --git a/assets/controllers/modal_controller.js b/assets/controllers/modal_controller.js
+new file mode 100644
+index 0000000..4be7891
+--- /dev/null
++++ b/assets/controllers/modal_controller.js
+@@ -0,0 +1,9 @@
++import { Controller } from '@hotwired/stimulus';
++
++export default class extends Controller {
++    static targets = ['dialog'];
++
++    open() {
++        this.dialogTarget.show();
++    }
++}
+diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
+index 501dd5a..9c16127 100644
+--- a/templates/voyage/index.html.twig
++++ b/templates/voyage/index.html.twig
+@@ -5,10 +5,13 @@
+ {% block body %}
+ <div class="m-4 p-4 bg-gray-800 rounded-lg">
+     <div
++        {{ stimulus_controller('modal') }}
+         class="flex justify-between"
+     >
+         <h1 class="text-xl font-semibold text-white mb-4">Voyages</h1>
++
+         <button
++            {{ stimulus_action('modal', 'open') }}
+             class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold px-4 rounded"
+         >
+             New Voyage
+@@ -16,8 +19,8 @@
+         </button>
+ 
+         <dialog
+-            open
+             class="bg-gray-800 rounded-lg shadow-xl inset-0 w-full lg:w-1/2"
++            {{ stimulus_target('modal', 'dialog') }}
+         >
+             <div class="text-white space-y-4 p-5">
+                 <div class="flex justify-between items-center">

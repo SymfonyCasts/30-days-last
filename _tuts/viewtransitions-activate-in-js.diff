@@ -1,0 +1,27 @@
+diff --git a/assets/app.js b/assets/app.js
+index d29b1c0..9258ed6 100644
+--- a/assets/app.js
++++ b/assets/app.js
+@@ -2,6 +2,22 @@ import * as Turbo from '@hotwired/turbo';
+ import './bootstrap.js';
+ import './styles/app.css';
+ import alienGreeting from './lib/alien-greeting.js';
++import { shouldPerformTransition, performTransition } from 'turbo-view-transitions';
+ 
+ //Turbo.session.drive = false;
+ alienGreeting('Give us all your candy!', false);
++
++document.addEventListener('turbo:before-render', (event) => {
++    if (shouldPerformTransition()) {
++        event.preventDefault();
++
++        performTransition(document.body, event.detail.newBody, async () => {
++            await event.detail.resume();
++        });
++    }
++});
++
++document.addEventListener('turbo:load', () => {
++    // View Transitions don't play nicely with Turbo cache
++    if (shouldPerformTransition()) Turbo.cache.exemptPageFromCache();
++});

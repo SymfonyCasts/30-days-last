@@ -1,0 +1,18 @@
+diff --git a/assets/app.js b/assets/app.js
+index 9258ed6..6595954 100644
+--- a/assets/app.js
++++ b/assets/app.js
+@@ -21,3 +21,13 @@ document.addEventListener('turbo:load', () => {
+     // View Transitions don't play nicely with Turbo cache
+     if (shouldPerformTransition()) Turbo.cache.exemptPageFromCache();
+ });
++
++document.addEventListener('turbo:before-frame-render', (event) => {
++    if (shouldPerformTransition()) {
++        event.preventDefault();
++
++        performTransition(event.target, event.detail.newFrame, async () => {
++            await event.detail.resume();
++        });
++    }
++});

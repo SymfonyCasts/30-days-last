@@ -351,6 +351,36 @@
             "description": null
         },
         {
+            "id": "viewtransitions-install-turbo-view-transitions",
+            "name": "ViewTransitions: Install turbo-view-transitions",
+            "description": null
+        },
+        {
+            "id": "viewtransitions-activate-meta-tag",
+            "name": "ViewTransitions: Activate meta tag",
+            "description": null
+        },
+        {
+            "id": "viewtransitions-activate-in-js",
+            "name": "ViewTransitions: Activate in JS",
+            "description": null
+        },
+        {
+            "id": "viewtransitions-support-frames",
+            "name": "ViewTransitions: Support frames",
+            "description": null
+        },
+        {
+            "id": "viewtransitions-remove-busy-opacity-on-data-tables",
+            "name": "ViewTransitions: Remove busy opacity on data tables",
+            "description": null
+        },
+        {
+            "id": "viewtransitions-fix-frames-that-advance",
+            "name": "ViewTransitions: Fix frames that advance",
+            "description": null
+        },
+        {
             "id": "toast-render-flash-messages",
             "name": "Toast: Render flash messages",
             "description": null
@@ -446,5 +476,5 @@
             "description": null
         }
     ],
-    "sha": "ce8cce8d07d21796bf30fe292ca09e449c06b6e6"
+    "sha": "3987ac989b5ef5094e2947b02071a4b3e8f29bfa"
 }

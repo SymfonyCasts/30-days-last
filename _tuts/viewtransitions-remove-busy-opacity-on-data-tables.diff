@@ -1,0 +1,13 @@
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index 0e6810c..58d5195 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -55,7 +55,7 @@
+                 <div class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
+             </form>
+             <turbo-frame id="voyage-list" data-turbo-action="advance">
+-                <div class="bg-gray-800 p-4 rounded busy:opacity-50 busy:blur-sm">
++                <div class="bg-gray-800 p-4 rounded">
+                     <table class="w-full text-white">
+                         <thead>
+                             <tr>

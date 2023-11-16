@@ -4,7 +4,21 @@
 
 {% block body %}
     <div class="m-4 p-4 bg-gray-800 rounded-lg">
-        <h1 class="text-xl font-semibold text-white mb-4">Create New Planet</h1>
+        <div class="flex justify-between">
+            <h1 class="text-xl font-semibold text-white mb-4">Create New Planet</h1>
+
+            <div class="mr-4">
+                <a href="{{ path('app_planet_index') }}" class="text-sm font-medium text-white">
+                    Back to list
+                </a>
+                <div class="inline-block">
+                    {% if form.vars.data.id|default %}
+                        {{ include('planet/_delete_form.html.twig') }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
 
         {{ include('planet/_form.html.twig') }}
     </div>

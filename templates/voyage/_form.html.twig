@@ -1,20 +1,7 @@
-<div class="relative">
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
+{{ form_start(form) }}
+    {{ form_widget(form) }}
 
-        <button formnovalidate class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
-            {{ button_label|default('Save') }}
-        </button>
-    {{ form_end(form) }}
-
-    <div class="absolute right-0 bottom-0 mt-4 mr-4">
-        <a href="{{ path('app_voyage_index') }}" class="text-sm font-medium text-white">
-            Back to list
-        </a>
-        <div class="inline-block">
-            {% if form.vars.data.id|default %}
-                {{ include('voyage/_delete_form.html.twig') }}
-            {% endif %}
-        </div>
-    </div>
-</div>
+    <button formnovalidate class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+        {{ button_label|default('Save') }}
+    </button>
+{{ form_end(form) }}

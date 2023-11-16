@@ -25,7 +25,12 @@ class Voyage
 
     #[ORM\Column]
     #[NotBlank]
-    private ?\DateTimeImmutable $leaveAt = null;
+    private ?\DateTimeImmutable $leaveAt;
+
+    public function __construct()
+    {
+        $this->leaveAt = new \DateTimeImmutable('+1 month');
+    }
 
     public function getId(): ?int
     {

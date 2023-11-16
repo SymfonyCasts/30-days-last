@@ -1,13 +1,13 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 6314484..798336e 100644
+index 798336e..6314484 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -24,7 +24,7 @@
                              <img src="{{ asset('images/logo.png') }}" width="50" alt="Space Inviters Logo" >
                          </a>
                          <a href="{{ path('app_homepage') }}" class="text-xl ml-3">Space Inviters</a>
--                        <a href="{{ path('app_voyage_index') }}" class="ml-6 hover:text-gray-400">Voyages</a>
-+                        <a href="{{ path('app_voyage_index') }}" data-turbo-preload class="ml-6 hover:text-gray-400">Voyages</a>
+-                        <a href="{{ path('app_voyage_index') }}" data-turbo-preload class="ml-6 hover:text-gray-400">Voyages</a>
++                        <a href="{{ path('app_voyage_index') }}" class="ml-6 hover:text-gray-400">Voyages</a>
                          <a href="{{ path('app_planet_index') }}" class="ml-4 hover:text-gray-400">Planets</a>
                      </div>
                      <div class="flex items-center">

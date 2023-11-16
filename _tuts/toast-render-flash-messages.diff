@@ -1,28 +1,25 @@
-diff --git a/templates/_flash.html.twig b/templates/_flash.html.twig
+diff --git a/templates/_flashes.html.twig b/templates/_flashes.html.twig
 new file mode 100644
-index 0000000..e30a23e
+index 0000000..ba82d5e
 --- /dev/null
-+++ b/templates/_flash.html.twig
-@@ -0,0 +1,3 @@
-+<div class="fixed bottom-0 right-0 m-4 p-4 bg-green-500 text-white rounded shadow">
-+    {{ message }}
-+</div>
++++ b/templates/_flashes.html.twig
+@@ -0,0 +1,5 @@
++{% for message in app.flashes('success') %}
++    <div class="fixed bottom-0 right-0 m-4 p-4 bg-green-500 text-white rounded shadow">
++        {{ message }}
++    </div>
++{% endfor %}
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index dc7e43b..9556380 100644
+index 6314484..80528a9 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -46,5 +46,14 @@
+@@ -48,5 +48,9 @@
                  </div>
              </footer>
          </div>
 +
 +        <div id="flash-container">
-+            {% for message in app.flashes('success') %}
-+                {{ include('_flash.html.twig', {
-+                    type: 'success',
-+                    message: message
-+                }) }}
-+            {% endfor %}
++            {{ include('_flashes.html.twig') }}
 +        </div>
      </body>
  </html>

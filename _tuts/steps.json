@@ -171,6 +171,11 @@
             "description": null
         },
         {
+            "id": "turbo-remove-preload-link",
+            "name": "Turbo: Remove preload link",
+            "description": null
+        },
+        {
             "id": "frames-add-frame-around-planets",
             "name": "Frames: Add frame around planets",
             "description": null
@@ -381,25 +386,65 @@
             "description": null
         },
         {
-            "id": "stream-add-form-to-voyage-index",
-            "name": "Stream: Add form to voyage index",
+            "id": "forminframe-add-form-to-voyage-index",
+            "name": "FormInFrame: Add form to voyage index",
             "description": null
         },
         {
-            "id": "stream-add-form-action",
-            "name": "Stream: Add form action",
+            "id": "forminframe-put-form-inside-a-turbo-frame",
+            "name": "FormInFrame: Put form inside a turbo-frame",
             "description": null
         },
         {
-            "id": "stream-stream-form-update",
-            "name": "Stream: Stream form update",
+            "id": "forminframe-add-form-action",
+            "name": "FormInFrame: Add form action",
             "description": null
         },
         {
-            "id": "stream-fix-action-on-all-pages",
-            "name": "Stream: Fix action on all pages",
+            "id": "delete-me-1",
+            "name": "delete me 1",
+            "description": null
+        },
+        {
+            "id": "forminframe-fix-action-on-all-pages",
+            "name": "FormInFrame: Fix action on all pages",
+            "description": null
+        },
+        {
+            "id": "forminframe-opacity-on-submit",
+            "name": "FormInFrame: Opacity on submit",
+            "description": null
+        },
+        {
+            "id": "forminframe-redirect-to-show-page",
+            "name": "FormInFrame: Redirect to show page",
+            "description": null
+        },
+        {
+            "id": "stream-reset-the-form-in-a-stream",
+            "name": "Stream: Reset the form in a stream",
+            "description": null
+        },
+        {
+            "id": "stream-append-to-flash-container",
+            "name": "Stream: append to flash container",
+            "description": null
+        },
+        {
+            "id": "stream-prepend-to-the-table-list",
+            "name": "Stream: Prepend to the table list",
+            "description": null
+        },
+        {
+            "id": "stream-append-actual-row",
+            "name": "Stream: Append actual row",
+            "description": null
+        },
+        {
+            "id": "stream-stream-on-edit",
+            "name": "Stream: Stream on edit",
             "description": null
         }
     ],
-    "sha": "2d77a84ef683e2c06b3be9b9b6300db7815241c9"
+    "sha": "ce8cce8d07d21796bf30fe292ca09e449c06b6e6"
 }

@@ -11,7 +11,7 @@ index ecef2f4..f7f44da 100644
          $pager = Pagerfanta::createForCurrentPageWithMaxPerPage(
              new QueryAdapter($voyageRepository->findBySearchQueryBuilder($query, $sort, $sortDirection)),
 diff --git a/tailwind.config.js b/tailwind.config.js
-index cfbf534..4bfd8e7 100644
+index cfbf534..b212fba 100644
 --- a/tailwind.config.js
 +++ b/tailwind.config.js
 @@ -12,7 +12,8 @@ module.exports = {
@@ -20,7 +20,7 @@ index cfbf534..4bfd8e7 100644
      plugin(function({ addVariant }) {
 -      addVariant('turbo-frame', 'turbo-frame[src] &')
 +      addVariant('turbo-frame', 'turbo-frame[src] &');
-+      addVariant('busy', '[busy] &');
++      addVariant('busy', ['[busy] &', '[busy]&']);
      }),
    ],
  }

@@ -24,7 +24,7 @@ index d376ea1..beca337 100644
      <td class="px-6 py-4">{{ voyage.purpose }}</td>
      <td class="px-6 py-4 whitespace-nowrap">{{ voyage.leaveAt ? voyage.leaveAt|date('Y-m-d H:i:s') : '' }}</td>
 diff --git a/templates/voyage/edit.html.twig b/templates/voyage/edit.html.twig
-index a2e22e5..1d530cb 100644
+index 36fc116..1400589 100644
 --- a/templates/voyage/edit.html.twig
 +++ b/templates/voyage/edit.html.twig
 @@ -25,4 +25,8 @@

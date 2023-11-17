@@ -1,26 +1,29 @@
 diff --git a/src/Controller/MainController.php b/src/Controller/MainController.php
-index ca22f96..ecef2f4 100644
+index 8fda034..1ed24ef 100644
 --- a/src/Controller/MainController.php
 +++ b/src/Controller/MainController.php
-@@ -17,8 +17,13 @@ class MainController extends AbstractController
-     public function homepage(VoyageRepository $voyageRepository, PlanetRepository $planetRepository, Request $request): Response
+@@ -19,12 +19,16 @@ class MainController extends AbstractController
+         VoyageRepository $voyageRepository,
+         PlanetRepository $planetRepository,
+         #[MapQueryParameter('page')] int $page = 1,
++        #[MapQueryParameter('sort')] string $sort = 'leaveAt',
++        #[MapQueryParameter('sortDirection')] string $sortDirection = 'ASC',
+         #[MapQueryParameter('query')] string $query = null,
+         #[MapQueryParameter('planets', \FILTER_VALIDATE_INT)] array $searchPlanets = [],
+     ): Response
      {
-         $query = $request->query->get('query');
-+        $sort = $request->query->get('sort', 'leaveAt');
-+        $sortDirection = $request->query->get('sortDirection', 'ASC');
 +        $validSorts = ['purpose', 'leaveAt'];
 +        $sort = in_array($sort, $validSorts) ? $sort : 'leaveAt';
-+
          $pager = Pagerfanta::createForCurrentPageWithMaxPerPage(
--            new QueryAdapter($voyageRepository->findBySearchQueryBuilder($query)),
-+            new QueryAdapter($voyageRepository->findBySearchQueryBuilder($query, $sort, $sortDirection)),
-             $request->query->getInt('page', 1),
+-            new QueryAdapter($voyageRepository->findBySearchQueryBuilder($query, $searchPlanets)),
++            new QueryAdapter($voyageRepository->findBySearchQueryBuilder($query, $searchPlanets, $sort, $sortDirection)),
+             $page,
              10
          );
-@@ -26,6 +31,8 @@ class MainController extends AbstractController
-         return $this->render('main/homepage.html.twig', [
+@@ -33,6 +37,8 @@ class MainController extends AbstractController
              'voyages' => $pager,
              'planets' => $planetRepository->findAll(),
+             'searchPlanets' => $searchPlanets,
 +            'sort' => $sort,
 +            'sortDirection' => $sortDirection,
          ]);

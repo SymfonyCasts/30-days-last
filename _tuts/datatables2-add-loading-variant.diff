@@ -1,15 +1,15 @@
 diff --git a/src/Controller/MainController.php b/src/Controller/MainController.php
-index ecef2f4..f7f44da 100644
+index 1ed24ef..f0f239d 100644
 --- a/src/Controller/MainController.php
 +++ b/src/Controller/MainController.php
-@@ -21,6 +21,7 @@ class MainController extends AbstractController
-         $sortDirection = $request->query->get('sortDirection', 'ASC');
+@@ -27,6 +27,7 @@ class MainController extends AbstractController
+     {
          $validSorts = ['purpose', 'leaveAt'];
          $sort = in_array($sort, $validSorts) ? $sort : 'leaveAt';
 +        sleep(1);
- 
          $pager = Pagerfanta::createForCurrentPageWithMaxPerPage(
-             new QueryAdapter($voyageRepository->findBySearchQueryBuilder($query, $sort, $sortDirection)),
+             new QueryAdapter($voyageRepository->findBySearchQueryBuilder($query, $searchPlanets, $sort, $sortDirection)),
+             $page,
 diff --git a/tailwind.config.js b/tailwind.config.js
 index cfbf534..e4bcfca 100644
 --- a/tailwind.config.js

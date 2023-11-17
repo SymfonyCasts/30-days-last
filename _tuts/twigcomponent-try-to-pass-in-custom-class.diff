@@ -1,5 +1,5 @@
 diff --git a/tailwind.config.js b/tailwind.config.js
-index 1a20978..5194c11 100644
+index 4da3513..8c47995 100644
 --- a/tailwind.config.js
 +++ b/tailwind.config.js
 @@ -11,12 +11,17 @@ module.exports = {

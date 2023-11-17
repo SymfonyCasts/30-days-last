@@ -15,14 +15,20 @@ index 1ba68b3..d376ea1 100644
      </td>
  </tr>
 diff --git a/templates/voyage/edit.html.twig b/templates/voyage/edit.html.twig
-index 81e13f9..a2e22e5 100644
+index 81e13f9..36fc116 100644
 --- a/templates/voyage/edit.html.twig
 +++ b/templates/voyage/edit.html.twig
-@@ -1,4 +1,4 @@
+@@ -1,9 +1,9 @@
 -{% extends 'base.html.twig' %}
 +{% extends 'modalBase.html.twig' %}
  
  {% block title %}Edit Voyage{% endblock %}
+ 
+ {% block body %}
+-    <div class="m-4 p-4 bg-gray-800 rounded-lg">
++    <div class="m-4 p-4 modal:m-0 modal:p-0 bg-gray-800 rounded-lg">
+         <div class="flex justify-between">
+             <h1 class="text-xl font-semibold text-white mb-4">Edit Voyage</h1>
  
 @@ -24,9 +24,5 @@
  {% endblock %}

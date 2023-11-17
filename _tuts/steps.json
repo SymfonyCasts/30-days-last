@@ -621,6 +621,11 @@
             "description": null
         },
         {
+            "id": "modal-conditional-styling-in-modal",
+            "name": "Modal: Conditional styling in modal",
+            "description": null
+        },
+        {
             "id": "modal-repeat-for-edit",
             "name": "Modal: Repeat for edit",
             "description": null
@@ -764,7 +769,12 @@
             "id": "modalbonus-put-planets-in-modal",
             "name": "ModalBonus: Put planets in modal",
             "description": null
+        },
+        {
+            "id": "modalbonus-add-planet-checkboxes",
+            "name": "ModalBonus: Add planet checkboxes",
+            "description": null
         }
     ],
-    "sha": "6aeda13d0c84b6f66917206d46e9532a43b1c24e"
+    "sha": "e4942e1aa3f969e938775480fd86f0911ee23e23"
 }

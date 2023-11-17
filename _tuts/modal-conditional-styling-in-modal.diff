@@ -1,0 +1,25 @@
+diff --git a/tailwind.config.js b/tailwind.config.js
+index 1a20978..4da3513 100644
+--- a/tailwind.config.js
++++ b/tailwind.config.js
+@@ -23,6 +23,7 @@ module.exports = {
+   plugins: [
+     plugin(function({ addVariant }) {
+       addVariant('turbo-frame', 'turbo-frame[src] &');
++      addVariant('modal', 'dialog &');
+     }),
+   ],
+ }
+diff --git a/templates/voyage/new.html.twig b/templates/voyage/new.html.twig
+index f2b54b1..53de426 100644
+--- a/templates/voyage/new.html.twig
++++ b/templates/voyage/new.html.twig
+@@ -3,7 +3,7 @@
+ {% block title %}New Voyage{% endblock %}
+ 
+ {% block body %}
+-    <div class="m-4 p-4 bg-gray-800 rounded-lg">
++    <div class="m-4 p-4 modal:m-0 modal:p-0 bg-gray-800 rounded-lg">
+         <div class="flex justify-between">
+             <h1 class="text-xl font-semibold text-white mb-4">Create New Voyage</h1>
+ 

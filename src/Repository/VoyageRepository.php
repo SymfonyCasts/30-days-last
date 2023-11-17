@@ -32,13 +32,18 @@ class VoyageRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findBySearchQueryBuilder(?string $query, ?string $sort = null, string $direction = 'DESC'): QueryBuilder
+    public function findBySearchQueryBuilder(?string $query, array $searchPlanets, ?string $sort = null, string $direction = 'DESC'): QueryBuilder
     {
         $qb = $this->createQueryBuilder('v');
 
         if ($query) {
             $qb->andWhere('v.purpose LIKE :query')
                 ->setParameter('query', '%' . $query . '%');
+        }
+
+        if ($searchPlanets) {
+            $qb->andWhere('v.planet IN (:planets)')
+                ->setParameter('planets', $searchPlanets);
         }
 
         if ($sort) {

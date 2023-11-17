@@ -1,8 +1,8 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index e587b7e..2e1d097 100644
+index 53c574d..1852e24 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -53,6 +53,38 @@
+@@ -54,6 +54,38 @@
          <div id="flash-container">
              {{ include('_flashes.html.twig') }}
          </div>
@@ -42,7 +42,7 @@ index e587b7e..2e1d097 100644
      </body>
  </html>
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index b221eed..a8df998 100644
+index 63a16bb..11b3cbc 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
 @@ -5,8 +5,6 @@

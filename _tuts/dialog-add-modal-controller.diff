@@ -14,7 +14,7 @@ index 0000000..4be7891
 +    }
 +}
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index 501dd5a..9c16127 100644
+index 4177b96..256450f 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
 @@ -5,10 +5,13 @@

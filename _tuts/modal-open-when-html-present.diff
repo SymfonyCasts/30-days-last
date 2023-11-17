@@ -37,10 +37,10 @@ index 084b4ea..3915a1d 100644
      open() {
          this.dialogTarget.showModal();
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 419fe94..c11f5aa 100644
+index 77d1302..83dc1d0 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -63,8 +63,8 @@
+@@ -64,8 +64,8 @@
                  {{ stimulus_target('modal', 'dialog') }}
                  {{ stimulus_action('modal', 'close', 'close') }}
              >

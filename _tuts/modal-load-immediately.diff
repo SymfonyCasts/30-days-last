@@ -38,10 +38,10 @@ index 47acff2..23b9290 100644
          if ($form->isSubmitted() && $form->isValid()) {
              $entityManager->persist($voyage);
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index c11f5aa..9cd3fc1 100644
+index 83dc1d0..4964b0b 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -64,9 +64,29 @@
+@@ -65,9 +65,29 @@
                  {{ stimulus_action('modal', 'close', 'close') }}
              >
                  <div class="text-white space-y-4 p-5 fart">

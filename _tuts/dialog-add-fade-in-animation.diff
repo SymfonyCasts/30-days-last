@@ -22,7 +22,7 @@ index e4bcfca..1a20978 100644
    plugins: [
      plugin(function({ addVariant }) {
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index e447091..afe36b6 100644
+index d4d83a2..b3e03b0 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
 @@ -20,7 +20,7 @@

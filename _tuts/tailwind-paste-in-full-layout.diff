@@ -1,8 +1,8 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 579a577..59c44f3 100644
+index 554dae0..044421f 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -11,9 +11,38 @@
+@@ -12,9 +12,38 @@
              {{ importmap('app') }}
          {% endblock %}
      </head>

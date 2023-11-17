@@ -473,10 +473,10 @@ index b80ba6b..e036ac9 100644
          "version": "6.3",
          "recipe": {
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 67598ac..f0c933f 100644
+index 047838a..151e7e5 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -8,6 +8,7 @@
+@@ -9,6 +9,7 @@
          {% endblock %}
  
          {% block javascripts %}

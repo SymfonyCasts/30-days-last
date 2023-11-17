@@ -28,10 +28,10 @@ index 0000000..832f17b
 +    }
 +}
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 59c44f3..6314484 100644
+index 044421f..f0ace44 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -16,7 +16,11 @@
+@@ -17,7 +17,11 @@
              <header class="my-8 px-4">
                  <nav class="flex items-center justify-between mb-4">
                      <div class="flex items-center">

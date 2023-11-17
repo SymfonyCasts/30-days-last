@@ -1,8 +1,8 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 2e1d097..419fe94 100644
+index 1852e24..77d1302 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -64,27 +64,9 @@
+@@ -65,27 +65,9 @@
                  {{ stimulus_action('modal', 'close', 'close') }}
              >
                  <div class="text-white space-y-4 p-5">

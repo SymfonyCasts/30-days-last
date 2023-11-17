@@ -11,10 +11,10 @@ index e3b03ad..4d2296d 100644
 -console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉')
 +alienGreeting('Give us all your candy!', false);
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 5ead64b..579a577 100644
+index 9947d50..554dae0 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -9,12 +9,6 @@
+@@ -10,12 +10,6 @@
  
          {% block javascripts %}
              {{ importmap('app') }}

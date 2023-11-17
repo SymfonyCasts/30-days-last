@@ -1,8 +1,8 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 6314484..798336e 100644
+index f0ace44..0116f6d 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -24,7 +24,7 @@
+@@ -25,7 +25,7 @@
                              <img src="{{ asset('images/logo.png') }}" width="50" alt="Space Inviters Logo" >
                          </a>
                          <a href="{{ path('app_homepage') }}" class="text-xl ml-3">Space Inviters</a>

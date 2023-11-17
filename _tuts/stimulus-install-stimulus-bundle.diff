@@ -228,11 +228,11 @@ index 84b0d7b..7f9e5af 100644
          "version": "6.4",
          "recipe": {
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 59c44f3..0290e5a 100644
+index 044421f..0163f4e 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -5,6 +5,7 @@
-         <title>{% block title %}Welcome!{% endblock %}</title>
+@@ -6,6 +6,7 @@
+         <title>{% block title %}Space Inviters!{% endblock %}</title>
          <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
          {% block stylesheets %}
 +            {{ ux_controller_link_tags() }}

@@ -1,0 +1,53 @@
+diff --git a/assets/controllers/modal_controller.js b/assets/controllers/modal_controller.js
+index 084b4ea..3915a1d 100644
+--- a/assets/controllers/modal_controller.js
++++ b/assets/controllers/modal_controller.js
+@@ -1,7 +1,32 @@
+ import { Controller } from '@hotwired/stimulus';
+ 
+ export default class extends Controller {
+-    static targets = ['dialog'];
++    static targets = ['dialog', 'modalContent'];
++
++    observer = null;
++
++    connect() {
++        // create a mutation observer on this.modalContentTarget
++        // when the content changes, call this.open()
++        this.observer = new MutationObserver((mutations) => {
++            mutations.forEach((mutation) => {
++                if (mutation.type === 'childList') {
++                    const shouldOpen = this.modalContentTarget.innerHTML.trim().length > 0;
++
++                    if (shouldOpen && !this.dialogTarget.open) {
++                        this.open();
++                    } else if (!shouldOpen && this.dialogTarget.open) {
++                        this.close();
++                    }
++                }
++            });
++        });
++        this.observer.observe(this.modalContentTarget, { childList: true });
++    }
++
++    disconnect() {
++        this.observer.disconnect();
++    }
+ 
+     open() {
+         this.dialogTarget.showModal();
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index 419fe94..c11f5aa 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -63,8 +63,8 @@
+                 {{ stimulus_target('modal', 'dialog') }}
+                 {{ stimulus_action('modal', 'close', 'close') }}
+             >
+-                <div class="text-white space-y-4 p-5">
+-                    <turbo-frame id="modal"></turbo-frame>
++                <div class="text-white space-y-4 p-5 fart">
++                    <turbo-frame id="modal" {{ stimulus_target('modal', 'modalContent') }}></turbo-frame>
+                 </div>
+             </dialog>
+         </div>

@@ -1,0 +1,74 @@
+diff --git a/assets/controllers/modal_controller.js b/assets/controllers/modal_controller.js
+index 3915a1d..28595a4 100644
+--- a/assets/controllers/modal_controller.js
++++ b/assets/controllers/modal_controller.js
+@@ -1,7 +1,7 @@
+ import { Controller } from '@hotwired/stimulus';
+ 
+ export default class extends Controller {
+-    static targets = ['dialog', 'modalContent'];
++    static targets = ['dialog', 'modalContent', 'loadingTemplate'];
+ 
+     observer = null;
+ 
+@@ -43,4 +43,13 @@ export default class extends Controller {
+             this.dialogTarget.close();
+         }
+     }
++
++    showLoading(event) {
++        // do nothing if the dialog is already open
++        if (this.dialogTarget.open) {
++            return;
++        }
++
++        this.modalContentTarget.innerHTML = this.loadingTemplateTarget.innerHTML;
++    }
+ }
+diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
+index 47acff2..23b9290 100644
+--- a/src/Controller/VoyageController.php
++++ b/src/Controller/VoyageController.php
+@@ -31,6 +31,7 @@ class VoyageController extends AbstractController
+         $voyage = new Voyage();
+         $form = $this->createVoyageForm($voyage);
+         $form->handleRequest($request);
++        sleep(2);
+ 
+         if ($form->isSubmitted() && $form->isValid()) {
+             $entityManager->persist($voyage);
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index c11f5aa..9cd3fc1 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -64,9 +64,29 @@
+                 {{ stimulus_action('modal', 'close', 'close') }}
+             >
+                 <div class="text-white space-y-4 p-5 fart">
+-                    <turbo-frame id="modal" {{ stimulus_target('modal', 'modalContent') }}></turbo-frame>
++                    <turbo-frame
++                        id="modal"
++                        {{ stimulus_target('modal', 'modalContent') }}
++                        {{ stimulus_action('modal', 'showLoading', 'turbo:before-fetch-request') }}
++                    ></turbo-frame>
+                 </div>
+             </dialog>
++
++            <template {{ stimulus_target('modal', 'loadingTemplate') }}>
++                <div class="bg-space-pattern bg-cover rounded-lg p-8">
++                    <div class="space-y-2">
++                        <div class="h-4 bg-gray-700 rounded w-3/4 animate-pulse"></div>
++                        <div class="h-4 bg-gray-700 rounded animate-pulse"></div>
++                        <div class="h-4 bg-gray-700 rounded animate-pulse"></div>
++                        <div class="h-4"></div>
++                        <div class="h-4 bg-gray-700 rounded animate-pulse"></div>
++                        <div class="h-4 bg-gray-700 rounded w-1/2 animate-pulse"></div>
++                        <div class="h-4 bg-gray-700 rounded w-3/4 animate-pulse"></div>
++                        <div class="h-4"></div>
++                        <div class="h-4 bg-gray-700 rounded w-1/2 animate-pulse"></div>
++                    </div>
++                </div>
++            </template>
+         </div>
+     </body>
+ </html>

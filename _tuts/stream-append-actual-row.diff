@@ -1,8 +1,8 @@
 diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
-index 254ddbd..af12546 100644
+index 5b4b249..b7411f2 100644
 --- a/src/Controller/VoyageController.php
 +++ b/src/Controller/VoyageController.php
-@@ -45,7 +45,8 @@ class VoyageController extends AbstractController
+@@ -44,7 +44,8 @@ class VoyageController extends AbstractController
                  $form = $this->createVoyageForm();
  
                  return $this->renderBlock('voyage/new.html.twig', 'success_stream', [

@@ -1,8 +1,8 @@
 diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
-index af12546..b23cec3 100644
+index b7411f2..47acff2 100644
 --- a/src/Controller/VoyageController.php
 +++ b/src/Controller/VoyageController.php
-@@ -78,6 +78,13 @@ class VoyageController extends AbstractController
+@@ -77,6 +77,13 @@ class VoyageController extends AbstractController
  
              $this->addFlash('success', 'Voyage updated!');
  

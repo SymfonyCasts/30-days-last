@@ -1,0 +1,12 @@
+diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
+index 73a274d..1e0c7f0 100644
+--- a/src/Controller/VoyageController.php
++++ b/src/Controller/VoyageController.php
+@@ -30,7 +30,6 @@ class VoyageController extends AbstractController
+         $voyage = new Voyage();
+         $form = $this->createVoyageForm($voyage);
+         $form->handleRequest($request);
+-        usleep(500000);
+ 
+         if ($form->isSubmitted() && $form->isValid()) {
+             $entityManager->persist($voyage);

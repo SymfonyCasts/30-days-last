@@ -1,0 +1,13 @@
+diff --git a/templates/voyage/new.html.twig b/templates/voyage/new.html.twig
+index 9e7a391..4d08297 100644
+--- a/templates/voyage/new.html.twig
++++ b/templates/voyage/new.html.twig
+@@ -40,4 +40,8 @@
+             {{ include('voyage/_row.html.twig') }}
+         </template>
+     </turbo-stream>
++
++    <turbo-stream action="update" targets="#modal">
++        <template></template>
++    </turbo-stream>
+ {% endblock %}

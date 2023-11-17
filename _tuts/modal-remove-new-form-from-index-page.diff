@@ -1,0 +1,13 @@
+diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
+index afe36b6..53a8fb8 100644
+--- a/templates/voyage/index.html.twig
++++ b/templates/voyage/index.html.twig
+@@ -47,8 +47,6 @@
+         </dialog>
+     </div>
+ 
+-    {{ include('voyage/_form.html.twig') }}
+-
+     <table class="min-w-full bg-gray-800 text-white" id="voyage-list">
+         <thead class="border-b border-gray-700">
+             <tr>

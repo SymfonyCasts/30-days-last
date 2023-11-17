@@ -446,6 +446,11 @@
             "description": null
         },
         {
+            "id": "forminframe-remove-usleep",
+            "name": "FormInFrame: Remove usleep",
+            "description": null
+        },
+        {
             "id": "forminframe-redirect-to-show-page",
             "name": "FormInFrame: Redirect to show page",
             "description": null
@@ -534,7 +539,52 @@
             "id": "dialog-add-fade-in-animation",
             "name": "Dialog: Add fade-in animation",
             "description": null
+        },
+        {
+            "id": "modal-remove-new-form-from-index-page",
+            "name": "Modal: Remove new form from index page",
+            "description": null
+        },
+        {
+            "id": "modal-add-modal-turbo-frame-to-layout",
+            "name": "Modal: Add modal turbo-frame to layout",
+            "description": null
+        },
+        {
+            "id": "modal-target-click-into-turbo-frame",
+            "name": "Modal: Target click into turbo-frame",
+            "description": null
+        },
+        {
+            "id": "modal-fix-anchor-text-align",
+            "name": "Modal: Fix anchor text align",
+            "description": null
+        },
+        {
+            "id": "modal-move-modal-into-layout",
+            "name": "Modal: Move modal into layout",
+            "description": null
+        },
+        {
+            "id": "modal-put-frame-inside-the-modal",
+            "name": "Modal: Put frame inside the modal",
+            "description": null
+        },
+        {
+            "id": "modal-open-when-html-present",
+            "name": "Modal: Open when HTML present",
+            "description": null
+        },
+        {
+            "id": "modal-close-on-save",
+            "name": "Modal: Close on save",
+            "description": null
+        },
+        {
+            "id": "modal-load-immediately",
+            "name": "Modal: Load immediately",
+            "description": null
         }
     ],
-    "sha": "35d4c84ec29d41cfcb3e95e16c970b92dc13002d"
+    "sha": "d87282086d4f68b22158b6931477bae7cf3bba0d"
 }

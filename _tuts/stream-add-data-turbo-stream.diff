@@ -1,0 +1,12 @@
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index 9e90a4c..9c35741 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -41,6 +41,7 @@
+                 class="mb-6 flex justify-between"
+                 {{ stimulus_controller('autosubmit') }}
+                 data-turbo-frame="voyage-list"
++                data-turbo-stream
+             >
+                 <input
+                     type="search"

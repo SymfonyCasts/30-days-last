@@ -1,0 +1,40 @@
+diff --git a/src/Controller/MainController.php b/src/Controller/MainController.php
+index 8746a98..fe24f50 100644
+--- a/src/Controller/MainController.php
++++ b/src/Controller/MainController.php
+@@ -40,6 +40,8 @@ class MainController extends AbstractController
+ 
+             return $this->renderBlock('main/homepage.html.twig', 'success_stream', [
+                 'voyages' => $pager,
++                'sort' => $sort,
++                'sortDirection' => $sortDirection,
+             ]);
+         }
+ 
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index 9c35741..cccefd2 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -55,6 +55,7 @@
+                 >
+                 <div class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
+             </form>
++            {% block voyage_list_frame %}
+             <turbo-frame id="voyage-list" data-turbo-action="advance">
+                 <div class="bg-gray-800 p-4 rounded">
+                     <table class="w-full text-white">
+@@ -137,12 +138,13 @@
+                     </div>
+                 </div>
+             </turbo-frame>
++            {% endblock %}
+         </section>
+     </div>
+ {% endblock %}
+ 
+ {% block success_stream %}
+     <turbo-stream action="replace" target="voyage-list">
+-        <template>test</template>
++        <template>{{ block('voyage_list_frame') }}</template>
+     </turbo-stream>
+ {% endblock %}

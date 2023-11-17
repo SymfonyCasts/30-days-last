@@ -1,8 +1,8 @@
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 56274fc..6247773 100644
+index 49274c3..2cc946a 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
-@@ -73,7 +73,22 @@
+@@ -74,7 +74,22 @@
                              >X</twig:Button>
                          </div>
                          <hr class="mb-4">

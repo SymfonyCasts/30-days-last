@@ -486,6 +486,26 @@
             "description": null
         },
         {
+            "id": "stream-try-to-stream-from-search-form",
+            "name": "Stream: Try to stream from search form",
+            "description": null
+        },
+        {
+            "id": "stream-add-data-turbo-stream",
+            "name": "Stream: Add data-turbo-stream",
+            "description": null
+        },
+        {
+            "id": "stream-replace-frame-in-stream",
+            "name": "Stream: Replace frame in stream",
+            "description": null
+        },
+        {
+            "id": "stream-stream-the-result-count",
+            "name": "Stream: Stream the result count",
+            "description": null
+        },
+        {
             "id": "dialog-add-new-button",
             "name": "Dialog: Add new button",
             "description": null
@@ -776,5 +796,5 @@
             "description": null
         }
     ],
-    "sha": "e4942e1aa3f969e938775480fd86f0911ee23e23"
+    "sha": "089acd5f6cf1406f6573407c7bccc2267399c5dc"
 }

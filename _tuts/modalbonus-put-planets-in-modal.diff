@@ -1,8 +1,8 @@
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index df257e4..56274fc 100644
+index 0643cc2..49274c3 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
-@@ -53,6 +53,34 @@
+@@ -54,6 +54,34 @@
                          {{ stimulus_action('autosubmit', 'debouncedSubmit') }}
                          autofocus
                      >
@@ -35,5 +35,5 @@ index df257e4..56274fc 100644
 +                        </div>
 +                    </twig:Modal>
                  </div>
-                 <div class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
-             </form>
+                 {% block result_count %}
+                     <div id="result-count" class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>

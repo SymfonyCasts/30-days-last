@@ -1,10 +1,10 @@
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 58d5195..df257e4 100644
+index 0838158..0643cc2 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
-@@ -42,16 +42,18 @@
-                 {{ stimulus_controller('autosubmit') }}
+@@ -43,16 +43,18 @@
                  data-turbo-frame="voyage-list"
+                 data-turbo-stream
              >
 -                <input
 -                    type="search"
@@ -28,6 +28,6 @@ index 58d5195..df257e4 100644
 +                        autofocus
 +                    >
 +                </div>
-                 <div class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
-             </form>
-             <turbo-frame id="voyage-list" data-turbo-action="advance">
+                 {% block result_count %}
+                     <div id="result-count" class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
+                 {% endblock %}

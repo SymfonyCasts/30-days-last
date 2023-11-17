@@ -1,0 +1,49 @@
+diff --git a/src/Controller/MainController.php b/src/Controller/MainController.php
+index 1ed24ef..8746a98 100644
+--- a/src/Controller/MainController.php
++++ b/src/Controller/MainController.php
+@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\Response;
+ use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
+ use Symfony\Component\Routing\Annotation\Route;
++use Symfony\UX\Turbo\TurboBundle;
+ 
+ class MainController extends AbstractController
+ {
+@@ -18,6 +19,7 @@ class MainController extends AbstractController
+     public function homepage(
+         VoyageRepository $voyageRepository,
+         PlanetRepository $planetRepository,
++        Request $request,
+         #[MapQueryParameter('page')] int $page = 1,
+         #[MapQueryParameter('sort')] string $sort = 'leaveAt',
+         #[MapQueryParameter('sortDirection')] string $sortDirection = 'ASC',
+@@ -33,6 +35,14 @@ class MainController extends AbstractController
+             10
+         );
+ 
++        if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
++            $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
++
++            return $this->renderBlock('main/homepage.html.twig', 'success_stream', [
++                'voyages' => $pager,
++            ]);
++        }
++
+         return $this->render('main/homepage.html.twig', [
+             'voyages' => $pager,
+             'planets' => $planetRepository->findAll(),
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index 58d5195..9e90a4c 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -139,3 +139,9 @@
+         </section>
+     </div>
+ {% endblock %}
++
++{% block success_stream %}
++    <turbo-stream action="replace" target="voyage-list">
++        <template>test</template>
++    </turbo-stream>
++{% endblock %}

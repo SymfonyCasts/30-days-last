@@ -1,5 +1,5 @@
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index f4d81bd..bf4408e 100644
+index c9b53f3..3808122 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
 @@ -1,7 +1,9 @@
@@ -9,11 +9,11 @@ index f4d81bd..bf4408e 100644
 +    {{ form_start(form) }}
 +        {{ form_widget(form) }}
  
--    <button formnovalidate class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+-    <button formnovalidate class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
 -        {{ button_label|default('Save') }}
 -    </button>
 -{{ form_end(form) }}
-+        <button formnovalidate class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
++        <button formnovalidate class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
 +            {{ button_label|default('Save') }}
 +        </button>
 +    {{ form_end(form) }}

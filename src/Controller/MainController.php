@@ -16,6 +16,7 @@ class MainController extends AbstractController
     {
         $query = $request->query->get('query');
         $searchPlanets = array ($request->query->all()['planets'] ?? []);
+        $searchPlanets = array_filter($searchPlanets, 'is_numeric');
         $voyages = $voyageRepository->findBySearch($query, $searchPlanets);
 
         return $this->render('main/homepage.html.twig', [

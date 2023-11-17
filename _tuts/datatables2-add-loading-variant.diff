@@ -11,29 +11,28 @@ index ecef2f4..f7f44da 100644
          $pager = Pagerfanta::createForCurrentPageWithMaxPerPage(
              new QueryAdapter($voyageRepository->findBySearchQueryBuilder($query, $sort, $sortDirection)),
 diff --git a/tailwind.config.js b/tailwind.config.js
-index cfbf534..b212fba 100644
+index cfbf534..e4bcfca 100644
 --- a/tailwind.config.js
 +++ b/tailwind.config.js
-@@ -12,7 +12,8 @@ module.exports = {
+@@ -12,7 +12,7 @@ module.exports = {
    },
    plugins: [
      plugin(function({ addVariant }) {
 -      addVariant('turbo-frame', 'turbo-frame[src] &')
 +      addVariant('turbo-frame', 'turbo-frame[src] &');
-+      addVariant('busy', ['[busy] &', '[busy]&']);
      }),
    ],
  }
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 8bf9929..0168161 100644
+index 8bf9929..ac3311b 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
-@@ -55,7 +55,7 @@
+@@ -54,7 +54,7 @@
+                 >
                  <div class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
              </form>
-             <turbo-frame id="voyage-list">
--                <div class="bg-gray-800 p-4 rounded">
-+                <div class="bg-gray-800 p-4 rounded busy:opacity-50 busy:blur-sm">
+-            <turbo-frame id="voyage-list">
++            <turbo-frame id="voyage-list" class="aria-busy:opacity-50 aria-busy:blur-sm">
+                 <div class="bg-gray-800 p-4 rounded">
                      <table class="w-full text-white">
                          <thead>
-                             <tr>

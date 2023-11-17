@@ -1,0 +1,38 @@
+diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
+index 47acff2..8481265 100644
+--- a/src/Controller/VoyageController.php
++++ b/src/Controller/VoyageController.php
+@@ -81,7 +81,9 @@ class VoyageController extends AbstractController
+                 // If the request comes from Turbo, set the content type as text/vnd.turbo-stream.html and only send the HTML to update
+                 $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
+ 
+-                return $this->renderBlock('voyage/edit.html.twig', 'success_stream');
++                return $this->renderBlock('voyage/edit.html.twig', 'success_stream', [
++                    'voyage' => $voyage,
++                ]);
+             }
+ 
+             return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
+diff --git a/templates/voyage/_row.html.twig b/templates/voyage/_row.html.twig
+index d376ea1..beca337 100644
+--- a/templates/voyage/_row.html.twig
++++ b/templates/voyage/_row.html.twig
+@@ -1,4 +1,4 @@
+-<tr class="even:bg-gray-700 odd:bg-gray-600">
++<tr class="even:bg-gray-700 odd:bg-gray-600" id="voyage-list-item-{{ voyage.id }}">
+     <td class="px-6 py-4 whitespace-nowrap">{{ voyage.id }}</td>
+     <td class="px-6 py-4">{{ voyage.purpose }}</td>
+     <td class="px-6 py-4 whitespace-nowrap">{{ voyage.leaveAt ? voyage.leaveAt|date('Y-m-d H:i:s') : '' }}</td>
+diff --git a/templates/voyage/edit.html.twig b/templates/voyage/edit.html.twig
+index 752eda3..d8095c5 100644
+--- a/templates/voyage/edit.html.twig
++++ b/templates/voyage/edit.html.twig
+@@ -33,4 +33,8 @@
+     <turbo-stream action="update" target="modal">
+         <template></template>
+     </turbo-stream>
++
++    <turbo-stream action="replace" target="voyage-list-item-{{ voyage.id }}">
++        <template>{{ include('voyage/_row.html.twig') }}</template>
++    </turbo-stream>
+ {% endblock %}

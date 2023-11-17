@@ -1,0 +1,45 @@
+diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
+index 8481265..7072bea 100644
+--- a/src/Controller/VoyageController.php
++++ b/src/Controller/VoyageController.php
+@@ -99,10 +99,20 @@ class VoyageController extends AbstractController
+     public function delete(Request $request, Voyage $voyage, EntityManagerInterface $entityManager): Response
+     {
+         if ($this->isCsrfTokenValid('delete'.$voyage->getId(), $request->request->get('_token'))) {
++            $id = $voyage->getId();
+             $entityManager->remove($voyage);
+             $entityManager->flush();
+ 
+             $this->addFlash('success', 'Voyage deleted!');
++
++            if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
++                // If the request comes from Turbo, set the content type as text/vnd.turbo-stream.html and only send the HTML to update
++                $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
++
++                return $this->renderBlock('voyage/delete.html.twig', 'success_stream', [
++                    'id' => $id,
++                ]);
++            }
+         }
+ 
+         return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
+diff --git a/templates/voyage/delete.html.twig b/templates/voyage/delete.html.twig
+new file mode 100644
+index 0000000..dc91965
+--- /dev/null
++++ b/templates/voyage/delete.html.twig
+@@ -0,0 +1,14 @@
++{% block success_stream %}
++    <turbo-stream action="append" target="flash-container">
++        <template>
++            {{ include('_flashes.html.twig') }}
++        </template>
++    </turbo-stream>
++
++    <turbo-stream action="update" target="modal">
++        <template></template>
++    </turbo-stream>
++
++    <turbo-stream action="remove" target="voyage-list-item-{{ id }}">
++    </turbo-stream>
++{% endblock %}

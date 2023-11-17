@@ -584,7 +584,27 @@
             "id": "modal-load-immediately",
             "name": "Modal: Load immediately",
             "description": null
+        },
+        {
+            "id": "modal-remove-sleep",
+            "name": "Modal: remove sleep",
+            "description": null
+        },
+        {
+            "id": "modal-repeat-for-edit",
+            "name": "Modal: Repeat for edit",
+            "description": null
+        },
+        {
+            "id": "modal-update-row-on-edit",
+            "name": "Modal: Update row on edit",
+            "description": null
+        },
+        {
+            "id": "modal-fix-delete",
+            "name": "Modal: Fix delete",
+            "description": null
         }
     ],
-    "sha": "d87282086d4f68b22158b6931477bae7cf3bba0d"
+    "sha": "ada86b049b10be24cf84610a7545a36bcede86c8"
 }

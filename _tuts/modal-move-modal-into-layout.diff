@@ -42,7 +42,7 @@ index e587b7e..2e1d097 100644
      </body>
  </html>
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index 35e8eec..73cf892 100644
+index b221eed..a8df998 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
 @@ -5,8 +5,6 @@
@@ -55,7 +55,7 @@ index 35e8eec..73cf892 100644
      >
          <h1 class="text-xl font-semibold text-white mb-4">Voyages</h1>
 @@ -19,33 +17,6 @@
-             New Voyage
+             <span>New Voyage</span>
              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M9 12h6" /><path d="M12 9v6" /></svg>
          </a>
 -

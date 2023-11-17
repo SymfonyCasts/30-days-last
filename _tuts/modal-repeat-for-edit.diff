@@ -1,0 +1,47 @@
+diff --git a/templates/voyage/_row.html.twig b/templates/voyage/_row.html.twig
+index 1ba68b3..d376ea1 100644
+--- a/templates/voyage/_row.html.twig
++++ b/templates/voyage/_row.html.twig
+@@ -4,6 +4,10 @@
+     <td class="px-6 py-4 whitespace-nowrap">{{ voyage.leaveAt ? voyage.leaveAt|date('Y-m-d H:i:s') : '' }}</td>
+     <td class="px-6 py-4 whitespace-nowrap">
+         <a href="{{ path('app_voyage_show', {'id': voyage.id}) }}" class="text-blue-400 hover:text-blue-600">show</a>
+-        <a href="{{ path('app_voyage_edit', {'id': voyage.id}) }}" class="ml-4 text-yellow-400 hover:text-yellow-600">edit</a>
++        <a
++            href="{{ path('app_voyage_edit', {'id': voyage.id}) }}"
++            class="ml-4 text-yellow-400 hover:text-yellow-600"
++            data-turbo-frame="modal"
++        >edit</a>
+     </td>
+ </tr>
+diff --git a/templates/voyage/edit.html.twig b/templates/voyage/edit.html.twig
+index 81e13f9..752eda3 100644
+--- a/templates/voyage/edit.html.twig
++++ b/templates/voyage/edit.html.twig
+@@ -3,7 +3,7 @@
+ {% block title %}Edit Voyage{% endblock %}
+ 
+ {% block body %}
+-    <div class="m-4 p-4 bg-gray-800 rounded-lg">
++    <turbo-frame id="modal" target="_top" class="m-4 p-4 bg-gray-800 rounded-lg">
+         <div class="flex justify-between">
+             <h1 class="text-xl font-semibold text-white mb-4">Edit Voyage</h1>
+ 
+@@ -20,7 +20,7 @@
+         </div>
+ 
+         {{ include('voyage/_form.html.twig') }}
+-    </div>
++    </turbo-frame>
+ {% endblock %}
+ 
+ {% block success_stream %}
+@@ -29,4 +29,8 @@
+             {{ include('_flashes.html.twig') }}
+         </template>
+     </turbo-stream>
++
++    <turbo-stream action="update" target="modal">
++        <template></template>
++    </turbo-stream>
+ {% endblock %}

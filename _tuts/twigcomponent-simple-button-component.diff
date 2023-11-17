@@ -1,0 +1,39 @@
+diff --git a/src/Twig/Components/Button.php b/src/Twig/Components/Button.php
+new file mode 100644
+index 0000000..f09ea9a
+--- /dev/null
++++ b/src/Twig/Components/Button.php
+@@ -0,0 +1,11 @@
++<?php
++
++namespace App\Twig\Components;
++
++use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
++
++#[AsTwigComponent]
++class Button
++{
++
++}
+diff --git a/templates/components/Button.html.twig b/templates/components/Button.html.twig
+new file mode 100644
+index 0000000..82eb1f3
+--- /dev/null
++++ b/templates/components/Button.html.twig
+@@ -0,0 +1 @@
++<button {{ attributes }}>Press me!</button>
+diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
+index c1ac14a..17d598d 100644
+--- a/templates/voyage/_form.html.twig
++++ b/templates/voyage/_form.html.twig
+@@ -2,6 +2,10 @@
+     {{ form_start(form) }}
+         {{ form_widget(form) }}
+ 
++        {{ component('Button', {
++            class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700',
++        }) }}
++
+         <button formnovalidate class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+             {{ button_label|default('Save') }}
+         </button>

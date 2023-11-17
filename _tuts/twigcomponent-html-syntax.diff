@@ -1,0 +1,17 @@
+diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
+index 17d598d..7bf9954 100644
+--- a/templates/voyage/_form.html.twig
++++ b/templates/voyage/_form.html.twig
+@@ -2,9 +2,9 @@
+     {{ form_start(form) }}
+         {{ form_widget(form) }}
+ 
+-        {{ component('Button', {
+-            class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700',
+-        }) }}
++        <twig:Button
++            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
++        />
+ 
+         <button formnovalidate class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+             {{ button_label|default('Save') }}

@@ -1,0 +1,24 @@
+diff --git a/templates/components/Button.html.twig b/templates/components/Button.html.twig
+index 6f849fa..0053b91 100644
+--- a/templates/components/Button.html.twig
++++ b/templates/components/Button.html.twig
+@@ -1 +1,3 @@
+-<button {{ attributes }}>{% block content %}{% endblock %}</button>
++<button {{ attributes.defaults({
++    class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700',
++}) }}>{% block content %}{% endblock %}</button>
+diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
+index 74204f1..512d6ff 100644
+--- a/templates/voyage/_form.html.twig
++++ b/templates/voyage/_form.html.twig
+@@ -2,9 +2,7 @@
+     {{ form_start(form) }}
+         {{ form_widget(form) }}
+ 
+-        <twig:Button
+-            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
+-        >
++        <twig:Button>
+             {{ button_label|default('Save') }}
+         </twig:Button>
+     {{ form_end(form) }}

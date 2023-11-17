@@ -604,7 +604,57 @@
             "id": "modal-fix-delete",
             "name": "Modal: Fix delete",
             "description": null
+        },
+        {
+            "id": "twigcomponent-install-it",
+            "name": "TwigComponent: Install it",
+            "description": null
+        },
+        {
+            "id": "twigcomponent-simple-button-component",
+            "name": "TwigComponent: Simple Button component",
+            "description": null
+        },
+        {
+            "id": "twigcomponent-html-syntax",
+            "name": "TwigComponent: HTML syntax",
+            "description": null
+        },
+        {
+            "id": "twigcomponent-pass-in-html",
+            "name": "TwigComponent: Pass in HTML",
+            "description": null
+        },
+        {
+            "id": "twigcomponent-remove-old-button",
+            "name": "TwigComponent: Remove old button",
+            "description": null
+        },
+        {
+            "id": "twigcomponent-move-classes-into-component",
+            "name": "TwigComponent: Move classes into component",
+            "description": null
+        },
+        {
+            "id": "twigcomponent-try-to-pass-in-custom-class",
+            "name": "TwigComponent: Try to pass in custom class",
+            "description": null
+        },
+        {
+            "id": "twigcomponent-use-for-delete-button",
+            "name": "TwigComponent: Use for delete button",
+            "description": null
+        },
+        {
+            "id": "twigcomponent-add-type-prop",
+            "name": "TwigComponent: Add type prop",
+            "description": null
+        },
+        {
+            "id": "twigcomponent-dynamic-classes-for-type",
+            "name": "TwigComponent: Dynamic classes for type",
+            "description": null
         }
     ],
-    "sha": "f1c399450826b67c8fc7b19c6ec57f3855f77f45"
+    "sha": "dc43ad97711d4580f68dba023a06b9ba0e76e536"
 }

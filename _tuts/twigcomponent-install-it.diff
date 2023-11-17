@@ -1,0 +1,169 @@
+diff --git a/composer.json b/composer.json
+index 4972042..9456ae1 100644
+--- a/composer.json
++++ b/composer.json
+@@ -27,6 +27,7 @@
+         "symfony/twig-bundle": "6.4.x-dev",
+         "symfony/ux-autocomplete": "2.x-dev",
+         "symfony/ux-turbo": "2.x-dev",
++        "symfony/ux-twig-component": "2.x-dev",
+         "symfony/validator": "6.4.x-dev",
+         "symfony/yaml": "6.4.x-dev",
+         "symfonycasts/tailwind-bundle": "dev-main",
+diff --git a/composer.lock b/composer.lock
+index ee65643..cc34897 100644
+--- a/composer.lock
++++ b/composer.lock
+@@ -4,7 +4,7 @@
+         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+         "This file is @generated automatically"
+     ],
+-    "content-hash": "513c8adea32632a4150e6f64f3ee7d57",
++    "content-hash": "68fd800ef56ce125f4626e085a5dd33b",
+     "packages": [
+         {
+             "name": "babdev/pagerfanta-bundle",
+@@ -5996,6 +5996,91 @@
+             ],
+             "time": "2023-11-11T01:20:31+00:00"
+         },
++        {
++            "name": "symfony/ux-twig-component",
++            "version": "2.x-dev",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/symfony/ux-twig-component.git",
++                "reference": "d70262ccd2b1814c6064942c76037ec6e433b66c"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/d70262ccd2b1814c6064942c76037ec6e433b66c",
++                "reference": "d70262ccd2b1814c6064942c76037ec6e433b66c",
++                "shasum": ""
++            },
++            "require": {
++                "php": ">=8.1",
++                "symfony/dependency-injection": "^5.4|^6.0|^7.0",
++                "symfony/deprecation-contracts": "^2.2|^3.0",
++                "symfony/event-dispatcher": "^5.4|^6.0|^7.0",
++                "symfony/property-access": "^5.4|^6.0|^7.0",
++                "twig/twig": "^2.14.7|^3.0.4"
++            },
++            "conflict": {
++                "symfony/config": "<5.4.0"
++            },
++            "require-dev": {
++                "symfony/console": "^5.4|^6.0|^7.0",
++                "symfony/css-selector": "^5.4|^6.0|^7.0",
++                "symfony/dom-crawler": "^5.4|^6.0|^7.0",
++                "symfony/framework-bundle": "^5.4|^6.0|^7.0",
++                "symfony/phpunit-bridge": "^6.0|^7.0",
++                "symfony/stimulus-bundle": "^2.9.1",
++                "symfony/stopwatch": "^5.4|^6.0|^7.0",
++                "symfony/twig-bundle": "^5.4|^6.0|^7.0",
++                "symfony/webpack-encore-bundle": "^1.15"
++            },
++            "default-branch": true,
++            "type": "symfony-bundle",
++            "extra": {
++                "thanks": {
++                    "name": "symfony/ux",
++                    "url": "https://github.com/symfony/ux"
++                }
++            },
++            "autoload": {
++                "psr-4": {
++                    "Symfony\\UX\\TwigComponent\\": "src/"
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "Symfony Community",
++                    "homepage": "https://symfony.com/contributors"
++                }
++            ],
++            "description": "Twig components for Symfony",
++            "homepage": "https://symfony.com",
++            "keywords": [
++                "components",
++                "symfony-ux",
++                "twig"
++            ],
++            "support": {
++                "source": "https://github.com/symfony/ux-twig-component/tree/2.x"
++            },
++            "funding": [
++                {
++                    "url": "https://symfony.com/sponsor",
++                    "type": "custom"
++                },
++                {
++                    "url": "https://github.com/fabpot",
++                    "type": "github"
++                },
++                {
++                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
++                    "type": "tidelift"
++                }
++            ],
++            "time": "2023-11-15T18:16:39+00:00"
++        },
+         {
+             "name": "symfony/validator",
+             "version": "6.4.x-dev",
+@@ -7357,6 +7442,7 @@
+         "symfony/twig-bundle": 20,
+         "symfony/ux-autocomplete": 20,
+         "symfony/ux-turbo": 20,
++        "symfony/ux-twig-component": 20,
+         "symfony/validator": 20,
+         "symfony/yaml": 20,
+         "symfonycasts/tailwind-bundle": 20,
+diff --git a/config/bundles.php b/config/bundles.php
+index 52f8b9e..bd069db 100644
+--- a/config/bundles.php
++++ b/config/bundles.php
+@@ -19,4 +19,5 @@ return [
+     Symfony\UX\Autocomplete\AutocompleteBundle::class => ['all' => true],
+     Symfony\UX\Turbo\TurboBundle::class => ['all' => true],
+     BabDev\PagerfantaBundle\BabDevPagerfantaBundle::class => ['all' => true],
++    Symfony\UX\TwigComponent\TwigComponentBundle::class => ['all' => true],
+ ];
+diff --git a/config/packages/twig_component.yaml b/config/packages/twig_component.yaml
+new file mode 100644
+index 0000000..fd17ac6
+--- /dev/null
++++ b/config/packages/twig_component.yaml
+@@ -0,0 +1,5 @@
++twig_component:
++    anonymous_template_directory: 'components/'
++    defaults:
++        # Namespace & directory for components
++        App\Twig\Components\: 'components/'
+diff --git a/symfony.lock b/symfony.lock
+index da79d09..cf5acf8 100644
+--- a/symfony.lock
++++ b/symfony.lock
+@@ -203,6 +203,18 @@
+     "symfony/ux-turbo": {
+         "version": "2.x-dev"
+     },
++    "symfony/ux-twig-component": {
++        "version": "2.9999999",
++        "recipe": {
++            "repo": "github.com/symfony/recipes",
++            "branch": "main",
++            "version": "2.13",
++            "ref": "67814b5f9794798b885cec9d3f48631424449a01"
++        },
++        "files": [
++            "config/packages/twig_component.yaml"
++        ]
++    },
+     "symfony/validator": {
+         "version": "6.4",
+         "recipe": {

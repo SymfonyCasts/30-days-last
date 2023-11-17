@@ -1,0 +1,22 @@
+diff --git a/templates/components/Button.html.twig b/templates/components/Button.html.twig
+index 82eb1f3..6f849fa 100644
+--- a/templates/components/Button.html.twig
++++ b/templates/components/Button.html.twig
+@@ -1 +1 @@
+-<button {{ attributes }}>Press me!</button>
++<button {{ attributes }}>{% block content %}{% endblock %}</button>
+diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
+index 7bf9954..10af7d1 100644
+--- a/templates/voyage/_form.html.twig
++++ b/templates/voyage/_form.html.twig
+@@ -4,7 +4,9 @@
+ 
+         <twig:Button
+             class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
+-        />
++        >
++            {{ button_label|default('Save') }}
++        </twig:Button>
+ 
+         <button formnovalidate class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+             {{ button_label|default('Save') }}

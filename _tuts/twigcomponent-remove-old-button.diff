@@ -1,0 +1,14 @@
+diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
+index 10af7d1..74204f1 100644
+--- a/templates/voyage/_form.html.twig
++++ b/templates/voyage/_form.html.twig
+@@ -7,9 +7,5 @@
+         >
+             {{ button_label|default('Save') }}
+         </twig:Button>
+-
+-        <button formnovalidate class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+-            {{ button_label|default('Save') }}
+-        </button>
+     {{ form_end(form) }}
+ </turbo-frame>

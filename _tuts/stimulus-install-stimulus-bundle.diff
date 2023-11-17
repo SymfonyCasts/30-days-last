@@ -63,7 +63,7 @@ index 0d340ce..0413a8c 100644
          "symfony/validator": "6.4.x-dev",
          "symfony/yaml": "6.4.x-dev",
 diff --git a/composer.lock b/composer.lock
-index 3b5375b..17b7632 100644
+index 0c9b068..4e756b7 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
@@ -92,7 +92,7 @@ index 3b5375b..17b7632 100644
                  "vimeo/psalm": "^4.30 || ^5.15"
              },
              "type": "symfony-bundle",
-@@ -4997,6 +5000,76 @@
+@@ -5116,6 +5119,76 @@
              ],
              "time": "2023-07-30T20:28:31+00:00"
          },
@@ -169,7 +169,7 @@ index 3b5375b..17b7632 100644
          {
              "name": "symfony/stopwatch",
              "version": "6.4.x-dev",
-@@ -6866,6 +6939,7 @@
+@@ -7040,6 +7113,7 @@
          "symfony/framework-bundle": 20,
          "symfony/runtime": 20,
          "symfony/security-csrf": 20,

@@ -32,7 +32,7 @@ index 0413a8c..cff96ca 100644
          "symfony/yaml": "6.4.x-dev",
          "symfonycasts/tailwind-bundle": "dev-main",
 diff --git a/composer.lock b/composer.lock
-index 17b7632..6c473e7 100644
+index 4e756b7..67f16f6 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
@@ -44,7 +44,7 @@ index 17b7632..6c473e7 100644
      "packages": [
          {
              "name": "composer/semver",
-@@ -5585,6 +5585,98 @@
+@@ -5704,6 +5704,98 @@
              ],
              "time": "2023-11-07T14:57:07+00:00"
          },
@@ -143,7 +143,7 @@ index 17b7632..6c473e7 100644
          {
              "name": "symfony/validator",
              "version": "6.4.x-dev",
-@@ -6941,6 +7033,7 @@
+@@ -7115,6 +7207,7 @@
          "symfony/security-csrf": 20,
          "symfony/stimulus-bundle": 20,
          "symfony/twig-bundle": 20,

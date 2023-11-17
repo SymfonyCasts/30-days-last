@@ -11,7 +11,7 @@ index 4972042..9456ae1 100644
          "symfony/yaml": "6.4.x-dev",
          "symfonycasts/tailwind-bundle": "dev-main",
 diff --git a/composer.lock b/composer.lock
-index ee65643..cc34897 100644
+index b9b027d..0ec8438 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
@@ -23,7 +23,7 @@ index ee65643..cc34897 100644
      "packages": [
          {
              "name": "babdev/pagerfanta-bundle",
-@@ -5996,6 +5996,91 @@
+@@ -6115,6 +6115,91 @@
              ],
              "time": "2023-11-11T01:20:31+00:00"
          },
@@ -115,7 +115,7 @@ index ee65643..cc34897 100644
          {
              "name": "symfony/validator",
              "version": "6.4.x-dev",
-@@ -7357,6 +7442,7 @@
+@@ -7531,6 +7616,7 @@
          "symfony/twig-bundle": 20,
          "symfony/ux-autocomplete": 20,
          "symfony/ux-turbo": 20,

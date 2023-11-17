@@ -1,5 +1,5 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 4964b0b..7981f89 100644
+index 8914f81..7981f89 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -55,39 +55,6 @@
@@ -15,7 +15,7 @@ index 4964b0b..7981f89 100644
 -                {{ stimulus_target('modal', 'dialog') }}
 -                {{ stimulus_action('modal', 'close', 'close') }}
 -            >
--                <div class="text-white space-y-4 p-5 fart">
+-                <div class="text-white space-y-4 p-5">
 -                    <turbo-frame
 -                        id="modal"
 -                        {{ stimulus_target('modal', 'modalContent') }}
@@ -45,7 +45,7 @@ index 4964b0b..7981f89 100644
  </html>
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
 new file mode 100644
-index 0000000..dd47598
+index 0000000..94460c3
 --- /dev/null
 +++ b/templates/components/Modal.html.twig
 @@ -0,0 +1,34 @@
@@ -58,7 +58,7 @@ index 0000000..dd47598
 +        {{ stimulus_target('modal', 'dialog') }}
 +        {{ stimulus_action('modal', 'close', 'close') }}
 +    >
-+        <div class="text-white space-y-4 p-5 fart">
++        <div class="text-white space-y-4 p-5">
 +            <turbo-frame
 +                id="modal"
 +                {{ stimulus_target('modal', 'modalContent') }}

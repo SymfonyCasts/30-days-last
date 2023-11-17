@@ -37,16 +37,14 @@ index 084b4ea..3915a1d 100644
      open() {
          this.dialogTarget.showModal();
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 77d1302..83dc1d0 100644
+index 77d1302..24482db 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -64,8 +64,8 @@
-                 {{ stimulus_target('modal', 'dialog') }}
+@@ -65,7 +65,7 @@
                  {{ stimulus_action('modal', 'close', 'close') }}
              >
--                <div class="text-white space-y-4 p-5">
+                 <div class="text-white space-y-4 p-5">
 -                    <turbo-frame id="modal"></turbo-frame>
-+                <div class="text-white space-y-4 p-5 fart">
 +                    <turbo-frame id="modal" {{ stimulus_target('modal', 'modalContent') }}></turbo-frame>
                  </div>
              </dialog>

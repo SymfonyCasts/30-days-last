@@ -11,7 +11,7 @@ index 5b94d8b..0d340ce 100644
          "twig/twig": "^2.12|^3.0"
      },
 diff --git a/composer.lock b/composer.lock
-index dcb4cd9..3b5375b 100644
+index dcb4cd9..0c9b068 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
@@ -23,7 +23,140 @@ index dcb4cd9..3b5375b 100644
      "packages": [
          {
              "name": "composer/semver",
-@@ -5894,6 +5894,65 @@
+@@ -1416,6 +1416,73 @@
+             },
+             "time": "2023-08-16T21:49:04+00:00"
+         },
++        {
++            "name": "gehrisandro/tailwind-merge-php",
++            "version": "v1.0.0",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/gehrisandro/tailwind-merge-php.git",
++                "reference": "9e9692989129336d801821a43211f1c7f4292aa5"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/gehrisandro/tailwind-merge-php/zipball/9e9692989129336d801821a43211f1c7f4292aa5",
++                "reference": "9e9692989129336d801821a43211f1c7f4292aa5",
++                "shasum": ""
++            },
++            "require": {
++                "php": "^8.1.0",
++                "psr/simple-cache": "^3.0"
++            },
++            "require-dev": {
++                "laravel/pint": "^1.10.0",
++                "nunomaduro/collision": "^7.5.2",
++                "pestphp/pest": "^v2.24.0",
++                "pestphp/pest-plugin-arch": "^2.1.2",
++                "pestphp/pest-plugin-mock": "^2.0.0",
++                "pestphp/pest-plugin-type-coverage": "^2.0.0",
++                "phpstan/phpstan": "^1.10.15",
++                "rector/rector": "^0.14.8",
++                "symfony/var-dumper": "^6.2.10"
++            },
++            "type": "library",
++            "autoload": {
++                "files": [
++                    "src/TailwindMerge.php"
++                ],
++                "psr-4": {
++                    "TailwindMerge\\": "src/"
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "Sandro Gehri",
++                    "email": "sandrogehri@gmail.com"
++                }
++            ],
++            "description": "TailwindMerge for PHP merges multiple Tailwind CSS classes by automatically resolving conflicts between them",
++            "keywords": [
++                "classes",
++                "merge",
++                "php",
++                "tailwindcss"
++            ],
++            "support": {
++                "issues": "https://github.com/gehrisandro/tailwind-merge-php/issues",
++                "source": "https://github.com/gehrisandro/tailwind-merge-php/tree/v1.0.0"
++            },
++            "funding": [
++                {
++                    "url": "https://github.com/gehrisandro",
++                    "type": "github"
++                }
++            ],
++            "time": "2023-10-18T07:54:22+00:00"
++        },
+         {
+             "name": "knplabs/knp-time-bundle",
+             "version": "dev-main",
+@@ -1805,6 +1872,58 @@
+             },
+             "time": "2021-07-14T16:46:02+00:00"
+         },
++        {
++            "name": "psr/simple-cache",
++            "version": "dev-master",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/php-fig/simple-cache.git",
++                "reference": "2d280c2aaa23a120f35d55cfde8581954a8e77fa"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/2d280c2aaa23a120f35d55cfde8581954a8e77fa",
++                "reference": "2d280c2aaa23a120f35d55cfde8581954a8e77fa",
++                "shasum": ""
++            },
++            "require": {
++                "php": ">=8.0.0"
++            },
++            "default-branch": true,
++            "type": "library",
++            "extra": {
++                "branch-alias": {
++                    "dev-master": "3.0.x-dev"
++                }
++            },
++            "autoload": {
++                "psr-4": {
++                    "Psr\\SimpleCache\\": "src/"
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "PHP-FIG",
++                    "homepage": "https://www.php-fig.org/"
++                }
++            ],
++            "description": "Common interfaces for simple caching",
++            "keywords": [
++                "cache",
++                "caching",
++                "psr",
++                "psr-16",
++                "simple-cache"
++            ],
++            "support": {
++                "source": "https://github.com/php-fig/simple-cache/tree/master"
++            },
++            "time": "2022-04-08T16:41:45+00:00"
++        },
+         {
+             "name": "symfony/asset",
+             "version": "6.4.x-dev",
+@@ -5894,6 +6013,120 @@
              },
              "time": "2023-11-08T19:29:49+00:00"
          },
@@ -33,26 +166,27 @@ index dcb4cd9..3b5375b 100644
 +            "source": {
 +                "type": "git",
 +                "url": "https://github.com/tales-from-a-dev/flowbite-bundle.git",
-+                "reference": "54f6e0854d4ada2794eb1b6df30c6089df1dfbce"
++                "reference": "24c62436f1254b0a87be9b73e4b04389a060d95a"
 +            },
 +            "dist": {
 +                "type": "zip",
-+                "url": "https://api.github.com/repos/tales-from-a-dev/flowbite-bundle/zipball/54f6e0854d4ada2794eb1b6df30c6089df1dfbce",
-+                "reference": "54f6e0854d4ada2794eb1b6df30c6089df1dfbce",
++                "url": "https://api.github.com/repos/tales-from-a-dev/flowbite-bundle/zipball/24c62436f1254b0a87be9b73e4b04389a060d95a",
++                "reference": "24c62436f1254b0a87be9b73e4b04389a060d95a",
 +                "shasum": ""
 +            },
 +            "require": {
 +                "php": ">=8.2",
-+                "symfony/http-kernel": "^6.2",
-+                "symfony/twig-bridge": "^6.2"
++                "symfony/http-kernel": "^6.2 || ^7.0",
++                "symfony/twig-bridge": "^6.2 || ^7.0",
++                "tales-from-a-dev/twig-tailwind-extra": "^0.1.0"
 +            },
 +            "require-dev": {
 +                "friendsofphp/php-cs-fixer": "^3.15",
 +                "phpunit/phpunit": "^10.0",
-+                "symfony/form": "^6.2",
-+                "symfony/intl": "^6.2",
-+                "symfony/security-csrf": "^6.2",
-+                "symfony/translation": "^6.2"
++                "symfony/form": "^6.2 || ^7.0",
++                "symfony/intl": "^6.2 || ^7.0",
++                "symfony/security-csrf": "^6.2 || ^7.0",
++                "symfony/translation": "^6.2 || ^7.0"
 +            },
 +            "default-branch": true,
 +            "type": "symfony-bundle",
@@ -82,14 +216,68 @@ index dcb4cd9..3b5375b 100644
 +            ],
 +            "support": {
 +                "issues": "https://github.com/tales-from-a-dev/flowbite-bundle/issues",
-+                "source": "https://github.com/tales-from-a-dev/flowbite-bundle/tree/v0.2.5"
++                "source": "https://github.com/tales-from-a-dev/flowbite-bundle/tree/v0.2.6"
 +            },
-+            "time": "2023-06-21T15:29:10+00:00"
++            "time": "2023-11-17T13:03:20+00:00"
++        },
++        {
++            "name": "tales-from-a-dev/twig-tailwind-extra",
++            "version": "v0.1.0",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/tales-from-a-dev/twig-tailwind-extra.git",
++                "reference": "abf0b46350751b69d770dece65be7eae26b390c7"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/tales-from-a-dev/twig-tailwind-extra/zipball/abf0b46350751b69d770dece65be7eae26b390c7",
++                "reference": "abf0b46350751b69d770dece65be7eae26b390c7",
++                "shasum": ""
++            },
++            "require": {
++                "gehrisandro/tailwind-merge-php": "^1.0",
++                "php": ">=8.2",
++                "symfony/cache": "^6.3",
++                "twig/twig": "^3.0"
++            },
++            "require-dev": {
++                "friendsofphp/php-cs-fixer": "^3.38",
++                "symfony/phpunit-bridge": "^6.3"
++            },
++            "type": "twig",
++            "autoload": {
++                "psr-4": {
++                    "TalesFromADev\\Twig\\Extra\\Tailwind\\": "src/"
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "Romain Monteil",
++                    "email": "monteil.romain@gmail.com"
++                }
++            ],
++            "description": "A Twig extension for Tailwind",
++            "homepage": "https://github.com/tales-from-a-dev/twig-tailwind-extra",
++            "keywords": [
++                "extension",
++                "symfony",
++                "tailwind",
++                "twig"
++            ],
++            "support": {
++                "issues": "https://github.com/tales-from-a-dev/twig-tailwind-extra/issues",
++                "source": "https://github.com/tales-from-a-dev/twig-tailwind-extra/tree/v0.1.0"
++            },
++            "time": "2023-11-17T11:35:31+00:00"
 +        },
          {
              "name": "twig/extra-bundle",
              "version": "3.x-dev",
-@@ -6811,6 +6870,7 @@
+@@ -6811,6 +7044,7 @@
          "symfony/validator": 20,
          "symfony/yaml": 20,
          "symfonycasts/tailwind-bundle": 20,

@@ -17,7 +17,7 @@ index 57163f7..4972042 100644
          "symfony/asset-mapper": "6.4.*",
          "symfony/console": "6.4.x-dev",
 diff --git a/composer.lock b/composer.lock
-index 2d98015..ee65643 100644
+index 4a50052..b9b027d 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,8 +4,96 @@
@@ -118,7 +118,7 @@ index 2d98015..ee65643 100644
          {
              "name": "composer/semver",
              "version": "dev-main",
-@@ -1597,6 +1685,140 @@
+@@ -1664,6 +1752,140 @@
              ],
              "time": "2023-11-10T12:29:35+00:00"
          },
@@ -259,7 +259,7 @@ index 2d98015..ee65643 100644
          {
              "name": "psr/cache",
              "version": "dev-master",
-@@ -7121,7 +7343,10 @@
+@@ -7295,7 +7517,10 @@
      "aliases": [],
      "minimum-stability": "dev",
      "stability-flags": {

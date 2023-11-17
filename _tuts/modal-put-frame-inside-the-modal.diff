@@ -1,30 +1,33 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 1852e24..77d1302 100644
+index 47b7a02..2306538 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -65,27 +65,9 @@
-                 {{ stimulus_action('modal', 'close', 'close') }}
+@@ -66,30 +66,10 @@
              >
-                 <div class="text-white space-y-4 p-5">
--                    <div class="flex justify-between items-center">
--                        <h2 class="text-xl font-bold">Create new Voyage</h2>
--                        <form method="dialog">
--                            <button class="text-lg">
--                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>
--                            </button>
--                        </form>
--                    </div>
--                    <p class="text-gray-400">
--                        Join us on an exciting journey through the cosmos! Discover the
--                        mysteries of the universe and explore distant galaxies.
--                    </p>
--                    <div class="flex justify-end">
--                        <button
--                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
--                            Let's Go!
--                        </button>
--                    </div>
-+                    <turbo-frame id="modal"></turbo-frame>
+                 <div class="flex grow p-5">
+                     <div class="grow overflow-auto p-1">
+-                        <div class="text-white space-y-4">
+-                            <div class="flex justify-between items-center">
+-                                <h2 class="text-xl font-bold">Create new Voyage</h2>
+-                                <form method="dialog">
+-                                    <button class="text-lg absolute top-5 right-5">
+-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>
+-                                    </button>
+-                                </form>
+-                            </div>
+-                            <p class="text-gray-400">
+-                                Join us on an exciting journey through the cosmos! Discover the
+-                                mysteries of the universe and explore distant galaxies.
+-                            </p>
+-                            <div class="flex justify-end">
+-                                <button
+-                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+-                                    Let's Go!
+-                                </button>
+-                            </div>
+-                        </div>
++                        <turbo-frame id="modal"></turbo-frame>
+                     </div>
                  </div>
              </dialog>
          </div>

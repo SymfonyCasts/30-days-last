@@ -681,6 +681,11 @@
             "description": null
         },
         {
+            "id": "twigcomponent-point-tailwind-at-component-classes",
+            "name": "TwigComponent: Point Tailwind at component classes",
+            "description": null
+        },
+        {
             "id": "twigcomponent-convert-new-voyage-button",
             "name": "TwigComponent: Convert new voyage button",
             "description": null
@@ -691,10 +696,25 @@
             "description": null
         },
         {
+            "id": "twigcomponent-try-to-add-text-l",
+            "name": "TwigComponent: Try to add text-l",
+            "description": null
+        },
+        {
+            "id": "twigcomponent-merge-the-tailwind-classes",
+            "name": "TwigComponent: Merge the tailwind classes",
+            "description": null
+        },
+        {
             "id": "modalcomponent-copy-into-new-component-template",
             "name": "ModalComponent: Copy into new component template",
             "description": null
+        },
+        {
+            "id": "modalcomponent-extract-turbo-frame-into-block",
+            "name": "ModalComponent: Extract turbo-frame into block",
+            "description": null
         }
     ],
-    "sha": "b846fb6461fc5924f9dec81f26f5c0d2e44dcf42"
+    "sha": "73360ae30b43a1600203ab96a828185869094a2c"
 }

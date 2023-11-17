@@ -1,13 +1,13 @@
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index 256450f..fd30317 100644
+index c13a0df..7049396 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
 @@ -19,7 +19,7 @@
          </button>
  
          <dialog
--            class="bg-gray-800 rounded-lg shadow-xl inset-0 w-full lg:w-1/2"
-+            class="bg-gray-800 rounded-lg shadow-xl inset-0 w-full lg:w-1/2 backdrop:bg-slate-600 backdrop:opacity-80"
+-            class="open:flex bg-gray-800 rounded-lg shadow-xl inset-0 w-full lg:w-1/2"
++            class="open:flex bg-gray-800 rounded-lg shadow-xl inset-0 w-full lg:w-1/2 backdrop:bg-slate-600 backdrop:opacity-80"
              {{ stimulus_target('modal', 'dialog') }}
          >
-             <div class="text-white space-y-4 p-5">
+             <div class="flex grow p-5">

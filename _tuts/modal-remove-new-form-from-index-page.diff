@@ -1,8 +1,8 @@
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index b3e03b0..da47551 100644
+index 78822e0..9423729 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
-@@ -47,8 +47,6 @@
+@@ -51,8 +51,6 @@
          </dialog>
      </div>
  

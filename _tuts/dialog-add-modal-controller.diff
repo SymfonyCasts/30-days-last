@@ -14,7 +14,7 @@ index 0000000..4be7891
 +    }
 +}
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index 4177b96..256450f 100644
+index 5ae3748..c13a0df 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
 @@ -5,10 +5,13 @@
@@ -36,8 +36,8 @@ index 4177b96..256450f 100644
  
          <dialog
 -            open
-             class="bg-gray-800 rounded-lg shadow-xl inset-0 w-full lg:w-1/2"
+             class="open:flex bg-gray-800 rounded-lg shadow-xl inset-0 w-full lg:w-1/2"
 +            {{ stimulus_target('modal', 'dialog') }}
          >
-             <div class="text-white space-y-4 p-5">
-                 <div class="flex justify-between items-center">
+             <div class="flex grow p-5">
+                 <div class="grow overflow-auto p-1">

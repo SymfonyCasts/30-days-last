@@ -1,0 +1,41 @@
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index 7981f89..9f1091a 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -55,6 +55,14 @@
+             {{ include('_flashes.html.twig') }}
+         </div>
+ 
+-        <twig:Modal />
++        <twig:Modal>
++            <twig:block name="full_content">
++                <turbo-frame
++                    id="modal"
++                    {{ stimulus_target('modal', 'modalContent') }}
++                    {{ stimulus_action('modal', 'showLoading', 'turbo:before-fetch-request') }}
++                ></turbo-frame>
++            </twig:block>
++        </twig:Modal>
+     </body>
+ </html>
+diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
+index 14a7ca2..85fac47 100644
+--- a/templates/components/Modal.html.twig
++++ b/templates/components/Modal.html.twig
+@@ -9,11 +9,11 @@
+     >
+         <div class="flex grow p-5">
+             <div class="grow overflow-auto p-1">
+-                <turbo-frame
+-                    id="modal"
+-                    {{ stimulus_target('modal', 'modalContent') }}
+-                    {{ stimulus_action('modal', 'showLoading', 'turbo:before-fetch-request') }}
+-                ></turbo-frame>
++                {% block full_content %}
++                    <div {{ stimulus_target('modal', 'modalContent') }}>
++                        {% block content %}{% endblock %}
++                    </div>
++                {% endblock %}
+             </div>
+         </div>
+     </dialog>

@@ -21,7 +21,7 @@ index c884707..a2230cd 100644
 -}) }}>{% block content %}{% endblock %}</button>
 +}) }}>{% block content %}{% endblock %}</{{ tag }}>
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index 7d40acd..9855757 100644
+index 7d9b7d1..077ed68 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
 @@ -10,6 +10,7 @@
@@ -31,4 +31,4 @@ index 7d40acd..9855757 100644
 +            tag="a"
              href="{{ path('app_voyage_new') }}"
              data-turbo-frame="modal"
-             class="flex items-center space-x-1"
+             class="flex items-center space-x-1 font-bold"

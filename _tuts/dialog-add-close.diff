@@ -1,19 +1,19 @@
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index ea637e1..4177b96 100644
+index 284fa69..5ae3748 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
-@@ -22,9 +22,11 @@
-             <div class="text-white space-y-4 p-5">
-                 <div class="flex justify-between items-center">
-                     <h2 class="text-xl font-bold">Create new Voyage</h2>
--                    <button class="text-lg">
--                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>
--                    </button>
-+                    <form method="dialog">
-+                        <button class="text-lg">
-+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>
-+                        </button>
-+                    </form>
-                 </div>
-                 <p class="text-gray-400">
-                     Join us on an exciting journey through the cosmos! Discover the
+@@ -24,9 +24,11 @@
+                     <div class="text-white space-y-4">
+                         <div class="flex justify-between items-center">
+                             <h2 class="text-xl font-bold">Create new Voyage</h2>
+-                            <button class="text-lg absolute top-5 right-5">
+-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>
+-                            </button>
++                            <form method="dialog">
++                                <button class="text-lg absolute top-5 right-5">
++                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>
++                                </button>
++                            </form>
+                         </div>
+                         <p class="text-gray-400">
+                             Join us on an exciting journey through the cosmos! Discover the

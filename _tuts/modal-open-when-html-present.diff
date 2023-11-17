@@ -1,8 +1,8 @@
 diff --git a/assets/controllers/modal_controller.js b/assets/controllers/modal_controller.js
-index 084b4ea..3915a1d 100644
+index 084b4ea..d3fd556 100644
 --- a/assets/controllers/modal_controller.js
 +++ b/assets/controllers/modal_controller.js
-@@ -1,7 +1,32 @@
+@@ -1,7 +1,28 @@
  import { Controller } from '@hotwired/stimulus';
  
  export default class extends Controller {
@@ -14,20 +14,16 @@ index 084b4ea..3915a1d 100644
 +    connect() {
 +        // create a mutation observer on this.modalContentTarget
 +        // when the content changes, call this.open()
-+        this.observer = new MutationObserver((mutations) => {
-+            mutations.forEach((mutation) => {
-+                if (mutation.type === 'childList') {
-+                    const shouldOpen = this.modalContentTarget.innerHTML.trim().length > 0;
++        this.observer = new MutationObserver(() => {
++            const shouldOpen = this.modalContentTarget.innerHTML.trim().length > 0;
 +
-+                    if (shouldOpen && !this.dialogTarget.open) {
-+                        this.open();
-+                    } else if (!shouldOpen && this.dialogTarget.open) {
-+                        this.close();
-+                    }
-+                }
-+            });
++            if (shouldOpen && !this.dialogTarget.open) {
++                this.open();
++            } else if (!shouldOpen && this.dialogTarget.open) {
++                this.close();
++            }
 +        });
-+        this.observer.observe(this.modalContentTarget, { childList: true });
++        this.observer.observe(this.modalContentTarget, { childList: true, characterData: true, subtree: true });
 +    }
 +
 +    disconnect() {
@@ -37,15 +33,15 @@ index 084b4ea..3915a1d 100644
      open() {
          this.dialogTarget.showModal();
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 77d1302..24482db 100644
+index 2306538..ce194d0 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -65,7 +65,7 @@
-                 {{ stimulus_action('modal', 'close', 'close') }}
+@@ -66,7 +66,7 @@
              >
-                 <div class="text-white space-y-4 p-5">
--                    <turbo-frame id="modal"></turbo-frame>
-+                    <turbo-frame id="modal" {{ stimulus_target('modal', 'modalContent') }}></turbo-frame>
+                 <div class="flex grow p-5">
+                     <div class="grow overflow-auto p-1">
+-                        <turbo-frame id="modal"></turbo-frame>
++                        <turbo-frame id="modal" {{ stimulus_target('modal', 'modalContent') }}></turbo-frame>
+                     </div>
                  </div>
              </dialog>
-         </div>

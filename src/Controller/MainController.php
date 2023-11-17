@@ -15,11 +15,13 @@ class MainController extends AbstractController
     public function homepage(VoyageRepository $voyageRepository, PlanetRepository $planetRepository, Request $request): Response
     {
         $query = $request->query->get('query');
-        $voyages = $voyageRepository->findBySearch($query);
+        $searchPlanets = array ($request->query->all()['planets'] ?? []);
+        $voyages = $voyageRepository->findBySearch($query, $searchPlanets);
 
         return $this->render('main/homepage.html.twig', [
             'voyages' => $voyages,
             'planets' => $planetRepository->findAll(),
+            'searchPlanets' => $searchPlanets,
         ]);
     }
 }

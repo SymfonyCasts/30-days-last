@@ -561,18 +561,18 @@
             "description": null
         },
         {
-            "id": "delete-me",
-            "name": "delete me",
+            "id": "modal-use-base-template-for-modal",
+            "name": "Modal: use base template for modal",
             "description": null
         },
         {
-            "id": "modal-make-modal-id-conditional-on-page",
-            "name": "Modal: make modal id conditional on page",
+            "id": "delete-me-3",
+            "name": "delete me 3",
             "description": null
         },
         {
-            "id": "modal-easier-dynamic-frame-id",
-            "name": "Modal: Easier dynamic frame id",
+            "id": "delete-me-4",
+            "name": "delete me 4",
             "description": null
         },
         {
@@ -676,8 +676,8 @@
             "description": null
         },
         {
-            "id": "twigcomponent-add-type-prop",
-            "name": "TwigComponent: Add type prop",
+            "id": "twigcomponent-add-variant-prop",
+            "name": "TwigComponent: Add variant prop",
             "description": null
         },
         {
@@ -754,7 +754,17 @@
             "id": "modalcomponent-include-delete",
             "name": "ModalComponent: Include delete",
             "description": null
+        },
+        {
+            "id": "modalbonus-organize-search-into-new-div",
+            "name": "ModalBonus: Organize search into new div",
+            "description": null
+        },
+        {
+            "id": "modalbonus-put-planets-in-modal",
+            "name": "ModalBonus: Put planets in modal",
+            "description": null
         }
     ],
-    "sha": "10a84a22b6f4b05d1e2f7f86c15e8a6e18c35f32"
+    "sha": "6aeda13d0c84b6f66917206d46e9532a43b1c24e"
 }

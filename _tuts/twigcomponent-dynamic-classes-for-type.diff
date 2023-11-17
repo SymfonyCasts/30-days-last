@@ -1,42 +1,42 @@
 diff --git a/src/Twig/Components/Button.php b/src/Twig/Components/Button.php
-index e9d4614..45915ce 100644
+index 701608e..040302e 100644
 --- a/src/Twig/Components/Button.php
 +++ b/src/Twig/Components/Button.php
 @@ -8,4 +8,14 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
  class Button
  {
-     public string $type = 'default';
+     public string $variant = 'default';
 +
-+    public function getTypeClasses(): string
++    public function getVariantClasses(): string
 +    {
-+        return match ($this->type) {
++        return match ($this->variant) {
 +            'default' => 'text-white bg-blue-500 hover:bg-blue-700',
 +            'success' => 'text-white bg-green-600 hover:bg-green-700',
 +            'danger' => 'text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 focus:outline-none',
-+            default => throw new \LogicException(sprintf('Unknown button type "%s"', $this->type)),
++            default => throw new \LogicException(sprintf('Unknown button type "%s"', $this->variant)),
 +        };
 +    }
  }
 diff --git a/templates/components/Button.html.twig b/templates/components/Button.html.twig
-index b9c798b..c884707 100644
+index f17cf71..5d1af9a 100644
 --- a/templates/components/Button.html.twig
 +++ b/templates/components/Button.html.twig
 @@ -1,3 +1,3 @@
  <button {{ attributes.defaults({
 -    class: 'px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700',
--}) }}>{{ type }}{% block content %}{% endblock %}</button>
-+    class: 'px-4 py-2 border border-transparent text-sm font-medium rounded-md '~this.typeClasses,
+-}) }}>{{ variant }}{% block content %}{% endblock %}</button>
++    class: 'px-4 py-2 border border-transparent text-sm font-medium rounded-md '~this.variantClasses,
 +}) }}>{% block content %}{% endblock %}</button>
 diff --git a/templates/voyage/_delete_form.html.twig b/templates/voyage/_delete_form.html.twig
-index 4160998..017566c 100644
+index c8d8072..4fb61eb 100644
 --- a/templates/voyage/_delete_form.html.twig
 +++ b/templates/voyage/_delete_form.html.twig
 @@ -1,7 +1,7 @@
  <form method="post" action="{{ path('app_voyage_delete', {'id': voyage.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
      <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ voyage.id) }}">
  
--    <twig:Button type="danger" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 focus:outline-none">
-+    <twig:Button type="danger">
+-    <twig:Button variant="danger" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 focus:outline-none">
++    <twig:Button variant="danger">
          Delete
      </twig:Button>
  </form>

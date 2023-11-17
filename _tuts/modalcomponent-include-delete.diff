@@ -1,5 +1,5 @@
 diff --git a/src/Twig/Components/Button.php b/src/Twig/Components/Button.php
-index 6ba41f2..47f587a 100644
+index 1fe4dab..0316d9d 100644
 --- a/src/Twig/Components/Button.php
 +++ b/src/Twig/Components/Button.php
 @@ -16,6 +16,7 @@ class Button
@@ -7,11 +7,11 @@ index 6ba41f2..47f587a 100644
              'success' => 'text-white bg-green-600 hover:bg-green-700',
              'danger' => 'text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 focus:outline-none',
 +            'link' => 'text-white',
-             default => throw new \LogicException(sprintf('Unknown button type "%s"', $this->type)),
+             default => throw new \LogicException(sprintf('Unknown button type "%s"', $this->variant)),
          };
      }
 diff --git a/templates/voyage/_delete_form.html.twig b/templates/voyage/_delete_form.html.twig
-index 017566c..57948c1 100644
+index 4fb61eb..f48201c 100644
 --- a/templates/voyage/_delete_form.html.twig
 +++ b/templates/voyage/_delete_form.html.twig
 @@ -1,4 +1,4 @@
@@ -19,9 +19,9 @@ index 017566c..57948c1 100644
 +<form method="post" action="{{ path('app_voyage_delete', {'id': voyage.id}) }}">
      <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ voyage.id) }}">
  
-     <twig:Button type="danger">
+     <twig:Button variant="danger">
 diff --git a/templates/voyage/_row.html.twig b/templates/voyage/_row.html.twig
-index 26baaca..3bd2912 100644
+index 26baaca..44e0d5e 100644
 --- a/templates/voyage/_row.html.twig
 +++ b/templates/voyage/_row.html.twig
 @@ -24,6 +24,13 @@
@@ -31,7 +31,7 @@ index 26baaca..3bd2912 100644
 +
 +            <div class="flex justify-between">
 +                <form method="dialog">
-+                    <twig:Button type="link">Cancel</twig:Button>
++                    <twig:Button variant="link">Cancel</twig:Button>
 +                </form>
 +                {{ include('voyage/_delete_form.html.twig') }}
 +            </div>

@@ -1,0 +1,33 @@
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index 58d5195..df257e4 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -42,16 +42,18 @@
+                 {{ stimulus_controller('autosubmit') }}
+                 data-turbo-frame="voyage-list"
+             >
+-                <input
+-                    type="search"
+-                    name="query"
+-                    value="{{ app.request.query.get('query') }}"
+-                    aria-label="Search voyages"
+-                    placeholder="Search voyages"
+-                    class="w-1/3 px-4 py-2 rounded bg-gray-800 text-white placeholder-gray-400"
+-                    {{ stimulus_action('autosubmit', 'debouncedSubmit') }}
+-                    autofocus
+-                >
++                <div class="w-1/3 flex">
++                    <input
++                        type="search"
++                        name="query"
++                        value="{{ app.request.query.get('query') }}"
++                        aria-label="Search voyages"
++                        placeholder="Search voyages"
++                        class="px-4 py-2 rounded bg-gray-800 text-white placeholder-gray-400"
++                        {{ stimulus_action('autosubmit', 'debouncedSubmit') }}
++                        autofocus
++                    >
++                </div>
+                 <div class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
+             </form>
+             <turbo-frame id="voyage-list" data-turbo-action="advance">

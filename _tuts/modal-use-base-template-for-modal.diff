@@ -1,0 +1,39 @@
+diff --git a/templates/modalBase.html.twig b/templates/modalBase.html.twig
+new file mode 100644
+index 0000000..d0fa31c
+--- /dev/null
++++ b/templates/modalBase.html.twig
+@@ -0,0 +1 @@
++{% extends app.request.headers.get('turbo-frame') == 'modal' ? 'modalFrame.html.twig' : 'base.html.twig' %}
+diff --git a/templates/modalFrame.html.twig b/templates/modalFrame.html.twig
+new file mode 100644
+index 0000000..1875037
+--- /dev/null
++++ b/templates/modalFrame.html.twig
+@@ -0,0 +1,3 @@
++<turbo-frame id="modal">
++    {% block body %}{% endblock %}
++</turbo-frame>
+diff --git a/templates/voyage/new.html.twig b/templates/voyage/new.html.twig
+index 90e254f..f509c42 100644
+--- a/templates/voyage/new.html.twig
++++ b/templates/voyage/new.html.twig
+@@ -1,9 +1,8 @@
+-{% extends 'base.html.twig' %}
++{% extends 'modalBase.html.twig' %}
+ 
+ {% block title %}New Voyage{% endblock %}
+ 
+ {% block body %}
+-    <turbo-frame id="modal" target="_top">
+     <div class="m-4 p-4 bg-gray-800 rounded-lg">
+         <div class="flex justify-between">
+             <h1 class="text-xl font-semibold text-white mb-4">Create New Voyage</h1>
+@@ -21,7 +20,6 @@
+         </div>
+         {{ include('voyage/_form.html.twig') }}
+     </div>
+-    </turbo-frame>
+ {% endblock %}
+ 
+ {% block success_stream %}

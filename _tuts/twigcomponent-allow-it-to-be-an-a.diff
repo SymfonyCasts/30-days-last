@@ -1,23 +1,23 @@
 diff --git a/src/Twig/Components/Button.php b/src/Twig/Components/Button.php
-index 45915ce..6ba41f2 100644
+index 040302e..1fe4dab 100644
 --- a/src/Twig/Components/Button.php
 +++ b/src/Twig/Components/Button.php
 @@ -8,6 +8,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
  class Button
  {
-     public string $type = 'default';
+     public string $variant = 'default';
 +    public string $tag = 'button';
  
-     public function getTypeClasses(): string
+     public function getVariantClasses(): string
      {
 diff --git a/templates/components/Button.html.twig b/templates/components/Button.html.twig
-index c884707..a2230cd 100644
+index 5d1af9a..91da0ef 100644
 --- a/templates/components/Button.html.twig
 +++ b/templates/components/Button.html.twig
 @@ -1,3 +1,3 @@
 -<button {{ attributes.defaults({
 +<{{ tag }} {{ attributes.defaults({
-     class: 'px-4 py-2 border border-transparent text-sm font-medium rounded-md '~this.typeClasses,
+     class: 'px-4 py-2 border border-transparent text-sm font-medium rounded-md '~this.variantClasses,
 -}) }}>{% block content %}{% endblock %}</button>
 +}) }}>{% block content %}{% endblock %}</{{ tag }}>
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig

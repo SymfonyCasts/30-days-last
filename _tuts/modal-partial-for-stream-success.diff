@@ -14,7 +14,7 @@ index 0000000..1f95c64
 +    <template></template>
 +</turbo-stream>
 diff --git a/templates/voyage/new.html.twig b/templates/voyage/new.html.twig
-index 9de7044..dba14ec 100644
+index d06c0eb..f2b54b1 100644
 --- a/templates/voyage/new.html.twig
 +++ b/templates/voyage/new.html.twig
 @@ -23,25 +23,17 @@

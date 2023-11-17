@@ -1,0 +1,109 @@
+diff --git a/src/Controller/MainController.php b/src/Controller/MainController.php
+index ecef2f4..8865ce3 100644
+--- a/src/Controller/MainController.php
++++ b/src/Controller/MainController.php
+@@ -17,13 +17,15 @@ class MainController extends AbstractController
+     public function homepage(VoyageRepository $voyageRepository, PlanetRepository $planetRepository, Request $request): Response
+     {
+         $query = $request->query->get('query');
++        $searchPlanets = $request->query->all()['planets'] ?? [];
++        $searchPlanets = is_array($searchPlanets) ? $searchPlanets : [$searchPlanets];
+         $sort = $request->query->get('sort', 'leaveAt');
+         $sortDirection = $request->query->get('sortDirection', 'ASC');
+         $validSorts = ['purpose', 'leaveAt'];
+         $sort = in_array($sort, $validSorts) ? $sort : 'leaveAt';
+ 
+         $pager = Pagerfanta::createForCurrentPageWithMaxPerPage(
+-            new QueryAdapter($voyageRepository->findBySearchQueryBuilder($query, $sort, $sortDirection)),
++            new QueryAdapter($voyageRepository->findBySearchQueryBuilder($query, $searchPlanets, $sort, $sortDirection)),
+             $request->query->getInt('page', 1),
+             10
+         );
+@@ -31,6 +33,7 @@ class MainController extends AbstractController
+         return $this->render('main/homepage.html.twig', [
+             'voyages' => $pager,
+             'planets' => $planetRepository->findAll(),
++            'searchPlanets' => $searchPlanets,
+             'sort' => $sort,
+             'sortDirection' => $sortDirection,
+         ]);
+diff --git a/src/Repository/VoyageRepository.php b/src/Repository/VoyageRepository.php
+index ce3f2fd..6e773e6 100644
+--- a/src/Repository/VoyageRepository.php
++++ b/src/Repository/VoyageRepository.php
+@@ -32,7 +32,7 @@ class VoyageRepository extends ServiceEntityRepository
+             ->getResult();
+     }
+ 
+-    public function findBySearchQueryBuilder(?string $query, ?string $sort = null, string $direction = 'DESC'): QueryBuilder
++    public function findBySearchQueryBuilder(?string $query, array $searchPlanets, ?string $sort = null, string $direction = 'DESC'): QueryBuilder
+     {
+         $qb = $this->createQueryBuilder('v');
+ 
+@@ -41,6 +41,11 @@ class VoyageRepository extends ServiceEntityRepository
+                 ->setParameter('query', '%' . $query . '%');
+         }
+ 
++        if ($searchPlanets) {
++            $qb->andWhere('v.planet IN (:planets)')
++                ->setParameter('planets', $searchPlanets);
++        }
++
+         if ($sort) {
+             $qb->orderBy('v.' . $sort, $direction);
+         }
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index df257e4..6025280 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -53,6 +53,50 @@
+                         {{ stimulus_action('autosubmit', 'debouncedSubmit') }}
+                         autofocus
+                     >
++
++                    <twig:Modal>
++                        <twig:block name="trigger">
++                            <twig:Button
++                                variant="link"
++                                type="button"
++                                data-action="modal#open"
++                            >Options</twig:Button>
++                        </twig:block>
++
++                        <div class="flex justify-between">
++                            <h3 class="text-white text-lg font-semibold mb-2">Search Options</h3>
++
++                            <twig:Button
++                                variant="link"
++                                type="button"
++                                data-action="modal#close"
++                            >X</twig:Button>
++                        </div>
++                        <hr class="mb-4">
++                        <h4 class="text-white text-sm font-semibold mb-2">
++                            Planets
++                        </h4>
++                        {% for planet in planets %}
++                            <div class="flex items-center mb-4">
++                                <input
++                                    type="checkbox"
++                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
++                                    name="planets[]"
++                                    value="{{ planet.id }}"
++                                    id="planet-search-{{ planet.id }}"
++                                    {{ planet.id in searchPlanets ? 'checked' : '' }}
++                                >
++                                <label for="planet-search-{{ planet.id }}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ planet.name }}</label>
++                            </div>
++                        {% endfor %}
++
++                        <div class="flex justify-end">
++                            <twig:Button
++                                variant="success"
++                                data-action="autosubmit#submit modal#close"
++                            >See Results</twig:Button>
++                        </div>
++                    </twig:Modal>
+                 </div>
+                 <div class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
+             </form>

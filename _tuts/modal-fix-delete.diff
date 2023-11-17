@@ -25,21 +25,12 @@ index 8481265..7072bea 100644
          return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
 diff --git a/templates/voyage/delete.html.twig b/templates/voyage/delete.html.twig
 new file mode 100644
-index 0000000..dc91965
+index 0000000..95771df
 --- /dev/null
 +++ b/templates/voyage/delete.html.twig
-@@ -0,0 +1,14 @@
+@@ -0,0 +1,5 @@
 +{% block success_stream %}
-+    <turbo-stream action="append" target="flash-container">
-+        <template>
-+            {{ include('_flashes.html.twig') }}
-+        </template>
-+    </turbo-stream>
++    {{ include('_streamSuccess.html.twig') }}
 +
-+    <turbo-stream action="update" target="modal">
-+        <template></template>
-+    </turbo-stream>
-+
-+    <turbo-stream action="remove" target="voyage-list-item-{{ id }}">
-+    </turbo-stream>
++    <turbo-stream action="remove" target="voyage-list-item-{{ id }}"></turbo-stream>
 +{% endblock %}

@@ -15,7 +15,7 @@ index 1ba68b3..d376ea1 100644
      </td>
  </tr>
 diff --git a/templates/voyage/edit.html.twig b/templates/voyage/edit.html.twig
-index 81e13f9..ccb99c7 100644
+index 81e13f9..0c0467e 100644
 --- a/templates/voyage/edit.html.twig
 +++ b/templates/voyage/edit.html.twig
 @@ -3,7 +3,7 @@
@@ -27,7 +27,7 @@ index 81e13f9..ccb99c7 100644
          <div class="flex justify-between">
              <h1 class="text-xl font-semibold text-white mb-4">Edit Voyage</h1>
  
-@@ -20,7 +20,7 @@
+@@ -20,13 +20,9 @@
          </div>
  
          {{ include('voyage/_form.html.twig') }}
@@ -36,12 +36,10 @@ index 81e13f9..ccb99c7 100644
  {% endblock %}
  
  {% block success_stream %}
-@@ -29,4 +29,8 @@
-             {{ include('_flashes.html.twig') }}
-         </template>
-     </turbo-stream>
-+
-+    <turbo-stream action="update" target="modal">
-+        <template></template>
-+    </turbo-stream>
+-    <turbo-stream action="append" target="flash-container">
+-        <template>
+-            {{ include('_flashes.html.twig') }}
+-        </template>
+-    </turbo-stream>
++    {{ include('_streamSuccess.html.twig') }}
  {% endblock %}

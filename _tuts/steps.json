@@ -601,13 +601,18 @@
             "description": null
         },
         {
-            "id": "delete-me-2",
-            "name": "delete me 2",
+            "id": "modal-partial-for-stream-success",
+            "name": "Modal: partial for stream success",
             "description": null
         },
         {
             "id": "modal-load-immediately",
             "name": "Modal: Load immediately",
+            "description": null
+        },
+        {
+            "id": "modal-set-min-width-on-modal",
+            "name": "Modal: Set min-width on modal",
             "description": null
         },
         {
@@ -714,7 +719,42 @@
             "id": "modalcomponent-extract-turbo-frame-into-block",
             "name": "ModalComponent: Extract turbo-frame into block",
             "description": null
+        },
+        {
+            "id": "modalcomponent-extract-loading",
+            "name": "ModalComponent: Extract loading",
+            "description": null
+        },
+        {
+            "id": "modalcomponent-duplicate-for-edit-link",
+            "name": "ModalComponent: Duplicate for edit link",
+            "description": null
+        },
+        {
+            "id": "modalcomponent-tweak-to-say-delete",
+            "name": "ModalComponent: Tweak to say delete",
+            "description": null
+        },
+        {
+            "id": "modalcomponent-render-a-modal",
+            "name": "ModalComponent: Render a modal",
+            "description": null
+        },
+        {
+            "id": "modalcomponent-open-on-click",
+            "name": "ModalComponent: Open on click",
+            "description": null
+        },
+        {
+            "id": "modalcomponent-allow-small-size",
+            "name": "ModalComponent: Allow small size",
+            "description": null
+        },
+        {
+            "id": "modalcomponent-include-delete",
+            "name": "ModalComponent: Include delete",
+            "description": null
         }
     ],
-    "sha": "73360ae30b43a1600203ab96a828185869094a2c"
+    "sha": "10a84a22b6f4b05d1e2f7f86c15e8a6e18c35f32"
 }

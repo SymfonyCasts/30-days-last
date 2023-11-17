@@ -1,5 +1,5 @@
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index 5adffc6..284fa69 100644
+index 5adffc6..8211ffd 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
 @@ -15,8 +15,32 @@
@@ -10,7 +10,7 @@ index 5adffc6..284fa69 100644
 -            I am a dialog!
 +        <dialog
 +            open
-+            class="open:flex bg-gray-800 rounded-lg shadow-xl inset-0 w-full lg:w-1/2"
++            class="open:flex bg-gray-800 rounded-lg shadow-xl inset-0 w-full md:w-fit md:max-w-[50%]"
 +        >
 +            <div class="flex grow p-5">
 +                <div class="grow overflow-auto p-1">

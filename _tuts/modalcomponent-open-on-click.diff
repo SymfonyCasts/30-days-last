@@ -1,0 +1,46 @@
+diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
+index fe22ea2..1dfbab9 100644
+--- a/templates/components/Modal.html.twig
++++ b/templates/components/Modal.html.twig
+@@ -2,6 +2,8 @@
+     {{ stimulus_controller('modal') }}
+     {{ stimulus_action('modal', 'clickOutside', 'click') }}
+ >
++    {% block trigger %}{% endblock %}
++
+     <dialog
+         class="open:flex bg-gray-800 rounded-lg shadow-xl inset-0 w-full md:w-fit md:max-w-[50%] md:min-w-[50%] animate-fade-in backdrop:bg-slate-600 backdrop:opacity-80"
+         {{ stimulus_target('modal', 'dialog') }}
+diff --git a/templates/voyage/_row.html.twig b/templates/voyage/_row.html.twig
+index 43ca5b1..83706ea 100644
+--- a/templates/voyage/_row.html.twig
++++ b/templates/voyage/_row.html.twig
+@@ -2,18 +2,23 @@
+     <td class="px-6 py-4 whitespace-nowrap">{{ voyage.id }}</td>
+     <td class="px-6 py-4">{{ voyage.purpose }}</td>
+     <td class="px-6 py-4 whitespace-nowrap">{{ voyage.leaveAt ? voyage.leaveAt|date('Y-m-d H:i:s') : '' }}</td>
+-    <td class="px-6 py-4 whitespace-nowrap">
++    <td class="px-6 py-4 whitespace-nowrap flex">
+         <a href="{{ path('app_voyage_show', {'id': voyage.id}) }}" class="text-blue-400 hover:text-blue-600">show</a>
+         <a
+             href="{{ path('app_voyage_edit', {'id': voyage.id}) }}"
+             class="ml-4 text-yellow-400 hover:text-yellow-600"
+             data-turbo-frame="modal"
+         >edit</a>
+-        <button
+-            class="ml-4 text-red-400 hover:text-red-600"
+-            data-turbo-frame="modal"
+-        >delete</button>
++
+         <twig:Modal>
++            <twig:block name="trigger">
++                <button
++                    class="ml-4 text-red-400 hover:text-red-600"
++                    data-turbo-frame="modal"
++                    {{ stimulus_action('modal', 'open') }}
++                >delete</button>
++            </twig:block>
++
+             <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 9v4" /><path d="M12 16v.01" /></svg>
+ 
+             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">

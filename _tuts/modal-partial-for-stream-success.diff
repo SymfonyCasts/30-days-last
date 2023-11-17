@@ -1,0 +1,47 @@
+diff --git a/templates/_streamSuccess.html.twig b/templates/_streamSuccess.html.twig
+new file mode 100644
+index 0000000..1f95c64
+--- /dev/null
++++ b/templates/_streamSuccess.html.twig
+@@ -0,0 +1,9 @@
++<turbo-stream action="append" target="flash-container">
++    <template>
++        {{ include('_flashes.html.twig') }}
++    </template>
++</turbo-stream>
++
++<turbo-stream action="update" targets="dialog[open] [data-modal-target=modalContent]">
++    <template></template>
++</turbo-stream>
+diff --git a/templates/voyage/new.html.twig b/templates/voyage/new.html.twig
+index 9de7044..dba14ec 100644
+--- a/templates/voyage/new.html.twig
++++ b/templates/voyage/new.html.twig
+@@ -23,25 +23,17 @@
+ {% endblock %}
+ 
+ {% block success_stream %}
++    {{ include('_streamSuccess.html.twig') }}
++
+     <turbo-stream action="replace" target="voyage-form">
+         <template>
+             {{ include('voyage/_form.html.twig') }}
+         </template>
+     </turbo-stream>
+ 
+-    <turbo-stream action="append" target="flash-container">
+-        <template>
+-            {{ include('_flashes.html.twig') }}
+-        </template>
+-    </turbo-stream>
+-
+     <turbo-stream action="prepend" targets="#voyage-list tbody">
+         <template>
+             {{ include('voyage/_row.html.twig') }}
+         </template>
+     </turbo-stream>
+-
+-    <turbo-stream action="update" targets="dialog[open] [data-modal-target=modalContent]">
+-        <template></template>
+-    </turbo-stream>
+ {% endblock %}

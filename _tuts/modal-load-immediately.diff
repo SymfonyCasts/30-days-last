@@ -1,5 +1,5 @@
 diff --git a/assets/controllers/modal_controller.js b/assets/controllers/modal_controller.js
-index d3fd556..86dfbf7 100644
+index d3784e8..37ef547 100644
 --- a/assets/controllers/modal_controller.js
 +++ b/assets/controllers/modal_controller.js
 @@ -1,7 +1,7 @@
@@ -11,7 +11,7 @@ index d3fd556..86dfbf7 100644
  
      observer = null;
  
-@@ -39,4 +39,13 @@ export default class extends Controller {
+@@ -42,4 +42,13 @@ export default class extends Controller {
              this.dialogTarget.close();
          }
      }
@@ -38,7 +38,7 @@ index 47acff2..23b9290 100644
          if ($form->isSubmitted() && $form->isValid()) {
              $entityManager->persist($voyage);
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index ce194d0..f6fcb52 100644
+index 540d58d..850ab23 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -66,10 +66,30 @@

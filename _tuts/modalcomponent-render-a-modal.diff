@@ -1,0 +1,17 @@
+diff --git a/templates/voyage/_row.html.twig b/templates/voyage/_row.html.twig
+index cbaac24..43ca5b1 100644
+--- a/templates/voyage/_row.html.twig
++++ b/templates/voyage/_row.html.twig
+@@ -13,5 +13,12 @@
+             class="ml-4 text-red-400 hover:text-red-600"
+             data-turbo-frame="modal"
+         >delete</button>
++        <twig:Modal>
++            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 9v4" /><path d="M12 16v.01" /></svg>
++
++            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
++                Delete this thrilling voyage???
++            </h3>
++        </twig:Modal>
+     </td>
+ </tr>

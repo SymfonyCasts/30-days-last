@@ -24,13 +24,13 @@ index d376ea1..beca337 100644
      <td class="px-6 py-4">{{ voyage.purpose }}</td>
      <td class="px-6 py-4 whitespace-nowrap">{{ voyage.leaveAt ? voyage.leaveAt|date('Y-m-d H:i:s') : '' }}</td>
 diff --git a/templates/voyage/edit.html.twig b/templates/voyage/edit.html.twig
-index ccb99c7..f34f7ac 100644
+index 0c0467e..c9621fa 100644
 --- a/templates/voyage/edit.html.twig
 +++ b/templates/voyage/edit.html.twig
-@@ -33,4 +33,8 @@
-     <turbo-stream action="update" target="modal">
-         <template></template>
-     </turbo-stream>
+@@ -25,4 +25,8 @@
+ 
+ {% block success_stream %}
+     {{ include('_streamSuccess.html.twig') }}
 +
 +    <turbo-stream action="replace" target="voyage-list-item-{{ voyage.id }}">
 +        <template>{{ include('voyage/_row.html.twig') }}</template>

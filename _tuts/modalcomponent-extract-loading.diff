@@ -1,0 +1,55 @@
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index 9f1091a..46b2f47 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -63,6 +63,21 @@
+                     {{ stimulus_action('modal', 'showLoading', 'turbo:before-fetch-request') }}
+                 ></turbo-frame>
+             </twig:block>
++            <twig:block name="loading_template">
++                <div class="bg-space-pattern bg-cover rounded-lg p-8">
++                    <div class="space-y-2">
++                        <div class="h-4 bg-gray-700 rounded w-3/4 animate-pulse"></div>
++                        <div class="h-4 bg-gray-700 rounded animate-pulse"></div>
++                        <div class="h-4 bg-gray-700 rounded animate-pulse"></div>
++                        <div class="h-4"></div>
++                        <div class="h-4 bg-gray-700 rounded animate-pulse"></div>
++                        <div class="h-4 bg-gray-700 rounded w-1/2 animate-pulse"></div>
++                        <div class="h-4 bg-gray-700 rounded w-3/4 animate-pulse"></div>
++                        <div class="h-4"></div>
++                        <div class="h-4 bg-gray-700 rounded w-1/2 animate-pulse"></div>
++                    </div>
++                </div>
++            </twig:block>
+         </twig:Modal>
+     </body>
+ </html>
+diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
+index fd38b65..fe22ea2 100644
+--- a/templates/components/Modal.html.twig
++++ b/templates/components/Modal.html.twig
+@@ -18,19 +18,9 @@
+         </div>
+     </dialog>
+ 
+-    <template {{ stimulus_target('modal', 'loadingTemplate') }}>
+-        <div class="bg-space-pattern bg-cover rounded-lg p-8">
+-            <div class="space-y-2">
+-                <div class="h-4 bg-gray-700 rounded w-3/4 animate-pulse"></div>
+-                <div class="h-4 bg-gray-700 rounded animate-pulse"></div>
+-                <div class="h-4 bg-gray-700 rounded animate-pulse"></div>
+-                <div class="h-4"></div>
+-                <div class="h-4 bg-gray-700 rounded animate-pulse"></div>
+-                <div class="h-4 bg-gray-700 rounded w-1/2 animate-pulse"></div>
+-                <div class="h-4 bg-gray-700 rounded w-3/4 animate-pulse"></div>
+-                <div class="h-4"></div>
+-                <div class="h-4 bg-gray-700 rounded w-1/2 animate-pulse"></div>
+-            </div>
+-        </div>
+-    </template>
++    {% if block('loading_template') %}
++        <template {{ stimulus_target('modal', 'loadingTemplate') }}>
++            {% block loading_template %}{% endblock %}
++        </template>
++    {% endif %}
+ </div>

@@ -1,8 +1,8 @@
 diff --git a/assets/controllers/modal_controller.js b/assets/controllers/modal_controller.js
-index 084b4ea..d3fd556 100644
+index 084b4ea..d3784e8 100644
 --- a/assets/controllers/modal_controller.js
 +++ b/assets/controllers/modal_controller.js
-@@ -1,7 +1,28 @@
+@@ -1,7 +1,31 @@
  import { Controller } from '@hotwired/stimulus';
  
  export default class extends Controller {
@@ -28,12 +28,15 @@ index 084b4ea..d3fd556 100644
 +
 +    disconnect() {
 +        this.observer.disconnect();
++        if (this.dialogTarget.open) {
++            this.close();
++        }
 +    }
  
      open() {
          this.dialogTarget.showModal();
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 2306538..ce194d0 100644
+index 484f175..540d58d 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -66,7 +66,7 @@

@@ -25,9 +25,9 @@ class VoyageRepository extends ServiceEntityRepository
     /**
      * @return Voyage[]
      */
-    public function findBySearch(?string $query): array
+    public function findBySearch(?string $query, array $searchPlanets): array
     {
-        return $this->findBySearchQueryBuilder($query)
+        return $this->findBySearchQueryBuilder($query, $searchPlanets)
             ->getQuery()
             ->getResult();
     }

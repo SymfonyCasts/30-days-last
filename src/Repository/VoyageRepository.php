@@ -25,9 +25,15 @@ class VoyageRepository extends ServiceEntityRepository
     /**
      * @return Voyage[]
      */
-    public function findBySearch(?string $query, array $searchPlanets): array
+    public function findBySearch(?string $query, array $searchPlanets, int $limit = null): array
     {
-        return $this->findBySearchQueryBuilder($query, $searchPlanets)
+        $qb =  $this->findBySearchQueryBuilder($query, $searchPlanets);
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb
             ->getQuery()
             ->getResult();
     }

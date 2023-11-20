@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Space Inviters!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ importmap('app') }}
+        {% endblock %}
+    </head>
+    <body class="bg-black text-white font-mono">
+        <div class="container mx-auto min-h-screen flex flex-col">
+            <header class="my-8 px-4">
+                <nav class="flex items-center justify-between mb-4">
+                    <div class="flex items-center">
+                        <a href="{{ path('app_homepage') }}">
+                            <img src="{{ asset('images/logo.png') }}" width="50" alt="Space Inviters Logo" >
+                        </a>
+                        <a href="{{ path('app_homepage') }}" class="text-xl ml-3">Space Inviters</a>
+                        <a href="{{ path('app_voyage_index') }}" class="ml-6 hover:text-gray-400">Voyages</a>
+                        <a href="{{ path('app_planet_index') }}" class="ml-4 hover:text-gray-400">Planets</a>
+                    </div>
+                    <div
+                        class="hidden md:flex pr-10 items-center space-x-2 border-2 border-gray-900 rounded-lg p-2 bg-gray-800 text-white cursor-pointer"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
+                        <span class="pl-2 pr-10 text-gray-500">Search Cmd+K</span>
+                    </div>
+                </nav>
+            </header>
+
+            <!-- Make sure the main tag takes up the remaining height -->
+            <main class="flex-grow">{% block body %}{% endblock %}</main>
+
+            <!-- Footer -->
+            <footer class="py-4 mt-6 bg-gray-800 text-center">
+                <div class="text-sm">
+                    With <svg class="inline-block w-4 h-4 text-red-600 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 3.22l-.61-.6a5.5 5.5 0 00-7.78 7.78l7.39 7.4 7.39-7.4a5.5 5.5 0 00-7.78-7.78l-.61.61z"/></svg> from Symfonycasts.
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

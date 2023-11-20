@@ -1,0 +1,21 @@
+<ul>
+    {% for planet in planets %}
+        <li class="mb-4 group">
+            <a href="{{ path('app_planet_show', {
+                'id': planet.id,
+            }) }}" class="block transform transition duration-300 ease-in-out hover:translate-x-1 hover:bg-gray-700 rounded">
+                <div class="flex justify-between items-start p-2">
+                    <div class="pr-3">
+                        <span class="text-white">{{ planet.name }}</span>
+                        <span class="block text-gray-400 text-sm">{{ planet.lightYearsFromEarth|round|number_format }} light years</span>
+                    </div>
+                    <img
+                        class="flex-shrink-0 w-8 h-8 bg-gray-600 rounded-full group-hover:bg-gray-500 transition duration-300 ease-in-out"
+                        src="#"
+                        alt="Image of {{ planet.name }}"
+                    >
+                </div>
+            </a>
+        </li>
+    {% endfor %}
+</ul>

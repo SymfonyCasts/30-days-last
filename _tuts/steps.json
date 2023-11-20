@@ -874,7 +874,37 @@
             "id": "livecomponents-cmd-k-to-open",
             "name": "LiveComponents: Cmd+k to open",
             "description": null
+        },
+        {
+            "id": "autovalidation-create-voyageform-component",
+            "name": "AutoValidation: Create VoyageForm component",
+            "description": null
+        },
+        {
+            "id": "autovalidation-render-attributes",
+            "name": "AutoValidation: Render attributes",
+            "description": null
+        },
+        {
+            "id": "delete-me-6",
+            "name": "delete me 6",
+            "description": null
+        },
+        {
+            "id": "autovalidation-convert-to-live-component",
+            "name": "AutoValidation: Convert to live component",
+            "description": null
+        },
+        {
+            "id": "autovalidation-use-componentwithformtrait",
+            "name": "AutoValidation: Use ComponentWithFormTrait",
+            "description": null
+        },
+        {
+            "id": "autovalidation-pass-in-initial-data",
+            "name": "AutoValidation: Pass in initial data",
+            "description": null
         }
     ],
-    "sha": "95ba096fc6c18315ce1c9e50b145913e7e3f2428"
+    "sha": "28077c1b02ad0107c2c38cec65b54006605e81b0"
 }

@@ -1,0 +1,47 @@
+diff --git a/src/Twig/Components/VoyageForm.php b/src/Twig/Components/VoyageForm.php
+index 11f27bf..9d0c1f5 100644
+--- a/src/Twig/Components/VoyageForm.php
++++ b/src/Twig/Components/VoyageForm.php
+@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+ use Symfony\Component\Form\FormInterface;
+ use Symfony\Component\Form\FormView;
+ use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
++use Symfony\UX\LiveComponent\Attribute\LiveProp;
+ use Symfony\UX\LiveComponent\ComponentWithFormTrait;
+ use Symfony\UX\LiveComponent\DefaultActionTrait;
+ 
+@@ -17,9 +18,12 @@ class VoyageForm extends AbstractController
+     use DefaultActionTrait;
+     use ComponentWithFormTrait;
+ 
++    #[LiveProp]
++    public ?Voyage $initialFormData = null;
++
+     protected function instantiateForm(): FormInterface
+     {
+-        $voyage = $voyage ?? new Voyage();
++        $voyage = $this->initialFormData ?? new Voyage();
+ 
+         return $this->createForm(VoyageType::class, $voyage, [
+             'action' => $voyage->getId() ? $this->generateUrl('app_voyage_edit', ['id' => $voyage->getId()]) : $this->generateUrl('app_voyage_new'),
+diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
+index c4faeaf..95ec553 100644
+--- a/templates/voyage/_form.html.twig
++++ b/templates/voyage/_form.html.twig
+@@ -1,3 +1,3 @@
+ <turbo-frame id="voyage-form" class="aria-busy:opacity-50">
+-    <twig:VoyageForm :form="form" />
++    <twig:VoyageForm :form="form" :initialFormData="voyage" />
+ </turbo-frame>
+diff --git a/templates/voyage/new.html.twig b/templates/voyage/new.html.twig
+index 53de426..53fa530 100644
+--- a/templates/voyage/new.html.twig
++++ b/templates/voyage/new.html.twig
+@@ -18,6 +18,7 @@
+                 </div>
+             </div>
+         </div>
++
+         {{ include('voyage/_form.html.twig') }}
+     </div>
+ {% endblock %}

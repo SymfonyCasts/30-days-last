@@ -1,0 +1,54 @@
+diff --git a/src/Twig/Components/VoyageForm.php b/src/Twig/Components/VoyageForm.php
+new file mode 100644
+index 0000000..f2c113f
+--- /dev/null
++++ b/src/Twig/Components/VoyageForm.php
+@@ -0,0 +1,12 @@
++<?php
++
++namespace App\Twig\Components;
++
++use Symfony\Component\Form\FormView;
++use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
++
++#[AsTwigComponent]
++class VoyageForm
++{
++    public FormView $form;
++}
+diff --git a/templates/components/VoyageForm.html.twig b/templates/components/VoyageForm.html.twig
+new file mode 100644
+index 0000000..4c2f90d
+--- /dev/null
++++ b/templates/components/VoyageForm.html.twig
+@@ -0,0 +1,11 @@
++{{ form_start(form) }}
++    {{ form_widget(form) }}
++
++    <twig:Button
++        formnovalidate
++        variant="success"
++        class="hover:animate-wiggle"
++    >
++        {{ button_label|default('Save') }}
++    </twig:Button>
++{{ form_end(form) }}
+diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
+index a556d4f..c4faeaf 100644
+--- a/templates/voyage/_form.html.twig
++++ b/templates/voyage/_form.html.twig
+@@ -1,13 +1,3 @@
+ <turbo-frame id="voyage-form" class="aria-busy:opacity-50">
+-    {{ form_start(form) }}
+-        {{ form_widget(form) }}
+-
+-        <twig:Button
+-            formnovalidate
+-            variant="success"
+-            class="hover:animate-wiggle"
+-        >
+-            {{ button_label|default('Save') }}
+-        </twig:Button>
+-    {{ form_end(form) }}
++    <twig:VoyageForm :form="form" />
+ </turbo-frame>

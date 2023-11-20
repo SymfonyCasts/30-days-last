@@ -8,17 +8,18 @@ index 6f849fa..e4088eb 100644
 +    class: 'px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700',
 +}) }}>{% block content %}{% endblock %}</button>
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index 8be3b36..512d6ff 100644
+index 34baaa4..17ed6b6 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
-@@ -2,9 +2,7 @@
+@@ -2,10 +2,7 @@
      {{ form_start(form) }}
          {{ form_widget(form) }}
  
 -        <twig:Button
+-            formnovalidate
 -            class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
 -        >
-+        <twig:Button>
++        <twig:Button formnovalidate>
              {{ button_label|default('Save') }}
          </twig:Button>
      {{ form_end(form) }}

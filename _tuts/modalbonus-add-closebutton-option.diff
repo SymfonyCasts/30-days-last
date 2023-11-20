@@ -24,7 +24,7 @@ index 34b7ff9..d11ec65 100644
  
      {% if block('loading_template') %}
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index dc001cd..d101e03 100644
+index 8a48177..d3af020 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -55,7 +55,7 @@

@@ -1,5 +1,5 @@
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 03f8b50..ff4e080 100644
+index 03f8b50..7f10908 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -43,16 +43,18 @@
@@ -23,7 +23,7 @@ index 03f8b50..ff4e080 100644
 +                        value="{{ app.request.query.get('query') }}"
 +                        aria-label="Search voyages"
 +                        placeholder="Search voyages"
-+                        class="w-1/3 px-4 py-2 rounded bg-gray-800 text-white placeholder-gray-400"
++                        class="px-4 py-2 rounded bg-gray-800 text-white placeholder-gray-400"
 +                        data-action="autosubmit#debouncedSubmit"
 +                        autofocus
 +                    >

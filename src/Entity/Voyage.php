@@ -83,9 +83,9 @@ class Voyage
         return $this->wormholeUpgrade;
     }
 
-    public function setWormholeUpgrade(bool $wormholeUpgrade): self
+    public function setWormholeUpgrade(?bool $wormholeUpgrade): self
     {
-        $this->wormholeUpgrade = $wormholeUpgrade;
+        $this->wormholeUpgrade = (bool) $wormholeUpgrade;
 
         return $this;
     }

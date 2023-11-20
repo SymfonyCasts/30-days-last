@@ -1,0 +1,20 @@
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index 7ed955e..a921c26 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -29,7 +29,14 @@
+                         <a href="{{ path('app_voyage_index') }}" class="ml-6 hover:text-gray-400">Voyages</a>
+                         <a href="{{ path('app_planet_index') }}" class="ml-4 hover:text-gray-400">Planets</a>
+                     </div>
+-                    <twig:Modal :closeButton="true" padding="" :fixedTop="true" data-turbo-permanent id="global-search-modal">
++                    <twig:Modal
++                        :closeButton="true"
++                        padding=""
++                        :fixedTop="true"
++                        data-turbo-permanent
++                        id="global-search-modal"
++                        data-action="keydown.meta+k@window->modal#open keydown.ctrl+k@window->modal#open"
++                    >
+                         <twig:block name="trigger">
+                             <div
+                                 class="hidden md:flex pr-10 items-center space-x-2 border-2 border-gray-900 rounded-lg p-2 bg-gray-800 text-white cursor-pointer"

@@ -1,8 +1,8 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 9f1091a..46b2f47 100644
+index 09757de..1ba1667 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -63,6 +63,21 @@
+@@ -61,6 +61,21 @@
                      {{ stimulus_action('modal', 'showLoading', 'turbo:before-fetch-request') }}
                  ></turbo-frame>
              </twig:block>
@@ -25,10 +25,10 @@ index 9f1091a..46b2f47 100644
      </body>
  </html>
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index fd38b65..fe22ea2 100644
+index d462f59..4920c4b 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
-@@ -18,19 +18,9 @@
+@@ -20,19 +20,9 @@
          </div>
      </dialog>
  

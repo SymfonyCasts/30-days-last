@@ -741,6 +741,11 @@
             "description": null
         },
         {
+            "id": "modalcomponent-render-attributes-on-root",
+            "name": "ModalComponent: Render attributes on root",
+            "description": null
+        },
+        {
             "id": "modalcomponent-extract-turbo-frame-into-block",
             "name": "ModalComponent: Extract turbo-frame into block",
             "description": null
@@ -776,6 +781,11 @@
             "description": null
         },
         {
+            "id": "delete-me-5",
+            "name": "delete me 5",
+            "description": null
+        },
+        {
             "id": "modalcomponent-include-delete",
             "name": "ModalComponent: Include delete",
             "description": null
@@ -791,10 +801,80 @@
             "description": null
         },
         {
+            "id": "modalbonus-add-closebutton-option",
+            "name": "ModalBonus: Add closeButton option",
+            "description": null
+        },
+        {
             "id": "modalbonus-add-planet-checkboxes",
             "name": "ModalBonus: Add planet checkboxes",
             "description": null
+        },
+        {
+            "id": "livecomponents-add-modal-to-global-search",
+            "name": "LiveComponents: Add modal to global search",
+            "description": null
+        },
+        {
+            "id": "livecomponents-add-in-search",
+            "name": "LiveComponents: Add in search",
+            "description": null
+        },
+        {
+            "id": "livecomponents-specify-click-event",
+            "name": "LiveComponents: Specify click event",
+            "description": null
+        },
+        {
+            "id": "livecomponents-limit-modal-padding",
+            "name": "LiveComponents: Limit modal padding",
+            "description": null
+        },
+        {
+            "id": "livecomponents-create-searchsite-component",
+            "name": "LiveComponents: Create SearchSite component",
+            "description": null
+        },
+        {
+            "id": "livecomponents-show-the-results",
+            "name": "LiveComponents: Show the results",
+            "description": null
+        },
+        {
+            "id": "livecomponents-install-it",
+            "name": "LiveComponents: install it",
+            "description": null
+        },
+        {
+            "id": "livecomponents-change-to-aslivecomponent",
+            "name": "LiveComponents: Change to AsLiveComponent",
+            "description": null
+        },
+        {
+            "id": "livecomponents-connect-the-search-box",
+            "name": "LiveComponents: Connect the search box",
+            "description": null
+        },
+        {
+            "id": "livecomponents-only-results-when-searching",
+            "name": "LiveComponents: Only results when searching",
+            "description": null
+        },
+        {
+            "id": "livecomponents-fixed-to-top-option",
+            "name": "LiveComponents: Fixed to top option",
+            "description": null
+        },
+        {
+            "id": "livecomponents-make-the-search-turbo-permanent",
+            "name": "LiveComponents: Make the search turbo permanent",
+            "description": null
+        },
+        {
+            "id": "livecomponents-cmd-k-to-open",
+            "name": "LiveComponents: Cmd+k to open",
+            "description": null
         }
     ],
-    "sha": "089acd5f6cf1406f6573407c7bccc2267399c5dc"
+    "sha": "4e4d20b69237e88629cd636fd2edf7ae8431a818"
 }

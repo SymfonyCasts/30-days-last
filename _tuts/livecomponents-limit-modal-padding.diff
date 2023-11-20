@@ -1,0 +1,32 @@
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index ea27af3..9aa1a2d 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -29,7 +29,7 @@
+                         <a href="{{ path('app_voyage_index') }}" class="ml-6 hover:text-gray-400">Voyages</a>
+                         <a href="{{ path('app_planet_index') }}" class="ml-4 hover:text-gray-400">Planets</a>
+                     </div>
+-                    <twig:Modal :closeButton="true">
++                    <twig:Modal :closeButton="true" padding="">
+                         <twig:block name="trigger">
+                             <div
+                                 class="hidden md:flex pr-10 items-center space-x-2 border-2 border-gray-900 rounded-lg p-2 bg-gray-800 text-white cursor-pointer"
+diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
+index 4ec349a..2267e1a 100644
+--- a/templates/components/Modal.html.twig
++++ b/templates/components/Modal.html.twig
+@@ -1,4 +1,4 @@
+-{% props allowSmallWidth=false, closeButton=false %}
++{% props allowSmallWidth=false, closeButton=false, padding="p-5" %}
+ <div
+     {{ attributes.defaults({
+         ...stimulus_controller('modal'),
+@@ -12,7 +12,7 @@
+         {{ stimulus_target('modal', 'dialog') }}
+         {{ stimulus_action('modal', 'close', 'close') }}
+     >
+-        <div class="flex grow p-5">
++        <div class="flex grow {{ padding }}">
+             <div class="grow overflow-auto p-1">
+                 {% block full_content %}
+                     <div {{ stimulus_target('modal', 'modalContent') }}>

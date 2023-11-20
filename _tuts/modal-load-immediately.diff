@@ -38,10 +38,10 @@ index 47acff2..23b9290 100644
          if ($form->isSubmitted() && $form->isValid()) {
              $entityManager->persist($voyage);
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 540d58d..850ab23 100644
+index 8276d36..86285d1 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -66,10 +66,30 @@
+@@ -64,10 +64,30 @@
              >
                  <div class="flex grow p-5">
                      <div class="grow overflow-auto p-1">

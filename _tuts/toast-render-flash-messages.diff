@@ -10,10 +10,10 @@ index 0000000..ba82d5e
 +    </div>
 +{% endfor %}
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index b5a74b3..4f33861 100644
+index da0259c..fb400c0 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -50,5 +50,9 @@
+@@ -48,5 +48,9 @@
                  </div>
              </footer>
          </div>

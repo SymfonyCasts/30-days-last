@@ -1,8 +1,8 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 60d61f1..484f175 100644
+index 86549b2..5cce142 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -66,30 +66,10 @@
+@@ -64,30 +64,10 @@
              >
                  <div class="flex grow p-5">
                      <div class="grow overflow-auto p-1">

@@ -1,8 +1,8 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 850ab23..c62bc42 100644
+index 86285d1..b67b8c4 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -60,7 +60,7 @@
+@@ -58,7 +58,7 @@
              {{ stimulus_action('modal', 'clickOutside', 'click') }}
          >
              <dialog

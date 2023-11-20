@@ -1,8 +1,8 @@
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 0643cc2..49274c3 100644
+index 0643cc2..52ec2af 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
-@@ -54,6 +54,34 @@
+@@ -54,6 +54,26 @@
                          {{ stimulus_action('autosubmit', 'debouncedSubmit') }}
                          autofocus
                      >
@@ -16,15 +16,7 @@ index 0643cc2..49274c3 100644
 +                            >Options</twig:Button>
 +                        </twig:block>
 +
-+                        <div class="flex justify-between">
-+                            <h3 class="text-white text-lg font-semibold mb-2">Search Options</h3>
-+
-+                            <twig:Button
-+                                variant="link"
-+                                type="button"
-+                                data-action="modal#close"
-+                            >X</twig:Button>
-+                        </div>
++                        <h3 class="text-white text-lg font-semibold mb-2">Search Options</h3>
 +                        <hr class="mb-4">
 +
 +                        <div class="flex justify-end">

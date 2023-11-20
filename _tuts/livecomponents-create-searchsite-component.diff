@@ -1,0 +1,42 @@
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index 9aa1a2d..d05c02f 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -40,17 +40,7 @@
+                             </div>
+                         </twig:block>
+ 
+-                        <div class="relative">
+-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
+-                            </div>
+-                            <input
+-                                type="search"
+-                                aria-label="Search site"
+-                                placeholder="Search for anything"
+-                                class="px-4 py-2 pl-10 rounded bg-gray-800 text-white placeholder-gray-400 w-full outline-none"
+-                            />
+-                        </div>
++                        <twig:SearchSite />
+                     </twig:Modal>
+                 </nav>
+             </header>
+diff --git a/templates/components/SearchSite.html.twig b/templates/components/SearchSite.html.twig
+new file mode 100644
+index 0000000..8441b3a
+--- /dev/null
++++ b/templates/components/SearchSite.html.twig
+@@ -0,0 +1,13 @@
++<div {{ attributes }}>
++    <div class="relative">
++        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
++            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
++        </div>
++        <input
++            type="search"
++            aria-label="Search site"
++            placeholder="Search for anything"
++            class="px-4 py-2 pl-10 rounded bg-gray-800 text-white placeholder-gray-400 w-full outline-none"
++        />
++    </div>
++</div>

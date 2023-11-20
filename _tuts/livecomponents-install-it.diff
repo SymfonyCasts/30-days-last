@@ -1,0 +1,302 @@
+diff --git a/assets/controllers.json b/assets/controllers.json
+index c7e11e9..50bf1e2 100644
+--- a/assets/controllers.json
++++ b/assets/controllers.json
+@@ -10,6 +10,15 @@
+                 }
+             }
+         },
++        "@symfony/ux-live-component": {
++            "live": {
++                "enabled": true,
++                "fetch": "eager",
++                "autoimport": {
++                    "@symfony/ux-live-component/dist/live.min.css": true
++                }
++            }
++        },
+         "@symfony/ux-turbo": {
+             "turbo-core": {
+                 "enabled": true,
+diff --git a/composer.json b/composer.json
+index 9456ae1..2946ded 100644
+--- a/composer.json
++++ b/composer.json
+@@ -26,6 +26,7 @@
+         "symfony/stimulus-bundle": "2.x-dev",
+         "symfony/twig-bundle": "6.4.x-dev",
+         "symfony/ux-autocomplete": "2.x-dev",
++        "symfony/ux-live-component": "2.x-dev",
+         "symfony/ux-turbo": "2.x-dev",
+         "symfony/ux-twig-component": "2.x-dev",
+         "symfony/validator": "6.4.x-dev",
+diff --git a/composer.lock b/composer.lock
+index 0ec8438..b08a63d 100644
+--- a/composer.lock
++++ b/composer.lock
+@@ -4,7 +4,7 @@
+         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+         "This file is @generated automatically"
+     ],
+-    "content-hash": "68fd800ef56ce125f4626e085a5dd33b",
++    "content-hash": "0672a5367abb14efdefcdf853ea3404e",
+     "packages": [
+         {
+             "name": "babdev/pagerfanta-bundle",
+@@ -5258,6 +5258,104 @@
+             ],
+             "time": "2023-08-25T16:27:31+00:00"
+         },
++        {
++            "name": "symfony/serializer",
++            "version": "6.4.x-dev",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/symfony/serializer.git",
++                "reference": "e85ca7192f053b221e0a1dc465eabd492b6b9030"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/symfony/serializer/zipball/e85ca7192f053b221e0a1dc465eabd492b6b9030",
++                "reference": "e85ca7192f053b221e0a1dc465eabd492b6b9030",
++                "shasum": ""
++            },
++            "require": {
++                "php": ">=8.1",
++                "symfony/deprecation-contracts": "^2.5|^3",
++                "symfony/polyfill-ctype": "~1.8"
++            },
++            "conflict": {
++                "doctrine/annotations": "<1.12",
++                "phpdocumentor/reflection-docblock": "<3.2.2",
++                "phpdocumentor/type-resolver": "<1.4.0",
++                "symfony/dependency-injection": "<5.4",
++                "symfony/property-access": "<5.4",
++                "symfony/property-info": "<5.4.24|>=6,<6.2.11",
++                "symfony/uid": "<5.4",
++                "symfony/validator": "<6.4",
++                "symfony/yaml": "<5.4"
++            },
++            "require-dev": {
++                "doctrine/annotations": "^1.12|^2",
++                "phpdocumentor/reflection-docblock": "^3.2|^4.0|^5.0",
++                "seld/jsonlint": "^1.10",
++                "symfony/cache": "^5.4|^6.0|^7.0",
++                "symfony/config": "^5.4|^6.0|^7.0",
++                "symfony/console": "^5.4|^6.0|^7.0",
++                "symfony/dependency-injection": "^5.4|^6.0|^7.0",
++                "symfony/error-handler": "^5.4|^6.0|^7.0",
++                "symfony/filesystem": "^5.4|^6.0|^7.0",
++                "symfony/form": "^5.4|^6.0|^7.0",
++                "symfony/http-foundation": "^5.4|^6.0|^7.0",
++                "symfony/http-kernel": "^5.4|^6.0|^7.0",
++                "symfony/messenger": "^5.4|^6.0|^7.0",
++                "symfony/mime": "^5.4|^6.0|^7.0",
++                "symfony/property-access": "^5.4|^6.0|^7.0",
++                "symfony/property-info": "^5.4.24|^6.2.11|^7.0",
++                "symfony/translation-contracts": "^2.5|^3",
++                "symfony/uid": "^5.4|^6.0|^7.0",
++                "symfony/validator": "^6.4|^7.0",
++                "symfony/var-dumper": "^5.4|^6.0|^7.0",
++                "symfony/var-exporter": "^5.4|^6.0|^7.0",
++                "symfony/yaml": "^5.4|^6.0|^7.0"
++            },
++            "type": "library",
++            "autoload": {
++                "psr-4": {
++                    "Symfony\\Component\\Serializer\\": ""
++                },
++                "exclude-from-classmap": [
++                    "/Tests/"
++                ]
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "Fabien Potencier",
++                    "email": "fabien@symfony.com"
++                },
++                {
++                    "name": "Symfony Community",
++                    "homepage": "https://symfony.com/contributors"
++                }
++            ],
++            "description": "Handles serializing and deserializing data structures, including object graphs, into array structures or other formats like XML and JSON.",
++            "homepage": "https://symfony.com",
++            "support": {
++                "source": "https://github.com/symfony/serializer/tree/6.4"
++            },
++            "funding": [
++                {
++                    "url": "https://symfony.com/sponsor",
++                    "type": "custom"
++                },
++                {
++                    "url": "https://github.com/fabpot",
++                    "type": "github"
++                },
++                {
++                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
++                    "type": "tidelift"
++                }
++            ],
++            "time": "2023-11-12T20:48:31+00:00"
++        },
+         {
+             "name": "symfony/service-contracts",
+             "version": "dev-main",
+@@ -6018,6 +6116,99 @@
+             ],
+             "time": "2023-11-12T21:55:15+00:00"
+         },
++        {
++            "name": "symfony/ux-live-component",
++            "version": "2.x-dev",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/symfony/ux-live-component.git",
++                "reference": "67372d192aeb8a4216bbc6f64ba34e438afe7cec"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/symfony/ux-live-component/zipball/67372d192aeb8a4216bbc6f64ba34e438afe7cec",
++                "reference": "67372d192aeb8a4216bbc6f64ba34e438afe7cec",
++                "shasum": ""
++            },
++            "require": {
++                "php": ">=8.1",
++                "symfony/property-access": "^5.4.5|^6.0|^7.0",
++                "symfony/serializer": "^5.4|^6.0|^7.0",
++                "symfony/ux-twig-component": "^2.8",
++                "twig/twig": "^2.14.7|^3.0.4"
++            },
++            "conflict": {
++                "symfony/config": "<5.4.0"
++            },
++            "require-dev": {
++                "doctrine/annotations": "^1.0",
++                "doctrine/collections": "^1.6.8|^2.0",
++                "doctrine/doctrine-bundle": "^2.4.3",
++                "doctrine/orm": "^2.9.4",
++                "doctrine/persistence": "^2.5.2|^3.0",
++                "phpdocumentor/reflection-docblock": "5.x-dev",
++                "symfony/dependency-injection": "^5.4|^6.0|^7.0",
++                "symfony/expression-language": "^5.4|^6.0|^7.0",
++                "symfony/form": "^5.4|^6.0|^7.0",
++                "symfony/framework-bundle": "^5.4|^6.0|^7.0",
++                "symfony/options-resolver": "^5.4|^6.0|^7.0",
++                "symfony/phpunit-bridge": "^6.0|^7.0",
++                "symfony/property-info": "^5.4|^6.0|^7.0",
++                "symfony/security-csrf": "^5.4|^6.0|^7.0",
++                "symfony/twig-bundle": "^5.4|^6.0|^7.0",
++                "symfony/validator": "^5.4|^6.0|^7.0",
++                "zenstruck/browser": "^1.2.0",
++                "zenstruck/foundry": "^1.33"
++            },
++            "default-branch": true,
++            "type": "symfony-bundle",
++            "extra": {
++                "thanks": {
++                    "name": "symfony/ux",
++                    "url": "https://github.com/symfony/ux"
++                }
++            },
++            "autoload": {
++                "psr-4": {
++                    "Symfony\\UX\\LiveComponent\\": "src/"
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "Symfony Community",
++                    "homepage": "https://symfony.com/contributors"
++                }
++            ],
++            "description": "Live components for Symfony",
++            "homepage": "https://symfony.com",
++            "keywords": [
++                "components",
++                "symfony-ux",
++                "twig"
++            ],
++            "support": {
++                "source": "https://github.com/symfony/ux-live-component/tree/2.x"
++            },
++            "funding": [
++                {
++                    "url": "https://symfony.com/sponsor",
++                    "type": "custom"
++                },
++                {
++                    "url": "https://github.com/fabpot",
++                    "type": "github"
++                },
++                {
++                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
++                    "type": "tidelift"
++                }
++            ],
++            "time": "2023-11-15T17:17:55+00:00"
++        },
+         {
+             "name": "symfony/ux-turbo",
+             "version": "2.x-dev",
+@@ -7615,6 +7806,7 @@
+         "symfony/stimulus-bundle": 20,
+         "symfony/twig-bundle": 20,
+         "symfony/ux-autocomplete": 20,
++        "symfony/ux-live-component": 20,
+         "symfony/ux-turbo": 20,
+         "symfony/ux-twig-component": 20,
+         "symfony/validator": 20,
+diff --git a/config/bundles.php b/config/bundles.php
+index bd069db..bab8d24 100644
+--- a/config/bundles.php
++++ b/config/bundles.php
+@@ -20,4 +20,5 @@ return [
+     Symfony\UX\Turbo\TurboBundle::class => ['all' => true],
+     BabDev\PagerfantaBundle\BabDevPagerfantaBundle::class => ['all' => true],
+     Symfony\UX\TwigComponent\TwigComponentBundle::class => ['all' => true],
++    Symfony\UX\LiveComponent\LiveComponentBundle::class => ['all' => true],
+ ];
+diff --git a/config/routes/ux_live_component.yaml b/config/routes/ux_live_component.yaml
+new file mode 100644
+index 0000000..e56523a
+--- /dev/null
++++ b/config/routes/ux_live_component.yaml
+@@ -0,0 +1,5 @@
++live_component:
++    resource: '@LiveComponentBundle/config/routes.php'
++    prefix: '/_components'
++    # adjust prefix to add localization to your components
++    #prefix: '/{_locale}/_components'
+diff --git a/symfony.lock b/symfony.lock
+index cf5acf8..7bcfaa7 100644
+--- a/symfony.lock
++++ b/symfony.lock
+@@ -200,6 +200,18 @@
+             "config/routes/ux_autocomplete.yaml"
+         ]
+     },
++    "symfony/ux-live-component": {
++        "version": "2.9999999",
++        "recipe": {
++            "repo": "github.com/symfony/recipes",
++            "branch": "main",
++            "version": "2.6",
++            "ref": "73e69baf18f47740d6f58688c5464b10cdacae06"
++        },
++        "files": [
++            "config/routes/ux_live_component.yaml"
++        ]
++    },
+     "symfony/ux-turbo": {
+         "version": "2.x-dev"
+     },

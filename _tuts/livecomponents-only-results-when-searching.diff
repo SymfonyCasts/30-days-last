@@ -1,0 +1,33 @@
+diff --git a/src/Twig/Components/SearchSite.php b/src/Twig/Components/SearchSite.php
+index 264aeed..3ff7beb 100644
+--- a/src/Twig/Components/SearchSite.php
++++ b/src/Twig/Components/SearchSite.php
+@@ -25,6 +25,10 @@ class SearchSite
+      */
+     public function voyages(): array
+     {
++        if (!$this->query) {
++            return [];
++        }
++
+         return $this->voyageRepository->findBySearch($this->query, [], 10);
+     }
+ }
+diff --git a/templates/components/SearchSite.html.twig b/templates/components/SearchSite.html.twig
+index ea6a8b3..66aee65 100644
+--- a/templates/components/SearchSite.html.twig
++++ b/templates/components/SearchSite.html.twig
+@@ -12,6 +12,7 @@
+         />
+     </div>
+ 
++    {% if this.voyages is not empty %}
+     <div class="text-white py-2 rounded-lg">
+         {% for voyage in this.voyages %}
+             <a href="{{ path('app_voyage_show', { id: voyage.id }) }}" class="flex items-center space-x-4 px-4 p-2 hover:bg-gray-700 cursor-pointer">
+@@ -28,4 +29,5 @@
+             </a>
+         {% endfor %}
+     </div>
++    {% endif %}
+ </div>

@@ -1,0 +1,21 @@
+diff --git a/src/Twig/Components/SearchSite.php b/src/Twig/Components/SearchSite.php
+index cfbc2d5..177255a 100644
+--- a/src/Twig/Components/SearchSite.php
++++ b/src/Twig/Components/SearchSite.php
+@@ -4,11 +4,14 @@ namespace App\Twig\Components;
+ 
+ use App\Entity\Voyage;
+ use App\Repository\VoyageRepository;
+-use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
++use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
++use Symfony\UX\LiveComponent\DefaultActionTrait;
+ 
+-#[AsTwigComponent]
++#[AsLiveComponent]
+ class SearchSite
+ {
++    use DefaultActionTrait;
++
+     public function __construct(private VoyageRepository $voyageRepository)
+     {
+     }

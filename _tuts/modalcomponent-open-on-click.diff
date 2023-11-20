@@ -1,10 +1,10 @@
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index fe22ea2..1dfbab9 100644
+index 4920c4b..0392d51 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
-@@ -2,6 +2,8 @@
-     {{ stimulus_controller('modal') }}
-     {{ stimulus_action('modal', 'clickOutside', 'click') }}
+@@ -4,6 +4,8 @@
+         ...stimulus_action('modal', 'clickOutside', 'click'),
+     }) }}
  >
 +    {% block trigger %}{% endblock %}
 +

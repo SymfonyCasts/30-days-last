@@ -1,0 +1,55 @@
+diff --git a/src/Twig/Components/SearchSite.php b/src/Twig/Components/SearchSite.php
+new file mode 100644
+index 0000000..cfbc2d5
+--- /dev/null
++++ b/src/Twig/Components/SearchSite.php
+@@ -0,0 +1,23 @@
++<?php
++
++namespace App\Twig\Components;
++
++use App\Entity\Voyage;
++use App\Repository\VoyageRepository;
++use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
++
++#[AsTwigComponent]
++class SearchSite
++{
++    public function __construct(private VoyageRepository $voyageRepository)
++    {
++    }
++
++    /**
++     * @return Voyage[]
++     */
++    public function voyages(): array
++    {
++        return $this->voyageRepository->findBySearch(null, [], 10);
++    }
++}
+diff --git a/templates/components/SearchSite.html.twig b/templates/components/SearchSite.html.twig
+index 8441b3a..e20e69c 100644
+--- a/templates/components/SearchSite.html.twig
++++ b/templates/components/SearchSite.html.twig
+@@ -10,4 +10,21 @@
+             class="px-4 py-2 pl-10 rounded bg-gray-800 text-white placeholder-gray-400 w-full outline-none"
+         />
+     </div>
++
++    <div class="text-white py-2 rounded-lg">
++        {% for voyage in this.voyages %}
++            <a href="{{ path('app_voyage_show', { id: voyage.id }) }}" class="flex items-center space-x-4 px-4 p-2 hover:bg-gray-700 cursor-pointer">
++                <img
++                    class="h-10 w-10 rounded-full"
++                    src="{{ asset('images/'~voyage.planet.imageFilename) }}"
++                    alt="{{ voyage.planet.name }} planet"
++                >
++
++                <div>
++                    <p class="text-sm font-medium text-white">{{ voyage.purpose }}</p>
++                    <p class="text-xs text-gray-400">{{ voyage.leaveAt|ago }}</p>
++                </div>
++            </a>
++        {% endfor %}
++    </div>
+ </div>

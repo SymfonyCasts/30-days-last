@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\VoyageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: VoyageRepository::class)]
@@ -17,6 +18,7 @@ class Voyage
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     #[NotBlank]
+    #[Length(min: 3, max: 255)]
     private ?Planet $planet = null;
 
     #[ORM\Column(length: 255)]

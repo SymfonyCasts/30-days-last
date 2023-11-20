@@ -38,7 +38,9 @@ final class PlanetFactory extends ModelFactory
         'Saturn',
         'Uranus',
         'Neptune',
-        // and some from other solar systems!
+    ];
+
+    public const OTHER_PLANET_NAMES = [
         'Proxima Centauri b',
         'Kepler-186f',
         'Kepler-62e',

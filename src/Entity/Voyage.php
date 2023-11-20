@@ -26,6 +26,9 @@ class Voyage
     private ?string $purpose = null;
 
     #[ORM\Column]
+    private bool $wormholeUpgrade = false;
+
+    #[ORM\Column]
     #[NotBlank]
     private ?\DateTimeImmutable $leaveAt;
 
@@ -71,6 +74,18 @@ class Voyage
     public function setLeaveAt(?\DateTimeImmutable $leaveAt): static
     {
         $this->leaveAt = $leaveAt;
+
+        return $this;
+    }
+
+    public function getWormholeUpgrade(): bool
+    {
+        return $this->wormholeUpgrade;
+    }
+
+    public function setWormholeUpgrade(bool $wormholeUpgrade): self
+    {
+        $this->wormholeUpgrade = $wormholeUpgrade;
 
         return $this;
     }

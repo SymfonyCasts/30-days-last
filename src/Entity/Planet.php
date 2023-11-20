@@ -33,6 +33,9 @@ class Planet
     #[NotBlank]
     private ?string $imageFilename = null;
 
+    #[ORM\Column]
+    private bool $isInMilkyWay = true;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -82,6 +85,18 @@ class Planet
     public function setImageFilename(?string $imageFilename): static
     {
         $this->imageFilename = $imageFilename;
+
+        return $this;
+    }
+
+    public function isInMilkyWay(): bool
+    {
+        return $this->isInMilkyWay;
+    }
+
+    public function setIsInMilkyWay(bool $isInMilkyWay): self
+    {
+        $this->isInMilkyWay = $isInMilkyWay;
 
         return $this;
     }

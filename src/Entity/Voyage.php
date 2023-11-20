@@ -18,11 +18,11 @@ class Voyage
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     #[NotBlank]
-    #[Length(min: 3, max: 255)]
     private ?Planet $planet = null;
 
     #[ORM\Column(length: 255)]
     #[NotBlank]
+    #[Length(min: 3, max: 255)]
     private ?string $purpose = null;
 
     #[ORM\Column]

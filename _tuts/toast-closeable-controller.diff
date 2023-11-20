@@ -1,6 +1,6 @@
 diff --git a/assets/controllers/closeable_controller.js b/assets/controllers/closeable_controller.js
 new file mode 100644
-index 0000000..4345d10
+index 00000000..4345d109
 --- /dev/null
 +++ b/assets/controllers/closeable_controller.js
 @@ -0,0 +1,7 @@
@@ -12,7 +12,7 @@ index 0000000..4345d10
 +    }
 +}
 diff --git a/templates/_flashes.html.twig b/templates/_flashes.html.twig
-index 9260488..3f6a918 100644
+index 92604889..3f6a918e 100644
 --- a/templates/_flashes.html.twig
 +++ b/templates/_flashes.html.twig
 @@ -2,6 +2,7 @@

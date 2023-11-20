@@ -1,5 +1,5 @@
 diff --git a/templates/voyage/_row.html.twig b/templates/voyage/_row.html.twig
-index beca337..01c5f1d 100644
+index beca337f..01c5f1d1 100644
 --- a/templates/voyage/_row.html.twig
 +++ b/templates/voyage/_row.html.twig
 @@ -9,5 +9,10 @@

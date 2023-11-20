@@ -1,6 +1,6 @@
 diff --git a/src/Twig/Components/VoyageForm.php b/src/Twig/Components/VoyageForm.php
 new file mode 100644
-index 0000000..f2c113f
+index 00000000..f2c113f3
 --- /dev/null
 +++ b/src/Twig/Components/VoyageForm.php
 @@ -0,0 +1,12 @@
@@ -18,7 +18,7 @@ index 0000000..f2c113f
 +}
 diff --git a/templates/components/VoyageForm.html.twig b/templates/components/VoyageForm.html.twig
 new file mode 100644
-index 0000000..4c2f90d
+index 00000000..4c2f90da
 --- /dev/null
 +++ b/templates/components/VoyageForm.html.twig
 @@ -0,0 +1,11 @@
@@ -34,7 +34,7 @@ index 0000000..4c2f90d
 +    </twig:Button>
 +{{ form_end(form) }}
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index a556d4f..c4faeaf 100644
+index a556d4f2..c4faeafc 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
 @@ -1,13 +1,3 @@

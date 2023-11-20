@@ -1,5 +1,5 @@
 diff --git a/templates/planet/_card.html.twig b/templates/planet/_card.html.twig
-index 0f2fecb..b745c25 100644
+index 0f2fecb3..b745c25a 100644
 --- a/templates/planet/_card.html.twig
 +++ b/templates/planet/_card.html.twig
 @@ -1,10 +1,10 @@

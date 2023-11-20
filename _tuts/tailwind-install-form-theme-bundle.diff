@@ -1,5 +1,5 @@
 diff --git a/composer.json b/composer.json
-index 5b94d8b..0d340ce 100644
+index b174b25c..69005dbd 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -24,6 +24,7 @@
@@ -10,20 +10,29 @@ index 5b94d8b..0d340ce 100644
          "twig/extra-bundle": "^2.12|^3.0",
          "twig/twig": "^2.12|^3.0"
      },
+@@ -74,7 +75,7 @@
+     },
+     "extra": {
+         "symfony": {
+-            "allow-contrib": false,
++            "allow-contrib": true,
+             "require": "6.4.*",
+             "docker": true
+         }
 diff --git a/composer.lock b/composer.lock
-index dcb4cd9..0c9b068 100644
+index b3a666d6..938c2742 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "b89d5cff1119263d38d5607b8fd3cc61",
-+    "content-hash": "35f0aa87aa9cb1249acd19cc4b178fd6",
+-    "content-hash": "2cbaa7fab99d5fbcaba4de63b211589d",
++    "content-hash": "e89cf74fb100c1bb2e50e1e4c03a526f",
      "packages": [
          {
              "name": "composer/semver",
-@@ -1416,6 +1416,73 @@
+@@ -1417,6 +1417,73 @@
              },
              "time": "2023-08-16T21:49:04+00:00"
          },
@@ -97,7 +106,7 @@ index dcb4cd9..0c9b068 100644
          {
              "name": "knplabs/knp-time-bundle",
              "version": "dev-main",
-@@ -1805,6 +1872,58 @@
+@@ -1806,6 +1873,58 @@
              },
              "time": "2021-07-14T16:46:02+00:00"
          },
@@ -156,7 +165,7 @@ index dcb4cd9..0c9b068 100644
          {
              "name": "symfony/asset",
              "version": "6.4.x-dev",
-@@ -5894,6 +6013,120 @@
+@@ -5896,6 +6015,121 @@
              },
              "time": "2023-11-08T19:29:49+00:00"
          },
@@ -166,19 +175,19 @@ index dcb4cd9..0c9b068 100644
 +            "source": {
 +                "type": "git",
 +                "url": "https://github.com/tales-from-a-dev/flowbite-bundle.git",
-+                "reference": "24c62436f1254b0a87be9b73e4b04389a060d95a"
++                "reference": "5b8f1316de3cfce28c1c8fea11cd45c2a840ad9e"
 +            },
 +            "dist": {
 +                "type": "zip",
-+                "url": "https://api.github.com/repos/tales-from-a-dev/flowbite-bundle/zipball/24c62436f1254b0a87be9b73e4b04389a060d95a",
-+                "reference": "24c62436f1254b0a87be9b73e4b04389a060d95a",
++                "url": "https://api.github.com/repos/tales-from-a-dev/flowbite-bundle/zipball/5b8f1316de3cfce28c1c8fea11cd45c2a840ad9e",
++                "reference": "5b8f1316de3cfce28c1c8fea11cd45c2a840ad9e",
 +                "shasum": ""
 +            },
 +            "require": {
 +                "php": ">=8.2",
 +                "symfony/http-kernel": "^6.2 || ^7.0",
 +                "symfony/twig-bridge": "^6.2 || ^7.0",
-+                "tales-from-a-dev/twig-tailwind-extra": "^0.1.0"
++                "tales-from-a-dev/twig-tailwind-extra": "^0.2"
 +            },
 +            "require-dev": {
 +                "friendsofphp/php-cs-fixer": "^3.15",
@@ -216,33 +225,34 @@ index dcb4cd9..0c9b068 100644
 +            ],
 +            "support": {
 +                "issues": "https://github.com/tales-from-a-dev/flowbite-bundle/issues",
-+                "source": "https://github.com/tales-from-a-dev/flowbite-bundle/tree/v0.2.6"
++                "source": "https://github.com/tales-from-a-dev/flowbite-bundle/tree/v0.2.7"
 +            },
-+            "time": "2023-11-17T13:03:20+00:00"
++            "time": "2023-11-18T08:47:05+00:00"
 +        },
 +        {
 +            "name": "tales-from-a-dev/twig-tailwind-extra",
-+            "version": "v0.1.0",
++            "version": "v0.2.1",
 +            "source": {
 +                "type": "git",
 +                "url": "https://github.com/tales-from-a-dev/twig-tailwind-extra.git",
-+                "reference": "abf0b46350751b69d770dece65be7eae26b390c7"
++                "reference": "9477b1c58a0f0a07a4eb0d3d1f472cc3b343f596"
 +            },
 +            "dist": {
 +                "type": "zip",
-+                "url": "https://api.github.com/repos/tales-from-a-dev/twig-tailwind-extra/zipball/abf0b46350751b69d770dece65be7eae26b390c7",
-+                "reference": "abf0b46350751b69d770dece65be7eae26b390c7",
++                "url": "https://api.github.com/repos/tales-from-a-dev/twig-tailwind-extra/zipball/9477b1c58a0f0a07a4eb0d3d1f472cc3b343f596",
++                "reference": "9477b1c58a0f0a07a4eb0d3d1f472cc3b343f596",
 +                "shasum": ""
 +            },
 +            "require": {
 +                "gehrisandro/tailwind-merge-php": "^1.0",
 +                "php": ">=8.2",
-+                "symfony/cache": "^6.3",
++                "symfony/cache": "^6.3 || ^7.0",
++                "symfony/framework-bundle": "^6.3 || ^7.0",
 +                "twig/twig": "^3.0"
 +            },
 +            "require-dev": {
 +                "friendsofphp/php-cs-fixer": "^3.38",
-+                "symfony/phpunit-bridge": "^6.3"
++                "symfony/phpunit-bridge": "^6.3 || ^7.0"
 +            },
 +            "type": "twig",
 +            "autoload": {
@@ -270,14 +280,14 @@ index dcb4cd9..0c9b068 100644
 +            ],
 +            "support": {
 +                "issues": "https://github.com/tales-from-a-dev/twig-tailwind-extra/issues",
-+                "source": "https://github.com/tales-from-a-dev/twig-tailwind-extra/tree/v0.1.0"
++                "source": "https://github.com/tales-from-a-dev/twig-tailwind-extra/tree/v0.2.1"
 +            },
-+            "time": "2023-11-17T11:35:31+00:00"
++            "time": "2023-11-18T12:23:51+00:00"
 +        },
          {
              "name": "twig/extra-bundle",
              "version": "3.x-dev",
-@@ -6811,6 +7044,7 @@
+@@ -6813,6 +7047,7 @@
          "symfony/validator": 20,
          "symfony/yaml": 20,
          "symfonycasts/tailwind-bundle": 20,
@@ -286,25 +296,35 @@ index dcb4cd9..0c9b068 100644
          "symfony/stopwatch": 20,
          "symfony/web-profiler-bundle": 20
 diff --git a/config/bundles.php b/config/bundles.php
-index 5fd504a..b7c1af7 100644
+index 5fd504a8..1a07b4a9 100644
 --- a/config/bundles.php
 +++ b/config/bundles.php
-@@ -14,4 +14,5 @@ return [
+@@ -14,4 +14,6 @@ return [
      Zenstruck\Foundry\ZenstruckFoundryBundle::class => ['dev' => true, 'test' => true],
      Symfonycasts\TailwindBundle\SymfonycastsTailwindBundle::class => ['all' => true],
      Knp\Bundle\TimeBundle\KnpTimeBundle::class => ['all' => true],
 +    TalesFromADev\FlowbiteBundle\FlowbiteBundle::class => ['all' => true],
++    TalesFromADev\Twig\Extra\Tailwind\Bridge\Symfony\Bundle\TalesFromADevTwigExtraTailwindBundle::class => ['all' => true],
  ];
 diff --git a/symfony.lock b/symfony.lock
-index 39f9159..84b0d7b 100644
+index 39f91599..edbb0ff7 100644
 --- a/symfony.lock
 +++ b/symfony.lock
-@@ -199,6 +199,9 @@
+@@ -199,6 +199,18 @@
      "symfonycasts/tailwind-bundle": {
          "version": "dev-main"
      },
 +    "tales-from-a-dev/flowbite-bundle": {
 +        "version": "dev-main"
++    },
++    "tales-from-a-dev/twig-tailwind-extra": {
++        "version": "0.2",
++        "recipe": {
++            "repo": "github.com/symfony/recipes-contrib",
++            "branch": "main",
++            "version": "0.2",
++            "ref": "7243ab070ed66198eb82c026684e9b9773e7b64a"
++        }
 +    },
      "twig/extra-bundle": {
          "version": "v3.7.1"

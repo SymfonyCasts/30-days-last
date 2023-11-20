@@ -1,5 +1,5 @@
 diff --git a/assets/app.js b/assets/app.js
-index e3b03ad..4d2296d 100644
+index e3b03ade..4d2296d5 100644
 --- a/assets/app.js
 +++ b/assets/app.js
 @@ -5,5 +5,6 @@
@@ -11,7 +11,7 @@ index e3b03ad..4d2296d 100644
 -console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉')
 +alienGreeting('Give us all your candy!', false);
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 9947d50..554dae0 100644
+index 9947d500..554dae09 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -10,12 +10,6 @@

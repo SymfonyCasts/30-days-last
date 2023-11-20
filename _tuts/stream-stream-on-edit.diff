@@ -1,5 +1,5 @@
 diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
-index b7411f2..47acff2 100644
+index b7411f24..47acff25 100644
 --- a/src/Controller/VoyageController.php
 +++ b/src/Controller/VoyageController.php
 @@ -77,6 +77,13 @@ class VoyageController extends AbstractController
@@ -17,7 +17,7 @@ index b7411f2..47acff2 100644
          }
  
 diff --git a/templates/voyage/edit.html.twig b/templates/voyage/edit.html.twig
-index 9c0a403..81e13f9 100644
+index 9c0a4030..81e13f96 100644
 --- a/templates/voyage/edit.html.twig
 +++ b/templates/voyage/edit.html.twig
 @@ -22,3 +22,11 @@

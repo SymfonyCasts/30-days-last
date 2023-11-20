@@ -1,5 +1,5 @@
 diff --git a/src/Twig/Components/SearchSite.php b/src/Twig/Components/SearchSite.php
-index 264aeed..3ff7beb 100644
+index 264aeed2..3ff7bebd 100644
 --- a/src/Twig/Components/SearchSite.php
 +++ b/src/Twig/Components/SearchSite.php
 @@ -25,6 +25,10 @@ class SearchSite
@@ -14,7 +14,7 @@ index 264aeed..3ff7beb 100644
      }
  }
 diff --git a/templates/components/SearchSite.html.twig b/templates/components/SearchSite.html.twig
-index ea6a8b3..66aee65 100644
+index ea6a8b31..66aee65c 100644
 --- a/templates/components/SearchSite.html.twig
 +++ b/templates/components/SearchSite.html.twig
 @@ -12,6 +12,7 @@

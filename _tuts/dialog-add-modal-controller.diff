@@ -1,6 +1,6 @@
 diff --git a/assets/controllers/modal_controller.js b/assets/controllers/modal_controller.js
 new file mode 100644
-index 0000000..4be7891
+index 00000000..4be78915
 --- /dev/null
 +++ b/assets/controllers/modal_controller.js
 @@ -0,0 +1,9 @@
@@ -14,7 +14,7 @@ index 0000000..4be7891
 +    }
 +}
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index 79b4bef..aed96de 100644
+index 79b4befa..aed96dec 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
 @@ -5,10 +5,13 @@

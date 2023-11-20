@@ -1,5 +1,5 @@
 diff --git a/src/Twig/Components/SearchSite.php b/src/Twig/Components/SearchSite.php
-index 177255a..264aeed 100644
+index 177255a1..264aeed2 100644
 --- a/src/Twig/Components/SearchSite.php
 +++ b/src/Twig/Components/SearchSite.php
 @@ -5,6 +5,7 @@ namespace App\Twig\Components;
@@ -29,7 +29,7 @@ index 177255a..264aeed 100644
      }
  }
 diff --git a/templates/components/SearchSite.html.twig b/templates/components/SearchSite.html.twig
-index e20e69c..ea6a8b3 100644
+index e20e69cc..ea6a8b31 100644
 --- a/templates/components/SearchSite.html.twig
 +++ b/templates/components/SearchSite.html.twig
 @@ -5,6 +5,7 @@

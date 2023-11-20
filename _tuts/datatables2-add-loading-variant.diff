@@ -1,5 +1,5 @@
 diff --git a/src/Controller/MainController.php b/src/Controller/MainController.php
-index 1ed24ef..f0f239d 100644
+index 1ed24eff..f0f239d4 100644
 --- a/src/Controller/MainController.php
 +++ b/src/Controller/MainController.php
 @@ -27,6 +27,7 @@ class MainController extends AbstractController
@@ -11,7 +11,7 @@ index 1ed24ef..f0f239d 100644
              new QueryAdapter($voyageRepository->findBySearchQueryBuilder($query, $searchPlanets, $sort, $sortDirection)),
              $page,
 diff --git a/tailwind.config.js b/tailwind.config.js
-index cfbf534..e4bcfca 100644
+index cfbf534a..e4bcfcad 100644
 --- a/tailwind.config.js
 +++ b/tailwind.config.js
 @@ -12,7 +12,7 @@ module.exports = {
@@ -24,7 +24,7 @@ index cfbf534..e4bcfca 100644
    ],
  }
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index dd58b5d..513d02e 100644
+index dd58b5d5..513d02ed 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -54,7 +54,7 @@

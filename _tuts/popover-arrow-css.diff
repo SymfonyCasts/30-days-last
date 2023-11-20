@@ -1,5 +1,5 @@
 diff --git a/assets/styles/app.css b/assets/styles/app.css
-index 2318938..c66913b 100644
+index 23189389..c66913b6 100644
 --- a/assets/styles/app.css
 +++ b/assets/styles/app.css
 @@ -60,3 +60,12 @@ body {

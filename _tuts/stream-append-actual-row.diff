@@ -1,5 +1,5 @@
 diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
-index 5b4b249..b7411f2 100644
+index 5b4b249a..b7411f24 100644
 --- a/src/Controller/VoyageController.php
 +++ b/src/Controller/VoyageController.php
 @@ -44,7 +44,8 @@ class VoyageController extends AbstractController
@@ -14,7 +14,7 @@ index 5b4b249..b7411f2 100644
  
 diff --git a/templates/voyage/_row.html.twig b/templates/voyage/_row.html.twig
 new file mode 100644
-index 0000000..1ba68b3
+index 00000000..1ba68b3e
 --- /dev/null
 +++ b/templates/voyage/_row.html.twig
 @@ -0,0 +1,9 @@
@@ -28,7 +28,7 @@ index 0000000..1ba68b3
 +    </td>
 +</tr>
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index 6b897ac..8e1f17e 100644
+index 6b897ac9..8e1f17e5 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
 @@ -19,15 +19,7 @@
@@ -49,7 +49,7 @@ index 6b897ac..8e1f17e 100644
                  <tr>
                      <td colspan="4" class="px-6 py-4 whitespace-nowrap text-center text-gray-400">No records found</td>
 diff --git a/templates/voyage/new.html.twig b/templates/voyage/new.html.twig
-index 60c15dc..77d1a0e 100644
+index 60c15dca..77d1a0ef 100644
 --- a/templates/voyage/new.html.twig
 +++ b/templates/voyage/new.html.twig
 @@ -37,7 +37,7 @@

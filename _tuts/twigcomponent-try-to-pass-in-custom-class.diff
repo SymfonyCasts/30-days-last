@@ -1,5 +1,5 @@
 diff --git a/tailwind.config.js b/tailwind.config.js
-index 4da3513..8c47995 100644
+index 4da3513c..8c47995d 100644
 --- a/tailwind.config.js
 +++ b/tailwind.config.js
 @@ -11,12 +11,17 @@ module.exports = {
@@ -21,7 +21,7 @@ index 4da3513..8c47995 100644
      },
    },
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index 17ed6b6..497000f 100644
+index 17ed6b6a..497000f1 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
 @@ -2,7 +2,7 @@

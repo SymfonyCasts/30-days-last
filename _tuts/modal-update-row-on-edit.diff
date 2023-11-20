@@ -1,5 +1,5 @@
 diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
-index 47acff2..8481265 100644
+index 47acff25..8481265a 100644
 --- a/src/Controller/VoyageController.php
 +++ b/src/Controller/VoyageController.php
 @@ -81,7 +81,9 @@ class VoyageController extends AbstractController
@@ -14,7 +14,7 @@ index 47acff2..8481265 100644
  
              return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
 diff --git a/templates/voyage/_row.html.twig b/templates/voyage/_row.html.twig
-index d376ea1..beca337 100644
+index d376ea1d..beca337f 100644
 --- a/templates/voyage/_row.html.twig
 +++ b/templates/voyage/_row.html.twig
 @@ -1,4 +1,4 @@
@@ -24,7 +24,7 @@ index d376ea1..beca337 100644
      <td class="px-6 py-4">{{ voyage.purpose }}</td>
      <td class="px-6 py-4 whitespace-nowrap">{{ voyage.leaveAt ? voyage.leaveAt|date('Y-m-d H:i:s') : '' }}</td>
 diff --git a/templates/voyage/edit.html.twig b/templates/voyage/edit.html.twig
-index 36fc116..1400589 100644
+index 36fc116b..14005891 100644
 --- a/templates/voyage/edit.html.twig
 +++ b/templates/voyage/edit.html.twig
 @@ -25,4 +25,8 @@

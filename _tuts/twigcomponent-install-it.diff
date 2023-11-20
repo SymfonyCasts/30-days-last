@@ -1,5 +1,5 @@
 diff --git a/composer.json b/composer.json
-index 4972042..9456ae1 100644
+index 297896b0..9b0d1ddc 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -27,6 +27,7 @@
@@ -11,19 +11,19 @@ index 4972042..9456ae1 100644
          "symfony/yaml": "6.4.x-dev",
          "symfonycasts/tailwind-bundle": "dev-main",
 diff --git a/composer.lock b/composer.lock
-index b9b027d..0ec8438 100644
+index de17835e..08aedad2 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "513c8adea32632a4150e6f64f3ee7d57",
-+    "content-hash": "68fd800ef56ce125f4626e085a5dd33b",
+-    "content-hash": "3000e5cfd8ca01e126aade22fe20d39f",
++    "content-hash": "f6af7df07ce06499dee4e8d44ca79412",
      "packages": [
          {
              "name": "babdev/pagerfanta-bundle",
-@@ -6115,6 +6115,91 @@
+@@ -6113,6 +6113,91 @@
              ],
              "time": "2023-11-11T01:20:31+00:00"
          },
@@ -124,10 +124,10 @@ index b9b027d..0ec8438 100644
          "symfony/yaml": 20,
          "symfonycasts/tailwind-bundle": 20,
 diff --git a/config/bundles.php b/config/bundles.php
-index 52f8b9e..bd069db 100644
+index a3f69611..d87510bb 100644
 --- a/config/bundles.php
 +++ b/config/bundles.php
-@@ -19,4 +19,5 @@ return [
+@@ -20,4 +20,5 @@ return [
      Symfony\UX\Autocomplete\AutocompleteBundle::class => ['all' => true],
      Symfony\UX\Turbo\TurboBundle::class => ['all' => true],
      BabDev\PagerfantaBundle\BabDevPagerfantaBundle::class => ['all' => true],
@@ -135,7 +135,7 @@ index 52f8b9e..bd069db 100644
  ];
 diff --git a/config/packages/twig_component.yaml b/config/packages/twig_component.yaml
 new file mode 100644
-index 0000000..fd17ac6
+index 00000000..fd17ac69
 --- /dev/null
 +++ b/config/packages/twig_component.yaml
 @@ -0,0 +1,5 @@
@@ -145,7 +145,7 @@ index 0000000..fd17ac6
 +        # Namespace & directory for components
 +        App\Twig\Components\: 'components/'
 diff --git a/symfony.lock b/symfony.lock
-index da79d09..cf5acf8 100644
+index e6c4c8bd..a6000cdc 100644
 --- a/symfony.lock
 +++ b/symfony.lock
 @@ -203,6 +203,18 @@

@@ -1,6 +1,6 @@
 diff --git a/src/Twig/Components/SearchSite.php b/src/Twig/Components/SearchSite.php
 new file mode 100644
-index 0000000..cfbc2d5
+index 00000000..cfbc2d59
 --- /dev/null
 +++ b/src/Twig/Components/SearchSite.php
 @@ -0,0 +1,23 @@
@@ -28,7 +28,7 @@ index 0000000..cfbc2d5
 +    }
 +}
 diff --git a/templates/components/SearchSite.html.twig b/templates/components/SearchSite.html.twig
-index 8441b3a..e20e69c 100644
+index 8441b3a6..e20e69cc 100644
 --- a/templates/components/SearchSite.html.twig
 +++ b/templates/components/SearchSite.html.twig
 @@ -10,4 +10,21 @@

@@ -1,5 +1,5 @@
 diff --git a/composer.json b/composer.json
-index 2946ded..2cfbd19 100644
+index f746ebc2..87c720da 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -31,6 +31,7 @@
@@ -11,19 +11,10 @@ index 2946ded..2cfbd19 100644
          "tales-from-a-dev/flowbite-bundle": "dev-main",
          "twig/extra-bundle": "^2.12|^3.0",
 diff --git a/composer.lock b/composer.lock
-index b08a63d..b7e645f 100644
+index c9ec5406..432b4f7a 100644
 --- a/composer.lock
 +++ b/composer.lock
-@@ -4,7 +4,7 @@
-         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
-         "This file is @generated automatically"
-     ],
--    "content-hash": "0672a5367abb14efdefcdf853ea3404e",
-+    "content-hash": "6ebea149bb75ba7aa486c4c1fcefa19c",
-     "packages": [
-         {
-             "name": "babdev/pagerfanta-bundle",
-@@ -6718,6 +6718,61 @@
+@@ -6717,6 +6717,61 @@
              ],
              "time": "2023-11-06T11:00:25+00:00"
          },

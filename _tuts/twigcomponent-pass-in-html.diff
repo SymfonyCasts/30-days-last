@@ -1,12 +1,12 @@
 diff --git a/templates/components/Button.html.twig b/templates/components/Button.html.twig
-index 82eb1f3..6f849fa 100644
+index 82eb1f31..6f849faf 100644
 --- a/templates/components/Button.html.twig
 +++ b/templates/components/Button.html.twig
 @@ -1 +1 @@
 -<button {{ attributes }}>Press me!</button>
 +<button {{ attributes }}>{% block content %}{% endblock %}</button>
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index 3a3af65..95fe6b9 100644
+index 3a3af65a..95fe6b95 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
 @@ -5,7 +5,9 @@

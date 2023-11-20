@@ -1,5 +1,5 @@
 diff --git a/composer.json b/composer.json
-index 36400c2..9e0c3a8 100644
+index edc15e83..6a025660 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -22,6 +22,7 @@
@@ -11,19 +11,19 @@ index 36400c2..9e0c3a8 100644
          "twig/twig": "^2.12|^3.0"
      },
 diff --git a/composer.lock b/composer.lock
-index 096ebc3..25586dd 100644
+index 2266548f..b73961d2 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "6d6434b54bbde42fb3751e3c0a0e45e4",
-+    "content-hash": "38d3781a95a2e6529019d428bda0581d",
+-    "content-hash": "a77bd7cbfca1bbaf39d6b3ebea4b5f97",
++    "content-hash": "dd9b9a9a70089865921de2d79dbed48a",
      "packages": [
          {
              "name": "composer/semver",
-@@ -4302,6 +4302,67 @@
+@@ -4303,6 +4303,67 @@
              ],
              "time": "2023-08-16T06:22:46+00:00"
          },
@@ -91,7 +91,7 @@ index 096ebc3..25586dd 100644
          {
              "name": "symfony/property-access",
              "version": "6.4.x-dev",
-@@ -5607,6 +5668,61 @@
+@@ -5609,6 +5670,61 @@
              ],
              "time": "2023-11-06T11:00:25+00:00"
          },
@@ -153,7 +153,7 @@ index 096ebc3..25586dd 100644
          {
              "name": "twig/extra-bundle",
              "version": "3.x-dev",
-@@ -6217,67 +6333,6 @@
+@@ -6219,67 +6335,6 @@
              ],
              "time": "2023-10-31T18:23:49+00:00"
          },
@@ -221,7 +221,7 @@ index 096ebc3..25586dd 100644
          {
              "name": "symfony/web-profiler-bundle",
              "version": "6.4.x-dev",
-@@ -6583,6 +6638,7 @@
+@@ -6585,6 +6640,7 @@
          "symfony/twig-bundle": 20,
          "symfony/validator": 20,
          "symfony/yaml": 20,
@@ -230,7 +230,7 @@ index 096ebc3..25586dd 100644
          "symfony/stopwatch": 20,
          "symfony/web-profiler-bundle": 20
 diff --git a/config/bundles.php b/config/bundles.php
-index 5f0f85b..d8894f2 100644
+index 5f0f85b1..d8894f22 100644
 --- a/config/bundles.php
 +++ b/config/bundles.php
 @@ -12,4 +12,5 @@ return [
@@ -240,7 +240,7 @@ index 5f0f85b..d8894f2 100644
 +    Symfonycasts\TailwindBundle\SymfonycastsTailwindBundle::class => ['all' => true],
  ];
 diff --git a/symfony.lock b/symfony.lock
-index e036ac9..7064e79 100644
+index e036ac9d..7064e793 100644
 --- a/symfony.lock
 +++ b/symfony.lock
 @@ -180,6 +180,9 @@

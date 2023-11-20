@@ -1,5 +1,5 @@
 diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
-index 8481265..7072bea 100644
+index 8481265a..7072beae 100644
 --- a/src/Controller/VoyageController.php
 +++ b/src/Controller/VoyageController.php
 @@ -99,10 +99,20 @@ class VoyageController extends AbstractController
@@ -25,7 +25,7 @@ index 8481265..7072bea 100644
          return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
 diff --git a/templates/voyage/delete.html.twig b/templates/voyage/delete.html.twig
 new file mode 100644
-index 0000000..95771df
+index 00000000..95771dfe
 --- /dev/null
 +++ b/templates/voyage/delete.html.twig
 @@ -0,0 +1,5 @@

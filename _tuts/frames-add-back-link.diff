@@ -1,5 +1,5 @@
 diff --git a/templates/planet/show.html.twig b/templates/planet/show.html.twig
-index f4d3d37..f9645c8 100644
+index f4d3d37f..f9645c88 100644
 --- a/templates/planet/show.html.twig
 +++ b/templates/planet/show.html.twig
 @@ -32,6 +32,10 @@

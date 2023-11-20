@@ -1,5 +1,5 @@
 diff --git a/assets/controllers/closeable_controller.js b/assets/controllers/closeable_controller.js
-index f3fba33..3a84766 100644
+index f3fba33e..3a847669 100644
 --- a/assets/controllers/closeable_controller.js
 +++ b/assets/controllers/closeable_controller.js
 @@ -5,11 +5,19 @@ export default class extends Controller {
@@ -23,7 +23,7 @@ index f3fba33..3a84766 100644
      }
  
 diff --git a/templates/_flashes.html.twig b/templates/_flashes.html.twig
-index f372dd9..ee61dbf 100644
+index f372dd9c..ee61dbf9 100644
 --- a/templates/_flashes.html.twig
 +++ b/templates/_flashes.html.twig
 @@ -24,5 +24,10 @@

@@ -1,6 +1,6 @@
 diff --git a/templates/_flashes.html.twig b/templates/_flashes.html.twig
 new file mode 100644
-index 0000000..ba82d5e
+index 00000000..ba82d5e4
 --- /dev/null
 +++ b/templates/_flashes.html.twig
 @@ -0,0 +1,5 @@
@@ -10,7 +10,7 @@ index 0000000..ba82d5e
 +    </div>
 +{% endfor %}
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index e288055..b197a6d 100644
+index e288055f..b197a6de 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -48,5 +48,9 @@

@@ -1,5 +1,5 @@
 diff --git a/composer.json b/composer.json
-index 57163f7..4972042 100644
+index b65c9bda..297896b0 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -6,10 +6,13 @@
@@ -17,15 +17,15 @@ index 57163f7..4972042 100644
          "symfony/asset-mapper": "6.4.*",
          "symfony/console": "6.4.x-dev",
 diff --git a/composer.lock b/composer.lock
-index 4a50052..b9b027d 100644
+index 7d928936..de17835e 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,8 +4,96 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "2bca814ce13c3ff853c77d0ad60f59bc",
-+    "content-hash": "513c8adea32632a4150e6f64f3ee7d57",
+-    "content-hash": "bfa41a3632ac045c225b991e5cf07059",
++    "content-hash": "3000e5cfd8ca01e126aade22fe20d39f",
      "packages": [
 +        {
 +            "name": "babdev/pagerfanta-bundle",
@@ -118,7 +118,7 @@ index 4a50052..b9b027d 100644
          {
              "name": "composer/semver",
              "version": "dev-main",
-@@ -1664,6 +1752,140 @@
+@@ -1662,6 +1750,140 @@
              ],
              "time": "2023-11-10T12:29:35+00:00"
          },
@@ -271,17 +271,17 @@ index 4a50052..b9b027d 100644
          "symfony/dotenv": 20,
          "symfony/form": 20,
 diff --git a/config/bundles.php b/config/bundles.php
-index 9bfe625..52f8b9e 100644
+index 46db4773..a3f69611 100644
 --- a/config/bundles.php
 +++ b/config/bundles.php
-@@ -18,4 +18,5 @@ return [
+@@ -19,4 +19,5 @@ return [
      Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
      Symfony\UX\Autocomplete\AutocompleteBundle::class => ['all' => true],
      Symfony\UX\Turbo\TurboBundle::class => ['all' => true],
 +    BabDev\PagerfantaBundle\BabDevPagerfantaBundle::class => ['all' => true],
  ];
 diff --git a/symfony.lock b/symfony.lock
-index 01c68d5..da79d09 100644
+index 76cf0685..e6c4c8bd 100644
 --- a/symfony.lock
 +++ b/symfony.lock
 @@ -1,4 +1,7 @@

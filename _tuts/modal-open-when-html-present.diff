@@ -1,5 +1,5 @@
 diff --git a/assets/controllers/modal_controller.js b/assets/controllers/modal_controller.js
-index 084b4ea..d3784e8 100644
+index 084b4eac..d3784e85 100644
 --- a/assets/controllers/modal_controller.js
 +++ b/assets/controllers/modal_controller.js
 @@ -1,7 +1,31 @@
@@ -36,7 +36,7 @@ index 084b4ea..d3784e8 100644
      open() {
          this.dialogTarget.showModal();
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 7dba50e..5d6cfcb 100644
+index 7dba50e9..5d6cfcba 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -64,7 +64,7 @@

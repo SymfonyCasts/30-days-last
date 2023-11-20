@@ -1,6 +1,6 @@
 diff --git a/templates/_streamSuccess.html.twig b/templates/_streamSuccess.html.twig
 new file mode 100644
-index 0000000..1f95c64
+index 00000000..1f95c64d
 --- /dev/null
 +++ b/templates/_streamSuccess.html.twig
 @@ -0,0 +1,9 @@
@@ -14,7 +14,7 @@ index 0000000..1f95c64
 +    <template></template>
 +</turbo-stream>
 diff --git a/templates/voyage/new.html.twig b/templates/voyage/new.html.twig
-index d06c0eb..f2b54b1 100644
+index d06c0eb2..f2b54b12 100644
 --- a/templates/voyage/new.html.twig
 +++ b/templates/voyage/new.html.twig
 @@ -23,25 +23,17 @@

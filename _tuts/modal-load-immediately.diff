@@ -1,5 +1,5 @@
 diff --git a/assets/controllers/modal_controller.js b/assets/controllers/modal_controller.js
-index d3784e8..37ef547 100644
+index d3784e85..37ef547f 100644
 --- a/assets/controllers/modal_controller.js
 +++ b/assets/controllers/modal_controller.js
 @@ -1,7 +1,7 @@
@@ -26,7 +26,7 @@ index d3784e8..37ef547 100644
 +    }
  }
 diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
-index 47acff2..23b9290 100644
+index 47acff25..23b9290b 100644
 --- a/src/Controller/VoyageController.php
 +++ b/src/Controller/VoyageController.php
 @@ -31,6 +31,7 @@ class VoyageController extends AbstractController
@@ -38,7 +38,7 @@ index 47acff2..23b9290 100644
          if ($form->isSubmitted() && $form->isValid()) {
              $entityManager->persist($voyage);
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 5d6cfcb..58fe419 100644
+index 5d6cfcba..58fe4196 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -64,10 +64,30 @@

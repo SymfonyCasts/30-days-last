@@ -1,6 +1,6 @@
 diff --git a/assets/controllers/autosubmit_controller.js b/assets/controllers/autosubmit_controller.js
 new file mode 100644
-index 0000000..0816a44
+index 00000000..0816a445
 --- /dev/null
 +++ b/assets/controllers/autosubmit_controller.js
 @@ -0,0 +1,17 @@

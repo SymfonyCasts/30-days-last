@@ -1,5 +1,5 @@
 diff --git a/templates/voyage/_delete_form.html.twig b/templates/voyage/_delete_form.html.twig
-index e580628..9154ba1 100644
+index e580628b..9154ba16 100644
 --- a/templates/voyage/_delete_form.html.twig
 +++ b/templates/voyage/_delete_form.html.twig
 @@ -1,6 +1,7 @@

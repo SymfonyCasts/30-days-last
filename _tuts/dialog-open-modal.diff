@@ -1,5 +1,5 @@
 diff --git a/assets/controllers/modal_controller.js b/assets/controllers/modal_controller.js
-index 4be7891..e432130 100644
+index 4be78915..e4321306 100644
 --- a/assets/controllers/modal_controller.js
 +++ b/assets/controllers/modal_controller.js
 @@ -4,6 +4,6 @@ export default class extends Controller {

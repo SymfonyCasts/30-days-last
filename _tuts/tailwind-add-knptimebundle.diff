@@ -1,5 +1,5 @@
 diff --git a/composer.json b/composer.json
-index 9e0c3a8..5b94d8b 100644
+index 6a025660..b174b25c 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -9,6 +9,7 @@
@@ -11,19 +11,19 @@ index 9e0c3a8..5b94d8b 100644
          "symfony/asset-mapper": "6.4.*",
          "symfony/console": "6.4.x-dev",
 diff --git a/composer.lock b/composer.lock
-index 25586dd..dcb4cd9 100644
+index b73961d2..b3a666d6 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "38d3781a95a2e6529019d428bda0581d",
-+    "content-hash": "b89d5cff1119263d38d5607b8fd3cc61",
+-    "content-hash": "dd9b9a9a70089865921de2d79dbed48a",
++    "content-hash": "2cbaa7fab99d5fbcaba4de63b211589d",
      "packages": [
          {
              "name": "composer/semver",
-@@ -1416,6 +1416,82 @@
+@@ -1417,6 +1417,82 @@
              },
              "time": "2023-08-16T21:49:04+00:00"
          },
@@ -106,9 +106,9 @@ index 25586dd..dcb4cd9 100644
          {
              "name": "monolog/monolog",
              "version": "dev-main",
-@@ -5069,6 +5145,101 @@
+@@ -5070,6 +5146,101 @@
              ],
-             "time": "2023-11-09T08:51:37+00:00"
+             "time": "2023-11-20T16:41:16+00:00"
          },
 +        {
 +            "name": "symfony/translation",
@@ -208,7 +208,7 @@ index 25586dd..dcb4cd9 100644
          {
              "name": "symfony/translation-contracts",
              "version": "dev-main",
-@@ -6629,6 +6800,7 @@
+@@ -6631,6 +6802,7 @@
      "aliases": [],
      "minimum-stability": "dev",
      "stability-flags": {
@@ -217,7 +217,7 @@ index 25586dd..dcb4cd9 100644
          "symfony/dotenv": 20,
          "symfony/form": 20,
 diff --git a/config/bundles.php b/config/bundles.php
-index d8894f2..5fd504a 100644
+index d8894f22..5fd504a8 100644
 --- a/config/bundles.php
 +++ b/config/bundles.php
 @@ -13,4 +13,5 @@ return [
@@ -228,7 +228,7 @@ index d8894f2..5fd504a 100644
  ];
 diff --git a/config/packages/translation.yaml b/config/packages/translation.yaml
 new file mode 100644
-index 0000000..888f0ba
+index 00000000..888f0ba8
 --- /dev/null
 +++ b/config/packages/translation.yaml
 @@ -0,0 +1,15 @@
@@ -248,7 +248,7 @@ index 0000000..888f0ba
 +#            phrase:
 +#                dsn: '%env(PHRASE_DSN)%'
 diff --git a/symfony.lock b/symfony.lock
-index 7064e79..39f9159 100644
+index 7064e793..39f91599 100644
 --- a/symfony.lock
 +++ b/symfony.lock
 @@ -38,6 +38,9 @@
@@ -282,7 +282,7 @@ index 7064e79..39f9159 100644
          "version": "6.4",
          "recipe": {
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index e58ccf0..441e2a6 100644
+index e58ccf02..441e2a68 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -47,7 +47,7 @@
@@ -296,4 +296,4 @@ index e58ccf0..441e2a6 100644
                      </tbody>
 diff --git a/translations/.gitignore b/translations/.gitignore
 new file mode 100644
-index 0000000..e69de29
+index 00000000..e69de29b

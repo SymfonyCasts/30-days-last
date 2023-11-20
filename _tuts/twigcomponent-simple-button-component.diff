@@ -1,6 +1,6 @@
 diff --git a/src/Twig/Components/Button.php b/src/Twig/Components/Button.php
 new file mode 100644
-index 0000000..f09ea9a
+index 00000000..f09ea9a5
 --- /dev/null
 +++ b/src/Twig/Components/Button.php
 @@ -0,0 +1,11 @@
@@ -17,13 +17,13 @@ index 0000000..f09ea9a
 +}
 diff --git a/templates/components/Button.html.twig b/templates/components/Button.html.twig
 new file mode 100644
-index 0000000..82eb1f3
+index 00000000..82eb1f31
 --- /dev/null
 +++ b/templates/components/Button.html.twig
 @@ -0,0 +1 @@
 +<button {{ attributes }}>Press me!</button>
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index 9265eb8..2eefb3c 100644
+index 9265eb8a..2eefb3cf 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
 @@ -2,6 +2,11 @@

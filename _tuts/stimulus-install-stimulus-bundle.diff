@@ -1,5 +1,5 @@
 diff --git a/assets/app.js b/assets/app.js
-index 91c6f5b..03295f9 100644
+index 91c6f5bf..03295f96 100644
 --- a/assets/app.js
 +++ b/assets/app.js
 @@ -1,3 +1,4 @@
@@ -9,7 +9,7 @@ index 91c6f5b..03295f9 100644
   *
 diff --git a/assets/bootstrap.js b/assets/bootstrap.js
 new file mode 100644
-index 0000000..d4e50c9
+index 00000000..d4e50c91
 --- /dev/null
 +++ b/assets/bootstrap.js
 @@ -0,0 +1,5 @@
@@ -20,7 +20,7 @@ index 0000000..d4e50c9
 +// app.register('some_controller_name', SomeImportedController);
 diff --git a/assets/controllers.json b/assets/controllers.json
 new file mode 100644
-index 0000000..a1c6e90
+index 00000000..a1c6e90c
 --- /dev/null
 +++ b/assets/controllers.json
 @@ -0,0 +1,4 @@
@@ -30,7 +30,7 @@ index 0000000..a1c6e90
 +}
 diff --git a/assets/controllers/hello_controller.js b/assets/controllers/hello_controller.js
 new file mode 100644
-index 0000000..e847027
+index 00000000..e847027b
 --- /dev/null
 +++ b/assets/controllers/hello_controller.js
 @@ -0,0 +1,16 @@
@@ -51,7 +51,7 @@ index 0000000..e847027
 +    }
 +}
 diff --git a/composer.json b/composer.json
-index 0d340ce..0413a8c 100644
+index 69005dbd..a582fb70 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -20,6 +20,7 @@
@@ -63,36 +63,19 @@ index 0d340ce..0413a8c 100644
          "symfony/validator": "6.4.x-dev",
          "symfony/yaml": "6.4.x-dev",
 diff --git a/composer.lock b/composer.lock
-index 0c9b068..4e756b7 100644
+index 938c2742..76cb1093 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "35f0aa87aa9cb1249acd19cc4b178fd6",
-+    "content-hash": "b03121abde2a98b45f9fe0dfaaba76f4",
+-    "content-hash": "e89cf74fb100c1bb2e50e1e4c03a526f",
++    "content-hash": "7fffce856c4c1204f5743ad0e0779ab3",
      "packages": [
          {
              "name": "composer/semver",
-@@ -659,6 +659,7 @@
-                 "doctrine/doctrine-bundle": "^2.4",
-                 "doctrine/migrations": "^3.2",
-                 "php": "^7.2|^8.0",
-+                "symfony/deprecation-contracts": "^2.1 || ^3",
-                 "symfony/framework-bundle": "^5.4 || ^6.0 || ^7.0"
-             },
-             "require-dev": {
-@@ -673,6 +674,8 @@
-                 "phpunit/phpunit": "^8.5|^9.5",
-                 "psalm/plugin-phpunit": "^0.18.4",
-                 "psalm/plugin-symfony": "^3 || ^5",
-+                "symfony/phpunit-bridge": "^6.3 || ^7",
-+                "symfony/var-exporter": "^5.4 || ^6 || ^7",
-                 "vimeo/psalm": "^4.30 || ^5.15"
-             },
-             "type": "symfony-bundle",
-@@ -5116,6 +5119,76 @@
+@@ -5117,6 +5117,76 @@
              ],
              "time": "2023-07-30T20:28:31+00:00"
          },
@@ -169,7 +152,7 @@ index 0c9b068..4e756b7 100644
          {
              "name": "symfony/stopwatch",
              "version": "6.4.x-dev",
-@@ -7040,6 +7113,7 @@
+@@ -7043,6 +7113,7 @@
          "symfony/framework-bundle": 20,
          "symfony/runtime": 20,
          "symfony/security-csrf": 20,
@@ -178,17 +161,17 @@ index 0c9b068..4e756b7 100644
          "symfony/validator": 20,
          "symfony/yaml": 20,
 diff --git a/config/bundles.php b/config/bundles.php
-index b7c1af7..3bb7c9d 100644
+index 1a07b4a9..b43215ca 100644
 --- a/config/bundles.php
 +++ b/config/bundles.php
-@@ -15,4 +15,5 @@ return [
-     Symfonycasts\TailwindBundle\SymfonycastsTailwindBundle::class => ['all' => true],
+@@ -16,4 +16,5 @@ return [
      Knp\Bundle\TimeBundle\KnpTimeBundle::class => ['all' => true],
      TalesFromADev\FlowbiteBundle\FlowbiteBundle::class => ['all' => true],
+     TalesFromADev\Twig\Extra\Tailwind\Bridge\Symfony\Bundle\TalesFromADevTwigExtraTailwindBundle::class => ['all' => true],
 +    Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
  ];
 diff --git a/importmap.php b/importmap.php
-index 0c489cc..6023f8e 100644
+index 0c489cca..6023f8e3 100644
 --- a/importmap.php
 +++ b/importmap.php
 @@ -21,4 +21,10 @@ return [
@@ -203,7 +186,7 @@ index 0c489cc..6023f8e 100644
 +    ],
  ];
 diff --git a/symfony.lock b/symfony.lock
-index 84b0d7b..7f9e5af 100644
+index edbb0ff7..6270a914 100644
 --- a/symfony.lock
 +++ b/symfony.lock
 @@ -145,6 +145,20 @@
@@ -228,7 +211,7 @@ index 84b0d7b..7f9e5af 100644
          "version": "6.4",
          "recipe": {
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 26fa709..96d1713 100644
+index 26fa7096..96d17132 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -6,6 +6,7 @@

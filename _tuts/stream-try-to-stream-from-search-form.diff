@@ -1,5 +1,5 @@
 diff --git a/src/Controller/MainController.php b/src/Controller/MainController.php
-index 1ed24ef..8746a98 100644
+index 1ed24eff..8746a983 100644
 --- a/src/Controller/MainController.php
 +++ b/src/Controller/MainController.php
 @@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +34,7 @@ index 1ed24ef..8746a98 100644
              'voyages' => $pager,
              'planets' => $planetRepository->findAll(),
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 09096a5..698b4d8 100644
+index 09096a52..698b4d87 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -136,3 +136,9 @@

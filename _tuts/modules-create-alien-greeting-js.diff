@@ -1,6 +1,6 @@
 diff --git a/assets/lib/alien-greeting.js b/assets/lib/alien-greeting.js
 new file mode 100644
-index 0000000..c86e6ad
+index 00000000..c86e6ad2
 --- /dev/null
 +++ b/assets/lib/alien-greeting.js
 @@ -0,0 +1,3 @@

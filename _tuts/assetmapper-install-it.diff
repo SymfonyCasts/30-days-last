@@ -1,5 +1,5 @@
 diff --git a/.gitignore b/.gitignore
-index a67f91e..4b484c6 100644
+index a67f91e2..4b484c6c 100644
 --- a/.gitignore
 +++ b/.gitignore
 @@ -8,3 +8,8 @@
@@ -13,7 +13,7 @@ index a67f91e..4b484c6 100644
 +###< symfony/asset-mapper ###
 diff --git a/assets/app.js b/assets/app.js
 new file mode 100644
-index 0000000..e3b03ad
+index 00000000..e3b03ade
 --- /dev/null
 +++ b/assets/app.js
 @@ -0,0 +1,9 @@
@@ -28,7 +28,7 @@ index 0000000..e3b03ad
 +console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉')
 diff --git a/assets/styles/app.css b/assets/styles/app.css
 new file mode 100644
-index 0000000..dd6181a
+index 00000000..dd6181a1
 --- /dev/null
 +++ b/assets/styles/app.css
 @@ -0,0 +1,3 @@
@@ -36,7 +36,7 @@ index 0000000..dd6181a
 +    background-color: skyblue;
 +}
 diff --git a/composer.json b/composer.json
-index e41ffb1..899b08d 100644
+index 5fa5815d..55fc685c 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -9,6 +9,7 @@
@@ -48,15 +48,15 @@ index e41ffb1..899b08d 100644
          "symfony/dotenv": "6.4.x-dev",
          "symfony/flex": "^2",
 diff --git a/composer.lock b/composer.lock
-index bea8d2c..af9df23 100644
+index b0eac01b..9cafa4df 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,8 +4,90 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "3abebaab5d0b1127a50d0a007a1ae492",
-+    "content-hash": "abecf8899b6523ba3698fd8495b81081",
+-    "content-hash": "becba4b68eb58feb1b0fcd8f1afd47f7",
++    "content-hash": "4e1988ef5dd6aba53169ddaaa5859e3c",
      "packages": [
 +        {
 +            "name": "composer/semver",
@@ -143,7 +143,7 @@ index bea8d2c..af9df23 100644
          {
              "name": "doctrine/cache",
              "version": "2.2.x-dev",
-@@ -1647,6 +1729,85 @@
+@@ -1648,6 +1730,85 @@
              },
              "time": "2021-07-14T16:46:02+00:00"
          },
@@ -153,12 +153,12 @@ index bea8d2c..af9df23 100644
 +            "source": {
 +                "type": "git",
 +                "url": "https://github.com/symfony/asset-mapper.git",
-+                "reference": "93e7adcdc5db720eb8099d85ed79165f2d38f725"
++                "reference": "181155536524d69bf46824df3e0a4347d1dd51cf"
 +            },
 +            "dist": {
 +                "type": "zip",
-+                "url": "https://api.github.com/repos/symfony/asset-mapper/zipball/93e7adcdc5db720eb8099d85ed79165f2d38f725",
-+                "reference": "93e7adcdc5db720eb8099d85ed79165f2d38f725",
++                "url": "https://api.github.com/repos/symfony/asset-mapper/zipball/181155536524d69bf46824df3e0a4347d1dd51cf",
++                "reference": "181155536524d69bf46824df3e0a4347d1dd51cf",
 +                "shasum": ""
 +            },
 +            "require": {
@@ -224,14 +224,14 @@ index bea8d2c..af9df23 100644
 +                    "type": "tidelift"
 +                }
 +            ],
-+            "time": "2023-11-10T07:35:33+00:00"
++            "time": "2023-11-14T09:44:27+00:00"
 +        },
          {
              "name": "symfony/cache",
              "version": "6.4.x-dev",
-@@ -2990,6 +3151,178 @@
+@@ -2991,6 +3152,178 @@
              ],
-             "time": "2023-11-09T14:41:31+00:00"
+             "time": "2023-11-20T16:10:54+00:00"
          },
 +        {
 +            "name": "symfony/http-client",
@@ -332,12 +332,12 @@ index bea8d2c..af9df23 100644
 +            "source": {
 +                "type": "git",
 +                "url": "https://github.com/symfony/http-client-contracts.git",
-+                "reference": "697f1d16c15d3f86970f59b043278f4d7f5eb25e"
++                "reference": "1ee70e699b41909c209a0c930f11034b93578654"
 +            },
 +            "dist": {
 +                "type": "zip",
-+                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/697f1d16c15d3f86970f59b043278f4d7f5eb25e",
-+                "reference": "697f1d16c15d3f86970f59b043278f4d7f5eb25e",
++                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/1ee70e699b41909c209a0c930f11034b93578654",
++                "reference": "1ee70e699b41909c209a0c930f11034b93578654",
 +                "shasum": ""
 +            },
 +            "require": {
@@ -387,7 +387,7 @@ index bea8d2c..af9df23 100644
 +                "standards"
 +            ],
 +            "support": {
-+                "source": "https://github.com/symfony/http-client-contracts/tree/main"
++                "source": "https://github.com/symfony/http-client-contracts/tree/v3.4.0"
 +            },
 +            "funding": [
 +                {
@@ -403,14 +403,14 @@ index bea8d2c..af9df23 100644
 +                    "type": "tidelift"
 +                }
 +            ],
-+            "time": "2023-11-02T09:13:47+00:00"
++            "time": "2023-07-30T20:28:31+00:00"
 +        },
          {
              "name": "symfony/http-foundation",
              "version": "6.4.x-dev",
 diff --git a/config/packages/asset_mapper.yaml b/config/packages/asset_mapper.yaml
 new file mode 100644
-index 0000000..d1ac653
+index 00000000..d1ac653b
 --- /dev/null
 +++ b/config/packages/asset_mapper.yaml
 @@ -0,0 +1,5 @@
@@ -421,7 +421,7 @@ index 0000000..d1ac653
 +            - assets/
 diff --git a/importmap.php b/importmap.php
 new file mode 100644
-index 0000000..6d29807
+index 00000000..6d298076
 --- /dev/null
 +++ b/importmap.php
 @@ -0,0 +1,21 @@
@@ -447,7 +447,7 @@ index 0000000..6d29807
 +    ],
 +];
 diff --git a/symfony.lock b/symfony.lock
-index b80ba6b..e036ac9 100644
+index b80ba6b5..e036ac9d 100644
 --- a/symfony.lock
 +++ b/symfony.lock
 @@ -38,6 +38,21 @@
@@ -473,7 +473,7 @@ index b80ba6b..e036ac9 100644
          "version": "6.3",
          "recipe": {
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 047838a..151e7e5 100644
+index 047838a0..151e7e5e 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -9,6 +9,7 @@

@@ -1,5 +1,5 @@
 diff --git a/assets/controllers/closeable_controller.js b/assets/controllers/closeable_controller.js
-index 975b77e..138f526 100644
+index 975b77e0..138f526f 100644
 --- a/assets/controllers/closeable_controller.js
 +++ b/assets/controllers/closeable_controller.js
 @@ -23,6 +23,9 @@ export default class extends Controller {

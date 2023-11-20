@@ -436,11 +436,6 @@
             "description": null
         },
         {
-            "id": "delete-me-1",
-            "name": "delete me 1",
-            "description": null
-        },
-        {
             "id": "forminframe-fix-action-on-all-pages",
             "name": "FormInFrame: Fix action on all pages",
             "description": null
@@ -583,16 +578,6 @@
         {
             "id": "modal-use-base-template-for-modal",
             "name": "Modal: use base template for modal",
-            "description": null
-        },
-        {
-            "id": "delete-me-3",
-            "name": "delete me 3",
-            "description": null
-        },
-        {
-            "id": "delete-me-4",
-            "name": "delete me 4",
             "description": null
         },
         {
@@ -781,11 +766,6 @@
             "description": null
         },
         {
-            "id": "delete-me-5",
-            "name": "delete me 5",
-            "description": null
-        },
-        {
             "id": "modalcomponent-include-delete",
             "name": "ModalComponent: Include delete",
             "description": null
@@ -886,11 +866,6 @@
             "description": null
         },
         {
-            "id": "delete-me-6",
-            "name": "delete me 6",
-            "description": null
-        },
-        {
             "id": "autovalidation-convert-to-live-component",
             "name": "AutoValidation: Convert to live component",
             "description": null
@@ -913,11 +888,6 @@
         {
             "id": "dyanmicforms-add-a-dynamic-field",
             "name": "DyanmicForms: Add a dynamic field",
-            "description": null
-        },
-        {
-            "id": "delete-me-7",
-            "name": "delete me 7",
             "description": null
         }
     ],

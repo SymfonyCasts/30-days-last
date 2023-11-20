@@ -1,0 +1,95 @@
+diff --git a/composer.json b/composer.json
+index 2946ded..2cfbd19 100644
+--- a/composer.json
++++ b/composer.json
+@@ -31,6 +31,7 @@
+         "symfony/ux-twig-component": "2.x-dev",
+         "symfony/validator": "6.4.x-dev",
+         "symfony/yaml": "6.4.x-dev",
++        "symfonycasts/dynamic-forms": "dev-main",
+         "symfonycasts/tailwind-bundle": "dev-main",
+         "tales-from-a-dev/flowbite-bundle": "dev-main",
+         "twig/extra-bundle": "^2.12|^3.0",
+diff --git a/composer.lock b/composer.lock
+index b08a63d..b7e645f 100644
+--- a/composer.lock
++++ b/composer.lock
+@@ -4,7 +4,7 @@
+         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+         "This file is @generated automatically"
+     ],
+-    "content-hash": "0672a5367abb14efdefcdf853ea3404e",
++    "content-hash": "6ebea149bb75ba7aa486c4c1fcefa19c",
+     "packages": [
+         {
+             "name": "babdev/pagerfanta-bundle",
+@@ -6718,6 +6718,61 @@
+             ],
+             "time": "2023-11-06T11:00:25+00:00"
+         },
++        {
++            "name": "symfonycasts/dynamic-forms",
++            "version": "dev-main",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/SymfonyCasts/dynamic-forms.git",
++                "reference": "e50c06f6bc95ee12a6c2a1bc3a31b9cbd3b62eea"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/SymfonyCasts/dynamic-forms/zipball/e50c06f6bc95ee12a6c2a1bc3a31b9cbd3b62eea",
++                "reference": "e50c06f6bc95ee12a6c2a1bc3a31b9cbd3b62eea",
++                "shasum": ""
++            },
++            "require": {
++                "php": ">=8.1",
++                "symfony/form": "^5.4|^6.3|^7.0"
++            },
++            "require-dev": {
++                "phpstan/phpstan": "^1.11",
++                "symfony/framework-bundle": "^6.3|^7.0",
++                "symfony/options-resolver": "^5.4|^6.3|^7.0",
++                "symfony/phpunit-bridge": "^5.4|^6.3|^7.0",
++                "symfony/twig-bundle": "^5.4|^6.3|^7.0",
++                "twig/twig": "^2.15|^3.0",
++                "zenstruck/browser": "^1.4"
++            },
++            "default-branch": true,
++            "type": "library",
++            "autoload": {
++                "psr-4": {
++                    "Symfonycasts\\DynamicForms\\": "src"
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "Ryan Weaver",
++                    "homepage": "https://symfonycasts.com"
++                }
++            ],
++            "description": "Add dynamic/dependent fields to Symfony forms",
++            "keywords": [
++                "Forms",
++                "symfony"
++            ],
++            "support": {
++                "issues": "https://github.com/SymfonyCasts/dynamic-forms/issues",
++                "source": "https://github.com/SymfonyCasts/dynamic-forms/tree/main"
++            },
++            "time": "2023-10-09T16:25:08+00:00"
++        },
+         {
+             "name": "symfonycasts/tailwind-bundle",
+             "version": "dev-main",
+@@ -7811,6 +7866,7 @@
+         "symfony/ux-twig-component": 20,
+         "symfony/validator": 20,
+         "symfony/yaml": 20,
++        "symfonycasts/dynamic-forms": 20,
+         "symfonycasts/tailwind-bundle": 20,
+         "tales-from-a-dev/flowbite-bundle": 20,
+         "symfony/debug-bundle": 20,

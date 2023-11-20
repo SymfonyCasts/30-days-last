@@ -1,0 +1,45 @@
+diff --git a/src/Form/VoyageType.php b/src/Form/VoyageType.php
+index 76b445f..7adc8a8 100644
+--- a/src/Form/VoyageType.php
++++ b/src/Form/VoyageType.php
+@@ -2,16 +2,21 @@
+ 
+ namespace App\Form;
+ 
++use App\Entity\Planet;
+ use App\Entity\Voyage;
+ use Symfony\Component\Form\AbstractType;
++use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+ use Symfony\Component\Form\Extension\Core\Type\DateType;
+ use Symfony\Component\Form\FormBuilderInterface;
+ use Symfony\Component\OptionsResolver\OptionsResolver;
++use Symfonycasts\DynamicForms\DependentField;
++use Symfonycasts\DynamicForms\DynamicFormBuilder;
+ 
+ class VoyageType extends AbstractType
+ {
+     public function buildForm(FormBuilderInterface $builder, array $options): void
+     {
++        $builder = new DynamicFormBuilder($builder);
+         $builder
+             ->add('purpose')
+             ->add('leaveAt', DateType::class, [
+@@ -22,6 +27,18 @@ class VoyageType extends AbstractType
+                 'placeholder' => 'Choose a planet',
+                 'autocomplete' => true,
+             ])
++            ->addDependent('wormholeUpgrade', ['planet'], function (DependentField $field, ?Planet $planet) {
++                if (!$planet || $planet->isInMilkyWay()) {
++                    return;
++                }
++
++                $field->add(ChoiceType::class, [
++                    'choices' => [
++                        'Yes' => true,
++                        'No' => false,
++                    ],
++                ]);
++            })
+         ;
+     }
+ 

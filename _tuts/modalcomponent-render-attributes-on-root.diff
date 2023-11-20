@@ -1,14 +1,14 @@
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index 8b5c5af..a1ac18f 100644
+index ab86712..d09dc69 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
 @@ -1,6 +1,8 @@
  <div
--    {{ stimulus_controller('modal') }}
--    {{ stimulus_action('modal', 'clickOutside', 'click') }}
+-    data-controller="modal"
+-    data-action="click->modal#clickOutside"
 +    {{ attributes.defaults({
-+        ...stimulus_controller('modal'),
-+        ...stimulus_action('modal', 'clickOutside', 'click'),
++        'data-controller': 'modal',
++        'data-action': 'click->modal#clickOutside',
 +    }) }}
  >
      <dialog

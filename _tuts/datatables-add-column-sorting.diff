@@ -30,7 +30,7 @@ index 8fda034..1ed24ef 100644
      }
  }
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 9def390..00d9969 100644
+index e5ba1ef..a1e5a3b 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -2,6 +2,29 @@

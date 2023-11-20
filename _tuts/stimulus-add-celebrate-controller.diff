@@ -28,18 +28,18 @@ index 0000000..832f17b
 +    }
 +}
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 16ba943..6370838 100644
+index 26fa709..e894f51 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -17,7 +17,11 @@
              <header class="my-8 px-4">
                  <nav class="flex items-center justify-between mb-4">
                      <div class="flex items-center">
--                        <a href="{{ path    ('app_homepage') }}">
+-                        <a href="{{ path('app_homepage') }}">
 +                        <a
-+                            href="{{ path    ('app_homepage') }}"
-+                            {{ stimulus_controller('celebrate') }}
-+                            {{ stimulus_action('celebrate', 'poof', 'mouseover') }}
++                            href="{{ path('app_homepage') }}"
++                            data-controller="celebrate"
++                            data-action="mouseover->celebrate#poof"
 +                        >
                              <img src="{{ asset('images/logo.png') }}" width="50" alt="Space Inviters Logo" >
                          </a>

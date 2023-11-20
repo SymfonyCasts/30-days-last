@@ -14,14 +14,14 @@ index 89e2f63..084b4ea 100644
 +    }
  }
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index 257408f..74af12a 100644
+index a9844b6..dc17bd2 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
 @@ -6,6 +6,7 @@
  <div class="m-4 p-4 bg-gray-800 rounded-lg">
      <div
-         {{ stimulus_controller('modal') }}
-+        {{ stimulus_action('modal', 'clickOutside', 'click') }}
+         data-controller="modal"
++        data-action="click->modal#clickOutside"
          class="flex justify-between"
      >
          <h1 class="text-xl font-semibold text-white mb-4">Voyages</h1>

@@ -18,11 +18,11 @@ index 1c5a760..e1f85f7 100644
      public function edit(Request $request, Planet $planet, EntityManagerInterface $entityManager): Response
      {
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 6a7a910..82c8a5b 100644
+index 40059a4..7659797 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
-@@ -60,14 +60,9 @@
-                                             {{ stimulus_target('popover', 'card') }}
+@@ -57,14 +57,9 @@
+                                             data-popover-target="card"
                                              class="max-w-sm rounded shadow-lg bg-gray-900 absolute left-0 bottom-8"
                                          >
 -                                            <div class="px-6 py-4">

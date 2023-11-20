@@ -21,10 +21,10 @@ index 4fb61eb..f48201c 100644
  
      <twig:Button variant="danger">
 diff --git a/templates/voyage/_row.html.twig b/templates/voyage/_row.html.twig
-index 26baaca..44e0d5e 100644
+index 2e3f3c3..7b359e2 100644
 --- a/templates/voyage/_row.html.twig
 +++ b/templates/voyage/_row.html.twig
-@@ -24,6 +24,13 @@
+@@ -23,6 +23,13 @@
              <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
                  Delete this thrilling voyage???
              </h3>

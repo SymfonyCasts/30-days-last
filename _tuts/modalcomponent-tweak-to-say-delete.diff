@@ -1,18 +1,18 @@
 diff --git a/templates/voyage/_row.html.twig b/templates/voyage/_row.html.twig
-index 01c5f1d..cbaac24 100644
+index 01c5f1d..192b663 100644
 --- a/templates/voyage/_row.html.twig
 +++ b/templates/voyage/_row.html.twig
-@@ -9,10 +9,9 @@
+@@ -9,10 +9,8 @@
              class="ml-4 text-yellow-400 hover:text-yellow-600"
              data-turbo-frame="modal"
          >edit</a>
 -        <a
 -            href="{{ path('app_voyage_edit', {'id': voyage.id}) }}"
 -            class="ml-4 text-yellow-400 hover:text-yellow-600"
+-            data-turbo-frame="modal"
+-        >edit</a>
 +        <button
 +            class="ml-4 text-red-400 hover:text-red-600"
-             data-turbo-frame="modal"
--        >edit</a>
 +        >delete</button>
      </td>
  </tr>

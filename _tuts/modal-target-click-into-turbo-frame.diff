@@ -1,5 +1,5 @@
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index 1025813..0094e4e 100644
+index e273a3b..a3d0e17 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
 @@ -11,13 +11,14 @@
@@ -7,7 +7,7 @@ index 1025813..0094e4e 100644
          <h1 class="text-xl font-semibold text-white mb-4">Voyages</h1>
  
 -        <button
--            {{ stimulus_action('modal', 'open') }}
+-            data-action="modal#open"
 +        <a
 +            href="{{ path('app_voyage_new') }}"
 +            data-turbo-frame="modal"

@@ -1,9 +1,9 @@
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 0643cc2..52ec2af 100644
+index ff4e080..dc001cd 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -54,6 +54,26 @@
-                         {{ stimulus_action('autosubmit', 'debouncedSubmit') }}
+                         data-action="autosubmit#debouncedSubmit"
                          autofocus
                      >
 +

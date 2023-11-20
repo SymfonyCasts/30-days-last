@@ -1,11 +1,11 @@
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index f0e5d9e..8bf9929 100644
+index b4a93c2..dd58b5d 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -40,6 +40,7 @@
                  action="{{ path('app_homepage') }}"
                  class="mb-6 flex justify-between"
-                 {{ stimulus_controller('autosubmit') }}
+                 data-controller="autosubmit"
 +                data-turbo-frame="voyage-list"
              >
                  <input

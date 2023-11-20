@@ -24,7 +24,7 @@ index cfbf534..e4bcfca 100644
    ],
  }
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 8bf9929..ac3311b 100644
+index dd58b5d..513d02e 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -54,7 +54,7 @@

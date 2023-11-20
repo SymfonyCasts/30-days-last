@@ -1,21 +1,21 @@
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index 4920c4b..0392d51 100644
+index faa53fd..90e6fc4 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
 @@ -4,6 +4,8 @@
-         ...stimulus_action('modal', 'clickOutside', 'click'),
+         'data-action': 'click->modal#clickOutside',
      }) }}
  >
 +    {% block trigger %}{% endblock %}
 +
      <dialog
          class="open:flex bg-gray-800 rounded-lg shadow-xl inset-0 w-full md:w-fit md:max-w-[50%] md:min-w-[50%] animate-fade-in backdrop:bg-slate-600 backdrop:opacity-80"
-         {{ stimulus_target('modal', 'dialog') }}
+         data-modal-target="dialog"
 diff --git a/templates/voyage/_row.html.twig b/templates/voyage/_row.html.twig
-index 43ca5b1..83706ea 100644
+index 19717bc..aede624 100644
 --- a/templates/voyage/_row.html.twig
 +++ b/templates/voyage/_row.html.twig
-@@ -2,18 +2,23 @@
+@@ -2,17 +2,22 @@
      <td class="px-6 py-4 whitespace-nowrap">{{ voyage.id }}</td>
      <td class="px-6 py-4">{{ voyage.purpose }}</td>
      <td class="px-6 py-4 whitespace-nowrap">{{ voyage.leaveAt ? voyage.leaveAt|date('Y-m-d H:i:s') : '' }}</td>
@@ -29,15 +29,13 @@ index 43ca5b1..83706ea 100644
          >edit</a>
 -        <button
 -            class="ml-4 text-red-400 hover:text-red-600"
--            data-turbo-frame="modal"
 -        >delete</button>
 +
          <twig:Modal>
 +            <twig:block name="trigger">
 +                <button
 +                    class="ml-4 text-red-400 hover:text-red-600"
-+                    data-turbo-frame="modal"
-+                    {{ stimulus_action('modal', 'open') }}
++                    data-action="modal#open"
 +                >delete</button>
 +            </twig:block>
 +

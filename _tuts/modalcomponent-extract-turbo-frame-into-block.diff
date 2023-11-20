@@ -1,25 +1,24 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index f106dd9..09757de 100644
+index b197a6d..bd803fc 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -53,6 +53,14 @@
+@@ -52,5 +52,14 @@
+         <div id="flash-container">
              {{ include('_flashes.html.twig') }}
          </div>
- 
--        <twig:Modal />
 +        <twig:Modal>
 +            <twig:block name="full_content">
 +                <turbo-frame
 +                    id="modal"
-+                    {{ stimulus_target('modal', 'modalContent') }}
-+                    {{ stimulus_action('modal', 'showLoading', 'turbo:before-fetch-request') }}
++                    data-modal-target="modalContent"
++                    data-action="turbo:before-fetch-request->modal#showLoading"
 +                ></turbo-frame>
 +            </twig:block>
 +        </twig:Modal>
      </body>
  </html>
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index a1ac18f..d462f59 100644
+index d09dc69..3dfce91 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
 @@ -11,11 +11,11 @@
@@ -28,11 +27,11 @@ index a1ac18f..d462f59 100644
              <div class="grow overflow-auto p-1">
 -                <turbo-frame
 -                    id="modal"
--                    {{ stimulus_target('modal', 'modalContent') }}
--                    {{ stimulus_action('modal', 'showLoading', 'turbo:before-fetch-request') }}
+-                    data-modal-target="modalContent"
+-                    data-action="turbo:before-fetch-request->modal#showLoading"
 -                ></turbo-frame>
 +                {% block full_content %}
-+                    <div {{ stimulus_target('modal', 'modalContent') }}>
++                    <div data-modal-target="modalContent">
 +                        {% block content %}{% endblock %}
 +                    </div>
 +                {% endblock %}

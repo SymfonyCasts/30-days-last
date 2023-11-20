@@ -1,5 +1,5 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 554dae0..16ba943 100644
+index 554dae0..26fa709 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -12,9 +12,36 @@
@@ -13,7 +13,7 @@ index 554dae0..16ba943 100644
 +            <header class="my-8 px-4">
 +                <nav class="flex items-center justify-between mb-4">
 +                    <div class="flex items-center">
-+                        <a href="{{ path    ('app_homepage') }}">
++                        <a href="{{ path('app_homepage') }}">
 +                            <img src="{{ asset('images/logo.png') }}" width="50" alt="Space Inviters Logo" >
 +                        </a>
 +                        <a href="{{ path('app_homepage') }}" class="text-xl ml-3">Space Inviters</a>

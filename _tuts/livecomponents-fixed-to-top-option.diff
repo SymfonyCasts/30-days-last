@@ -1,5 +1,5 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index d05c02f..b876b55 100644
+index 5e7acf4..a315639 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -29,7 +29,7 @@
@@ -12,7 +12,7 @@ index d05c02f..b876b55 100644
                              <div
                                  class="hidden md:flex pr-10 items-center space-x-2 border-2 border-gray-900 rounded-lg p-2 bg-gray-800 text-white cursor-pointer"
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index 2267e1a..4d26fd3 100644
+index cf6eeab..d170276 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
 @@ -1,4 +1,9 @@
@@ -25,13 +25,13 @@ index 2267e1a..4d26fd3 100644
 +%}
  <div
      {{ attributes.defaults({
-         ...stimulus_controller('modal'),
+         'data-controller': 'modal',
 @@ -8,7 +13,7 @@
      {% block trigger %}{% endblock %}
  
      <dialog
 -        class="open:flex bg-gray-800 rounded-lg shadow-xl inset-0 w-full md:w-fit md:max-w-[50%] {{ allowSmallWidth ? '' : 'md:min-w-[50%] ' }}animate-fade-in backdrop:bg-slate-600 backdrop:opacity-80"
 +        class="open:flex bg-gray-800 rounded-lg shadow-xl inset-0 w-full md:w-fit md:max-w-[50%] {{ allowSmallWidth ? '' : 'md:min-w-[50%] ' }}animate-fade-in backdrop:bg-slate-600 backdrop:opacity-80{{ fixedTop ? ' mt-14' : '' }}"
-         {{ stimulus_target('modal', 'dialog') }}
-         {{ stimulus_action('modal', 'close', 'close') }}
+         data-modal-target="dialog"
+         data-action="close->modal#close"
      >

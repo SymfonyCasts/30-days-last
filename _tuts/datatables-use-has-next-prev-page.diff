@@ -1,8 +1,8 @@
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 76f7bdb..15f09fc 100644
+index 548a49d..0848798 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
-@@ -84,9 +84,12 @@
+@@ -81,9 +81,12 @@
                  </table>
              </div>
              <div class="flex items-center mt-6 space-x-4">

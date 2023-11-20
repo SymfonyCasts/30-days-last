@@ -1,9 +1,9 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 09757de..1ba1667 100644
+index bd803fc..66cb2e2 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -61,6 +61,21 @@
-                     {{ stimulus_action('modal', 'showLoading', 'turbo:before-fetch-request') }}
+@@ -60,6 +60,21 @@
+                     data-action="turbo:before-fetch-request->modal#showLoading"
                  ></turbo-frame>
              </twig:block>
 +            <twig:block name="loading_template">
@@ -25,14 +25,14 @@ index 09757de..1ba1667 100644
      </body>
  </html>
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index d462f59..4920c4b 100644
+index 3dfce91..faa53fd 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
 @@ -20,19 +20,9 @@
          </div>
      </dialog>
  
--    <template {{ stimulus_target('modal', 'loadingTemplate') }}>
+-    <template data-modal-target="loadingTemplate">
 -        <div class="bg-space-pattern bg-cover rounded-lg p-8">
 -            <div class="space-y-2">
 -                <div class="h-4 bg-gray-700 rounded w-3/4 animate-pulse"></div>
@@ -48,7 +48,7 @@ index d462f59..4920c4b 100644
 -        </div>
 -    </template>
 +    {% if block('loading_template') %}
-+        <template {{ stimulus_target('modal', 'loadingTemplate') }}>
++        <template data-modal-target="loadingTemplate">
 +            {% block loading_template %}{% endblock %}
 +        </template>
 +    {% endif %}

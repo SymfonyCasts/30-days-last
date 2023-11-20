@@ -1,5 +1,5 @@
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index e126e47..4ec349a 100644
+index 34b7ff9..d11ec65 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
 @@ -1,4 +1,4 @@
@@ -7,7 +7,7 @@ index e126e47..4ec349a 100644
 +{% props allowSmallWidth=false, closeButton=false %}
  <div
      {{ attributes.defaults({
-         ...stimulus_controller('modal'),
+         'data-controller': 'modal',
 @@ -21,6 +21,14 @@
                  {% endblock %}
              </div>
@@ -15,7 +15,7 @@ index e126e47..4ec349a 100644
 +        {% if closeButton %}
 +            <button
 +                class="absolute right-4 top-3 text-white pl-3 flex items-center opacity-70 transition-opacity hover:opacity-100"
-+                {{ stimulus_action('modal', 'close') }}
++                data-action="modal#close"
 +            >
 +                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
 +            </button>
@@ -24,7 +24,7 @@ index e126e47..4ec349a 100644
  
      {% if block('loading_template') %}
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 52ec2af..fdb7ed1 100644
+index dc001cd..d101e03 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -55,7 +55,7 @@

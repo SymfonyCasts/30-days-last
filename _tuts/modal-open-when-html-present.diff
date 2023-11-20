@@ -36,7 +36,7 @@ index 084b4ea..d3784e8 100644
      open() {
          this.dialogTarget.showModal();
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 5cce142..8276d36 100644
+index 7dba50e..5d6cfcb 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -64,7 +64,7 @@
@@ -44,7 +44,7 @@ index 5cce142..8276d36 100644
                  <div class="flex grow p-5">
                      <div class="grow overflow-auto p-1">
 -                        <turbo-frame id="modal"></turbo-frame>
-+                        <turbo-frame id="modal" {{ stimulus_target('modal', 'modalContent') }}></turbo-frame>
++                        <turbo-frame id="modal" data-modal-target="modalContent"></turbo-frame>
                      </div>
                  </div>
              </dialog>

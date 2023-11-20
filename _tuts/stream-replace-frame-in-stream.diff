@@ -12,7 +12,7 @@ index 8746a98..fe24f50 100644
          }
  
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 9c35741..cccefd2 100644
+index 50b1227..88ed7cb 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -55,6 +55,7 @@
@@ -23,7 +23,7 @@ index 9c35741..cccefd2 100644
              <turbo-frame id="voyage-list" data-turbo-action="advance">
                  <div class="bg-gray-800 p-4 rounded">
                      <table class="w-full text-white">
-@@ -137,12 +138,13 @@
+@@ -134,12 +135,13 @@
                      </div>
                  </div>
              </turbo-frame>

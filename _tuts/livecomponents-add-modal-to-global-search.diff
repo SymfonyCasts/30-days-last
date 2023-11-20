@@ -1,5 +1,5 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 1ba1667..aac218b 100644
+index 66cb2e2..e3d3e64 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -29,12 +29,17 @@
@@ -16,7 +16,7 @@ index 1ba1667..aac218b 100644
 +                        <twig:block name="trigger">
 +                            <div
 +                                class="hidden md:flex pr-10 items-center space-x-2 border-2 border-gray-900 rounded-lg p-2 bg-gray-800 text-white cursor-pointer"
-+                                {{ stimulus_action('modal', 'open') }}
++                                data-action="modal#open"
 +                            >
 +                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
 +                                <span class="pl-2 pr-10 text-gray-500">Search Cmd+K</span>

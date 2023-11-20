@@ -1,8 +1,8 @@
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 9528573..7122921 100644
+index 2c6a1f2..94ec94c 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
-@@ -62,7 +62,14 @@
+@@ -59,7 +59,14 @@
                                          >
                                              <turbo-frame loading="lazy" id="planet-card-{{ voyage.planet.id }}" target="_top" src="{{ path('app_planet_show_card', {
                                                  'id': voyage.planet.id,

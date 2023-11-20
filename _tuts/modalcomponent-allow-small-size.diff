@@ -1,23 +1,23 @@
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index 0392d51..e126e47 100644
+index 90e6fc4..34b7ff9 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
 @@ -1,3 +1,4 @@
 +{% props allowSmallWidth=false %}
  <div
      {{ attributes.defaults({
-         ...stimulus_controller('modal'),
+         'data-controller': 'modal',
 @@ -7,7 +8,7 @@
      {% block trigger %}{% endblock %}
  
      <dialog
 -        class="open:flex bg-gray-800 rounded-lg shadow-xl inset-0 w-full md:w-fit md:max-w-[50%] md:min-w-[50%] animate-fade-in backdrop:bg-slate-600 backdrop:opacity-80"
 +        class="open:flex bg-gray-800 rounded-lg shadow-xl inset-0 w-full md:w-fit md:max-w-[50%] {{ allowSmallWidth ? '' : 'md:min-w-[50%] ' }}animate-fade-in backdrop:bg-slate-600 backdrop:opacity-80"
-         {{ stimulus_target('modal', 'dialog') }}
-         {{ stimulus_action('modal', 'close', 'close') }}
+         data-modal-target="dialog"
+         data-action="close->modal#close"
      >
 diff --git a/templates/voyage/_row.html.twig b/templates/voyage/_row.html.twig
-index 83706ea..26baaca 100644
+index aede624..2e3f3c3 100644
 --- a/templates/voyage/_row.html.twig
 +++ b/templates/voyage/_row.html.twig
 @@ -10,7 +10,7 @@

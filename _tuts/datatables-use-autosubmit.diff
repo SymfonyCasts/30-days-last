@@ -1,12 +1,12 @@
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 7122921..d61456b 100644
+index 94ec94c..78b9672 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -16,6 +16,7 @@
                  method="GET"
                  action="{{ path('app_homepage') }}"
                  class="mb-6 flex justify-between"
-+                {{ stimulus_controller('autosubmit') }}
++                data-controller="autosubmit"
              >
                  <input
                      type="search"
@@ -14,7 +14,7 @@ index 7122921..d61456b 100644
                      aria-label="Search voyages"
                      placeholder="Search voyages"
                      class="w-1/3 px-4 py-2 rounded bg-gray-800 text-white placeholder-gray-400"
-+                    {{ stimulus_action('autosubmit', 'debouncedSubmit') }}
++                    data-action="autosubmit#debouncedSubmit"
                  >
                  <div class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
              </form>

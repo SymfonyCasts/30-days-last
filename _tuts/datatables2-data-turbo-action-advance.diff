@@ -1,13 +1,13 @@
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 513d02ed..b499d9ba 100644
+index 0a2822ff..5a776a8a 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -54,7 +54,7 @@
                  >
                  <div class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
              </form>
--            <turbo-frame id="voyage-list" class="aria-busy:opacity-50 aria-busy:blur-sm">
-+            <turbo-frame id="voyage-list" data-turbo-action="advance" class="aria-busy:opacity-50 aria-busy:blur-sm">
+-            <turbo-frame id="voyage-list" class="aria-busy:opacity-50 aria-busy:blur-sm transition-all">
++            <turbo-frame id="voyage-list" data-turbo-action="advance" class="aria-busy:opacity-50 aria-busy:blur-sm transition-all">
                  <div class="bg-gray-800 p-4 rounded">
                      <table class="w-full text-white">
                          <thead>

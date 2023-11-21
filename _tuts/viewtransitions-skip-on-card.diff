@@ -1,0 +1,26 @@
+diff --git a/assets/app.js b/assets/app.js
+index 3f6c690e..87363302 100644
+--- a/assets/app.js
++++ b/assets/app.js
+@@ -24,7 +24,7 @@ document.addEventListener('turbo:load', () => {
+ });
+ 
+ document.addEventListener('turbo:before-frame-render', (event) => {
+-    if (shouldPerformTransition()) {
++    if (shouldPerformTransition() && !event.target.hasAttribute('data-skip-transition')) {
+         event.preventDefault();
+ 
+         // workaround for data-turbo-action="advance", which triggers
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index 21a80d70..138c96df 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -101,7 +101,7 @@
+                                                 data-popover-target="card"
+                                                 class="max-w-sm rounded shadow-lg bg-gray-900 absolute left-0 bottom-10"
+                                             >
+-                                                <turbo-frame loading="lazy" id="planet-card-{{ voyage.planet.id }}" target="_top" src="{{ path('app_planet_show_card', {
++                                                <turbo-frame data-skip-transition id="planet-card-{{ voyage.planet.id }}" target="_top" src="{{ path('app_planet_show_card', {
+                                                     'id': voyage.planet.id,
+                                                 }) }}">
+                                                     <div class="p-10">

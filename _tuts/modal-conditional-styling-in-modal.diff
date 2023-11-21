@@ -1,11 +1,13 @@
 diff --git a/tailwind.config.js b/tailwind.config.js
-index 1a209789..4da3513c 100644
+index 5651163d..4da3513c 100644
 --- a/tailwind.config.js
 +++ b/tailwind.config.js
-@@ -23,6 +23,7 @@ module.exports = {
+@@ -22,7 +22,8 @@ module.exports = {
+   },
    plugins: [
      plugin(function({ addVariant }) {
-       addVariant('turbo-frame', 'turbo-frame[src] &');
+-      addVariant('turbo-frame', 'turbo-frame[src] &')
++      addVariant('turbo-frame', 'turbo-frame[src] &');
 +      addVariant('modal', 'dialog &');
      }),
    ],

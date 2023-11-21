@@ -18,12 +18,12 @@ index 1c5a760a..e1f85f7e 100644
      public function edit(Request $request, Planet $planet, EntityManagerInterface $entityManager): Response
      {
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 40059a4e..76597976 100644
+index 5177f235..7a62dc41 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -57,14 +57,9 @@
                                              data-popover-target="card"
-                                             class="max-w-sm rounded shadow-lg bg-gray-900 absolute left-0 bottom-8"
+                                             class="max-w-sm rounded shadow-lg bg-gray-900 absolute left-0 bottom-10"
                                          >
 -                                            <div class="px-6 py-4">
 -                                                <h4>

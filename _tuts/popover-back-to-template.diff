@@ -1,5 +1,5 @@
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 29fd8d94..2c6a1f21 100644
+index 300893c3..ffd03aea 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -52,7 +52,7 @@
@@ -10,7 +10,7 @@ index 29fd8d94..2c6a1f21 100644
 +                                    <template data-popover-target="content">
                                          <div
                                              data-popover-target="card"
-                                             class="max-w-sm rounded shadow-lg bg-gray-900 absolute left-0 bottom-8"
+                                             class="max-w-sm rounded shadow-lg bg-gray-900 absolute left-0 bottom-10"
 @@ -61,7 +61,7 @@
                                                  'id': voyage.planet.id,
                                              }) }}"></turbo-frame>

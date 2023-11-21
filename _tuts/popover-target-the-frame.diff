@@ -1,10 +1,10 @@
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 76597976..045cfc51 100644
+index 7a62dc41..244d246e 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -57,7 +57,7 @@
                                              data-popover-target="card"
-                                             class="max-w-sm rounded shadow-lg bg-gray-900 absolute left-0 bottom-8"
+                                             class="max-w-sm rounded shadow-lg bg-gray-900 absolute left-0 bottom-10"
                                          >
 -                                            <turbo-frame id="planet-card-{{ voyage.planet.id }}" src="{{ path('app_planet_show_card', {
 +                                            <turbo-frame id="planet-card-{{ voyage.planet.id }}" target="_top" src="{{ path('app_planet_show_card', {

@@ -70,7 +70,7 @@ index 00000000..52ca04ad
 +    {% endfor %}
 +</ul>
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 73b104b9..e58ccf02 100644
+index 73b104b9..78f9547c 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -3,5 +3,60 @@
@@ -106,7 +106,7 @@ index 73b104b9..e58ccf02 100644
 +                <table class="w-full text-white">
 +                    <thead>
 +                        <tr>
-+                            <th class="text-left py-2">Name</th>
++                            <th class="text-left py-2">Purpose</th>
 +                            <th class="text-left py-2 pr-4">Planet</th>
 +                            <th class="text-left py-2">Departing</th>
 +                        </tr>

@@ -1,5 +1,5 @@
 diff --git a/src/Controller/MainController.php b/src/Controller/MainController.php
-index 1ed24eff..8746a983 100644
+index 6cafa115..e5ae1611 100644
 --- a/src/Controller/MainController.php
 +++ b/src/Controller/MainController.php
 @@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +15,9 @@ index 1ed24eff..8746a983 100644
          VoyageRepository $voyageRepository,
          PlanetRepository $planetRepository,
 +        Request $request,
-         #[MapQueryParameter('page')] int $page = 1,
-         #[MapQueryParameter('sort')] string $sort = 'leaveAt',
-         #[MapQueryParameter('sortDirection')] string $sortDirection = 'ASC',
+         #[MapQueryParameter] int $page = 1,
+         #[MapQueryParameter] string $sort = 'leaveAt',
+         #[MapQueryParameter] string $sortDirection = 'ASC',
 @@ -33,6 +35,14 @@ class MainController extends AbstractController
              10
          );
@@ -34,7 +34,7 @@ index 1ed24eff..8746a983 100644
              'voyages' => $pager,
              'planets' => $planetRepository->findAll(),
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 09096a52..698b4d87 100644
+index 138c96df..9b15835e 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -136,3 +136,9 @@

@@ -1,5 +1,5 @@
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index a1e5a3bd..b4a93c29 100644
+index dd50cc06..d31d5c06 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -53,83 +53,85 @@
@@ -85,7 +85,7 @@ index a1e5a3bd..b4a93c29 100644
 -                                    <template data-popover-target="content">
 -                                        <div
 -                                            data-popover-target="card"
--                                            class="max-w-sm rounded shadow-lg bg-gray-900 absolute left-0 bottom-8"
+-                                            class="max-w-sm rounded shadow-lg bg-gray-900 absolute left-0 bottom-10"
 +                                        <img
 +                                            src="{{ asset('images/'~voyage.planet.imageFilename) }}"
 +                                            alt="Image of {{ voyage.planet.name }}"
@@ -124,7 +124,7 @@ index a1e5a3bd..b4a93c29 100644
 +                                        <template data-popover-target="content">
 +                                            <div
 +                                                data-popover-target="card"
-+                                                class="max-w-sm rounded shadow-lg bg-gray-900 absolute left-0 bottom-8"
++                                                class="max-w-sm rounded shadow-lg bg-gray-900 absolute left-0 bottom-10"
 +                                            >
 +                                                <turbo-frame loading="lazy" id="planet-card-{{ voyage.planet.id }}" target="_top" src="{{ path('app_planet_show_card', {
 +                                                    'id': voyage.planet.id,

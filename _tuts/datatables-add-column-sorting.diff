@@ -1,14 +1,14 @@
 diff --git a/src/Controller/MainController.php b/src/Controller/MainController.php
-index 8fda0345..1ed24eff 100644
+index 4b7ae7e3..6cafa115 100644
 --- a/src/Controller/MainController.php
 +++ b/src/Controller/MainController.php
 @@ -19,12 +19,16 @@ class MainController extends AbstractController
          VoyageRepository $voyageRepository,
          PlanetRepository $planetRepository,
-         #[MapQueryParameter('page')] int $page = 1,
-+        #[MapQueryParameter('sort')] string $sort = 'leaveAt',
-+        #[MapQueryParameter('sortDirection')] string $sortDirection = 'ASC',
-         #[MapQueryParameter('query')] string $query = null,
+         #[MapQueryParameter] int $page = 1,
++        #[MapQueryParameter] string $sort = 'leaveAt',
++        #[MapQueryParameter] string $sortDirection = 'ASC',
+         #[MapQueryParameter] string $query = null,
          #[MapQueryParameter('planets', \FILTER_VALIDATE_INT)] array $searchPlanets = [],
      ): Response
      {
@@ -30,7 +30,7 @@ index 8fda0345..1ed24eff 100644
      }
  }
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index e5ba1eff..a1e5a3bd 100644
+index ff5db33f..dd50cc06 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -2,6 +2,29 @@
@@ -67,7 +67,7 @@ index e5ba1eff..a1e5a3bd 100644
                  <table class="w-full text-white">
                      <thead>
                          <tr>
--                            <th class="text-left py-2">Name</th>
+-                            <th class="text-left py-2">Purpose</th>
 +                            <th class="text-left py-2">
 +                                <a href="{{ path('app_homepage', {
 +                                    ...app.request.query.all(),

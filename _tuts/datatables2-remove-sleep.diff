@@ -1,5 +1,5 @@
 diff --git a/src/Controller/MainController.php b/src/Controller/MainController.php
-index f0f239d4..1ed24eff 100644
+index 84cc01ce..6cafa115 100644
 --- a/src/Controller/MainController.php
 +++ b/src/Controller/MainController.php
 @@ -27,7 +27,6 @@ class MainController extends AbstractController

@@ -1,5 +1,5 @@
 diff --git a/src/Controller/MainController.php b/src/Controller/MainController.php
-index 1ed24eff..f0f239d4 100644
+index 6cafa115..84cc01ce 100644
 --- a/src/Controller/MainController.php
 +++ b/src/Controller/MainController.php
 @@ -27,6 +27,7 @@ class MainController extends AbstractController
@@ -10,21 +10,8 @@ index 1ed24eff..f0f239d4 100644
          $pager = Pagerfanta::createForCurrentPageWithMaxPerPage(
              new QueryAdapter($voyageRepository->findBySearchQueryBuilder($query, $searchPlanets, $sort, $sortDirection)),
              $page,
-diff --git a/tailwind.config.js b/tailwind.config.js
-index cfbf534a..e4bcfcad 100644
---- a/tailwind.config.js
-+++ b/tailwind.config.js
-@@ -12,7 +12,7 @@ module.exports = {
-   },
-   plugins: [
-     plugin(function({ addVariant }) {
--      addVariant('turbo-frame', 'turbo-frame[src] &')
-+      addVariant('turbo-frame', 'turbo-frame[src] &');
-     }),
-   ],
- }
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index dd58b5d5..513d02ed 100644
+index 2efffe3e..0a2822ff 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -54,7 +54,7 @@
@@ -32,7 +19,7 @@ index dd58b5d5..513d02ed 100644
                  <div class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
              </form>
 -            <turbo-frame id="voyage-list">
-+            <turbo-frame id="voyage-list" class="aria-busy:opacity-50 aria-busy:blur-sm">
++            <turbo-frame id="voyage-list" class="aria-busy:opacity-50 aria-busy:blur-sm transition-all">
                  <div class="bg-gray-800 p-4 rounded">
                      <table class="w-full text-white">
                          <thead>

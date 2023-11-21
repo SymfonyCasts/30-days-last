@@ -421,6 +421,11 @@
             "description": null
         },
         {
+            "id": "toast-install-stimulus-use",
+            "name": "Toast: Install stimulus-use",
+            "description": null
+        },
+        {
             "id": "toast-add-css-transition",
             "name": "Toast: Add CSS transition",
             "description": null
@@ -901,5 +906,5 @@
             "description": null
         }
     ],
-    "sha": "d4ee2988f0f181cb8fc09673ab5608e3037b9d47"
+    "sha": "73e725f30ceb1b0752aba9685a21bdf6dc33c4c3"
 }

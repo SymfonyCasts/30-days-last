@@ -1,14 +1,15 @@
 diff --git a/assets/controllers/closeable_controller.js b/assets/controllers/closeable_controller.js
-index 975b77e0..138f526f 100644
+index 108e7b83..ecb60f20 100644
 --- a/assets/controllers/closeable_controller.js
 +++ b/assets/controllers/closeable_controller.js
-@@ -23,6 +23,9 @@ export default class extends Controller {
+@@ -30,6 +30,10 @@ export default class extends Controller {
+     }
  
      close() {
-         this.element.style.opacity = 0;
 +        if (this.hasTimerbarTarget) {
 +            this.timerbarTarget.remove();
 +        }
- 
-         let handler;
-         this.element.addEventListener('transitionend', handler = (event) => {
++
+         this.leave();
+     }
+ }

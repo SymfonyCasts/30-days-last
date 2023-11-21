@@ -23,7 +23,7 @@ index f3fba33e..3a847669 100644
      }
  
 diff --git a/templates/_flashes.html.twig b/templates/_flashes.html.twig
-index f372dd9c..ee61dbf9 100644
+index ec76a05c..97cb8855 100644
 --- a/templates/_flashes.html.twig
 +++ b/templates/_flashes.html.twig
 @@ -24,5 +24,10 @@

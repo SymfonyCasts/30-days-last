@@ -1,0 +1,12 @@
+diff --git a/importmap.php b/importmap.php
+index 6f775ca3..a3b7838a 100644
+--- a/importmap.php
++++ b/importmap.php
+@@ -46,4 +46,7 @@ return [
+     'turbo-view-transitions' => [
+         'version' => '0.3.0',
+     ],
++    'stimulus-use' => [
++        'version' => '0.52.1',
++    ],
+ ];

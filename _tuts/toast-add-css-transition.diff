@@ -1,23 +1,32 @@
 diff --git a/assets/controllers/closeable_controller.js b/assets/controllers/closeable_controller.js
-index 3a847669..975b77e0 100644
+index 3a847669..108e7b83 100644
 --- a/assets/controllers/closeable_controller.js
 +++ b/assets/controllers/closeable_controller.js
-@@ -22,6 +22,17 @@ export default class extends Controller {
+@@ -1,4 +1,5 @@
+ import { Controller } from '@hotwired/stimulus';
++import { useTransition } from 'stimulus-use';
+ 
+ export default class extends Controller {
+     static values = {
+@@ -8,6 +9,13 @@ export default class extends Controller {
+     static targets = ['timerbar']
+ 
+     connect() {
++        useTransition(this, {
++            leaveActive: 'transition ease-in duration-200',
++            leaveFrom: 'opacity-100',
++            leaveTo: 'opacity-0',
++            transitioned: true,
++        });
++
+         if (this.autoValue) {
+             setTimeout(() => {
+                 this.close();
+@@ -22,6 +30,6 @@ export default class extends Controller {
      }
  
      close() {
 -        this.element.remove();
-+        this.element.style.opacity = 0;
-+
-+        let handler;
-+        this.element.addEventListener('transitionend', handler = (event) => {
-+            // ignore events from children
-+            if (event.target !== this.element) {
-+                return;
-+            }
-+
-+            this.element.remove();
-+            this.element.removeEventListener('transitionend', handler);
-+        });
++        this.leave();
      }
  }

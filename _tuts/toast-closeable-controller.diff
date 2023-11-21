@@ -12,12 +12,12 @@ index 00000000..4345d109
 +    }
 +}
 diff --git a/templates/_flashes.html.twig b/templates/_flashes.html.twig
-index 92604889..3f6a918e 100644
+index aa9f65ca..2881b47b 100644
 --- a/templates/_flashes.html.twig
 +++ b/templates/_flashes.html.twig
 @@ -2,6 +2,7 @@
      <div
-         class="fixed top-5 right-5 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 opacity-100 transition-opacity duration-500"
+         class="fixed top-5 right-5 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
          role="alert"
 +        data-controller="closeable"
      >

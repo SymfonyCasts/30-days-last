@@ -1,5 +1,5 @@
 diff --git a/composer.json b/composer.json
-index f746ebc2..87c720da 100644
+index 49f05db5..65ef75fc 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -31,6 +31,7 @@
@@ -11,7 +11,7 @@ index f746ebc2..87c720da 100644
          "tales-from-a-dev/flowbite-bundle": "dev-main",
          "twig/extra-bundle": "^2.12|^3.0",
 diff --git a/composer.lock b/composer.lock
-index c9ec5406..432b4f7a 100644
+index d5016636..c82091f3 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -6717,6 +6717,61 @@
@@ -76,7 +76,7 @@ index c9ec5406..432b4f7a 100644
          {
              "name": "symfonycasts/tailwind-bundle",
              "version": "dev-main",
-@@ -7811,6 +7866,7 @@
+@@ -7814,6 +7869,7 @@
          "symfony/ux-twig-component": 20,
          "symfony/validator": 20,
          "symfony/yaml": 20,

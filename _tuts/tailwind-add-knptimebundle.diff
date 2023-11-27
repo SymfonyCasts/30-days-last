@@ -1,5 +1,5 @@
 diff --git a/composer.json b/composer.json
-index 6a025660..b174b25c 100644
+index da2cc673..c740523c 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -9,6 +9,7 @@
@@ -11,15 +11,15 @@ index 6a025660..b174b25c 100644
          "symfony/asset-mapper": "6.4.*",
          "symfony/console": "6.4.x-dev",
 diff --git a/composer.lock b/composer.lock
-index b73961d2..b3a666d6 100644
+index 07d6f65a..77efe290 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "dd9b9a9a70089865921de2d79dbed48a",
-+    "content-hash": "2cbaa7fab99d5fbcaba4de63b211589d",
+-    "content-hash": "80d41920b067979f2c4de74c309d3358",
++    "content-hash": "9a751cfc907b161ead7019371aacd9b1",
      "packages": [
          {
              "name": "composer/semver",
@@ -208,7 +208,7 @@ index b73961d2..b3a666d6 100644
          {
              "name": "symfony/translation-contracts",
              "version": "dev-main",
-@@ -6631,6 +6802,7 @@
+@@ -6634,6 +6805,7 @@
      "aliases": [],
      "minimum-stability": "dev",
      "stability-flags": {

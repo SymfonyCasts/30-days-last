@@ -20,7 +20,7 @@ index 06b78e28..c7e11e9f 100644
      },
      "entrypoints": []
 diff --git a/composer.json b/composer.json
-index 67b3e14a..b65c9bda 100644
+index c0beffa1..21fbf8cd 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -23,6 +23,7 @@
@@ -32,15 +32,15 @@ index 67b3e14a..b65c9bda 100644
          "symfony/yaml": "6.4.x-dev",
          "symfonycasts/tailwind-bundle": "dev-main",
 diff --git a/composer.lock b/composer.lock
-index f4979ff8..7d928936 100644
+index e36c24d3..a1dbca7e 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "ec86182ab86cf340afb54494de24a141",
-+    "content-hash": "bfa41a3632ac045c225b991e5cf07059",
+-    "content-hash": "7fae6036eccc6fc2a54ffc41e405b7c4",
++    "content-hash": "98198c41e856af77790b0ff78b975a46",
      "packages": [
          {
              "name": "composer/semver",
@@ -148,7 +148,7 @@ index f4979ff8..7d928936 100644
          {
              "name": "symfony/validator",
              "version": "6.4.x-dev",
-@@ -7208,6 +7305,7 @@
+@@ -7211,6 +7308,7 @@
          "symfony/stimulus-bundle": 20,
          "symfony/twig-bundle": 20,
          "symfony/ux-autocomplete": 20,

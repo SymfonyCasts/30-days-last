@@ -19,7 +19,7 @@ index c7e11e9f..50bf1e2e 100644
              "turbo-core": {
                  "enabled": true,
 diff --git a/composer.json b/composer.json
-index 9b0d1ddc..f746ebc2 100644
+index 06592c8c..49f05db5 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -26,6 +26,7 @@
@@ -31,15 +31,15 @@ index 9b0d1ddc..f746ebc2 100644
          "symfony/ux-twig-component": "2.x-dev",
          "symfony/validator": "6.4.x-dev",
 diff --git a/composer.lock b/composer.lock
-index 08aedad2..c9ec5406 100644
+index 86ac75f4..d5016636 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "f6af7df07ce06499dee4e8d44ca79412",
-+    "content-hash": "ca68dff6c513338bee1f478c8a5bd2ab",
+-    "content-hash": "444ca7b6dc81e05bcef3bf4f82254787",
++    "content-hash": "8d4ebc27643b19b6777b70dbad91f6a5",
      "packages": [
          {
              "name": "babdev/pagerfanta-bundle",
@@ -248,7 +248,7 @@ index 08aedad2..c9ec5406 100644
          {
              "name": "symfony/ux-turbo",
              "version": "2.x-dev",
-@@ -7615,6 +7806,7 @@
+@@ -7618,6 +7809,7 @@
          "symfony/stimulus-bundle": 20,
          "symfony/twig-bundle": 20,
          "symfony/ux-autocomplete": 20,

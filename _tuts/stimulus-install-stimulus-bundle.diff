@@ -51,7 +51,7 @@ index 00000000..e847027b
 +    }
 +}
 diff --git a/composer.json b/composer.json
-index 69005dbd..a582fb70 100644
+index cfc86bf6..efe409dc 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -20,6 +20,7 @@
@@ -63,15 +63,15 @@ index 69005dbd..a582fb70 100644
          "symfony/validator": "6.4.x-dev",
          "symfony/yaml": "6.4.x-dev",
 diff --git a/composer.lock b/composer.lock
-index 938c2742..76cb1093 100644
+index 59bca020..9f346712 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "content-hash": "e89cf74fb100c1bb2e50e1e4c03a526f",
-+    "content-hash": "7fffce856c4c1204f5743ad0e0779ab3",
+-    "content-hash": "a4253d0c0a14e591ad5265fe37e831f1",
++    "content-hash": "1586208eee801e2fbd7c70e74e42cefb",
      "packages": [
          {
              "name": "composer/semver",
@@ -152,7 +152,7 @@ index 938c2742..76cb1093 100644
          {
              "name": "symfony/stopwatch",
              "version": "6.4.x-dev",
-@@ -7043,6 +7113,7 @@
+@@ -7046,6 +7116,7 @@
          "symfony/framework-bundle": 20,
          "symfony/runtime": 20,
          "symfony/security-csrf": 20,

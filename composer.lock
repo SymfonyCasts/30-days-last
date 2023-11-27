@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "becba4b68eb58feb1b0fcd8f1afd47f7",
+    "content-hash": "5a321db7046069535ef0c07d426e25d1",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -5225,11 +5225,11 @@
                 "php": ">=7.2.5",
                 "symfony/framework-bundle": "^5.4|^6.0|^7.0",
                 "symfony/twig-bundle": "^5.4|^6.0|^7.0",
-                "twig/twig": "^2.7|^3.0"
+                "twig/twig": "^3.0"
             },
             "require-dev": {
                 "league/commonmark": "^1.0|^2.0",
-                "symfony/phpunit-bridge": "^5.4|^6.3|^7.0",
+                "symfony/phpunit-bridge": "^6.4|^7.0",
                 "twig/cache-extra": "^3.0",
                 "twig/cssinliner-extra": "^2.12|^3.0",
                 "twig/html-extra": "^2.12|^3.0",
@@ -5268,7 +5268,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/twigphp/twig-extra-bundle/tree/3.x"
+                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.8.0"
             },
             "funding": [
                 {
@@ -5377,19 +5377,21 @@
                 "php": "^7.4 || ^8.0"
             },
             "conflict": {
-                "doctrine/dbal": "<3",
-                "doctrine/orm": "<2.14",
+                "doctrine/dbal": "<3.5 || >=5",
+                "doctrine/orm": "<2.14 || >=4",
                 "doctrine/phpcr-odm": "<1.3.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^11.1",
-                "doctrine/dbal": "^3.0",
+                "doctrine/annotations": "^1.12 || ^2",
+                "doctrine/coding-standard": "^12",
+                "doctrine/dbal": "^3.5 || ^4",
                 "doctrine/mongodb-odm": "^1.3.0 || ^2.0.0",
-                "doctrine/orm": "^2.14",
+                "doctrine/orm": "^2.14 || ^3",
                 "ext-sqlite3": "*",
                 "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^9.6.6 || ^10.0",
-                "symfony/cache": "^5.4 || ^6.2",
+                "phpunit/phpunit": "^9.6.13 || ^10.4.2",
+                "symfony/cache": "^5.4 || ^6.3 || ^7",
+                "symfony/var-exporter": "^5.4 || ^6.3 || ^7",
                 "vimeo/psalm": "^5.9"
             },
             "suggest": {
@@ -5398,6 +5400,7 @@
                 "doctrine/orm": "For loading ORM fixtures",
                 "doctrine/phpcr-odm": "For loading PHPCR ODM fixtures"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -6190,7 +6193,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.1",
+        "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*"
     },

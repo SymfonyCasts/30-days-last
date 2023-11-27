@@ -1,89 +1,107 @@
-# Js Modules
+# JavaScript Modules
 
-Coming soon...
+Inspect element on this page and head over to the browser console. Ah, we've got
+a console log that says it's coming from `assets/app.js`. And sure enough, if we
+spin over and open that file... there it is!
 
-So if you inspect element on this page and head over to your console, we've got a
-little console that log in there says it's coming from assets slash app digest. And
-sure enough, if we spin over and go to assets slash app digest, we have the log right
-there. The more interesting thing is, how is this file being loaded? So to answer
-that view the page source, and there's some interesting stuff going on here. But I
-want you to zoom in down here to this script type equals a module import app. It
-turns out that all modern browsers basically everything except for IE 11. And you
-should not be supporting IE 11 anymore. Nobody does unless you work for some bank.
-Turns out that all browsers now support JavaScript modules. And what a JavaScript
-module means, it's just basically that system where you're able to use import and
-export statements in your JavaScript, you've probably gotten used to doing that in
-Webpack Encore. Well, it turns out browsers can just do that. If you open any HTML
-page and say script type equals module, then the code inside of here can just be
-normal JavaScript using import and export statements. So the second question is, what
-the heck is app? How does how does it know to to map app over to this asset slash app
-dot j s file. This is also a new trick of browsers called import maps. So this has
-nothing to do with symphony, nothing to do with asset mapper. This is just how
-browsers work. If on your page, you have a script type equals import map, this
-becomes like a key value map that's used by your browser when it loads modules. So if
-we say import app, it actually looks inside of this list sees app there. And this is
-actually the file that it opens to that, which happens to be the file that's being
-served by asset mapper. So it's all this nice little teamwork together that's doing
-this. This import map functionality is also something that all modern browsers
-support, it has slightly less support than the actual JavaScript modules. But
-fortunately, there is a shim or a polyfill. So that if you your user does happen to
-have a browser that doesn't support import maps, that will take care of that it will
-work, you don't need to worry about it. So the second thing is, where the heck is
-this all coming from? This is coming from templates slash base dot html twig. And
-it's entirely coming from this one line right here, import map app. So this, of
-course, because we passed app there, this is going to generate a script type equals
-module import app. But this is also dumping the polyfill a couple of things that are
-less important. And of course, the import map. And the import map is primarily though
-not entirely, we'll get to that, but primarily generated from this import map dot PHP
-file. So when we installed asset mapper, it gave us this file. And this is the reason
-that we basically have an app key inside of our import map, pointing to our assets
-slash app dot j s file. So by the way, this, when we talk about JavaScript modules,
-these are called, they're technically called ECMAScript modules. And one of the
-things you'll see commonly is the acronym ESM, ECMAScript module. So if you see as
-ESM, that's just a fancy way of saying code that uses import and export statements.
-And it's really not any more important than that. So I want to play a little bit with
-this new system. Because this is really cool. The fact that we can use import and
-export statements just in our browser, that's a really big key for us not needing a
-build system. So inside the assets directory, we can organize this however we want.
-I'm going to create a lib directory with an alien greeting dot j s file. And it's not
-here, I'm gonna write some awesome new JavaScript. So experts fault function, let's
-have a function of a message argument, we'll have an in piece argument equaling
-defaulting to false. And then I'm just going to put a console dot log in there even
-use these fancy little tick things. Then I'll use some fun emojis. And close that
-out. By the way, you do see a little bit of like auto completion happening. And here
-I am for the first time ever, actually leaving co pilot enabled, because it's just so
-important for coding. I want this tutorial to be as real as possible. So great. This
-is now a file that we've created. It lives in the assets directory. So technically,
-it's publicly available to the user, but nobody is actually using it yet. But we can.
-So something we can do, we won't do this often. But just to prove that we can, we can
-go right into our base layout anywhere. And we can say script type equals module. And
-inside here, whoops. It's a import alien greeting. I'll hit tab on there. And from
-and notice it puts this dot dot slash assets, that's not actually going to work. But
-what will work is we can use the asset function, we can point to its logical path,
-which is going to be a lib slash alien greeting dot j s. And then down here, let's
-try to use that say alien greeting. And we will not come in peace. So cool. So let's
-see this works. Close that. And it doesn't check this out. I actually thought that
-what would work, we get a 404 down there for lib slash alien greeting dot j s. Now it
-works, give us all your candy. So just writing normal JavaScript just works. And one
-thing I do want to point out when you view the page source is if I refresh this I
-don't want to do that is that of course, we get this nice version file name when we
-do our import. So you can import just things like app and rely on the import map, but
-you can also just import entire paths like that. And that works fine, too. It's super
-duper friendly. Alright, so in reality, we're not usually going to be just writing
-code in line like this, I'm going to copy this code, get rid of that script type
-equals module. And we're going to going to go into app dot j s. And we're going to
-put the code right there. And in this case, when we refer to the path, we're just
-gonna write normal JavaScript, which means we're gonna say dot slash lib slash alien
-greeting dot j s. This is me the exact same code that you have in Webpack Encore.
-With one difference, I will point out with Webpack, you don't have to have the dot j
-s on there. Turns out that's like a node specific thing. And sort of real JavaScript,
-you do need to have the extension on there. So you do need to add the dot j s. But it
-works. And by the way, if you were ever using autocompletion, like if you want
-phpStorm to autocomplete that for you can actually go into your settings. And let's
-see here. We go to editor extensions. I just searched that editor. There we go
-editor. code style, JavaScript. And right here, if you just change this use file
-extension to always then it's going to like autocomplete with the dot j s instead of
-without it, which is kind of nice. So yeah, we can just kind of code like normal
-JavaScript and asset mapper takes care of all of that for us. And one thing that we
-kind of already saw, I don't need to do that. All right, so next, let's talk about
-bringing in third party packages.
+But how is this file being loaded? To answer that, view the page source. There's
+some interesting stuff going on here, but I want you to zoom in to this
+`<script type="module">`, `import 'app'` part.
+
+## ECMAScript Modules
+
+It turns out that all modern browsers - basically everything except for IE 11...
+and you should *not* be supporting IE 11 anymore - all modern browsers support
+JavaScript modules also known as ECMAScript modules or ESM. But it's nothing too
+fancy: you're inside of a JavaScript module if that file uses the `import` or `export`
+statements, which you probably got used to with Webpack Encore.
+
+The big news is that: browsers understand `import` and `export`! If you open any
+HTML page and say `<script type="module">`, you the code inside is allowed to
+use import and export statements. 
+
+## Importmaps
+
+So... the second question is: what the heck is `app`? How does `app` ultimately
+refer to `assets/app.js`? This is *also* a new trick of browsers called importmaps.
+And this has *nothing* to do with Symfony or AssetMapper. If, on your page, you have
+a `<script type="importmap">`, this becomes a key value map that's used by your
+browser when it loads modules. So if we say `import 'app'`, it looks inside of this
+list, sees `app` and ultimately loads *this* file... which is served by AssetMapper.
+It's a nice bit of teamwork!
+
+Importmaps are supported in all modern browsers... though it has slightly less support
+than the JavaScript modules. Fortunately, there's a shim or polyfill so that if
+your user happens to have a browser that *doesn't* support import maps, that shim
+will *add* it and everything will work.
+
+## The importmap() Function
+
+The final question on my mind is: where the heck is this all coming from? To answer
+that, open `templates/base.html.twig`. It's entirely coming from this one line right
+here: `{{ importmap('app') }}`.
+
+Because we passed `app`, this will generate a `<script type="module">` with
+`import 'app'` inside. But this also dumps the polyfill, some preloads - those
+are good for performance, but not required - and, of course, the importmap itself.
+The importmap is *primarily*, though not entirely (we'll get to that) generated from
+this `importmap.php` file.
+
+## The importmap.php File
+
+When we installed AssetMapper, its recipe gave us this file. And *this* is the reason
+that we have an `app` key in the importmap on the page that points to
+`assets/app.js`.
+
+## Writing Some JavaScript Modules
+
+So I want to play a bit with this new system. Inside the `assets/` directory - we
+can organize this however we want - create a `lib/` directory with an
+`alien-greeting.js` file. Inside, I'm going to write some awesome new JavaScript:
+`export default` a function, give it `message` and `inPeace` arguments... then I'll
+log a message with some emojis using those arguments.
+
+So, great! This new file lives inside `assets/` so, technically, it's publicly
+available to the user. But... nobody is *using* it yet.
+
+To prove that we can, go into the base layout and, anywhere, say `<script type="module">`
+module. Inside, `import alien greeting`... and Ill hit tab.
+
+Notice it uses `../assets` for the path. That's not going to work. Instead, we
+can use the `asset()` function and the logical path: `lib/alient-greeting.js`.
+Then below, try to use that: `alienGreeting()`, a message and we will *not* come
+in peace!
+
+Let's see if it works! Close that, and... it *doesn't*. i actually thought that
+*would* work! We get a 404 for `lib/alien-greeing.js` - with no "s"...! Boop!
+Now it works! No build, nice code, nothing special. 
+
+If you view the page source, we, of course, have this nice version filename
+in the `import`. So you can import simple things like `app` and rely on the
+`importmap` to poing to the true filename or you can include full paths.
+
+## Importing from JS Files
+
+Ok, as fun as it was to hack this into the HTML, in reality, we're not usually going
+to be write code in-line like this. Copy this code, get rid of that
+`<script type="module">`, then go into `app.js`. Paste the code here.
+
+And now that we're inside of JavaScript, when we refer to a path, we can write it
+with normal, relative paths: `./alien-greeting.js`.
+
+This is the exact code that we would have in Webpack Encore, with one small
+difference. In Webpack, you don't need to have the `.js` on the end. It turns out
+that leaving *off* the extension is a Node-specific thing. In real JavaScript, you
+*do* need to have the extension. So you *do* need to add the `.js`.
+
+And...  it works!
+
+## PhpStorm: Auto-add Extension
+
+By the way, if you let PHPStorm auto-complete the path to the imported JavaScript
+file, by default, it will *not* include the `.js` on the end. To fix that, open
+the settings... and search for "extensions". There we go: Editor => Code Style =>
+JavaScript. And right here, change this "use file extension" to "always".
+
+Ok, day 3 is in the books! Tomorrow, we'll make our JavaScript set up much more
+powerful by learning how to install 3rd-party packages!

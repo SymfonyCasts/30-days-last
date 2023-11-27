@@ -1,67 +1,99 @@
-# Css
+# CSS
 
-Coming soon...
+Day 5 already? We're flying! It's time to add some CSS to our site. So how does that
+work inside of AssetMapper?
 
-Welcome to day five, where it's time for us to add some CSS to our site. So how does
-that work inside of the asset mapper system? Well, we do already have a assets styles
-app dot CSS file. And there's nothing stopping us from going into our base study HTML
-twig, and just adding a link tag for that link rel equals style sheet, then we can
-use asset and then the logical path to that file, which is going to be styles slash
-app dot CSS. We go over refresh and look at the page source. It is right there link
-rel equals style sheet, and we have it and it works great and it's super boring.
-However, if we remove this line and go and refresh the page, notice we still have
-this blue background, that blue background is actually coming from our app dot CSS
-file. And if you look at the page source, there is still an always was a link rel
-equals style sheet for that CSS file. But over in base dot HTML twig, there's nothing
-here. So how the heck is that being loaded? The answer is that's being loaded inside
-the import map function. So here's how this works. And it's because it's being
-imported from app dot j s on top. So importing a CSS file. This is probably something
-you got used to with Webpack Encore, you import a CSS file, and ultimately, it's
-rendered on the page as a link link tag. However, this is not something that
-ECMAScript modules actually do. This is not something that works in a browser. The
-only thing you can import in a browser are JavaScript files. So this should fail
-spectacularly. spectacularly. However, it doesn't. So this is something we built on
-top of asset mapper, that is a totally extra feature. And here's how it works. In
-base that HTML twig, we say import map app that's called the entry point, we know
-that app actually refers to our assets slash app dot j s file. So what asset mapper
-does is it goes into this and finds all the import statements for JavaScript and CSS
-files. For every CSS file it finds, it adds that as a link tag. And it's basically
-just that simple. However, there is one kind of little complication that's actually
-kind of interesting. If you go to the network tab, and I'll go to all search for app.
-There we go. If you look at the app dot j s file, it actually does still have that
-import statement. So if you think about it, when our browser executes this line, that
-should still fail, it should go and download our CSS file, our CSS files, not a
-JavaScript file. So it should fail with a syntax error. But it's not. The reason for
-that is a little trick inside of asset mapper. When you import a CSS file, we add an
-import map entry for it. So even though this starts with dot slash, our browser does
-look to see if there's a matching path for that inside of our import map. And there
-actually is. So because it finds this matching entry, it downloads this file, which
-is not a real file. It's a totally fake file that does absolutely nothing. So it
-makes that line not error out. Alright, to see how powerful this is, I want to create
-a second CSS file to support my alien greeting. So let's say that when our alien
-greeting code is executed, we also want to import a CSS file. So I'm gonna create a
-new CSS file called alien greeting dot CSS. We'll make it body background of dark
-green. And then over alien greeting that j s, we'll just import dot dot slash styles
-slash alien greeting dot CSS. And when we go and refresh, we get a dark green
-background. And it works like you expect, we have a second style sheet here. And we
-have a second entry down here for alien greeting dot CSS, which points to do to
-nothing. Now what gets really interesting is with JavaScript modules, you can also
-load, load them asynchronously. So instead of loading a CSS or JavaScript file,
-always, we can load it only when we need it. So I'm going to copy this. And let's
-pretend that we only want to load that CSS file when in pieces equal to false. So
-I'll say if not in piece, I'm gonna call set timeout here. And let's do it for four
-seconds. So we'll do a little four second delay. And then I'm going to import that.
-Except as soon as you import things not at the top of your file, you need to call
-them as a function. Cool. So this time, when we refresh the page, blue background
-234, and then we get the dark green background, it loaded it lazily. What's really
-cool about this is, of course, there's no alien greeting link tag being output
-anymore. So the way this works is that we actually wait for our browser to execute
-this JavaScript line. And when it does, it looks for this in the import map, it finds
-it in the import map. But this time, instead of just having a line that does nothing,
-this line here adds a new link tag with rel equals style sheet and href set to our
-alien greeting and actually adds that to the head of our page. And we can totally see
-this. So over here, under the head tag, you can see here's our style sheet right
-here. So if I refresh and real quick, go and open that see it's not there. And it
-gets added. How cool is that? So as fancy as this is, I want to use tailwind for my
-CSS. But doesn't tailwind require building a node? Nope. Let's get it set up and
-style our site next.
+## Including a Manual link Tag?
+
+Well, we & already have an `assets/styles/app.css` file. And... there's nothing
+stopping us from going into `base.html.twig`, and adding a link tag: `link`,
+`rel="stylesheet"`, `href` then `asset()` and the logical path: `styles/app.css`.
+
+Swell! When go  refresh... and look at the page source, there it is! It works great
+and it's super boring - the kind of boring I like.
+
+*However*, if we remove this line... and go and refresh the page. Huh, we *still*
+have this `blue` background: a blue background that's coming from the `app.css`
+file.
+
+View the page source again. There is *still* a `link` tag pointing to that file?
+Back over in `base.html.twig`, hmm, nothing here. Where is that coming from?
+
+The answer - I bet you guessed - is the `importmap()` function. And it's because
+it's being imported from `app.js`.
+
+## How CSS Works
+
+Importing a CSS file from JavaScript is probably something you got used to with
+Webpack Encore. You import a CSS file... and ultimately, it's rendered on the page
+as a `link` tag. *However*, this is *not* something that ECMAScript modules actually
+support. This is not something that's supposed to work in a browser! The *only* thing
+you can import are *JavaScript* files. So this *should* fail spectacularly: like it
+should download the CSS file and try to parse it as JS.
+
+However, as you may have noticed, it doesn't! Mystery
+
+This is a *totally* extra feature that we added to AssetMapper. And here's how it
+works. In `base.html.twig`, we say `importmap('app')`. The `app` is known as the
+entrypoint: the *one* file the browser will execute directly. And we know that
+refers to `assets/app.js`.
+
+So what AssetMapper does is, it goes into this file and finds all the `import`
+statements for JavaScript and CSS files. For every CSS import it finds, it adds that
+as a `link` tag. It's... basically just that simple.
+
+## The CSS Importmap Trick
+
+Well, there *is* one little, fascinating complication. Go to the network tab in
+your browser and search for `app`. This is the `app.js` file that's being executed
+by the browser. Notice: it *does* still have the import statement to the CSS file!
+If you think about it, when our browser executes this line, it should fail! It
+should download the CSS file, try to parse it as JavaScript & hit a syntax error.
+But it doesn't.
+
+The reason is a little trick inside of AssetMapper. When you import a CSS file,
+AssetMapper adds an importmap entry for it. So even though this starts with `./`,
+our browser *does* look to see if there's a matching path inside the importmap.
+And there *is*. Because of that, it downloads this file.... which is *not* a real
+file. It's a fake file that does.... absolutely nothing. So it makes that line
+not error out and... not *do* anything.
+
+## Importing CSS from Other JavaScript Files
+
+To see how powerful this is, let's create a second CSS file to support our alien
+greeting. Create a new file called `alien-greeting.css`. We'll make the body
+background dark green.
+
+Then, over `alien-greeting.js`, import that: `../styles/alien-greeting.css`.
+
+Will this work? Try it! Refresh and... green background! In the source, we have
+a second `link` tag and a second new item in the `importmap`. So that's awesome!
+Because `app.js` imports `alien-greeting.js`, AssetMapper *also* finds any CSS
+files that *it* imports.
+
+## Lazy-Loading CSS
+
+Here's where things get *really* spooky-cool. JavaScript modules have a dynamic
+import syntax that allows you to import modules asynchronously. That let's us load
+a file *later* when we need it, instead of on page load. And we can use the same
+trick with CSS.
+
+Copy this. Let's pretend that we only want to load that CSS file when `inPeace` equals
+false. So I'll say, if not `inPeace`, then use `setTimeout()` to wait for 4 seconds.
+After 4 seconds, import the CSS file. Except, as soon as you need an import to *not*
+live at the top of your file, you need to call it like a function.
+
+That's pretty cool. Try this. At first, blue background! 2, 3, 4, green background!
+The CSS file loaded *lazily*. How? Well, there's no `alien-greeting.css` link tag
+in the page source anymore. Instead, we wait for the browser to execute this
+JavaScript line. When it does, it looks for this in the importmap, finds it and
+downloads this fake file. But this time, instead of it being a line that does
+nothing, this fake file adds a new `link` tag to the `head` section with
+`rel="stylesheet"` and `href` set to `alien-greeting.css`.
+
+Heck, we can watch this in real time! Over here, under the head tag, we can see
+the stylesheet. If I refresh and quickly open open that, it's not there. And...
+*then* it gets added. *So* stinkin' cool.
+
+Now that we've conquered *how* CSS works, tomorrow, we'll use it to bring our site
+to life! But I want to do it with an extra complexity: I want to use Tailwind CSS.

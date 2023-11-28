@@ -1,98 +1,139 @@
-# Pager Sorting
+# Pagination & Column Sorting
 
-Coming soon...
+Welcome to Day 13! We're going to take a pause with Stimulus and Turbo and just
+work with Symfony and Twig today. Out goal is to add pagination to this list, as
+well as column sorting.
 
-Welcome to Day 13, where we take a pause with Stimulus and Turbo. We're just going to
-work with Symfony and Twig today to add pagination to this list, as well as column
-sorting. Now, the way I like to add pagination is via PagerFonta. I absolutely love
-that bundle. Don't love its documentation, but hey, it's open source, so if you don't
-love it, go fix it. To use PagerFonta, we're going to install three different
-libraries. Babdev PagerFonta Bundle, PagerFonta slash Doctrine ORM, and PagerFonta
-slash Twig. Doctrine ORM Adapter, PagerFonta slash Twig. Cool. Let's get this set up
-in PHP first. So, go into Source Controller, Main Controller, and the first thing we
-need to do is read the query parameter. So, the way this is going to work is we're
-going to have ?page="1", ?page="2", so we need to read off the current page. I'm
-going to do that with this really cool new map query parameter thing. And actually,
-before, I was doing a little too much work. If your query parameter matches your
-argument name, you do not need to specify it there. So, I'm going to remove that on
-those two. It is different on this search planet, so that's a field we're going to
-use a little bit later. Anyway, this is going to be an ?page, and we'll have it
-default to 1. And the order of these doesn't matter. Down here, copy the
-VoyageRepository find by search, and replace it with a Pager object. So, Pager equals
-PagerFonta, colon, colon, create for current page with max per page. And the first
-thing this needs is an adapter. So, for this, it's going to be new QueryAdapter,
-since we're going to make a Doctrine query. And we're going to pass that a
-QueryBuilder. So, I'll paste in what I had before, though that's not quite right,
-because this find by search returned an array of voyages, and what we need is a
-QueryBuilder. Fortunately, I already set things up so that we can get this same
-query, but in QueryBuilder format via this method down here, find by search
-QueryBuilder. So, I will paste that method name in, and now it's happy. The next
-argument is the current page, that's page, and then max per page, how about 10? Cool.
-And then we can pass Pager in as the voyages variable, and that should just work
-because we can loop over that to run the voyages. Next up, inside of
-homepage.html.twig, we need to render the Pagination links. Down at the bottom, I
-already have a spot for this. I have kind of a hard-coded previous and next. The way
-you're supposed to render the PagerFonta links is by saying curly curly PagerFonta
-and then passing in voyages. So, when we try this, let me clear my search out. The
-Pagination looks awful, but it's working. That actually goes through the results, and
-the results are changing as we do them. Awesome. So, how do we make these Pagination
-links not so ugly? Well, there is a built-in Tailwind template that you can configure
-PagerFonta to use. That involves creating a babdev PagerFonta.yaml file, setting the
-default view to twig, and then pointing the default twig template at babdev
-PagerFonta.html.twig. However, I want to be stubborn. I want to just have a previous
-next button. I want to style it exactly how I want to style it, so I'm going to go
-rogue and do whatever I want to do. So, the first thing I need to do is render these
-links conditionally, only if there is a previous page. So, to do that, we can say if
-voyages.hasPreviousPage, then we'll render that. The next thing is, if we have a next
-page, we'll render that. It's probably the correct text, but I'll just be careful.
-Perfect. Then, for the actual URLs, we can use a little helper called
-PagerFontaPageURL. We pass to it the pager, voyages, and then which page we want to
-go to. In this case, it's voyages.previousPage. I'll copy that. We'll put it down
-here. We'll say voyages.nextPage. Lovely. So, let's give that a try. When we refresh,
-awesome. The previous page is missing. We click next. It's there. Click next again.
-Page three is the last one. It's working beautifully. For a little extra fanciness
-down here, I'll even print the current page. With voyages.currentPage. Then, I'll do
-a little slash. It's not number of pages. Actually, that is correct. Number of pages.
-Good job, AI. There we go. Page one of three. Page two of three. Love it. What about
-sorting? We want to be able to click these columns and have them sort. For this,
-we're going to need two new query parameters up here. A sort column name and a sort
-direction. Back to PHP to make this happen. Map query parameter. The first thing we
-need is going to be a string sort equals. We'll default it to leaveAt. That's the
-property name for this departing column. Then, we're going to go map query parameter
-again. We need sort direction. We'll default it to ascending. Down below in the
-actual method, I'm going to paste in two really boring lines here. This is just
-validating that someone's passing in a real sort column and not something we didn't
-expect. Then, the findBySearchQueryBuilder, this is actually already set up to expect
-some sort arguments. We can pass sort and sort direction. It should be happy.
-Finally, we're going to need this information in the template so that we can render
-the correct links. I'm going to pass a sort, set to sort, and a sort direction set to
-sort direction. Probably the most boring part of this comes next. That's transforming
-these th's into proper links. Here, I'm going to add an a tag and immediately break
-this onto multiple lines because we have a little bit of work here to do. I'll put
-purpose there. We want this to link back to the homepage. I can say pathApp
-underscore homepage. Of course, we're going to want sort set to purpose. Then, down
-here, sort direction is going to be a little bit complicated. If the sort equals
-purpose and the sort direction equals ascending, then we'll want descending.
-Otherwise, we want to do ascending by default. However, it's not quite this simple
-because in addition to the sort and sort direction query parameters, we want to keep
-any existing query parameters that might be on there. The cool thing is there's a
-nice way to do that. Dot, dot, dot, app.request.query.all. That's it. Now, down here
-for purpose, I also want to have a nice little down arrow or up arrow here. To help
-with that, I'm going to use a twig macro. I don't always love twig macros, but in
-this case, I have just a quick twig macro that says if the sort direction is
-ascending, print a down arrow. Else, print an up arrow. If you're not sorting by this
-column, then print both an up and down arrow. Down here... Let's get rid of all that
-stuff. Here we go. We can say curly curly self.sortdirection. Nope. self.sortarrow
-and let that fill in passing purpose. sort and sort direction. Just like that. Now,
-I'm going to repeat all of that down here for departing. You can see this is all
-relatively straightforward. It is a bit of work to get this set up. Could we have
-some tools in the Symfony world to make this all a lot easier to build? Probably.
-That might be a cool thing for someone to work on, but at least we can build this
-super straightforward. Change purpose to leave at. I'll say departing. Then we just
-need to change leave at here and leave at here. Hopefully, that is it. All right,
-moment of truth. Refresh. Okay, that looks good. Ah, love it. We can sort by that. We
-can sort by departing. We can paginate to page three. Notice it's keeping our page.
-It's keeping our search filter. Life is good, and it's all happening via AJAX.
-Really, the only problem now is that it's a little bit jarring to have that full page
-refresh every single time. It really wants us to feel like a standalone thing that's
-not jumping around. Let's do that next with turbo frames.
+## Adding Pagination
+
+The way I like to add pagination is via PagerFanta. I *love* this library, though
+I get a little lost in its documentation. But hey: it's open source, if you don't
+love it, go fix it.
+
+To use PagerFanta, we're going to install three different libraries:
+
+```terminal
+composer require babdev/pagerfanta-bundle pagerfanta/doctrine-orm-adapter pagerfanta/twig
+```
+
+Cool! Let's get the PHP side working first. Open `src/Controller/MainController.php`.
+The current page will be stored on the URL as `?page=1` or `?page=2`, so we need
+to *read* that page query parameter. I'm going to do that with a cool newish
+`#[MapQueryParameter]` attribute. And actually, before, I was doing a too
+much work. If your query parameter matches your argument name, you don't need to
+specify it there. So, I'll remove it on those two. It *is* different for `searchPlanet`:
+a parameter we'll use later.
+
+Anyway, this is will read the `?page=` and we'll default it to 1. Oh, and the order
+of these doesn't matter.
+
+Below, copy the `$voyageRepository->findBySearch()` line, and replace it with a Pager
+object: `$pager` equals `PagerFaanta::createForCurrentPageWithMaxPerPage()`.
+The first argument is an adapter: new `QueryAdapter` - since we're making a
+query - then paste in the code from before. But, that's not quite right: this
+method returns an array of voyages, but we need  a `QueryBuilder`. Fortunately,
+I already set things up so that we can get this same result but as a `QueryBuilder`
+via this method: `findBySearchQueryBuilder`. Paste that method name in.
+
+The next argument is the current page - `$page` - then max per page. How about
+10? Pass `$pager` to the template as the `voyages` variable.
+
+That... should just work because we can loop over `$pager` to get the voyages.
+
+## Rendering the Pagination Links
+
+Next up, in `homepage.html.twig`, we need to render the pagination links. Down
+at the bottom, I already have a spot for this: I've hardcoded previous and next
+links.
+
+The way you're supposed to render PagerFanta links is by saying
+`{{ pagerfanta() }}` and then passing in `voyages`.
+
+When we try this - let me clear my search out - the pagination looks awful... but
+it *is* working! As we click, the results are changing.
+
+So... how do we make these pagination links... *not* so ugly? Well, there *is* a
+built-in Tailwind template that you can configure PagerFanta to use. That involves
+creating a `babdev_pagerfanta.yaml` file, setting the `default_view` to `twig`,
+and then pointing the `default_twig_template` to `@BabDevPagerfanta/tailwind.html.twig`:
+
+```yaml
+babdev_pagerfanta:
+    # The default Pagerfanta view to use in your application
+    default_view: twig
+
+    # The default Twig template to use when using the Twig Pagerfanta view
+    default_twig_template: '@BabDevPagerfanta/tailwind.html.twig'
+```
+
+But I'm going to be stubborn. I want to *just* have a previous & next button...
+I want to style them *exactly* like this. So let's go rogue!
+
+The first thing we need to do is render these links conditionally, only if there
+*is* a previous page. To do that, say if `voyages.hasPreviousPage`, then render that.
+And, if we have a next page, render *that*.
+
+For the URLs, we can use a helper called `pagerfanta_page_url()`. Pass it the pager,
+`voyages`, then which page we want to go to: `voyages.previousPage`.
+
+Copy that, then repeat it below with `voyages.nextPage`.
+
+Lovely! Let's give that a try. Refresh. Love it! The previous page is missing, we
+click next, and it's there. Click next again. Page 3 is the last one. We got it!
+
+For extra credit, let's even print the current page. Add a div... then print
+`voyages.currentPage`, a slash, then `voyages.nbPages`. Good job, AI!
+
+There we go. Page one of three. Page two of three.
+
+## Column Sorting
+
+What about column sorting? I want to be able to click each column to sort by that
+column. sort. For this, we're going to need two new query parameters. A `sort`
+column name and a `sortDirection`. Back to PHP! Add `#[MapQueryParameter]` on
+a `string` argument called `$sort`. Default it to `leaveAt`. That's the property
+name for this departing column. Then, to go `#[MapQueryParameter]` again to add
+a string `$sortDirection` that defaults it ascending.
+
+In the actual method, I'll paste in 2 boring lines that validate that `sort` is
+a real column. We could probably do the same for `$sortDirection`, but I'll skip
+to `findBySearchQueryBuilder()`. This is already set up to expect the sort arguments.
+So pass `$sort` and `$sortDirection`... and it should be happy!
+
+Finally, we're going to need this info in the template to help render the sort
+links. Pass `sort` set to `$sort` and `sortDirection` set to `$sortDirection`.
+
+## Adding the Column Sorting Links
+
+The most tedious part is to transform each `th` into the proper sort link. Add
+an `a` tag and break it onto multiple lines. Set the `href` to this page - the
+homepage - with an extra `sort` set to `purpose` - the name of this column.
+For `sortDirection`. this is more complex: if `sort` equals `purpose`
+and the `SortDirection` equals `asc`, then we want `desc`. Otherwise, we want
+`asc`.
+
+Finally, in addition to the `sort` and `sortDirection` query parameters, we want to
+keep any *existing* query parameters that might be present - like the search query.
+There's a cool way to do this: `...` then `app.request.query.all`.
+
+Done! Oh, but after the word Purpose, I want to have a nice down or up arrow.
+To help, I'm going to use a Twig macro. I don't often use macros... but this will
+help us figure out the direction, then print the correct svg: a down arrow, an
+up arrow, or an up and down arrow.
+
+Down here... use this with `{{ _self.sortArrow() }}` passing `'purpose'`,
+`sort` and `sortDirection`.
+
+Phew! Let's repeat all of this for the departing column. Paste, change `purpose`
+to `leaveAt`, the text to `Departing`... then use `leaveAt` in the other two spots.
+So, all pretty boring code, though it *was* a bit of work to get this set up. Could
+we have some tools in the Symfony world to make this all easier to build? Probably.
+That would be a cool thing for someone to work on. 
+
+Moment of truth! Refresh. Okay, that looks good. And it works *great*! We can sort
+by each column... we can paginate. Filtering keeps our page... and keeps the search
+filter. It's everything I want! And it's all happening via Ajax! Life is good!
+
+Really, the only problem now is that it's... a little jarring to have the full
+page refresh every time. I really want this to feel like a standalone thing widget
+doesn't jump around. Tomorrow: we'll polish this thanks to Turbo Frames.

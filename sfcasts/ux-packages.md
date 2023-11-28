@@ -121,6 +121,6 @@ search for autocomplete... and Tom select. Nothing. But as *soon* as we go to th
 edit page where that's being used: search for autocomplete. There it is! `tom-select`
 and the CSS file were also loaded lazily, only when we needed it.
 
-We're now done with day 7 - 1 full week into LAST stack! Tomorrow, we turn things
-up a notch and transform our app into a single-page-application with Turbo. Over
-the next 7 days, things are start getting crazy.
+We're now done with day 8 - a full week and day into LAST stack! Tomorrow, we turn
+things up a notch and transform our app into a single-page-application with Turbo.
+Over the next 7 days, things are start getting crazy.

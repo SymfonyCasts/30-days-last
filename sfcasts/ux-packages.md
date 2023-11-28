@@ -1,82 +1,126 @@
-# Ux Packages
+# Symfony UX Packages
 
-Coming soon...
+Head over to https://ux.symfony.com. This is the site for the Symfony UX Initiative,
+which is a group of PHP and JavaScript packages that give you free Stimulus
+controllers. There's a Stimulus controller that can render chart.js, one that
+can add an image cropper, and so on.
 
-Head over to ux.symfony.com. This is the site for the Symfony UX Initiative, which is
-really a group of PHP and JavaScript packages that give you free stimulus
-controllers. So there's a stimulus controller that can render chart.js, there's a
-stimulus controller that can add an image scrapper, and so on. What we're going to
-focus on today is this autocomplete one. So very simply, you can see down here, this
-adds a nice little searchable autocomplete type of thing that you can add to a select
-element. It's just that nice. On our site, if we go over to the voyages and hit edit,
-we have a little planet dropdown, which is fine, but this could use a little extra
-fanciness. So we're going to add it right there. So let's get this package installed.
-So I'll scroll up, copy that, copy the compose require line, and paste. And then when
-that finishes, I'm going to clear it and run git status. And there's two interesting
-things that have modified here. It's controllers.json and import map.php. We know
-that everything in the assets controllers directory is going to be available as a
-stimulus controller. In addition to that, anything in our controllers.json is also
-registered as a stimulus controller. So the recipe added this entry right here, which
-basically means that it's looking in the symphony UX autocomplete PHP package we just
-installed, and it's registering a stimulus controller called autocomplete. The end
-result of this code is that we now have a third stimulus controller in our
-application. The other thing that the recipe did is down here on import map.php,
-added a new vendor entry for Tom select. So Tom select is a JavaScript package. And
-that's actually what does the heavy lifting of adding all the autocomplete. So this
-stimulus controller is just a small wrapper around Tom select. And so since we need
-Tom select, it was added here. Now when we refresh the page, we are greeted with a
-lovely error. It says the auto import Tom select dot default dot CSS could not be
-found in import map.php. Try running import map require and then that path. So if you
-look back into that controllers.json, sometimes these controllers have an extra
-section called auto import. So the idea is that sometimes a JavaScript controller, a
-stimulus controller might have a CSS file that goes along with it. This section
-allows you to activate or deactivate those CSS files. So for example, with Tom
-select, there's a default one, or if you're using bootstrap, you can use the
-bootstrap five one. So for example, we can set this to false in this set to true if
-we are using bootstrap. Now, one difference between using JavaScript modules in a
-browser and an environment like webpack is that with something like webpack, when you
-install a Tom select package, you get the entire package. So you get the JavaScript
-files, any CSS files, the whole thing is there. So in this system, when you install
-Tom select, that actually installs just a single file, just the JavaScript file. So
-the CSS files are not there. However, one really cool thing about this system is that
-when you run import map require, so bin console import map require, you can import
-map require a package name like this. Totally cool. But you can also import a
-specific file path within that package. And of course, with asset mappers, since we
-support CSS files, you can also that path can be to a CSS file. So that's a long way
-of saying that we need this vendor file. So we're going to run bin console import map
-require and paste that. And now we have it. So over in our assets vendor directory,
-you can see we have that CSS file. And in our import map dot PHP, we have it right
-there. So it's now available for the stimulus controller to import. And the end
-result is it works. And when you view the page source, you can see we have the CSS
-file right there. All right, let's add this stimulus controller to our code. So as I
-mentioned, UX packages are usually a mixture of PHP and stimulus controllers. So in
-this case, what the PHP code allows us to do is go to source form voyage type dot
-PHP. And this is a entity type on any entity type or choice type, we can say
-autocomplete. True. As soon as we do that, boom, okay, the styling is not right yet.
-But what that does is it activates a stimulus controller on that element, you can
-even inspect element and see it. So here's the select that was rendered on the page.
-And here you can see data dash controller. And then it has a kind of an ugly long
-name to the controller, but that's the controller being activated. And then Tom
-select is actually adding all this extra markup down there. So it works, it works
-beautifully. It just doesn't look quite right yet. So this is where the auto import
-comes into play. It is bringing in this Tom selected dot default dot CSS, which makes
-it at least look somewhat okay. But it's not really styled for our dark mode yet. So
-if we were using bootstrap, as I mentioned, we could just set this to true this to
-false, and then import map require this file and would be good. There's no official
-support right now for tailwind. So we're just going to style this manually over in
-assets styles app dot CSS, I'll remove this body. In addition to the tailwind stuff,
-you can totally paste in whatever custom styling you want. So this is just a little
-thing that I put in here to override some of the styles for a nice dark mode. And now
-it looks nice. Love that. Earlier we talked about how in our assets controllers
-directory, if we want to make one of these controllers lazy, we can add a comment.
-And we can do the same thing with the controllers loaded in controllers dot JSON. And
-that's good, right? Because we're only using this autocomplete on one page. So
-ideally, we wouldn't need to download this stimulus controller, or Tom select or this
-CSS file until we're actually on a page that needs it. So the way to do that is very
-simple, fetch, lazy. That's it. So over here, if we for example, go to the voyages
-page, I'll go to my network tools and refresh. So if we search here for autocomplete,
-or Tom select nothing. But as soon as we go to the edit page where that's being used,
-search for autocomplete. There we go. There is the stimulus controller that's housing
-autocomplete. And Tom select also got downloaded along with the CSS file. Alright,
-next up on day eight, we're going to transform our entire site into a single page
-application all at once with turbo.
+Today we're going to focus on grabbing a *free* Stimulus controller that will give
+us a fancy autocomplete `select` element. You can search, select - it's all very
+nice.
+
+On our site, head to the voyages section and hit edit. The form has a planet dropdown,
+which is fine... but, let's be honest, this could use a little extra fanciness.
+
+## Installing UX Autocomplete
+
+So let's get this package installed. The UX Autocomplete package is a mixture of
+PHP with a Stimulus controller inside. Copy the composer require line and paste:
+
+```terminal-silent
+composer require symfony/ux-autocomplete
+```
+
+When that finishes... run:
+
+```terminal
+git status
+```
+
+Oooh: the recipe mdoified two interesting things: `controllers.json` and `importmap.php`
+We know that everything in the `assets/controllers/` directory will be available
+as a Stimulus controller. In addition to that, anything in our `controllers.json`
+file will *also* be registered as a Stimulus controller. It's a way for third-party
+PHP packages to add more controllers. The recipe added this entry, which basically
+means that it'll grab a some code from the package we just installed and register
+it as a Stimulus controller.
+
+The point is, we now have a *third* Stimulus controller in our app! The other change
+the recipe ,made is in `importmap.php`: it added a new entry for `tom-select`.
+`tom-select` is a JavaScript package, and that's actually what does the heavy lifting
+for the autocomplete functionality. This stimulus controller is just a small wrapper
+around `tom-select`. And so, since that controller needs `tom-select`, it was added
+here!
+
+## UX "autoimport" CSS
+
+But when we refresh the page, we are greeted with a *lovely* error. It says
+
+> The `autoimport` `tomselect.default.css` could not be found in `importmap.php`.
+> Try running `importmap:require` and then that path.
+
+Look back into `controllers.json`. Sometimes, these controllers have an extra section
+called `autoimport`. The idea is that a Stimulus controller might have a CSS file
+that goes along with it. This section allows you to activate or deactivate those
+CSS files. For example, with `tom-select`, there's a default CSS file or if you're
+using bBootstrap, you can use the Bootstrap 5 CSS file. We could set this to `false`
+in set to `true`.
+
+One difference between using JavaScript modules in a browser versus like Node &
+Webpack is how *much* of the package you get. With Node, if you `npm add tom-select`,
+that will download the *entire* package: the JavaScript files, CSS files and
+anything else. But with AssetMapper & the browser environment in general, when
+you `importmap:require tom-select`, that downloads a *single* file: just the
+JavaScript file. The CSS files are *not* there.
+
+*However*, when you run `importmap:require`, you can, of course, grab a package
+with its name, like this. Cool. But you can *also* import a specific file path
+*within* that package. And, because AssetMapper support CSS files, that path can
+be to a CSS file.
+
+In other words, if we need this vendor CSS file, we can get it with:
+
+```terminal
+php bin/console importmap:require tom-select/dist/css/tom-select.default.css
+```
+
+Now we have it! Over in the `assets/vendor/` directory... there it is! And in
+`importmap.php`, it's there too. This means it's available for our Stimulus
+controller to import.
+
+The end result? Error gone! And in the page source, there's the CSS file.
+
+## Applying Autocomplete to a Field
+
+Ok, after one `composer require` call, one `importmap:require` and a ton of *me*
+yapping, we have a new autocomplete Stimulus controller ready to go.
+
+We could add a `data-controller` to the `select` element, but UX packages are usually
+a mixture of Stimulus controllers and PHP code. In this case, the PHP code allows
+us to activate the controller directly in our form. Open up `src/Form/VoyageType.php`.
+The `planet` field is an `EntityType`. And, thanks to the new package, any
+`EntityType` or `ChoiceType` can now have an `autocomplete` option. Set it to
+`true`.
+
+And now... woo! Ok, the styling isn't perfect, but it works! That option activated
+the Stimulus controller: you can even see it on the page. Here's the `select`
+now with a `data-controller` followed by a long name for that controller.
+
+## Customizing the CSS
+
+How can we make this look better? Thanks to the `autoimport`, the
+`tom-select.default.css` at least makes it look okay. If we were using Bootstrap,
+I'd change this to `true`, this to false, then `importmap:require` the Bootstrap
+file and we'd be good.
+
+Right now, there's no official support for Tailwind, so we'll style it manually.
+Over in `assets/styles/app.css`, I'll remove this `body`. In addition to the Tailwind
+stuff, you can paste in whatever custom styling you need. These override some
+of the default styles to look nice in our space-themed, dark mode.
+
+And now... super nice! Love that.
+
+## Making UX Controllers Lazy
+
+Oh, remember how we can make *our* controllers lazy by adding a special comment?
+We can do the same thing with the controllers loaded in `controllers.json` by
+setting `fetch` to `lazy`.
+
+Check this out. Go to the voyages page. I'll go to my network tools, refresh and
+search for autocomplete... and Tom select. Nothing. But as *soon* as we go to the
+edit page where that's being used: search for autocomplete. There it is! `tom-select`
+and the CSS file were also loaded lazily, only when we needed it.
+
+We're now done with day 7 - 1 full week into LAST stack! Tomorrow, we turn things
+up a notch and transform our app into a single-page-application with Turbo. Over
+the next 7 days, things are start getting crazy.

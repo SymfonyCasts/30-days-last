@@ -1,45 +1,67 @@
-# Toast
-
-Coming soon...
+# Toast Notifications
 
 An important part of any functional beautiful site is a notification system. In
-Symfony we often think of flash messages, success messages that we render near the
-top of the page after the user successfully submits a form. And yes, that is what I'm
-talking about. But just rendering them on the top of the page is not good enough for
-me. Instead, I want to render them as rich, beautiful, toast-style notifications in
-the upper left that disappear automatically with CSS transitions. But first, let's at
-least render the flash messages. So on our CRUD controller, I'm already saving flash
-messages when I submit the form, we're just not rendering them anywhere. So in the
-templates directory, let's create a new flashes.html.twig. And for right now, I'm
-just going to loop over the success flash messages with for message in
-app.flashes.success, we'll add the end for. Now for the inside, I'm going to post a
-very simple flash message, which is actually going to be fixed to the bottom of the
-page by default. And then in base.html.twig, instead of rendering this somewhere near
-our body block, I'm gonna put this all the way at the bottom of the page. I'm going
-to say div ID equals flash container, and then curly curly include underscore
-flashes.html.twig. Now this ID flash container is not important yet, but it will be
-useful later when we talk about turbo streams. So let's see if this works, I'm gonna
-hit Save. And there we go. It's in kind of a weird spot, but it is showing up. So to
-get this to look nicer, we can go to flow byte. And here, if I search for toast,
-actually have some nice examples for some different style toast notifications that we
-can take advantage of. So I'm going to paste in some code that is heavily inspired by
-these flow byte examples. So back in underscore flashes.html.twig, I'll paste over
-that. And there we go. So nothing really changed. We're still looping over the same
-collection. I'm still dumping out message. We've just got some nice markup around
-this. All right, let's try it. I'll go to edit, save. Oh, and that is beautiful. It's
-up in the upper right. It doesn't auto close yet. In fact, it doesn't close at all
-yet. But that's great. That's just done with CSS. So let's hook up this close button.
-It's pretty likely that we're going to need to close things from other places. So
-let's create a standalone reusable stimulus controller for closing things. So in
-assets controller, let's create a closeable controller.js file. I'll cheat and grab
-the code from another controller and clear that out. Perfect. And what we have in
-here is just a close method. That when it's called is going to remove the entire
-element that's attached to this controller. Next up, over in underscore
-flashes.html.twig, we will attach the controller to the top level element because
-this is the element that we want to remove when we close it. Then down here on the
-button, we'll say data-action equals closeable pound sign close. We don't need the
-click because this is a button. So stimulus knows that we want this to trigger on
-click. All right, let's try it. Hit edit. Hit save. It's there. It's gone. So just a
-couple minutes, we have a rich toast notification system, but it's not cool enough.
-So tomorrow we're going to make it fancier with an auto-close functionality in CSS
-transitions.
+Symfony, we often think of flash messages: success messages that we render near the
+top of the page after the user submits a form. And yes, that *is* what I'm talking
+about. But just rendering them at the top of the page isn't good enough for me.
+Instead, I want to render them as rich, toast-style notifications in the upper left
+that disappear automatically with CSS transitions.
+
+## Rendering Flash Messages
+
+On our CRUD controllers, I'm already setting a `success` flash message... but I'm
+not rendering it anywhere. In the templates directory, create a new `flashes.html.twig`.
+To start, just loop over the success flash messages with `for message in`
+`app.flashes.success`... then `endfor`.
+
+Inside, I'll paste a very simple flash message, which willl start fixed to the bottom
+of the page.
+
+Next, in `base.html.twig`, instead of rendering the flashes somewhere near the top
+of the body, put them at the bottom. Say `<div id="flash-container">` then
+`{{ include('_flashes.html.twig') }}`.
+
+The `id="flash-container"` isn't important yet, but it *will* be useful later when
+we talk about Turbo streams.
+
+So let's see if this works! Hit "Save" and... there we go! It's in a weird spot,
+but it shows up.
+
+## Making the Notification Pretty!
+
+To make this look nicer, we can go to Flowbite. Search for "toast". Ah, this has
+some great examples for different styles of toast notifications. We can take
+advantage of this.
+
+Back in `_flashes.html.twig`, I'll paste in some new content. This is heavily inspired
+by the Flowbite examples. But nothing really changed: we're still looping over the
+same collection and still dumping out the message. We've just got nice markup around
+this.
+
+I can't want to see this! I'll go to edit and "Save". Oh, that is wonderful:
+in the upper right where I want it and all done with CSS.
+
+## Making the Toast Closeable
+
+Though, it doesn't auto close yet. In fact, it doesn't close at all! Since "closing"
+things will be a common problem, let's create a reusable Stimulus controller to
+handle that.
+
+In `assets/controller/`, add a new `closeable_controller.js` file. I'll cheat and
+grab the code from another controller... clear it out... then add a `close()` method.
+When this is called, it will remove the entire element that the controller is attached
+to.
+
+To use this, in `_flashes.html.twig`, attach the controller to the top level element
+because that's what should be removed on close. Then, down on the button, say
+`data-action="closeable#close"`.
+
+We don't need the `click` because this is a `button`, so Stimulus already knows that
+we want this to trigger on the `click` event.
+
+Let's try it! Hit edit and Save. It's there... it's gone.
+
+In just a few minutes of work, we created a beautiful and functional toast
+notification system! But, darn it, this is *not* cool enough for our 30 Days of
+Last Stack mission! So tomorrow, we'll fancy-ify this with auto-close, CSS
+transitions and an animated timer bar.

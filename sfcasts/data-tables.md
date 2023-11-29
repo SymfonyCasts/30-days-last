@@ -1,78 +1,115 @@
-# Data Tables
+# Data Tables with Turbo Frames
 
-Coming soon...
+Our data tables-like setup is working. And it's *almost* awesome. What I don't love
+is how it jumps around. Every time we click a link, it jumps back to the top of the
+page. Boo.
 
-So our data tables setup is working. It's almost awesome. What I don't love is how it
-jumps around. Every time we click a link, it's... jumping back to the top of the
-page. And that's because Turbo is making a full page reload, and whenever Turbo makes
-a full page reload, it scrolls to the top of the page, because that's usually what we
-want. But not in this case. I really want our data table to almost work like a little
-application, where it just changes right here without moving the screen around. A
-really great way to do this is just to surround this entire table area with a Turbo
-frame. So check this out. In homepage.html.twig, let's find the table. Here we go. So
-this div right here really represents the entire table. So above the div, we're going
-to say Turbo-frame ID equals voyage-list. Then I will indent this div. And then also
-these pagination links down here. We also want those to be inside of the Turbo frame
-as well, so that when we click on them, it moves the... it advances the frame. All
-right, let's try this out. I'll clear my search. And oh, beautiful. Look at that.
-Everything moving within the frame. Try pagination. Beautiful. The reason this works
-is that all of our links are going back to the homepage and the homepage, of course,
-has this frame. Now, just remember, now that we have this inside of a Turbo frame, if
-we had any links inside of here, they might stop working. So again, the way to fix
-that is on those links to add data-Turbo-frame equals top. Or if you want to be a
-little bit more conservative, you can go up to the new Turbo frame we added and add
-target equals underscore top. And then if you do that, you just need to go down to
-your sorting links and your pagination links and add data-Turbo-frame equals
-voyage-list right there, so that those do target the frame. But I will remove those
-because we do not have that problem in this case. So at this point, the pagination
-links, the sorting links, all working perfectly. But watch this. When I search here,
-the search is still a full page reload. And that makes sense. I didn't put that
-inside of the Turbo frame. Why? Because it wouldn't have fixed our problem. Because
-when we type into it, it still would have reloaded the form, which still would have
-reset my cursor position every time I type. So I don't want my form to reload. I want
-it to just stay on the page statically. But when my form submits, I do want to
-trigger the table to navigate. And we can do that. Up here on the form element that
-we submit, add data-Turbo-frame equals voyage-list. This is a really powerful
-concept. Even though this isn't inside of that Turbo frame, we can still target that
-Turbo frame to navigate it. So now when we refresh, watch this. Beautiful. It
-navigates and it's no longer taking away my control because that's not being
-reloaded. So I love this. This is gorgeous. And now we have time to make things extra
-fancy. So what about adding some sort of a loading indicator as we're navigating
-between pages? Well, to make this super obvious, let's go to our controller and add a
-sleep for one second. So now you can see it's really not very responsive. It's slow,
-but we're also not even getting any user feedback that it's doing anything. So how
-can we add some sort of loading indication? This is a spot where Turbo has our back.
-So here's the Turbo frame element, and I want you to watch the attributes at the end
-when I navigate. Boom. See that? There was an area-busy equals true that Turbo adds
-while it's navigating. That is there for accessibility, but it's also something that
-we can leverage very easily with Tailwind to add some loading indicator. So over on
-that Turbo frame element, here we go. Say class equals, and here we can say area-busy
-colon opacity 50. So what's happening here is this is a special thing that says only
-if this element has an area-busy attribute should we apply the opacity 50. So we can
-also do another one, area-busy colon, and let's say blur-sm. That's going to blur the
-background. That's really cool. And I'll also say transition all to transition the
-opacity and the blur so it's not too abrupt. Abrupt. All right. So I'll refresh that
-and watch. Oh, beautiful transitions just by adding a couple of classes. Now, as
-beautiful as that is, it's a little slow. So in main controller, let's remove our
-sleep. Now, at this point, there's only one big, gigantic, horrible problem, and that
-is that when we search or when we sort or when we paginate, there is nothing
-happening up here on the URL. This is just static. So if I just go to the page like
-this, the URL is never changing. And that's the default behavior of Turbo frames.
-When they navigate, they don't update the URL. However, we can tell Turbo that we do
-want to update the URL. To do that on the Turbo frame, we're going to add
-data-turbo-action equals advance. So what advance means is do update the URL and
-update it in such a way that if we hit the back button later, it will go to the
-previous search. So watch this. This time if I do AU, great, that works. I can clear
-that out. Let's go to page two, page three. Now, if I go back, you can see it goes
-back to page two, back to page one, exactly how we want. And now this is a truly
-sweet data tables setup, entirely written with no JavaScript inside of Twig and
-Symphony. Really, the last problem here is this 30 results. So notice as we search,
-that never changes. It's just stuck on whatever was there when the original page
-loaded. That's because this lives outside of our Turbo frame. The easiest way to fix
-that would be just to move this into the Turbo frame. But I don't really want it
-there. I want it visually up here. So we're going to leave that for now. But that's
-something that can be fixed by Turbo streams, a topic we'll talk about in a few days.
-And we will eventually get that updating. Alright, next tomorrow, we're going to dive
-into a brand new feature of browsers in general called view transitions. These allow
-smooth visual transitions that we can apply to any navigation or content change of
-any kind. It's super sweet.
+That's because Turbo is reloading the full page. And when it does that, it scrolls
+to the top... because that's usually what we want! But not this time. I want our
+data table to work like a little application: where the content changes without moving
+the screen around.
+
+## Turbo 8 Morphing?
+
+There are two great ways to solve this. In Turbo 8 - which is *not* released yet,
+it's Beta 1 at the time of recording this - there's a new feature called page
+refreshes that leverages morphing. Without nerding out too much - and I want to -
+when navigating to the same page - like our search form, column sorting and
+pagination links *all* do - we can tell Turbo to only update the content on the
+page that *changed*... *and* to preserve the scroll position. So, keep an eye out
+for that.
+
+## Adding a Turbo Frame
+
+The second way - which works fantastically today - is to surround this entire table
+area with a `<turbo-frame>`. In `homepage.html.twig`, find the `table`. Here it is:
+this `div` represents the entire table. Above the `div`, add
+`<turbo-frame id="voyage-list">`. Indent this `div`... and also these pagination
+links: we also want those to be inside the Turbo frame so that when we click on them,
+they advance the frame & update.
+
+Let's try this. Clear the search. And oh... beautiful. Look at that! Everything moves
+*within* the frame. Try pagination. That too! All of our links point *back* to the
+homepage... and the homepage, of course, *has* this frame.
+
+But remember: now that this table lives inside of a Turbo frame, if we have any links
+inside, they will stop working. Again, to fix that, on each link, add
+`data-turbo-frame="top"`. Or to be more conservative, go up to the `<turbo-frame>`
+we added and add `target="_top"`. If you do that, you'll also need to find the
+sorting and pagination links that *should* navigate the frame and add
+`data-turbo-frame="voyage-list"`.
+
+But I'll remove those... because we don't have any links in the table.
+
+## Targeting the Search on the Form
+
+At this point, the pagination links and sorting links: they all work perfectly! But...
+the search?  The search is still a full page reload. That makes sense! I didn't put
+that inside the frame. Why? Because, if we had, when we typed and the frame reloaded,
+it would have *also* reloaded the search box... which would *still* reset my cursor
+position each time. So we *don't* want the form to reload.
+
+Can we... *keep* this outside of the frame but make it only *update* the frame when
+the form submits? We can! Up on the `form` element that submits, add
+`data-turbo-frame="voyage-list"`.
+
+Isn't that cool? Even though this doesn't live in that frame, we can still *target*
+our navigation on it. Now when we refresh: watch. It's perfect! The table loads,
+but I *keep* my input focus. This is gorgeous.
+
+## Adding a Loading Screen
+
+And now we have time to make things extra fancy! What about a loading indicator
+on the table while we're it's navigating? To make this super obvious, go to our
+controller and add a `sleep()` for one second.
+
+Now... it's *slow*... and when we click or search, we're not even getting any feedback
+that the site is *doing* anything.
+
+So how *can* we add some sort of loading indicator? This is a spot where Turbo has
+our back. So here's the `<turbo-frame>` element. Watch the attributes at the end
+when I navigate. Did you see that? Turbo added an `aria-busy="true"` attribute
+while it's loading. That's there for accessibility, but it's also something that
+we can leverage withing Tailwind!
+
+Over on that `<turbo-frame>` element, here it is, say `class=""` with
+`aria-busy:opacity-50`.
+
+This special syntax says that, *if* this element has an `aria-busy` attribute,
+apply the `opacity-50`. Add one more `aria-busy:` with `blur-sm`.
+
+That'll blur the background at bit. Finally, for extra points, add `transition-all`
+so that the opacity and blur changes *transition* and aren't too abrupt.
+
+Refresh that and watch. Oh, that's lovely! And all happened thanks to 3 CSS classes.
+And, though I love watching that, in `MainController`, remove the sleep.
+
+## Advancing the Frame
+
+Is this mission accomplished? *Nearly*. There's on gigantic, horrible problem...
+with a simple solution. When we search or sort or paginate, the URL doesn't change.
+That's the default behavior of Turbo frames: when they navigate, they don't update
+the URL. However, we *can* tell Turbo that we *want* this. To do that, on the Turbo
+Frame, add `data-turbo-action="advance"`.
+
+Advance means that it will update the URL *and* advance the browser history so
+that if we hit the "Back" button, it'll go the the previous URL. You can also
+use `replace` to change the URL, but *without* adding to the history.
+
+Watch: this time when we search... the URL updates! And as we navigate to page
+two or three... it updates... and we can hit back, back, and forward, forward.
+
+We now have a truly *fantastic* data tables setup... entirely written without
+any custom JavaScript inside of Twig and Symfony.
+
+The final little problem is this "30 results". As we search, that never changes:
+it's stuck on whatever number was there when the original page loaded. That's because
+this lives *outside* of the Turbo frame. The easiest fix would be to move this
+*into* the Turbo frame... but I don't want it there! I want it visually up here.
+
+We're going to leave that for now. But we'll fix in in a few days with Turbo
+Streams, 
+
+Tomorrow, we're going to dive into a brand new feature browser feature! It's
+called view transitions, and it'll let us apply visual transitions to a navigation
+of any kind.

@@ -1,88 +1,130 @@
 # View Transitions
 
-Coming soon...
+Day 15! We're already halfway through our adventure. And it only gets cooler from
+here.
 
-Welcome to day 15. We've made it to the halfway point of the tutorial. And I promise
-you, it only gets cooler from here. To celebrate our halfway point today, we're going
-to talk about something fun, the View Transitions API, a new feature supported in
-most browsers that allows us to have really cool view transitions whenever any HTML
-changes on your page. And the good news is, if your user has a browser that doesn't
-support it, it just skips the transition and happens immediately. So no big deal. Now
-to work with this, you do not need to have an external library. But we're going to
-use one called TurboViewTransitions. And this library actually came out of a blog
-series where they built a really cool project called TurboMusicDrive. So what we're
-going to see today with View Transitions, this is actually something that's going to
-come standard in Turbo 8. And so this Evil Martians place, they came out with a two
-series of blog posts all about this and all about doing super crazy stuff with Turbo.
-And when they built this blog post, they actually made a cool demo page where you can
-see this stuff in action. So the View Transitions allow us to transition between
-pages, we can control what those transitions look like. And we can even connect
-elements before and after so that they kind of do a special transition. So watch
-this. When I click this album cover here, it's actually going to move up to the left.
-That is happening via View Transitions. Also, it has a nice blur on the rest of the
-page. So let's try this out. Step one, get the TurboViewTransitions library
-installed. So at our terminal, we'll run bin console import map require
-TurboViewTransitions. Perfect. To get this working, we need to do two things. First,
-in base.html.twig, we need to add a little meta tag. So meta name equals view
-transition. And that's it. That ops our site into view transitions. The second thing
-we need to do is activate it in JavaScript. So head to app dot j s, this is going to
-be some rare JavaScript that doesn't need to live in a stimulus controller. So we can
-copy from their example, paste, I'll move the import to the top of the file. And
-that's it. This is going to be enough to make our turbo drive page navigations
-happening with view transitions. This leverages an event from turbo called turbo
-before render. This should perform transition basically checks to see if the user's
-browser supports transitions. If they don't, it does nothing. If it does, then this
-perform transition is going to transition between the old body and the new body. And
-by default, that's going to be a nice little crossfade. There's also a little code
-down here to not use the turbo page cache if there are view transitions. Alright, so
-let's see what this looks like refresh the page, watch. Look at that super smooth
-little cross transitions. So not only do we have no full page reloads anymore, but we
-now have these really nice smooth transitions between our pages. And as I mentioned,
-that's going to happen by default in turbo eight without us doing anything. But what
-about frames? So if we click here, you can see that that still happens instantly. So
-we've activated it for full page navigations, but not for frames. Can we? Absolutely.
-Copy this listener. And then down here. And this time, we're going to just change it
-to turbo before frame render. And then we just need to adjust this down here. Instead
-of document that body, we can use event dot target, that will be the I the turbo
-frame. And then the new thing will be event dot detail dot new frame. That's it. So
-when we refresh and click a beautiful transition on that frame, and if the transition
-wasn't obvious enough, you can open up your browser tools here, click the little dot
-dot dot, go to more tools, go to animations, and I looks like I already had it open.
-And you can actually change the speed of your animations. So watch. Now it's super
-obvious. You can even see how it works. If I scroll up and scroll down, you can kind
-of see how it takes a screenshot of the old site and blends it in. It's not normally
-a problem because this is happening so fast, but it's kind of cool to see it. So at
-this point, we probably don't really need our probably don't need our transitions on
-our data tables anymore. So let's spin over there and just take those off. So take
-off the class. I'll move over refresh. And nothing happens. Well, I mean, it moves,
-but there was no transition. Why? This is a bit subtle. But the transitions break
-when you have a frame that advances the URL. And the problem is that when you have a
-frame that advances the URL, turbo calls turbo before frame render. And then it also
-calls turbo before render right after that. And the fact that these are both called
-kind of collide and cause a problem. So once you figure this out, it's a pretty easy
-fix. We're gonna create a variable called let skip next render transition equals
-false. And then down here, if should perform transition and not skip next render
-transition, then actually do it. Where does this come into play? We're going to set
-that right down here. So when our frame starts to do its thing, we're going to set
-this to true. And then we're going to set a little timeout here and set that to
-false. And we're just going to let this go for 100 milliseconds. So it's a little bit
-weird. But we're going to set this to true. Then when this is called almost
-immediately after it will skip doing it, which will fix things. And then within 100
-milliseconds, we'll set this back to false. So now when we refresh, beautiful, it
-changes, let's set that back to full speed. So it looks a little more normal.
-Awesome. That is a smooth effect right there. Now the last little detail, and
-honestly, I'm not sure what's going on here is check that out when we hover over kind
-of disappears because of the loading that has to do with the turbo form transition,
-there's probably a way to fix it, I couldn't crack it. So we're just going to add a
-way to disable the transitions on turbo on a turbo frame if we have this weird
-problem, which I think is just going to apply to the popover. So on the homepage, I'm
-going to search for turbo dash frame, here we go. Here's our lazy one right here. And
-we're going to add a new attribute here called data, skip transition, I'm totally
-just making that up. And then over an app dot j s, we can just look for that. So if
-should perform transition, and not event dot target has had as attribute data skip
-transition, then do the transition. Now, perfect. So that works. Well, we have
-transition on that, we have transitions on this, we have transitions on the whole
-page. It's crazy. Again, all done with such little JavaScript. Next up tomorrow,
-let's handle having, let's add a really cool little toast notification system on our
-site that's going to be easy to activate, no matter where and how we need to add
-them.
+To celebrate, today we're going to talk about something new & fun: the View
+Transitions API. This is a new feature supported in most browsers that allow us
+to have smooth transitions whenever *any* HTML changes on your page. And if your
+user has a browser that *doesn't* support it, it's ok! The transition is skipped,
+but everything keeps working. No biggie.
+
+## Evil Martians & Demoing View Transitions
+
+To use View Transitions, you do *not* need any external library. But we're going
+to use one called `turbo-view-transitions`. This actually came out of a blog series
+where they built a neat project called [Turbo Music Drive](https://github.com/palkan/turbo-music-drive).
+Oh, and, View Transitions will come Standard in Turbo 8 for full page navigation.
+Though, we'll take them even a bit further.
+
+Anyway, Evil Martians released two blog posts all about morphing and doing
+crazy stuff with it in Turbo. They even created a live demo! In the simplest form,
+view transitions can add a crossfade as you navigate. But you can also get more specific
+and connect elements between pages to give them a special transition. Watch: when
+I click this album, it move up to the left. There's also a nice crossfade for the
+rest of the page.
+
+## Installing turbo-view-transitions
+
+So let's try this out! Step one, get the `turbo-view-transitions` library. At
+your terminal, run:
+
+```terminal
+php bin/console importmap:require turbo-view-transitions
+```
+
+Lovely! To activate transitions, we need to do two things. First, in `base.html.twig`,
+add a `meta` tag with `name="view-transition"`. That's how you tell your browser
+you want these!
+
+Second, in Turbo 7, we need activate transitions in JavaScript. Head to `app.js`.
+This will be a rare time where we write JavaScript that doesn't need to live in a
+Stimulus controller. Copy from their example, paste... and move the `import` to the
+top of the file.
+
+Done! That should be enough to make the Turbo Drive navigations happen with view
+transitions! This leverages an event from Turbo called `turbo:before-render`. The
+`shouldPerformTransition()` function checks to see if the user's browser supports
+transitions. If they don't, it's normal behavior. But if it *does*, then
+`performTransition()` will transition between the old and new body. There's also
+a little code down here to avoid the turbo page cache. I think that's something
+that'll work better in Turbo 8 when this is official.
+
+Let's see what this looks like! Refresh the page and watch. Oooooh. A smooth
+crossfade transitions! So not did we eliminate full page reloads, we now have a
+transition between our pages. Watch our Powerpoint, we're coming for you!
+
+## Transition Turbo Frames
+
+But what about Turbo frames? When we click, that still happens instantly. We
+activated transitions for full page navigations, but not for frames. Can we?
+Sure!
+
+Copy this listener, and paste it below. This time, listen to
+`turbo:before-frame-render`... and adjust this part. Instead of `document.body`,
+use `event.target`. That will be the the `<turbo-frame>`. And then the new
+element will be `event.detail.newFrame`.
+
+Done! Refresh and.... click. Transition, check!
+
+## Debugging Transitions
+
+And if the transition isn't obvious enough, you can open up your browser tools,
+click the little "...", go to "more tools", then animations. It looks like I already
+had it open. Here, you can change the speed of your animations.
+
+Now... it's super obvious. You can even see how it works. If you scroll during
+the transition, you can kind of see how it takes a screenshot of the old HTML and
+blends it with the new. This weird affect isn't  normally a problem because it
+happens so fast, but it's cool to see.
+
+## Edge Case: Frames that Advance
+
+At this point, we probably *don't* need the custom CSS transition on the table
+anymore. So spin over to that template... and take of the `class`.
+
+Refresh... and try it. Huh. Nothing happens. I mean, it *works*... but there was
+no view transition. Why?
+
+This is subtle. The transition breaks when you have a frame that *advances* the URL.
+The problem is that, in this situation, Turbo calls `turbo:before-frame-render`...
+then *also* calls `turbo:before-render` right after. These two, sort of, collide.
+
+But it's an easy fix. Create a variable: `let skipNextRenderTransition` and set
+it to false. Below, if `shouldPerformTransition()` and *not* `skipNextRenderTransition`,
+then do it.
+
+Finally, when our frame starts its transition, set this variable to true. Also
+include a `setTimeout()`, set that back to `false` and delay this for 100
+milliseconds.
+
+It's a bit weird. But hey, that's programming! We set this to true, Turbo triggers
+the other listener almost immediately... then 100 milliseconds we reset it. We could
+probably also replace the `setTimeout()` by setting `skipNextRenderTransition = false`
+up in the `turbo:before-render` listener.
+
+The most important thing is that... *now* we have a transition! Let's set that back
+to full speed. I like it!
+
+## Disabling Transitions
+
+Try the planet popover iframe. Woh! That was weird. To be fully honest, I do not
+know what's happening here. For some reason, the view transition causes the popover
+to disappear... which is *not* ideal. There's probably a way to fix that, but I
+couldn't crack it.
+
+That's ok... and I think this weirdness is isolated to the popover behavior.
+Instead, we'll add a way to disable the transitions on a frame.
+
+On the homepage, search for `turbo-frame`. Here it is. Add a new attribute called
+`data-skip-transition`.
+
+I'm totally making that up. Then over an `app.js`, we can look for that. If
+`shouldPerformTransition()` and *not* `event.target.hasAttribute('data-skip-transition')`,
+then do the transition.
+
+Now... fixed! And we have transitions on... virtually *every* type of navigation
+on our site. And that only took about 10 minutes! It's crazy!
+
+Tomorrow - we're going to build a beautiful toast notification system that's
+easy to activate no matter where and how we need to add them. Seeya then!

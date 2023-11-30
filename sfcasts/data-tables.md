@@ -33,7 +33,7 @@ to the homepage... and the homepage, of course, *has* this frame.
 
 But remember: now that this table lives inside a Turbo frame, if we have any links
 inside, they'll stop working. Again, to fix that, on each link, add
-`data-turbo-frame="top"`. Or to be more conservative, go up to the new
+`data-turbo-frame="_top"`. Or to be more conservative, go up to the new
 `<turbo-frame>` and add `target="_top"`. If you do that, you'll also need to find
 the sorting and pagination links that *should* navigate the frame and add
 `data-turbo-frame="voyage-list"`.
@@ -105,7 +105,7 @@ this lives *outside* the Turbo frame. The easiest fix would be to move it
 *into* the frame... but I don't want it there! Visually, I want it up here!
 
 We're going to leave that for now. But we'll fix it in a few days with Turbo
-Streams, 
+Streams.
 
 Tomorrow, we're going to dive into a brand-new browser feature! It's
 called View Transitions, and it'll let us apply visual transitions to any navigation.

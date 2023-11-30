@@ -92,7 +92,7 @@ What about column sorting? I want to be able to click each column to sort by tha
 For this, we need two new query parameters. A `sort` column name and
 `sortDirection`. Back to PHP! Add `#[MapQueryParameter]` on a `string` argument
 called `$sort`. Default it to `leaveAt`. That's the property name for this
-departing column. Then, to go `#[MapQueryParameter]` again to add a string
+departing column. Then, do `#[MapQueryParameter]` again to add a string
 `$sortDirection` that defaults to ascending.
 
 Inside the  method, I'll paste 2 boring lines that validate that `sort` is
@@ -115,7 +115,7 @@ Finally, in addition to the `sort` and `sortDirection` query parameters, we need
 to keep any *existing* query parameters that might be present - like the search query.
 And there's a cool way to do this: `...` then `app.request.query.all`.
 
-Done! Oh, but after the word Purpose, let's add nice down or up arrow.
+Done! Oh, but after the word Purpose, let's add a nice down or up arrow.
 To help, I'll paste a Twig macro. I don't often use macros... but this will
 help us figure out the direction, then print the correct svg: a down arrow, an
 up arrow, or an up and down arrow.
@@ -133,6 +133,6 @@ Moment of truth! Refresh. That looks good. And it works *great*! We can sort
 by each column... we can paginate. Filtering keeps our page... and keeps the search
 parameter. It's everything I want! And it's all happening via Ajax! Life is good!
 
-The only hiccup now? That awkward full page refresh whenever we do anything.
+The only hiccup now? That awkward scrolling whenever we do anything.
 I want this to feel like a standalone app that doesn't jump around. Tomorrow:
 we'll polish this thanks to Turbo Frames.

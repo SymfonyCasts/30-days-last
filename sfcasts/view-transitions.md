@@ -4,7 +4,7 @@ Day 15! We're already halfway through our adventure. And it only gets cooler fro
 here.
 
 To celebrate, today we'll work on something sparkly & new: the View
-Transitions API. This nifty new feature is supported in most browsers and allow us
+Transitions API. This nifty new feature is supported in most browsers and allows us
 to have smooth transitions whenever *any* HTML changes on our page. And if your
 user has a browser that *doesn't* support it, that's ok! The transition is just
 skipped, but everything keeps working. No biggie.
@@ -51,7 +51,7 @@ a little code down here to avoid the turbo page cache. I think that's something
 that'll work better in Turbo 8 when this is official.
 
 Time for the big reveal! Hit refresh and watch. Oooooh. A smooth
-crossfade transitions! So not only did we eliminate full page reloads, we now have
+crossfade transition! So not only did we eliminate full page reloads, we now have
 a transition between our pages. Watch our Powerpoint, we're coming for you!
 
 ## Transition Turbo Frames
@@ -126,5 +126,5 @@ I totally made that up. Over an `app.js`, we can look for that. If
 Now... fixed! And we have transitions on... virtually *every* type of navigation
 on our site. And in only about 10 minutes! It's crazy!
 
-Tomorrow's mission: crafting a dazzling toast notification system that's
+Now to tomorrow's mission: crafting a dazzling toast notification system that's
 easy to activate no matter where and how we need to add them. Seeya then!

@@ -39,7 +39,7 @@ by the Flowbite examples. But nothing really changed: we're still looping over t
 same collection and still dumping out the message. We've just got nice markup around
 this.
 
-I can't want to see this! I'll go to edit and "Save". Oh, that is wonderful!
+And I can't want to see it! I'll go to edit and "Save". Oh, that is wonderful!
 In the upper right where I want it and all done with CSS.
 
 ## Making the Toast Closeable

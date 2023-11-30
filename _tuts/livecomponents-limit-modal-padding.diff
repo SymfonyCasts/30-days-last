@@ -12,7 +12,7 @@ index 99e33ef2..73408cb6 100644
                              <div
                                  class="hidden md:flex pr-10 items-center space-x-2 border-2 border-gray-900 rounded-lg p-2 bg-gray-800 text-white cursor-pointer"
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index d11ec652..cf6eeab7 100644
+index b158b847..49e70fa8 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
 @@ -1,4 +1,4 @@

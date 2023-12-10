@@ -90,7 +90,7 @@ in each spot.
 
 We now have an AJAX endpoint that returns the content. Here's the magic part.
 Over in `homepage.html.twig`, we want to load that content right here. Do that
-by adding a `turbo-frame` with `id` set to `card-` then `{{ voyage.planet.id }}`
+by adding a `turbo-frame` with `id` set to `planet-card-` then `{{ voyage.planet.id }}`
 so it's unique on the page. Add this same frame in `_card.html.twig`... with the
 closing tag.
 

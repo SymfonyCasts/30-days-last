@@ -56,10 +56,18 @@ MakerBundle to generate a CRUD for each entity. This `PlanetController`,
 adjustments.
 
 But basically... there's nothing special going on! We do have a `MainController`,
-which powers this homepage. It contains a query that will help us later... but
-the template, right now, is doing a whole lot of nothing. No CSS, no JavaScript, no
-assets of any kind... and the site doesn't *do* anything. But in 30 short
-lessons, we'll transform this into a small digital masterpiece.
+which powers this homepage:
+
+[[[ code('fb904fa3fa') ]]]
+
+It contains a query that will help us later... but the template, right now,
+is doing a whole lot of nothing:
+
+[[[ code('6bb0a02edd') ]]]
+
+No CSS, no JavaScript, no assets of any kind... and the site doesn't *do*
+anything. But in 30 short lessons, we'll transform this into a small digital
+masterpiece.
 
 That's it for day 1. Tomorrow, we'll install AssetMapper: a system for handling CSS,
 JavaScript and other frontend assets with batteries include... but absolutely

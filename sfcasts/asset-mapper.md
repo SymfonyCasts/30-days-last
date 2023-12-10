@@ -3,7 +3,7 @@
 Okay, so how are we going to bring CSS and JavaScript into our app? Are we going
 to add a build system like Vite or Webpack? Heck no! That's one of the fun
 things about all of this! We're going to create something *amazing* with *zero*
-build system. To do that, let's install a new Symfony component called asset-mapper.
+build system. To do that, let's install a new Symfony component called AssetMapper.
 
 ## Installing AssetMapper
 
@@ -24,8 +24,11 @@ git status
 ```
 
 We see that its Flex recipe made a number of changes. For example, `.gitignore`
-is ignoring a `public/assets/` directory and `assets/vendor/`. We'll
-talk more about those later. But on production, this is where your assets will be
+is ignoring a `public/assets/` directory and `assets/vendor/`:
+
+[[[ code('2b0d764e8d') ]]]
+
+We'll talk more about those later. But on production, this is where your assets will be
 written to and, when we install third-party JavaScript libraries, they'll live in
 that `vendor/` directory.
 
@@ -36,7 +39,9 @@ those on the back burner for now: we'll talk about them tomorrow.
 
 For today's adventure, pretend that, when we installed this, all it gave us was a new
 `asset_mapper.yaml` file and an `assets/` directory. Let's go check out that config
-file: `config/packages/asset_mapper.yaml`.
+file: `config/packages/asset_mapper.yaml`:
+
+[[[ code('ea53167677') ]]]
 
 The idea behind AssetMapper couldn't be simpler: you define paths - like the
 `assets/` directory - and AssetMapper makes every file inside available publicly...
@@ -53,7 +58,9 @@ Since this new files lives inside the `assets/` directory, we should be able to
 reference it publicly. Let's do that in our base layout: `templates/base.html.twig`.
 Anywhere, say `<img src="">`, `{{` and then use the normal `asset()` function. For
 the argument, pass the path *relative* to the `assets/` directory. This is called
-the logical path: `images/logo.png`.
+the logical path: `images/logo.png`:
+
+[[[ code('bbb066562f') ]]]
 
 Before we try this, an easy way to see *every* asset that's available is via: 
 
@@ -105,7 +112,11 @@ refresh, this file isn't being processed by Symfony, it's loading one of those
 real files.
 
 Now, if you ever run this command locally, make sure to delete that directory
-after... so it stops using the compiled versions.
+after... so it stops using the compiled versions:
+
+```terminal-silent
+rm -rf public/assets/
+```
 
 Wow! Day 2 is already done! We now have a way to serve images, CSS or *any*
 file publicly with automatic file versioning. The second part of `AssetMapper` is

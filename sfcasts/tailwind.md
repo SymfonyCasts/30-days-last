@@ -22,7 +22,7 @@ we can't opt *into* a small one for a specific purpose.
 And there's a super-easy bundle to help us do this with AssetMapper. It's called
 `symfonycasts/tailwind-bundle`. Hey, I've heard of them!
 
-Head down here, go to the documentation... and I'll copy the composer require line.
+Head down here, go to the documentation... and I'll copy the `composer require` line.
 Spin over and run that:
 
 ```terminal-silent
@@ -51,11 +51,17 @@ php bin/console tailwind:init
 
 This downloads the Tailwind binary in the background, which is awesome. That binary
 is standalone and doesn't require Node. It just works. The command also did two
-other things. First: it added the three lines needed inside of `app.css`. When
-this file is built, these will be replaced by the actual CSS we need.
-Second, this created a `tailwind.config.js` file. This tells Tailwind *where* to
-look for all the classes we'll use. This will find any classes in our JavaScript
-files or our templates.
+other things. First: it added the three lines needed inside of `app.css`:
+
+[[[ code('e4b6a191cd') ]]]
+
+When this file is built, these will be replaced by the actual CSS we need.
+Second, this created a `tailwind.config.js` file:
+
+[[[ code('75b1715df7') ]]]
+
+This tells Tailwind *where* to look for all the classes we'll use. This will find
+any classes in our JavaScript files or our templates.
 
 To *execute* Tailwind, run:
 
@@ -63,7 +69,7 @@ To *execute* Tailwind, run:
 php bin/console tailwind:build -w
 ```
 
-For "watch". That builds... then hangs out, waiting for future changes.
+For *watch*. That builds... then hangs out, waiting for future changes.
 
 So... what did that do? Remember: we're already including `app.css` on our page.
 When we refresh, woh! It looks a bit different! The reason is, if you view the page
@@ -77,7 +83,9 @@ CRUD templates with Tailwind classes before we started the tutorial.
 
 But let's see this in action for real. If we refresh the page, this is my `h1`.
 It's small and sad. Open `templates/main/homepage.html.twig`. On the
-`h1`, add `class="text-3xl"`.
+`h1`, add `class="text-3xl"`:
+
+[[[ code('35feee1337') ]]]
 
 Now, refresh. It works! If that `text-3xl` wasn't in the `app.css` file before,
 Tailwind just added it because it's running in the background.
@@ -86,8 +94,15 @@ Tailwind just added it because it's running in the background.
 
 So Tailwind is working! To celebrate, let's paste in a proper layout. If you
 downloaded the course code, you should have a `tutorial/` directory with a couple
-of files. Move `base.html.twig` into templates... and these other two go into
-the `main/` directory.
+of files. Move `base.html.twig` into templates:
+
+[[[ code('21bde93dda') ]]]
+
+And these other two go into the `main/` directory:
+
+[[[ code('b02ad450ef') ]]]
+
+[[[ code('2cef0cba2b') ]]]
 
 Refresh. Huh, no difference. That's because, at least on a Mac, because I moved
 and overwrote those files, Twig didn't notice that they were updated... so its cache is
@@ -109,11 +124,16 @@ We do have some broken planet images though. To fix those, go into the
 `tutorial/assets/` directory... and move all of those planets into `assets/images/`.
 Delete the `tutorial/` folder.
 
-That broken `img` tag comes from the `_planet_list.html.twig` partial. Here it
-is: I left it for us to finish! How nice of me! We know that we can do
-`{{ assets() }}` then something like `images/planets-1.png`. That would work.
-But this time, the `planet-1.png` part is a dynamic property on the `Planet` entity.
-So, instead  say `~` then `planet.imageFilename`.
+That broken `img` tag comes from the `_planet_list.html.twig` partial. Here it is:
+
+[[[ code('ea4148e2f8') ]]]
+
+I left it for us to finish! How nice of me! We know that we can do `{{ assets() }}`
+then something like `images/planets-1.png`. That would work. But this time, the
+`planet-1.png` part is a dynamic property on the `Planet` entity. So, instead
+say `~` then `planet.imageFilename`:
+
+[[[ code('f0b3e3e8d6') ]]]
 
 And... pretty! Yea, I know that's not what Earth and Saturn look like - I've
 got some randomness in my fixtures - but they're fun to look at!
@@ -131,7 +151,9 @@ composer require knplabs/knp-time-bundle
 
 This gives us a handy `ago` filter. So as soon as this finishes, spin over and open
 `homepage.html.twig`. Search for `leaveAt`, here we go. Replace that `date` filter
-with `ago`.
+with `ago`:
+
+[[[ code('d9d5d4b100') ]]]
 
 And... *much* cooler!
 
@@ -158,8 +180,8 @@ In theory, if we could make our forms output like this, they would look great.
 ## Adding a Tailwind Form Theme
 
 And fortunately, there's a bundle that can help us. It's called
-`tales-from-a-dev/flowbite-bundle`. Click "Installation" and copy the composer
-require line. Then run it:
+`tales-from-a-dev/flowbite-bundle`. Click "Installation" and copy the `composer
+require` line. Then run it:
 
 ```terminal
 composer require tales-from-a-dev/flowbite-bundle
@@ -172,13 +194,17 @@ Back on the installation instructions, we don't need to register the bundle - th
 happens automatically - but we *do* need to copy this line for the tailwind
 configuration file.
 
-Open up `tailwind.config.js`, and paste that. This bundle comes with its own form
-theme template with its own Tailwind classes. So we want to make sure that Tailwind
-*sees* those and outputs the CSS for them.
+Open up `tailwind.config.js`, and paste that:
+
+[[[ code('f9fbd3886e') ]]]
+
+This bundle comes with its own form theme template with its own Tailwind classes.
+So we want to make sure that Tailwind *sees* those and outputs the CSS for them.
 
 The last step over on the docs is to tell our system to *use* this form theme by default.
-This happens over in `config/packages/twig.yaml`. I'll paste... then fix the
-indentation.
+This happens over in `config/packages/twig.yaml`. I'll paste... then fix the indentation:
+
+[[[ code('53a05536d6') ]]]
 
 That's it. Go back, refresh and eureka! In just over 10 minutes, we installed
 Tailwind and started using it *everywhere*.

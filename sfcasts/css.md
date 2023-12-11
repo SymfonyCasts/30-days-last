@@ -13,14 +13,21 @@ Swell! When we refresh... and look at the page source, there it is! It works gre
 and it's super boring. The kind of boring I like.
 
 *However*, if we remove this line... and go and refresh the page. Huh, we *still*
-have this `blue` background: a blue background that's coming from `app.css`.
+have this `blue` background: a blue background that's coming from `app.css`:
+
+[[[ code('63108a07e9') ]]]
 
 Take another peek at the page source. There is *still* a `link` tag pointing to
 that file? Back over in `base.html.twig`, hmm, nothing here. Where is that coming
 from?
 
-The answer - I bet you guessed - is the `importmap()` function. And it's because
-it's being imported from `app.js`.
+The answer - I bet you guessed - is the `importmap()` function:
+
+[[[ code('5b3d3d7599') ]]]
+
+And it's because it's being imported from `app.js`:
+
+[[[ code('b96c71e397') ]]]
 
 ## How CSS Works
 
@@ -61,10 +68,14 @@ not error out and... not *do* anything.
 ## Importing CSS from Other JavaScript Files
 
 To see how powerful this is, let's create a second CSS file to support our alien
-greeting. Call it `alien-greeting.css` and make the body background dark green.
-Though, personally, I'm hoping aliens are rainbow colored.
+greeting. Call it `alien-greeting.css` and make the body background `darkgreen`.
+Though, personally, I'm hoping aliens are rainbow colored:
 
-Over in `alien-greeting.js`, import that: `../styles/alien-greeting.css`.
+[[[ code('6e3923c492') ]]]
+
+Over in `alien-greeting.js`, import that: `../styles/alien-greeting.css`:
+
+[[[ code('d10e2f8aaf') ]]]
 
 Will this work? Try it! Refresh and... green background! In the source, we have
 a second `link` tag and a second new item in the `importmap`. So that's awesome!
@@ -81,7 +92,9 @@ trick with CSS.
 Copy this. Pretend that we only want to load that CSS file when `inPeace` equals
 false. So I'll say, if not `inPeace`, then use `setTimeout()` to wait for 4 seconds.
 After 4 seconds, import the CSS file. Except, as soon as you need an import to *not*
-live at the top of your file, you need to call it like a function.
+live at the top of your file, you need to call it like a function:
+
+[[[ code('192d631fec') ]]]
 
 That's pretty cool. Try it. At first, blue background! 2, 3, 4, green background!
 The CSS file loaded *lazily*. How? Well, there's no `alien-greeting.css` link tag

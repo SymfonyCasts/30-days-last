@@ -32,13 +32,18 @@ git status
 ```
 
 Like the other UX package, this modified `controllers.json` and `importmap.php`.
-In `assets/controllers.json`, it added *two* new controllers. The first is...
-kind of a fake controller. It loads and activates Turbo - you'll see what that
-does in a moment - but it's not a Stimulus controller that we'll ever use directly.
-The second controller is optional - we're not going to talk about it, and
-it's disabled by default.
+In `assets/controllers.json`, it added *two* new controllers:
 
-The other change, in `importmap.php` is, no surprise: it added `@hotwired/turbo`.
+[[[ code('661e2a081c') ]]]
+
+The first is... kind of a fake controller. It loads and activates Turbo - you'll
+see what that does in a moment - but it's not a Stimulus controller that we'll
+ever use directly. The second controller is optional - we're not going to talk
+about it, and it's disabled by default.
+
+The other change, in `importmap.php` is, no surprise: it added `@hotwired/turbo`:
+
+[[[ code('82d54c52e1') ]]]f
 
 The result of this single command is *amazing*. When I refresh, watch the address
 bar: we're not going to see *any* more full page reloads! And everything feels
@@ -63,15 +68,17 @@ around to, that just keeps on rolling.
 
 If your app *isn't* ready for Turbo yet - because of the JavaScript problem - you
 can disable it. In `app.js`, `import * as Turbo` `from '@hotwired/turbo'`. Below,
-say `Turbo.session.drive = false`.
+say `Turbo.session.drive = false`. I'm not going to do that... so I'll comment it out:
 
-I'm not going to do that... so I'll comment it out. But why would I install
-Turbo... just to disable it? Because Turbo is actually *three* parts. The first
-is called Turbo Drive. That's the part that gives us free AJAX navigation on
-all link clicks and form submits. And *that's* what this disables.
+[[[ code('46c6ae9099') ]]]
+
+But why would I install Turbo... just to disable it? Because Turbo is actually
+*three* parts. The first is called *Turbo Drive*. That's the part that gives us
+free AJAX navigation on all link clicks and form submits. And *that's* what this
+disables.
 
 But even if you're not ready for Drive, you can still use the two other parts:
-Turbo Frames and Turbo Streams. These are *powerful* and we'll spend a lot
+*Turbo Frames* and *Turbo Streams*. These are *powerful* and we'll spend a lot
 of time in this tutorial doing some wild things with them.
 
 ## Preloading Links
@@ -82,7 +89,9 @@ preloading. To show this off, go into `templates/base.html.twig`. If you're ever
 on a page... and you're *really* sure that you know what link the user is going to
 click next, you can *preload* that.
 
-For example, on the "voyages" link, add `data-turbo-preload`.
+For example, on the "voyages" link, add `data-turbo-preload`:
+
+[[[ code('9407ada213') ]]]
 
 Refresh, inspect element, then go to network tools, XHR... and clear the filter.
 When I refresh, we immediately see an AJAX request made for the voyages page!

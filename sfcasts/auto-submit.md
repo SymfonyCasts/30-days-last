@@ -19,20 +19,29 @@ has a ton of good stuff. I highly recommend checking it out.
 
 ## The autosubmit Stimulus Controller
 
-Anyway, I'm going to borrow this great "auto submit" controller. It's dead-simple:
+Anyway, I'm going to borrow this great "auto-submit" controller. It's dead-simple:
 it gives us a way to submit a form... with optional debouncing. If I type really
 quickly, I don't want to submit the form four times. I want it to wait for a slight
 pause... and *then* submit. That's called debouncing. This waits for a 300 millisecond
 pause.
 
 So let's roll up our sleeves and get this into our app. Create a new file
-called `autosubmit_controller.js`... then paste.
+called `autosubmit_controller.js`... then paste:
+
+[[[ code('b6c0e8c72f') ]]]
 
 Then head to the homepage to use it. Near the top... here's our search form. On the
-form, add `data-controller"autosubmit"`. Notice I'm getting auto-complete on that.
-That's thanks to a Stimulus plugin I have for PhpStorm.
+form, add `data-controller"autosubmit"`:
 
-Next, down on the input, say `data-action` equals `autosubmit#debouncedSubmit`.
+[[[ code('41bb95feb9') ]]]
+
+Notice I'm getting auto-complete on that. That's thanks to a Stimulus plugin I have
+for PhpStorm.
+
+Next, down on the input, say `data-action` equals `autosubmit#debouncedSubmit`:
+
+[[[ code('50d8de3da6') ]]]
+
 In the controller, you can call `submit` to submit the form immediately or
 `debouncedSubmit()` to wait for the pause. And we don't need to include the
 event name this time - like `input->` to listen to the `input` event. When you apply
@@ -57,7 +66,9 @@ it's working! Just one request after I finished typing thanks to debounce!
 
 The only bummer is that we're losing focus when it reloads the entire page. As a
 workaround - this is *not* going to be our final solution - we can try putting
-`autofocus`.
+`autofocus`:
+
+[[[ code('631e2f24a3') ]]]
 
 This... *almost* works... except we're losing the cursor location: it puts us back
 at the beginning. That's okay: we're going to solve this in a much better way soon.

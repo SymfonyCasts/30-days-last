@@ -25,11 +25,11 @@ index 11f27bfb..9d0c1f52 100644
          return $this->createForm(VoyageType::class, $voyage, [
              'action' => $voyage->getId() ? $this->generateUrl('app_voyage_edit', ['id' => $voyage->getId()]) : $this->generateUrl('app_voyage_new'),
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index c4faeafc..95ec5537 100644
+index 10fa972e..ebffae7b 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
 @@ -1,3 +1,3 @@
- <turbo-frame id="voyage-form" class="aria-busy:opacity-50">
+ <turbo-frame id="voyage-form" class="aria-busy:opacity-50 transition-opacity">
 -    <twig:VoyageForm :form="form" />
 +    <twig:VoyageForm :form="form" :initialFormData="voyage" />
  </turbo-frame>

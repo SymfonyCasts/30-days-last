@@ -32,7 +32,7 @@ index 9154ba16..c8d80729 100644
      </twig:Button>
  </form>
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index 497000f1..a556d4f2 100644
+index 43fd22d8..620c45d8 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
 @@ -2,7 +2,11 @@

@@ -21,7 +21,7 @@ index 4da3513c..8c47995d 100644
      },
    },
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index 17ed6b6a..497000f1 100644
+index b35b62be..43fd22d8 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
 @@ -2,7 +2,7 @@

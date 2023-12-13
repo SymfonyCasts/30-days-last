@@ -6,7 +6,7 @@ index 82eb1f31..6f849faf 100644
 -<button {{ attributes }}>Press me!</button>
 +<button {{ attributes }}>{% block content %}{% endblock %}</button>
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index 3a3af65a..95fe6b95 100644
+index f78ba09e..a84c6b53 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
 @@ -5,7 +5,9 @@

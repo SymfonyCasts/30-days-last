@@ -23,7 +23,7 @@ index 00000000..82eb1f31
 @@ -0,0 +1 @@
 +<button {{ attributes }}>Press me!</button>
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index 9265eb8a..2eefb3cf 100644
+index 1c079b4a..d0e5351e 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
 @@ -2,6 +2,11 @@

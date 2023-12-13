@@ -11,12 +11,12 @@ index 1e0c7f0f..73a274d8 100644
          if ($form->isSubmitted() && $form->isValid()) {
              $entityManager->persist($voyage);
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index 3808122f..9265eb8a 100644
+index 3808122f..1c079b4a 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
 @@ -1,4 +1,4 @@
 -<turbo-frame id="voyage-form">
-+<turbo-frame id="voyage-form" class="aria-busy:opacity-50">
++<turbo-frame id="voyage-form" class="aria-busy:opacity-50 transition-opacity">
      {{ form_start(form) }}
          {{ form_widget(form) }}
  

@@ -1,18 +1,18 @@
 diff --git a/assets/controllers/closeable_controller.js b/assets/controllers/closeable_controller.js
-index f3fba33e..3a847669 100644
+index 39b87d0f..1ec887de 100644
 --- a/assets/controllers/closeable_controller.js
 +++ b/assets/controllers/closeable_controller.js
 @@ -5,11 +5,19 @@ export default class extends Controller {
-         auto: Number,
+         autoClose: Number,
      };
  
 +    static targets = ['timerbar']
 +
      connect() {
-         if (this.autoValue) {
+         if (this.autoCloseValue) {
              setTimeout(() => {
                  this.close();
-             }, this.autoValue);
+             }, this.autoCloseValue);
 +
 +            if (this.hasTimerbarTarget) {
 +                setTimeout(() => {
@@ -23,10 +23,10 @@ index f3fba33e..3a847669 100644
      }
  
 diff --git a/templates/_flashes.html.twig b/templates/_flashes.html.twig
-index ec76a05c..97cb8855 100644
+index afa713b1..c9f20ead 100644
 --- a/templates/_flashes.html.twig
 +++ b/templates/_flashes.html.twig
-@@ -24,5 +24,10 @@
+@@ -23,5 +23,10 @@
                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
              </svg>
          </button>

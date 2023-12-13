@@ -431,8 +431,8 @@
             "description": null
         },
         {
-            "id": "toast-hide-timerbar-on-close",
-            "name": "Toast: Hide timerbar on close",
+            "id": "delete-me-4",
+            "name": "delete me 4",
             "description": null
         },
         {
@@ -441,8 +441,8 @@
             "description": null
         },
         {
-            "id": "forminframe-put-form-inside-a-turbo-frame",
-            "name": "FormInFrame: Put form inside a turbo-frame",
+            "id": "delete-me-5",
+            "name": "delete me 5",
             "description": null
         },
         {
@@ -453,6 +453,11 @@
         {
             "id": "forminframe-fix-action-on-all-pages",
             "name": "FormInFrame: Fix action on all pages",
+            "description": null
+        },
+        {
+            "id": "forminframe-add-the-frame-around-the-form",
+            "name": "FormInFrame: Add the frame around the form",
             "description": null
         },
         {
@@ -906,5 +911,5 @@
             "description": null
         }
     ],
-    "sha": "bd878b7c409546c9b86ca52f0a784eb97f35701e"
+    "sha": "6fa54d053b2364869b6a4f238198551a8531db95"
 }

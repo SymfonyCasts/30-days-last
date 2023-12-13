@@ -25,7 +25,9 @@ The second way - which works fantastically today - is to surround this entire ta
 with a `<turbo-frame>`. In `homepage.html.twig`, find the `table`. Here it is:
 this `div` represents the table. Above it, add `<turbo-frame id="voyage-list">`.
 Indent this `div`... and also these pagination links: we want those to be inside
-the Turbo frame so that when we click on them, they advance the frame & update.
+the Turbo frame so that when we click on them, they advance the frame & update:
+
+[[[ code('88574e7472') ]]]
 
 Let's try this. Zap that search clear. And oh... beautiful. Look at that! Everything
 moves *within* the frame. Try pagination. That too! All of our links point *back*
@@ -50,7 +52,9 @@ position. So we *don't* want the form to reload.
 
 Can we... *keep* this outside of the frame but *target* the frame when
 the form submits? We can! Up on the `form` element that submits, add
-`data-turbo-frame="voyage-list"`.
+`data-turbo-frame="voyage-list"`:
+
+[[[ code('c861024e8a') ]]]
 
 Isn't that cool? Now when we refresh: watch. It's perfect! The table loads,
 but I *keep* my input focus. This is gorgeous.
@@ -59,7 +63,9 @@ but I *keep* my input focus. This is gorgeous.
 
 And now we have time to make things extra fancy! What about a loading indicator
 on the table while it's navigating? To make this obvious, go to our controller
-and add a `sleep()` for one second.
+and add a `sleep()` for one second:
+
+[[[ code('2877140665') ]]]
 
 Now... it's *slow*... and when we click or search, we don't even getting any
 feedback that the site is *doing* anything.
@@ -76,7 +82,9 @@ Over on that `<turbo-frame>` element, here it is, say `class=""` with
 This special syntax says that, *if* this element has an `aria-busy` attribute,
 apply the `opacity-50`. Add one more `aria-busy:` with `blur-sm` to blur the
 background. And for extra points, include `transition-all` so that the opacity
-and blur *transition* instead of happening abruptly.
+and blur *transition* instead of happening abruptly:
+
+[[[ code('f15c734c69') ]]]
 
 Refresh that and watch. Oh, that's lovely! And it all happens thanks to 3 CSS classes.
 And, though I love watching that, in `MainController`, remove the sleep.
@@ -87,7 +95,9 @@ Is this mission accomplished? *Nearly*. There's one gigantic, horrible problem..
 with an easy solution. When we search or sort or paginate, the URL doesn't change.
 That's the default behavior of Turbo frames: when they navigate, they don't update
 the URL. However, we *can* tell Turbo that we *want* this. On the Turbo
-Frame, add `data-turbo-action="advance"`.
+Frame, add `data-turbo-action="advance"`:
+
+[[[ code('5bb7f7f1df') ]]]
 
 Advance means that it will update the URL and *advance* the browser history so
 that if we hit the "Back" button, it'll go the previous URL. You can also
@@ -104,8 +114,7 @@ it's stuck on whatever number was there when the original page loaded. That's be
 this lives *outside* the Turbo frame. The easiest fix would be to move it
 *into* the frame... but I don't want it there! Visually, I want it up here!
 
-We're going to leave that for now. But we'll fix it in a few days with Turbo
-Streams.
+We're going to leave that for now. But we'll fix it in a few days with Turbo Streams.
 
-Tomorrow, we're going to dive into a brand-new browser feature! It's
-called View Transitions, and it'll let us apply visual transitions to any navigation.
+Tomorrow, we're going to dive into a brand-new browser feature! It's called
+View Transitions, and it'll let us apply visual transitions to any navigation.

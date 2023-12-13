@@ -30,7 +30,7 @@ of these doesn't matter:
 [[[ code('b7502623e3') ]]]
 
 Below, copy the `$voyageRepository->findBySearch()` line, and replace it with a Pager
-object: `$pager` equals `PagerFanta::createForCurrentPageWithMaxPerPage()`:
+object: `$pager` equals `Pagerfanta::createForCurrentPageWithMaxPerPage()`:
 
 [[[ code('378b27ea11') ]]]
 
@@ -64,7 +64,7 @@ I already have a spot for this with hardcoded previous and next links:
 
 [[[ code('17ca7d9f77') ]]]
 
-The way you're supposed to render PagerFanta links is by saying `{{ pagerfanta() }}`
+The way you're supposed to render Pagerfanta links is by saying `{{ pagerfanta() }}`
 and then passing `voyages`:
 
 [[[ code('cd89cedecb') ]]]

@@ -22,18 +22,27 @@ git status
 
 ## The Recipe Changes
 
-Oooh. It made a number of changes. The first is over here in
-`assets/app.js`. On top - I'll remove that comment - we're now importing a new
-`bootstrap.js`. *That* file starts the Stimulus application.
+Oooh. It made a number of changes. The first is over here in `assets/app.js`.
+On top - I'll remove that comment - we're now importing a new `bootstrap.js`:
 
-Notice that this imports an `@symfony/stimulus-bundle` module. The `@` symbol isn't
-important: that's just a character namespaced JavaScript packages use. The
-important thing is that this is a *bare* import, which means the browser will try
-to find this package by looking at our importmap.
+[[[ code('5d5ccda147') ]]]
 
-Ok! Open up `importmap.php`. The recipe added *two* new entries here. The first
-is for Stimulus itself: that now lives in the `assets/vendor/` directory. The second
-is... a kind of "fake" 3rd party package. It says that `@symfony/stimulus-bundle`
+*That* file starts the Stimulus application.
+
+Notice that this imports an `@symfony/stimulus-bundle` module:
+
+[[[ code('d57b0f0acf') ]]]
+
+The `@` symbol isn't important: that's just a character namespaced JavaScript
+packages use. The important thing is that this is a *bare* import, which means
+the browser will try to find this package by looking at our importmap.
+
+Ok! Open up `importmap.php`. The recipe added *two* new entries here:
+
+[[[ code('1f57ed519a') ]]]
+
+The first is for Stimulus itself - that now lives in the `assets/vendor/` directory.
+The second is... a kind of "fake" 3rd party package. It says that `@symfony/stimulus-bundle`
 should resolve to a file in our `vendor/` directory. This is a bit of
 fanciness: we say `import '@symfony/stimulus-bundle'`... and that will ultimately
 import this `loader.js` file from `vendor/`.
@@ -41,7 +50,10 @@ import this `loader.js` file from `vendor/`.
 The recipe also added a `controllers/` directory - the home for our custom Stimulus
 controllers - and a `controllers.json` file, which we'll talk about tomorrow.
 
-Oh, and in `base.html.twig`, it added this `ux_controller_link_tags()` line.
+Oh, and in `base.html.twig`, it added this `ux_controller_link_tags()` line:
+
+[[[ code('788558ce83') ]]]
+
 Delete it! That was needed with AssetMapper 6.3, but not anymore. We'll talk about
 what that did tomorrow anyway.
 
@@ -49,11 +61,13 @@ what that did tomorrow anyway.
 
 Ok: so, all we've done is `composer require` this new bundle. And *yet*, when we
 refresh the page and look at the console, Stimulus is already working! This
-"application #starting" and "application #start" come from Stimulus. That's awesome.
+`application #starting` and `application #start` come from Stimulus. That's awesome.
 
 With StimulusBundle, anything we put into the `controllers/` directory will
 automatically be available as a Stimulus controller. So, the fact that we have a
-`hello_controller.js` means that we can use a controller named `hello`.
+`hello_controller.js` means that we can use a controller named `hello`:
+
+[[[ code('36568b772a') ]]]
 
 In fact, we can see it right now. When this controller is activated, it replaces the
 text of the element it's attached to. To prove Stimulus is working, inspect
@@ -65,21 +79,30 @@ When I hit enter, boom! It activates the controller.
 
 That was fun, but let's create our own, *real* controller. Copy `hello_controller.js`
 and create a new file called `celebrate_controller.js`. I'll remove the comments
-and the connect method.
+and the connect method:
+
+[[[ code('571bc3e5e2') ]]]
 
 Here's the goal: when we hover over the logo, I want to call a method on the
 controller that triggers the `js-confetti` library. Start by creating the method.
 It could be called anything, but `poof()` sure is a fun name!
 
-Head over to `app.js`, copy the `js-confetti` code and delete it. Pop that into
-`celebrate` controller... and move the import statement to the top.
+Head over to `app.js`, copy the `js-confetti` code and delete it:
+
+[[[ code('9f376e82d9') ]]]
+
+Pop that into `celebrate` controller... and move the import statement to the top:
+
+[[[ code('3a84b43701') ]]]
 
 Cool! The last step is to activate this on an element. Do that in `base.html.twig`.
 Let's see... here's the logo. Add `data-controller="celebrate"`. And to trigger
 the action on hover, say `data-action=""`... and the suggestion is *almost* correct.
 The format is, first: the JavaScript *event* that we want to listen to. Instead
 of `click`, we want `mouseover`. Then `->`, the name of our controller, `#` and
-the method name: `poof`.
+the method name: `poof`:
+
+[[[ code('aa59ae159b') ]]]
 
 That's it! Refresh and celebrate!!! Each time we `mouseover`, it calls the method.
 You can see this liberally in the console.
@@ -93,7 +116,10 @@ But sometimes you might have a controller that's only used on *certain* pages...
 so you don't want to force your user to download it immediately on *every* page.
 If you have that situation, you can make your controller lazy. It's the best.
 
-To do that, add this special comment above it: `stimulusFetch: 'lazy'`.
+To do that, add this special comment above it: `stimulusFetch: 'lazy'`:
+
+[[[ code('61cf5a8dff') ]]]
+
 Yes, that *is* pretty crazy. But as soon as we do that, instead of downloading this
 file on page load, it will wait until it sees an element on the page with
 `data-controller"celebrate"`.

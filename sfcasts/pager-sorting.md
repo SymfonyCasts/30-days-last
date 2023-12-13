@@ -6,11 +6,11 @@ to this list.
 
 ## Adding Pagination
 
-I like to add pagination with PagerFanta. I *love* this library, though
+I like to add pagination with Pagerfanta. I *love* this library, though
 I do get a bit lost in its documentation. But hey: it's open source, if you're not
 happy, go fix it!
 
-To use PagerFanta, we'll install *three* libraries:
+To use Pagerfanta, we'll install *three* libraries:
 
 ```terminal
 composer require babdev/pagerfanta-bundle pagerfanta/doctrine-orm-adapter pagerfanta/twig
@@ -25,35 +25,55 @@ specify it there. So, I'll remove it on those two. It *is* different for `search
 a parameter we'll use later.
 
 Anyway, this will read the `?page=` and we'll default it to 1. Oh, and the order
-of these doesn't matter.
+of these doesn't matter:
+
+[[[ code('b7502623e3') ]]]
 
 Below, copy the `$voyageRepository->findBySearch()` line, and replace it with a Pager
-object: `$pager` equals `PagerFanta::createForCurrentPageWithMaxPerPage()`.
+object: `$pager` equals `Pagerfanta::createForCurrentPageWithMaxPerPage()`:
+
+[[[ code('378b27ea11') ]]]
+
 The first argument is an adapter: new `QueryAdapter` then paste in the code from
-before. But, that's not quite right: this method returns an array of voyages, but
-we now need  a `QueryBuilder`. Fortunately, I already set things up so that we
-can get this same result, but as a `QueryBuilder` via: `findBySearchQueryBuilder`.
+before. But, that's not quite right: this method returns an array of voyages:
+
+[[[ code('094033a391') ]]]
+
+but we now need  a `QueryBuilder`. Fortunately, I already set things up so that we
+can get this same result, but as a `QueryBuilder` via: `findBySearchQueryBuilder`:
+
+[[[ code('5ab552db61') ]]]
+
 Paste that method name in.
 
 The next argument is the current page - `$page` - then max per page. How about
-10? Pass `$pager` to the template as the `voyages` variable.
+10?
+
+[[[ code('13981a44c5') ]]]
+
+Pass `$pager` to the template as the `voyages` variable:
+
+[[[ code('ff58dc06a4') ]]]
 
 That... should just work because we can loop over `$pager` to get the voyages.
 
 ## Rendering the Pagination Links
 
-Next up, in `homepage.html.twig`, we need pagination links! Down
-at the bottom, I already have a spot for this with hardcoded previous and next
-links.
+Next up, in `homepage.html.twig`, we need pagination links! Down at the bottom,
+I already have a spot for this with hardcoded previous and next links:
 
-The way you're supposed to render PagerFanta links is by saying
-`{{ pagerfanta() }}` and then passing `voyages`.
+[[[ code('17ca7d9f77') ]]]
+
+The way you're supposed to render Pagerfanta links is by saying `{{ pagerfanta() }}`
+and then passing `voyages`:
+
+[[[ code('cd89cedecb') ]]]
 
 When we try this - let me clear my search out - the pagination looks awful... but
 it *is* working! As we click, the results are changing.
 
 So... how can we change these pagination links from "blah" to "ah"? There *is* a
-built-in Tailwind template that you can tell PagerFanta to use. That involves
+built-in Tailwind template that you can tell Pagerfanta to use. That involves
 creating a `babdev_pagerfanta.yaml` file and a bit of configuration. I haven't
 used this before - so let me know how it goes!
 
@@ -71,20 +91,27 @@ and I want to style them *exactly* like this. So let's go rogue!
 
 The first thing we need to do is render these links conditionally, only if there
 *is* a previous page. To do that, say if `voyages.hasPreviousPage`, then render.
-And, if we have a next page, render *that*.
+And, if we have a next page, render *that*:
+
+[[[ code('0071611bf0') ]]]
 
 For the URLs, use a helper called `pagerfanta_page_url()`. Pass it the pager,
-`voyages`, then which page we want to go to: `voyages.previousPage`.
+`voyages`, then which page we want to go to: `voyages.previousPage`. Copy that,
+then repeat it below with `voyages.nextPage`:
 
-Copy that, then repeat it below with `voyages.nextPage`.
+[[[ code('760bfc9e0c') ]]]
 
 Lovely! Let's give that a try. Refresh. Love it! The previous page is missing, we
 click next, and it's there. Click next again. Page 3 is the last one. We got it!
 
 For extra credit, let's even print the current page. Add a div... then print
-`voyages.currentPage`, a slash and `voyages.nbPages`. Good job, AI!
+`voyages.currentPage`, a slash and `voyages.nbPages`:
 
-And... there we go. Page one of three. Page two of three.
+[[[ code('2be4dae34c') ]]]
+
+Good job, AI!
+
+And... there we go. Page 1 of 3. Page 2 of 3.
 
 ## Column Sorting
 
@@ -93,15 +120,25 @@ For this, we need two new query parameters. A `sort` column name and
 `sortDirection`. Back to PHP! Add `#[MapQueryParameter]` on a `string` argument
 called `$sort`. Default it to `leaveAt`. That's the property name for this
 departing column. Then, do `#[MapQueryParameter]` again to add a string
-`$sortDirection` that defaults to ascending.
+`$sortDirection` that defaults to ascending:
+
+[[[ code('92f6506b1a') ]]]
 
 Inside the  method, I'll paste 2 boring lines that validate that `sort` is
-a real column. We could probably do the same for `$sortDirection`, but I'll skip
-and go to `findBySearchQueryBuilder()`. This is already set up to expect the sort
-arguments. So pass `$sort` and `$sortDirection`... and it should be happy!
+a real column:
+
+[[[ code('26f16f64e6') ]]]
+
+We could probably do the same for `$sortDirection`, but I'll skip and go to
+`findBySearchQueryBuilder()`. This is already set up to expect the sort arguments.
+So pass `$sort` and `$sortDirection`... and it should be happy!
+
+[[[ code('254194c30f') ]]]
 
 Finally, we're going to need this info in the template to help render the sort
-links. Pass `sort` set to `$sort` and `sortDirection` set to `$sortDirection`.
+links. Pass `sort` set to `$sort` and `sortDirection` set to `$sortDirection`:
+
+[[[ code('b366b6110c') ]]]
 
 ## Adding the Column Sorting Links
 
@@ -113,18 +150,27 @@ and `sortDirection` is `asc`, then we want `desc`. Otherwise, use `asc`.
 
 Finally, in addition to the `sort` and `sortDirection` query parameters, we need
 to keep any *existing* query parameters that might be present - like the search query.
-And there's a cool way to do this: `...` then `app.request.query.all`.
+And there's a cool way to do this: `...` then `app.request.query.all`:
+
+[[[ code('ed56b194a3') ]]]
 
 Done! Oh, but after the word Purpose, let's add a nice down or up arrow.
 To help, I'll paste a Twig macro. I don't often use macros... but this will
-help us figure out the direction, then print the correct svg: a down arrow, an
-up arrow, or an up and down arrow.
+help us figure out the direction, then print the correct SVG: a down arrow, an
+up arrow, or an up and down arrow:
+
+[[[ code('98fd2431b1') ]]]
 
 Down here... use this with `{{ _self.sortArrow() }}` passing `'purpose'`,
-`sort` and `sortDirection`.
+`sort` and `sortDirection`:
+
+[[[ code('0b2f0959dc') ]]]
 
 Phew! Let's repeat all of this for the departing column. Paste, change `purpose`
-to `leaveAt`, the text to `Departing`... then use `leaveAt` in the other two spots.
+to `leaveAt`, the text to `Departing`... then use `leaveAt` in the other two spots:
+
+[[[ code('a9c3ff4b5c') ]]]
+
 So, all pretty boring code, though it *was* a bit of work to get this set up. Could
 we have some tools in the Symfony world to make this all easier to build? Probably.
 That would be a cool thing for someone to work on. 

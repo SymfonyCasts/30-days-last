@@ -21,23 +21,28 @@ php bin/console importmap:require stimulus-popover
 ```
 
 Since we're dealing with a pure JavaScript package, there's no Flex recipe. The
-only change this made was to `importmap.php`. So we have *access* to the code, but
-this time, we need to register the controller manually.
+only change this made was to `importmap.php`:
+
+[[[ code('24728c5a49') ]]]
+
+So we have *access* to the code, but this time, we need to register the controller manually.
 
 That's okay! Copy these lines from the documentation... then open `assets/bootstrap.js`.
 Paste this on top. We don't need `Application.start()`... and move
-`application.register()` after... and call it `app`.
+`application.register()` after... and call it `app`:
+
+[[[ code('5b992f1a4c') ]]]
 
 Congrats! We have a shiny new controller named `popover`.
 
 ## Using the Controller
 
 The goal is to hover over this planet and show a popover with extra info. To get
-that working, head down on the docs. There's some Rails
-documentation for server-side stuff.... we don't need that. Here we go.
-So we need an element with `data-controller"popover"` and, inside, a link that,
-on `mouseenter` calls a `show` method and, on `mouseleave` calls `hide`. Below,
-this is the content that will be shown in the popover.
+that working, head down on the docs. There's some Rails documentation for server-side
+stuff.... we don't need that. Here we go. So we need an element with
+`data-controller"popover"` and, inside, a link that, on `mouseenter` calls a `show`
+method and, on `mouseleave` calls `hide`. Below, this is the content that will be
+shown in the popover.
 
 Copy this then, head to `homepage.html.twig`, and search for planets. Here's the
 `td` and here's the planet image. Paste... then I'll move my `img` inside.
@@ -45,17 +50,24 @@ Copy this then, head to `homepage.html.twig`, and search for planets. Here's the
 Lovely! Then we need to put this `data-action` somewhere. It's tempting to put
 it on the `img` itself. But, the library adds the popover content *inside* the element
 that triggers it... and since you can't put content inside an `img`, it's a no-go.
-Instead, put it directly on the parent `div`. So on `mouseenter` of this div, show
-the popover, on `mouseleave` of this div, *hide* the popover.
+Instead, put it directly on the parent `div`:
+
+[[[ code('4ba334e43b') ]]]
+
+So on `mouseenter` of this div, show the popover, on `mouseleave` of this div, *hide*
+the popover.
 
 That ought to do the trick! It might look a bit wild at first... but hey, let's dive
 in and see what happens. And, it... works! It's weird and jumpy, but functional!
 
 ## Styling the Popover
 
-Time to make it look better. I'll select this entire `div` and paste. That
-didn't do anything too big: I added a `relative` class on the outer `div`... and
-down here, made the popover absolutely positioned and printed out some planet
+Time to make it look better. I'll select this entire `div` and paste:
+
+[[[ code('43b6fa00f1') ]]]
+
+That didn't do anything too big: I added a `relative` class on the outer `div`...
+and down here, made the popover absolutely positioned and printed out some planet
 info.
 
 Now... look at that! You know what would be cool? A little arrow! We can
@@ -64,7 +76,9 @@ This is a standard CSS strategy for adding arrows, and you can find it on the
 web, or you use AI to help generate it.
 
 Open `app.css` and I'll paste in some code. You *can* also do this with Tailwind
-classes.
+classes:
+
+[[[ code('850c2e5208') ]]]
 
 Go check it out! Love it!
 
@@ -73,26 +87,40 @@ Go check it out! Love it!
 At this point, the popover works great and looks great. Are you up for a challenge?
 Instead of loading all of this markup on page load, I want to load it via Ajax only
 once the user hovers. The popover library *does* have a way to do
-this. But as an extra, extra challenge, I want to do it with regular ol' Turbo
+this. But as an extra, extra challenge, I want to do it with regular `ol`' Turbo
 frames. Because, Frames are *really* good at loading stuff via AJAX! Plus, we'll
 see a couple of extra frames features that we haven't talked about yet.
 
 To start, we need an endpoint that renders this planet info. In the homepage
-template, copy that code, then delete it. In `templates/planet/`, create a new file
-called `_card.html.twig`, and paste.
+template, copy that code, then delete it:
+
+[[[ code('c566b6b24e') ]]]
+
+In `templates/planet/`, create a new file called `_card.html.twig`, and paste:
+
+[[[ code('d0671b7614') ]]]
 
 Next, create an endpoint for this. In `src/Controller/PlanetController.php`, anywhere,
-I'll paste in a route and controller.
+I'll paste in a route and controller:
+
+[[[ code('dc76d84b12') ]]]
 
 Nothing special: it queries for the `Planet` and passes it to the template. *In*
 that template, adjust the variables. Instead of `voyage.planet`, use `planet`
-in each spot.
+in each spot:
+
+[[[ code('5324099877') ]]]
 
 We now have an AJAX endpoint that returns the content. Here's the magic part.
 Over in `homepage.html.twig`, we want to load that content right here. Do that
 by adding a `turbo-frame` with `id` set to `planet-card-` then `{{ voyage.planet.id }}`
-so it's unique on the page. Add this same frame in `_card.html.twig`... with the
-closing tag.
+so it's unique on the page:
+
+[[[ code('bb3e0015d8') ]]]
+
+Add this same frame in `_card.html.twig`... with the closing tag:
+
+[[[ code('1395368049') ]]]
 
 Usually, a `<turbo-frame>` will be one part of a whole page. But it's perfectly
 ok to make an endpoint that *just* returns a single frame.
@@ -102,7 +130,9 @@ we're not waiting for somebody to click a link inside this frame that will *then
 load the card page. Nope, we want it to load immediately.
 
 To do that, add a `src` attribute set to `{{ path() }}`... and... that's almost
-correct. The route is `app_planet_show_card`.
+correct. The route is `app_planet_show_card`:
+
+[[[ code('640ab97a21') ]]]
 
 Done! When a turbo frame appears that *already* has a `src` attribute, it will
 make the AJAX call to load that content immediately.
@@ -110,15 +140,20 @@ make the AJAX call to load that content immediately.
 Try it. Refresh and... content missing. I mucked something up. That's
 ok - we can debug! The call failed with a 500 error. This is where the web debug
 toolbar comes in handy. We can't see the error easily... but via the Ajax toolbar
-element, we can click to see the big beautiful exception page. Ah, variable
-`voyage` does not exist... because I need to adjust that to `planet.id`.
+element, we can click to see the big beautiful exception page. Ah:
+
+> Variable `voyage` does not exist.
+
+Because I need to adjust that to `planet.id`:
+
+[[[ code('3d01652190') ]]]
 
 All right. And now... got it! There *is* a moment when the popover is empty...
 but we'll fix that soon.
 
 ## Lazy-Loading Turbo Frames
 
-By complete accident, our turbo frame is even being loaded *lazily*. What I mean is:
+By complete accident, our Turbo Frame is even being loaded *lazily*. What I mean is:
 when we have a `<turbo-frame>` with a `src` attribute, the AJAX call will be made
 *immediately*. With that in mind, shouldn't we see 30 Ajax calls happening all at
 once? Yea... but we *don't*! It only happens once we hover. Why?
@@ -132,17 +167,23 @@ and the Ajax call is made. Pretty cool!
 
 But there *will* be other situations when we want a `turbo-frame` to
 load its content *only* once that frame becomes *visible*. And we can do that!
-To show this off, change the `template` to a `div` temporarily.
+To show this off, change the `template` to a `div` temporarily:
+
+[[[ code('1fbe74d0fb') ]]]
 
 This is going to look awful... because every card will be visible all at once.
 Yup! They're all on the page *and* it made 30 Ajax calls immediately! Yikes! To
-tell these frames to not load until they become visible on the page, add `loading="lazy"`.
+tell these frames to not load until they become visible on the page, add `loading="lazy"`:
+
+[[[ code('682a1bbd69') ]]]
 
 Refresh now. 3 ajax calls... because only 3 frames are visible! The other elements
 *are* all on the page... but below the scroll. Watch this number as I scroll. See
 that? As they become visible, each makes its AJAX call. *So* cool.
 
-Change the element back to a `template` so that things work nicely again.
+Change the element back to a `template` so that things work nicely again:
+
+[[[ code('6c1062fc05') ]]]
 
 ## Adding Loading Content
 
@@ -152,9 +193,12 @@ content.
 
 This is easy: when you have a `turbo-frame` with a `src` attribute, whatever content
 is inside will be shown by default while it loads. I'll paste in a `div` with
-an SVG. This SVG comes from tabler icons. That's a *great* source to find an icon
-that you copy into your project. I've coupled that with an `animate-spin` class from
-Tailwind.
+an SVG:
+
+[[[ code('bf9dfd613f') ]]]
+
+This SVG comes from Tabler Icons. That's a *great* source to find an icon that you
+copy into your project. I've coupled that with an `animate-spin` class from Tailwind.
 
 Let's check it. Quick, spinny and lovely!
 
@@ -171,13 +215,15 @@ destroys it, etc.
 
 So: how can we make the controller *remember* the content? I have no idea! But 
 let's go look inside the code. In `assets/vendor/stimulus-popover/`, open this
-up. The contents are minified... but a quick Cmd+L to reformat the code fixes that.
+file. The contents are minified... but a quick `Cmd`+`L` to reformat the code fixes that.
 How cool is this? We can now read this vendor file - and even add temporary debugging
 code if we needed to. And... I think I see a way that we can make this work.
 
 Just like with Symfony controllers, we can override Stimulus controllers. Inside
 the `controllers/` directory, create our own `popover_controller.js`. Then I'll
-paste in some code.
+paste in some code:
+
+[[[ code('c75a899e5f') ]]]
 
 Normally we import `Controller` from Stimulus and extend that. But in
 this case, I'm importing the popover controller directly and extending *that*.
@@ -193,7 +239,7 @@ Moment of truth! It loads once... then *remembers* its content!
 
 Not *only* did we create the perfect popover, we can now easily repeat this on other
 parts of our site. If you're wondering if we could reuse some of the popover markup...
-stay tuned for Day 23 when we talk about Twig components.
+stay tuned for Day 23 when we talk about Twig Components.
 
 That's a wrap for today! Get some well-deserved rest, because tomorrow we'll
-write a tiny, yet mighty, Stimulus controller called autosubmit.
+write a tiny, yet mighty, Stimulus controller called auto-submit.

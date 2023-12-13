@@ -19,7 +19,9 @@ To do that, find the sidebar: it's over in `templates/main/homepage.html.twig`..
 up near the top. This partial renders that planet list. To make this a frame,
 find the element that surrounds it and change it to `<turbo-frame>`. And the one
 rule of frames is that each needs to have an `id` attribute. It should be something
-unique that describes what it holds. How about `planet-info`.
+unique that describes what it holds. How about `planet-info`:
+
+[[[ code('05db661c1b') ]]]
 
 Ok: what does that do? At first, nothing. A `<turbo-frame>` is just an HTML element
 like a `div`, and so it renders normally. Though, for styling purpose, `turbo-frame`
@@ -44,14 +46,18 @@ to - that page *must* have a matching `<turbo-frame>`.
 Copy this `<turbo-frame id="planet-info>` and then open `planet/show.html.twig`.
 Put this around the content that we want to load into the sidebar. I don't really
 want the `h1`... so put it around this table. Add the closing `</turbo-frame>`
-at the bottom.
+at the bottom:
+
+[[[ code('abb6ae6b38') ]]]
 
 Refresh! And click. How cool is that? It makes an AJAX request to this page, grabs
 *just* the `<turbo-frame>` content and puts it here.
 
 You know what else would be great? A "back" link! To add
 that, still inside the `<turbo-frame>`, add a `<div class="mt-2">` then an `a`,
-`href` set to `{{ path() }}`. Link to the homepage.
+`href` set to `{{ path() }}`. Link to the homepage:
+
+[[[ code('d6cbba9f7c') ]]]
 
 Try it! We don't even need to refresh. Behold! A back link! Whoops, let's make
 that more of an arrow. When we click it... it goes back! That made
@@ -59,7 +65,9 @@ an AJAX request to the homepage and looked for a matching
 `<turbo-frame id="planet-info">`. And guess what that holds? This list of planets.
 
 We're on a roll! Before we finish today, add one more link: an edit link. The
-route is `app_planet_edit`... with `id` set to `planet.id`.
+route is `app_planet_edit`... with `id` set to `planet.id`:
+
+[[[ code('418e66c400') ]]]
 
 Cool! this time, if we click a planet... then edit... it doesn't work! And I bet you
 can guess why. It made an AJAX request to the *edit* page.... but there
@@ -77,7 +85,9 @@ visit.
 ## Targeting Links to the Full Page
 
 How do you do that? Find the link, and add `data-turbo-frame` - that's a typo Ryan -
-set to `_top`.
+set to `_top`:
+
+[[[ code('eb0db440c3') ]]]
 
 Now, without refreshing, hit edit. It still breaks. I did the wrong thing.
 It's `data-turbo-frame="_top"`. There we go.
@@ -128,7 +138,9 @@ navigates. In fact, it would be a good idea to add a `target="_top'` to *this*
 frame, since we don't need fancy frame navigation on this page.
 
 Anyway, Tailwind variants are a bit more advanced, but simple enough. Import
-this `plugin` module, then go down to `plugins`. I'll paste in some code.
+this `plugin` module, then go down to `plugins`. I'll paste in some code:
+
+[[[ code('229fdf30a6') ]]]
 
 This adds a variant called `turbo-frame`: you'll see how we use that in a second.
 It basically applies to an element that's inside a `<turbo-frame>` that has a `src`
@@ -138,7 +150,9 @@ Because we called this `turbo-frame`, copy that. Now, in `show.html.twig`,
 add a `hidden` class to hide this `div` by default.
 
 When we refresh, it's gone. But then, if we match our `turbo-frame` variant, change
-to display `block`.
+to display `block`:
+
+[[[ code('ce77a64553') ]]]
 
 Check it out. When we refresh, those links are still hidden. But over here... we've
 got them! Because we're inside  a `turbo-frame` with a `src` attribute, our variant

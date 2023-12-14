@@ -1,11 +1,11 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 0bff7ee9..14c66414 100644
+index 4e8eb04f..a09de017 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -56,18 +56,7 @@
          <div
              data-controller="modal"
-             data-action="click->modal#clickOutside"
+             data-action="click->modal#clickOutside turbo:before-cache@window->modal#close"
 -            class="flex justify-between"
          >
 -            <h1 class="text-xl font-semibold text-white mb-4">Voyages</h1>

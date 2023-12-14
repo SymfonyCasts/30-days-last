@@ -38,7 +38,7 @@ index 08be053d..0e9dc828 100644
          if ($form->isSubmitted() && $form->isValid()) {
              $entityManager->persist($voyage);
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 8955d4f1..5165c9a5 100644
+index 19ab260b..f1917e74 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -64,10 +64,30 @@

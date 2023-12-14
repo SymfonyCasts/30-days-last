@@ -11,7 +11,7 @@ index 00000000..f04d1f10
 +    {{ stream|raw }}
 +{% endfor %}
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 3318c3ff..1bf1ac38 100644
+index 3741740a..89b32536 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -66,12 +66,7 @@

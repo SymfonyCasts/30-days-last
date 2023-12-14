@@ -1,14 +1,14 @@
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index cb42b490..c187bf84 100644
+index b6655ffe..92f45e7a 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
 @@ -1,6 +1,8 @@
  <div
 -    data-controller="modal"
--    data-action="click->modal#clickOutside"
+-    data-action="click->modal#clickOutside turbo:before-cache@window->modal#close"
 +    {{ attributes.defaults({
 +        'data-controller': 'modal',
-+        'data-action': 'click->modal#clickOutside',
++        'data-action': 'click->modal#clickOutside turbo:before-cache@window->modal#close',
 +    }) }}
  >
      <dialog

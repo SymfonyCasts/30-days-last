@@ -1,9 +1,9 @@
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index f763c21d..88a0da5a 100644
+index 4adeb48e..39559ea7 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
 @@ -4,6 +4,8 @@
-         'data-action': 'click->modal#clickOutside',
+         'data-action': 'click->modal#clickOutside turbo:before-cache@window->modal#close',
      }) }}
  >
 +    {% block trigger %}{% endblock %}

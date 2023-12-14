@@ -22,12 +22,12 @@ index 4345d109..39b87d0f 100644
          this.element.remove();
      }
 diff --git a/templates/_flashes.html.twig b/templates/_flashes.html.twig
-index 2881b47b..afa713b1 100644
+index a7b95936..bea2d2fd 100644
 --- a/templates/_flashes.html.twig
 +++ b/templates/_flashes.html.twig
-@@ -3,6 +3,7 @@
-         class="fixed top-5 right-5 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+@@ -4,6 +4,7 @@
          role="alert"
+         data-turbo-temporary
          data-controller="closeable"
 +        data-closeable-auto-close-value="5000"
      >

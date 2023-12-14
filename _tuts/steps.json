@@ -491,6 +491,16 @@
             "description": null
         },
         {
+            "id": "dialog-re-add-snapshots",
+            "name": "Dialog: Re-add snapshots",
+            "description": null
+        },
+        {
+            "id": "dialog-close-before-snapshot",
+            "name": "Dialog: close before snapshot",
+            "description": null
+        },
+        {
             "id": "modal-move-modal-to-layout",
             "name": "Modal: Move modal to layout",
             "description": null
@@ -876,5 +886,5 @@
             "description": null
         }
     ],
-    "sha": "ba9d7493178b1019c2ac81ac407a90acc95befdc"
+    "sha": "9df9bcfbe1921d6c1b0e9ac3884b9f883c9d50bb"
 }

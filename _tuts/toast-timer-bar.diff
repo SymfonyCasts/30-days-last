@@ -23,10 +23,10 @@ index 39b87d0f..1ec887de 100644
      }
  
 diff --git a/templates/_flashes.html.twig b/templates/_flashes.html.twig
-index afa713b1..c9f20ead 100644
+index bea2d2fd..cdd84d4f 100644
 --- a/templates/_flashes.html.twig
 +++ b/templates/_flashes.html.twig
-@@ -23,5 +23,10 @@
+@@ -24,5 +24,10 @@
                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
              </svg>
          </button>

@@ -12,18 +12,18 @@ index 00000000..4345d109
 +    }
 +}
 diff --git a/templates/_flashes.html.twig b/templates/_flashes.html.twig
-index aa9f65ca..2881b47b 100644
+index 922c7224..a7b95936 100644
 --- a/templates/_flashes.html.twig
 +++ b/templates/_flashes.html.twig
-@@ -2,6 +2,7 @@
-     <div
+@@ -3,6 +3,7 @@
          class="fixed top-5 right-5 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
          role="alert"
+         data-turbo-temporary
 +        data-controller="closeable"
      >
          <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
              <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-@@ -14,6 +15,7 @@
+@@ -15,6 +16,7 @@
              type="button"
              class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
              aria-label="Close"

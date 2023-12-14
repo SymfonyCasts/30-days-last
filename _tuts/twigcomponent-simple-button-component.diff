@@ -23,18 +23,18 @@ index 00000000..82eb1f31
 @@ -0,0 +1 @@
 +<button {{ attributes }}>Press me!</button>
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index 1c079b4a..d0e5351e 100644
+index c9b53f3c..1ea91ebb 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
-@@ -2,6 +2,11 @@
-     {{ form_start(form) }}
-         {{ form_widget(form) }}
+@@ -1,6 +1,11 @@
+ {{ form_start(form) }}
+     {{ form_widget(form) }}
  
-+        {{ component('Button', {
-+            formnovalidate: true,
-+            class: 'px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700',
-+        }) }}
++    {{ component('Button', {
++        formnovalidate: true,
++        class: 'px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700',
++    }) }}
 +
-         <button formnovalidate class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
-             {{ button_label|default('Save') }}
-         </button>
+     <button formnovalidate class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+         {{ button_label|default('Save') }}
+     </button>

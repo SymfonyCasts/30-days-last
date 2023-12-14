@@ -1,11 +1,11 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index bd803fc0..66cb2e22 100644
+index 9ed74272..8428a9e0 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -60,6 +60,21 @@
-                     data-action="turbo:before-fetch-request->modal#showLoading"
-                 ></turbo-frame>
-             </twig:block>
+@@ -61,6 +61,21 @@
+             >
+                 {{ include('_frameSuccessStreams.html.twig', { frame: 'modal' }) }}
+             </turbo-frame>
 +            <twig:block name="loading_template">
 +                <div class="bg-space-pattern bg-cover rounded-lg p-8">
 +                    <div class="space-y-2">
@@ -25,10 +25,10 @@ index bd803fc0..66cb2e22 100644
      </body>
  </html>
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index 3dfce915..faa53fd1 100644
+index 90eafe5b..f763c21d 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
-@@ -20,19 +20,9 @@
+@@ -16,19 +16,9 @@
          </div>
      </dialog>
  

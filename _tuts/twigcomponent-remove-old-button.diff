@@ -1,14 +1,13 @@
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index a84c6b53..5b7ff32a 100644
+index 83ff5763..9fdbc880 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
-@@ -8,9 +8,5 @@
-         >
-             {{ button_label|default('Save') }}
-         </twig:Button>
+@@ -7,8 +7,4 @@
+     >
+         {{ button_label|default('Save') }}
+     </twig:Button>
 -
--        <button formnovalidate class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
--            {{ button_label|default('Save') }}
--        </button>
-     {{ form_end(form) }}
- </turbo-frame>
+-    <button formnovalidate class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+-        {{ button_label|default('Save') }}
+-    </button>
+ {{ form_end(form) }}

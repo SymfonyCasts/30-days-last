@@ -1,35 +1,35 @@
 diff --git a/assets/controllers/modal_controller.js b/assets/controllers/modal_controller.js
-index d3784e85..37ef547f 100644
+index 62409eba..503f4807 100644
 --- a/assets/controllers/modal_controller.js
 +++ b/assets/controllers/modal_controller.js
 @@ -1,7 +1,7 @@
  import { Controller } from '@hotwired/stimulus';
  
  export default class extends Controller {
--    static targets = ['dialog', 'modalContent'];
-+    static targets = ['dialog', 'modalContent', 'loadingTemplate'];
+-    static targets = ['dialog', 'dynamicContent'];
++    static targets = ['dialog', 'dynamicContent', 'loadingTemplate'];
  
      observer = null;
  
-@@ -42,4 +42,13 @@ export default class extends Controller {
+@@ -49,4 +49,13 @@ export default class extends Controller {
              this.dialogTarget.close();
          }
      }
 +
-+    showLoading(event) {
++    showLoading() {
 +        // do nothing if the dialog is already open
 +        if (this.dialogTarget.open) {
 +            return;
 +        }
 +
-+        this.modalContentTarget.innerHTML = this.loadingTemplateTarget.innerHTML;
++        this.dynamicContentTarget.innerHTML = this.loadingTemplateTarget.innerHTML;
 +    }
  }
 diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
-index 47acff25..23b9290b 100644
+index 08be053d..0e9dc828 100644
 --- a/src/Controller/VoyageController.php
 +++ b/src/Controller/VoyageController.php
-@@ -31,6 +31,7 @@ class VoyageController extends AbstractController
+@@ -29,6 +29,7 @@ class VoyageController extends AbstractController
          $voyage = new Voyage();
          $form = $this->createVoyageForm($voyage);
          $form->handleRequest($request);
@@ -38,17 +38,17 @@ index 47acff25..23b9290b 100644
          if ($form->isSubmitted() && $form->isValid()) {
              $entityManager->persist($voyage);
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 5d6cfcba..58fe4196 100644
+index 8955d4f1..5165c9a5 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -64,10 +64,30 @@
              >
                  <div class="flex grow p-5">
                      <div class="grow overflow-auto p-1">
--                        <turbo-frame id="modal" data-modal-target="modalContent"></turbo-frame>
+-                        <turbo-frame id="modal" data-modal-target="dynamicContent"></turbo-frame>
 +                        <turbo-frame
 +                            id="modal"
-+                            data-modal-target="modalContent"
++                            data-modal-target="dynamicContent"
 +                            data-action="turbo:before-fetch-request->modal#showLoading"
 +                        ></turbo-frame>
                      </div>

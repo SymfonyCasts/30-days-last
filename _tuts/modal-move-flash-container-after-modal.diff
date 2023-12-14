@@ -1,0 +1,25 @@
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index a9d5db23..166a8ef4 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -49,10 +49,6 @@
+             </footer>
+         </div>
+ 
+-        <div id="flash-container">
+-            {{ include('_flashes.html.twig') }}
+-        </div>
+-
+         <div
+             data-controller="modal"
+             data-action="click->modal#clickOutside"
+@@ -94,5 +90,9 @@
+                 </div>
+             </template>
+         </div>
++
++        <div id="flash-container">
++            {{ include('_flashes.html.twig') }}
++        </div>
+     </body>
+ </html>

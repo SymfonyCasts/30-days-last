@@ -1,33 +1,40 @@
 diff --git a/assets/controllers/modal_controller.js b/assets/controllers/modal_controller.js
-index 084b4eac..d3784e85 100644
+index 084b4eac..62409eba 100644
 --- a/assets/controllers/modal_controller.js
 +++ b/assets/controllers/modal_controller.js
-@@ -1,7 +1,31 @@
+@@ -1,7 +1,38 @@
  import { Controller } from '@hotwired/stimulus';
  
  export default class extends Controller {
 -    static targets = ['dialog'];
-+    static targets = ['dialog', 'modalContent'];
++    static targets = ['dialog', 'dynamicContent'];
 +
 +    observer = null;
 +
 +    connect() {
-+        // create a mutation observer on this.modalContentTarget
-+        // when the content changes, call this.open()
-+        this.observer = new MutationObserver(() => {
-+            const shouldOpen = this.modalContentTarget.innerHTML.trim().length > 0;
++        if (this.hasDynamicContentTarget) {
++            // when the content changes, call this.open()
++            this.observer = new MutationObserver(() => {
++                const shouldOpen = this.dynamicContentTarget.innerHTML.trim().length > 0;
 +
-+            if (shouldOpen && !this.dialogTarget.open) {
-+                this.open();
-+            } else if (!shouldOpen && this.dialogTarget.open) {
-+                this.close();
-+            }
-+        });
-+        this.observer.observe(this.modalContentTarget, { childList: true, characterData: true, subtree: true });
++                if (shouldOpen && !this.dialogTarget.open) {
++                    this.open();
++                } else if (!shouldOpen && this.dialogTarget.open) {
++                    this.close();
++                }
++            });
++            this.observer.observe(this.dynamicContentTarget, {
++                childList: true,
++                characterData: true,
++                subtree: true
++            });
++        }
 +    }
 +
 +    disconnect() {
-+        this.observer.disconnect();
++        if (this.observer) {
++            this.observer.disconnect();
++        }
 +        if (this.dialogTarget.open) {
 +            this.close();
 +        }
@@ -36,7 +43,7 @@ index 084b4eac..d3784e85 100644
      open() {
          this.dialogTarget.showModal();
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 7dba50e9..5d6cfcba 100644
+index 11eeb4ca..8955d4f1 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -64,7 +64,7 @@
@@ -44,7 +51,7 @@ index 7dba50e9..5d6cfcba 100644
                  <div class="flex grow p-5">
                      <div class="grow overflow-auto p-1">
 -                        <turbo-frame id="modal"></turbo-frame>
-+                        <turbo-frame id="modal" data-modal-target="modalContent"></turbo-frame>
++                        <turbo-frame id="modal" data-modal-target="dynamicContent"></turbo-frame>
                      </div>
                  </div>
              </dialog>

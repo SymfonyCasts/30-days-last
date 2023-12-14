@@ -1,10 +1,10 @@
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index ed55e981..9bd9e89d 100644
+index 92c67bb4..7b4316cf 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
-@@ -43,16 +43,18 @@
+@@ -42,16 +42,18 @@
+                 data-controller="autosubmit"
                  data-turbo-frame="voyage-list"
-                 data-turbo-stream
              >
 -                <input
 -                    type="search"
@@ -29,5 +29,5 @@ index ed55e981..9bd9e89d 100644
 +                    >
 +                </div>
                  {% block result_count %}
-                     <div id="result-count" class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
+                     <div id="voyage-result-count" class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
                  {% endblock %}

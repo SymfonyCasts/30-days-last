@@ -1,8 +1,8 @@
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index e273a3b3..a3d0e174 100644
+index 3eb438f0..4289d4e2 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
-@@ -11,13 +11,14 @@
+@@ -9,13 +9,14 @@
      >
          <h1 class="text-xl font-semibold text-white mb-4">Voyages</h1>
  
@@ -11,32 +11,12 @@ index e273a3b3..a3d0e174 100644
 +        <a
 +            href="{{ path('app_voyage_new') }}"
 +            data-turbo-frame="modal"
-             class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold px-4 rounded"
+             class="flex items-center space-x-1 bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold px-4 rounded"
          >
-             New Voyage
+             <span>New Voyage</span>
              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M9 12h6" /><path d="M12 9v6" /></svg>
 -        </button>
 +        </a>
- 
-         <dialog
-             class="open:flex bg-gray-800 rounded-lg shadow-xl inset-0 w-full md:w-fit md:max-w-[50%] animate-fade-in backdrop:bg-slate-600 backdrop:opacity-80"
-diff --git a/templates/voyage/new.html.twig b/templates/voyage/new.html.twig
-index 77d1a0ef..90e254f8 100644
---- a/templates/voyage/new.html.twig
-+++ b/templates/voyage/new.html.twig
-@@ -3,6 +3,7 @@
- {% block title %}New Voyage{% endblock %}
- 
- {% block body %}
-+    <turbo-frame id="modal" target="_top">
-     <div class="m-4 p-4 bg-gray-800 rounded-lg">
-         <div class="flex justify-between">
-             <h1 class="text-xl font-semibold text-white mb-4">Create New Voyage</h1>
-@@ -20,6 +21,7 @@
-         </div>
-         {{ include('voyage/_form.html.twig') }}
      </div>
-+    </turbo-frame>
- {% endblock %}
  
- {% block success_stream %}
+     <table class="min-w-full bg-gray-800 text-white">

@@ -1,0 +1,13 @@
+diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
+index 63132f08..e6042988 100644
+--- a/src/Controller/VoyageController.php
++++ b/src/Controller/VoyageController.php
+@@ -72,7 +72,7 @@ class VoyageController extends AbstractController
+ 
+             $this->addFlash('success', 'Voyage updated!');
+ 
+-            return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
++            return $this->redirectToRoute('app_voyage_edit', ['id' => $voyage->getId()], Response::HTTP_SEE_OTHER);
+         }
+ 
+         return $this->render('voyage/edit.html.twig', [

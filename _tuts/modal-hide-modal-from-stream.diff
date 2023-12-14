@@ -1,0 +1,32 @@
+diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
+index e6042988..36159d74 100644
+--- a/src/Controller/VoyageController.php
++++ b/src/Controller/VoyageController.php
+@@ -71,6 +71,13 @@ class VoyageController extends AbstractController
+             $entityManager->flush();
+ 
+             $this->addFlash('success', 'Voyage updated!');
++            if ($request->headers->has('turbo-frame')) {
++                $stream = $this->renderBlockView('voyage/edit.html.twig', 'stream_success', [
++                    'voyage' => $voyage
++                ]);
++
++                $this->addFlash('stream', $stream);
++            }
+ 
+             return $this->redirectToRoute('app_voyage_edit', ['id' => $voyage->getId()], Response::HTTP_SEE_OTHER);
+         }
+diff --git a/templates/voyage/edit.html.twig b/templates/voyage/edit.html.twig
+index ce7cd35b..bb5e685b 100644
+--- a/templates/voyage/edit.html.twig
++++ b/templates/voyage/edit.html.twig
+@@ -22,3 +22,9 @@
+         {{ include('voyage/_form.html.twig') }}
+     </div>
+ {% endblock %}
++
++{% block stream_success %}
++    <turbo-stream action="update" targets="dialog[open] [data-modal-target=dynamicContent]">
++        <template></template>
++    </turbo-stream>
++{% endblock %}

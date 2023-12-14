@@ -34,21 +34,21 @@ index 00000000..4c2f90da
 +    </twig:Button>
 +{{ form_end(form) }}
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index 620c45d8..10fa972e 100644
+index 4c2f90da..10fa972e 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
-@@ -1,13 +1,3 @@
- <turbo-frame id="voyage-form" class="aria-busy:opacity-50 transition-opacity">
--    {{ form_start(form) }}
--        {{ form_widget(form) }}
+@@ -1,11 +1,3 @@
+-{{ form_start(form) }}
+-    {{ form_widget(form) }}
 -
--        <twig:Button
--            formnovalidate
--            variant="success"
--            class="hover:animate-wiggle"
--        >
--            {{ button_label|default('Save') }}
--        </twig:Button>
--    {{ form_end(form) }}
+-    <twig:Button
+-        formnovalidate
+-        variant="success"
+-        class="hover:animate-wiggle"
+-    >
+-        {{ button_label|default('Save') }}
+-    </twig:Button>
+-{{ form_end(form) }}
++<turbo-frame id="voyage-form" class="aria-busy:opacity-50 transition-opacity">
 +    <twig:VoyageForm :form="form" />
- </turbo-frame>
++</turbo-frame>

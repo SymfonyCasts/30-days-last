@@ -1,8 +1,8 @@
 diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
-index 23b9290b..47acff25 100644
+index 0e9dc828..08be053d 100644
 --- a/src/Controller/VoyageController.php
 +++ b/src/Controller/VoyageController.php
-@@ -31,7 +31,6 @@ class VoyageController extends AbstractController
+@@ -29,7 +29,6 @@ class VoyageController extends AbstractController
          $voyage = new Voyage();
          $form = $this->createVoyageForm($voyage);
          $form->handleRequest($request);

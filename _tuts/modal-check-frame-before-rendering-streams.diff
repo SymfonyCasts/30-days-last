@@ -1,0 +1,42 @@
+diff --git a/templates/_frameSuccessStreams.html.twig b/templates/_frameSuccessStreams.html.twig
+index f04d1f10..278af0e0 100644
+--- a/templates/_frameSuccessStreams.html.twig
++++ b/templates/_frameSuccessStreams.html.twig
+@@ -1,6 +1,8 @@
+-<turbo-stream action="append" target="flash-container">
+-    <template>{{ include('_flashes.html.twig') }}</template>
+-</turbo-stream>
+-{% for stream in app.flashes('stream') %}
+-    {{ stream|raw }}
+-{% endfor %}
++{% if app.request.headers.get('turbo-frame') == frame %}
++    <turbo-stream action="append" target="flash-container">
++        <template>{{ include('_flashes.html.twig') }}</template>
++    </turbo-stream>
++    {% for stream in app.flashes('stream') %}
++        {{ stream|raw }}
++    {% endfor %}
++{% endif %}
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index 1bf1ac38..b7501534 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -66,7 +66,7 @@
+                             data-action="turbo:before-fetch-request->modal#showLoading"
+                             class="aria-busy:opacity-50 transition-opacity"
+                         >
+-                            {{ include('_frameSuccessStreams.html.twig') }}
++                            {{ include('_frameSuccessStreams.html.twig', { frame: 'modal' }) }}
+                         </turbo-frame>
+                     </div>
+                 </div>
+diff --git a/templates/modalFrame.html.twig b/templates/modalFrame.html.twig
+index 14433e63..b3b070c7 100644
+--- a/templates/modalFrame.html.twig
++++ b/templates/modalFrame.html.twig
+@@ -1,4 +1,4 @@
+ <turbo-frame id="modal">
+     {% block body %}{% endblock %}
+-    {{ include('_frameSuccessStreams.html.twig') }}
++    {{ include('_frameSuccessStreams.html.twig', { frame: 'modal' }) }}
+ </turbo-frame>

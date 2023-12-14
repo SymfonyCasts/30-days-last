@@ -14,10 +14,10 @@ index 00000000..4be78915
 +    }
 +}
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index 79b4befa..aed96dec 100644
+index d5daa105..db533de7 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
-@@ -5,10 +5,13 @@
+@@ -5,11 +5,13 @@
  {% block body %}
  <div class="m-4 p-4 bg-gray-800 rounded-lg">
      <div
@@ -25,18 +25,18 @@ index 79b4befa..aed96dec 100644
          class="flex justify-between"
      >
          <h1 class="text-xl font-semibold text-white mb-4">Voyages</h1>
-+
+ 
          <button
 +            data-action="modal#open"
-             class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold px-4 rounded"
+             class="flex items-center space-x-1 bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold px-4 rounded"
          >
-             New Voyage
-@@ -16,8 +19,8 @@
+             <span>New Voyage</span>
+@@ -17,8 +19,8 @@
          </button>
  
          <dialog
 -            open
-             class="open:flex bg-gray-800 rounded-lg shadow-xl inset-0 w-full md:w-fit md:max-w-[50%]"
+             class="open:flex bg-gray-800 rounded-lg shadow-xl inset-0 w-full md:w-fit md:max-w-[50%] md:min-w-[50%]"
 +            data-modal-target="dialog"
          >
              <div class="flex grow p-5">

@@ -1,0 +1,18 @@
+diff --git a/templates/voyage/new.html.twig b/templates/voyage/new.html.twig
+index 95d416a4..962b9f5c 100644
+--- a/templates/voyage/new.html.twig
++++ b/templates/voyage/new.html.twig
+@@ -3,6 +3,7 @@
+ {% block title %}New Voyage{% endblock %}
+ 
+ {% block body %}
++    <turbo-frame id="modal" target="_top">
+     <div class="m-4 p-4 bg-gray-800 rounded-lg">
+         <div class="flex justify-between">
+             <h1 class="text-xl font-semibold text-white mb-4">Create New Voyage</h1>
+@@ -20,4 +21,5 @@
+         </div>
+         {{ include('voyage/_form.html.twig') }}
+     </div>
++    </turbo-frame>
+ {% endblock %}

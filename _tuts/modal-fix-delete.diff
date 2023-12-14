@@ -1,8 +1,8 @@
 diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
-index 8481265a..7072beae 100644
+index 36159d74..f7d3fd4b 100644
 --- a/src/Controller/VoyageController.php
 +++ b/src/Controller/VoyageController.php
-@@ -99,10 +99,20 @@ class VoyageController extends AbstractController
+@@ -92,10 +92,19 @@ class VoyageController extends AbstractController
      public function delete(Request $request, Voyage $voyage, EntityManagerInterface $entityManager): Response
      {
          if ($this->isCsrfTokenValid('delete'.$voyage->getId(), $request->request->get('_token'))) {
@@ -12,25 +12,22 @@ index 8481265a..7072beae 100644
  
              $this->addFlash('success', 'Voyage deleted!');
 +
-+            if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
-+                // If the request comes from Turbo, set the content type as text/vnd.turbo-stream.html and only send the HTML to update
-+                $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
-+
-+                return $this->renderBlock('voyage/delete.html.twig', 'success_stream', [
++            if ($request->headers->has('turbo-frame')) {
++                $stream = $this->renderBlockView('voyage/delete.html.twig', 'success_stream', [
 +                    'id' => $id,
 +                ]);
++
++                $this->addFlash('stream', $stream);
 +            }
          }
  
          return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
 diff --git a/templates/voyage/delete.html.twig b/templates/voyage/delete.html.twig
 new file mode 100644
-index 00000000..95771dfe
+index 00000000..80635fc3
 --- /dev/null
 +++ b/templates/voyage/delete.html.twig
-@@ -0,0 +1,5 @@
+@@ -0,0 +1,3 @@
 +{% block success_stream %}
-+    {{ include('_streamSuccess.html.twig') }}
-+
 +    <turbo-stream action="remove" target="voyage-list-item-{{ id }}"></turbo-stream>
 +{% endblock %}

@@ -1,19 +1,19 @@
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index d0e5351e..f78ba09e 100644
+index 1ea91ebb..dd5bed38 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
-@@ -2,10 +2,10 @@
-     {{ form_start(form) }}
-         {{ form_widget(form) }}
+@@ -1,10 +1,10 @@
+ {{ form_start(form) }}
+     {{ form_widget(form) }}
  
--        {{ component('Button', {
--            formnovalidate: true,
--            class: 'px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700',
--        }) }}
-+        <twig:Button
-+            formnovalidate
-+            class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
-+        />
+-    {{ component('Button', {
+-        formnovalidate: true,
+-        class: 'px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700',
+-    }) }}
++    <twig:Button
++        formnovalidate
++        class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
++    />
  
-         <button formnovalidate class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
-             {{ button_label|default('Save') }}
+     <button formnovalidate class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+         {{ button_label|default('Save') }}

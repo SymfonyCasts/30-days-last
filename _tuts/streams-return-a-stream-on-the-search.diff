@@ -1,0 +1,26 @@
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index 138c96df..e9775c6d 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -52,7 +52,7 @@
+                     data-action="autosubmit#debouncedSubmit"
+                     autofocus
+                 >
+-                <div class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
++                <div id="voyage-result-count" class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
+             </form>
+             <turbo-frame id="voyage-list" data-turbo-action="advance">
+                 <div class="bg-gray-800 p-4 rounded">
+@@ -132,6 +132,12 @@
+                         Page {{ voyages.currentPage }}/{{ voyages.nbPages }}
+                     </div>
+                 </div>
++
++                <turbo-stream action="replace" target="voyage-result-count">
++                    <template>
++                        Is this thing on?
++                    </template>
++                </turbo-stream>
+             </turbo-frame>
+         </section>
+     </div>

@@ -1,40 +1,40 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index b197a6de..bd803fc0 100644
+index b197a6de..9ed74272 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -52,5 +52,14 @@
+@@ -52,5 +52,15 @@
          <div id="flash-container">
              {{ include('_flashes.html.twig') }}
          </div>
 +        <twig:Modal>
-+            <twig:block name="full_content">
-+                <turbo-frame
-+                    id="modal"
-+                    data-modal-target="modalContent"
-+                    data-action="turbo:before-fetch-request->modal#showLoading"
-+                ></turbo-frame>
-+            </twig:block>
++            <turbo-frame
++                id="modal"
++                data-modal-target="dynamicContent"
++                data-action="turbo:before-fetch-request->modal#showLoading"
++                class="aria-busy:opacity-50 transition-opacity"
++            >
++                {{ include('_frameSuccessStreams.html.twig', { frame: 'modal' }) }}
++            </turbo-frame>
 +        </twig:Modal>
      </body>
  </html>
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index d09dc69a..3dfce915 100644
+index c187bf84..90eafe5b 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
-@@ -11,11 +11,11 @@
+@@ -11,14 +11,7 @@
      >
          <div class="flex grow p-5">
              <div class="grow overflow-auto p-1">
 -                <turbo-frame
 -                    id="modal"
--                    data-modal-target="modalContent"
+-                    data-modal-target="dynamicContent"
 -                    data-action="turbo:before-fetch-request->modal#showLoading"
--                ></turbo-frame>
-+                {% block full_content %}
-+                    <div data-modal-target="modalContent">
-+                        {% block content %}{% endblock %}
-+                    </div>
-+                {% endblock %}
+-                    class="aria-busy:opacity-50 transition-opacity"
+-                >
+-                    {{ include('_frameSuccessStreams.html.twig', { frame: 'modal' }) }}
+-                </turbo-frame>
++                {% block content %}{% endblock %}
              </div>
          </div>
      </dialog>

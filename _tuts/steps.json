@@ -431,13 +431,18 @@
             "description": null
         },
         {
-            "id": "delete-me-4",
-            "name": "delete me 4",
+            "id": "streams-return-a-stream-on-the-search",
+            "name": "Streams Return a stream on the search",
             "description": null
         },
         {
-            "id": "forminframe-add-form-to-voyage-index",
-            "name": "FormInFrame: Add form to voyage index",
+            "id": "streams-render-the-real-count",
+            "name": "Streams: Render the real count",
+            "description": null
+        },
+        {
+            "id": "delete-me-17",
+            "name": "delete me 17",
             "description": null
         },
         {
@@ -446,78 +451,118 @@
             "description": null
         },
         {
-            "id": "forminframe-add-form-action",
-            "name": "FormInFrame: Add form action",
+            "id": "delete-me-18",
+            "name": "delete me 18",
             "description": null
         },
         {
-            "id": "forminframe-fix-action-on-all-pages",
-            "name": "FormInFrame: Fix action on all pages",
+            "id": "delete-me-19",
+            "name": "delete me 19",
             "description": null
         },
         {
-            "id": "forminframe-add-the-frame-around-the-form",
-            "name": "FormInFrame: Add the frame around the form",
+            "id": "delete-me-20",
+            "name": "delete me 20",
             "description": null
         },
         {
-            "id": "forminframe-opacity-on-submit",
-            "name": "FormInFrame: Opacity on submit",
+            "id": "delete-me-21",
+            "name": "delete me 21",
             "description": null
         },
         {
-            "id": "forminframe-remove-usleep",
-            "name": "FormInFrame: Remove usleep",
+            "id": "delete-me-22",
+            "name": "delete me 22",
             "description": null
         },
         {
-            "id": "forminframe-redirect-to-show-page",
-            "name": "FormInFrame: Redirect to show page",
+            "id": "delete-me-23",
+            "name": "delete me 23",
             "description": null
         },
         {
-            "id": "stream-reset-the-form-in-a-stream",
-            "name": "Stream: Reset the form in a stream",
+            "id": "delete-me-24",
+            "name": "delete me 24",
             "description": null
         },
         {
-            "id": "stream-append-to-flash-container",
-            "name": "Stream: append to flash container",
+            "id": "delete-me-25",
+            "name": "delete me 25",
             "description": null
         },
         {
-            "id": "stream-prepend-to-the-table-list",
-            "name": "Stream: Prepend to the table list",
+            "id": "delete-me-26",
+            "name": "delete me 26",
             "description": null
         },
         {
-            "id": "stream-append-actual-row",
-            "name": "Stream: Append actual row",
+            "id": "delete-me-27",
+            "name": "delete me 27",
             "description": null
         },
         {
-            "id": "stream-stream-on-edit",
-            "name": "Stream: Stream on edit",
+            "id": "delete-me-28",
+            "name": "delete me 28",
             "description": null
         },
         {
-            "id": "stream-try-to-stream-from-search-form",
-            "name": "Stream: Try to stream from search form",
+            "id": "delete-me-29",
+            "name": "delete me 29",
             "description": null
         },
         {
-            "id": "stream-add-data-turbo-stream",
-            "name": "Stream: Add data-turbo-stream",
+            "id": "delete-me-30",
+            "name": "delete me 30",
             "description": null
         },
         {
-            "id": "stream-replace-frame-in-stream",
-            "name": "Stream: Replace frame in stream",
+            "id": "delete-me-6",
+            "name": "delete me 6",
             "description": null
         },
         {
-            "id": "stream-stream-the-result-count",
-            "name": "Stream: Stream the result count",
+            "id": "delete-me-7",
+            "name": "delete me 7",
+            "description": null
+        },
+        {
+            "id": "delete-me-8",
+            "name": "delete me 8",
+            "description": null
+        },
+        {
+            "id": "delete-me-31",
+            "name": "delete me 31",
+            "description": null
+        },
+        {
+            "id": "delete-me-32",
+            "name": "delete me 32",
+            "description": null
+        },
+        {
+            "id": "delete-me-33",
+            "name": "delete me 33",
+            "description": null
+        },
+        {
+            "id": "delete-me-34",
+            "name": "delete me 34",
+            "description": null
+        },
+        {
+            "id": "delete-me-10",
+            "name": "delete me 10",
+            "description": null
+        },
+        {
+            "id": "delete-me-11",
+            "name": "delete me 11",
+            "description": null
+        },
+        {
+            "id": "delete-me-12",
+            "name": "delete me 12",
             "description": null
         },
         {
@@ -581,13 +626,23 @@
             "description": null
         },
         {
-            "id": "modal-remove-new-form-from-index-page",
-            "name": "Modal: Remove new form from index page",
+            "id": "modal-move-modal-to-layout",
+            "name": "Modal: Move modal to layout",
             "description": null
         },
         {
-            "id": "modal-add-modal-turbo-frame-to-layout",
-            "name": "Modal: Add modal turbo-frame to layout",
+            "id": "modal-remove-extra-parts-in-base",
+            "name": "Modal: Remove extra parts in base",
+            "description": null
+        },
+        {
+            "id": "modal-add-modal-frame-into-layout-modal",
+            "name": "Modal: Add modal frame into layout modal",
+            "description": null
+        },
+        {
+            "id": "delete-me-36",
+            "name": "delete me 36",
             "description": null
         },
         {
@@ -596,23 +651,33 @@
             "description": null
         },
         {
+            "id": "delete-me-37",
+            "name": "delete me 37",
+            "description": null
+        },
+        {
+            "id": "modal-add-modal-frame-to-new-page",
+            "name": "Modal: Add modal frame to new page",
+            "description": null
+        },
+        {
             "id": "modal-use-base-template-for-modal",
             "name": "Modal: use base template for modal",
             "description": null
         },
         {
-            "id": "modal-fix-anchor-text-align",
-            "name": "Modal: Fix anchor text align",
+            "id": "delete-me-13",
+            "name": "delete me 13",
             "description": null
         },
         {
-            "id": "modal-move-modal-into-layout",
-            "name": "Modal: Move modal into layout",
+            "id": "delete-me-38",
+            "name": "delete me 38",
             "description": null
         },
         {
-            "id": "modal-put-frame-inside-the-modal",
-            "name": "Modal: Put frame inside the modal",
+            "id": "delete-me-39",
+            "name": "delete me 39",
             "description": null
         },
         {
@@ -621,13 +686,23 @@
             "description": null
         },
         {
-            "id": "modal-close-on-save",
-            "name": "Modal: Close on save",
+            "id": "modal-fix-form-action-attribute",
+            "name": "Modal: Fix form action attribute",
             "description": null
         },
         {
-            "id": "modal-partial-for-stream-success",
-            "name": "Modal: partial for stream success",
+            "id": "delete-me-41",
+            "name": "delete me 41",
+            "description": null
+        },
+        {
+            "id": "delete-me-14",
+            "name": "delete me 14",
+            "description": null
+        },
+        {
+            "id": "delete-me-15",
+            "name": "delete me 15",
             "description": null
         },
         {
@@ -636,8 +711,8 @@
             "description": null
         },
         {
-            "id": "modal-set-min-width-on-modal",
-            "name": "Modal: Set min-width on modal",
+            "id": "modal-add-loading-transition-behavior",
+            "name": "Modal: Add loading transition behavior",
             "description": null
         },
         {
@@ -651,8 +726,48 @@
             "description": null
         },
         {
+            "id": "modal-render-flash-stream-in-modal-frame",
+            "name": "Modal: render flash stream in modal frame",
+            "description": null
+        },
+        {
+            "id": "modal-move-flash-container-after-modal",
+            "name": "Modal: Move flash container after modal",
+            "description": null
+        },
+        {
+            "id": "modal-add-stream-flash-to-prepend",
+            "name": "Modal: Add \"stream\" flash to prepend",
+            "description": null
+        },
+        {
+            "id": "modal-stream-real-flash-content",
+            "name": "Modal: Stream real flash content",
+            "description": null
+        },
+        {
             "id": "modal-repeat-for-edit",
             "name": "Modal: Repeat for edit",
+            "description": null
+        },
+        {
+            "id": "modal-redirect-edit-to-edit",
+            "name": "Modal: redirect edit to edit",
+            "description": null
+        },
+        {
+            "id": "modal-render-frame-success-streams-template-from-both-modals",
+            "name": "Modal: Render \"frame success streams\" template from both modals",
+            "description": null
+        },
+        {
+            "id": "modal-check-frame-before-rendering-streams",
+            "name": "Modal: Check frame before rendering streams",
+            "description": null
+        },
+        {
+            "id": "modal-hide-modal-from-stream",
+            "name": "Modal: Hide modal from stream",
             "description": null
         },
         {
@@ -661,8 +776,33 @@
             "description": null
         },
         {
+            "id": "modal-target-delete-on-top",
+            "name": "Modal: Target delete on \"top\"",
+            "description": null
+        },
+        {
+            "id": "modal-remove-that-target",
+            "name": "Modal: Remove that target",
+            "description": null
+        },
+        {
             "id": "modal-fix-delete",
             "name": "Modal: Fix delete",
+            "description": null
+        },
+        {
+            "id": "modal-return-a-full-stream-from-new",
+            "name": "Modal: Return a full stream from new",
+            "description": null
+        },
+        {
+            "id": "modal-add-the-other-needed-stream-parts",
+            "name": "Modal: Add the other needed stream parts",
+            "description": null
+        },
+        {
+            "id": "modal-revert-full-stream",
+            "name": "Modal: Revert full stream",
             "description": null
         },
         {
@@ -911,5 +1051,5 @@
             "description": null
         }
     ],
-    "sha": "6fa54d053b2364869b6a4f238198551a8531db95"
+    "sha": "4edddf85131087e60dbe7ef8e6ab9f7f9596bb64"
 }

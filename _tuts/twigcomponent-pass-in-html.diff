@@ -6,17 +6,17 @@ index 82eb1f31..6f849faf 100644
 -<button {{ attributes }}>Press me!</button>
 +<button {{ attributes }}>{% block content %}{% endblock %}</button>
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index f78ba09e..a84c6b53 100644
+index dd5bed38..83ff5763 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
-@@ -5,7 +5,9 @@
-         <twig:Button
-             formnovalidate
-             class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
--        />
-+        >
-+            {{ button_label|default('Save') }}
-+        </twig:Button>
+@@ -4,7 +4,9 @@
+     <twig:Button
+         formnovalidate
+         class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
+-    />
++    >
++        {{ button_label|default('Save') }}
++    </twig:Button>
  
-         <button formnovalidate class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
-             {{ button_label|default('Save') }}
+     <button formnovalidate class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+         {{ button_label|default('Save') }}

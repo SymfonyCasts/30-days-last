@@ -1,0 +1,62 @@
+diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
+index 08be053d..63132f08 100644
+--- a/src/Controller/VoyageController.php
++++ b/src/Controller/VoyageController.php
+@@ -36,6 +36,14 @@ class VoyageController extends AbstractController
+ 
+             $this->addFlash('success', 'Bon voyage!');
+ 
++            if ($request->headers->has('turbo-frame')) {
++                $stream = $this->renderBlockView('voyage/new.html.twig', 'stream_success', [
++                    'voyage' => $voyage
++                ]);
++
++                $this->addFlash('stream', $stream);
++            }
++
+             return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
+         }
+ 
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index 166a8ef4..3318c3ff 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -69,6 +69,9 @@
+                             <turbo-stream action="append" target="flash-container">
+                                 <template>{{ include('_flashes.html.twig') }}</template>
+                             </turbo-stream>
++                            {% for stream in app.flashes('stream') %}
++                                {{ stream|raw }}
++                            {% endfor %}
+                         </turbo-frame>
+                     </div>
+                 </div>
+diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
+index 4289d4e2..5e1ef65f 100644
+--- a/templates/voyage/index.html.twig
++++ b/templates/voyage/index.html.twig
+@@ -19,7 +19,7 @@
+         </a>
+     </div>
+ 
+-    <table class="min-w-full bg-gray-800 text-white">
++    <table class="min-w-full bg-gray-800 text-white" id="voyage-list">
+         <thead class="border-b border-gray-700">
+             <tr>
+                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Id</th>
+diff --git a/templates/voyage/new.html.twig b/templates/voyage/new.html.twig
+index 6ce6f30e..b4d39384 100644
+--- a/templates/voyage/new.html.twig
++++ b/templates/voyage/new.html.twig
+@@ -21,3 +21,11 @@
+         {{ include('voyage/_form.html.twig') }}
+     </div>
+ {% endblock %}
++
++{% block stream_success %}
++    <turbo-stream action="prepend" targets="#voyage-list tbody">
++        <template>
++            <tr><td>{{ voyage.purpose }}</td></tr>
++        </template>
++    </turbo-stream>
++{% endblock %}

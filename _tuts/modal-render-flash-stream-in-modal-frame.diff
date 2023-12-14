@@ -1,0 +1,17 @@
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index 1498cdd1..a9d5db23 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -69,7 +69,11 @@
+                             data-modal-target="dynamicContent"
+                             data-action="turbo:before-fetch-request->modal#showLoading"
+                             class="aria-busy:opacity-50 transition-opacity"
+-                        ></turbo-frame>
++                        >
++                            <turbo-stream action="append" target="flash-container">
++                                <template>{{ include('_flashes.html.twig') }}</template>
++                            </turbo-stream>
++                        </turbo-frame>
+                     </div>
+                 </div>
+             </dialog>

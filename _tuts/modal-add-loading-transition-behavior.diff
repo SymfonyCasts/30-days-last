@@ -1,0 +1,12 @@
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index 5165c9a5..1498cdd1 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -68,6 +68,7 @@
+                             id="modal"
+                             data-modal-target="dynamicContent"
+                             data-action="turbo:before-fetch-request->modal#showLoading"
++                            class="aria-busy:opacity-50 transition-opacity"
+                         ></turbo-frame>
+                     </div>
+                 </div>

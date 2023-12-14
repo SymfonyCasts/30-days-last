@@ -32,19 +32,19 @@ index 9154ba16..c8d80729 100644
      </twig:Button>
  </form>
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index 43fd22d8..620c45d8 100644
+index 2b80e0f6..4c2f90da 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
-@@ -2,7 +2,11 @@
-     {{ form_start(form) }}
-         {{ form_widget(form) }}
+@@ -1,7 +1,11 @@
+ {{ form_start(form) }}
+     {{ form_widget(form) }}
  
--        <twig:Button formnovalidate class="hover:animate-wiggle">
-+        <twig:Button
-+            formnovalidate
-+            variant="success"
-+            class="hover:animate-wiggle"
-+        >
-             {{ button_label|default('Save') }}
-         </twig:Button>
-     {{ form_end(form) }}
+-    <twig:Button formnovalidate class="hover:animate-wiggle">
++    <twig:Button
++        formnovalidate
++        variant="success"
++        class="hover:animate-wiggle"
++    >
+         {{ button_label|default('Save') }}
+     </twig:Button>
+ {{ form_end(form) }}

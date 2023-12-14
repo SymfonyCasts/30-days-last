@@ -1,0 +1,24 @@
+diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
+index e9775c6d..92c67bb4 100644
+--- a/templates/main/homepage.html.twig
++++ b/templates/main/homepage.html.twig
+@@ -52,7 +52,9 @@
+                     data-action="autosubmit#debouncedSubmit"
+                     autofocus
+                 >
+-                <div id="voyage-result-count" class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
++                {% block result_count %}
++                    <div id="voyage-result-count" class="whitespace-nowrap m-2 mr-4">{{ voyages|length }} results</div>
++                {% endblock %}
+             </form>
+             <turbo-frame id="voyage-list" data-turbo-action="advance">
+                 <div class="bg-gray-800 p-4 rounded">
+@@ -135,7 +137,7 @@
+ 
+                 <turbo-stream action="replace" target="voyage-result-count">
+                     <template>
+-                        Is this thing on?
++                        {{ block('result_count') }}
+                     </template>
+                 </turbo-stream>
+             </turbo-frame>

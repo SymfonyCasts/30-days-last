@@ -1,5 +1,5 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 5e7acf48..a3156396 100644
+index 29efa486..915f0e07 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -29,7 +29,7 @@
@@ -12,7 +12,7 @@ index 5e7acf48..a3156396 100644
                              <div
                                  class="hidden md:flex pr-10 items-center space-x-2 border-2 border-gray-900 rounded-lg p-2 bg-gray-800 text-white cursor-pointer"
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index 49e70fa8..78aea7af 100644
+index d3906b1c..844b647a 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
 @@ -1,4 +1,9 @@

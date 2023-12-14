@@ -1,12 +1,11 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index d20c800c..b197a6de 100644
+index b7501534..b197a6de 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -52,42 +52,5 @@
-         <div id="flash-container">
-             {{ include('_flashes.html.twig') }}
+@@ -49,46 +49,6 @@
+             </footer>
          </div>
--
+ 
 -        <div
 -            data-controller="modal"
 -            data-action="click->modal#clickOutside"
@@ -20,9 +19,12 @@ index d20c800c..b197a6de 100644
 -                    <div class="grow overflow-auto p-1">
 -                        <turbo-frame
 -                            id="modal"
--                            data-modal-target="modalContent"
+-                            data-modal-target="dynamicContent"
 -                            data-action="turbo:before-fetch-request->modal#showLoading"
--                        ></turbo-frame>
+-                            class="aria-busy:opacity-50 transition-opacity"
+-                        >
+-                            {{ include('_frameSuccessStreams.html.twig', { frame: 'modal' }) }}
+-                        </turbo-frame>
 -                    </div>
 -                </div>
 -            </dialog>
@@ -43,14 +45,16 @@ index d20c800c..b197a6de 100644
 -                </div>
 -            </template>
 -        </div>
-     </body>
- </html>
+-
+         <div id="flash-container">
+             {{ include('_flashes.html.twig') }}
+         </div>
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
 new file mode 100644
-index 00000000..ab86712c
+index 00000000..cb42b490
 --- /dev/null
 +++ b/templates/components/Modal.html.twig
-@@ -0,0 +1,36 @@
+@@ -0,0 +1,39 @@
 +<div
 +    data-controller="modal"
 +    data-action="click->modal#clickOutside"
@@ -64,9 +68,12 @@ index 00000000..ab86712c
 +            <div class="grow overflow-auto p-1">
 +                <turbo-frame
 +                    id="modal"
-+                    data-modal-target="modalContent"
++                    data-modal-target="dynamicContent"
 +                    data-action="turbo:before-fetch-request->modal#showLoading"
-+                ></turbo-frame>
++                    class="aria-busy:opacity-50 transition-opacity"
++                >
++                    {{ include('_frameSuccessStreams.html.twig', { frame: 'modal' }) }}
++                </turbo-frame>
 +            </div>
 +        </div>
 +    </dialog>

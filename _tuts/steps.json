@@ -106,11 +106,6 @@
             "description": null
         },
         {
-            "id": "delete-me-1",
-            "name": "delete me 1",
-            "description": null
-        },
-        {
             "id": "tailwind-configure-and-use-form-theme",
             "name": "Tailwind: Configure & use form theme",
             "description": null
@@ -228,11 +223,6 @@
         {
             "id": "popover-add-real-popover-content",
             "name": "Popover: Add real popover content",
-            "description": null
-        },
-        {
-            "id": "delete-me-2",
-            "name": "delete me 2",
             "description": null
         },
         {
@@ -441,131 +431,6 @@
             "description": null
         },
         {
-            "id": "delete-me-17",
-            "name": "delete me 17",
-            "description": null
-        },
-        {
-            "id": "delete-me-5",
-            "name": "delete me 5",
-            "description": null
-        },
-        {
-            "id": "delete-me-18",
-            "name": "delete me 18",
-            "description": null
-        },
-        {
-            "id": "delete-me-19",
-            "name": "delete me 19",
-            "description": null
-        },
-        {
-            "id": "delete-me-20",
-            "name": "delete me 20",
-            "description": null
-        },
-        {
-            "id": "delete-me-21",
-            "name": "delete me 21",
-            "description": null
-        },
-        {
-            "id": "delete-me-22",
-            "name": "delete me 22",
-            "description": null
-        },
-        {
-            "id": "delete-me-23",
-            "name": "delete me 23",
-            "description": null
-        },
-        {
-            "id": "delete-me-24",
-            "name": "delete me 24",
-            "description": null
-        },
-        {
-            "id": "delete-me-25",
-            "name": "delete me 25",
-            "description": null
-        },
-        {
-            "id": "delete-me-26",
-            "name": "delete me 26",
-            "description": null
-        },
-        {
-            "id": "delete-me-27",
-            "name": "delete me 27",
-            "description": null
-        },
-        {
-            "id": "delete-me-28",
-            "name": "delete me 28",
-            "description": null
-        },
-        {
-            "id": "delete-me-29",
-            "name": "delete me 29",
-            "description": null
-        },
-        {
-            "id": "delete-me-30",
-            "name": "delete me 30",
-            "description": null
-        },
-        {
-            "id": "delete-me-6",
-            "name": "delete me 6",
-            "description": null
-        },
-        {
-            "id": "delete-me-7",
-            "name": "delete me 7",
-            "description": null
-        },
-        {
-            "id": "delete-me-8",
-            "name": "delete me 8",
-            "description": null
-        },
-        {
-            "id": "delete-me-31",
-            "name": "delete me 31",
-            "description": null
-        },
-        {
-            "id": "delete-me-32",
-            "name": "delete me 32",
-            "description": null
-        },
-        {
-            "id": "delete-me-33",
-            "name": "delete me 33",
-            "description": null
-        },
-        {
-            "id": "delete-me-34",
-            "name": "delete me 34",
-            "description": null
-        },
-        {
-            "id": "delete-me-10",
-            "name": "delete me 10",
-            "description": null
-        },
-        {
-            "id": "delete-me-11",
-            "name": "delete me 11",
-            "description": null
-        },
-        {
-            "id": "delete-me-12",
-            "name": "delete me 12",
-            "description": null
-        },
-        {
             "id": "dialog-add-new-button",
             "name": "Dialog: Add new button",
             "description": null
@@ -641,18 +506,8 @@
             "description": null
         },
         {
-            "id": "delete-me-36",
-            "name": "delete me 36",
-            "description": null
-        },
-        {
             "id": "modal-target-click-into-turbo-frame",
             "name": "Modal: Target click into turbo-frame",
-            "description": null
-        },
-        {
-            "id": "delete-me-37",
-            "name": "delete me 37",
             "description": null
         },
         {
@@ -666,21 +521,6 @@
             "description": null
         },
         {
-            "id": "delete-me-13",
-            "name": "delete me 13",
-            "description": null
-        },
-        {
-            "id": "delete-me-38",
-            "name": "delete me 38",
-            "description": null
-        },
-        {
-            "id": "delete-me-39",
-            "name": "delete me 39",
-            "description": null
-        },
-        {
             "id": "modal-open-when-html-present",
             "name": "Modal: Open when HTML present",
             "description": null
@@ -688,21 +528,6 @@
         {
             "id": "modal-fix-form-action-attribute",
             "name": "Modal: Fix form action attribute",
-            "description": null
-        },
-        {
-            "id": "delete-me-41",
-            "name": "delete me 41",
-            "description": null
-        },
-        {
-            "id": "delete-me-14",
-            "name": "delete me 14",
-            "description": null
-        },
-        {
-            "id": "delete-me-15",
-            "name": "delete me 15",
             "description": null
         },
         {

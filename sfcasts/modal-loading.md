@@ -1,93 +1,130 @@
 # Fantastic Model UX with a Loading State
 
-Coming soon...
+Let's pick up where we left off yesterday. The Ajax-powered modal loads! Let's
+try to submit it. Uh oh - something went wrong. It went to some page that didn't
+have a `<turbo-frame id="modal">`... which is odd, because *every* page now has one.
+That's because the response was an error. If we look down on the web debug toolbar,
+there was a 405 status code. Open that up. Interesting:
 
-All right, so
-let's try to submit this and something goes wrong. It went to a page that didn't have
-a TurboFrame ID = modal. And that's because the response was an error. If we look
-down here on the web debug toolbar, there was a 405 status code. Let's open that up.
-So it says no route found for post /voyage, which is weird because we're submitting
-the new voyage form. But here's the problem. When you generate, when I generated the
-crud for my voyage system, it generated form elements that don't have an action
-attribute. That's fine when you were on that page, because it means it submits right
-back to the same URL. But as soon as you start embedding your forms in other places,
-you need to be responsible and always set the action attribute to do that, open up
-our src/Controller, the voyage controller. And at the bottom of this, I'm going to
-paste in a really simple private method. That's going to handle this for us. Okay. To
-add the use statement. So we can pass a voyage or not pass a voyage. And all this
-does is create our normal voyage form, but it sets the action attribute. If the
-voyage has an ID, it sets the action to the edit page else it sets it to the new
-page. So thanks to this up in the new action, we can say this->create voyage form
-voyage, and I'll copy that line because we need the exact same thing down here in
-edit. Perfect. All right. So now I don't even need to refresh. I'm just going to open
-the modal, save, and it works. It's submitted. And we got the response right back
-inside the modal because of course that's the whole point of a turbo frame. It keeps
-the navigation right inside this area. Now, before we talk about what happens on
-success, let's perfect this. My second requirement for the opening the modal was that
-it needed to open immediately over in our new action. Add a sleep = two to mimic our
-site being so cool that it's being slammed by traffic.  Now, when we hit the button
-click, nothing happens. No user feedback at all until the Ajax request actually
-finishes. It's not good enough. Instead, I want the modal to open immediately with
-some loading content. To do this over in the modal controller, we're going to add a
-new target called loading content. So the idea is that in our actual HTML in a
-second, we will define the, what we want the loading content to look like inside of
-our modal. Then down here, we're going to create a new method called showLoading. And
-if this.dialogTarget.open, so if we're already open, we don't need to show the
-loading, I'm just going to return. Otherwise say this.dynamicContentTarget. So in our
-case, this is going to be the turbo frame that we're waiting to load the Ajax into.
-.innerHTML = this.loadingContentTarget.innerHTML. So it's going to copy whatever
-we've defined as our loading content into our dynamic content. Finally, let's add
-that target. So in base.html.twig, after my dialog, I'll add a template element. Yes,
-my beloved template element. It's perfect for this situation because anything inside
-of a template element isn't visible on the page. Let's add a data modal target =
-loading content. And then inside of this, we're going to add a template element that
-we're going to And then inside of this, I'm going to paste in some content. This is
-just some tailwind classes that are going to give us this nice pulsing animation.
-Now, if we tried this right now, it still doesn't work because nothing is calling our
-new show loading method. And this is where we can use a little trick from a turbo. So
-over in base.html.twig, find the iframe. I'm going to move this on to multiple lines.
-What we effectively want to do is the moment the turbo frame starts loading, we want
-the loading content to show. And turbo dispatches an event when it starts an AJAX
-request that we can listen to. So add a data action to listen to that and we'll say
-turbo before fetch request. That's the name of the event. Then->modal pound sign show
-loading. All right, let's check out the effect here. I'm going to refresh the page
-and, oh, I love that opens instantly. We see that loading content. It's perfect.  And
-it's really cool how it works. When this calls show loading, show loading puts
-content into our dynamic content target. And do you remember what happens? The moment
-any content goes into a turbo frame that triggers the modal to open. So there's some
-really cool teamwork going on here to get that modal to open immediately. And then
-once the turbo frame actually finishes loading, its final content overrides the
-loading. All right, so we're almost there to making this perfect, but I'm not
-satisfied yet. And while I have that sleep in there, I'm going to hit save. Look it,
-nothing happens. There's no feedback while that's loading. Fortunately, that's easy
-to fix, and we've already done it on a different turbo frame. I'm going to add class
-area-busy:opacity 50, and then transition opacity. This time, let's reload this.
-Actually, I should reload the page. There we go. And we've got the nice loading
-animation. And yes, we get the low animation. Low opacity, so we can see that it's
-doing something. All right, so with that, I will happily remove our sleep. At this
-point, there's just one last detail I want to talk about, and it's this extra padding
-here. The reason that extra padding is there is because we're going to be using it to
-edit the page. So the reason that extra padding is there is because the content from
-the page has an M4 and a P4 that adds that. So the modal has some padding, and then
-there's extra padding coming from that on the page. And on the page, that margin and
-padding makes sense. So this comes from over here in new.html-twig. And when that
-same content is inside of the modal, we want that to hide. So to help us do this,
-we're going to add, we're going to use a tailwind trick. So it's really easy for us
-to customize this. So in tailwind.config.js, let's add one more variant. We're going
-to call this one modal, and it's going to activate whenever we are inside of a dialog
-element. Thanks to that, over in new.html-twig, we'll keep the margin for and the
-padding for in normal situations. But if we're in a modal, use M0, and if we're in a
-modal, use P0.  All right, so over here on this page, there shouldn't be any change.
-That looks good. But now, oh, look at that. That is the modal padding and margin we
-want. So that's it. With a fully reusable modal system, it loads instantly, it
-submits into it, and it even closes itself when the modal, when the content
-disappears. Watch. First voyage from a modal. And I'll choose this. Let's close this
-for dramatic effect and save. Look at that. It closed. How? The new action redirects
-to the index page, and the index page doesn't extend modal base. It extends the
-normal base.html-twig. So there is a modal frame on the index page, but it's the
-empty frame at the bottom of the page. So that means that the modal lost its content.
-What happens when the modal loses its content? The modal is smart enough to close
-itself. Now, the only thing we are missing, if you're watching closely, is there is
-no toast notification. So tomorrow, we'll talk all about handling form success when a
-form is submitted inside a frame. By the end, we're even going to move the edit into
-a modal and add a few other effects that are simply amazing.
+> no route found for POST /voyage
+
+That's  weird because we're submitting the new voyage form... so the URL should
+be `/voyage/new`.
+
+## Adding action Attributes to the Forms
+
+Here's the problem: when I generated the voyage crud from MakerBundle, it created
+forms that *don't* have an `action` attribute. That's fine when you were on that
+page: it means it submits back to the current URL. But as soon as we decide to
+embed your forms on other pages, you need to be responsible and always set the
+`action` attribute.
+
+To do that, open up `src/Controller/VoyageController.php`. At the bottom, I'll
+paste in a simple private method. Hit Okay to add the `use` statement. We can pass
+a voyage or not... and this creates the form but sets the `action`. If the voyage
+has an id, it sets the action to the edit page, else it sets it to the new page.
+
+Thanks to this, up in the `new` action, we can say `this->createVoyageForm($voyage)`.
+Copy that... because we need the exact line down in `edit`.
+
+Lovely. Back over, I don't even need to refresh. Open the modal, save and... it works.
+It submitted and we got the response *right* back inside the modal... because of
+course! That's the whole point of a Turbo frame. It keeps the navigation inside
+of itself.
+
+## Loading the Modal Instantly
+
+Before we talk about what happens on success, I want to *perfect* this. My second
+requirement for the opening the modal was that it needed to open immediately. Over
+in our` new` action. Add a `sleep(2)`... to pretend our site is getting slammed
+by aliens planning their spring brek trips.
+
+When we click the button now... nothing happens. No user feedback at *all* until
+the Ajax request finishes. That is *not* good enough. Instead, I want the modal to
+open immediately with a loading animation.
+
+Over in the modal controller, add a new target called `loadingContent`. The idea
+is, if you want some loading content, you'll define that in your template and
+set this target on it. We'll do that in a moment.
+
+At the bottom, create a new method called `showLoading`. If `this.dialogTarget.open`,
+so if the dialog is already open, we don't need to show the loading, so return.
+Otherwise say `this.dynamicContentTarget` - for us, that's the `<turbo-frame>`
+that the content will be loaded into - `.innerHTML` equals
+`this.loadingContentTarget.innerHTML`.
+
+Finally, add that target. In `base.html.twig`, after the `dialog`, I'll add a
+`template` element. Yes, my beloved `template` element: it's perfect for this
+situation because anything inside won't be visible or active on the page. It's
+a template we can steal from. Add a `data-modal-target="loadingContent"`. I'l
+paste some content inside.
+
+Nothing special here: just some Tailwind classes with a cool pulse animation.
+
+If we try this now... no loading content! That's because nothing is calling our
+new `showLoading` method. On click, we want to start loading content into the
+`turbo-frame` *and* call that method. How?
+
+Over in `base.html.twig`, find the frame. I'll break this onto multiple lines. Let's
+think: as soon as the `turbo-frame` starts loading, we want to call `showLoading()`.
+Fortunately, Turbo dispatches an event when it starts an AJAX request. And we can
+listen to that.
+
+Add a `data-action` to listen  `turbo:before-fetch-request` - that's the name of
+the event - then `->modal#showLoading`.
+
+All right, let's check out the effect! Refresh the page and... oh, it's wonderful!
+It opens instantly, we see that loading content... and it's replaced once the
+frame finishes.
+
+I love how this works. When this calls `showLoading`, that method puts content
+into `dynamicContentTarget`. And... do you remember what happens the moment any
+HTML goes into that? Our controller notices it, and the modal opens. So there's some
+*really* cool teamwork going on to open that immediately.
+
+## Loading Indication on Form Submit
+
+We're nearly there to making this perfect, but I'm not satisfied! While we still
+have the `sleep`, submit the form. Nothing happens! There's no feedback while that's
+loading.
+
+Fortunately, we've fixed this before on a different Turbo frame. Add class
+`aria-busy:opacity-50`, and `transition-opacity`.
+
+I'll reload... click, loading animation and submit. Yes! The low opacity tells
+the user that something is happening.
+
+And with that, I will happily remove our `sleep`.
+
+## Conditional Modal Styling
+
+There's one final detail I want to get right: it's this extra padding. This shows
+up because the content from the `new` page an element with `m-4` and `p-4`. So
+the modal has some padding... and then extra padding comes from that page.
+
+*On* the page, the margin and padding makes sense. It comes from over here in
+`new.html.twig`. So we *do* want this on the full page... but not in the modal.
+
+To help us do this, we're going to use a Tailwind trick. In `tailwind.config.js`,
+add one more variant. Call this `modal`, and activate it whenever we are inside of
+a `dialog` element.
+
+Now, in `new.html.twig`, keep the margin and padding for the normal situation.
+But if we're in a modal, use `modal:m-0`, and `modal:p-0`.
+
+Back on the new page, this shouldn't change. Looks good! But in the modal...
+*that* is the look we want.
+
+Our modal system now opens instantly, AJAX-loads content and we can even submit
+into it. It even closes itself on success! Fill in a purpose, select a planet...
+and... the modal closed!
+
+How? It's cool! The `new` action redirects to the index page. And because
+`index.html.twig` extends the normal `base.html.twig`, it *does* have a
+`modal` frame... but its empty. That makes the `turbo-frame` on the *page* become
+empty. And thanks to our controller, we notice that and close the dialog.
+
+The only thing we're missing now, if you were watching closely, is the toast
+notification! It was missing! Tomorrow, we'll talk all about handling form success
+when a form is submitted inside a frame... *including* doing cool things like
+automatically adding the new row to the table on this page.

@@ -19,6 +19,7 @@ chapters:
     - streams
     - dialog
     - modal
+    - modal-loading
     - modal-success
     - modal-edit
     - twig-component

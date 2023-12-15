@@ -13,7 +13,7 @@ my shoes for me.
 On our CRUD controllers, I'm already setting a `success` flash message... but I'm
 not rendering it anywhere. In the `templates/` directory, create a new `_flashes.html.twig`.
 To start, just loop over the success messages with `for message in`
-`app.flashes.success`... and `endfor`.
+`app.flashes('success')`... and `endfor`.
 
 Inside, I'll paste a very simple flash message, which will start fixed to the bottom
 of the page.

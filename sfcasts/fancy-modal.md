@@ -1,3 +1,0 @@
-# Fancier Modals
-
-Coming soon...

@@ -19,7 +19,8 @@ chapters:
     - streams
     - dialog
     - modal
-    - fancy-modal
+    - modal-success
+    - modal-edit
     - twig-component
     - modal-component
     - live-components

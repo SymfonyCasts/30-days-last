@@ -43,7 +43,7 @@ index 084b4eac..62409eba 100644
      open() {
          this.dialogTarget.showModal();
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 3898416f..19ab260b 100644
+index dbffebd5..b0825425 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -64,7 +64,7 @@

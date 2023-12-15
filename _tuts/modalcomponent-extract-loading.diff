@@ -25,7 +25,7 @@ index 9ed74272..8428a9e0 100644
      </body>
  </html>
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index 5e85c124..4adeb48e 100644
+index 0892c609..60b8c659 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
 @@ -16,19 +16,9 @@

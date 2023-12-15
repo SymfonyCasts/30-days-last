@@ -9,11 +9,11 @@ index d376ea1d..beca337f 100644
      <td class="px-6 py-4">{{ voyage.purpose }}</td>
      <td class="px-6 py-4 whitespace-nowrap">{{ voyage.leaveAt ? voyage.leaveAt|date('Y-m-d H:i:s') : '' }}</td>
 diff --git a/templates/voyage/edit.html.twig b/templates/voyage/edit.html.twig
-index bb5e685b..e27148bb 100644
+index 4d450562..258e81ef 100644
 --- a/templates/voyage/edit.html.twig
 +++ b/templates/voyage/edit.html.twig
 @@ -27,4 +27,7 @@
-     <turbo-stream action="update" targets="dialog[open] [data-modal-target=dynamicContent]">
+     <turbo-stream action="update" target="modal">
          <template></template>
      </turbo-stream>
 +    <turbo-stream action="replace" target="voyage-list-item-{{ voyage.id }}">

@@ -17,7 +17,7 @@ index e6042988..36159d74 100644
              return $this->redirectToRoute('app_voyage_edit', ['id' => $voyage->getId()], Response::HTTP_SEE_OTHER);
          }
 diff --git a/templates/voyage/edit.html.twig b/templates/voyage/edit.html.twig
-index ce7cd35b..bb5e685b 100644
+index ce7cd35b..4d450562 100644
 --- a/templates/voyage/edit.html.twig
 +++ b/templates/voyage/edit.html.twig
 @@ -22,3 +22,9 @@
@@ -26,7 +26,7 @@ index ce7cd35b..bb5e685b 100644
  {% endblock %}
 +
 +{% block stream_success %}
-+    <turbo-stream action="update" targets="dialog[open] [data-modal-target=dynamicContent]">
++    <turbo-stream action="update" target="modal">
 +        <template></template>
 +    </turbo-stream>
 +{% endblock %}

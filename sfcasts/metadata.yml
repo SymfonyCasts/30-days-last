@@ -16,7 +16,6 @@ chapters:
     - view-transitions
     - toast
     - fancier-toast
-    - form-frame
     - streams
     - dialog
     - modal

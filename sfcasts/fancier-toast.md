@@ -1,5 +1,122 @@
-# Fancier Toasts
+# Fancier Toasts: Auto-close & Fading
 
-Coming soon...
+Thanks to our work yesterday on day 16, we have a nice Toast notification system
+that's powered entirely with CSS. Ok, just a *tiny* bit of JavaScript to, boop, close
+it.
 
-Thanks to our work yesterday on day 16, we have a really nice Toast notification that's powered entirely via CSS and just a tiny bit of JavaScript to, boop, close it. Today we're going to take this to the next level because I really want Toast notification to be a rich part of our site. And the first thing we're going to do is add an auto-close. It's pretty common for these Toast notifications to hide themselves after maybe 5 seconds. But I also want to keep my closeable controller reusable. There may be other parts of my site where I want to close something, but I don't want it to automatically close. So we're going to allow this to be an option that we can pass in. And the way you pass things into a controller is via values. So I'm going to say static values equals. And we're going to invent a new value here called auto-close, which is going to be a number. Now, in a connect method, the idea here is that if we have this .auto-close value, which is how you reference the value for this auto-close, then that's actually perfect. We'll just use a little setTimeout. So this looks good. So the next step is to go to our specific usage of this controller over in underscore flashes.html twig and pass in this new auto-close value. We do that on the same element as the data-controller. And the value here is going to be data-closeable-auto-close-value equals. And let's use 5,000 for 5 seconds. So the format here is data-the name of the controller-auto-close. That's the name of the value, auto-close. But because we're in an HTML attribute, we use the dash case here. Then the word dash-value equals. And finally, what we want to pass in. The format here is a bit harder to remember than just data-controller. But as you saw, if you have this stimulus plugin for PhpStorm, it auto-completes it for you, which helps a lot. All right, so let's try this. Let's go here, edit this, save, and 1, 2, 3, 4, 5. Boom, got it. All right. Should we make it... We might want to make it more obvious that the toast notification is going to close after 5 seconds. What I'm thinking is a little animation here of a bar that gets smaller and smaller, and then finally disappears right as the toast closes itself. So cool.  Let's add this. And once again, we're going to make this configurable. So the idea is that we're going to add a little bar down here, and then we're going to animate its width from 100% to 0% over those 5 seconds. To be able to find that element instead of our controller, we're going to use a target. So static targets equals timer bar. And then down here in connect, we'll just check for that. So we can see if we have one by saying if this.hasTimerBarTarget, then we basically want to say this.TimerBarTarget.style.width equals 0. So we'll start at full, and then immediately if we have that target, we'll set it to 0. And as long as we have some CSS transition set up on that element, we should see that transition happen over time. But we are going to do one small change here. We're going to use a little setTimeout and put it inside of there with a little 10-millisecond delay. This is going to allow the element to establish itself on the page with a full 100% width, and then 10 milliseconds later, we will change it to 0, and CSS will see that change and start the CSS transition. Now for the timer bar itself, let's add that. So at the bottom of underscore flashes, I am going to just paste something. So we're absolutely positioning this. We're giving it a height, background green. And the really important thing is that we're going to do our transition, and we're going to have the transition last for 5,000 milliseconds. Also, w-full is going to establish this as a width of 100%. And then finally, to make this a target, we can say data-closable target equals timer bar. All right, let's see what this looks like. Hit edit, save, and it opens, but there was no animation on it. Let's do some debugging here. So I don't see any errors in my console. And there's the problem right there. I should have listened to my editor. Timer bar target. There we go, let's close this. Save. That's what I want to see. And right as it gets to 0, boop, it ends. All right, so this is nice, but there's one more detail that I'm going to want on my toast notification, and that is that no matter how it closes, I want it to fade out instead of, boom, happening automatically.  Now, fading things out is a bit tricky. You can use CSS transitions, and we will, to go from opacity 100 to 0. But then you need some JavaScript to wait for that CSS transition to finish so that it can finally remove the element from the page. To help us with this, we're going to use a library called stimulus-use. Stimulus components, we saw earlier, is a list of reusable stimulus controllers. Stimulus-use is a bunch of behaviors that you can add to your stimulus controllers. Lots of good stuff here. And the one we're going to use is called use-transition. So step one, let's get this installed. So we'll run bin console, import map requires stimulus-use. Awesome. And then over in our controller, we can import that with import use-transition. From stimulus-use. And the way you use these behaviors is you say use-transition, you pass this, and then you pass some options that are going to be specific to this. And I am just going to paste those in. So what this means is that while an element is leaving or hiding, this library is going to add these three classes to that element. That's going to establish that we want the element to have a 200 millisecond transition. The leave from means that at the moment it starts hiding, it's going to give it this opacity 100. Then one millisecond later, it's going to remove this class, add opacity zero. That change will trigger the 200 millisecond transition. Finally, the transition true is a way for us to tell the library that we are starting in a visible state because you can also use this behavior to start hidden and then show your element. When you use use-transition, what it gives us in our controller are two new methods called leave and enter. So now down here in close, instead of removing the element ourselves, we'll say this.leave. All right, let's try this. Spin over, refresh, and save. And watch this. Ah, it was quick, but that is exactly what we want to see. I love it. All right, tomorrow we're going to explore what happens when we put an HTML form inside of a frame. This will lead us to turbo streams and eventually modals.
+Today we're going to take this to the next level. I want these toasts to be amazing.
+
+## Adding Auto-Close
+
+The first feature we'll add is auto-close: it's pretty common for toasts to close
+themselves after a few seconds. But I also want to keep our closeable controller
+reusable. There may be other parts of the site where we want to be able to close
+something... but not have it close itself automatically.
+
+So, we need a way to *activate* the auto-close on a case-by-case basis. The way
+to pass info into a controller is via values. Add `static values` equals... and I'll
+invent a new value here called `autoClose`, which is going to be a `Number`.
+
+Now add a `connect()` method. The idea is that if we have `this.autoCloseValue` -
+that's who you reference this value - then that's actually perfect! We'll use
+`setTimeout` to close after that many milliseconds.
+
+Next up: go to our usage of this controller in `_flashes.html.twig` and pass in
+the new `autoCloseValue`. We do that on the same element as the `data-controller`.
+Add `data-closeable-auto-close-value` equals and use 5,000 for 5 seconds.
+
+The format is `data-` the name of the controller - `auto-close` - that's the name
+of the value `autoClose`... but because we're in an HTML attribute, we use the
+"dash case" - then the word `value` equals and finally what we want to pass in.
+This format here is a bit harder to remember than just `data-controller`. But as
+you saw, if you have this Stimulus plugin for PhpStorm, it auto-completes it, which
+helps a lot.
+
+Let's do this. Edit this record, save and 1, 2, 3, 4, 5. Gone!
+
+## Auto-close Timer Bar
+
+What's next on our quest for an ultra rich toast? What a about a timer bar that
+shows when the toast will close? A little bar that animates smaller and smaller then
+finally disappears right as the toast auto-closes itself.
+
+That sounds cool! Here's the plan: we're going to add an element down here then
+animate its width from 100% to 0% over those 5 seconds. To be able to *find* that
+element, inside the controller, we're going to use a target. Add
+`static targets = ['timerbar']`.
+ 
+Then down in `connect()`, check for that: if `this.hasTimerbarTarget`, then
+`this.timerbarTarget.style.width = 0`.
+
+Assuming we've added a CSS transition to this element, that should animate the
+change from full width to 0. Oh, but one other detail: add a `setTimeout` and put
+this inside with a 10-millisecond delay.
+
+This will allow the element to *establish* itself on the page with a full 100% width,
+before changing it to 0. If you add or unhide an element and *immediately* change
+a CSS property on it - like its width - the CSS transition won't work. You need to
+let the property *be* on the page with 100% width for 1 animation frame, *then*
+change it. It's a tricky part of transitions.
+
+Ok, we're good here, so let's add the timer bar itself. At the bottom of
+`_flashes.html.twig`, I'll paste it in. This has an absolute position on the bottom,
+left of the parent with a height and green background. It also has an explicit
+width: that's the `w-full`. That's important for the transition.
+
+To make this a target, add `data-closeable-target="timerbar"`.
+
+Ok! Let's see what this looks like. Hit edit, save, and it opens... but no animation.
+Let's do some debugging! No errors in my console. Ah... here's the problem: I should
+have listened to my editor: `timerbarTarget`.
+
+Let's close this. Save and... *that's* what I want to see! And right as it gets to
+0, boop, it closes.
+
+Ok, I *love* how this is looking. But there's one last detail that I think our
+toast deserves: no matter how it closes, I want it to fade out instead of, boom,
+happening automatically.
+
+## CSS Transition on Close
+
+Fading things out is a bit tricky. You can use CSS transitions - and we will - to
+go from opacity 100 to 0. But then you also need some JavaScript to *wait* for that
+CSS transition to finish so that it can finally remove the element from the page
+or at least set its display to hidden.
+
+To help us with this, we're going to use a library called `stimulus-use`. Stimulus
+Components - as we saw earlier - are a list of reusable stimulus controllers.
+`stimulus-use` is a group of *behaviors* that you can add to your Stimulus
+controllers. And there's a lot of interesting stuff here.
+
+The one we're going to use is called `useTransition`. So step one, let's get this
+installed. Run:
+
+```terminal
+php bin/console importmap:require stimulus-use
+```
+
+Awesome! Then over in the controller, import that with
+`import { useTransition } from 'stimulus-use'`.
+
+The activate a behavior, you call the it from `connect()`: `useTransition(this)`
+then pass any options you need. I'll paste a few in.
+
+Here's what this means. While this element is "leaving" or hiding, the library will
+add these three classes to the element. That will establish that, in case any
+CSS properties change on this element, we *want* to have a 200 millisecond transition.
+The `leaveFrom` means that, at the moment it *starts* hiding, the library will give
+it this class: setting its opacity to 100. Then, one millisecond later, it will
+remove this class and add `opacity-0`. That change will trigger the 200 millisecond
+transition. Finally, `transitioned` true is a way for us to tell the library that
+we are *starting* in a visible state... because you can also use this library to
+start hidden and then transition *in* your element to visible.
+
+Now that we've initialized this behavior, our controller magically has two new
+methods: `leave` and `enter`. So down here in `close`, instead of removing the element
+ourselves, say `this.leave()`.
+
+Let's try this! Spin over, refresh, and save. Watch. Ah, it was quick, but that is
+*exactly* what we want to see! Our toast notification is polished and done.
+
+Tomorrow: we're going to explore the third and final part of Turbo: Streams. These
+are the Swiss army knife of Turbo and will let us solve a whole new set of problems.

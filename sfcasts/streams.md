@@ -1,5 +1,86 @@
-# Turbo Streams
+# Turbo Streams: Update any Element
 
-Coming soon...
+Today we're going to learn about the third and final part of Turbo: Turbo Streams.
+Streams will allow us to solve certain problems that we... just don't have a solution
+for yet.
 
-Today we're going to learn about the third and final part of Turbo, Turbo Streams. Streams will allow us to solve certain problems that we just don't have a solution for yet. For example, on the homepage we have this really nice data tables setup and we can even search into here. However, there's one teeny tiny not so great problem and that is when we type into this box, that number of results doesn't change. It's stuck at whatever it was on page load. That's because the Turbo Frame is around this table and so this is not inside the Turbo Frame. It's outside of the Turbo Frame. This is where Turbo Streams comes in. When you're dealing with a Turbo Frame and you need to update something outside of it, you need a stream. Streams have a really fancy name. They sound like they're doing something really, really cool, really, really crazy, but it's actually a very simple idea. A Turbo Stream is a custom HTML element. I could take this here, put this onto my page and what it would do is find the element on the page whose ID is messages and it would append this content. We have actions for everything inside of here. We could prepend, replace, update. We could use a Turbo Stream to make any change we want to any element on the page from anywhere. To prove this, I'm going to copy the Turbo Stream here that's an update and we're going to go over and inspect element on our Space Invaders name. I'm going to give this temporarily an ID called company name so we can target it. Cool. Now, anywhere else on the page, so how about down here in the footer, I'm going to say edit as HTML and I'm going to paste that Turbo Stream. In this case, we want the target to be company underscore name and inside the template element, let's say Space Invaders. Now, check this out. As soon as I click off here, this Turbo Stream custom element is going to become active and it's going to execute its action. Watch. Boom. It updated that element, found that element and updated it. If you look back on the footer, check out that Turbo Stream isn't even there anymore. So it renders, then it self-destructs and removes it from the page.  It's the most noble of custom elements. And even if it were on the page for a moment, remember all the Turbo Streams have a template element inside of it. We talked about the template element earlier in this series. When you have a template element on your page, anything inside of really isn't on your page at all. It's kind of hidden. It's just a hidden string. So even if this were on the page for a moment, it would be completely invisible to your user. So these just work awesome. All right, so let's use these to solve our problem. I'm going to go into the template for this, templates, main homepage.html twig and search for results. Here we go right here. So to target this, I'm going to give this an ID. How about voyage result count. And I'll copy that. Now on this page, when we're searching, it's actually this Turbo Frame, which is being loaded. So anywhere inside this Turbo Frame, I'm going to put it at the bottom. We can add a Turbo Stream. So we'll say Turbo dash Stream. Action equals replace. We'll replace that entire element. Target equals, and then I'll paste. Now don't forget, we need the template element in here. Always got to have that. And I'll just put a hard-coded message for now. So let me go over and refresh. Check it out. Immediately that Turbo Stream is on the page. It executes and it replaces the element with that custom content. Awesome. All right, so now let's actually put the real content on here. So we basically want to do is copy this entire div right here and paste it down here, except we don't want to do that, right? We don't want to repeat ourselves and duplicate code. So instead we're going to use a little trick with blocks. Surround this with a new block called ResultsCount. Then end block below it. In Twig, you're free to add blocks wherever you want. And if you do, they don't do anything out of the box. When this renders, it's going to see this block do nothing and just render this div like normal. But now because we've put this inside of a block, we can go down to the bottom inside of our Turbo Stream and we can say curly curly block ResultsCount.  All right, so watch this. Let me start by going to the homepage so we can actually get the full 30 results. And then as we type, ah, beautiful. You can see this updating as we go along. It works perfectly. And dang, that was really easy. Now one note I do want to make is that on initial page load, we're rendering the ResultCount here. And even though we can't see it, we're also rendering that same ResultCount down here inside of a Turbo Stream. So it's being rendered technically twice on the page. It's not actually a problem unless for some reason grabbing that ResultCount is a lot of work, but that's not usually something that happens. All right, tomorrow we're going to be doing a little bit more of this. We're going to be doing a little bit more of this. But that's not usually something that happens. All right, tomorrow we'll start building a reusable modal system that just absolutely rocks. I'm so excited. So see you tomorrow.
+For example, on the homepage we have this really nice data tables system. However,
+we have a teeny tiny problem: when we type into this box, that number of results
+doesn't change. It's stuck at whatever it was on page load. The Turbo Frame is around
+this *table*, so the result count is *outside* if it.
+
+This is where Turbo Streams comes in. When you're dealing with a Turbo Frame and
+you need to update something *outside* of it, you need a stream. Streams have a fancy
+name, but it's a simple idea. A Turbo Stream is actually custom HTML element. I could
+take this, put it onto my page and it would instantly *execute*. It would find the
+element on the page whose `id` is `messages` and append this content. And there are
+actions for everything: prepend, replace, update. We can use a Turbo Stream to
+make any change we want to any element on the page from anywhere. The power!
+
+## Adding a `<turbo-stream>` Right on the Page
+
+To prove this, copy the Turbo Stream that's an update. Back on our site, inpspect
+element on the Space Inviters name. Temporarily, give this an `id` called
+`company_name` so we can target it. Cool.
+
+Now, *anywhere* else on the page - so how about down here in the footer - edit as
+HTML and paste that Turbo Stream. In this case, we want the target to be `company_name`
+and inside the template element, say "Space Invaders". Now, check this out. As soon
+as I click out of this, the `<turbo-stream>` custom element will become active and
+it will execute its action. Watch. Boom. It found that element and updated it!
+
+If you look back on the footer, that `<turbo-stream>` isn't even there anymore.
+So it renders then self-destructs and removes itself from the page. It's the most
+noble of custom elements.
+
+And even if it *were* on the page for a moment, remember: all `<turbo-streams>` have
+a `template` element inside. We talked about the `template` HTML element on Day 11.
+Anything inside of a `<template>`... isn't *really* on the page at all: it's completely
+hidden an inactive. So even if this *were* on the page for a moment, it would be
+invisible.
+
+So streams *just* work.
+
+## Updating the Result Count with a Stream
+
+So let's use them to solve our problem! Open `templates/main/homepage.html.twig`
+and search for "results". Here's the element we need to update. To target this,
+give it an `id`: how about `voyage-result-count`.
+
+Copy that. When we search, it's actually this `<turbo-frame>` that's navigating.
+So *anywhere* inside this - I'll go to the bottom - we can add a `<turbo-stream>`.
+Say: `<turbo-stream action="replace"`, `target=""` and paste. Then add the
+`<template>` element - don't forget that - and I'll hard-code a message to start.
+
+Ok, watch what happens when I refresh. Boom! Because the `<turbo-stream>` element
+exists in page load, it immediately executes and it replaces the element with the
+custom content.
+
+## Replacing the Real Content with a Block
+
+So *now*... let's put in the *real* content. Essential,y we want to do copy this
+entire div... and paste it down here. Except we don't want  duplication!
+
+Instead we're going to use a trick with blocks. Surround the result count with a
+new block called `result_count`... then `endblock` below it. In Twig, you're free
+to add blocks wherever you want. When you do, they don't *do* anything immediately.
+When this renders, Twig will see this block.... ignore it... and then render
+the `div` like normal.
+
+But now, we can go down inside our `<turbo-stream>` and say
+`{{ block('result_count') }}`.
+
+I think we're ready! Start by going to the homepage so we see the full 30 results.
+And then as we type... ah, beautiful! The count updates as the results reload.
+Dang, that was easy!
+
+For those of you that are nerds for details, first, we love you, and second, yes,
+on page load, we're rendering the result count here... and, even though we can't
+see it, we're *also* rendering that same result count down here inside of the Turbo
+Stream. So it's being rendered twice on the page. That's not an *actual* problem,
+unless, for some reason, calculating the result count takes a lot of work. *If*
+you had that situation, you could set it to a Twig variable, then just render in
+both spots.
+
+All right, tomorrow we'll start into the biggest, boldest part of this entire series:
+building  a reusable modal system that just absolutely rocks. I'm so excited!

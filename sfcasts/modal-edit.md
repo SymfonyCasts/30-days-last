@@ -1,7 +1,170 @@
 # More with fun Modals! Editing & Deleting
 
-Coming soon...
+Welcome to day 23 - the grand finale in our modal system saga. Though, we will
+revisit it in a few days when we talk about Twig components.
 
-So if our new modal system is so reusable, we should be able to open the edit form in a modal really easily, right? Well, the only thing we need to do in edit.html.twig is opt into the modal system by changing modal-base.html.twig. And while I'm here, let's take out this extra margin. So we'll add modal-m0 and modal-p0. Cool. Next, we're going to make this edit link target the modal frame. So this lives in underscore row.html.twig. Here it is. I'll break this link onto multiple lines so we can see it better. And we'll add data turbo frame equals edit equals modal. All right, moment of truth. Refresh. And darn it, it just works. And if we save successfully, even that works. We get the toast. The modal closes. My goodness. This works because in Voyage Controller, the edit action, like the new action, redirects over to the index page. So that has an empty modal frame. So that closes the modal. Everything works beautifully. But I want to be tricky. Remember, the edit form now appears in two contexts, the modal, but also on a standalone page. What if when we're on this standalone page, on success, instead of redirecting to the index page, we actually want to redirect right back here so we can keep editing. So this is easy to do. Let's just change the route to app voyage edit. And then set ID to voyage arrow get ID. Awesome. So now if I save this, that works awesomely. But I bet you can guess weird things are going to happen over here. So when I edit, I hit save and nothing happens. The modal's still here and there's no toast notification. So I want to work on that missing toast notification first. Over in base.html twig, instead of our modal frame, we render the flash messages in a turbo stream. Well, the problem is in the edit page, when we redirect to the edit page, because it extends modal base.html twig, what's being returned on success is actually this turbo frame. And this turbo frame does not render these same streams. So we don't see the flash message. So it turns out that these lines here, we should really put these inside any turbo frame that might have a form in it. Form in it.  So to help that, I'm going to copy this and inside the templates directory, create a new file called underscore frame success stream.html.twig. And I'm going to paste that. Cool. Now, before I go start using this, I'm going to add one other little detail here. An if statement that says if app.request.headers.get turbo frame equals a new frame variable, then we're going to render this. Else, we're not going to. So the reason I have this is that the reason we're adding this is if we, for example, have multiple turbo frames on the page that all include this partial, whichever one is rendered first is going to render all of the flash messages. We don't want that. So in case there's a turbo frame up here that includes a partial, we're only going to render anything in here if that frame is the current frame. So watch how we use this. Down here, I'll delete those and we'll say curly curly include underscore frame success stream.html.twig. And then we'll pass frame set to modal. So only if we are actually submitting inside of the modal frame will we go and render the success stream messages right here. Because if we're not, we want to leave those stream messages for whatever part of our page, whatever frame in our page is actually being used right now. So I'll copy this and let's go into modal.frame.html.twig. And I'm going to paste it there as well. So if we go over here, I'll refresh, I'll hit edit and save. The modal stays open, but look back here, we can see the turbo, we can see the toast. So yay. Now about this, so how do we close this modal? Now, again, when we start loading a form inside of a frame, when we start loading a form inside of a modal, our symphony controller, let me close a few things, might not need to change. Might not need to change. Flash messages work. And depending on where you redirect to, the modal might even close. But this is an example of asking yourself, where is my form going to be used? And in the context of a modal right now, it's not working correctly. And that's okay. This is one of those extra changes we're going to make.  So check this out. In new.html.twig, let's steal the stream success from the bottom. And in edit.html.twig, we will paste that. What we want to do in this case is update the turbo frame ID equals modal to empty its content so that the modal will close. So we can do that by saying action equals update and then target equals modal. And then in the template, we will update it with nothing. Now in our controller to kind of add that extra stuff, we'll copy the if statement from our new action down here, right before we set the flash. We'll paste that, change the template to edit.html.twig and we should be good. So this time when we hit edit, when we hit save, that is going to redirect back to the edit page and that is going to have a modal frame with this content. But because of that extra stream, the modal will immediately be emptied and it should close. So watch.
+So if our new modal system is as reusable as I've promised, we should be able to
+easily open the edit form in a modal too, right?
 
-It doesn't close, so let me go look at my stream here, make sure I have everything correct. And ah, here's the problem. When you target, you use a CSS selector, when it's target, it's just the ID. So this turbo stream wasn't matching anything, it wasn't doing anything, so let's try it again. And got it. Now, speaking of our controller doing extras, a really cool thing here would be that when we make a change to this form, it automatically updates this row right here. So cool, we can totally do that. First, to target this in underscore row dot h to my twig, let's add an ID, we'll call it voyage list item dash, and then curly, curly voyage list item dash. Voyage dot ID. Perfect. And I'll copy that, and we'll head over to edit dot h to my twig, and we'll just add one more turbo stream here. Turbo stream action equals replace, and then target equals voyage list item voyage ID, and we'll do our template, and inside we can just call that voyage slash underscore row dot h to my twig. So this is where things really start to shine, because I can edit this, remove those exclamation points, and the page updates instantly. All right, the last thing I wanna talk about here is this delete. It actually works, it almost works perfectly. When I hit delete, look, the modal closes, we get the flash message. And the reason is, like our other actions, after delete happens, it redirects back to our index page, the empty modal frame over there closes it, the flash message works, it's all great, except for one small detail. The item on the row is still there until we refresh. Now we actually have two options here. First, I wanna point out that the delete button is actually a form that submits, and the only reason this is submitting inside of a TurboFrame is because we're inside of the modal. But the delete action doesn't really need to submit inside the frame. It's not like we're gonna get validation errors that we need to reload inside of this modal. So the easiest option is to go into the delete form and add a data TurboFrame equals underscore top. So this is gonna work really nicely.  We can hit edit, we can hit delete, and it's just a full page reload, full page navigation, which is great. Now, if you wanna get really technical about how smooth it is, if you scroll down a little bit and delete one, it's gonna scroll back up to the top because it's a full navigation. So if you wanna make it really, really shine, you can. We can remove that data TurboFrame equals top. And now, like any other form that exists in the TurboFrame, we need to ask, where is this form being used and what do I need to update to make the page really, really nice? In this case, we need to remove the row. So this is another extra thing we're gonna do after we handle this form submit. So inside of edit.html twig, let's steal this stream success. And then we're gonna create a new template here called delete.html twig. Now, delete doesn't normally have its own templates, and we're just gonna use this for the stream success. And what we'll use is this one. We'll change action equals remove and target equals voyage list item dash. And here, just use an ID variable. And for the template, we don't even need that. This is just going to remove that element. Now, inside of VoyageController, scroll up. Let's steal our if statement and down in delete, let's paste that. And in this case, change the template to delete. And in this case, we're gonna pass an ID variable and set that to ID. We can't use voyage arrow get ID here because it'll already be empty because we deleted it. So instead, pass an ID here. And then right before we delete it, we'll say ID equals voyage arrow get ID. All right, this time, I'm gonna scroll way down here. Let's delete ID 22. Watch. Boom. The row is gone, we get the toast notification, but it doesn't move around all over the place. All right, wow, what a few days. Tomorrow, we're gonna take it a little bit easier and learn one other way we can use TurboStreams in situations where we need ultimate control. See you then.
+## Opening the Edit Form in a Modal
+
+To opt into the modal system, the only thing we need to change - in
+`edit.html.twig` - is to extend `modalBase.html.twig`. And while we're here,
+take out the extra padding with `modal:m-0` and `modal:p-0`.
+
+Next, make the edit link *target* the `modal` frame. This lives in `_row.html.twig`.
+I'll break this onto multiple lines.... then add `data-turbo-frame="modal"`.
+
+Moment of truth. Refresh. And... darn it! It just works! Even if we save successfully,
+*that* works. We get the toast, the modal closes, my goodness!
+
+This works because, in `VoyageController`, the `edit` action, like `new`, redirects
+to the `index` page. That has an empty modal frame, so the modal closes.
+
+## When the Modal Doesn't Close
+
+But... I want to be tricky. The edit form now appears in two contexts, the modal,
+but also on its standalone page. What if, when we're on this page, on
+success, we want to redirect right back here so we can keep editing.
+
+Easy! Change the route to `app_voyage_edit` and set `id` to `$voyage->getId()`.
+
+Cool. Now when we save, it works! But... how did that affect the form in the
+modal? When we edit and save... nothing happens. The modal is still here and
+no toast notification.
+
+## Rendering the "Frame Streams" in all Frames
+
+Let's work on the missing toast notification first. In `base.html.twig`,
+inside of the `modal` frame, we render the flash messages in a `<turbo-stream>`.
+The problem is... when we redirect to the edit page, because it extends
+`modalBase.html.twig`, the frame that's returned is *this* one. And this
+`<turbo-frame>` does *not* render these streams.
+
+It turns out, these lines should really live inside *any* `<turbo-frame>` that
+might be rendered after a form submit.
+
+To help with that, copy this and, inside the `templates/` directory, create a new
+file called `_frameSuccessStream.html.twig`. Paste inside. But before we use
+this, I want to add one other detail: if
+`app.request.headers.get('turbo-frame')` equals a new `frame` variable, then
+render this, else, do nothing.
+
+I'm coding for an edge-case, so let me explain. Imagine we have *two*
+`<turbo-frame>` elements on the same page: `id="login"` and
+`id="registration"`. And they both include this partial. In this case,
+the `<turbo-frame id="login">` would always render the flash messages...
+leaving nothing for the poor `registration` frame. And so, when we *are* submitting
+inside the `registration` Turbo Frame... we wouldn't see the toast notifications.
+
+To fix this, when we use this partial - `include('_frameSuccessStream.html.twig')` -
+pass the name of the frame you're inside: `modal`. That way, if the current
+frame is something *else*, this won't eat the flash messages.
+
+Copy this, and in `modalFrame.html.twig`, paste that here too.
+
+Let's do this! Refresh, Edit... and save. The modal still stays open, but look back
+there: we see the toast!
+
+## Closing the Modal when it wants to stay open
+
+Now: how can we close this pesky modal. When we put a form inside a frame, our Symfony
+controller might not need to change. Flash messages will work and, depending on where
+you redirect, the modal might even close.
+
+But you *do* need to ask yourself: where are all the places my form will be used?
+And: am I returning the right response for each situation? Right now, in the modal
+situation, our response *isn't* what we want: it *doesn't* cause the modal to close.
+
+And that's okay! Remember: in addition to letting the Turbo frame update with the
+content after the redirect, we can *also* use streams to do anything extra.
+
+In `new.html.twig`, steal the `stream_success` from the bottom. In `edit.html.twig`,
+paste. This time, we want to update the `<turbo-frame id="modal">` element to *empty*
+its content so the modal will close. Do that with `action="update"`,
+`target="modal"`, and set the `<template>` to nothing.
+
+In the controller, to add the "extra stuff", copy the if statement from
+`new`... paste it down here, change the template to `edit.html.twig` and... we should
+be good!
+
+Ok, hit "Edit" and save. Hmm, I saw the toast, but the modal didn't close. Let me
+look at the stream to make sure I have everything. Ah! With `targets`, you use
+a CSS selector. But with `target`, it's just the id. So the Turbo Stream was
+executing... but wasn't matching anything.
+
+Let's try that again. When we hit save, that will redirect back to the edit page,
+and that *is* going have a `<turbo-frame id="modal">` *with* content:
+it *won't* be empty. But then, our *stream* should empty it and the modal should
+close.
+
+And... gorgeous!
+
+## Updating the Row in Edit
+
+Can I add one last polishing detail to edit? It would be *so* cool if, when
+we change a voyage, it updated the row instantly. This is another "extra",
+and... it's going to be easy.
+
+First, to target this, in `_row.html.twig`, add an `id`:
+`voyage-list-item-` `{{ voyage.id }}`.
+
+Copy that, head over to `edit.html.twig` and add one more Turbo Stream:
+`action="replace"` and `target="voyage-list-item-"` `voyage.id`. Add the
+`<template>` and then include `voyage/_row.html.twig`.
+
+This is where things *really* start to shine. Edit, remove those exclamation
+points and... the page updates instantly. Our edit modal - even with all the
+complications I threw in - is done!
+
+## Handling Delete
+
+With our last 3 minutes, let's make sure the "delete" button is working. Oh...
+it is! The modal closes and the toast renders! Like the other actions, after
+deleting, it redirects to the `index` page and the empty `modal` frame
+closes the modal. It's brilliant!
+
+Except... that the row I deleted is *still* there until we refresh.
+
+But hold up. The delete button is a form that submits. And the only reason this
+submits into a `<turbo-frame>` is because it happens to live inside the modal frame.
+
+But the delete action doesn't *need* to submit into a frame. We're never going
+to click "Delete" then want to *show* something in the modal. A full page
+navigation would be *fine*.
+
+To do that, in `_delete_form.html.twig`, on the frame, add `target="_top"`.
+
+Now, edit, delete, and... the redirect causes a full page navigation, which
+is *fine*.
+
+## Extra-Fancy Delete
+
+Though, yes, it *could* be smoother. Scroll down a bit...
+and delete one. The page scrolls back to the top.
+
+Like with anything, if this is important to us, we can improve it. Remove
+the `target="_top"`.
+
+When a form - even our delete form - exists inside a `<turbo-frame>`, we need to
+ask: where is this being used and what do I need to update to make the page
+*perfect* after success? In this case, we need to remove the row. So we need to do
+something *extra*, outside the frame. And we know how to do that!
+
+In `edit.html.twig`, steal the `stream_success` block. Then create a new template
+called `delete.html.twig`. Delete doesn't normally have its own template... and we're
+going to use this just for the `stream_success`. Use this one,
+change `action` to `remove` and `target` `voyage-list-item-` but just
+use an `id` variable. And for remove, we don't need the `<template>` at all.
+
+In `VoyageController`, scroll up, steal the if statement.... and down in delete,
+paste that. Change the template to `delete.html.twig` and pass an `id` variable
+set to `$id`. We can't use `$voyage->getId()` because it'll already be empty since
+we deleted it. Instead, pass `$id`... and before we delete, set that:
+`$id = $voyage->getId()`.
+
+Let's do this! Scroll way down here and delete ID 22. Watch. Boom. The row
+is gone, we get the toast notification and the page doesn't budge.
+
+Ok, the last few days have been... wow. Tomorrow, we're going to take it easier
+and learn one other way we can use Turbo Streams. See you then!

@@ -1,5 +1,135 @@
 # Fancy things on Modal Form Success
 
-Coming soon...
+We have been busy. We've cooked up a reusable AJAX-powered modal system that I
+*love*. Submitting with validation errors already works. And success? It's
+nearly there. We when save... no toast notification, but the modal *did* close.
 
-We have been busy. We now have a reusable AJAX-powered killer modal system. Submitting with validation errors already works, and even success almost works. We fill in some details here and hit save. No toast notification, but the modal did close. And the reason it closed is really important. For in our new action, we redirect to the home page, we redirect to the index page. Now the index page extends the normal base.html.twig. So it does have a TurboFrame ID equals modal on it, but it's this empty one. So this means that the TurboFrame becomes empty. And what happens when our TurboFrame becomes empty? That triggers the modal to close. Now in general, when you add a TurboFrame around something, like on the home page with our planets, we need to think about where any of these links lead to. We need to make sure they lead to a page that has a matching TurboFrame. When we talk about a form inside of a TurboFrame, we need to think about what happens on submit. Now the error case is easy. It always renders the same page that has the same frame with the errors inside. But for success, it means we need to think about where the form is redirecting to and asking, does that have a matching TurboFrame and does it contain the right content? In the case of our modal and the index page, this is working perfectly. Okay, but what about our toast notification on success? This is a case where we need to update the TurboFrame to empty it, but we also need to trigger a toast notification. This is a super common need when a form submits inside a TurboFrame. So we're going to solve this in kind of a cool way. We know that when we redirect, this TurboFrame here is what is ultimately loaded on the page causing the modal to close. Inside of here, I'm going to add a TurboStream with action equals append and target equals flash container. Now a few days ago when we added our cool toast system, we added an ID with flash-container. We didn't need that then, but now it's going to come in handy because we can target that to add flash messages into that spot.  So inside of here, I'm going to add the template tag, of course, and then curly curly include underscore flashes.html twig. This will render the flash messages and then this should append them into that container. So I'll refresh, try this, fill out a new voyage and submit, and absolutely nothing happens. The problem is that when we redirect to the index page, the entire index page is rendered. So this, the entire index page is actually rendered by the server, even if only the TurboFrame content is going to be used by Turbo. This means that right before we render this code here, our flash container renders the flash messages, which removes them from the flash. So these flashes are contained in the HTML, the AJAX call, but then they're not used because they're not inside of our TurboFrame. So the fix for this, just to make sure your flash container is after this. And if you're thinking, yes, this can cause the opposite problem of them being used up here and then not being available down here, you're right. Stay tuned. We will fix that. But right now I'll refresh the page and hit save. Got it. Modal closes still, but that TurboStream causes the toast to show up there. And if you're wondering why the modal closed, it's actually really cool. So at the bottom of the page, if I find our TurboFrame, it's empty. So when we redirected, it actually added this content right here to the TurboFrame. So it wasn't empty. But remember, TurboStreams, as soon as they activate, they execute themselves and then they disappear. So as soon as this executes itself and disappears, the TurboFrame is empty. The empty TurboFrame closes the modal. So a lot of really nice teamwork happening. So what's really cool about this is it's working perfectly and we haven't needed to make any changes to our new controller. So now we get to think about any optional extra behavior that we might want to add. For example, could we prepend the table with a new element? Because right now we don't see it until after we refresh. Let's try it. So first in index.html twig, find the table. And what we need to do is prepend this T body right here.  So on the table, I'm going to add an ID called voyage list so we can target that. Now ultimately, this is yet another case where we need to update something outside of our TurboFrame. So we're going to do it with a TurboStream and we're going to do it in kind of a cool way. So open new.html.twig and after block body, we're going to add a new block called stream success and then end block. Instead of here, we're going to add any TurboStreams that we need, any extra TurboStreams that we need to make the new submit really shine. So let's add a TurboStream action equals prepend. And then I'm going to say targets equals, I added an S here, which means I can now use a CSS selector. I'll use pound sign voyage list T body. Cool. Then don't forget the template element. And then for now, I'm just going to add a TR, TD, and we'll say curly curly voyage.purpose. At this point, this is just a block in our template and no one is using it anywhere. So how are we going to use it? Once out of our voyage controller, we somehow want to send that stream to the next page, but we're redirecting to the next page right now. So how do we do that? The system I've come up with is storing that content in a special flash message. Now first thing, we only need to worry about this special stream updating stuff when we're submitting inside of a TurboFrame. So if we went to the new voyage page, which doesn't have a frame and submitted successfully, we don't need the TurboStream stuff there. This is going to be a normal page. It's going to redirect normally. Everything's going to be nice and simple. So over here, I'm going to start with an if statement that says if request arrow headers arrow has TurboFrame. So if this form submit is happening inside of a TurboFrame, then we need to set some extra stream details. So we're going to do this by saying stream equals, and we're going to use a function that you've maybe never used before called render block view. Pass this voyage slash new dot html twig. But instead of running the entire template, we're going to render a single block called stream success.  And actually I think I'm missing an S in there. I am. Perfect. All right. So we need to pass this a voyage variable. Cool. So at this point we have the TurboStream right here. I'm going to pass it to the next page by adding a special new flash called stream. Finally, when we redirect to the index page and this TurboFrame is rendered right here, we can render those TurboStreams. So I'm going to say for stream in app dot flashes stream and for, and then we'll say curly curly stream and then pipe to raw so that this actually renders the HTML elements. Phew. So check this out. Let me refresh the page here. Let's go to new. Let's beg with this to work and it does redirects to the index page. That TurboFrame temporarily has those TurboStreams which prepend to the table. All right. So last step, let's put some real content here. So what we want is this tr right here. So to get that inside of new dot html twig, we need to isolate it into its own template. So I'm going to copy that and delete it and instead say include voyage slash underscore row dot html dot twig. Let's go create that template, new file, underscore row dot html dot twig, and we'll paste that in there. Cool. I will close that new template and we'll copy the include statement and a new, very simply, we'll just include that. All right. Let's try this. Create one more voyage here and got it. Modal closes, toast notification. The page updates. It's everything that I want. All right. Tomorrow we're going to put our new modal system to the test by opening the edit link inside of a modal. I'm also going to, we're also going to throw a couple of curve balls to make sure our system is really, really solid.
+The reason it closed is important. In the `new()` action, we redirect to the
+index page. That page extends the normal `base.html.twig`... so it *does* have a
+`<turbo-frame id="modal">` on it... but it's this empty one. This means the
+modal frame becomes empty, our modal Stimulus controller notices that then
+closes it.
+
+## Planning: When Forms are in Frames
+
+In general, when you add a `<turbo-frame>` around something - like on the homepage
+with our planets sidebar - you need to think about where the links inside point to.
+We need to make sure each goes to a page that has a matching `<turbo-frame>`.
+
+When a *form* lives inside a `<turbo-frame>`, we need to think about what happens
+on *submit*. The error case is easy: it always renders the same page that has
+the same frame with the errors inside. But on success, we need to think about where
+the form redirects to and ask: does that page have a matching `<turbo-frame>` and
+does it contain the right content?
+
+In the case of this modal and the index page, it's perfect: there *is* a
+matching frame, it's empty and the modal closes.
+
+## Rendering Success Flashes with a Turbo Streams
+
+Ok, back to the missing toast notification! This is a situation where we need
+to update the `<turbo-frame>` - to empty it - and we *also* need to update another
+area on the page: we need to render the success flash messages into the flash
+container.
+
+This is a super common need when a form submits inside a `<turbo-frame>`. So we're
+going to solve this, I think, in a cool and global way. When we redirect on success,
+this `<turbo-frame>` is ultimately loaded on the page, which causes the modal to
+close. Inside it, add a `<turbo-stream>` with `action="append"` and
+`target="flash-container"`.
+
+When we added the toast system, we added an element with
+`id="flash-container`. We didn't need that then, but now it's going to come in handy
+because we can target that to add flash messages into it. 
+
+Inside the stream, add the `template` tag, of course, then
+`{{ include('_flashes.html.twig') }}`.
+
+This will render the flash messages... and the stream will append them into that
+container.
+
+Let's try it! Fill out a new voyage, submit and... absolutely nothing happens.
+The problem... is subtle. When we redirect to the index page, Symfony renders that
+entire page... even though Turbo will only use the `<turbo-frame id="modal">`.
+This means that, right before we render this code, our flash container renders the
+flash messages... which *removes* them from the flash system. So the flashes
+messages *are* in the HTML that we return from the Ajax call... but because they're
+not inside the `<turbo-frame>`, they don't make it onto the page.
+
+The fix is easy: make sure your flash container is *after* the modal.
+
+Give this a go. Refresh... and fill in the form. Got it! The Modal closes, then
+the `<turbo-stream>` triggers the toast!
+
+And this is really neat! When we redirect, the `<turbo-frame>` is now *not* empty:
+it contains the flash `<turbo-stream>`. But remember: as soon as a `<turbo-stream>`
+activates, it executes itself and then disappears. Once that happens, the
+`<turbo-frame>` becomes empty and the modal closes. I really dig that.
+
+## Stream Extras: Prepending the Table
+
+What I love about the modal system is that it works... and we haven't needed
+to make any changes to our controller. But now, we get to think about any optional
+*extra* behavior that we might want.
+
+For example, could we prepend the table with the new voyage? Because, right now we
+don't see it until after we refresh. Let's try!
+
+In `index.html.twig`, find the `table`. We need to prepend into the `tbody`.
+To target this, on the `table`, add an `id="voyage-list"`.
+
+Let's think: this is another case where we need to update something that lives
+outside the `<turbo-frame>`. So, we need a stream.
+
+Open `new.html.twig` and after the `body` block, add a new block called `stream_success`,
+then `endblock`. Inside, we'll add any Turbo streams we need to make the submit
+*really* shine. Add a `<turbo-stream>` `action="prepend"` then `targets=""`. The
+"s" on targets means we can use a CSS selector: `#voyage-list tbody`. Add the
+`<template>` element... and, for now, a `<tr><td>` `{{ voyage.purpose }}`.
+
+Ok, so we have a new block in our template... that nobody is using. Somehow,
+we need to grab this Turbo stream... and, after the redirect, render it on the
+*next* page in the modal `<turbo-frame>`.
+
+How do we do that? We have two options - and I'll show the second on Day 24. But
+here's the system I like.
+
+First, we only need to worry about prepending the table row when we're submitting
+inside a `<turbo-frame>`. If we went to the new voyage page directly - which
+doesn't have a frame - and submitted, we wouldn't need any Turbo Stream stuff. This
+would navigate the full page and render normally. Nice & simple.
+
+So, in the controller, start with if `$request->headers->has('turbo-frame')`. So
+if this form submit is happening inside a `<turbo-frame>`, then we want to
+use our stream. Render that block with `$stream` equals then a relatively new
+controller method: `$this->renderBlockView()` passing `voyage/new.html.twig`.
+Instead of rendering the entire template, to render a single block pass this,
+you guessed it, `stream_success`. Actually... I think I'm missing an "s". I am!
+Better.
+
+Pass the template a `voyage` variable.
+
+To pass the `<turbo-stream>` string to the next page add it to a new flash called
+`stream`. Finally, when we redirect to the index page and this `<turbo-frame>` is
+rendered, *output* that flash: `for stream in app.flashes('stream')`, `endfor`
+with `{{ stream|raw }}` so it renders the raw HTML elements.
+
+I think we're ready! Refresh... add a new voyage and... that's incredible! 
+The Ajax call redirected to the index page, where the modal frame had 2 Turbo
+streams: one to render the toast and the other to prepend the table.
+
+## Prepending with Real Content
+
+Last step, prepend the real content. What we want is this `tr`. To get that
+from inside of `new.html.twig`, we need to isolate it into its own template. Copy
+that, delete it, then include `voyage/_row.html.twig`. Go create that template...
+then paste. Easy.
+
+Copy the `include` statement and, in `new.html.twig`, use that for the stream.
+
+Let's try this! Create another voyage and... beautiful! Modal closes, toast notification
+renders & the page updates. It's everything we want.
+
+Tomorrow we're going to put our new modal system to the test by opening the edit
+link inside a modal. I promised it would be reusable, and tomorrow we'll prove it...
+with a few curve balls to make it more realistic.

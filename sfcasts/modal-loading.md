@@ -1,4 +1,4 @@
-# Fantastic Model UX with a Loading State
+# Fantastic Modal UX with a Loading State
 
 Let's pick up where we left off yesterday. The Ajax-powered modal loads!
 Try to submit it. Uh oh - something went wrong. It went to some page that didn't

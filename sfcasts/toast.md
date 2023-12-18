@@ -34,6 +34,12 @@ To make this look nicer, let's take a trip to Flowbite. Search for "toast". Ah,
 this has some great examples for different styles of toast notifications. This
 has me feeling dangerous!
 
+***TIP
+I also recommend adding a `data-turbo-temporary` attribute to the root `<div>`.
+This will remove the flash message before Turbo takes its "snapshot" for caching,
+This means that if the user clicks "Back" to a page, the toast won't still be visible.
+***
+
 Back in `_flashes.html.twig`, I'll paste in some content. This is heavily inspired
 by the Flowbite examples. But nothing really changed: we're still looping over the
 same collection and still dumping out the message. We've just got nice markup around

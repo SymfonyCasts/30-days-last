@@ -13,14 +13,20 @@ my shoes for me.
 On our CRUD controllers, I'm already setting a `success` flash message... but I'm
 not rendering it anywhere. In the `templates/` directory, create a new `_flashes.html.twig`.
 To start, just loop over the success messages with `for message in`
-`app.flashes('success')`... and `endfor`.
+`app.flashes('success')`... and `endfor`:
+
+[[[ code('fadbbb1e82') ]]]
 
 Inside, I'll paste a very simple flash message, which will start fixed to the bottom
-of the page.
+of the page:
+
+[[[ code('e70f4d936d') ]]]
 
 Next, in `base.html.twig`, instead of rendering the flashes somewhere near the top
 of the body, put them at the bottom. Say `<div id="flash-container">` then
-`{{ include('_flashes.html.twig') }}`.
+`{{ include('_flashes.html.twig') }}`:
+
+[[[ code('4e0a07ea03') ]]]
 
 The `id="flash-container"` isn't important yet, but it *will* be useful later when
 we talk about Turbo streams.
@@ -40,10 +46,13 @@ This will remove the flash message before Turbo takes its "snapshot" for caching
 This means that if the user clicks "Back" to a page, the toast won't still be visible.
 ***
 
-Back in `_flashes.html.twig`, I'll paste in some content. This is heavily inspired
-by the Flowbite examples. But nothing really changed: we're still looping over the
-same collection and still dumping out the message. We've just got nice markup around
-this.
+Back in `_flashes.html.twig`, I'll paste in some content:
+
+[[[ code('39f4c48711') ]]]
+
+This is heavily inspired by the Flowbite examples. But nothing really changed:
+we're still looping over the same collection and still dumping out the message.
+We've just got nice markup around this.
 
 And I can't want to see it! I'll go to edit and "Save". Oh, that is wonderful!
 In the upper right where I want it and all done with CSS.
@@ -57,11 +66,15 @@ can do that.
 In `assets/controller/`, add a new `closeable_controller.js`. I'll cheat and
 grab the code from another controller... clear it out... then add a `close()` method.
 When this is called, it'll remove the entire element that the controller is attached
-to.
+to:
+
+[[[ code('d7906bc655') ]]]
 
 To use this, in `_flashes.html.twig`, attach the controller to the top level element
 because that's what should be removed on close. Then, down on the button, say
-`data-action="closeable#close"`.
+`data-action="closeable#close"`:
+
+[[[ code('035447cbfc') ]]]
 
 We don't need the `click` because this is a `button`, so Stimulus already knows that
 we want this to trigger on the `click` event.

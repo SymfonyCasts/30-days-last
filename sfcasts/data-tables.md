@@ -86,6 +86,11 @@ and blur *transition* instead of happening abruptly:
 
 [[[ code('f15c734c69') ]]]
 
+***TIP
+For an even nicer effect, tou can also only change the opacity & blur only if loading
+takes longer than, for example, 700 ms. Do that by adding an `aria-busy:delay-700` class.
+***
+
 Refresh that and watch. Oh, that's lovely! And it all happens thanks to 3 CSS classes.
 And, though I love watching that, in `MainController`, remove the sleep.
 

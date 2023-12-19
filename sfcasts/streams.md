@@ -24,7 +24,7 @@ element on the "Space Inviters" name. Temporarily, give this an `id` called
 
 Now, *anywhere* else on the page - so how about down here in the footer - edit as
 HTML and paste that Turbo Stream. In this case, we want the target to be `company_name`
-and inside the template element, say "Space Invaders". Now, check this out. As soon
+and inside the template element, say "Space Invaders!". Now, check this out. As soon
 as I click out of this, the `<turbo-stream>` custom element will become active and
 will execute its action. Watch. Boom! It found that element and updated it!
 
@@ -44,12 +44,16 @@ Streams *just* work.
 
 So let's use them to solve our problem! Open `templates/main/homepage.html.twig`
 and search for "results". Here's the element we need to update. To target this,
-give it an `id`: how about `voyage-result-count`.
+give it an `id`: how about `voyage-result-count`:
+
+[[[ code('60d7223411') ]]]
 
 Copy that. When we search on the page, it's actually this `<turbo-frame>` that's navigating.
 So *anywhere* inside this - I'll go to the bottom - we can add a `<turbo-stream>`.
 Say: `<turbo-stream action="replace"`, `target=""` and paste. Then add the
-`<template>` element - don't forget that - and I'll hard-code a message to start.
+`<template>` element - don't forget that - and I'll hard-code a message to start:
+
+[[[ code('b21ba69993') ]]]
 
 Ok, watch what happens when I refresh. Boom! Because the `<turbo-stream>` element
 exists on page load, it immediately executes and replaces the element with the
@@ -62,13 +66,17 @@ entire div... and paste it down here. Except... without *actually* duplicating
 this.
 
 To do this, we'll use a trick with Twig blocks. Surround the result count with a
-new block called `result_count`... then `endblock` below. In Twig, you're free
-to add blocks wherever you want. When you do, they don't *do* anything immediately.
-When this renders, Twig will see this block.... ignore it... and render
-the `div` like normal.
+new block called `result_count`... then `endblock` below:
 
-But now, we can go down inside our `<turbo-stream>` and say
-`{{ block('result_count') }}`.
+[[[ code('968975b906') ]]]
+
+In Twig, you're free to add blocks wherever you want. When you do, they don't *do*
+anything immediately. When this renders, Twig will see this block.... ignore it...
+and render the `div` like normal.
+
+But now, we can go down inside our `<turbo-stream>` and say `{{ block('result_count') }}`:
+
+[[[ code('9c0f279769') ]]]
 
 I think we're ready! Start by going to the homepage so we see the full 30 results.
 And then as we type... ah, beautiful! The count updates as the results reload.

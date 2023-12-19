@@ -85,6 +85,11 @@ We're nearly there to making this perfect, but I'm not satisfied! While we still
 have the `sleep`, submit the form. Nothing happens! There's no feedback while that's
 loading.
 
+***TIP
+For an even nicer effect, you can also change the opacity only if loading
+takes longer than, for example, 700ms. Do that by adding an `aria-busy:delay-700` class.
+***
+
 Lucky for us, we've been down this road before with a different Turbo frame. Add class
 `aria-busy:opacity-50`, and `transition-opacity`.
 

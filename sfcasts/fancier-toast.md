@@ -16,15 +16,21 @@ automatically.
 
 So, we need a way to *activate* the auto-close on a case-by-case basis. The way
 to pass info into a controller is via values. Add `static values` equals... and I'll
-invent a new one called `autoClose`, which will be a `Number`.
+invent a new one called `autoClose`, which will be a `Number`:
+
+[[[ code('bbcf9c83d0') ]]]
 
 Next, add a `connect()` method. The idea is that if we have `this.autoCloseValue` -
 that's how you reference that - then... that's actually perfect! We'll use
-`setTimeout` to close after that many milliseconds.
+`setTimeout` to close after that many milliseconds:
+
+[[[ code('db78dbfca0') ]]]
 
 To finish, go to where we use this controller - `_flashes.html.twig` - to pass
 in the new `autoClose` value. We do that on the same element as the `data-controller`.
-Add `data-closeable-auto-close-value` equals and use 5,000 for 5 seconds.
+Add `data-closeable-auto-close-value` equals and use 5,000 for 5 seconds:
+
+[[[ code('5df4526859') ]]]
 
 The format is `data-` the name of the controller, `auto-close` - that's the name
 of the value `autoClose`... but because we're in an HTML attribute, we use the
@@ -44,14 +50,20 @@ then finally disappears right as the toast auto-closes itself.
 That sounds cool! Here's the plan: we're going to add an element down here then
 animate its width from 100% to 0% over those 5 seconds. To be able to *find* that
 element, inside the controller, we're going to use a target. Add
-`static targets = ['timerbar']`.
+`static targets = ['timerbar']`:
+
+[[[ code('b64b15424c') ]]]
  
 Then down in `connect()`, check for that: if `this.hasTimerbarTarget`, then
-`this.timerbarTarget.style.width = 0`.
+`this.timerbarTarget.style.width = 0`:
+
+[[[ code('d7c70f75e6') ]]]
 
 Assuming we've added a CSS transition to this element, that should animate the
 change from full width to 0. Oh, but one other detail: add a `setTimeout` and put
-this inside with a 10-millisecond delay.
+this inside with a 10-millisecond delay:
+
+[[[ code('5ebd443a54') ]]]
 
 This will allow the element to *establish* itself on the page with a full 100% width,
 before changing it to 0. This is a CSS transition trick. If you add or unhide an
@@ -60,11 +72,17 @@ You need to let the element *be* on the page with 100% width for 1 animation fra
 *then* change it.
 
 Alrighty, with the stage set, time to add the timer bar. At the bottom of
-`_flashes.html.twig`, I'll paste it in. This has an absolute position on the bottom,
-left of the parent with a height and green background. It also has an explicit
-width: that's the `w-full`. That's important for the transition.
+`_flashes.html.twig`, I'll paste it in:
 
-To make this a target, add `data-closeable-target="timerbar"`.
+[[[ code('bff9bcf2d7') ]]]
+
+This has an absolute position on the bottom, left of the parent with a height
+and green background. It also has an explicit width: that's the `w-full`.
+That's important for the transition.
+
+To make this a target, add `data-closeable-target="timerbar"`:
+
+[[[ code('cd17fc3623') ]]]
 
 Ok! Let's see what this looks like. Hit edit, save, and it opens... but no animation.
 Let's do some debugging! No errors in my console. Ah... here's the problem: I should
@@ -96,10 +114,14 @@ php bin/console importmap:require stimulus-use
 ```
 
 Awesome! Then over in the controller, import that with
-`import { useTransition } from 'stimulus-use'`.
+`import { useTransition } from 'stimulus-use'`:
+
+[[[ code('c3e59674a9') ]]]
 
 To activate a behavior, you call it from `connect()`: `useTransition(this)`
-then pass any options you need. I'll paste a few in.
+then pass any options you need. I'll paste a few in:
+
+[[[ code('ca0d28c8d8') ]]]
 
 Here's what this means. While this element is "leaving" or hiding, the library will
 add these three classes. This establishes that, in case any CSS properties change
@@ -113,11 +135,13 @@ start hidden and then transition *in* to make your element visible.
 
 Now that we've initialized the behavior, our controller magically has two new
 methods: `leave()` and `enter()`. Down here in `close()`, instead of removing
-the element ourselves, say `this.leave()`.
+the element ourselves, say `this.leave()`:
+
+[[[ code('eea4e4cc06') ]]]
 
 Let's try this! Spin over, refresh, and save. Watch. Ah, it was quick, but that is
 *exactly* what we wanted! Our toast notification is polished and done.
 
-Tomorrow's adventure: diving into the third and final part of Turbo: Streams.
+Tomorrow's adventure: diving into the third and final part of Turbo: *Streams*.
 These are the Swiss army knife of Turbo, and will let us solve a whole new set of
 problems.

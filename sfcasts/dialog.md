@@ -149,6 +149,12 @@ the `close()` method on our controller *was* called.
 
 ## Blurring the Background
 
+***TIP
+Thanks to help from Rob Meijer, you can do this in pure CSS. On the `<dialog>` element
+use `backdrop:bg-opacity-80` instead of `backdrop:opacity-80` then add `backdrop:backdrop-blur-sm`.
+No JS needed!
+***
+
 Ok, I'm excited. What else can we do? How about blurring the background? You
 might try to do this by blurring the backdrop. I *totally* tried that... but
 couldn't make it work. That's ok. What we *can* blur is the body. Add one more

@@ -22,6 +22,7 @@ chapters:
     - modal-loading
     - modal-success
     - modal-edit
+    - stream-response
     - twig-component
     - modal-component
     - live-components

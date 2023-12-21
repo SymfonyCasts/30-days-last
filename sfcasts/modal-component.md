@@ -13,7 +13,7 @@ paste somewhere else.
 Copy, then delete it. Let's craft a `Modal` component, this time by hand. Create
 a new file in `templates/components` called `Modal.html.twig`, and paste.
 
-As I mentioned with the `Button`, we don't *need* a PHP class for a component.
+Just like I said with the `Button`, we don't *need* a PHP class for a component.
 When you don't, we call it an "anonymous component". And they work great!
 
 On top, render `attributes`...  then add `.defaults()` so we can move these two
@@ -120,7 +120,7 @@ Cool, huh? Below, we want to make this min-width conditional. Say
 `md:min-w-[50%]`.
 
 Back on the page, the edit link still opens with half width... but that delete link,
-ah, it's nice and small. And it deserves some real content! In `_rowl.htm.twig`,
+ah, it's nice and small. And it deserves some real content! In `_row.html.twig`,
 after the `<h3>`, I'll add a bit of styling... then I want a cancel button that
 closes the modal. For that, we can go old-school. Add a `<form method="dialog">`,
 and inside a `<twig:Button>` that says Cancel. And I want the button to look like
@@ -188,7 +188,7 @@ make input check boxes. My Symfony controller is already set up to read the
 Final test. Open it up. Lovely! Now watch: click a few. When I press "See Results",
 the table should update. Boom. See that?
 
-But the coolest part is... how this worked! Think about it: I click this button...
+But the coolest part is... *how* this worked! Think about it: I click this button...
 and the table reloads. But... what's submitting the form to cause that? Look at
 the button: there's no code to submit the form. So what's going on?
 

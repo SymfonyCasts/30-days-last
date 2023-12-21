@@ -1,0 +1,268 @@
+WEBVTT
+
+00:00:01.096 --> 00:00:05.366 align:middle
+Vale, ¿cómo vamos a introducir CSS
+y JavaScript en nuestra aplicación?
+
+00:00:05.736 --> 00:00:09.316 align:middle
+¿Vamos a añadir un sistema de
+compilación como Vite o Webpack?
+
+00:00:09.656 --> 00:00:12.976 align:middle
+¡Pues no! ¡Esa es una de las
+cosas divertidas de todo esto!
+
+00:00:13.336 --> 00:00:16.976 align:middle
+Vamos a crear algo increíble sin
+ningún sistema de compilación.
+
+00:00:17.866 --> 00:00:21.916 align:middle
+Para ello, vamos a instalar un nuevo
+componente de Symfony llamado AssetMapper.
+
+00:00:22.566 --> 00:00:24.146 align:middle
+Dirígete a nuestro terminal y ejecuta:
+
+00:00:24.376 --> 00:00:31.616 align:middle
+composer require symfony/asset-mapper Esta
+es la nueva alternativa a Webpack Encore.
+
+00:00:32.016 --> 00:00:36.196 align:middle
+Puede hacer prácticamente todo lo
+que puede hacer Encore y más...
+
+00:00:36.426 --> 00:00:38.016 align:middle
+pero es mucho más sencillo.
+
+00:00:38.726 --> 00:00:41.136 align:middle
+Definitivamente deberías
+utilizarla en los nuevos proyectos.
+
+00:00:41.906 --> 00:00:47.236 align:middle
+Al Ejecuta: git status Vemos que su receta
+Flex ha realizado una serie de cambios.
+
+00:00:48.016 --> 00:00:54.496 align:middle
+Por ejemplo, .gitignore está ignorando un
+directorio public/assets/ y assets/vendor/:
+
+00:00:55.336 --> 00:00:56.976 align:middle
+Hablaremos más sobre ellos más adelante.
+
+00:00:57.256 --> 00:01:01.546 align:middle
+Pero en producción, aquí es
+donde se escribirán tus activos y,
+
+00:01:01.706 --> 00:01:04.386 align:middle
+cuando instalemos bibliotecas
+JavaScript de terceros,
+
+00:01:04.526 --> 00:01:06.456 align:middle
+vivirán en ese directorio vendor/.
+
+00:01:07.556 --> 00:01:12.466 align:middle
+También actualiza base.html.twig
+y añade un archivo importmap.php.
+
+00:01:13.156 --> 00:01:16.566 align:middle
+Pero déjalos en un segundo plano por
+ahora: hablaremos de ellos mañana.
+
+00:01:17.436 --> 00:01:20.886 align:middle
+Para la aventura de hoy, imagina
+que, cuando instalamos esto,
+
+00:01:21.236 --> 00:01:26.586 align:middle
+lo único que nos dio fue un nuevo archivo
+asset_mapper.yaml y un directorio assets/.
+
+00:01:27.386 --> 00:01:31.856 align:middle
+Vamos a ver ese archivo de configuración:
+config/packages/asset_mapper.yaml: La
+
+00:01:32.586 --> 00:01:39.876 align:middle
+idea detrás de AssetMapper no podría ser más
+sencilla: defines rutas -como el directorio assets/ -
+
+00:01:40.276 --> 00:01:45.016 align:middle
+y AssetMapper hace que todos los archivos que
+hay dentro estén disponibles públicamente...
+
+00:01:45.316 --> 00:01:48.206 align:middle
+como si vivieran en el directorio public/.
+
+00:01:49.456 --> 00:01:51.626 align:middle
+Veámoslo en acción tú.
+
+00:01:51.626 --> 00:01:55.196 align:middle
+Si te has descargado el código del curso,
+deberías tener un directorio tutorial/,
+
+00:01:55.366 --> 00:01:58.356 align:middle
+que he añadido para que podamos
+copiar algunas cosas de él.
+
+00:01:59.046 --> 00:02:00.566 align:middle
+Copia logo.png.
+
+00:02:01.186 --> 00:02:04.876 align:middle
+Dentro de assets/, podemos
+darle el aspecto que queramos.
+
+00:02:05.326 --> 00:02:08.946 align:middle
+Así que vamos a crear un nuevo directorio
+llamado images/ y a pegarlo dentro.
+
+00:02:10.126 --> 00:02:13.086 align:middle
+Como este nuevo archivo vive
+dentro del directorio assets/,
+
+00:02:13.236 --> 00:02:15.396 align:middle
+deberíamos poder referenciarlo públicamente.
+
+00:02:16.016 --> 00:02:19.966 align:middle
+Hagámoslo en nuestro diseño
+base: templates/base.html.twig.
+
+00:02:20.906 --> 00:02:27.056 align:middle
+En cualquier lugar, di <img src="">, {{
+y luego utiliza la función normal asset().
+
+00:02:27.986 --> 00:02:33.056 align:middle
+Como argumento, pasa la ruta
+relativa al directorio assets/.
+
+00:02:33.636 --> 00:02:40.466 align:middle
+Esto se llama la ruta lógica:
+images/logo.png: Antes de probar esto,
+
+00:02:40.826 --> 00:02:47.596 align:middle
+una forma fácil de ver todos los activos disponibles
+es mediante: php bin/console debug:asset Muy sencillo:
+
+00:02:47.826 --> 00:02:52.076 align:middle
+esto busca en todas tus rutas mapeadas
+-sólo assets/ para nosotros-,
+
+00:02:52.386 --> 00:02:56.316 align:middle
+encuentra cada archivo y luego
+los lista con su ruta lógica.
+
+00:02:56.706 --> 00:03:00.866 align:middle
+Así que puedo ser perezoso y
+copiar eso, pegarlo aquí....
+
+00:03:00.866 --> 00:03:06.306 align:middle
+y listo. Ahora bien, cuando
+probamos esto, ¡no funciona!
+
+00:03:07.066 --> 00:03:10.746 align:middle
+La función asset() sigue siendo un componente
+propio, así que vamos a instalarla:
+
+00:03:11.576 --> 00:03:16.126 align:middle
+composer require symfony/asset Y ahora....
+
+00:03:17.046 --> 00:03:17.826 align:middle
+¡un logo genial!
+
+00:03:18.616 --> 00:03:22.226 align:middle
+Para ver lo realmente chulo, inspecciona la
+imagen y fíjate en el nombre del archivo.
+
+00:03:22.786 --> 00:03:28.536 align:middle
+Es /assets/images/logo-
+y luego este largo hash.
+
+00:03:29.276 --> 00:03:31.676 align:middle
+Este hash procede del contenido del archivo.
+
+00:03:32.156 --> 00:03:37.076 align:middle
+Si actualizáramos logo.png, se
+generaría automáticamente un nuevo hash.
+
+00:03:37.466 --> 00:03:40.796 align:middle
+Y esto es muy importante por
+dos razones relacionadas.
+
+00:03:41.236 --> 00:03:47.176 align:middle
+Primero, porque cuando despleguemos, el nuevo nombre de archivo
+reventará la caché del navegador de nuestros usuarios para
+
+00:03:47.386 --> 00:03:49.516 align:middle
+que vean el nuevo archivo inmediatamente.
+
+00:03:50.186 --> 00:03:54.806 align:middle
+Y segundo, porque gracias a esto, podemos
+configurar nuestro servidor web de producción
+
+00:03:55.016 --> 00:03:59.306 align:middle
+para que sirva todos los activos con
+cabeceras de Expiración de larga duración.
+
+00:03:59.706 --> 00:04:02.836 align:middle
+Eso maximiza el almacenamiento
+en caché y el rendimiento.
+
+00:04:03.946 --> 00:04:08.526 align:middle
+Ahora, en el entorno dev, no hay ningún
+archivo físico con este nombre de archivo.
+
+00:04:08.906 --> 00:04:12.806 align:middle
+En su lugar, la petición de este
+activo se procesa a través de Symfony
+
+00:04:13.106 --> 00:04:15.456 align:middle
+y es interceptada por un oyente del núcleo.
+
+00:04:16.116 --> 00:04:17.666 align:middle
+Ese listener mira la URL,
+
+00:04:18.046 --> 00:04:23.596 align:middle
+encuentra el logo.png correspondiente dentro
+del directorio assets/images/ y lo devuelve.
+
+00:04:24.176 --> 00:04:27.166 align:middle
+Pero en producción, eso no
+es lo suficientemente rápido.
+
+00:04:27.736 --> 00:04:34.316 align:middle
+Así que, cuando despliegues, ejecuta: php
+bin/console asset-map:compile Muy sencillo:
+
+00:04:34.746 --> 00:04:38.706 align:middle
+esto escribe todos los archivos
+en el directorio public/assets/.
+
+00:04:39.416 --> 00:04:44.526 align:middle
+Mira: ¡en public/assets/, ahora
+tenemos archivos reales, físicos!
+
+00:04:45.106 --> 00:04:49.986 align:middle
+Así que cuando voy y actualizo, este archivo
+no está siendo procesado por Symfony, está
+
+00:04:50.256 --> 00:04:52.596 align:middle
+cargando uno de esos archivos reales.
+
+00:04:53.376 --> 00:04:57.936 align:middle
+Ahora bien, si alguna vez ejecutas este comando
+localmente, asegúrate de borrar ese directorio después...
+
+00:04:58.096 --> 00:05:01.666 align:middle
+para que deje de utilizar las
+versiones compiladas: ¡Vaya!
+
+00:05:01.666 --> 00:05:03.826 align:middle
+¡El día 2 ya está hecho!
+
+00:05:04.196 --> 00:05:10.766 align:middle
+Ahora tenemos una forma de servir imágenes, CSS o cualquier
+archivo públicamente con versionado automático de archivos.
+
+00:05:11.456 --> 00:05:15.046 align:middle
+La segunda parte de AssetMapper
+trata sobre los módulos JavaScript.
+
+00:05:15.376 --> 00:05:17.026 align:middle
+Y ese será el tema de mañana.

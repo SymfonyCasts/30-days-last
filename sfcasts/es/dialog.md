@@ -43,7 +43,7 @@ Dirígete a `assets/controllers/` y crea un nuevo archivo llamado `modal_control
 
 [[[ code('bf34ee43f4') ]]]
 
-Éste es otro superpoder del elemento `<dialog>`: ¡tiene un método `show()`! Integrada en el elemento `<dialog>` está esta idea central de mostrar y ocultar.
+Éste es otro superpoder del elemento `<dialog>` ¡tiene un método `show()`! Integrada en el elemento `<dialog>` está esta idea central de mostrar y ocultar.
 
 Para utilizar el nuevo controlador, en `index.html.twig`, busca el `div` que contiene el `button` y el `dialog` y añade `data-controller="modal"`. Luego, en el botón, di `data-action="modal#open"`:
 

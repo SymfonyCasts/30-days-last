@@ -1,0 +1,453 @@
+WEBVTT
+
+00:00:01.086 --> 00:00:04.676 align:middle
+Ayer construimos un sistema modal
+asesino gracias al elemento dialog.
+
+00:00:05.246 --> 00:00:09.326 align:middle
+Con sólo este marcado y un pequeño
+controlador Stimulus, me siento peligroso.
+
+00:00:09.916 --> 00:00:14.356 align:middle
+Así que déjame que te hable del
+objetivo de hoy, ¡que es grande y audaz!
+
+00:00:14.916 --> 00:00:20.596 align:middle
+Cuando haga clic en "Nuevo viaje", quiero cargar mediante
+AJAX el "nuevo formulario modal" e introducirlo en el modal.
+
+00:00:21.006 --> 00:00:22.176 align:middle
+Pero ¡más que eso!
+
+00:00:22.446 --> 00:00:25.876 align:middle
+Cuando envíe el formulario, los errores de
+validación deben permanecer en el modal,
+
+00:00:26.046 --> 00:00:30.846 align:middle
+éste debe cerrarse cuando tenga éxito
+y debemos ver notificaciones de tostadas.
+
+00:00:31.256 --> 00:00:36.096 align:middle
+Y, quizá lo más importante, quiero que
+todo este sistema sea reutilizable para que
+
+00:00:36.196 --> 00:00:40.086 align:middle
+podamos cargar rápidamente cualquier
+formulario de nuestro sitio en un modal.
+
+00:00:40.656 --> 00:00:42.816 align:middle
+Vamos a hacerlo, o moriremos en el intento.
+
+00:00:43.136 --> 00:00:44.226 align:middle
+Espero que lo hagamos...
+
+00:00:44.336 --> 00:00:45.016 align:middle
+Creo que lo haremos.
+
+00:00:45.826 --> 00:00:48.696 align:middle
+Para ponerlo en marcha,
+copia todo el marcado modal.
+
+00:00:49.826 --> 00:00:50.346 align:middle
+Ya está.
+
+00:00:50.916 --> 00:00:57.726 align:middle
+Luego entra en base.html.twig y, hasta el final,
+antes de la etiqueta de cierre body, pega:
+
+00:00:58.706 --> 00:01:01.656 align:middle
+De nuevo en index.html.twig, quita la dialog...
+
+00:01:02.536 --> 00:01:05.436 align:middle
+y ya no necesitamos lo del controlador modal:
+
+00:01:08.086 --> 00:01:11.146 align:middle
+Esto es ahora un h1 normal
+y un botón normal...
+
+00:01:11.336 --> 00:01:13.036 align:middle
+que no hace nada.
+
+00:01:14.036 --> 00:01:20.206 align:middle
+En base.html.twig, haz lo contrario:
+quita el button, el h1 y la clase del div:
+
+00:01:21.706 --> 00:01:24.296 align:middle
+Ahora es un div que contiene un dialog...
+
+00:01:24.616 --> 00:01:25.626 align:middle
+que está cerrado.
+
+00:01:26.496 --> 00:01:34.026 align:middle
+Ahora el toque mágico: elimina las tripas
+del dialog: sólo conserva estos dos divs:
+
+00:01:34.126 --> 00:01:36.616 align:middle
+nos ayudan a dar relleno y un buen
+comportamiento de desplazamiento.
+
+00:01:37.536 --> 00:01:46.486 align:middle
+Dentro, añade un <turbo-frame> con id="modal": Eso,
+amigos míos, ha sido un movimiento de poder de codificación.
+
+00:01:47.066 --> 00:01:51.146 align:middle
+Ahora tenemos en cada página un
+<turbo-frame id="modal">
+
+00:01:51.296 --> 00:01:54.286 align:middle
+en el que podemos cargar
+contenido dinámicamente
+
+00:01:54.686 --> 00:01:57.416 align:middle
+¡Y vive dentro de un diálogo!
+
+00:01:58.646 --> 00:02:02.916 align:middle
+Observa: en la página índice, cambia el
+botón de nuevo viaje por una etiqueta a
+
+00:02:03.326 --> 00:02:06.696 align:middle
+y establece su href en la ruta app_voyage_new.
+
+00:02:07.386 --> 00:02:10.036 align:middle
+Es una etiqueta normal que
+nos llevaría a esa página.
+
+00:02:10.346 --> 00:02:16.036 align:middle
+Pero ahora añade
+data-turbo-frame="modal": Compruébalo.
+
+00:02:16.476 --> 00:02:17.806 align:middle
+Actualiza y haz clic.
+
+00:02:18.676 --> 00:02:22.846 align:middle
+En lugar de cambiar la página,
+cargó el contenido en el marco modal.
+
+00:02:23.286 --> 00:02:25.126 align:middle
+Pero... no pasó nada.
+
+00:02:26.066 --> 00:02:29.636 align:middle
+Vale, hizo una llamada AJAX
+a la página del nuevo viaje.
+
+00:02:29.996 --> 00:02:34.796 align:middle
+Pero si la abrimos en una nueva pestaña,
+no hay ningún marco modal en esta página.
+
+00:02:35.176 --> 00:02:37.706 align:middle
+Bueno, en realidad sí lo hay.
+
+00:02:38.276 --> 00:02:42.666 align:middle
+Como todas las páginas, en la parte
+inferior, tiene un marco modal vacío.
+
+00:02:43.046 --> 00:02:46.106 align:middle
+Así que cuando hacemos clic
+en ese enlace, funciona...
+
+00:02:46.106 --> 00:02:49.546 align:middle
+pero el resultado es que el
+marco Turbo se queda vacío.
+
+00:02:49.796 --> 00:02:51.136 align:middle
+No es muy útil.
+
+00:02:51.136 --> 00:02:59.536 align:middle
+Para solucionarlo, en new.html.twig, añade un
+<turbo-frame id="modal"> alrededor de todo...
+
+00:02:59.926 --> 00:03:03.646 align:middle
+con una etiqueta de cierre
+al final: Compruébalo.
+
+00:03:04.496 --> 00:03:06.726 align:middle
+Cuando hacemos clic ahora, ¡sí!
+
+00:03:06.996 --> 00:03:09.816 align:middle
+Dentro de <turbo-frame>,
+¡tenemos el formulario!
+
+00:03:10.246 --> 00:03:13.106 align:middle
+El modal aún no se abre, pero está listo.
+
+00:03:13.616 --> 00:03:18.016 align:middle
+Ahora, antes de averiguar cómo abrir
+el modal, tenemos un problema...
+
+00:03:18.186 --> 00:03:20.216 align:middle
+y una oportunidad.
+
+00:03:20.216 --> 00:03:23.266 align:middle
+Si fuéramos directamente a
+la página del nuevo viaje,
+
+00:03:23.486 --> 00:03:27.846 align:middle
+tendríamos dos elementos
+<turbo-frame id="modal">:
+
+00:03:28.156 --> 00:03:31.846 align:middle
+el que rodea al formulario, y
+el vacío de la parte inferior.
+
+00:03:32.096 --> 00:03:34.196 align:middle
+Eso... no es válido.
+
+00:03:34.986 --> 00:03:41.766 align:middle
+Además, aunque quiero poder cargar este formulario
+dentro del modal, también quiero que se comporte de forma
+
+00:03:41.766 --> 00:03:44.696 align:middle
+normal si vamos a la página directamente.
+
+00:03:45.536 --> 00:03:53.006 align:middle
+Fíjate: ahora mismo, si relleno esto
+correctamente y lo guardo, ¡pasan cosas raras!
+
+00:03:53.586 --> 00:03:57.126 align:middle
+Lo he enviado a <turbo-frame
+id="modal">...
+
+00:03:57.526 --> 00:03:59.936 align:middle
+se redirige a la página índice...
+
+00:04:00.126 --> 00:04:02.096 align:middle
+que tiene ese marco coincidente...
+
+00:04:02.316 --> 00:04:03.436 align:middle
+pero está vacío.
+
+00:04:03.956 --> 00:04:05.936 align:middle
+Eso no es lo que quiero.
+
+00:04:06.296 --> 00:04:09.286 align:middle
+Si voy a esta página directamente,
+quiero que actúe como si fuera normal.
+
+00:04:09.986 --> 00:04:11.436 align:middle
+Vamos a manejar esto con un truco.
+
+00:04:12.156 --> 00:04:15.216 align:middle
+En new.html.twig, elimina la
+plantilla <turbo-frame>...
+
+00:04:15.596 --> 00:04:21.416 align:middle
+y extiende una nueva plantilla base
+llamada modalBase.html.twig: Ooh.
+
+00:04:22.126 --> 00:04:27.066 align:middle
+Copia ese nombre y en el directorio
+templates/, créalo: modalBase.html.twig.
+
+00:04:27.756 --> 00:04:31.936 align:middle
+Esta tendrá una línea: una
+etiqueta extends que es dinámica.
+
+00:04:32.606 --> 00:04:40.386 align:middle
+Si app.request.headers.get('turbo-frame') es igual a modal
+-por tanto, si se está realizando una petición AJAX
+
+00:04:40.386 --> 00:04:47.076 align:middle
+a esta página desde el turbo frame modal,
+extiende una nueva modalFrame.html.twig.
+
+00:04:48.066 --> 00:04:53.106 align:middle
+Si no, extiende la normal
+base.html.twig: Si vamos a la página de
+
+00:04:53.106 --> 00:04:56.436 align:middle
+forma normal, se extenderá base.html.twig.
+
+00:04:57.156 --> 00:05:01.626 align:middle
+Aquí no hay turbo marco, es completamente
+normal, y se enviará de forma normal.
+
+00:05:01.626 --> 00:05:04.076 align:middle
+Vamos a crear esa otra plantilla base.
+
+00:05:04.856 --> 00:05:09.246 align:middle
+Copia su nombre y, en templates/,
+crea modalFrame.html.twig.
+
+00:05:10.086 --> 00:05:13.446 align:middle
+Todo lo que esto necesita es un
+<turbo-frame id="modal">...
+
+00:05:13.446 --> 00:05:20.816 align:middle
+con {% block body %} y {% endblock %} dentro:
+Así, si hacemos una petición a esta página
+
+00:05:20.816 --> 00:05:25.486 align:middle
+desde el marco modal, toda la
+respuesta será este único marco
+
+00:05:25.526 --> 00:05:27.626 align:middle
+con el contenido de la página dentro.
+
+00:05:28.156 --> 00:05:30.016 align:middle
+Eso resuelve nuestro problema.
+
+00:05:30.406 --> 00:05:34.706 align:middle
+Y significa que si queremos que una página
+pueda cargar su formulario dentro de un modal...
+
+00:05:35.146 --> 00:05:37.776 align:middle
+la única línea que tenemos
+que cambiar está justo aquí.
+
+00:05:38.396 --> 00:05:40.176 align:middle
+Lo demostraré el día 23.
+
+00:05:40.746 --> 00:05:45.026 align:middle
+Pero ahora mismo, volvemos a la situación
+en la que hacemos clic en este enlace y...
+
+00:05:45.206 --> 00:05:50.326 align:middle
+si indago en los elementos del modal, se está
+cargando el formulario en el turbo-frame...
+
+00:05:50.536 --> 00:05:52.206 align:middle
+pero el modal no se abre.
+
+00:05:52.856 --> 00:05:53.776 align:middle
+¿Cómo podemos hacerlo?
+
+00:05:54.686 --> 00:05:57.156 align:middle
+Bueno, tengo 2 requisitos para abrir el modal.
+
+00:05:57.546 --> 00:06:00.976 align:middle
+El primero es que quiero que
+sea superfácil de abrir.
+
+00:06:01.486 --> 00:06:06.266 align:middle
+Si aparece HTML dentro de este turbo-frame
+-no importa cómo se añada- quiero
+
+00:06:06.506 --> 00:06:10.186 align:middle
+que el sistema sea lo suficientemente
+inteligente como para verlo y abrir el modal.
+
+00:06:10.756 --> 00:06:14.166 align:middle
+Y segundo, quiero que el
+modal se abra al instante.
+
+00:06:14.616 --> 00:06:16.216 align:middle
+No quiero hacer clic en este botón...
+
+00:06:16.526 --> 00:06:20.076 align:middle
+y luego esperar 500 milisegundos
+antes de ver el modal.
+
+00:06:20.396 --> 00:06:22.426 align:middle
+Esa no es una buena experiencia de usuario.
+
+00:06:22.426 --> 00:06:27.656 align:middle
+Para la primera parte -abrir este modal en
+cuanto haya contenido en turbo-frame - vamos a
+
+00:06:27.996 --> 00:06:31.216 align:middle
+utilizar un truco dentro de
+nuestro controlador Stimulus.
+
+00:06:31.986 --> 00:06:33.296 align:middle
+Permíteme cerrar algunos archivos.
+
+00:06:34.746 --> 00:06:42.446 align:middle
+En base.html.twig, haz que este turbo-frame sea un
+objetivo: data-modal-target="dynamicContent": Esta es la
+
+00:06:43.846 --> 00:06:51.296 align:middle
+idea: si un modal tiene este objetivo y el HTML
+entra dentro de este elemento por cualquier motivo,
+
+00:06:51.776 --> 00:06:55.266 align:middle
+quiero que nuestro código se
+dé cuenta y abra el modal.
+
+00:06:56.066 --> 00:07:01.436 align:middle
+Para ello, en modal_controller.js,
+añade ese objetivo: Y luego pegaré
+
+00:07:01.436 --> 00:07:07.066 align:middle
+el código más complejo que vamos a
+ver en este tutorial: Pero, espera:
+
+00:07:07.416 --> 00:07:10.716 align:middle
+aunque parezca complejo, lo
+que está haciendo es sencillo.
+
+00:07:11.526 --> 00:07:17.576 align:middle
+Si tenemos un objetivo dynamicContent, este código
+vigila ese elemento para detectar cualquier cambio.
+
+00:07:18.416 --> 00:07:21.056 align:middle
+Cada vez que se produce un
+cambio, llama a nuestra función.
+
+00:07:21.646 --> 00:07:26.566 align:middle
+Luego comprobamos si el elemento
+dynamicContentTarget tiene algún HTML.
+
+00:07:27.036 --> 00:07:28.596 align:middle
+Si lo tiene, ¡ábrelo!
+
+00:07:28.596 --> 00:07:30.086 align:middle
+Si no, ciérralo.
+
+00:07:30.556 --> 00:07:31.736 align:middle
+Así de sencillo.
+
+00:07:32.676 --> 00:07:35.356 align:middle
+En disconnect(), desactivamos ese sistema.
+
+00:07:35.696 --> 00:07:41.346 align:middle
+Y también, por si acaso, si nuestro elemento
+controlador modal se elimina alguna vez de la página
+
+00:07:41.346 --> 00:07:44.956 align:middle
+por cualquier motivo, esto cerrará
+el diálogo y hará la limpieza.
+
+00:07:45.786 --> 00:07:47.116 align:middle
+El resultado de esto es...
+
+00:07:47.406 --> 00:07:48.876 align:middle
+bastante increíble.
+
+00:07:49.316 --> 00:07:50.336 align:middle
+Actualiza la página.
+
+00:07:50.686 --> 00:07:51.886 align:middle
+Vamos a jugar.
+
+00:07:52.026 --> 00:07:57.436 align:middle
+Voy a editar el <turbo-frame>
+como HTML y escribir: "¿se abrirá?".
+
+00:07:59.216 --> 00:08:01.026 align:middle
+¡Bum! ¡Se abre!
+
+00:08:01.026 --> 00:08:03.266 align:middle
+Y si vaciamos el contenido...
+
+00:08:03.526 --> 00:08:04.896 align:middle
+se cierra.
+
+00:08:05.486 --> 00:08:11.846 align:middle
+Y, lo que es más importante, cuando hacemos clic
+en el enlace "Nuevo", ¡se abre con el formulario!
+
+00:08:12.016 --> 00:08:15.536 align:middle
+¡Increíble! Vale, creo que
+ya es suficiente por hoy.
+
+00:08:16.086 --> 00:08:19.166 align:middle
+Mañana, vamos a asegurarnos de
+que este formulario se envíe.
+
+00:08:19.576 --> 00:08:23.306 align:middle
+Y como no puedo evitarlo,
+añadiremos algunas cosas más:
+
+00:08:23.606 --> 00:08:28.256 align:middle
+como abrir el modal instantáneamente en lugar
+de esperar a que termine la llamada AJAX.

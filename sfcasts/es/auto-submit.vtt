@@ -1,0 +1,218 @@
+WEBVTT
+
+00:00:01.056 --> 00:00:02.896 align:middle
+¿Ya es el día 12?
+
+00:00:03.186 --> 00:00:08.246 align:middle
+Durante los próximos 3 días, vamos a trabajar
+en un gran objetivo: transformar esta tabla
+
+00:00:08.246 --> 00:00:13.066 align:middle
+en una rica configuración de tabla de datos,
+con búsqueda, filtrado de columnas, paginación,
+
+00:00:13.276 --> 00:00:15.876 align:middle
+todo ello con un bonito AJAX.
+
+00:00:16.356 --> 00:00:18.946 align:middle
+Esta es una de las partes en las que
+estoy más emocionado por sumergirme.
+
+00:00:19.596 --> 00:00:21.316 align:middle
+Nuestra página de inicio tiene una búsqueda.
+
+00:00:21.556 --> 00:00:23.916 align:middle
+Y no tiene nada de especial.
+
+00:00:24.276 --> 00:00:27.436 align:middle
+Pulso intro para enviar el formulario,
+el parámetro de consulta está
+
+00:00:27.436 --> 00:00:29.726 align:middle
+en la URL y filtra los resultados.
+
+00:00:30.126 --> 00:00:33.596 align:middle
+Naturalmente, gracias a Turbo
+Drive, todo ocurre vía AJAX.
+
+00:00:33.596 --> 00:00:39.396 align:middle
+Para nuestro primer truco, mira cómo hacemos que la búsqueda
+se actualice automáticamente a medida que escribimos.
+
+00:00:39.846 --> 00:00:43.686 align:middle
+Es decir, escribimos y, sin pulsar
+intro, la lista debería actualizarse.
+
+00:00:44.616 --> 00:00:49.696 align:middle
+Para ello, vamos a tomar prestado un controlador
+de un repositorio de 30 Días de Hotwire.
+
+00:00:50.556 --> 00:00:54.216 align:middle
+Proviene de un fantástico
+reto de 30 Días de Hotwire
+
+00:00:54.516 --> 00:00:56.656 align:middle
+que hizo alguien de la comunidad Rails.
+
+00:00:57.166 --> 00:01:00.466 align:middle
+Me encanta esta serie y tiene
+un montón de cosas buenas.
+
+00:01:00.616 --> 00:01:02.336 align:middle
+Te recomiendo encarecidamente
+que le eches un vistazo.
+
+00:01:02.986 --> 00:01:05.976 align:middle
+En cualquier caso, voy a tomar prestado este
+estupendo controlador de "envío automático".
+
+00:01:06.236 --> 00:01:09.726 align:middle
+Es muy sencillo: nos permite
+enviar un formulario...
+
+00:01:09.996 --> 00:01:11.926 align:middle
+con una eliminación opcional.
+
+00:01:12.366 --> 00:01:16.256 align:middle
+Si escribo muy rápido, no quiero
+enviar el formulario cuatro veces.
+
+00:01:16.536 --> 00:01:18.586 align:middle
+Quiero que espere una ligera pausa...
+
+00:01:18.916 --> 00:01:20.116 align:middle
+y luego lo envíe.
+
+00:01:20.716 --> 00:01:22.326 align:middle
+A eso se le llama desbordamiento.
+
+00:01:23.056 --> 00:01:25.416 align:middle
+Esto espera una pausa de 300 milisegundos.
+
+00:01:25.496 --> 00:01:28.686 align:middle
+Así que vamos a ponernos manos a la obra
+e introducir esto en nuestra aplicación.
+
+00:01:29.146 --> 00:01:31.906 align:middle
+Crea un nuevo archivo llamado
+autosubmit_controller.js...
+
+00:01:32.026 --> 00:01:36.376 align:middle
+y pégalo: Luego dirígete a la
+página de inicio para utilizarlo.
+
+00:01:37.666 --> 00:01:38.566 align:middle
+Cerca de la parte superior...
+
+00:01:39.086 --> 00:01:41.596 align:middle
+está nuestro formulario de búsqueda.
+
+00:01:41.596 --> 00:01:47.546 align:middle
+En el formulario, añade data-controller"autosubmit":
+Fíjate que estoy obteniendo autocompletado en eso.
+
+00:01:47.856 --> 00:01:50.956 align:middle
+Eso es gracias a un plugin de Stimulus
+que tengo para PhpStorm. A continuación
+
+00:01:50.956 --> 00:02:00.856 align:middle
+, abajo en la entrada, di data-action igual a
+autosubmit#debouncedSubmit: En el controlador,
+
+00:02:00.996 --> 00:02:03.806 align:middle
+puedes llamar a submit para enviar
+el formulario inmediatamente
+
+00:02:04.066 --> 00:02:07.026 align:middle
+o a debouncedSubmit() para esperar a la pausa.
+
+00:02:07.566 --> 00:02:10.546 align:middle
+Y esta vez no necesitamos incluir el nombre del
+
+00:02:10.626 --> 00:02:13.766 align:middle
+evento, como input-> para
+escuchar el evento input.
+
+00:02:14.346 --> 00:02:18.276 align:middle
+Cuando aplicas un data-action a
+un input, un button o un link,
+
+00:02:18.506 --> 00:02:21.206 align:middle
+Stimulus averigua qué evento quieres escuchar.
+
+00:02:21.796 --> 00:02:24.486 align:middle
+La mayoría de las veces, la
+vida será así de sencilla.
+
+00:02:25.386 --> 00:02:26.736 align:middle
+¿Funciona?
+
+00:02:27.906 --> 00:02:31.386 align:middle
+No! Porque tenemos un error...
+
+00:02:31.686 --> 00:02:33.926 align:middle
+¡un error que espero que te resulte familiar!
+
+00:02:34.046 --> 00:02:37.476 align:middle
+Error al resolver el
+especificador de módulo debounce.
+
+00:02:37.986 --> 00:02:39.296 align:middle
+¡Esto viene de nuestro código!
+
+00:02:39.976 --> 00:02:42.796 align:middle
+Nuestro código copiado está
+utilizando un paquete debounce...
+
+00:02:43.006 --> 00:02:45.036 align:middle
+¡y no lo tenemos instalado!
+
+00:02:45.646 --> 00:02:48.996 align:middle
+¡Genial! Copia debounce, gíralo y ejecútalo:
+
+00:02:48.996 --> 00:02:54.196 align:middle
+php bin/console importmap:require debounce
+Ahora está en nuestro proyecto...
+
+00:02:54.916 --> 00:02:57.056 align:middle
+y ahora el error ha desaparecido.
+
+00:02:57.056 --> 00:02:58.966 align:middle
+¿Listo para la magia?
+
+00:02:59.586 --> 00:03:01.226 align:middle
+Eh, ¡funciona!
+
+00:03:01.606 --> 00:03:05.456 align:middle
+¡Sólo una petición después de
+terminar de escribir gracias a debounce!
+
+00:03:06.216 --> 00:03:10.046 align:middle
+Lo único malo es que perdemos el foco
+cuando se recarga toda la página.
+
+00:03:10.506 --> 00:03:13.676 align:middle
+Como solución provisional -no va
+a ser nuestra solución definitiva-
+
+00:03:14.186 --> 00:03:17.606 align:middle
+podemos probar a poner : Esto autofocus...
+
+00:03:17.816 --> 00:03:19.046 align:middle
+casi funciona...
+
+00:03:19.136 --> 00:03:23.616 align:middle
+excepto que perdemos la posición del
+cursor: nos devuelve al principio.
+
+00:03:24.236 --> 00:03:27.346 align:middle
+No pasa nada: pronto resolveremos
+esto de una forma mucho mejor.
+
+00:03:27.516 --> 00:03:31.736 align:middle
+Y cuando lo hagamos, ni siquiera vamos
+a necesitar el enfoque automático.
+
+00:03:32.636 --> 00:03:36.756 align:middle
+Mañana vamos a enriquecerlo añadiendo
+paginación y ordenación por columnas.

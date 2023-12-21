@@ -1,0 +1,509 @@
+WEBVTT
+
+00:00:01.106 --> 00:00:05.896 align:middle
+Bienvenido al día 23, el gran final
+de nuestra saga de sistemas modales.
+
+00:00:06.356 --> 00:00:10.416 align:middle
+Aunque volveremos sobre ello dentro de unos
+días, cuando hablemos de los componentes Twig.
+
+00:00:10.726 --> 00:00:14.616 align:middle
+Así que si nuestro nuevo sistema modal
+es tan reutilizable como he prometido,
+
+00:00:14.826 --> 00:00:18.396 align:middle
+también deberíamos poder abrir fácilmente el
+formulario de edición en un modal, ¿verdad?
+
+00:00:19.086 --> 00:00:24.466 align:middle
+Para optar por el sistema modal, lo único
+que tenemos que cambiar -en edit.html.twig -
+
+00:00:24.666 --> 00:00:27.436 align:middle
+es ampliar modalBase.html.twig.
+
+00:00:28.086 --> 00:00:35.296 align:middle
+Y ya que estamos aquí, elimina el relleno extra
+con modal:m-0 y modal:p-0: A continuación,
+
+00:00:35.466 --> 00:00:38.216 align:middle
+haz que el enlace de edición
+tenga como objetivo el marco modal.
+
+00:00:38.856 --> 00:00:41.526 align:middle
+Esto está en _row.html.twig.
+
+00:00:42.486 --> 00:00:44.526 align:middle
+Lo dividiré en varias líneas ....
+
+00:00:45.556 --> 00:00:51.286 align:middle
+y luego añadiré data-turbo-frame="modal":
+Momento de la verdad.
+
+00:00:51.796 --> 00:00:53.366 align:middle
+Actualiza. Y...
+
+00:00:54.006 --> 00:00:56.126 align:middle
+¡maldita sea! ¡Simplemente funciona!
+
+00:00:56.706 --> 00:00:59.656 align:middle
+Incluso si guardamos con éxito, funciona.
+
+00:01:00.046 --> 00:01:03.846 align:middle
+Obtenemos la tostada, el
+modal se cierra, ¡madre mía!
+
+00:01:04.566 --> 00:01:09.206 align:middle
+Esto funciona porque, en VoyageController,
+la acción edit, al igual que new,
+
+00:01:09.446 --> 00:01:14.886 align:middle
+redirige a la página index: Que tiene un marco
+modal vacío, por lo que el modal se cierra.
+
+00:01:15.306 --> 00:01:17.746 align:middle
+Pero... Quiero ser delicado.
+
+00:01:18.296 --> 00:01:24.956 align:middle
+El formulario de edición aparece ahora en dos contextos,
+el modal, pero también en su página independiente.
+
+00:01:25.776 --> 00:01:29.356 align:middle
+¿Qué pasa si, cuando estamos
+en esta página, al tener éxito,
+
+00:01:29.756 --> 00:01:33.136 align:middle
+queremos redirigirnos de nuevo
+aquí para poder seguir editando?
+
+00:01:34.026 --> 00:01:42.696 align:middle
+¡Es fácil! Cambia la ruta a app_voyage_edit
+y pon id a $voyage->getId(): Genial.
+
+00:01:44.286 --> 00:01:46.306 align:middle
+Ahora, cuando guardemos, ¡funcionará!
+
+00:01:46.806 --> 00:01:49.606 align:middle
+Pero... ¿cómo ha afectado
+eso al formulario del modal?
+
+00:01:50.246 --> 00:01:52.026 align:middle
+Cuando editamos y guardamos...
+
+00:01:52.686 --> 00:01:54.086 align:middle
+no pasa nada.
+
+00:01:54.306 --> 00:01:57.256 align:middle
+El modal sigue aquí y no
+hay notificación tostada.
+
+00:01:57.756 --> 00:02:00.336 align:middle
+Trabajemos primero en la
+notificación de tostadas que falta.
+
+00:02:00.826 --> 00:02:07.246 align:middle
+En base.html.twig, dentro del marco modal, renderizamos
+los mensajes flash en un <turbo-stream>.
+
+00:02:07.926 --> 00:02:09.146 align:middle
+El problema es que...
+
+00:02:09.526 --> 00:02:14.746 align:middle
+cuando redirigimos a la página de edición,
+como ésta extiende modalBase.html.twig,
+
+00:02:15.156 --> 00:02:17.716 align:middle
+el marco que se devuelve es éste.
+
+00:02:17.716 --> 00:02:21.166 align:middle
+Y este <turbo-frame> no
+renderiza estos flujos. Resulta
+
+00:02:21.706 --> 00:02:25.856 align:middle
+que, en realidad, estas líneas deberían
+vivir dentro de cualquier <turbo-frame>
+
+00:02:25.946 --> 00:02:28.366 align:middle
+que pudiera renderizarse tras
+el envío de un formulario.
+
+00:02:29.006 --> 00:02:32.826 align:middle
+Para ello, copia esto y, dentro
+del directorio templates/,
+
+00:02:33.386 --> 00:02:37.886 align:middle
+crea un nuevo archivo llamado
+_frameSuccessStreams.html.twig.
+
+00:02:39.336 --> 00:02:44.206 align:middle
+Pégalo dentro: Pero antes de
+utilizarlo, quiero añadir otro detalle:
+
+00:02:45.056 --> 00:02:53.076 align:middle
+if app.request.headers.get('turbo-frame') iguala una
+nueva variable frame, y luego renderiza esto, si no,
+
+00:02:53.176 --> 00:02:58.096 align:middle
+no hagas nada: Estoy codificando para un
+caso extremo, así que deja que me explique.
+
+00:02:58.916 --> 00:03:06.216 align:middle
+Imagina que tenemos dos elementos <turbo-frame>
+en la misma página: id="login" y id="registration".
+
+00:03:06.556 --> 00:03:08.386 align:middle
+Y ambos incluyen este parcial.
+
+00:03:08.386 --> 00:03:14.776 align:middle
+En este caso, el <turbo-frame id="login">
+siempre renderizaría los mensajes flash...
+
+00:03:15.086 --> 00:03:18.286 align:middle
+sin dejar nada para el
+pobre marco registration.
+
+00:03:18.646 --> 00:03:22.296 align:middle
+Y así, cuando estemos enviando
+dentro del marco Turbo registration...
+
+00:03:22.616 --> 00:03:24.976 align:middle
+no veríamos las notificaciones tostadas.
+
+00:03:26.266 --> 00:03:31.936 align:middle
+Para solucionarlo, cuando utilicemos este parcial
+- include('_frameSuccessStreams.html.twig') -
+
+00:03:32.546 --> 00:03:36.866 align:middle
+pasa el nombre del marco dentro del
+que estás: modal: De esta forma,
+
+00:03:37.276 --> 00:03:41.786 align:middle
+si el marco actual es otro, esto
+no se comerá los mensajes flash.
+
+00:03:42.506 --> 00:03:48.616 align:middle
+Copia esto, y en modalFrame.html.twig,
+pégalo aquí también: ¡Hagámoslo!
+
+00:03:49.066 --> 00:03:50.286 align:middle
+Actualiza, edita...
+
+00:03:50.616 --> 00:03:56.376 align:middle
+y guardar. El modal sigue abierto, pero
+mira ahí detrás: ¡vemos la tostada!
+
+00:03:56.966 --> 00:03:59.766 align:middle
+Ahora: ¿cómo podemos
+cerrar este molesto modal?
+
+00:04:00.386 --> 00:04:05.236 align:middle
+Cuando ponemos un formulario dentro de un marco, puede
+que nuestro controlador Symfony no necesite cambiar.
+
+00:04:05.786 --> 00:04:11.656 align:middle
+Los mensajes flash funcionarán y, dependiendo de
+dónde redirijas, el modal podría incluso cerrarse.
+
+00:04:11.996 --> 00:04:17.066 align:middle
+Pero debes preguntarte: ¿dónde están todos los
+lugares en los que se utilizará mi formulario?
+
+00:04:17.476 --> 00:04:21.236 align:middle
+Y: ¿estoy devolviendo la respuesta
+adecuada para cada situación?
+
+00:04:22.126 --> 00:04:26.716 align:middle
+Ahora mismo, en la situación modal,
+nuestra respuesta no es la que queremos:
+
+00:04:27.026 --> 00:04:29.246 align:middle
+no hace que el modal se cierre.
+
+00:04:29.546 --> 00:04:30.756 align:middle
+¡Y no pasa nada!
+
+00:04:31.336 --> 00:04:36.596 align:middle
+Recuerda: además de dejar que el marco Turbo se
+actualice con el contenido tras la redirección,
+
+00:04:36.946 --> 00:04:39.696 align:middle
+también podemos utilizar streams
+para hacer cualquier cosa extra.
+
+00:04:40.716 --> 00:04:44.726 align:middle
+En new.html.twig, roba el
+stream_success de la parte inferior.
+
+00:04:45.646 --> 00:04:47.736 align:middle
+En edit.html.twig, pega.
+
+00:04:48.676 --> 00:04:52.936 align:middle
+Esta vez, queremos actualizar el
+elemento <turbo-frame id="modal">
+
+00:04:52.936 --> 00:04:56.436 align:middle
+para vaciar su contenido
+y que el modal se cierre.
+
+00:04:57.206 --> 00:05:03.136 align:middle
+Hazlo con action="update", target="modal",
+y pon el <template> a nada:
+
+00:05:03.136 --> 00:05:09.676 align:middle
+En el controlador, para añadir la "cosa
+extra", copia la sentencia if de new...
+
+00:05:11.416 --> 00:05:17.126 align:middle
+pégala aquí abajo, cambia la
+plantilla a edit.html.twig y...
+
+00:05:17.296 --> 00:05:18.036 align:middle
+¡ya está!
+
+00:05:19.346 --> 00:05:21.096 align:middle
+Vale, dale a "Editar" y guarda.
+
+00:05:22.426 --> 00:05:26.406 align:middle
+Hmm, he visto el brindis, pero
+el modal no se ha cerrado.
+
+00:05:26.986 --> 00:05:29.286 align:middle
+Déjame ver el flujo para
+asegurarme de que lo tengo todo.
+
+00:05:30.006 --> 00:05:33.736 align:middle
+¡Ah! Con targets, utilizas un selector CSS.
+
+00:05:34.016 --> 00:05:39.846 align:middle
+Pero con target, es sólo el id: Así que
+el Turbo Streams se estaba ejecutando...
+
+00:05:39.956 --> 00:05:41.476 align:middle
+pero no coincidía con nada.
+
+00:05:42.276 --> 00:05:43.156 align:middle
+Intentémoslo de nuevo.
+
+00:05:44.136 --> 00:05:47.476 align:middle
+Cuando le demos a guardar, eso nos
+redirigirá de nuevo a la página de edición,
+
+00:05:47.746 --> 00:05:54.186 align:middle
+y eso va a tener un <turbo-frame
+id="modal"> con contenido: no estará vacío.
+
+00:05:54.696 --> 00:05:58.446 align:middle
+Pero entonces, nuestro flujo debería
+vaciarlo y el modal debería cerrarse.
+
+00:05:58.976 --> 00:06:01.396 align:middle
+Y... ¡precioso!
+
+00:06:02.076 --> 00:06:05.166 align:middle
+¿Puedo añadir un último
+detalle para pulir la edición?
+
+00:06:05.856 --> 00:06:11.666 align:middle
+Sería genial que, cuando cambiáramos un
+viaje, actualizara la fila al instante.
+
+00:06:12.416 --> 00:06:14.386 align:middle
+Esto es otro "extra", y...
+
+00:06:14.506 --> 00:06:15.626 align:middle
+va a ser fácil.
+
+00:06:16.396 --> 00:06:25.146 align:middle
+Primero, para apuntar esto, en _row.html.twig,
+añade un id, voyage-list-item-, {{ voyage.id }}:
+
+00:06:26.446 --> 00:06:34.016 align:middle
+Copia eso, dirígete a edit.html.twig y
+añade un Turbo Stream más: action="replace"
+
+00:06:34.496 --> 00:06:38.396 align:middle
+y target="voyage-list-item-" voyage.id .
+
+00:06:39.396 --> 00:06:44.426 align:middle
+Añade el <template> y luego
+incluye voyage/_row.html.twig:
+
+00:06:44.426 --> 00:06:47.656 align:middle
+Aquí es donde las cosas
+realmente empiezan a brillar.
+
+00:06:48.586 --> 00:06:52.146 align:middle
+Edita, elimina los signos de exclamación y...
+
+00:06:52.596 --> 00:06:54.946 align:middle
+la página se actualiza al instante.
+
+00:06:55.756 --> 00:07:01.356 align:middle
+Nuestro modal de edición -incluso con todas las
+complicaciones que le he echado- ¡está hecho!
+
+00:07:01.986 --> 00:07:05.606 align:middle
+Con nuestros últimos 3 minutos, asegurémonos
+de que el botón "eliminar" funciona.
+
+00:07:06.386 --> 00:07:07.666 align:middle
+Oh... ¡funciona!
+
+00:07:08.066 --> 00:07:10.306 align:middle
+¡El modal se cierra y aparece la tostada!
+
+00:07:10.946 --> 00:07:15.316 align:middle
+Como las otras acciones, después de
+borrar, redirige a la página index y el
+
+00:07:15.526 --> 00:07:17.956 align:middle
+marco vacío modal cierra el modal.
+
+00:07:18.276 --> 00:07:19.626 align:middle
+¡Es genial!
+
+00:07:20.126 --> 00:07:25.126 align:middle
+Excepto... que la fila que he borrado
+sigue ahí hasta que actualizamos.
+
+00:07:25.636 --> 00:07:26.606 align:middle
+Pero espera.
+
+00:07:27.046 --> 00:07:29.966 align:middle
+El botón de borrar es un
+formulario que se envía.
+
+00:07:29.966 --> 00:07:33.526 align:middle
+Y la única razón por la que
+se envía a <turbo-frame>
+
+00:07:33.526 --> 00:07:36.316 align:middle
+es porque está dentro del marco modal.
+
+00:07:36.956 --> 00:07:40.066 align:middle
+Pero la acción de eliminar no
+necesita enviarse a un marco.
+
+00:07:40.516 --> 00:07:44.696 align:middle
+Nunca vamos a hacer clic en "Eliminar" y
+luego querremos mostrar algo en el modal.
+
+00:07:44.976 --> 00:07:47.526 align:middle
+Una navegación por toda
+la página estaría bien.
+
+00:07:48.476 --> 00:07:52.656 align:middle
+Para ello, en
+_delete_form.html.twig, en el marco,
+
+00:07:52.966 --> 00:08:02.686 align:middle
+añade data-turbo-frame="_top":
+Ahora, edita, borra y...
+
+00:08:02.946 --> 00:08:06.436 align:middle
+la redirección provoca una navegación
+a página completa, lo que está bien.
+
+00:08:06.956 --> 00:08:09.796 align:middle
+Aunque, sí, podría ser más suave.
+
+00:08:10.186 --> 00:08:11.156 align:middle
+Desplázate un poco hacia abajo...
+
+00:08:11.546 --> 00:08:12.656 align:middle
+y borra uno.
+
+00:08:13.776 --> 00:08:15.386 align:middle
+La página vuelve al principio.
+
+00:08:16.096 --> 00:08:19.676 align:middle
+Como con todo, si esto es importante
+para nosotros, podemos mejorarlo.
+
+00:08:20.266 --> 00:08:25.246 align:middle
+Elimina el data-turbo-frame="_top": Cuando un
+formulario -incluso nuestro formulario de eliminación-
+
+00:08:25.246 --> 00:08:31.266 align:middle
+existe dentro de un <turbo-frame> , tenemos que
+preguntarnos: ¿dónde se está utilizando y qué tengo que
+
+00:08:31.266 --> 00:08:34.656 align:middle
+actualizar para que la página
+sea perfecta después del éxito?
+
+00:08:34.656 --> 00:08:37.726 align:middle
+En este caso, necesitamos eliminar la fila.
+
+00:08:38.166 --> 00:08:41.126 align:middle
+Así que tenemos que hacer
+algo extra, fuera del marco.
+
+00:08:41.506 --> 00:08:42.826 align:middle
+¡Y ya sabemos cómo hacerlo!
+
+00:08:43.716 --> 00:08:47.296 align:middle
+En edit.html.twig, roba
+el bloque stream_success.
+
+00:08:48.646 --> 00:08:51.766 align:middle
+Luego crea una nueva plantilla
+llamada delete.html.twig.
+
+00:08:52.586 --> 00:08:54.576 align:middle
+Borrar normalmente no tiene
+su propia plantilla...
+
+00:08:54.886 --> 00:08:57.856 align:middle
+y vamos a utilizarla sólo para stream_success.
+
+00:08:58.516 --> 00:09:06.116 align:middle
+Usa esta, cambia action por remove y target
+voyage-list-item- pero solo usa una variable id.
+
+00:09:06.826 --> 00:09:11.266 align:middle
+Y para eliminar, no necesitamos el
+<template> en absoluto: En VoyageController,
+
+00:09:11.436 --> 00:09:14.486 align:middle
+desplázate hacia arriba,
+roba la declaración if....
+
+00:09:15.946 --> 00:09:18.256 align:middle
+y abajo en eliminar, pégala.
+
+00:09:19.946 --> 00:09:26.296 align:middle
+Cambia la plantilla a delete.html.twig y
+pasa una variable id establecida en $id.
+
+00:09:26.986 --> 00:09:32.456 align:middle
+No podemos usar $voyage->getId() porque
+ya estará vacía desde que la borramos.
+
+00:09:33.156 --> 00:09:34.526 align:middle
+En su lugar, pasa $id...
+
+00:09:34.976 --> 00:09:42.086 align:middle
+y antes de borrarla, ponla: $id =
+$voyage->getId(): ¡Hagámoslo!
+
+00:09:43.176 --> 00:09:46.556 align:middle
+Desplázate hasta aquí y borra el ID 22.
+
+00:09:47.926 --> 00:09:49.416 align:middle
+Observa. Bum.
+
+00:09:49.766 --> 00:09:54.576 align:middle
+La fila desaparece, recibimos la notificación
+de tostado y la página no se mueve.
+
+00:09:55.256 --> 00:09:57.156 align:middle
+Vale, los últimos días han sido...
+
+00:09:57.426 --> 00:10:03.066 align:middle
+guau. Mañana nos lo tomaremos con más calma y
+aprenderemos otra forma de utilizar Turbo Streams.
+
+00:10:03.586 --> 00:10:04.156 align:middle
+¡Hasta entonces!

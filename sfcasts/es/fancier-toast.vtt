@@ -1,0 +1,394 @@
+WEBVTT
+
+00:00:01.046 --> 00:00:05.866 align:middle
+Ayer cocinamos un bonito sistema de
+notificaciones Toast que funciona enteramente
+
+00:00:05.866 --> 00:00:09.276 align:middle
+con CSS y el sistema flash normal de Symfony.
+
+00:00:09.276 --> 00:00:12.906 align:middle
+Vale, y sólo un poquito de
+JavaScript para, boop, cerrarlo.
+
+00:00:13.626 --> 00:00:16.036 align:middle
+Hoy vamos a llevar esto al siguiente nivel.
+
+00:00:16.096 --> 00:00:18.696 align:middle
+Quiero que estos brindis sean increíbles.
+
+00:00:19.386 --> 00:00:23.886 align:middle
+La primera función que vamos a añadir es el cierre
+automático: un clásico en el mundo de las tost adas en
+
+00:00:23.916 --> 00:00:28.996 align:middle
+el que el mensaje aparece en nuestra pantalla y se
+cierra automáticamente al cabo de unos segundos.
+
+00:00:29.586 --> 00:00:32.466 align:middle
+Pero también quiero que nuestro
+controlador de cierre sea reutilizable.
+
+00:00:32.956 --> 00:00:36.466 align:middle
+Puede haber otras partes del sitio en
+las que queramos poder cerrar algo...
+
+00:00:36.686 --> 00:00:39.346 align:middle
+pero no que se cierre automáticamente.
+
+00:00:39.346 --> 00:00:44.306 align:middle
+Así que necesitamos una forma de activar
+el cierre automático caso por caso.
+
+00:00:44.886 --> 00:00:48.476 align:middle
+La forma de pasar información a
+un controlador es mediante valores.
+
+00:00:48.996 --> 00:00:50.836 align:middle
+Añade static values equals...
+
+00:00:51.386 --> 00:00:54.906 align:middle
+e inventa uno nuevo llamado
+autoClose, que será un Number:
+
+00:00:55.556 --> 00:00:57.346 align:middle
+A continuación, añade un método connect().
+
+00:00:58.006 --> 00:01:04.746 align:middle
+La idea es que si tenemos this.autoCloseValue
+-así es como se hace referencia a eso- entonces...
+
+00:01:05.116 --> 00:01:06.806 align:middle
+¡en realidad es perfecto!
+
+00:01:07.186 --> 00:01:11.386 align:middle
+Utilizaremos setTimeout para cerrar después
+de esa cantidad de milisegundos: Para
+
+00:01:11.996 --> 00:01:16.706 align:middle
+terminar, vamos a donde utilizamos
+este controlador - _flashes.html.twig-
+
+00:01:16.956 --> 00:01:19.286 align:middle
+para pasar el nuevo valor autoClose.
+
+00:01:19.846 --> 00:01:22.806 align:middle
+Lo hacemos en el mismo
+elemento que data-controller.
+
+00:01:23.226 --> 00:01:30.976 align:middle
+Añade data-closeable-auto-close-value
+igual y utiliza 5.000 para 5 segundos:
+
+00:01:31.656 --> 00:01:36.846 align:middle
+El formato es data- el nombre
+del controlador, auto-close -
+
+00:01:37.156 --> 00:01:40.036 align:middle
+que es el nombre del valor autoClose...
+
+00:01:40.326 --> 00:01:47.246 align:middle
+pero como estamos en un atributo HTML, utilizamos
+el "dash case" - luego la palabra value equals
+
+00:01:47.476 --> 00:01:49.266 align:middle
+y finalmente lo que queremos pasar.
+
+00:01:49.856 --> 00:01:53.696 align:middle
+Este formato es más difícil de
+recordar que simplemente data-controller.
+
+00:01:54.146 --> 00:01:57.826 align:middle
+Pero como has visto, si tienes
+este plugin Stimulus para PhpStorm,
+
+00:01:58.206 --> 00:02:00.966 align:middle
+lo autocompleta, lo que ayuda mucho.
+
+00:02:01.826 --> 00:02:02.606 align:middle
+¡Vamos a hacerlo!
+
+00:02:02.866 --> 00:02:09.876 align:middle
+Edita este registro, guarda y 1, 2, 3, 4, 5...
+
+00:02:10.416 --> 00:02:12.376 align:middle
+¡zas! Desaparece.
+
+00:02:13.156 --> 00:02:16.076 align:middle
+¿Qué es lo siguiente en nuestra
+búsqueda de la grandeza de las tostadas?
+
+00:02:16.486 --> 00:02:19.836 align:middle
+¿Qué tal una barra temporizadora que
+muestre cuándo se cerrará la tostada?
+
+00:02:20.256 --> 00:02:22.596 align:middle
+Una pequeña barra que se vaya
+haciendo cada vez más pequeña y que
+
+00:02:22.886 --> 00:02:27.566 align:middle
+finalmente desaparezca justo cuando
+la tostada se cierra automáticamente.
+
+00:02:27.566 --> 00:02:28.256 align:middle
+¡Suena genial! Este es
+
+00:02:28.816 --> 00:02:34.196 align:middle
+el plan: vamos a añadir un elemento aquí
+abajo y luego animaremos su anchura del
+
+00:02:34.196 --> 00:02:38.246 align:middle
+100% al 0% durante esos 5 segundos.
+
+00:02:38.756 --> 00:02:43.876 align:middle
+Para poder encontrar ese elemento, dentro del
+controlador, vamos a utilizar un objetivo.
+
+00:02:44.336 --> 00:02:46.886 align:middle
+Añade static targets = ['timerbar']:
+
+00:02:47.586 --> 00:02:52.606 align:middle
+Luego abajo en connect(), comprueba
+que: si this.hasTimerbarTarget,
+
+00:02:52.986 --> 00:02:57.836 align:middle
+entonces this.timerbarTarget.style.width = 0:
+
+00:02:58.656 --> 00:03:02.176 align:middle
+Suponiendo que hayamos añadido una
+transición CSS a este elemento,
+
+00:03:02.536 --> 00:03:06.406 align:middle
+eso debería animar el
+cambio de ancho completo a 0.
+
+00:03:07.186 --> 00:03:14.656 align:middle
+Ah, pero otro detalle: añade un setTimeout y pon
+esto dentro con un retardo de 10 milisegundos:
+
+00:03:15.556 --> 00:03:19.326 align:middle
+Esto permitirá que el elemento
+se establezca en la página con
+
+00:03:19.326 --> 00:03:23.666 align:middle
+una anchura completa del
+100%, antes de cambiarlo a 0.
+
+00:03:24.316 --> 00:03:26.536 align:middle
+Este es un truco de transición CSS.
+
+00:03:27.056 --> 00:03:33.056 align:middle
+Si añades o desocultas un elemento e
+inmediatamente cambias su anchura a 0...
+
+00:03:33.416 --> 00:03:35.576 align:middle
+la transición CSS no funcionará. Tienes
+
+00:03:36.086 --> 00:03:39.896 align:middle
+que dejar que el elemento esté en
+la página con una anchura del 100%
+
+00:03:39.896 --> 00:03:43.026 align:middle
+durante 1 fotograma de
+animación, y luego cambiarlo.
+
+00:03:43.826 --> 00:03:47.136 align:middle
+Muy bien, con el escenario preparado, es
+hora de añadir la barra del temporizador.
+
+00:03:47.726 --> 00:03:51.796 align:middle
+En la parte inferior de
+_flashes.html.twig, la pegaré:
+
+00:03:52.626 --> 00:03:55.606 align:middle
+Esto tiene una posición absoluta en la
+parte inferior, a la izquierda del padre
+
+00:03:55.786 --> 00:03:57.376 align:middle
+, con una altura y un fondo verde.
+
+00:03:57.916 --> 00:04:02.216 align:middle
+También tiene una anchura
+explícita: es el w-full.
+
+00:04:02.826 --> 00:04:04.456 align:middle
+Eso es importante para la transición.
+
+00:04:05.256 --> 00:04:09.636 align:middle
+Para convertirlo en objetivo, añade
+data-closeable-target="timerbar":
+
+00:04:10.596 --> 00:04:12.516 align:middle
+¡Vale! Veamos qué aspecto tiene.
+
+00:04:13.046 --> 00:04:16.856 align:middle
+Pulsa editar, guardar, y se abre...
+
+00:04:16.856 --> 00:04:18.766 align:middle
+pero no hay animación.
+
+00:04:19.236 --> 00:04:21.026 align:middle
+¡Vamos a depurar un poco!
+
+00:04:22.456 --> 00:04:23.896 align:middle
+No hay errores en mi consola.
+
+00:04:26.086 --> 00:04:31.956 align:middle
+Ah... aquí está el problema: debería
+haber hecho caso a mi editor: timerbarTarget.
+
+00:04:31.956 --> 00:04:33.806 align:middle
+Cerremos esto.
+
+00:04:33.806 --> 00:04:36.206 align:middle
+Guarda y...
+
+00:04:36.756 --> 00:04:38.066 align:middle
+¡eso es lo que quiero ver!
+
+00:04:38.646 --> 00:04:42.656 align:middle
+Y justo cuando llega a 0, boop, se cierra.
+
+00:04:43.236 --> 00:04:45.636 align:middle
+Vale, me encanta cómo queda esto.
+
+00:04:46.086 --> 00:04:51.316 align:middle
+Pero nuestro brindis se merece un último
+detalle: un elegante fundido de salida...
+
+00:04:51.846 --> 00:04:53.806 align:middle
+en lugar de esta salida abrupta.
+
+00:04:53.806 --> 00:04:56.176 align:middle
+Desvanecer las cosas es un poco complicado.
+
+00:04:56.756 --> 00:05:02.026 align:middle
+Puedes utilizar transiciones CSS -y lo
+haremos- para pasar de una opacidad de 100 a 0.
+
+00:05:02.686 --> 00:05:07.446 align:middle
+Pero entonces también necesitas algo de JavaScript
+para esperar a que termine esa transición CSS para
+
+00:05:07.756 --> 00:05:13.516 align:middle
+poder eliminar finalmente el elemento de la página
+o, al menos, establecer su visualización en ninguno.
+
+00:05:13.516 --> 00:05:18.176 align:middle
+Para ayudarnos con esto, vamos a utilizar
+una biblioteca llamada stimulus-use.
+
+00:05:18.176 --> 00:05:24.586 align:middle
+Los Componentes Stimulus -como vimos antes- son una
+lista de controladores de estímulos reutilizables.
+
+00:05:25.126 --> 00:05:31.186 align:middle
+stimulus-use es un grupo de comportamientos que
+puedes añadir a tus controladores Stimulus.
+
+00:05:31.626 --> 00:05:33.766 align:middle
+Y aquí hay muchas herramientas interesantes.
+
+00:05:34.356 --> 00:05:36.876 align:middle
+La que vamos a utilizar se llama useTransition.
+
+00:05:36.876 --> 00:05:39.876 align:middle
+Así que primer paso, vamos a instalarlo.
+
+00:05:40.356 --> 00:05:45.996 align:middle
+Ejecuta: php bin/console
+importmap:require stimulus-use ¡Genial!
+
+00:05:46.386 --> 00:05:52.926 align:middle
+Luego, en el controlador, impórtalo con
+import { useTransition } from 'stimulus-use':
+
+00:05:53.746 --> 00:05:56.906 align:middle
+Para activar un comportamiento,
+lo llamas desde connect():
+
+00:05:57.346 --> 00:06:01.146 align:middle
+useTransition(this) y le pasas
+las opciones que necesites.
+
+00:06:01.726 --> 00:06:02.996 align:middle
+Voy a pegar unas cuantas:
+
+00:06:03.926 --> 00:06:04.876 align:middle
+Esto es lo que significa
+
+00:06:05.356 --> 00:06:11.756 align:middle
+Mientras este elemento esté "saliendo" u ocultándose,
+la biblioteca añadirá estas tres clases.
+
+00:06:12.316 --> 00:06:17.306 align:middle
+Esto establece que, en caso de que cambie
+alguna propiedad CSS en este elemento,
+
+00:06:17.626 --> 00:06:20.596 align:middle
+queremos tener una transición
+de 200 milisegundos.
+
+00:06:21.086 --> 00:06:24.726 align:middle
+El leaveFrom significa que, en el
+momento en que empiece a ocultarse,
+
+00:06:25.156 --> 00:06:29.896 align:middle
+la biblioteca le dará esta clase:
+establecer su opacidad en 100.
+
+00:06:30.556 --> 00:06:36.156 align:middle
+Un milisegundo después, eliminará
+esta clase y añadirá opacity-0.
+
+00:06:36.726 --> 00:06:40.016 align:middle
+Ese cambio desencadenará la
+transición de 200 milisegundos.
+
+00:06:40.016 --> 00:06:44.816 align:middle
+Por último, transitioned true es
+una forma de decirle a la biblioteca
+
+00:06:44.816 --> 00:06:47.176 align:middle
+que estamos empezando en un estado visible...
+
+00:06:47.716 --> 00:06:50.266 align:middle
+porque también puedes utilizar
+esta biblioteca para empezar oculto
+
+00:06:50.616 --> 00:06:53.436 align:middle
+y luego hacer la transición
+para que tu elemento sea visible.
+
+00:06:53.436 --> 00:06:55.936 align:middle
+Ahora que hemos inicializado el comportamiento,
+
+00:06:56.356 --> 00:07:00.706 align:middle
+nuestro controlador tiene mágicamente
+dos nuevos métodos: leave() y enter().
+
+00:07:01.296 --> 00:07:07.066 align:middle
+Aquí abajo, en close(), en lugar de eliminar el
+elemento nosotros mismos, digamos this.leave():
+
+00:07:07.066 --> 00:07:08.686 align:middle
+¡Probemos esto!
+
+00:07:08.686 --> 00:07:12.516 align:middle
+Gira, actualiza y guarda.
+
+00:07:13.386 --> 00:07:18.396 align:middle
+Observa. Ah, ha sido rápido, ¡pero
+es exactamente lo que queríamos!
+
+00:07:19.126 --> 00:07:22.266 align:middle
+Nuestra notificación de
+tostadas está pulida y lista.
+
+00:07:23.016 --> 00:07:28.276 align:middle
+La aventura de mañana: sumergirnos en la
+tercera y última parte de Turbo: Streams.
+
+00:07:28.816 --> 00:07:34.016 align:middle
+Son la navaja suiza de Turbo, y nos permitirán
+resolver toda una nueva serie de problemas.

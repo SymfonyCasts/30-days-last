@@ -1,0 +1,332 @@
+WEBVTT
+
+00:00:00.066 --> 00:00:04.376 align:middle
+Inspecciona el elemento de esta página
+y dirígete a la consola del navegador.
+
+00:00:04.376 --> 00:00:11.836 align:middle
+Ah, tenemos un registro de consola
+que dice que viene de assets/app.js.
+
+00:00:12.406 --> 00:00:15.866 align:middle
+Y efectivamente, si giramos
+y abrimos ese archivo...
+
+00:00:16.456 --> 00:00:17.366 align:middle
+¡ahí está!
+
+00:00:17.786 --> 00:00:20.126 align:middle
+Pero, ¿cómo se carga este archivo?
+
+00:00:20.796 --> 00:00:23.006 align:middle
+Para responder a eso, mira el
+código fuente de la página.
+
+00:00:23.886 --> 00:00:28.426 align:middle
+Aquí ocurren cosas interesantes,
+pero quiero centrarme en una parte:
+
+00:00:28.926 --> 00:00:31.546 align:middle
+<script type="module">, import 'app';.
+
+00:00:32.246 --> 00:00:37.956 align:middle
+Resulta que todos los navegadores modernos
+-básicamente todos excepto IE 11...
+
+00:00:38.346 --> 00:00:41.336 align:middle
+y no deberías seguir soportando IE 11 -
+
+00:00:41.596 --> 00:00:44.786 align:middle
+ejem todos los navegadores modernos
+soportan módulos JavaScript,
+
+00:00:45.186 --> 00:00:48.496 align:middle
+también conocidos como
+módulos ECMAScript o ESM.
+
+00:00:48.776 --> 00:00:55.486 align:middle
+Pero no son nada del otro mundo: un módulo JavaScript es
+cualquier archivo JavaScript que utilice las sentencias import
+
+00:00:55.486 --> 00:01:00.266 align:middle
+o export a las que probablemente te
+hayas acostumbrado en Webpack Encore.
+
+00:01:00.916 --> 00:01:06.476 align:middle
+La gran novedad es que: ¡los navegadores
+entienden import y export por sí mismos!
+
+00:01:06.766 --> 00:01:08.496 align:middle
+No es necesario ningún paso de compilación.
+
+00:01:08.496 --> 00:01:15.176 align:middle
+Si abres cualquier página HTML y dices <script
+type="module">, el código que hay dentro
+
+00:01:15.176 --> 00:01:17.456 align:middle
+puede utilizar las sentencias import y export.
+
+00:01:18.036 --> 00:01:22.306 align:middle
+Así que... la segunda pregunta
+es: ¿qué demonios es app?
+
+00:01:22.736 --> 00:01:27.406 align:middle
+¿Cómo es que app se refiere en
+última instancia a assets/app.js?
+
+00:01:28.106 --> 00:01:31.996 align:middle
+También se trata de un nuevo truco
+de los navegadores llamado importmaps.
+
+00:01:32.556 --> 00:01:35.846 align:middle
+Y esto no tiene nada que ver
+con Symfony ni con AssetMapper.
+
+00:01:36.516 --> 00:01:40.456 align:middle
+Si en tu página tienes un
+<script type="importmap">,
+
+00:01:40.826 --> 00:01:45.876 align:middle
+éste se convierte en un mapa clave-valor que
+utiliza tu navegador cuando carga módulos.
+
+00:01:46.456 --> 00:01:50.846 align:middle
+Así que si decimos import
+'app', mira dentro de esta lista,
+
+00:01:51.056 --> 00:01:54.576 align:middle
+ve app y en última instancia
+carga este archivo...
+
+00:01:54.996 --> 00:01:57.116 align:middle
+que es servido por AssetMapper.
+
+00:01:57.546 --> 00:01:58.716 align:middle
+¡Es un bonito trabajo en equipo!
+
+00:01:59.396 --> 00:02:02.276 align:middle
+Los mapas de importación son compatibles
+con todos los navegadores modernos...
+
+00:02:02.476 --> 00:02:05.976 align:middle
+aunque tiene algo menos de soporte
+que los módulos JavaScript.
+
+00:02:05.976 --> 00:02:12.586 align:middle
+Afortunadamente, existe un shim o polyfill
+para que si tu usuario utiliza un navegador
+
+00:02:12.586 --> 00:02:17.336 align:middle
+que no admite importmaps, ese
+shim lo añada y todo funcione.
+
+00:02:18.026 --> 00:02:22.076 align:middle
+La última pregunta que me hago es:
+¿de dónde demonios viene todo esto?
+
+00:02:22.786 --> 00:02:26.336 align:middle
+Para responderla, abre
+templates/base.html.twig.
+
+00:02:26.916 --> 00:02:31.896 align:middle
+Todo viene de esta línea de
+aquí: {{ importmap('app') }}:
+
+00:02:32.506 --> 00:02:39.116 align:middle
+Como hemos pasado app, esto generará un <script
+type="module"> con import 'app' dentro.
+
+00:02:39.686 --> 00:02:45.456 align:middle
+Pero esto también vuelca el polyfill, algunas
+precargas -son buenas para el rendimiento,
+
+00:02:45.456 --> 00:02:50.366 align:middle
+pero no son necesarias- y, por supuesto,
+el propio mapa de importación.
+
+00:02:50.466 --> 00:02:55.096 align:middle
+El mapa de importación se genera principalmente,
+aunque no totalmente (ya hablaremos de ello),
+
+00:02:55.426 --> 00:02:58.526 align:middle
+a partir de este archivo importmap.php:
+
+00:02:59.346 --> 00:03:02.766 align:middle
+Cuando instalamos AssetMapper, su
+receta nos proporcionó este archivo.
+
+00:03:03.156 --> 00:03:05.656 align:middle
+Y ésta es la razón por la que el importmap
+
+00:03:05.656 --> 00:03:11.166 align:middle
+de nuestro HTML tiene una clave
+app que apunta a assets/app.js.
+
+00:03:11.276 --> 00:03:14.376 align:middle
+Así que quiero jugar un
+poco con este nuevo sistema.
+
+00:03:14.796 --> 00:03:18.626 align:middle
+Dentro del directorio assets/
+-podemos organizarlo como queramos-
+
+00:03:18.856 --> 00:03:22.796 align:middle
+crea un directorio lib/ con
+un archivo alien-greeting.js.
+
+00:03:22.796 --> 00:03:29.286 align:middle
+Dentro, voy a escribir algo de JavaScript
+impresionante y moderno: export default una función,
+
+00:03:30.066 --> 00:03:32.926 align:middle
+le daré message y inPeace argumentos...
+
+00:03:34.346 --> 00:03:40.526 align:middle
+y luego registraré un mensaje utilizando un literal de plantilla
+-los elegantes signos de retroceso- y algunos emojis: ¡Genial!
+
+00:03:41.046 --> 00:03:46.946 align:middle
+Este nuevo archivo vive dentro de assets/ así
+que, técnicamente, está disponible públicamente.
+
+00:03:47.556 --> 00:03:49.426 align:middle
+Pero... nadie lo utiliza todavía.
+
+00:03:50.266 --> 00:03:53.256 align:middle
+Intentemos algo no tradicional,
+pero divertido para empezar.
+
+00:03:53.796 --> 00:03:59.126 align:middle
+Entra en el diseño base y, en cualquier
+lugar, pon <script type="module">.
+
+00:04:00.646 --> 00:04:02.966 align:middle
+Dentro, import alienGreeting...
+
+00:04:03.286 --> 00:04:07.826 align:middle
+y pulsa tabulador: Hmm:
+PhpStorm ha utilizado ../assets
+
+00:04:07.826 --> 00:04:09.556 align:middle
+para la ruta. Eso
+
+00:04:10.536 --> 00:04:12.136 align:middle
+no va a funcionar. En su lugar,
+
+00:04:12.136 --> 00:04:19.576 align:middle
+podemos utilizar la función asset() y la ruta
+lógica: lib/alien-greeting.js. A continuación,
+
+00:04:20.526 --> 00:04:27.786 align:middle
+utiliza eso: alienGreeting() ¡un mensaje
+y no vendremos en son de paz! ¡ A
+
+00:04:29.286 --> 00:04:30.316 align:middle
+ver si funciona! Cierra
+
+00:04:30.966 --> 00:04:32.216 align:middle
+eso, y ... ¿no funciona
+
+00:04:32.536 --> 00:04:33.766 align:middle
+? ¡
+
+00:04:34.306 --> 00:04:35.876 align:middle
+En realidad pensaba que sí!
+
+00:04:36.326 --> 00:04:43.076 align:middle
+Obtenemos un 404 para lib/alien-greeing.js
+- ¡sin "t"...! ¡Boop!
+
+00:04:44.566 --> 00:04:47.576 align:middle
+¡Ahora funciona! Sin
+
+00:04:47.956 --> 00:04:51.116 align:middle
+construcción, código
+bonito, nada especial. Si
+
+00:04:51.116 --> 00:04:58.076 align:middle
+ves el código fuente de la página, tenemos, por supuesto,
+este bonito nombre de archivo versionado en import. Así que
+
+00:04:58.776 --> 00:05:03.266 align:middle
+puedes importar cosas sencillas como
+app y confiar en que importmap apunte
+
+00:05:03.266 --> 00:05:06.326 align:middle
+al verdadero nombre de archivo, o
+puedes incluir rutas completas. Por
+
+00:05:07.196 --> 00:05:11.386 align:middle
+muy divertido que haya sido hackear
+esto en el HTML, en realidad,
+
+00:05:11.506 --> 00:05:14.836 align:middle
+no solemos escribir código
+en línea como éste. Copia
+
+00:05:15.536 --> 00:05:20.556 align:middle
+esto, deshazte de <script
+type="module">: Luego entra en app.js. Pega
+
+00:05:21.546 --> 00:05:27.056 align:middle
+el código aquí: Y ahora que estamos dentro de
+JavaScript, cuando hagamos referencia a una ruta,
+
+00:05:27.216 --> 00:05:30.636 align:middle
+podemos escribirla con rutas normales
+y relativas: ./alien-greeting.js: Este
+
+00:05:30.916 --> 00:05:35.456 align:middle
+es el código exacto que
+tendríamos en Web pack
+
+00:05:35.456 --> 00:05:39.056 align:middle
+Encore, con una pequeña
+diferencia. En Webpack, no necesitas
+
+00:05:39.716 --> 00:05:44.076 align:middle
+tener el .js al final. Resulta
+
+00:05:44.076 --> 00:05:49.516 align:middle
+que omitir la extensión es algo
+específico de Node. En JavaScript real
+
+00:05:50.256 --> 00:05:53.476 align:middle
+, sí necesitas la extensión. Así que tienes
+
+00:05:53.736 --> 00:05:57.276 align:middle
+que añadir .js. Y...
+
+00:05:57.276 --> 00:05:59.206 align:middle
+¡funciona! Por
+
+00:05:59.916 --> 00:06:04.916 align:middle
+cierto, si dejas que PhpStorm autocomplete la
+ruta al archivo JavaScript importado, por defecto
+
+00:06:05.316 --> 00:06:08.806 align:middle
+no incluirá el .js al final. Para solucionarlo
+
+00:06:08.806 --> 00:06:11.206 align:middle
+, abre la configuración... y
+
+00:06:11.556 --> 00:06:13.436 align:middle
+busca "extensiones". Ahí
+
+00:06:13.926 --> 00:06:17.066 align:middle
+está "Editor"=>"Estilo de
+código"=> "JavaScript". Justo aquí,
+
+00:06:17.936 --> 00:06:21.826 align:middle
+cambia "usar extensión de archivo"
+a "siempre". Bien, ¡el día
+
+00:06:22.986 --> 00:06:25.316 align:middle
+3 está en los libros! Mañana
+
+00:06:25.866 --> 00:06:28.926 align:middle
+haremos que nuestra configuración de
+JavaScript sea mucho más potente aprendiendo
+
+00:06:29.056 --> 00:06:32.286 align:middle
+a instalar paquetes de terceros

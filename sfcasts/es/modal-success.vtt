@@ -1,0 +1,455 @@
+WEBVTT
+
+00:00:01.116 --> 00:00:02.596 align:middle
+Hemos estado ocupados.
+
+00:00:03.256 --> 00:00:07.736 align:middle
+Hemos creado un sistema modal reutilizable
+basado en AJAX que me encanta.
+
+00:00:08.286 --> 00:00:10.536 align:middle
+El envío con errores de
+validación ya funciona.
+
+00:00:10.816 --> 00:00:11.936 align:middle
+¿Y el éxito?
+
+00:00:12.216 --> 00:00:13.606 align:middle
+Ya casi está.
+
+00:00:15.016 --> 00:00:15.746 align:middle
+Cuando guardamos...
+
+00:00:16.086 --> 00:00:18.966 align:middle
+no recibimos ninguna notificación,
+pero el modal se cerró.
+
+00:00:19.796 --> 00:00:21.816 align:middle
+La razón por la que se cerró es importante.
+
+00:00:22.176 --> 00:00:24.856 align:middle
+En la acción new(), redirigimos
+a la página índice.
+
+00:00:25.106 --> 00:00:28.356 align:middle
+Esa página amplía la normal base.html.twig...
+
+00:00:28.776 --> 00:00:32.246 align:middle
+por lo que sí tiene un
+<turbo-frame id="modal">...
+
+00:00:32.466 --> 00:00:34.326 align:middle
+pero está vacío.
+
+00:00:35.006 --> 00:00:37.216 align:middle
+Esto significa que el marco modal se vacía,
+
+00:00:37.336 --> 00:00:41.676 align:middle
+nuestro controlador modal
+Stimulus se da cuenta y lo cierra.
+
+00:00:42.356 --> 00:00:46.336 align:middle
+En general, cuando añades un <turbo-frame>
+alrededor de algo -como en la página de inicio
+
+00:00:46.336 --> 00:00:50.696 align:middle
+con nuestra barra lateral de planetas- tienes que
+pensar a dónde apuntan los enlaces que hay dentro.
+
+00:00:51.156 --> 00:00:54.866 align:middle
+Tenemos que asegurarnos de que cada uno vaya a una
+página que tenga un <turbo-frame> correspondiente.
+
+00:00:55.656 --> 00:01:00.676 align:middle
+Cuando un formulario está dentro de <turbo-frame>,
+tenemos que pensar en lo que ocurre cuando se envía.
+
+00:01:01.186 --> 00:01:04.436 align:middle
+El caso de error es fácil: siempre
+muestra la misma página que tiene
+
+00:01:04.436 --> 00:01:07.126 align:middle
+el mismo marco con los errores dentro.
+
+00:01:07.716 --> 00:01:12.066 align:middle
+Pero en caso de éxito, tenemos que pensar a
+dónde redirige el formulario y preguntarnos
+
+00:01:12.416 --> 00:01:17.126 align:middle
+¿tiene esa página un <turbo-frame>
+que coincida y contiene el contenido correcto?
+
+00:01:17.126 --> 00:01:21.076 align:middle
+En el caso de este modal y la
+página índice, es perfecto:
+
+00:01:21.556 --> 00:01:25.136 align:middle
+hay un marco coincidente, está
+vacío y el modal se cierra.
+
+00:01:26.486 --> 00:01:29.046 align:middle
+Vale, ¡volvamos a la notificación
+de tostadas que falta!
+
+00:01:29.816 --> 00:01:34.416 align:middle
+Esta es una situación en la que necesitamos
+actualizar el <turbo-frame> -para vaciarlo-
+
+00:01:34.416 --> 00:01:37.716 align:middle
+y también necesitamos actualizar
+otra zona de la página:
+
+00:01:38.346 --> 00:01:41.896 align:middle
+necesitamos renderizar los mensajes
+flash de éxito en el contenedor flash.
+
+00:01:42.426 --> 00:01:46.226 align:middle
+Se trata de una necesidad súper común cuando se
+envía un formulario dentro de un <turbo-frame>.
+
+00:01:46.726 --> 00:01:50.946 align:middle
+Así que vamos a resolver esto,
+creo, de una forma genial y global.
+
+00:01:51.616 --> 00:01:55.886 align:middle
+Cuando redirijamos con éxito, este
+<turbo-frame> se cargará finalmente
+
+00:01:55.886 --> 00:01:58.536 align:middle
+en la página, lo que hará
+que se cierre el modal.
+
+00:01:58.986 --> 00:02:07.226 align:middle
+Dentro de él, añade un <turbo-stream>
+con action="append" y target="flash-container":
+
+00:02:08.556 --> 00:02:12.966 align:middle
+Cuando añadimos el sistema de tostadas,
+añadimos un elemento con id="flash-container:
+
+00:02:13.356 --> 00:02:18.276 align:middle
+Entonces no lo necesitábamos, pero ahora nos
+va a venir bien porque podemos apuntar a él
+
+00:02:18.276 --> 00:02:20.776 align:middle
+para añadirle mensajes flash.
+
+00:02:21.526 --> 00:02:25.456 align:middle
+Dentro del flujo, añade la
+etiqueta template, por supuesto,
+
+00:02:25.456 --> 00:02:30.986 align:middle
+y luego {{ include('_flashes.html.twig')
+}}: Esto renderizará los mensajes flash...
+
+00:02:31.216 --> 00:02:33.916 align:middle
+y el flujo los añadirá a ese contenedor.
+
+00:02:34.846 --> 00:02:35.876 align:middle
+¡Vamos a probarlo!
+
+00:02:35.876 --> 00:02:40.156 align:middle
+Rellena un nuevo viaje, envíalo y...
+
+00:02:40.526 --> 00:02:42.686 align:middle
+no pasa absolutamente nada.
+
+00:02:43.186 --> 00:02:43.866 align:middle
+El problema...
+
+00:02:43.966 --> 00:02:44.766 align:middle
+es sutil.
+
+00:02:45.356 --> 00:02:50.076 align:middle
+Cuando redirigimos a la página índice,
+Symfony renderiza toda esa página...
+
+00:02:50.356 --> 00:02:54.626 align:middle
+a pesar de que Turbo sólo utilizará la
+página <turbo-frame id="modal">.
+
+00:02:55.676 --> 00:02:58.566 align:middle
+Esto significa que, justo antes
+de renderizar este código,
+
+00:02:58.876 --> 00:03:01.596 align:middle
+nuestro contenedor flash
+renderiza los mensajes flash...
+
+00:03:01.856 --> 00:03:04.416 align:middle
+lo que los elimina del sistema flash.
+
+00:03:05.006 --> 00:03:09.966 align:middle
+Así que los mensajes flash están en el
+HTML que devolvemos de la llamada Ajax...
+
+00:03:10.186 --> 00:03:14.236 align:middle
+pero como no están dentro de
+<turbo-frame>, no llegan a la página.
+
+00:03:14.236 --> 00:03:22.306 align:middle
+La solución es fácil: asegúrate de que tu
+contenedor flash está después del modal: Prueba esto.
+
+00:03:23.176 --> 00:03:23.646 align:middle
+Actualiza...
+
+00:03:23.946 --> 00:03:25.236 align:middle
+y rellena el formulario.
+
+00:03:28.486 --> 00:03:32.846 align:middle
+¡Ya está! El modal se cierra, ¡y el
+<turbo-stream> activa el brindis!
+
+00:03:33.166 --> 00:03:34.686 align:middle
+¡Y esto es realmente genial!
+
+00:03:35.156 --> 00:03:41.236 align:middle
+Cuando redirigimos, el <turbo-frame> ahora no
+está vacío: contiene el flash <turbo-stream>.
+
+00:03:41.806 --> 00:03:45.036 align:middle
+Pero recuerda: en cuanto se
+activa un <turbo-stream>,
+
+00:03:45.376 --> 00:03:48.076 align:middle
+se ejecuta y luego desaparece.
+
+00:03:48.656 --> 00:03:53.426 align:middle
+Una vez que eso ocurre, el <turbo-frame>
+queda vacío y el modal se cierra.
+
+00:03:53.916 --> 00:03:55.266 align:middle
+Eso me encanta.
+
+00:03:56.336 --> 00:03:59.506 align:middle
+Lo que me encanta del sistema
+modal es que funciona...
+
+00:03:59.706 --> 00:04:02.916 align:middle
+y no hemos necesitado hacer ningún
+cambio en nuestro controlador.
+
+00:04:03.686 --> 00:04:08.566 align:middle
+Pero ahora, tenemos que pensar en cualquier
+comportamiento extra opcional que podamos querer.
+
+00:04:08.566 --> 00:04:13.306 align:middle
+Por ejemplo, ¿podríamos anteponer
+a la tabla el nuevo viaje?
+
+00:04:13.686 --> 00:04:17.246 align:middle
+Porque, ahora mismo, no lo vemos
+hasta después de actualizar.
+
+00:04:18.146 --> 00:04:19.066 align:middle
+Intentémoslo
+
+00:04:20.026 --> 00:04:22.726 align:middle
+En index.html.twig, busca la table.
+
+00:04:23.546 --> 00:04:25.976 align:middle
+Tenemos que añadirlo a tbody.
+
+00:04:26.996 --> 00:04:33.306 align:middle
+Para ello, en el table, añade
+un id="voyage-list": Pensemos:
+
+00:04:33.726 --> 00:04:38.806 align:middle
+este es otro caso en el que necesitamos actualizar
+algo que vive fuera del <turbo-frame>.
+
+00:04:39.226 --> 00:04:41.276 align:middle
+Por tanto, necesitamos un flujo.
+
+00:04:42.126 --> 00:04:45.776 align:middle
+Abre new.html.twig y después del bloque body,
+
+00:04:46.196 --> 00:04:49.546 align:middle
+añade un nuevo bloque llamado
+stream_success, luego endblock.
+
+00:04:50.886 --> 00:04:55.986 align:middle
+Dentro, añadiremos los Turbo Streams que
+necesitemos para que el envío brille de verdad.
+
+00:04:56.716 --> 00:05:01.336 align:middle
+Añade un <turbo-stream>
+action="prepend" y luego targets="".
+
+00:05:02.186 --> 00:05:08.016 align:middle
+La "s" en los objetivos significa que podemos
+utilizar un selector CSS: #voyage-list tbody.
+
+00:05:08.016 --> 00:05:13.036 align:middle
+Añade el elemento <template>...
+
+00:05:13.036 --> 00:05:19.686 align:middle
+y, por ahora, un <tr><td> {{ voyage.purpose }} :
+Vale, así que tenemos un nuevo bloque en nuestra plantilla...
+
+00:05:19.916 --> 00:05:21.546 align:middle
+que nadie está utilizando.
+
+00:05:21.546 --> 00:05:24.746 align:middle
+De alguna manera, tenemos
+que coger este flujo Turbo...
+
+00:05:24.946 --> 00:05:30.996 align:middle
+y, tras la redirección, renderizarlo en la
+página siguiente en el modal <turbo-frame>.
+
+00:05:31.646 --> 00:05:32.916 align:middle
+¿Cómo lo hacemos?
+
+00:05:33.446 --> 00:05:37.916 align:middle
+Tenemos dos opciones -y
+mostraré la segunda el Día 24-.
+
+00:05:38.356 --> 00:05:39.816 align:middle
+Pero éste es el sistema que me gusta.
+
+00:05:39.816 --> 00:05:44.066 align:middle
+En primer lugar, sólo tenemos que
+preocuparnos de anteponer la fila de la tabla
+
+00:05:44.176 --> 00:05:47.006 align:middle
+cuando estamos enviando dentro
+de un <turbo-frame>.
+
+00:05:47.006 --> 00:05:53.236 align:middle
+Si fuéramos directamente a la página del nuevo
+viaje -que no tiene marco- y la enviáramos,
+
+00:05:53.736 --> 00:05:56.356 align:middle
+no necesitaríamos nada de Turbo Stream.
+
+00:05:56.356 --> 00:05:59.326 align:middle
+Navegaríamos por la página completa
+y la renderizaríamos normalmente.
+
+00:05:59.636 --> 00:06:00.426 align:middle
+Bonito y sencillo.
+
+00:06:00.426 --> 00:06:06.436 align:middle
+Así que, en el controlador, empieza con if
+$request->headers->has('turbo-frame').
+
+00:06:06.436 --> 00:06:13.466 align:middle
+Si el envío del formulario se produce dentro de
+<turbo-frame>, entonces queremos utilizar nuestro flujo.
+
+00:06:14.296 --> 00:06:19.816 align:middle
+Renderiza ese bloque con $stream igual y luego
+un método de controlador relativamente nuevo:
+
+00:06:19.816 --> 00:06:25.066 align:middle
+$this->renderBlockView()
+pasando voyage/new.html.twig.
+
+00:06:25.066 --> 00:06:27.856 align:middle
+En lugar de renderizar toda la plantilla,
+
+00:06:28.076 --> 00:06:33.266 align:middle
+para renderizar un solo bloque pasa
+esto, lo has adivinado, stream_success.
+
+00:06:33.986 --> 00:06:34.686 align:middle
+En realidad...
+
+00:06:34.686 --> 00:06:36.396 align:middle
+Creo que me falta una "s".
+
+00:06:37.046 --> 00:06:39.006 align:middle
+Así es Mejor.
+
+00:06:40.376 --> 00:06:42.176 align:middle
+Pasa a la plantilla una variable voyage.
+
+00:06:43.626 --> 00:06:49.406 align:middle
+Para pasar la cadena <turbo-stream> a la página
+siguiente, añádela a un nuevo flash llamado stream:
+
+00:06:51.416 --> 00:06:55.736 align:middle
+Por último, cuando redirijamos a la página
+índice y se renderice este <turbo-frame>,
+
+00:06:56.136 --> 00:07:00.806 align:middle
+haz salir de ese flash: for
+stream in app.flashes('stream'),
+
+00:07:03.186 --> 00:07:12.356 align:middle
+endfor con {{ stream|raw }} para que renderice los
+elementos HTML en bruto: ¡Creo que ya estamos listos!
+
+00:07:12.886 --> 00:07:13.406 align:middle
+Actualiza...
+
+00:07:13.916 --> 00:07:17.956 align:middle
+añade un nuevo viaje y...
+
+00:07:18.796 --> 00:07:20.236 align:middle
+¡es increíble!
+
+00:07:20.626 --> 00:07:25.906 align:middle
+La llamada Ajax redirigía a la página índice,
+donde el marco modal tenía 2 Turbo streams:
+
+00:07:26.286 --> 00:07:29.256 align:middle
+uno para renderizar la tostada y
+el otro para preagregar la tabla.
+
+00:07:30.126 --> 00:07:33.336 align:middle
+Último paso, preagregar el contenido real.
+
+00:07:34.026 --> 00:07:35.716 align:middle
+Lo que queremos es este tr.
+
+00:07:36.566 --> 00:07:41.696 align:middle
+Para obtenerlo desde dentro de new.html.twig,
+tenemos que aislarlo en su propia plantilla.
+
+00:07:42.586 --> 00:07:47.626 align:middle
+Cópiala, bórrala e incluye
+voyage/_row.html.twig:
+
+00:07:48.896 --> 00:07:50.186 align:middle
+Ve a crear esa plantilla...
+
+00:07:51.686 --> 00:07:53.646 align:middle
+y pégala: Fácil. Copia la
+
+00:07:54.946 --> 00:07:58.746 align:middle
+declaración include() y, en new.html.twig,
+
+00:07:58.986 --> 00:08:02.636 align:middle
+úsala para el flujo: ¡Intentémoslo!
+
+00:08:03.636 --> 00:08:07.676 align:middle
+Crea otro viaje y...
+
+00:08:08.186 --> 00:08:09.086 align:middle
+¡precioso!
+
+00:08:09.296 --> 00:08:13.806 align:middle
+El modal se cierra, la notificación tostada
+se renderiza y la página se actualiza.
+
+00:08:14.236 --> 00:08:15.876 align:middle
+Es todo lo que queremos.
+
+00:08:16.686 --> 00:08:19.456 align:middle
+Mañana vamos a poner a prueba
+nuestro nuevo sistema modal
+
+00:08:19.526 --> 00:08:21.916 align:middle
+abriendo el enlace de
+edición dentro de un modal.
+
+00:08:22.456 --> 00:08:26.346 align:middle
+Prometí que sería reutilizable,
+y mañana lo probaremos...
+
+00:08:26.686 --> 00:08:29.456 align:middle
+con unas cuantas bolas curvas
+para hacerlo más realista.

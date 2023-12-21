@@ -1,6 +1,6 @@
 # Turbo Stream Responses
 
-For day 22, strap in for a quick adventure. We've learned that Turbo Streams are
+For day 24, strap in for a quick adventure. We've learned that Turbo Streams are
 custom HTML elements that you can throw onto the page *anywhere*... and they execute!
 But there's another way to use Streams that's actually more commonly-documented,
 even if I'm using it a bit less lately.

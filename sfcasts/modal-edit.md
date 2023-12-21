@@ -133,7 +133,7 @@ But the delete action doesn't *need* to submit into a frame. We're never going
 to click "Delete" then want to *show* something in the modal. A full page
 navigation would be *fine*.
 
-To do that, in `_delete_form.html.twig`, on the frame, add `target="_top"`.
+To do that, in `_delete_form.html.twig`, on the frame, add `data-turbo-frame="_top"`.
 
 Now, edit, delete, and... the redirect causes a full page navigation, which
 is *fine*.
@@ -144,7 +144,7 @@ Though, yes, it *could* be smoother. Scroll down a bit...
 and delete one. The page scrolls back to the top.
 
 Like with anything, if this is important to us, we can improve it. Remove
-the `target="_top"`.
+the `data-turbo-frame="_top"`.
 
 When a form - even our delete form - exists inside a `<turbo-frame>`, we need to
 ask: where is this being used and what do I need to update to make the page

@@ -151,19 +151,19 @@ php bin/console importmap:require
 js-confetti ¡Ya está! Vuelve a girar y...
 
 00:02:43.816 --> 00:02:46.076 align:middle
-¡a celebrarlo! ¡Funciona! ¡
+¡a celebrarlo! ¡Funciona!
 
 00:02:46.976 --> 00:02:48.416 align:middle
-Refrescante locura !
+¡Refrescante locura!
 
 00:02:48.756 --> 00:02:50.926 align:middle
-¿Cómo funciona
+¿Cómo funciona?
 
 00:02:51.656 --> 00:02:52.946 align:middle
-? ¿Karma? Bueno, como es lógico
+¿Karma? Bueno, como es lógico,
 
 00:02:53.396 --> 00:02:57.836 align:middle
-, si ves el código fuente
+si ves el código fuente
 de la página, tenemos una
 
 00:02:58.166 --> 00:03:02.516 align:middle
@@ -245,39 +245,42 @@ Falta el activo de vendedor js-confetti
 
 00:04:24.166 --> 00:04:29.476 align:middle
 : prueba a ejecutar el comando
-importmap:install. ¡Buena idea! Gira
+importmap:install.
 
 00:04:30.256 --> 00:04:31.356 align:middle
-e
+¡Buena idea!
 
 00:04:31.916 --> 00:04:37.796 align:middle
-inténtalo: php bin/console importmap:install
+Gira e inténtalo: php bin/console importmap:install
 Igual que composer install, que descarga lo que
 
 00:04:38.026 --> 00:04:41.216 align:middle
 necesites en assets/vendor/... y ahora
 
 00:04:42.096 --> 00:04:44.306 align:middle
-simplemente funciona. ¡Ya está! Al
+simplemente funciona. ¡Ya está!
 
 00:04:45.046 --> 00:04:45.646 align:middle
-cuarto día,
+Al cuarto día,
 
 00:04:45.896 --> 00:04:49.566 align:middle
 ¡ya hemos resuelto los paquetes
-de terceros! ¡ Ni siquiera
+de terceros! ¡Ni siquiera
 
 00:04:50.026 --> 00:04:52.716 align:middle
 necesitamos un directorio
-node_modules/ gigante! Voy a
+node_modules/ gigante!
 
 00:04:53.166 --> 00:04:55.466 align:middle
-tener que encontrar otra forma de llenar mi
-disco duro. ¿Tal vez, más contenedores Docker
+Voy a tener que encontrar otra forma de 
+llenar mi disco duro.
 
 00:04:56.116 --> 00:04:57.796 align:middle
-? Vale, para la
+¿Tal vez, más contenedores Docker?
 
 00:04:58.536 --> 00:05:02.736 align:middle
-aventura de mañana, vamos a animar nuestro
-sitio con algo de CSS. ¡Permanece atento!
+Vale, para la aventura de mañana, vamos a animar nuestro
+sitio con algo de CSS. 
+
+00:05:03.166 --> 00:05:03.866 align:middle
+¡Permanece atento!

@@ -15,18 +15,28 @@ die trying. Hopefully we'll do it... I think we'll do it.
 
 To get this going, copy the entire modal markup. There we go. Then go into
 `base.html.twig` and, all the way at the bottom, before the closing `body` tag,
-paste. Back in `index.html.twig`, remove the `dialog`... and we don't need the modal
-controller stuff anymore.
+paste:
+
+[[[ code('b22f94064a') ]]]
+
+Back in `index.html.twig`, remove the `dialog`... and we don't need the modal
+controller stuff anymore:
+
+[[[ code('49b60af471') ]]]
 
 This is now a normal `h1` and a normal button... that doesn't do anything. In
 `base.html.twig`, do the opposite: remove the `button`, the `h1` and the class on
-the div.
+the div:
+
+[[[ code('fd70f2df79') ]]]
 
 It's now a div that contains a `dialog`... that's closed.
 
 Now for the magic touch: remove the guts of the `dialog`: only keep these two
 divs: they help give us padding and nice scroll behavior. Inside, add a
-`<turbo-frame>` with `id="modal"`.
+`<turbo-frame>` with `id="modal"`:
+
+[[[ code('0bcb7e773e') ]]]
 
 That, my friends, was a coding power move. On every page, we now have a
 `<turbo-frame id="modal">` that we can dynamically load content into! *And*,
@@ -36,7 +46,9 @@ it lives inside a dialog!
 
 Watch: on the index page, change the new voyage button to an `a` tag and set its
 `href` to the  `app_voyage_new` route. It's a normal tag that would take us to that
-page. But now add `data-turbo-frame="modal"`.
+page. But now add `data-turbo-frame="modal"`:
+
+[[[ code('df2cbe6b1b') ]]]
 
 Check it out. Refresh and click. Instead of changing the page, it loaded the
 content into the `modal` frame. But... nothing happened.
@@ -48,7 +60,9 @@ we click that link, it *does* work... but the result is that the Turbo frame sta
 empty. Not super helpful.
 
 To fix this, in `new.html.twig`, add a `<turbo-frame id="modal">` around everything...
-with a closing tag at the bottom.
+with a closing tag at the bottom:
+
+[[[ code('a85e571f6e') ]]]
 
 Check it out. When we click now, yes! Inside the `<turbo-frame>`, we have the
 form! The modal isn't opening yet, but it's *ready*.
@@ -69,20 +83,26 @@ matching frame... but it's empty.
 That's not what I want. If I go to this page directly, I want it to act like normal.
 
 We're going to handle this with a trick. In `new.html.twig`, remove the `<turbo-frame>`...
-and extend a new base template called `modalBase.html.twig`.
+and extend a new base template called `modalBase.html.twig`:
+
+[[[ code('878b84781f') ]]]
 
 Ooh. Copy that name and in the `templates/` directory, create it: `modalBase.html.twig`.
 This will have one line: an extends tag that's dynamic. If
 `app.request.headers.get('turbo-frame')` equals `modal` - so if an AJAX request is
 being made to this page from the `modal` turbo frame, extend a new
-`modalFrame.html.twig`. Else, extend the normal `base.html.twig`.
+`modalFrame.html.twig`. Else, extend the normal `base.html.twig`:
+
+[[[ code('7fc5821f78') ]]]
 
 If we go to the page like normal, it will extend `base.html.twig`. There's
 no turbo frame here, it's completely normal, and it will submit like normal.
 
 Let's create that other base template. Copy its name and, in `templates/`,
 create `modalFrame.html.twig`. All this needs is a `<turbo-frame id="modal">`...
-with `{% block body %}` and `{% endblock %}` inside.
+with `{% block body %}` and `{% endblock %}` inside:
+
+[[[ code('c714229c01') ]]]
 
 So if we make a request to this page from the `modal` frame, the *entire* response
 will be this single frame with the page's content inside.
@@ -106,12 +126,19 @@ a good user experience.
 For part one - opening this modal as soon as there's content in the `turbo-frame` -
 we're going to use a trick inside our Stimulus controller. Let me close a few
 files. In `base.html.twig`, make this `turbo-frame` a target:
-`data-modal-target="dynamicContent"`.
+`data-modal-target="dynamicContent"`:
+
+[[[ code('ea56292f14') ]]]
 
 Here's the idea: if a modal has this target and HTML gets inside of this element
 for any reason, I want our code to *notice* that and open the modal. To do that,
-in `modal_controller.js`, add that target. And then I'll paste in the most
-complex code that we're going to see in this tutorial.
+in `modal_controller.js`, add that target:
+
+[[[ code('7b329d2d06') ]]]
+
+And then I'll paste in the most complex code that we're going to see in this tutorial:
+
+[[[ code('97111bc9e5') ]]]
 
 But, hold on: even if it looks complex, what it's *doing* is simple. If we
 have a `dynamicContent` target, this code watches that element for any changes.

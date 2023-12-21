@@ -1,0 +1,210 @@
+WEBVTT
+
+00:00:01.066 --> 00:00:05.326 align:middle
+Una parte importante de cualquier sitio bonito
+y funcional es un sistema de notificaciones.
+
+00:00:05.716 --> 00:00:11.066 align:middle
+En Symfony, a menudo pensamos en mensajes flash:
+mensajes que mostramos cerca de la parte superior
+
+00:00:11.066 --> 00:00:14.396 align:middle
+de la página, por ejemplo, después
+de que el usuario envíe un formulario.
+
+00:00:14.936 --> 00:00:17.806 align:middle
+Y sí, a eso me refiero.
+
+00:00:18.266 --> 00:00:21.966 align:middle
+Pero no nos basta con mostrarlos en la
+parte superior de la página. En lugar de
+
+00:00:22.456 --> 00:00:27.546 align:middle
+eso, quiero mostrarlas como notificaciones ricas,
+de estilo tostado, en la parte superior derecha
+
+00:00:27.766 --> 00:00:33.076 align:middle
+, que desaparezcan automáticamente con transiciones
+CSS y que puedan atarme los zapatos por mí.
+
+00:00:34.336 --> 00:00:38.546 align:middle
+En nuestros controladores CRUD, ya estoy
+configurando un mensaje flash success...
+
+00:00:38.876 --> 00:00:40.766 align:middle
+pero no lo estoy renderizando en ningún sitio.
+
+00:00:40.766 --> 00:00:46.006 align:middle
+En el directorio templates/,
+crea un nuevo _flashes.html.twig.
+
+00:00:47.256 --> 00:00:53.606 align:middle
+Para empezar, haz un bucle sobre los mensajes de
+éxito con for message in app.flashes('success') ...
+
+00:00:54.586 --> 00:00:55.526 align:middle
+y endfor:
+
+00:00:56.696 --> 00:00:59.726 align:middle
+Dentro, pegaré un mensaje flash muy simple,
+
+00:01:00.226 --> 00:01:03.046 align:middle
+que empezará a fijarse en la parte
+inferior de la página: A continuación
+
+00:01:04.016 --> 00:01:08.966 align:middle
+, en base.html.twig, en lugar de poner
+los flashes cerca de la parte superior
+
+00:01:08.966 --> 00:01:10.956 align:middle
+del cuerpo, ponlos en la parte inferior.
+
+00:01:12.626 --> 00:01:20.106 align:middle
+Digamos <div id="flash-container"> y
+luego {{ include('_flashes.html.twig') }}:
+
+00:01:20.856 --> 00:01:26.176 align:middle
+El id="flash-container" no es importante
+todavía, pero será útil más adelante
+
+00:01:26.246 --> 00:01:27.886 align:middle
+cuando hablemos de los flujos Turbo.
+
+00:01:28.386 --> 00:01:30.136 align:middle
+Veamos si funciona
+
+00:01:30.856 --> 00:01:32.186 align:middle
+Pulsa "Guardar" y...
+
+00:01:32.556 --> 00:01:33.386 align:middle
+¡ya está!
+
+00:01:33.856 --> 00:01:36.816 align:middle
+Está en un sitio raro, pero aparece.
+
+00:01:37.826 --> 00:01:40.766 align:middle
+Para que quede más bonito, vamos a Flowbite.
+
+00:01:41.936 --> 00:01:43.116 align:middle
+Busca "tostada".
+
+00:01:46.116 --> 00:01:52.106 align:middle
+Ah, esto tiene algunos ejemplos geniales de
+diferentes estilos de notificaciones tostadas.
+
+00:01:53.616 --> 00:01:55.376 align:middle
+¡Esto me hace sentir peligroso!
+
+00:01:55.896 --> 00:01:59.696 align:middle
+De vuelta en _flashes.html.twig,
+voy a pegar algo de contenido:
+
+00:02:00.656 --> 00:02:03.586 align:middle
+Esto está muy inspirado en
+los ejemplos de Flowbite.
+
+00:02:03.856 --> 00:02:07.576 align:middle
+Pero en realidad no ha cambiado nada: seguimos
+haciendo bucles sobre la misma colección
+
+00:02:07.576 --> 00:02:09.476 align:middle
+y seguimos volcando el mensaje.
+
+00:02:09.806 --> 00:02:11.896 align:middle
+Sólo tenemos un bonito
+marcado alrededor de esto.
+
+00:02:11.976 --> 00:02:13.176 align:middle
+¡Y no puedo querer verlo!
+
+00:02:13.786 --> 00:02:15.646 align:middle
+Voy a editar y a "Guardar".
+
+00:02:16.726 --> 00:02:18.996 align:middle
+¡Qué maravilla!
+
+00:02:19.566 --> 00:02:22.926 align:middle
+En la parte superior derecha donde
+lo quiero y todo hecho con CSS.
+
+00:02:23.366 --> 00:02:25.756 align:middle
+Aunque todavía no se cierra automáticamente.
+
+00:02:26.176 --> 00:02:27.636 align:middle
+Demonios, ¡no se cierra en absoluto!
+
+00:02:28.276 --> 00:02:30.856 align:middle
+Como "cerrar" cosas será
+un problema común, vamos a
+
+00:02:31.166 --> 00:02:34.646 align:middle
+crear un controlador de Stimulus
+reutilizable que pueda hacerlo.
+
+00:02:35.786 --> 00:02:42.226 align:middle
+En assets/controller/, añade un
+nuevo closeable_controller.js.
+
+00:02:42.226 --> 00:02:44.696 align:middle
+Haré trampas y cogeré el
+código de otro controlador...
+
+00:02:45.756 --> 00:02:46.476 align:middle
+límpialo...
+
+00:02:47.816 --> 00:02:49.566 align:middle
+y luego añadiré un método close().
+
+00:02:50.366 --> 00:02:54.596 align:middle
+Cuando se llame a esto, se eliminará todo el
+elemento al que está unido el controlador:
+
+00:02:55.356 --> 00:03:01.576 align:middle
+Para utilizar esto, en _flashes.html.twig, adjunta
+el controlador al elemento de nivel superior,
+
+00:03:01.836 --> 00:03:04.226 align:middle
+porque eso es lo que debe
+eliminarse al cerrarse.
+
+00:03:04.806 --> 00:03:10.416 align:middle
+Luego, abajo, en data-action="closeable#close":
+
+00:03:11.556 --> 00:03:16.216 align:middle
+No necesitamos el click porque esto es
+un button, así que Stimulus ya sabe
+
+00:03:16.216 --> 00:03:18.576 align:middle
+que queremos que esto se
+active en el evento click.
+
+00:03:19.456 --> 00:03:20.596 align:middle
+¡Vamos a probarlo!
+
+00:03:21.296 --> 00:03:22.566 align:middle
+Pulsa editar y Guardar.
+
+00:03:23.446 --> 00:03:23.886 align:middle
+Ya está...
+
+00:03:24.416 --> 00:03:25.206 align:middle
+ya no está.
+
+00:03:26.036 --> 00:03:28.936 align:middle
+En sólo unos minutos de
+trabajo, ¡hemos creado un bonito
+
+00:03:28.936 --> 00:03:31.416 align:middle
+y funcional sistema de
+notificación de tostadas!
+
+00:03:31.926 --> 00:03:37.726 align:middle
+Pero, ¡maldita sea, esto no es lo suficientemente
+guay para nuestra misión 30 Días de LAST Stack!
+
+00:03:38.186 --> 00:03:41.436 align:middle
+Así que mañana lo mejoraremos con autocierre,
+
+00:03:41.586 --> 00:03:45.016 align:middle
+transiciones CSS y una barra
+de temporizador animada.

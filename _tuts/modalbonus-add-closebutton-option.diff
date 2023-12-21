@@ -1,5 +1,5 @@
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index 1720a736..42784a68 100644
+index 1720a736..35b94416 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
 @@ -1,4 +1,4 @@
@@ -8,7 +8,7 @@ index 1720a736..42784a68 100644
  <div
      {{ attributes.defaults({
          'data-controller': 'modal',
-@@ -17,6 +17,14 @@
+@@ -17,6 +17,15 @@
                  {% block content %}{% endblock %}
              </div>
          </div>
@@ -16,6 +16,7 @@ index 1720a736..42784a68 100644
 +            <button
 +                class="absolute right-4 top-3 text-white flex items-center opacity-70 transition-opacity hover:opacity-100"
 +                data-action="modal#close"
++                type="button"
 +            >
 +                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
 +            </button>

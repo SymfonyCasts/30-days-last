@@ -1,0 +1,424 @@
+WEBVTT
+
+00:00:01.086 --> 00:00:05.316 align:middle
+¡Día 15! Ya hemos llegado a
+la mitad de nuestra aventura.
+
+00:00:05.456 --> 00:00:07.006 align:middle
+Y a partir de ahora la cosa
+no hará más que enfriarse.
+
+00:00:07.656 --> 00:00:13.206 align:middle
+Para celebrarlo, hoy trabajaremos en algo nuevo
+y brillante: la API de transiciones de vista.
+
+00:00:13.886 --> 00:00:17.716 align:middle
+Esta ingeniosa novedad es compatible
+con la mayoría de los navegadores y nos
+
+00:00:17.716 --> 00:00:21.966 align:middle
+permite tener transiciones suaves siempre
+que cambie cualquier HTML en nuestra página.
+
+00:00:22.196 --> 00:00:25.456 align:middle
+Y si tu usuario tiene un navegador
+que no la soporta, ¡no pasa nada!
+
+00:00:25.766 --> 00:00:28.976 align:middle
+La transición simplemente se
+salta, pero todo sigue funcionando.
+
+00:00:29.216 --> 00:00:29.806 align:middle
+No pasa nada.
+
+00:00:30.406 --> 00:00:35.746 align:middle
+Ah, y, las transiciones de vista vendrán de serie
+en Turbo 8 para la navegación por toda la página.
+
+00:00:36.196 --> 00:00:38.386 align:middle
+Sin embargo, las llevaremos un poco más lejos.
+
+00:00:39.096 --> 00:00:43.496 align:middle
+Para utilizar las Transiciones de Vista,
+no necesitas ninguna biblioteca externa.
+
+00:00:43.726 --> 00:00:46.966 align:middle
+Pero vamos a utilizar una llamada
+"transiciones de vista turbo
+
+00:00:47.716 --> 00:00:52.676 align:middle
+". Esto surgió de una serie de blogs en los que el
+autor construyó un bonito proyecto llamado Turbo
+
+00:00:53.676 --> 00:00:57.676 align:middle
+Music Drive. En dos entradas
+del blog Evil Martians, hablan
+
+00:00:57.806 --> 00:01:00.056 align:middle
+de morphing y de hacer locuras con él
+
+00:01:00.526 --> 00:01:02.516 align:middle
+en Turbo. Incluso crearon una
+
+00:01:03.386 --> 00:01:07.726 align:middle
+demostración en directo En su forma más simple, las
+transiciones de vista añaden un fundido cruzado mientras
+
+00:01:08.186 --> 00:01:12.276 align:middle
+navegas. Pero también puedes ser
+más específico y conectar elementos
+
+00:01:12.446 --> 00:01:14.126 align:middle
+entre páginas para darles una
+
+00:01:14.726 --> 00:01:18.846 align:middle
+transición especial. Mira: cuando hago
+clic en este álbum, se mueve hacia arriba a
+
+00:01:19.256 --> 00:01:21.536 align:middle
+la izquierda. También hay un bonito
+fundido cruzado para el resto de la página.
+
+00:01:22.466 --> 00:01:23.846 align:middle
+¡Vamos a probarlo
+
+00:01:24.186 --> 00:01:27.336 align:middle
+! Primer paso: consigue la
+
+00:01:28.366 --> 00:01:34.266 align:middle
+bibliotecaturbo-view-transitions. En tu terminal,
+ejecuta: php bin/console importmap:require
+
+00:01:34.986 --> 00:01:37.696 align:middle
+turbo-view-transitions ¡Lovely! Para
+activar las transiciones, tenemos que hacer
+
+00:01:37.746 --> 00:01:44.506 align:middle
+dos cosas. Primero, en base.html.twig,
+añade una etiqueta meta
+
+00:01:44.856 --> 00:01:47.006 align:middle
+con name="view-transition": ¡Así
+es como le dices a tu navegador que
+
+00:01:47.536 --> 00:01:52.536 align:middle
+las quieres! En segundo lugar, en Turbo
+7 , tenemos que activar las transiciones
+
+00:01:53.176 --> 00:01:53.886 align:middle
+en JavaScript.
+
+00:01:53.886 --> 00:01:58.556 align:middle
+Dirígete a app.js. Esta será una rara
+ocasión en la que escribamos JavaScript que
+
+00:01:58.556 --> 00:02:00.176 align:middle
+no necesite vivir en un
+
+00:02:01.006 --> 00:02:05.366 align:middle
+controlador Stimulus. Copia de su
+
+00:02:05.366 --> 00:02:06.746 align:middle
+ejemplo, pega... y mueve el import a
+
+00:02:08.586 --> 00:02:13.686 align:middle
+la parte superior: ¡Listo! ¡ Eso debería bastar
+para que las navegaciones de Turbo Drive utilicen
+
+00:02:14.286 --> 00:02:17.796 align:middle
+transiciones de vista! Esto
+aprovecha un evento de Turbo
+
+00:02:18.456 --> 00:02:23.736 align:middle
+llamado turbo:before-render. La función
+shouldPerformTransition() comprueba si el navegador del usuario
+
+00:02:24.196 --> 00:02:26.886 align:middle
+admite transiciones. Si no lo hace, es un
+
+00:02:27.196 --> 00:02:32.956 align:middle
+comportamiento normal. Pero si lo hace, entonces performTransition()
+hará la transición entre el cuerpo antiguo y el
+
+00:02:33.866 --> 00:02:37.556 align:middle
+nuevo. También hay un poco de código aquí
+abajo para evitar la caché de la página turbo.
+
+00:02:38.126 --> 00:02:41.116 align:middle
+Creo que es algo que funcionará
+mejor en Turbo 8 cuando esto
+
+00:02:41.116 --> 00:02:43.586 align:middle
+sea oficial. ¡Es hora de la
+
+00:02:44.036 --> 00:02:46.036 align:middle
+gran revelación! Pulsa actualizar
+
+00:02:46.606 --> 00:02:49.926 align:middle
+y mira. Oooooh. ¡ Una suave
+
+00:02:49.926 --> 00:02:55.496 align:middle
+transición cruzada! Así que no sólo hemos eliminado las recargas
+completas de página, sino que ahora tenemos una transición entre
+
+00:02:55.886 --> 00:02:57.896 align:middle
+nuestras páginas. Cuidado
+Powerpoint, ¡ vamos a
+
+00:02:58.606 --> 00:03:00.006 align:middle
+por ti! ¿Pero qué pasa con
+
+00:03:00.626 --> 00:03:03.396 align:middle
+los marcos Turbo? Cuando hacemos clic, sigue
+
+00:03:04.056 --> 00:03:08.416 align:middle
+ocurriendo instantáneamente. Activamos las transiciones para
+las navegaciones de página completa, pero no para los marcos.
+
+00:03:08.796 --> 00:03:10.376 align:middle
+¿Podemos hacerlo
+
+00:03:10.996 --> 00:03:13.046 align:middle
+? ¡Claro que sí! Copia esta escucha, y
+
+00:03:14.086 --> 00:03:17.476 align:middle
+pégala debajo. Esta vez,
+
+00:03:18.026 --> 00:03:19.406 align:middle
+escucha turbo:before-frame-render... y ajusta
+
+00:03:19.746 --> 00:03:22.816 align:middle
+esta parte. En lugar de document.body,
+
+00:03:23.316 --> 00:03:24.846 align:middle
+utiliza event.target. Ese será
+
+00:03:24.846 --> 00:03:29.176 align:middle
+el <turbo-frame>. Y
+entonces el nuevo elemento
+
+00:03:30.156 --> 00:03:32.126 align:middle
+será event.detail.newFrame: ¡Listo!
+
+00:03:33.846 --> 00:03:37.336 align:middle
+Actualiza y haz clic en .... .
+
+00:03:37.766 --> 00:03:41.686 align:middle
+Transición, ¡comprueba! Y si la transición no es lo
+suficientemente obvia, puedes abrir las herramientas de tu
+
+00:03:41.886 --> 00:03:46.556 align:middle
+navegador, hacer clic en el pequeño
+"...", ir a "más herramientas"
+
+00:03:47.656 --> 00:03:49.396 align:middle
+y luego a Animaciones. Parece que ya
+
+00:03:50.056 --> 00:03:53.116 align:middle
+lo tenía abierto. Aquí
+puedes cambiar la velocidad de
+
+00:03:54.686 --> 00:03:57.336 align:middle
+tus animaciones. Ahora ... es
+
+00:03:57.706 --> 00:03:59.416 align:middle
+super obvio. Incluso puedes ver cómo
+
+00:03:59.906 --> 00:04:03.886 align:middle
+funciona. Si te desplazas durante la
+transición, puedes ver cómo toma
+
+00:04:03.886 --> 00:04:06.146 align:middle
+una captura de pantalla del
+HTML antiguo y lo mezcla con
+
+00:04:06.746 --> 00:04:08.836 align:middle
+el nuevo. Este efecto raro no suele ser
+
+00:04:09.106 --> 00:04:11.786 align:middle
+un problema porque ocurre
+muy rápido, pero es chulo
+
+00:04:12.646 --> 00:04:17.086 align:middle
+de ver. Para mostrar un problema, vamos a
+eliminar la transición CSS de la tabla que
+
+00:04:17.796 --> 00:04:19.076 align:middle
+acabamos de añadir. Así que gira hasta
+
+00:04:19.266 --> 00:04:21.086 align:middle
+esa plantilla... y quita
+
+00:04:21.086 --> 00:04:22.396 align:middle
+el
+
+00:04:22.576 --> 00:04:23.486 align:middle
+class: Actualizar... y
+
+00:04:25.146 --> 00:04:26.756 align:middle
+pruébalo. No pasa nada.
+
+00:04:27.066 --> 00:04:28.646 align:middle
+No pasa nada. Es decir,
+
+00:04:28.866 --> 00:04:30.686 align:middle
+funciona... pero no había
+ninguna transición de
+
+00:04:31.066 --> 00:04:33.856 align:middle
+vista. ¿Por qué? Esto
+
+00:04:34.296 --> 00:04:37.996 align:middle
+es sutil. La transición se rompe
+cuando tienes un marco que hace avanzar
+
+00:04:38.656 --> 00:04:43.416 align:middle
+la URL. El problema es que,
+en esta situación, Turbo
+
+00:04:43.806 --> 00:04:47.536 align:middle
+llama a turbo:before-frame-render...
+y también llama a turbo:before-render
+
+00:04:48.086 --> 00:04:50.066 align:middle
+justo después. Estas dos, más o
+
+00:04:50.676 --> 00:04:51.896 align:middle
+menos, chocan. Pero tiene
+
+00:04:52.216 --> 00:04:56.566 align:middle
+fácil solución. Crea una variable:
+let skipNextRenderTransition y ponla
+
+00:04:57.486 --> 00:05:03.386 align:middle
+en false. A continuación, si shouldPerformTransition()
+y no skipNextRenderTransition , entonces
+
+00:05:05.586 --> 00:05:09.716 align:middle
+hazlo: Por último, cuando nuestro fotograma
+inicie su transición, establece esta variable
+
+00:05:10.616 --> 00:05:16.986 align:middle
+en true. Incluye también una setTimeout(),
+ponla de nuevo a false y retrasa esto
+
+00:05:18.056 --> 00:05:19.306 align:middle
+100 milisegundos: Es un
+
+00:05:19.556 --> 00:05:21.246 align:middle
+poco raro. Pero,
+
+00:05:21.816 --> 00:05:25.886 align:middle
+¡eso es programar! Establecemos esto
+en true, Turbo activa el otro oyente
+
+00:05:26.286 --> 00:05:28.936 align:middle
+casi inmediatamente... y
+luego a los 100 milisegundos
+
+00:05:29.586 --> 00:05:35.556 align:middle
+lo reiniciamos. Probablemente también podríamos sustituir
+el setTimeout() estableciendo skipNextRenderTransition
+
+00:05:35.736 --> 00:05:37.986 align:middle
+= false arriba en el oyente
+
+00:05:38.786 --> 00:05:40.066 align:middle
+turbo:before-render. Lo más importante
+
+00:05:40.496 --> 00:05:42.296 align:middle
+es que... ¡ahora tenemos
+
+00:05:42.956 --> 00:05:44.656 align:middle
+una transición! Pongámosla a
+
+00:05:46.116 --> 00:05:46.956 align:middle
+toda velocidad. ¡
+
+00:05:48.786 --> 00:05:50.756 align:middle
+Me gusta! Prueba con el
+marco emergente del planeta.
+
+00:05:51.456 --> 00:05:52.946 align:middle
+¡Guau! Eso
+
+00:05:53.676 --> 00:05:56.496 align:middle
+ha sido raro. Para ser totalmente
+sincero, no sé qué está
+
+00:05:56.896 --> 00:06:00.866 align:middle
+pasando aquí. Por alguna razón,
+la transición de vista hace que
+
+00:06:01.116 --> 00:06:01.876 align:middle
+desaparezca el popover...
+
+00:06:02.076 --> 00:06:02.746 align:middle
+lo que es...
+
+00:06:02.866 --> 00:06:03.886 align:middle
+digamos...
+
+00:06:03.886 --> 00:06:07.166 align:middle
+no es lo ideal. Probablemente haya una
+forma de arreglarlo, pero no he podido
+
+00:06:07.756 --> 00:06:08.286 align:middle
+descifrarla. No pasa nada...
+
+00:06:08.756 --> 00:06:12.496 align:middle
+y creo que esta rareza está aislada del
+
+00:06:13.096 --> 00:06:16.886 align:middle
+comportamiento del popover. En su lugar, añadiremos
+una forma de desactivar las transiciones en
+
+00:06:17.706 --> 00:06:19.886 align:middle
+un marco. En la página de inicio,
+
+00:06:19.886 --> 00:06:21.216 align:middle
+busca turbo-frame. Aquí
+
+00:06:22.196 --> 00:06:25.206 align:middle
+está. Añade un nuevo atributo
+
+00:06:25.646 --> 00:06:26.886 align:middle
+llamado data-skip-transition :
+Me lo he inventado totalmente.
+
+00:06:27.916 --> 00:06:30.856 align:middle
+Sobre un app.js , podemos buscarlo.
+
+00:06:33.286 --> 00:06:38.326 align:middle
+Si es shouldPerformTransition() y no
+
+00:06:38.436 --> 00:06:40.266 align:middle
+event.target.hasAttribute('data-skip-transition'),
+entonces haz la transición
+
+00:06:41.886 --> 00:06:44.306 align:middle
+: Ahora...
+
+00:06:44.306 --> 00:06:45.446 align:middle
+¡arreglado! Y tenemos transiciones
+
+00:06:45.506 --> 00:06:48.776 align:middle
+en... prácticamente todos los
+tipos de navegación de nuestro
+
+00:06:49.036 --> 00:06:50.986 align:middle
+sitio. ¡ Y en sólo unos 10
+
+00:06:51.116 --> 00:06:51.776 align:middle
+minutos! ¡ Es
+
+00:06:52.596 --> 00:06:58.646 align:middle
+una locura! Ahora pasamos a la misión de mañana: crear
+un deslumbrante sistema de notificaciones tostadas que sea
+
+00:06:58.646 --> 00:07:01.786 align:middle
+fácil de activar, independientemente de
+dónde y cómo tengamos que añadirlas
+
+00:07:02.486 --> 00:07:03.206 align:middle
+. Nos vemos

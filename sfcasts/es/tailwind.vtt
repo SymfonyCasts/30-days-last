@@ -1,0 +1,514 @@
+WEBVTT
+
+00:00:01.136 --> 00:00:03.356 align:middle
+Me encanta utilizar Tailwind para CSS.
+
+00:00:03.636 --> 00:00:07.586 align:middle
+Si nunca lo has usado antes, o tal vez
+sólo has oído hablar de él, puede que...
+
+00:00:07.756 --> 00:00:09.176 align:middle
+odiarlo al principio.
+
+00:00:09.796 --> 00:00:15.106 align:middle
+Esto se debe a que utilizas clases
+dentro de HTML para definirlo todo.
+
+00:00:15.676 --> 00:00:19.856 align:middle
+Y así tu HTML puede acabar
+pareciendo, bueno, un poco loco.
+
+00:00:20.326 --> 00:00:21.146 align:middle
+Pero dale una oportunidad.
+
+00:00:21.346 --> 00:00:23.446 align:middle
+Yo me he enamorado de él.
+
+00:00:23.756 --> 00:00:27.016 align:middle
+Y, en lugar de parecerme
+feo, me parece descriptivo.
+
+00:00:27.756 --> 00:00:30.616 align:middle
+Tailwind no es el tradicional monstruo CSS en
+
+00:00:30.736 --> 00:00:34.336 align:middle
+el que descargas un archivo
+CSS gigante y lo incluyes.
+
+00:00:34.336 --> 00:00:38.556 align:middle
+En su lugar, Tailwind tiene un binario
+que analiza todas tus plantillas,
+
+00:00:38.606 --> 00:00:45.066 align:middle
+encuentra las clases que utilizas y vuelca
+un CSS final que contiene sólo esas clases.
+
+00:00:45.456 --> 00:00:48.356 align:middle
+Así mantiene tu CSS final
+lo más pequeño posible.
+
+00:00:48.816 --> 00:00:51.896 align:middle
+¡Pero para hacer esto, duh duh duh!
+
+00:00:52.286 --> 00:00:54.976 align:middle
+Tailwind requiere un paso de compilación.
+
+00:00:55.326 --> 00:00:56.116 align:middle
+Y no pasa nada.
+
+00:00:56.556 --> 00:00:58.486 align:middle
+Que no tengamos un paso de compilación
+
+00:00:58.486 --> 00:01:03.156 align:middle
+para todo nuestro sistema JavaScript
+no significa que no podamos optar por
+
+00:01:03.276 --> 00:01:05.976 align:middle
+uno pequeño para un propósito específico.
+
+00:01:06.326 --> 00:01:09.776 align:middle
+Y existe un bundle superfácil para
+ayudarnos a hacer esto con AssetMapper.
+
+00:01:10.136 --> 00:01:12.796 align:middle
+Se llama symfonycasts/tailwind-bundle.
+
+00:01:13.146 --> 00:01:14.196 align:middle
+Oye, ¡he oído hablar de ellos!
+
+00:01:15.276 --> 00:01:17.666 align:middle
+Baja aquí, ve a la documentación...
+
+00:01:18.316 --> 00:01:20.566 align:middle
+y copiaré la línea composer require.
+
+00:01:20.646 --> 00:01:27.256 align:middle
+Ejecuta eso: Este bundle nos ayudará
+a ejecutar el comando de compilación
+
+00:01:27.256 --> 00:01:30.226 align:middle
+en segundo plano y a servir el archivo final.
+
+00:01:30.876 --> 00:01:35.756 align:middle
+Lo apuntamos a un archivo CSS real, y
+luego colará el contenido dinámico.
+
+00:01:36.276 --> 00:01:36.636 align:middle
+Ya lo verás.
+
+00:01:37.316 --> 00:01:42.626 align:middle
+Mientras estamos aquí, Ejecuta:: php
+bin/console debug:config symfonycasts_tailwind
+
+00:01:42.746 --> 00:01:44.846 align:middle
+para ver la configuración
+por defecto del bundle.
+
+00:01:45.586 --> 00:01:50.916 align:middle
+Por defecto, el archivo que
+"construye" es assets/styles/app.css...
+
+00:01:51.186 --> 00:01:55.396 align:middle
+lo cual es genial porque ¡ya tenemos
+un archivo assets/styles/app.css!
+
+00:01:56.566 --> 00:01:59.056 align:middle
+Para configurar las cosas,
+ejecuta un comando del bundle:
+
+00:01:59.056 --> 00:02:04.836 align:middle
+php bin/console tailwind:init Esto
+descarga el binario de Tailwind
+
+00:02:04.836 --> 00:02:07.026 align:middle
+en segundo plano, lo cual es genial.
+
+00:02:07.626 --> 00:02:11.076 align:middle
+Ese binario es independiente
+y no requiere Node.
+
+00:02:11.406 --> 00:02:13.116 align:middle
+Simplemente funciona.
+
+00:02:13.586 --> 00:02:15.606 align:middle
+El comando también hizo otras dos cosas.
+
+00:02:15.676 --> 00:02:21.926 align:middle
+Primero: añadió las tres líneas necesarias
+dentro de app.css: Cuando se construya este archivo,
+
+00:02:22.176 --> 00:02:25.576 align:middle
+se sustituirán por el
+CSS real que necesitamos.
+
+00:02:25.576 --> 00:02:31.976 align:middle
+En segundo lugar, creó un archivo
+tailwind.config.js: Esto le dice a Tailwind
+
+00:02:31.976 --> 00:02:35.046 align:middle
+dónde buscar todas las
+clases que utilizaremos.
+
+00:02:35.356 --> 00:02:39.716 align:middle
+Esto encontrará cualquier clase en nuestros
+archivos JavaScript o en nuestras plantillas.
+
+00:02:39.716 --> 00:02:46.306 align:middle
+Para ejecutar Tailwind, ejecuta: php
+bin/console tailwind:build -w Para ver.
+
+00:02:47.056 --> 00:02:48.216 align:middle
+Esto construye...
+
+00:02:48.476 --> 00:02:50.956 align:middle
+y luego se queda esperando futuros cambios.
+
+00:02:51.676 --> 00:02:53.866 align:middle
+Entonces... ¿qué ha hecho eso?
+
+00:02:54.436 --> 00:02:58.806 align:middle
+Recuerda: ya estamos incluyendo
+app.css en nuestra página.
+
+00:02:59.626 --> 00:03:01.606 align:middle
+Cuando actualizamos, ¡woh!
+
+00:03:01.606 --> 00:03:03.186 align:middle
+¡Se ve un poco diferente! La
+
+00:03:03.896 --> 00:03:06.536 align:middle
+razón es que, si ves el
+código fuente de la página
+
+00:03:06.586 --> 00:03:11.736 align:middle
+y haces clic para abrir el archivo
+app.css, ¡está lleno de código Tailwind!
+
+00:03:12.076 --> 00:03:16.696 align:middle
+¡Nuestro archivo app.css ya no es
+exactamente este archivo fuente!
+
+00:03:17.126 --> 00:03:22.396 align:middle
+Entre bastidores, el binario de Tailwind analiza
+nuestras plantillas y vuelca una versión final
+
+00:03:22.396 --> 00:03:24.526 align:middle
+de este archivo, que luego devuelve.
+
+00:03:25.506 --> 00:03:30.246 align:middle
+Este archivo ya contiene un montón de
+código porque llené las plantillas CRUD
+
+00:03:30.246 --> 00:03:32.896 align:middle
+con clases Tailwind antes
+de empezar el tutorial.
+
+00:03:33.636 --> 00:03:35.786 align:middle
+Pero veámoslo en acción de verdad.
+
+00:03:36.246 --> 00:03:38.846 align:middle
+Si refrescamos la página, este es mi h1.
+
+00:03:38.846 --> 00:03:41.866 align:middle
+Es pequeño y triste.
+
+00:03:42.486 --> 00:03:45.356 align:middle
+Abre templates/main/homepage.html.twig.
+
+00:03:46.206 --> 00:03:51.896 align:middle
+En h1, añade class="text-3xl":
+Ahora, actualiza.
+
+00:03:52.346 --> 00:04:00.356 align:middle
+¡Funciona! Si ese text-3xl no estaba antes en
+el archivo app.css, Tailwind acaba de añadir lo
+
+00:04:00.626 --> 00:04:02.016 align:middle
+porque se está ejecutando en segundo plano.
+
+00:04:02.076 --> 00:04:04.466 align:middle
+¡Así que Tailwind funciona!
+
+00:04:04.886 --> 00:04:07.546 align:middle
+Para celebrarlo, vamos a
+pegar un diseño adecuado.
+
+00:04:07.546 --> 00:04:09.746 align:middle
+Si has descargado el código del curso,
+
+00:04:09.886 --> 00:04:12.876 align:middle
+deberías tener un directorio
+tutorial/ con un par de archivos.
+
+00:04:13.346 --> 00:04:26.876 align:middle
+Mueve base.html.twig a plantillas: Y estos
+otros dos al directorio main/: Actualiza.
+
+00:04:27.816 --> 00:04:29.196 align:middle
+No hay diferencia.
+
+00:04:29.876 --> 00:04:34.686 align:middle
+Eso es porque, al menos en un Mac, como
+moví y sobrescribí esos archivos,
+
+00:04:34.946 --> 00:04:37.236 align:middle
+Twig no se dio cuenta de
+que estaban actualizados...
+
+00:04:37.336 --> 00:04:39.146 align:middle
+por lo que su caché está desactualizada.
+
+00:04:39.816 --> 00:04:45.756 align:middle
+Abre una nueva pestaña del terminal y ejecuta:
+php bin/console cache:clear Entonces...
+
+00:04:46.716 --> 00:04:49.866 align:middle
+¡Guau! ¡Bienvenido a Space Inviters!
+
+00:04:50.126 --> 00:04:52.236 align:middle
+¡Con estilo y listo para empezar!
+
+00:04:52.836 --> 00:04:55.246 align:middle
+Pero las nuevas plantillas
+no tienen nada de especial.
+
+00:04:55.976 --> 00:04:58.396 align:middle
+Tenemos una lista de viajes...
+
+00:04:58.566 --> 00:05:03.006 align:middle
+pero todo es aburrido, código
+Twig normal con clases Tailwind.
+
+00:05:04.886 --> 00:05:07.226 align:middle
+Sin embargo, tenemos algunas
+imágenes de planetas rotas.
+
+00:05:07.226 --> 00:05:11.346 align:middle
+Para arreglarlas, entra en el
+directorio tutorial/assets/...
+
+00:05:12.406 --> 00:05:16.146 align:middle
+y mueve todos esos planetas a assets/images/.
+
+00:05:18.386 --> 00:05:19.806 align:middle
+Borra la carpeta tutorial/.
+
+00:05:20.816 --> 00:05:25.386 align:middle
+Esa etiqueta img rota proviene de
+la parcial _planet_list.html.twig.
+
+00:05:26.386 --> 00:05:28.996 align:middle
+Aquí la tienes: ¡Lo dejé
+para que lo termináramos!
+
+00:05:29.186 --> 00:05:29.996 align:middle
+¡Qué amable por mi parte!
+
+00:05:32.246 --> 00:05:38.786 align:middle
+Sabemos que podemos hacer {{ assets() }}
+y luego algo como images/planets-1.png.
+
+00:05:39.096 --> 00:05:40.606 align:middle
+Eso funcionaría.
+
+00:05:41.086 --> 00:05:46.446 align:middle
+Pero esta vez, la parte planet-1.png es una
+propiedad dinámica de la entidad Planet.
+
+00:05:46.906 --> 00:05:54.226 align:middle
+Así que, en vez de eso, di ~ y
+luego planet.imageFilename: Y...
+
+00:05:54.576 --> 00:06:01.106 align:middle
+¡bonito! Sí, ya sé que la Tierra y Saturno no
+tienen ese aspecto -tengo algo de aleatoriedad
+
+00:06:01.106 --> 00:06:03.586 align:middle
+en mis instalaciones-,
+¡pero es divertido ver los!
+
+00:06:04.446 --> 00:06:10.006 align:middle
+Como el día 6 es el día de "hacer que todo tenga un
+aspecto impresionante", vamos a hacer dos cosas más.
+
+00:06:10.356 --> 00:06:12.246 align:middle
+Para empezar, esta fecha no me encanta.
+
+00:06:12.576 --> 00:06:13.296 align:middle
+Es aburrida
+
+00:06:13.296 --> 00:06:14.906 align:middle
+Quiero una cita con un aspecto genial.
+
+00:06:14.906 --> 00:06:17.656 align:middle
+Así que instala uno de mis bundles favoritos:
+
+00:06:17.956 --> 00:06:24.196 align:middle
+composer require knplabs/knp-time-bundle
+Esto nos proporciona un práctico filtro ago.
+
+00:06:24.306 --> 00:06:29.646 align:middle
+Así que en cuanto esto termine,
+gira y abre homepage.html.twig.
+
+00:06:30.166 --> 00:06:33.386 align:middle
+Busca leaveAt y ya está.
+
+00:06:34.886 --> 00:06:39.816 align:middle
+Sustituye ese filtro date por ago: Y...
+
+00:06:40.616 --> 00:06:41.556 align:middle
+¡mucho más guay!
+
+00:06:42.136 --> 00:06:42.846 align:middle
+¿Qué más?
+
+00:06:43.436 --> 00:06:45.086 align:middle
+Echa un vistazo a las áreas CRUD.
+
+00:06:45.736 --> 00:06:47.966 align:middle
+Éstas se generaron mediante MakerBundle...
+
+00:06:48.146 --> 00:06:52.556 align:middle
+pero... Las he precargado con clases
+Tailwind para que tengan buen aspecto.
+
+00:06:53.486 --> 00:06:56.006 align:middle
+Vaya, hay mucho que celebrar ahora mismo.
+
+00:06:56.316 --> 00:06:57.076 align:middle
+No me quejo.
+
+00:06:57.826 --> 00:07:01.836 align:middle
+Pero... si vas a un formulario, ¡se ve fatal!
+
+00:07:02.116 --> 00:07:06.536 align:middle
+¿Por qué? El marcado del formulario
+proviene del tema de formularios de Symfony...
+
+00:07:06.776 --> 00:07:10.286 align:middle
+que muestra los campos sin clases Tailwind.
+
+00:07:10.676 --> 00:07:11.446 align:middle
+Entonces, ¿qué hacemos?
+
+00:07:11.986 --> 00:07:13.796 align:middle
+¿Tenemos que crear un tema de formulario?
+
+00:07:13.796 --> 00:07:15.896 align:middle
+Afortunadamente, no.
+
+00:07:16.496 --> 00:07:21.466 align:middle
+Una de las cosas buenas de Tailwind es que
+hay todo un ecosistema creado a su alrededor.
+
+00:07:21.876 --> 00:07:28.016 align:middle
+Por ejemplo, Flowbite es un sitio con una mezcla de ejemplos
+de código abierto y funciones profesionales de pago.
+
+00:07:28.746 --> 00:07:34.196 align:middle
+En la parte de código abierto, puedes
+encontrar, por ejemplo, una página de "Alertas "
+
+00:07:34.426 --> 00:07:37.366 align:middle
+con diferentes marcas para
+crear alertas de gran aspecto.
+
+00:07:37.776 --> 00:07:40.596 align:middle
+Y no necesitas instalar nada con Flowbite.
+
+00:07:41.106 --> 00:07:43.626 align:middle
+Todas estas clases son nativas de Tailwind.
+
+00:07:44.146 --> 00:07:47.206 align:middle
+Puedes copiar este marcado en
+tu proyecto y actualizarlo.
+
+00:07:47.586 --> 00:07:48.496 align:middle
+Nada especial.
+
+00:07:48.686 --> 00:07:50.056 align:middle
+Y me encanta.
+
+00:07:50.636 --> 00:07:55.176 align:middle
+Esto también tiene una sección de formularios donde muestra cómo
+podemos hacer que los formularios tengan un aspecto realmente bonito.
+
+00:07:55.936 --> 00:08:01.376 align:middle
+En teoría, si pudiéramos hacer que nuestros formularios
+salieran así, tendrían un aspecto estupendo.
+
+00:08:01.856 --> 00:08:04.666 align:middle
+Y, afortunadamente, hay un
+bundle que puede ayudarnos.
+
+00:08:05.026 --> 00:08:07.916 align:middle
+Se llama tales-from-a-dev/flowbite-bundle.
+
+00:08:09.446 --> 00:08:12.466 align:middle
+Haz clic en "Instalación" y
+copia la línea composer require.
+
+00:08:13.626 --> 00:08:17.226 align:middle
+Luego ejecútalo: composer require
+tales-from-a-dev/flowbite-bundle ¡Hoy nos van a
+
+00:08:17.766 --> 00:08:18.596 align:middle
+instalar un montón de cosas!
+
+00:08:18.596 --> 00:08:20.956 align:middle
+Nos pregunta si queremos
+instalar la receta contrib.
+
+00:08:21.506 --> 00:08:23.216 align:middle
+Digamos que sí, permanentemente.
+
+00:08:24.236 --> 00:08:29.416 align:middle
+¡Genial! Volviendo a las instrucciones de
+instalación, no necesitamos registrar el bundle
+
+00:08:29.626 --> 00:08:33.266 align:middle
+-eso ocurre automáticamente-, pero
+sí necesitamos copiar esta línea
+
+00:08:33.266 --> 00:08:36.246 align:middle
+para el archivo de configuración de tailwind.
+
+00:08:36.246 --> 00:08:39.016 align:middle
+Abre tailwind.config.js y pégala:
+
+00:08:40.416 --> 00:08:45.706 align:middle
+Este bundle viene con su propia plantilla de tema
+de formulario con sus propias clases Tailwind.
+
+00:08:45.746 --> 00:08:50.566 align:middle
+Así que queremos asegurarnos de que
+Tailwind las ve y genera el CSS para ellas.
+
+00:08:51.716 --> 00:08:56.666 align:middle
+El último paso en los documentos es decirle a nuestro
+sistema que utilice este tema de formulario por defecto.
+
+00:08:57.366 --> 00:09:00.556 align:middle
+Esto se hace en config/packages/twig.yaml.
+
+00:09:01.726 --> 00:09:02.586 align:middle
+Voy a pegar...
+
+00:09:02.896 --> 00:09:05.746 align:middle
+y arreglaré la sangría: Ya está.
+
+00:09:06.186 --> 00:09:10.576 align:middle
+Vuelve atrás, actualiza y ¡eureka!
+
+00:09:11.026 --> 00:09:16.226 align:middle
+En poco más de 10 minutos, hemos instalado
+Tailwind y empezado a utilizarlo en todas partes.
+
+00:09:16.926 --> 00:09:20.176 align:middle
+Mañana volveremos a JavaScript
+y aprovecharemos Stimulus
+
+00:09:20.176 --> 00:09:23.296 align:middle
+para escribir código JavaScript
+fiable que nos encante.

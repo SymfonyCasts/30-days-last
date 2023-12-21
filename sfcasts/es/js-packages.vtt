@@ -1,0 +1,286 @@
+WEBVTT
+
+00:00:01.066 --> 00:00:03.376 align:middle
+¡Bienvenido al fabuloso día 4!
+
+00:00:03.596 --> 00:00:06.626 align:middle
+Ya estamos creando módulos JavaScript...
+
+00:00:06.756 --> 00:00:11.106 align:middle
+un término elegante que significa que estamos
+escribiendo sentencias import y export.
+
+00:00:11.566 --> 00:00:15.326 align:middle
+Y lo estamos haciendo completamente
+sin un sistema de compilación.
+
+00:00:15.606 --> 00:00:17.096 align:middle
+¡Es hora de bailar felices!
+
+00:00:17.756 --> 00:00:19.606 align:middle
+¿Pero qué pasa con los paquetes de terceros?
+
+00:00:20.356 --> 00:00:26.246 align:middle
+Dirígete a https://npmjs.com y busca un
+paquete muy importante llamado js-confetti.
+
+00:00:27.326 --> 00:00:29.676 align:middle
+Este paquete trata sobre
+la celebración, que...
+
+00:00:29.676 --> 00:00:33.226 align:middle
+¡es exactamente lo que vamos
+a hacer durante estos 30 días!
+
+00:00:33.706 --> 00:00:36.816 align:middle
+En el README dice que
+utilices Yarn para instalarlo.
+
+00:00:37.166 --> 00:00:39.086 align:middle
+No vamos a hacerlo.
+
+00:00:39.856 --> 00:00:43.506 align:middle
+En lugar de eso, ve
+directamente al ejemplo de uso.
+
+00:00:43.926 --> 00:00:46.376 align:middle
+Cópialo, dirígete a nuestro app.js...
+
+00:00:46.376 --> 00:00:53.836 align:middle
+y pégalo: Nota al margen: las declaraciones
+import siempre van al principio de tu archivo.
+
+00:00:54.486 --> 00:00:59.726 align:middle
+Si no lo haces -si haces algo raro
+como esto-, bueno, puedes hacerlo,
+
+00:00:59.906 --> 00:01:04.286 align:middle
+pero tu navegador lo subirá al principio
+cuando ejecute el código de todos modos.
+
+00:01:04.696 --> 00:01:06.796 align:middle
+Así que evitaremos dar problemas.
+
+00:01:07.586 --> 00:01:09.656 align:middle
+Vale: ¿funcionará?
+
+00:01:09.656 --> 00:01:14.326 align:middle
+Probablemente no, porque
+no hemos instalado nada.
+
+00:01:14.816 --> 00:01:17.886 align:middle
+¡Pero vivamos temerariamente
+e intentémoslo de todos modos!
+
+00:01:18.996 --> 00:01:25.376 align:middle
+¡Error! Un error muy importante: No se ha podido
+resolver el especificador de módulo js-confetti. Las
+
+00:01:25.656 --> 00:01:30.026 align:middle
+referencias relativas deben empezar por /, ./
+
+00:01:30.206 --> 00:01:34.876 align:middle
+o ../. Lo que esto está diciendo es que tu
+navegador ha encontrado una sentencia import... y
+
+00:01:35.046 --> 00:01:38.126 align:middle
+no tiene ni idea de cómo
+cargar ese archivo. Si
+
+00:01:38.656 --> 00:01:40.546 align:middle
+una sentencia import empieza por ./ o
+
+00:01:40.886 --> 00:01:47.496 align:middle
+../, tu navegador sabe cómo manejarlo: busca
+un archivo relativo a este archivo. Muy fácil.
+
+00:01:47.836 --> 00:01:48.696 align:middle
+Pero si
+
+00:01:49.156 --> 00:01:50.356 align:middle
+no hay ./ o ../ , se
+
+00:01:50.356 --> 00:01:53.806 align:middle
+llama módulo desnudo. En ese caso,
+
+00:01:54.256 --> 00:01:57.506 align:middle
+tu navegador busca una coincidencia en el mapa
+de importación. Ahora mismo, nuestro mapa de
+
+00:01:58.096 --> 00:02:00.546 align:middle
+importación tiene el mismo
+aspecto que antes. En particular,
+
+00:02:01.186 --> 00:02:05.346 align:middle
+no tenemos una clave js-confetti. Y por eso
+
+00:02:05.746 --> 00:02:07.496 align:middle
+obtenemos este error. Éste es uno
+
+00:02:08.326 --> 00:02:12.726 align:middle
+de los errores más importantes que verás al
+codificar con módulos. Y tendrá un aspecto un
+
+00:02:13.206 --> 00:02:16.686 align:middle
+poco diferente según el navegador que estés
+utilizando. Firefox, por ejemplo, formula
+
+00:02:17.216 --> 00:02:20.756 align:middle
+este error de forma diferente.
+Pero independientemente de
+
+00:02:21.206 --> 00:02:25.626 align:middle
+la redacción, este error casi siempre
+significa lo mismo: estás intentando
+
+00:02:25.986 --> 00:02:30.056 align:middle
+utilizar un paquete de terceros,
+pero no está instalado. ¿Cómo
+
+00:02:30.836 --> 00:02:32.656 align:middle
+lo instalamos? ¡Me alegro de que preguntes!
+
+00:02:33.316 --> 00:02:34.306 align:middle
+Copia el
+
+00:02:35.106 --> 00:02:38.076 align:middle
+nombre del paquete, gíralo y ejecútalo:
+php bin/console importmap:require
+
+00:02:38.256 --> 00:02:43.386 align:middle
+js-confetti ¡Ya está! Vuelve a girar y...
+
+00:02:43.816 --> 00:02:46.076 align:middle
+¡a celebrarlo! ¡Funciona!
+
+00:02:46.976 --> 00:02:48.416 align:middle
+¡Refrescante locura!
+
+00:02:48.756 --> 00:02:50.926 align:middle
+¿Cómo funciona?
+
+00:02:51.656 --> 00:02:52.946 align:middle
+¿Karma? Bueno, como es lógico,
+
+00:02:53.396 --> 00:02:57.836 align:middle
+si ves el código fuente
+de la página, tenemos una
+
+00:02:58.166 --> 00:03:02.516 align:middle
+nueva entrada dentro de nuestro
+importmap con una clave js-confetti. Y
+
+00:03:03.096 --> 00:03:06.126 align:middle
+apunta a un archivo en un directorio
+assets/vendor/. Interesante. Cuando
+
+00:03:06.546 --> 00:03:07.156 align:middle
+ejecutamos
+
+00:03:08.306 --> 00:03:11.586 align:middle
+ese comando, en realidad sólo hizo
+una cosa. Actualizó nuestro archivo
+
+00:03:12.026 --> 00:03:14.556 align:middle
+importmap.php. Añadió esta entrada de
+
+00:03:15.066 --> 00:03:19.686 align:middle
+aquí: Entre bastidores, buscó la
+
+00:03:19.686 --> 00:03:22.786 align:middle
+última versión y la puso aquí. Y como
+
+00:03:23.326 --> 00:03:28.836 align:middle
+tenemos un elemento js-confetti en importmap.php,
+eso significa que vamos a tener una
+
+00:03:28.836 --> 00:03:34.036 align:middle
+clave js-confetti correspondiente dentro del mapa de
+importación de la página. ¿Dónde vive realmente ese
+
+00:03:35.016 --> 00:03:37.126 align:middle
+archivo? Aquí arriba, en
+
+00:03:37.786 --> 00:03:40.526 align:middle
+un nuevo directorio assets/vendor/. Si indagas,
+
+00:03:41.226 --> 00:03:44.856 align:middle
+aquí está el archivo real que se
+está cargando. Dos detalles jugosos
+
+00:03:45.886 --> 00:03:48.776 align:middle
+sobre este directorio
+vendor/. El primero es que es
+
+00:03:49.206 --> 00:03:54.546 align:middle
+ignorado desde Git: puedes ver
+/assets/vendor/ : Al igual que el directorio
+
+00:03:55.256 --> 00:03:58.476 align:middle
+vendor/ de Composer, esto no es algo que debas
+
+00:03:58.476 --> 00:04:00.406 align:middle
+confirmar en tu repositorio. La segunda es
+
+00:04:01.416 --> 00:04:07.436 align:middle
+más bien una pregunta: ¿cómo obtengo estos archivos
+si clono o actualizo un proyecto y faltan algunos o
+
+00:04:07.596 --> 00:04:10.406 align:middle
+todos los archivos? Para averiguarlo,
+
+00:04:11.476 --> 00:04:15.166 align:middle
+vuélvete loco y destruye ese
+directorio. Muwahahaha. Y ahora,
+
+00:04:15.316 --> 00:04:16.416 align:middle
+para
+
+00:04:17.246 --> 00:04:21.126 align:middle
+aumentar nuestra racha temeraria, intenta actualizar
+la página. ¡Error! ¡Impresionante error!
+
+00:04:21.896 --> 00:04:23.776 align:middle
+Falta el activo de vendedor js-confetti
+
+00:04:24.166 --> 00:04:29.476 align:middle
+: prueba a ejecutar el comando
+importmap:install.
+
+00:04:30.256 --> 00:04:31.356 align:middle
+¡Buena idea!
+
+00:04:31.916 --> 00:04:37.796 align:middle
+Gira e inténtalo: php bin/console importmap:install
+Igual que composer install, que descarga lo que
+
+00:04:38.026 --> 00:04:41.216 align:middle
+necesites en assets/vendor/... y ahora
+
+00:04:42.096 --> 00:04:44.306 align:middle
+simplemente funciona. ¡Ya está!
+
+00:04:45.046 --> 00:04:45.646 align:middle
+Al cuarto día,
+
+00:04:45.896 --> 00:04:49.566 align:middle
+¡ya hemos resuelto los paquetes
+de terceros! ¡Ni siquiera
+
+00:04:50.026 --> 00:04:52.716 align:middle
+necesitamos un directorio
+node_modules/ gigante!
+
+00:04:53.166 --> 00:04:55.466 align:middle
+Voy a tener que encontrar otra forma de 
+llenar mi disco duro.
+
+00:04:56.116 --> 00:04:57.796 align:middle
+¿Tal vez, más contenedores Docker?
+
+00:04:58.536 --> 00:05:02.736 align:middle
+Vale, para la aventura de mañana, vamos a animar nuestro
+sitio con algo de CSS. 
+
+00:05:03.166 --> 00:05:03.866 align:middle
+¡Permanece atento!

@@ -1,0 +1,350 @@
+WEBVTT
+
+00:00:01.126 --> 00:00:03.466 align:middle
+Bienvenido al día de suerte número 7.
+
+00:00:03.986 --> 00:00:08.736 align:middle
+Hoy hablamos de Stimulus: una biblioteca
+JavaScript pequeña y fácil de entender
+
+00:00:08.816 --> 00:00:12.366 align:middle
+que nos permite crear código
+superorganizado que...
+
+00:00:12.366 --> 00:00:13.916 align:middle
+simplemente siempre funciona.
+
+00:00:14.176 --> 00:00:16.806 align:middle
+Es una de mis razones favoritas
+para utilizar Internet.
+
+00:00:16.806 --> 00:00:20.056 align:middle
+Pero aunque Stimulus es una
+biblioteca JavaScript...
+
+00:00:20.196 --> 00:00:23.626 align:middle
+Symfony tiene un bundle para ayudarnos
+a cargarla, configurarla y utilizarla.
+
+00:00:23.986 --> 00:00:29.776 align:middle
+Así que, busca tu terminal y ejecuta:
+composer require symfony/stimulus-bundle Una
+
+00:00:29.776 --> 00:00:33.246 align:middle
+de las cosas más importantes
+de StimulusBundle es su receta.
+
+00:00:34.016 --> 00:00:37.966 align:middle
+Cuando termine, ejecuta: git status Oooh.
+
+00:00:38.446 --> 00:00:40.166 align:middle
+Ha hecho varios cambios.
+
+00:00:40.436 --> 00:00:43.406 align:middle
+El primero está aquí, en assets/app.js.
+
+00:00:43.806 --> 00:00:50.106 align:middle
+En la parte superior -eliminaré ese comentario-
+ahora estamos importando un nuevo bootstrap.js:
+
+00:00:50.376 --> 00:00:53.566 align:middle
+Ese archivo inicia la aplicación Stimulus.
+
+00:00:54.146 --> 00:00:58.916 align:middle
+Observa que importa un módulo
+@symfony/stimulus-bundle:
+
+00:00:59.146 --> 00:01:05.336 align:middle
+El símbolo @ no es importante: es sólo un carácter que
+utilizan los paquetes JavaScript con espacio de nombres.
+
+00:01:06.016 --> 00:01:11.466 align:middle
+Lo importante es que se trata de una importación
+desnuda, lo que significa que el navegador intentará
+
+00:01:11.466 --> 00:01:13.926 align:middle
+encontrar este paquete mirando
+nuestro mapa de importación.
+
+00:01:14.996 --> 00:01:18.316 align:middle
+Vale Abre importmap.php.
+
+00:01:18.316 --> 00:01:22.866 align:middle
+La receta ha añadido aquí dos entradas
+nuevas: La primera es para el propio Stimulus,
+
+00:01:23.086 --> 00:01:25.516 align:middle
+que ahora vive en el directorio assets/vendor/.
+
+00:01:26.196 --> 00:01:26.896 align:middle
+La segunda es...
+
+00:01:27.106 --> 00:01:29.156 align:middle
+una especie de paquete "falso" de terceros.
+
+00:01:29.516 --> 00:01:35.446 align:middle
+Dice que @symfony/stimulus-bundle debe resolver
+a un archivo en nuestro directorio vendor/.
+
+00:01:36.316 --> 00:01:41.646 align:middle
+Esto es un poco de fantasía: decimos
+import '@symfony/stimulus-bundle'...
+
+00:01:41.976 --> 00:01:46.806 align:middle
+y eso importará en última instancia
+este archivo loader.js desde vendor/.
+
+00:01:47.526 --> 00:01:52.616 align:middle
+La receta también añadió un directorio controllers/ -el
+hogar de nuestros controladores de Stimulus personalizados-
+
+00:01:52.836 --> 00:01:56.976 align:middle
+y un archivo controllers.json,
+del que hablaremos mañana.
+
+00:01:57.556 --> 00:02:04.776 align:middle
+Ah, y en base.html.twig, añadió esta
+línea ux_controller_link_tags(): ¡Bórrala!
+
+00:02:05.486 --> 00:02:09.556 align:middle
+Eso era necesario con
+AssetMapper 6.3, pero ya no.
+
+00:02:10.156 --> 00:02:12.096 align:middle
+De todas formas, hablaremos de ello mañana.
+
+00:02:13.006 --> 00:02:16.906 align:middle
+Vale: todo lo que hemos hecho es
+composer require este nuevo bundle.
+
+00:02:17.596 --> 00:02:23.486 align:middle
+Y, sin embargo, cuando actualizamos la página y
+miramos la consola, ¡Stimulus ya está funcionando!
+
+00:02:24.156 --> 00:02:28.326 align:middle
+Estos application #starting y
+application #start proceden de Stimulus.
+
+00:02:28.626 --> 00:02:29.716 align:middle
+Es increíble.
+
+00:02:30.486 --> 00:02:32.616 align:middle
+Con StimulusBundle, cualquier cosa que pongamos
+
+00:02:32.616 --> 00:02:36.156 align:middle
+en el directorio controllers/
+estará automáticamente disponible
+
+00:02:36.156 --> 00:02:37.516 align:middle
+como controlador de Stimulus.
+
+00:02:38.166 --> 00:02:44.806 align:middle
+Así, el hecho de que tengamos un hello_controller.js
+significa que podemos utilizar un controlador llamado hello:
+
+00:02:45.406 --> 00:02:46.916 align:middle
+De hecho, podemos verlo ahora mismo.
+
+00:02:47.476 --> 00:02:52.806 align:middle
+Cuando se activa este controlador, sustituye
+el texto del elemento al que está unido.
+
+00:02:54.416 --> 00:02:58.386 align:middle
+Para comprobar que Stimulus funciona,
+inspecciona cualquier elemento de la página...
+
+00:02:58.866 --> 00:03:03.116 align:middle
+e introduce un data-controller="hello".
+
+00:03:04.206 --> 00:03:06.786 align:middle
+Cuando pulse intro, ¡boom!
+
+00:03:06.996 --> 00:03:08.616 align:middle
+Se activa el controlador.
+
+00:03:09.606 --> 00:03:12.876 align:middle
+Ha sido divertido, pero vamos a crear
+nuestro propio controlador real.
+
+00:03:13.396 --> 00:03:18.166 align:middle
+Copia hello_controller.js y crea un nuevo
+archivo llamado celebrate_controller.js.
+
+00:03:19.656 --> 00:03:26.236 align:middle
+Eliminaré los comentarios y el método connect: Éste es el
+objetivo: cuando pasemos el ratón por encima del logotipo,
+
+00:03:26.466 --> 00:03:31.426 align:middle
+quiero llamar a un método del controlador
+que active la biblioteca js-confetti.
+
+00:03:32.376 --> 00:03:33.566 align:middle
+Empieza por crear el método.
+
+00:03:34.136 --> 00:03:37.546 align:middle
+Podría llamarse como quieras,
+¡pero poof() es un nombre divertido!
+
+00:03:38.566 --> 00:03:44.446 align:middle
+Dirígete a app.js, copia el
+código de js-confetti y bórralo:
+
+00:03:45.256 --> 00:03:46.926 align:middle
+Colócalo en el controlador celebrate...
+
+00:03:47.356 --> 00:03:52.876 align:middle
+y mueve la declaración de importación
+a la parte superior: ¡Genial!
+
+00:03:53.536 --> 00:03:56.326 align:middle
+El último paso es activar esto en un elemento.
+
+00:03:56.716 --> 00:03:59.486 align:middle
+Hazlo en base.html.twig.
+
+00:04:00.476 --> 00:04:01.076 align:middle
+Veamos...
+
+00:04:01.516 --> 00:04:02.506 align:middle
+aquí está el logotipo.
+
+00:04:03.106 --> 00:04:05.616 align:middle
+Añade data-controller="celebrate".
+
+00:04:06.306 --> 00:04:10.586 align:middle
+Y para activar la acción al pasar
+el ratón, di data-action=""...
+
+00:04:11.226 --> 00:04:13.856 align:middle
+y la sugerencia es casi correcta.
+
+00:04:14.496 --> 00:04:19.616 align:middle
+El formato es, primero: el evento
+JavaScript que queremos escuchar.
+
+00:04:20.076 --> 00:04:22.726 align:middle
+En lugar de click, queremos mouseover.
+
+00:04:23.206 --> 00:04:29.386 align:middle
+Luego ->, el nombre de nuestro controlador,
+# y el nombre del método: poof: ¡Ya está!
+
+00:04:29.696 --> 00:04:33.486 align:middle
+¡¡Refresca y celébralo!!
+
+00:04:33.716 --> 00:04:37.106 align:middle
+Cada vez que mouseover, llama al método.
+
+00:04:37.576 --> 00:04:40.216 align:middle
+Puedes verlo abundantemente en la consola.
+
+00:04:41.046 --> 00:04:43.166 align:middle
+Vaya, en cuanto añadimos un controlador
+
+00:04:43.166 --> 00:04:46.746 align:middle
+al directorio controllers/, ya está
+cargado y listo para funcionar.
+
+00:04:47.326 --> 00:04:49.716 align:middle
+Recuerda, todo sin compilar.
+
+00:04:50.186 --> 00:04:53.996 align:middle
+Pero a veces puedes tener un controlador que
+sólo se utilice en determinadas páginas...
+
+00:04:53.996 --> 00:04:59.286 align:middle
+por lo que no quieres obligar a tu usuario a
+descargarlo inmediatamente en cada página.
+
+00:04:59.966 --> 00:05:03.256 align:middle
+Si te encuentras en esa situación, puedes
+hacer que tu controlador sea perezoso.
+
+00:05:03.736 --> 00:05:04.456 align:middle
+Es lo mejor.
+
+00:05:05.116 --> 00:05:09.576 align:middle
+Para ello, añade este comentario
+especial encima: stimulusFetch:
+
+00:05:09.666 --> 00:05:12.666 align:middle
+'lazy': Sí, es una locura.
+
+00:05:13.026 --> 00:05:17.466 align:middle
+Pero en cuanto hagamos eso, en lugar de
+descargar este archivo al cargar la página,
+
+00:05:17.716 --> 00:05:22.816 align:middle
+esperará hasta que vea un elemento en la
+página con data-controller"celebrate".
+
+00:05:23.446 --> 00:05:26.466 align:middle
+Observa: borra temporalmente
+el data-controller.
+
+00:05:27.056 --> 00:05:30.806 align:middle
+Luego vuelve, actualiza, y en
+las herramientas de red, si busco
+
+00:05:30.966 --> 00:05:34.336 align:middle
+celebrate, no hay nada.
+
+00:05:35.106 --> 00:05:40.726 align:middle
+Si busco confetti -desde que nuestro
+controlador importa- js-confetti, tampoco está.
+
+00:05:41.476 --> 00:05:43.276 align:middle
+No se han descargado.
+
+00:05:44.616 --> 00:05:45.986 align:middle
+Limpia tus herramientas de red.
+
+00:05:46.586 --> 00:05:49.926 align:middle
+Luego ve al logo y hackea ese data-controller.
+
+00:05:50.886 --> 00:05:56.526 align:middle
+Estamos imitando lo que ocurriría si
+cargáramos algo de HTML fresco vía AJAX y...
+
+00:05:56.526 --> 00:06:02.046 align:middle
+ese HTML fresco incluye un elemento
+con data-controller"celebrate".
+
+00:06:03.256 --> 00:06:06.846 align:middle
+En cuanto aparezca en la página,
+vuelve a las herramientas de red.
+
+00:06:07.566 --> 00:06:08.936 align:middle
+¡Aparecieron dos elementos nuevos!
+
+00:06:09.276 --> 00:06:14.286 align:middle
+Se fijó en el data-controller y
+descargó el controlador y js-confetti...
+
+00:06:14.426 --> 00:06:16.766 align:middle
+ya que se importa desde el controlador.
+
+00:06:17.186 --> 00:06:19.076 align:middle
+Y funciona de maravilla.
+
+00:06:19.406 --> 00:06:21.286 align:middle
+Esto me encanta.
+
+00:06:22.176 --> 00:06:27.956 align:middle
+Mantén este controlador perezoso, pero vuelve a
+base.html.twig, vuelve a añadir data-controller.
+
+00:06:29.116 --> 00:06:33.786 align:middle
+¡Una de las grandes cosas de Stimulus es
+que lo utiliza gente de toda la Interwebs!
+
+00:06:34.066 --> 00:06:38.776 align:middle
+Y hay muchos controladores Stimulus prefabricados
+por ahí para ayudarnos a resolver problemas.
+
+00:06:39.316 --> 00:06:41.876 align:middle
+Uno de ellos se llama Symfony-UX.
+
+00:06:42.276 --> 00:06:44.606 align:middle
+Mañana nos sumergiremos
+en uno de sus paquetes.

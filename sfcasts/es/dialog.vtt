@@ -1,0 +1,698 @@
+WEBVTT
+
+00:00:01.056 --> 00:00:02.686 align:middle
+Bienvenido al día 19.
+
+00:00:03.026 --> 00:00:09.106 align:middle
+Hoy tenemos la suerte de jugar con un elemento HTML
+poco conocido que es absolutamente genial a la hora de
+
+00:00:09.106 --> 00:00:10.806 align:middle
+crear modales.
+
+00:00:11.106 --> 00:00:13.156 align:middle
+El elemento <dialog>.
+
+00:00:13.596 --> 00:00:17.596 align:middle
+Si tienes prisa por ver la magnificencia
+de los modales, puedes saltar más adelante
+
+00:00:17.596 --> 00:00:20.366 align:middle
+para coger el marcado final
+y el controlador Stimulus.
+
+00:00:20.916 --> 00:00:25.246 align:middle
+Pero te prometo que el viaje
+de hoy va a ser divertido.
+
+00:00:26.246 --> 00:00:29.226 align:middle
+Abre templates/voyage/index.html.twig.
+
+00:00:29.226 --> 00:00:35.466 align:middle
+En h1, voy a pegar algo de contenido
+nuevo: Esto añade un botón "Nuevo viaje".
+
+00:00:36.146 --> 00:00:38.226 align:middle
+En la parte inferior,
+eliminaré el botón antiguo.
+
+00:00:38.926 --> 00:00:41.566 align:middle
+Este nuevo código no tiene nada
+de especial: es simplemente...
+
+00:00:41.756 --> 00:00:45.076 align:middle
+un botón. Y cuando vayamos
+a la página correcta...
+
+00:00:45.156 --> 00:00:46.216 align:middle
+¡ahí está!
+
+00:00:46.706 --> 00:00:48.176 align:middle
+Pero todavía no hace nada.
+
+00:00:49.226 --> 00:00:54.036 align:middle
+De vuelta en la plantilla, justo después del
+botón, añade un elemento <dialog>.
+
+00:00:54.976 --> 00:00:57.996 align:middle
+Dentro proclamaré "Soy un diálogo".
+
+00:00:59.016 --> 00:01:06.896 align:middle
+Añade también un atributo open: Pulsa
+actualizar y contempla el elemento dialog.
+
+00:01:07.246 --> 00:01:08.636 align:middle
+Es... interesante.
+
+00:01:09.316 --> 00:01:14.306 align:middle
+El dialog está absolutamente posicionado
+en la página, centrado horizontalmente
+
+00:01:14.496 --> 00:01:17.656 align:middle
+y cerca, pero no arriba verticalmente.
+
+00:01:18.426 --> 00:01:22.306 align:middle
+Eso es porque el elemento <dialog>
+está diseñado para modales...
+
+00:01:22.546 --> 00:01:27.656 align:middle
+o realmente para cualquier diálogo, como
+una alerta desechable o cualquier subventana.
+
+00:01:28.256 --> 00:01:33.636 align:middle
+Es un elemento HTML normal, pero con un montón
+de superpoderes que vamos a experimentar.
+
+00:01:34.156 --> 00:01:35.866 align:middle
+Pero primero, tenemos que hacerlo más bonito.
+
+00:01:36.586 --> 00:01:39.336 align:middle
+De vuelta a la plantilla,
+pegaré encima ese diálogo:
+
+00:01:39.336 --> 00:01:43.976 align:middle
+Esto es una adaptación de Flowbite
+con algo de ayuda de la IA.
+
+00:01:44.136 --> 00:01:46.936 align:middle
+Y un diseñador podría
+crear esto sin problemas.
+
+00:01:47.356 --> 00:01:52.746 align:middle
+Porque, no hay nada especial: seguimos
+teniendo un dialog, sigue siendo open...
+
+00:01:53.046 --> 00:01:56.146 align:middle
+e incluso las clases Tailwind
+son bastante aburridas.
+
+00:01:56.636 --> 00:01:57.816 align:middle
+Establezco una anchura...
+
+00:01:57.816 --> 00:01:59.136 align:middle
+y redondeo las esquinas.
+
+00:01:59.636 --> 00:02:03.736 align:middle
+Pero la mayoría de los detalles de posicionamiento
+ya están incorporados en el elemento.
+
+00:02:04.146 --> 00:02:07.866 align:middle
+Y la mayor parte del código es
+contenido modal ficticio para empezar.
+
+00:02:08.626 --> 00:02:09.166 align:middle
+El resultado...
+
+00:02:09.666 --> 00:02:10.706 align:middle
+es impresionante.
+
+00:02:11.296 --> 00:02:13.936 align:middle
+Aunque... ¡el botón de
+cerrar aún no hace su trabajo!
+
+00:02:14.786 --> 00:02:20.326 align:middle
+No te preocupes: ¡ésta es una gran oportunidad
+para mostrar uno de los superpoderes de diálogo!
+
+00:02:20.376 --> 00:02:22.276 align:middle
+Busca el botón de cerrar.
+
+00:02:22.926 --> 00:02:29.256 align:middle
+A su alrededor, añade un <form
+method="dialog">: Este es un botón normal:
+
+00:02:29.466 --> 00:02:32.376 align:middle
+naturalmente enviará el
+formulario cuando lo pulsemos,
+
+00:02:32.376 --> 00:02:34.876 align:middle
+pero el botón no tiene nada especial.
+
+00:02:35.946 --> 00:02:38.006 align:middle
+Pero ahora, cuando hagamos clic en X...
+
+00:02:38.466 --> 00:02:39.836 align:middle
+¡se cierra!
+
+00:02:40.516 --> 00:02:44.346 align:middle
+Para que el elemento <dialog> brille
+de verdad, necesitamos un poco de JavaScript.
+
+00:02:44.866 --> 00:02:49.956 align:middle
+Dirígete a assets/controllers/ y crea un
+nuevo archivo llamado modal_controller.js.
+
+00:02:50.836 --> 00:02:53.676 align:middle
+Haré trampas, robaré algo de
+contenido de otro controlador...
+
+00:02:54.006 --> 00:02:55.376 align:middle
+y lo borraré.
+
+00:02:58.146 --> 00:02:59.676 align:middle
+Este controlador será sencillo.
+
+00:03:00.126 --> 00:03:06.106 align:middle
+Empieza añadiendo un static targets = ['dialog'] para que
+podamos encontrar rápidamente el elemento <dialog>.
+
+00:03:06.856 --> 00:03:08.516 align:middle
+A continuación añade un método open.
+
+00:03:09.156 --> 00:03:14.736 align:middle
+Aquí, digamos this.dialogTarget.show():
+Éste es otro superpoder
+
+00:03:14.736 --> 00:03:18.056 align:middle
+del elemento <dialog>
+¡tiene un método show()!
+
+00:03:18.666 --> 00:03:23.486 align:middle
+La idea central de mostrar y ocultar está
+integrada en el elemento <dialog>.
+
+00:03:24.286 --> 00:03:27.616 align:middle
+Para utilizar el nuevo
+controlador, en index.html.twig,
+
+00:03:27.676 --> 00:03:33.056 align:middle
+busca el div que contiene el button y el
+dialog y añade data-controller="modal".
+
+00:03:34.386 --> 00:03:40.276 align:middle
+Luego, en el botón, pon
+data-action="modal#open": Por último,
+
+00:03:40.556 --> 00:03:42.576 align:middle
+tenemos que establecer el
+<dialog> como objetivo.
+
+00:03:43.176 --> 00:03:46.916 align:middle
+Elimina el atributo open para que
+empiece cerrado y sustitúyelo
+
+00:03:46.916 --> 00:03:51.036 align:middle
+por data-modal-target="dialog": ¡Me gusta!
+
+00:03:51.786 --> 00:03:53.716 align:middle
+Aquí empieza cerrado.
+
+00:03:54.296 --> 00:03:56.136 align:middle
+Y cuando hagamos clic, ¡abre!
+
+00:03:56.356 --> 00:03:58.096 align:middle
+Cerrado, abierto, ¡cerrado!
+
+00:03:58.926 --> 00:04:05.276 align:middle
+Un elemento <dialog> tiene dos modos: el modo
+normal que hemos estado utilizando y un modo modal...
+
+00:04:05.276 --> 00:04:06.956 align:middle
+que es mucho más útil.
+
+00:04:07.656 --> 00:04:16.096 align:middle
+Para utilizar el modo modal, en lugar de show(), utiliza
+showModal(): Ahora, cuando hacemos clic, se sigue abriendo,
+
+00:04:16.156 --> 00:04:18.036 align:middle
+pero hay algunas diferencias sutiles.
+
+00:04:18.586 --> 00:04:21.786 align:middle
+La primera es que podemos
+cerrarlo pulsando Esc.
+
+00:04:22.176 --> 00:04:26.326 align:middle
+¡Genial! La segunda es que
+tiene un telón de fondo.
+
+00:04:26.946 --> 00:04:30.916 align:middle
+Observa: cuando haga clic, la
+pantalla se oscurecerá un poco.
+
+00:04:31.486 --> 00:04:32.116 align:middle
+¿Lo has visto?
+
+00:04:32.786 --> 00:04:35.876 align:middle
+Esto también me impide interactuar
+con el resto de la página.
+
+00:04:36.226 --> 00:04:39.256 align:middle
+Y esto nos sale gratis
+gracias a <dialog>.
+
+00:04:39.566 --> 00:04:40.616 align:middle
+Esto es enorme.
+
+00:04:41.286 --> 00:04:45.986 align:middle
+Inspecciona y busca el elemento
+<dialog> - ahí está.
+
+00:04:46.596 --> 00:04:49.956 align:middle
+El telón de fondo se añade a través
+de un pseudoelemento llamado backdrop.
+
+00:04:50.376 --> 00:04:52.506 align:middle
+Así que se encarga de
+añadirlo por nosotros...
+
+00:04:52.756 --> 00:04:55.766 align:middle
+pero es un elemento real al
+que se le puede aplicar estilo.
+
+00:04:56.136 --> 00:04:57.876 align:middle
+¡Y quiero darle estilo!
+
+00:04:58.816 --> 00:05:01.546 align:middle
+De vuelta a la plantilla,
+busca el elemento dialog.
+
+00:05:01.546 --> 00:05:06.866 align:middle
+Gracias a Tailwind, podemos aplicar estilo
+directamente al pseudoelemento telón de fondo.
+
+00:05:07.626 --> 00:05:16.246 align:middle
+Añade backdrop:bg-slate-600 y
+backdrop:opacity-80: Observa el efecto.
+
+00:05:16.456 --> 00:05:21.046 align:middle
+Esto empieza a parecer muy, muy suave.
+
+00:05:21.776 --> 00:05:25.526 align:middle
+Una cosa que el elemento dialog
+no maneja automáticamente es...
+
+00:05:25.656 --> 00:05:28.026 align:middle
+la página del fondo sigue desplazándose.
+
+00:05:28.116 --> 00:05:29.776 align:middle
+No afecta a nada...
+
+00:05:29.776 --> 00:05:31.876 align:middle
+pero no es el comportamiento que esperamos.
+
+00:05:31.876 --> 00:05:38.476 align:middle
+Para solucionarlo, en el método open(), di
+document.body para obtener el elemento body,
+
+00:05:38.736 --> 00:05:45.226 align:middle
+.classList.add('overflow-hidden'): Y ahora...
+
+00:05:46.136 --> 00:05:47.736 align:middle
+¡eso es lo que queremos!
+
+00:05:48.126 --> 00:05:51.166 align:middle
+Aunque... si cerramos,
+¡sigo sin poder desplazarme!
+
+00:05:51.466 --> 00:05:54.336 align:middle
+Tenemos que eliminar esa clase.
+
+00:05:54.336 --> 00:05:59.146 align:middle
+Para ello, copia el método
+open(), pégalo y llámalo close().
+
+00:06:00.746 --> 00:06:03.916 align:middle
+Para cerrar el diálogo, llama a close()...
+
+00:06:03.916 --> 00:06:07.306 align:middle
+y luego elimina overflow-hidden: ¡Me gusta!
+
+00:06:07.696 --> 00:06:12.106 align:middle
+Sólo hay un pequeño problema: ¡no
+estamos llamando al método close()!
+
+00:06:12.106 --> 00:06:19.116 align:middle
+Si pulsamos X o Esc, el diálogo se cierra,
+sí, pero sigo sin poder desplazarme
+
+00:06:19.326 --> 00:06:22.786 align:middle
+porque nada llama a este método
+close() en nuestro controlador.
+
+00:06:22.906 --> 00:06:26.776 align:middle
+Afortunadamente, el elemento
+dialog nos cubre las espaldas.
+
+00:06:27.306 --> 00:06:33.716 align:middle
+Cada vez que un elemento dialog se cierra -por
+cualquier motivo-, envía un evento llamado close.
+
+00:06:34.146 --> 00:06:35.606 align:middle
+Podemos escucharlo.
+
+00:06:36.356 --> 00:06:42.546 align:middle
+En el elemento <dialog>, añade un
+conjunto data-action a close->modal#close:
+
+00:06:43.056 --> 00:06:47.026 align:middle
+Así, independientemente de cómo se
+cierre dialog -presionaré Escape-,
+
+00:06:47.586 --> 00:06:51.756 align:middle
+ahora podemos desplazarnos porque se ha llamado
+al método close() de nuestro controlador.
+
+00:06:52.516 --> 00:06:53.746 align:middle
+Vale, estoy emocionado.
+
+00:06:53.956 --> 00:06:55.006 align:middle
+¿Qué más podemos hacer?
+
+00:06:55.556 --> 00:06:57.446 align:middle
+¿Qué tal difuminar el fondo?
+
+00:06:58.176 --> 00:07:00.516 align:middle
+Puedes intentar hacerlo difuminando el fondo.
+
+00:07:00.966 --> 00:07:02.426 align:middle
+Yo lo he intentado...
+
+00:07:02.456 --> 00:07:03.826 align:middle
+pero no conseguí que funcionara.
+
+00:07:04.196 --> 00:07:04.676 align:middle
+No pasa nada.
+
+00:07:04.676 --> 00:07:07.076 align:middle
+Lo que sí podemos desenfocar es el cuerpo.
+
+00:07:07.756 --> 00:07:15.426 align:middle
+Añade una clase más: blur-sm y elimina
+la blur-sm en close(): Veamos cómo queda.
+
+00:07:17.116 --> 00:07:19.406 align:middle
+¡Está muy bien!
+
+00:07:19.826 --> 00:07:23.726 align:middle
+Pero si intento hacer clic
+fuera del modal, no se cierra.
+
+00:07:24.216 --> 00:07:27.156 align:middle
+Esa es otra cosa que el
+elemento dialog no maneja.
+
+00:07:27.206 --> 00:07:30.996 align:middle
+Afortunadamente, hay una
+solución rápida de una sola vez.
+
+00:07:30.996 --> 00:07:32.936 align:middle
+Arriba, en el elemento raíz
+de nuestro controlador...
+
+00:07:33.416 --> 00:07:35.676 align:middle
+En realidad, podemos ponerlo aquí
+abajo, en el elemento dialog.
+
+00:07:36.216 --> 00:07:44.586 align:middle
+Añade una nueva acción:
+click->modal#clickOutside: Apuesto a que parece raro
+
+00:07:44.826 --> 00:07:50.146 align:middle
+-se llamará siempre que hagamos clic en cualquier parte
+del diálogo-, así que vamos a escribir ese método.
+
+00:07:50.146 --> 00:08:00.116 align:middle
+Digamos clickOutside(), dale un argumento event,
+luego si event.target === this.dialogTarget,
+
+00:08:00.626 --> 00:08:08.916 align:middle
+this.dialogTarget.close(): event.target será
+el elemento real que recibió el clic. Resulta
+
+00:08:09.706 --> 00:08:12.826 align:middle
+que la única forma de hacer clic exactamente
+
+00:08:12.826 --> 00:08:16.786 align:middle
+en el propio elemento dialog es si
+haces clic en el telón de fondo.
+
+00:08:17.456 --> 00:08:22.266 align:middle
+Si haces clic en cualquier otro lugar del interior,
+event.target será uno de estos elementos.
+
+00:08:22.316 --> 00:08:26.576 align:middle
+Así que son tres ingeniosas líneas de
+código, pero el resultado es perfecto.
+
+00:08:27.136 --> 00:08:28.946 align:middle
+Haz clic aquí, sin problemas.
+
+00:08:29.176 --> 00:08:30.916 align:middle
+Haz clic ahí, cerrado.
+
+00:08:31.696 --> 00:08:33.936 align:middle
+Llegados a este punto, ¡estoy contento!
+
+00:08:34.516 --> 00:08:39.596 align:middle
+Pero este tutorial no trata de hacer
+cosas buenas, sino cosas geniales.
+
+00:08:39.596 --> 00:08:43.616 align:middle
+A continuación: Quiero que el
+elemento dialog se desvanezca.
+
+00:08:44.186 --> 00:08:46.776 align:middle
+Podríamos hacerlo con una transición CSS.
+
+00:08:47.356 --> 00:08:50.466 align:middle
+Pero otra opción es una animación CSS.
+
+00:08:50.956 --> 00:08:55.026 align:middle
+Lo sé, transiciones,
+animaciones... CSS tiene muchas.
+
+00:08:55.876 --> 00:08:59.236 align:middle
+Una animación es algo que
+aplicas a un elemento y...
+
+00:08:59.386 --> 00:08:59.976 align:middle
+simplemente...
+
+00:09:00.026 --> 00:09:02.226 align:middle
+hará esa animación para siempre.
+
+00:09:02.626 --> 00:09:04.916 align:middle
+O puedes hacer que se anime sólo una vez.
+
+00:09:05.296 --> 00:09:08.496 align:middle
+Por ejemplo, podemos hacer que este botón
+se anime arriba y abajo para siempre.
+
+00:09:09.486 --> 00:09:15.146 align:middle
+Una de las cosas buenas de las animaciones es que
+puedes hacer que una animación sólo ocurra una vez...
+
+00:09:15.436 --> 00:09:20.016 align:middle
+y no se iniciará hasta que el
+elemento sea visible en la página.
+
+00:09:20.046 --> 00:09:27.066 align:middle
+Por ejemplo, podríamos crear una animación de
+opacidad 0 a opacidad 100, que se ejecutaría en cuanto
+
+00:09:27.066 --> 00:09:30.046 align:middle
+nuestro dialog se hiciera visible.
+
+00:09:30.816 --> 00:09:34.546 align:middle
+Tailwind tiene algunas animaciones incorporadas,
+pero no una para el desvanecimiento.
+
+00:09:35.116 --> 00:09:36.486 align:middle
+Así que la añadiremos.
+
+00:09:37.466 --> 00:09:45.176 align:middle
+Abajo, en tailwind.config.js, pegaré sobre la tecla
+theme: Esto es sobre todo material de animación CSS:
+
+00:09:45.476 --> 00:09:52.726 align:middle
+añade una nueva llamada fade-in que
+pasará de opacidad 0 a 100 en 1/2 segundo.
+
+00:09:52.726 --> 00:10:01.216 align:middle
+Para utilizarlo, busca el elemento dialog
+y añade animate-fade-in: Pruébalo.
+
+00:10:02.516 --> 00:10:05.416 align:middle
+¡Precioso! ¿Podríamos desvanecerlo?
+
+00:10:05.896 --> 00:10:09.106 align:middle
+Claro, pero en realidad me gusta
+que se cierre inmediatamente.
+
+00:10:09.316 --> 00:10:10.576 align:middle
+Así que voy a omitirlo.
+
+00:10:11.596 --> 00:10:15.086 align:middle
+Vale, tengo un último detalle
+antes de despedirte por hoy.
+
+00:10:15.676 --> 00:10:22.706 align:middle
+Cuando añadimos las transiciones de vista, en app.js,
+desactivamos una función en Turbo llamada caché de página...
+
+00:10:23.196 --> 00:10:27.926 align:middle
+porque, al parecer, no siempre funciona
+bien con las transiciones de vista.
+
+00:10:28.626 --> 00:10:32.666 align:middle
+Cuando las transiciones de vista sean estándar en
+Turbo 8, supongo que esto no será un problema. De
+
+00:10:33.416 --> 00:10:40.086 align:middle
+todos modos, cuando la caché está activada: en el momento en
+que haces clic fuera de una página, Turbo toma una instantánea
+
+00:10:40.086 --> 00:10:42.096 align:middle
+de la página antes de navegar fuera.
+
+00:10:42.656 --> 00:10:46.226 align:middle
+Cuando volvemos a hacer clic,
+es instantáneo: ¡boom!
+
+00:10:46.656 --> 00:10:51.606 align:middle
+En lugar de hacer una petición a la red,
+utiliza la versión en caché de esta página.
+
+00:10:52.426 --> 00:10:55.206 align:middle
+Hay más cosas, pero captas la idea.
+
+00:10:55.876 --> 00:11:01.606 align:middle
+Con el almacenamiento en caché activado, una cosa de la que
+tenemos que preocuparnos es de eliminar cualquier elemento temporal
+
+00:11:01.606 --> 00:11:07.436 align:middle
+de la página antes de que se tome la instantánea,
+como los mensajes tostados o los modales.
+
+00:11:08.046 --> 00:11:12.466 align:middle
+Porque, cuando hagas clic en "Atrás", no querrás que
+una notificación de tostado esté aquí arriba. La
+
+00:11:13.516 --> 00:11:18.586 align:middle
+forma en que normalmente resolvemos
+esto, por ejemplo en _flashes.html.twig,
+
+00:11:18.986 --> 00:11:22.246 align:middle
+es añadir un atributo data-turbo-temporary:
+
+00:11:22.946 --> 00:11:26.926 align:middle
+Que le dice a Turbo que elimine este
+elemento antes de tomar la instantánea.
+
+00:11:27.586 --> 00:11:31.316 align:middle
+Probemos a añadir esto a nuestro dialog
+para que no aparezca en la instantánea.
+
+00:11:33.216 --> 00:11:36.306 align:middle
+Para ver qué ocurre, abre
+el modal y haz clic atrás.
+
+00:11:37.126 --> 00:11:40.096 align:middle
+Eso acaba de tomar una instantánea
+de la página anterior.
+
+00:11:40.756 --> 00:11:42.186 align:middle
+Ahora haz clic hacia adelante.
+
+00:11:42.876 --> 00:11:46.176 align:middle
+Vaya. Estamos en un estado extraño.
+
+00:11:46.666 --> 00:11:49.166 align:middle
+Parece que el diálogo ha desaparecido...
+
+00:11:49.396 --> 00:11:52.416 align:middle
+pero no podemos desplazarnos
+y la página está borrosa.
+
+00:11:53.176 --> 00:11:56.536 align:middle
+Eso es porque necesitamos hacer
+algo más que ocultar el dialog:
+
+00:11:57.186 --> 00:11:59.306 align:middle
+necesitamos eliminar estas clases del cuerpo.
+
+00:11:59.976 --> 00:12:05.396 align:middle
+Básicamente, antes de que Turbo tome la instantánea,
+¡necesitamos algo que llame al método close()!
+
+00:12:05.846 --> 00:12:07.076 align:middle
+¡Y podemos hacerlo!
+
+00:12:07.726 --> 00:12:11.666 align:middle
+En index.html.twig, en el
+elemento controlador raíz
+
+00:12:12.046 --> 00:12:16.176 align:middle
+-aunque esto podría ir en cualquier
+sitio- añade un data-action="".
+
+00:12:17.226 --> 00:12:23.556 align:middle
+Justo antes de que Turbo tome su instantánea,
+envía un evento llamado turbo:before-cache.
+
+00:12:24.356 --> 00:12:28.056 align:middle
+Podemos escucharlo y luego
+llamar a modal#close.
+
+00:12:28.656 --> 00:12:35.276 align:middle
+El único detalle es que el evento turbo:before-cache
+no se envía a un elemento específico.
+
+00:12:35.836 --> 00:12:39.176 align:middle
+Así que escucharlo en este
+elemento no funcionará.
+
+00:12:39.666 --> 00:12:42.466 align:middle
+Se envía por encima de nosotros, a la ventana.
+
+00:12:42.686 --> 00:12:44.206 align:middle
+Es un evento global.
+
+00:12:44.906 --> 00:12:50.316 align:middle
+Afortunadamente, Turbo nos ofrece una forma sencilla de
+escuchar los eventos globales añadiendo @window: Es un
+
+00:12:50.316 --> 00:12:56.966 align:middle
+poco técnico, pero con este único
+arreglo, podemos abrir el modal, retroceder,
+
+00:12:57.146 --> 00:13:00.246 align:middle
+avanzar, y la página queda preciosa.
+
+00:13:00.986 --> 00:13:05.366 align:middle
+¡Guau! Hoy ha sido un día enorme,
+¡pero mira lo que hemos conseguido!
+
+00:13:05.576 --> 00:13:09.146 align:middle
+Un bonito sistema modal sobre
+el que tenemos un control total.
+
+00:13:09.946 --> 00:13:13.866 align:middle
+Mañana va a ser igual de grande,
+ya que daremos vida a este modal
+
+00:13:13.866 --> 00:13:16.476 align:middle
+con contenido y formularios dinámicos reales.
+
+00:13:16.476 --> 00:13:17.526 align:middle
+Hasta entonces.

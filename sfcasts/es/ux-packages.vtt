@@ -1,0 +1,362 @@
+WEBVTT
+
+00:00:01.106 --> 00:00:03.066 align:middle
+Dirígete a https://ux.symfony.com.
+
+00:00:03.406 --> 00:00:08.756 align:middle
+Este es el sitio de la Iniciativa Symfony
+UX: un grupo de paquetes PHP y JavaScript
+
+00:00:08.876 --> 00:00:11.126 align:middle
+que nos proporcionan controladores
+Stimulus gratuitos. Hay un controlador
+
+00:00:11.686 --> 00:00:14.306 align:middle
+Stimulus que puede renderizar chart.js,
+
+00:00:14.446 --> 00:00:16.666 align:middle
+otro que puede añadir un
+recortador de imágenes, etc.
+
+00:00:17.606 --> 00:00:20.866 align:middle
+Hoy vamos a centrarnos en conseguir
+un controlador Stimulus gratuito
+
+00:00:20.866 --> 00:00:24.086 align:middle
+que nos proporcione un elegante
+elemento autocompletar select.
+
+00:00:24.596 --> 00:00:28.386 align:middle
+Puedes buscar, seleccionar...
+es todo muy bonito.
+
+00:00:29.116 --> 00:00:32.346 align:middle
+En nuestro sitio, dirígete a la
+sección de viajes y pulsa editar.
+
+00:00:32.346 --> 00:00:36.996 align:middle
+El formulario tiene un desplegable
+de planetas, que está bien...
+
+00:00:37.256 --> 00:00:39.496 align:middle
+¡pero quiero darle más genialidad!
+
+00:00:39.796 --> 00:00:41.586 align:middle
+Así que vamos a instalar este paquete.
+
+00:00:42.156 --> 00:00:47.196 align:middle
+La librería UX Autocompletar es una mezcla de
+PHP con un controlador Stimulus en su interior.
+
+00:00:47.826 --> 00:00:54.346 align:middle
+Copia la línea composer require
+y pégala: Cuando termine...
+
+00:00:54.526 --> 00:01:01.856 align:middle
+ejecuta: git status Oooh: la receta modificó
+dos cosas interesantes: controllers.json
+
+00:01:01.896 --> 00:01:05.426 align:middle
+y importmap.php Sabemos que todo lo que
+
+00:01:05.426 --> 00:01:09.976 align:middle
+haya en el directorio assets/controllers/
+estará disponible como controlador Stimulus.
+
+00:01:10.676 --> 00:01:17.116 align:middle
+Además, todo lo que esté en controllers.json
+también se registrará como controlador Stimulus:
+
+00:01:17.836 --> 00:01:21.476 align:middle
+Es una forma de que los paquetes PHP
+de terceros añadan más controladores.
+
+00:01:21.956 --> 00:01:25.926 align:middle
+La receta ha añadido esta entrada, lo que
+básicamente significa que cogerá algo de código
+
+00:01:25.926 --> 00:01:30.446 align:middle
+del paquete que acabamos de instalar y
+lo registrará como controlador Stimulus.
+
+00:01:31.146 --> 00:01:35.206 align:middle
+El caso es que ahora tenemos un tercer
+controlador Stimulus en nuestra aplicación El
+
+00:01:36.116 --> 00:01:41.296 align:middle
+otro cambio que hizo la receta está en
+importmap.php: añadió una nueva entrada
+
+00:01:41.296 --> 00:01:45.216 align:middle
+para tom-select: tom-select
+es un paquete JavaScript...
+
+00:01:45.446 --> 00:01:50.376 align:middle
+y en realidad es lo que hace el trabajo
+pesado para la funcionalidad de autocompletar.
+
+00:01:50.886 --> 00:01:54.276 align:middle
+Este controlador de Stimulus es sólo una
+pequeña envoltura alrededor de tom-select.
+
+00:01:54.726 --> 00:01:58.476 align:middle
+Y así, como ese controlador
+necesita tom-select, ¡se añadió!
+
+00:01:59.126 --> 00:02:03.546 align:middle
+Pero cuando actualizamos la página,
+nos aparece un bonito error.
+
+00:02:03.916 --> 00:02:10.336 align:middle
+Dice El autoimport tom-select.default.css
+no se pudo encontrar en importmap.php.
+
+00:02:10.336 --> 00:02:14.616 align:middle
+Prueba a ejecutar
+importmap:require y luego esa ruta.
+
+00:02:14.616 --> 00:02:16.336 align:middle
+Vuelve a mirar en controllers.json.
+
+00:02:16.336 --> 00:02:21.506 align:middle
+A veces, estos controladores tienen
+una sección extra llamada autoimport:
+
+00:02:22.246 --> 00:02:27.976 align:middle
+La idea es que un controlador Stimulus
+pueda tener un archivo CSS que lo acompañe.
+
+00:02:28.566 --> 00:02:33.336 align:middle
+Esta sección te permite activar
+o desactivar esos archivos CSS.
+
+00:02:33.336 --> 00:02:37.926 align:middle
+Por ejemplo, con tom-select,
+hay un archivo CSS por defecto.
+
+00:02:38.686 --> 00:02:42.846 align:middle
+O si utilizas Bootstrap, puedes
+utilizar el archivo CSS de Bootstrap 5.
+
+00:02:43.276 --> 00:02:45.776 align:middle
+Podríamos poner esto en false y esto en true.
+
+00:02:46.556 --> 00:02:50.046 align:middle
+Una diferencia entre utilizar
+módulos JavaScript en un navegador
+
+00:02:50.046 --> 00:02:54.346 align:middle
+frente a Node y Webpack es la
+cantidad de paquete que obtienes.
+
+00:02:54.816 --> 00:03:00.216 align:middle
+Con Node, cuando escribes npm add
+tom-select, se descarga todo el paquete:
+
+00:03:00.346 --> 00:03:03.566 align:middle
+los archivos JavaScript, los
+archivos CSS y todo lo demás.
+
+00:03:03.926 --> 00:03:07.666 align:middle
+Pero con AssetMapper y el entorno
+del navegador en general, cuando
+
+00:03:08.146 --> 00:03:10.196 align:middle
+importmap:require tom-select,
+
+00:03:10.436 --> 00:03:14.606 align:middle
+descargas un único archivo:
+sólo el archivo JavaScript.
+
+00:03:15.256 --> 00:03:17.386 align:middle
+Los archivos CSS no están ahí.
+
+00:03:17.856 --> 00:03:22.056 align:middle
+Sin embargo, con importmap:require,
+podemos, por supuesto,
+
+00:03:22.256 --> 00:03:25.836 align:middle
+coger un paquete con su nombre, así: Genial.
+
+00:03:26.196 --> 00:03:31.176 align:middle
+Pero también podemos importar una ruta de
+archivo específica dentro de ese paquete.
+
+00:03:31.616 --> 00:03:37.276 align:middle
+Y, como AssetMapper admite archivos CSS,
+esa ruta puede ser a un archivo CSS.
+
+00:03:38.126 --> 00:03:42.006 align:middle
+En otras palabras, si necesitamos este archivo
+CSS del proveedor, podemos obtenerlo con:
+
+00:03:42.006 --> 00:03:48.076 align:middle
+php bin/console importmap:require
+tom-select/dist/css/tom-select.default.css
+
+00:03:48.076 --> 00:03:49.706 align:middle
+¡Lo tengo!
+
+00:03:51.056 --> 00:03:52.996 align:middle
+En el directorio assets/vendor/...
+
+00:03:53.886 --> 00:03:55.376 align:middle
+¡ahí está!
+
+00:03:55.816 --> 00:03:58.596 align:middle
+Y en importmap.php, también está ahí.
+
+00:03:59.156 --> 00:04:03.046 align:middle
+Esto significa que está disponible para
+que lo importe nuestro controlador Stimulus.
+
+00:04:03.616 --> 00:04:04.376 align:middle
+¿El resultado final?
+
+00:04:04.816 --> 00:04:06.176 align:middle
+¡El error ha desaparecido!
+
+00:04:06.576 --> 00:04:09.466 align:middle
+Y en el código fuente de la
+página, está el archivo CSS.
+
+00:04:10.136 --> 00:04:17.016 align:middle
+Vale, después de una llamada a composer require, una
+llamada a importmap:require y un montón de parloteos míos,
+
+00:04:17.416 --> 00:04:21.256 align:middle
+tenemos un nuevo controlador Stimulus
+de autocompletado listo para funcionar.
+
+00:04:21.896 --> 00:04:25.176 align:middle
+Podríamos añadir un
+data-controller al elemento select.
+
+00:04:25.556 --> 00:04:32.266 align:middle
+Pero recuerda: Los paquetes UX suelen ser una
+mezcla de controladores Stimulus y código PHP.
+
+00:04:32.266 --> 00:04:37.976 align:middle
+En este caso, el código PHP nos permite activar
+el controlador directamente en nuestro formulario.
+
+00:04:38.686 --> 00:04:42.736 align:middle
+Abre src/Form/VoyageType.php.
+
+00:04:42.736 --> 00:04:48.576 align:middle
+El campo planet es un EntityType: Y, gracias
+al nuevo paquete, cualquier EntityType
+
+00:04:48.576 --> 00:04:52.096 align:middle
+o ChoiceType tiene ahora
+una opción autocomplete.
+
+00:04:52.366 --> 00:04:55.496 align:middle
+Ponlo en true: Y ahora...
+
+00:04:56.016 --> 00:05:00.946 align:middle
+¡Tachán! Puede que a la policía de
+la moda no le encante, ¡pero funciona!
+
+00:05:01.486 --> 00:05:05.586 align:middle
+Esa opción activó el controlador Stimulus:
+incluso puedes verlo en la página.
+
+00:05:05.856 --> 00:05:10.716 align:middle
+Aquí está el select ahora con un data-controller
+seguido del nombre largo de ese controlador.
+
+00:05:11.406 --> 00:05:13.196 align:middle
+¿Cómo podemos hacer que
+esto tenga mejor aspecto?
+
+00:05:13.856 --> 00:05:15.266 align:middle
+Gracias al autoimport,
+
+00:05:15.466 --> 00:05:19.696 align:middle
+el tom-select.default.css al
+menos hace que se vea bien.
+
+00:05:22.016 --> 00:05:26.006 align:middle
+Si utilizáramos Bootstrap , cambiaría
+esto por true, esto por false,
+
+00:05:26.326 --> 00:05:29.616 align:middle
+importmap:require el archivo
+Bootstrap y estaríamos bien.
+
+00:05:30.426 --> 00:05:35.366 align:middle
+Ahora mismo, no hay soporte oficial para
+Tailwind, así que le daremos estilo manualmente.
+
+00:05:36.176 --> 00:05:40.056 align:middle
+En assets/styles/app.css, eliminaré el body.
+
+00:05:41.046 --> 00:05:45.366 align:middle
+Además de las cosas de Tailwind, puedes pegar
+cualquier estilo personalizado que necesites.
+
+00:05:46.026 --> 00:05:48.796 align:middle
+Estos anulan algunos de los estilos
+predeterminados para que se vean bien
+
+00:05:48.826 --> 00:05:52.466 align:middle
+en nuestro modo oscuro con
+temática espacial: Y ahora...
+
+00:05:53.286 --> 00:05:59.646 align:middle
+¡me encanta! Ah, ¿y recuerdas que podemos hacer que nuestros
+controladores sean perezosos añadiendo un comentario especial?
+
+00:06:00.516 --> 00:06:03.966 align:middle
+Podemos hacer lo mismo con los
+controladores cargados en controllers.json
+
+00:06:04.026 --> 00:06:07.796 align:middle
+estableciendo fetch en lazy: Compruébalo.
+
+00:06:08.316 --> 00:06:09.696 align:middle
+Ve a la página de viajes.
+
+00:06:11.486 --> 00:06:15.326 align:middle
+Voy a mis herramientas de red,
+actualizo y busco "autocompletar"...
+
+00:06:15.636 --> 00:06:16.826 align:middle
+y "TomSelect".
+
+00:06:17.456 --> 00:06:21.066 align:middle
+Nada Pero en cuanto vayamos
+a la página de edición
+
+00:06:21.066 --> 00:06:23.826 align:middle
+donde se está utilizando:
+busca "autocompletar".
+
+00:06:24.306 --> 00:06:25.136 align:middle
+¡Ahí lo tienes!
+
+00:06:25.536 --> 00:06:30.426 align:middle
+"TomSelect" y el archivo CSS también se cargaron
+perezosamente, sólo cuando los necesitábamos.
+
+00:06:31.196 --> 00:06:32.916 align:middle
+¡Ya hemos terminado con el día 8!
+
+00:06:33.286 --> 00:06:35.806 align:middle
+¡Una semana y un día
+completos en la ÚLTIMA pila!
+
+00:06:36.356 --> 00:06:39.636 align:middle
+Mañana, ¡vamos a darle caña y
+a transformar nuestra aplicación
+
+00:06:39.636 --> 00:06:43.406 align:middle
+en una maravilla elegante de
+una sola página con Turbo!
+
+00:06:44.016 --> 00:06:45.136 align:middle
+Durante los próximos 7 días...
+
+00:06:45.316 --> 00:06:46.916 align:middle
+las cosas empezarán a volverse locas.

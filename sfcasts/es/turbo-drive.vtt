@@ -1,0 +1,315 @@
+WEBVTT
+
+00:00:01.066 --> 00:00:02.636 align:middle
+¡Es el día 9!
+
+00:00:02.766 --> 00:00:06.336 align:middle
+Hermoso día 9 en el que empezamos
+a hacer brillar nuestra aplicación.
+
+00:00:06.686 --> 00:00:12.446 align:middle
+Todos los fundamentos están en su sitio
+(AssetMapper, Tailwind y Stimulus), así que hoy es...
+
+00:00:12.596 --> 00:00:14.156 align:middle
+casi una vuelta de la victoria.
+
+00:00:14.656 --> 00:00:18.656 align:middle
+Estamos a punto de sacar un gran partido a nuestro
+dinero gracias a una biblioteca llamada Turbo.
+
+00:00:19.506 --> 00:00:23.996 align:middle
+En este momento, nuestro sitio, por supuesto,
+tiene actualizaciones de página completas.
+
+00:00:24.726 --> 00:00:26.796 align:middle
+Fíjate en el logotipo de
+la barra de direcciones.
+
+00:00:27.656 --> 00:00:30.836 align:middle
+Cuando hago clic, todo se hace con una
+actualización completa de la página.
+
+00:00:31.356 --> 00:00:32.336 align:middle
+Eso está bien.
+
+00:00:32.846 --> 00:00:34.746 align:middle
+No importa, ¡no está bien!
+
+00:00:35.036 --> 00:00:39.276 align:middle
+Quiero que nuestro sitio tenga una experiencia
+de usuario devastadoramente buena. Por
+
+00:00:39.946 --> 00:00:46.166 align:middle
+suerte, tenemos a Turbo en nuestro equipo: una biblioteca
+JavaScript forjada en las profundidades de Internet,
+
+00:00:46.306 --> 00:00:49.756 align:middle
+empeñada en destruir todas las
+actualizaciones de página completa.
+
+00:00:50.566 --> 00:00:55.076 align:middle
+Mira en su sitio: no verás ninguna recarga
+de página completa mientras navegamos.
+
+00:00:55.586 --> 00:00:57.766 align:middle
+Y comprueba lo rápido que se siente.
+
+00:00:58.046 --> 00:01:03.286 align:middle
+Parece una aplicación de una sola
+página, porque, bueno, lo es,
+
+00:01:03.806 --> 00:01:07.846 align:middle
+sólo que no es una que necesitemos construir
+con un framework frontend como React.
+
+00:01:08.866 --> 00:01:12.286 align:middle
+Al igual que Stimulus, Symfony tiene un paquete
+que nos ayuda a trabajar con este Turbo.
+
+00:01:12.406 --> 00:01:19.916 align:middle
+Busca tu terminal y ejecuta: composer
+require symfony/ux-turbo Cuando termine, haz:
+
+00:01:19.916 --> 00:01:29.526 align:middle
+git status Al igual que el otro paquete UX,
+este modificó controllers.json y importmap.php.
+
+00:01:29.526 --> 00:01:34.666 align:middle
+En assets/controllers.json, añadió dos
+nuevos controladores: El primero es...
+
+00:01:34.736 --> 00:01:35.896 align:middle
+una especie de controlador falso.
+
+00:01:36.296 --> 00:01:39.976 align:middle
+Carga y activa Turbo -verás
+lo que hace en un momento-,
+
+00:01:40.246 --> 00:01:43.726 align:middle
+pero no es un controlador de Stimulus
+que vayamos a utilizar directamente.
+
+00:01:44.556 --> 00:01:47.216 align:middle
+El segundo controlador es
+opcional -no vamos a hablar
+
+00:01:47.216 --> 00:01:49.246 align:middle
+de él- y está desactivado por defecto.
+
+00:01:50.056 --> 00:01:56.846 align:middle
+El otro cambio, en importmap.php es, ninguna
+sorpresa: ha añadido @hotwired/turbo:
+
+00:01:56.846 --> 00:02:01.116 align:middle
+f El resultado de este
+único comando es asombroso.
+
+00:02:01.636 --> 00:02:07.916 align:middle
+Cuando actualice, mira la barra de direcciones: ¡no
+vamos a ver más recargas de páginas completas!
+
+00:02:08.286 --> 00:02:11.196 align:middle
+Y todo va superrápido.
+
+00:02:11.346 --> 00:02:12.736 align:middle
+Me encanta.
+
+00:02:13.126 --> 00:02:14.006 align:middle
+¡Incluso los formularios!
+
+00:02:14.906 --> 00:02:15.586 align:middle
+Haz clic en editar.
+
+00:02:15.946 --> 00:02:18.646 align:middle
+Observa: se envía mediante AJAX.
+
+00:02:18.926 --> 00:02:24.636 align:middle
+O, si creo uno nuevo y pulso
+enter, se envía vía AJAX.
+
+00:02:25.176 --> 00:02:29.636 align:middle
+¡Nuestro sitio se acaba de transformar en una
+aplicación de una sola página con un solo comando!
+
+00:02:30.396 --> 00:02:33.456 align:middle
+Puede que estés pensando: Esto es
+demasiado bueno para ser verdad, Ryan.
+
+00:02:33.596 --> 00:02:34.456 align:middle
+¿Cuál es el truco?
+
+00:02:34.856 --> 00:02:40.556 align:middle
+Vale, hay una pega, pero menor para los nuevos
+proyectos: tu JavaScript debe estar escrito
+
+00:02:40.556 --> 00:02:43.446 align:middle
+para funcionar sin actualizaciones
+completas de la página.
+
+00:02:44.136 --> 00:02:48.286 align:middle
+Históricamente, hemos escrito nuestro JavaScript
+para que se ejecute al cargar la página...
+
+00:02:48.516 --> 00:02:50.536 align:middle
+o ejecutarse en document.ready.
+
+00:02:50.806 --> 00:02:54.286 align:middle
+Y esas cosas no ocurren después
+de la primera carga de la página.
+
+00:02:54.746 --> 00:02:57.976 align:middle
+Pero siempre que tengas todo escrito
+en Stimulus, estarás bien. Por
+
+00:02:57.976 --> 00:03:02.956 align:middle
+ejemplo: nuestro controlador celebrate:
+no importa en cuántas páginas haga clic
+
+00:03:02.956 --> 00:03:05.936 align:middle
+, eso sigue funcionando.
+
+00:03:05.936 --> 00:03:13.666 align:middle
+Si tu aplicación aún no está preparada para Turbo
+-por el problema del JavaScript-, puedes desactivarlo.
+
+00:03:13.666 --> 00:03:19.136 align:middle
+En app.js, import * as Turbo
+from '@hotwired/turbo' .
+
+00:03:19.956 --> 00:03:23.876 align:middle
+Abajo, pon Turbo.session.drive = false.
+
+00:03:24.726 --> 00:03:26.176 align:middle
+No voy a hacerlo...
+
+00:03:26.176 --> 00:03:30.656 align:middle
+así que lo comentaré: Pero,
+¿por qué iba a instalar Turbo...
+
+00:03:30.976 --> 00:03:32.576 align:middle
+sólo para desactivarlo?
+
+00:03:33.066 --> 00:03:35.276 align:middle
+Porque Turbo consta en realidad de tres partes.
+
+00:03:36.016 --> 00:03:37.686 align:middle
+La primera se llama Turbo Drive.
+
+00:03:38.106 --> 00:03:43.166 align:middle
+Es la parte que nos proporciona navegación AJAX gratuita
+en todos los clics de enlaces y envíos de formularios.
+
+00:03:43.416 --> 00:03:45.476 align:middle
+Y eso es lo que esto desactiva.
+
+00:03:46.326 --> 00:03:48.076 align:middle
+Pero incluso si no estás preparado para Drive,
+
+00:03:48.146 --> 00:03:52.666 align:middle
+puedes utilizar las otras dos
+partes: Turbo Frames y Turbo Streams.
+
+00:03:53.246 --> 00:03:56.756 align:middle
+Son muy potentes y pasaremos mucho tiempo
+
+00:03:56.756 --> 00:04:00.116 align:middle
+en este tutorial haciendo
+cosas increíbles con ellas.
+
+00:04:00.886 --> 00:04:05.636 align:middle
+Turbo Drive en sí es bastante sencillo,
+pero tiene algunos trucos más en la manga.
+
+00:04:06.046 --> 00:04:08.156 align:middle
+Y constantemente añaden cosas nuevas.
+
+00:04:08.206 --> 00:04:11.636 align:middle
+Por ejemplo, una función se llama precarga.
+
+00:04:12.456 --> 00:04:16.376 align:middle
+Para mostrarla, entra en
+templates/base.html.twig.
+
+00:04:16.556 --> 00:04:18.816 align:middle
+Si alguna vez estás en una página...
+
+00:04:19.196 --> 00:04:22.846 align:middle
+y estás muy seguro de saber qué
+enlace va a pulsar el usuario
+
+00:04:22.846 --> 00:04:25.386 align:middle
+a continuación, puedes precargarlo.
+
+00:04:25.476 --> 00:04:32.986 align:middle
+Por ejemplo, en el enlace "viajes",
+añade data-turbo-preload: Actualizar,
+
+00:04:33.056 --> 00:04:37.616 align:middle
+inspeccionar elemento, luego ve
+a herramientas de red, XHR...
+
+00:04:37.786 --> 00:04:38.836 align:middle
+y borra el filtro.
+
+00:04:39.686 --> 00:04:45.056 align:middle
+Cuando actualizo, ¡inmediatamente vemos una petición
+AJAX realizada para la página de los viajes!
+
+00:04:45.546 --> 00:04:50.926 align:middle
+Por eso, cuando hagamos clic en este
+enlace, mira: va a ser instantáneo.
+
+00:04:51.566 --> 00:04:56.776 align:middle
+¡Boom! Utiliza esto sólo cuando estés completamente
+seguro de cuál será la página siguiente.
+
+00:04:56.776 --> 00:05:02.056 align:middle
+No queremos desencadenar un montón de tráfico
+innecesario a tu sitio que no se utilizará.
+
+00:05:02.626 --> 00:05:04.406 align:middle
+Ah, ¿y ves estos errores de JavaScript?
+
+00:05:04.896 --> 00:05:07.906 align:middle
+Provienen de la barra de herramientas de
+depuración web y del perfilador de Symfony.
+
+00:05:08.326 --> 00:05:09.446 align:middle
+No sé muy bien por qué...
+
+00:05:09.446 --> 00:05:11.426 align:middle
+pero no le gusta la precarga.
+
+00:05:11.876 --> 00:05:15.126 align:middle
+Eso es algo que tenemos que arreglar,
+pero la precarga en sí funciona bien.
+
+00:05:15.396 --> 00:05:16.666 align:middle
+Puedes ignorar esto.
+
+00:05:17.766 --> 00:05:20.866 align:middle
+De vuelta en la plantilla,
+elimina el data-turbo-preload...
+
+00:05:20.986 --> 00:05:24.636 align:middle
+porque en realidad no sabemos en qué página
+hará clic el usuario a continuación.
+
+00:05:25.416 --> 00:05:26.876 align:middle
+Hoy ha ido genial.
+
+00:05:27.226 --> 00:05:31.196 align:middle
+Con una biblioteca, hemos eliminado
+todas las recargas de página completa.
+
+00:05:31.756 --> 00:05:32.736 align:middle
+¿Qué podría ser lo siguiente?
+
+00:05:33.296 --> 00:05:38.356 align:middle
+Mañana hablaremos de los Turbo Frames: una
+forma de crear "porciones" de carga Ajax
+
+00:05:38.356 --> 00:05:41.436 align:middle
+de nuestra página, sin escribir
+una sola línea de JavaScript.

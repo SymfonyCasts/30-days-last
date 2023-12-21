@@ -1,0 +1,441 @@
+WEBVTT
+
+00:00:01.176 --> 00:00:02.636 align:middle
+¡Bienvenido al Día 13!
+
+00:00:03.096 --> 00:00:07.576 align:middle
+Hoy vamos a dejar de lado Stimulus y Turbo y
+trabajaremos únicamente con Symfony y Twig.
+
+00:00:07.926 --> 00:00:11.056 align:middle
+Nuestro objetivo es añadir paginación
+y ordenación por columnas a esta lista.
+
+00:00:11.706 --> 00:00:13.726 align:middle
+Me gusta añadir paginación con Pagerfanta.
+
+00:00:14.346 --> 00:00:18.786 align:middle
+Me encanta esta biblioteca, aunque me
+pierdo un poco en su documentación.
+
+00:00:19.166 --> 00:00:22.726 align:middle
+Pero oye: es de código abierto, si
+no estás contento, ¡ve y arréglalo!
+
+00:00:23.356 --> 00:00:26.196 align:middle
+Para utilizar Pagerfanta,
+instalaremos tres bibliotecas:
+
+00:00:26.486 --> 00:00:34.806 align:middle
+composer require babdev/pagerfanta-bundle
+pagerfanta/doctrine-orm-adapter pagerfanta/twig
+
+00:00:36.846 --> 00:00:37.986 align:middle
+¡Genial!
+
+00:00:37.986 --> 00:00:40.626 align:middle
+Primero hagamos funcionar la parte PHP.
+
+00:00:40.996 --> 00:00:43.416 align:middle
+Abre src/Controller/MainController.php.
+
+00:00:45.046 --> 00:00:51.066 align:middle
+La página actual se almacenará
+en la URL como ?page=1 o ?page=2,
+
+00:00:51.336 --> 00:00:54.136 align:middle
+así que necesitamos leer ese
+parámetro de consulta page.
+
+00:00:55.096 --> 00:00:59.576 align:middle
+Lo haremos con un nuevo
+atributo #[MapQueryParameter].
+
+00:01:00.066 --> 00:01:01.776 align:middle
+Y en realidad, antes...
+
+00:01:01.886 --> 00:01:03.616 align:middle
+Estaba haciendo demasiado trabajo.
+
+00:01:03.616 --> 00:01:08.766 align:middle
+Si tu parámetro de consulta coincide con el nombre
+de tu argumento, no necesitas especificarlo ahí.
+
+00:01:09.186 --> 00:01:11.066 align:middle
+Así que lo suprimiré en esos dos.
+
+00:01:11.556 --> 00:01:15.156 align:middle
+Es diferente para searchPlanet: un
+parámetro que utilizaremos más adelante.
+
+00:01:16.126 --> 00:01:20.736 align:middle
+De todos modos, esto leerá el ?page=
+y lo pondremos por defecto a 1.
+
+00:01:21.296 --> 00:01:24.846 align:middle
+Ah, y el orden de estos no
+importa: A continuación,
+
+00:01:24.936 --> 00:01:30.046 align:middle
+copia la línea $voyageRepository->findBySearch()
+y sustitúyela por un objeto Pager:
+
+00:01:30.046 --> 00:01:35.366 align:middle
+$pager igual a
+Pagerfanta::createForCurrentPageWithMaxPerPage():
+
+00:01:35.366 --> 00:01:42.616 align:middle
+El primer argumento es un adaptador: new
+QueryAdapter luego pega el código de antes. Pero,
+
+00:01:43.066 --> 00:01:47.706 align:middle
+eso no es del todo correcto: este
+método devuelve una matriz de
+
+00:01:47.706 --> 00:01:50.636 align:middle
+viajes: pero ahora necesitamos
+un QueryBuilder. Afortunadamente,
+
+00:01:51.046 --> 00:01:54.956 align:middle
+ya he configurado las cosas para que
+podamos obtener este mismo resultado, pero
+
+00:01:55.186 --> 00:01:56.826 align:middle
+como un QueryBuilder a través
+de: findBySearchQueryBuilder:
+
+00:01:57.036 --> 00:02:01.376 align:middle
+Pega ese nombre de método. El
+
+00:02:03.346 --> 00:02:07.286 align:middle
+siguiente argumento es la página actual -
+$page - y luego el máximo por página. ¿Qué
+
+00:02:07.556 --> 00:02:08.406 align:middle
+te parece 10? Pasa
+
+00:02:08.566 --> 00:02:13.756 align:middle
+$pager a la plantilla como la
+variable voyages: Eso... debería
+
+00:02:13.756 --> 00:02:17.926 align:middle
+funcionar porque podemos hacer un bucle sobre
+$pager para obtener los viajes. A continuación
+
+00:02:18.796 --> 00:02:23.616 align:middle
+, en homepage.html.twig, ¡necesitamos
+enlaces de paginación! En la parte
+
+00:02:24.156 --> 00:02:29.436 align:middle
+inferior, ya tengo un lugar para ello con
+enlaces anteriores y siguientes codificados: La
+
+00:02:30.016 --> 00:02:34.646 align:middle
+forma en que se supone que debes renderizar los
+enlaces Pagerfanta es diciendo {{ pagerfanta() }} y
+
+00:02:34.646 --> 00:02:40.236 align:middle
+luego pasando voyages: Cuando
+probamos esto -permíteme aclarar mi
+
+00:02:40.236 --> 00:02:43.316 align:middle
+búsqueda- la paginación tiene
+un aspecto horrible... ¡pero
+
+00:02:43.496 --> 00:02:44.956 align:middle
+funciona! A medida que
+
+00:02:45.336 --> 00:02:47.176 align:middle
+hacemos clic, los resultados
+van cambiando. Entonces...
+
+00:02:47.176 --> 00:02:52.666 align:middle
+¿cómo podemos cambiar estos enlaces
+de paginación de "bla" a "ah"?
+
+00:02:53.526 --> 00:02:58.076 align:middle
+Hay una plantilla Tailwind incorporada que
+puedes decirle a Pagerfanta que utilice. Eso
+
+00:02:58.656 --> 00:03:03.336 align:middle
+implica crear un archivo babdev_pagerfanta.yaml
+y un poco de configuración. No he
+
+00:03:03.896 --> 00:03:06.526 align:middle
+utilizado esto antes, así que
+¡hazme saber cómo va! Porque...
+
+00:03:07.216 --> 00:03:07.646 align:middle
+Voy a
+
+00:03:07.646 --> 00:03:09.876 align:middle
+ser testaruda.
+
+00:03:10.206 --> 00:03:13.496 align:middle
+Sólo quiero tener los botones
+anterior y siguiente... y quiero que
+
+00:03:13.786 --> 00:03:16.486 align:middle
+tengan el mismo estilo que
+estos. Así que ¡vamos al
+
+00:03:16.826 --> 00:03:18.626 align:middle
+lío! Lo
+
+00:03:19.796 --> 00:03:23.126 align:middle
+primero que tenemos que hacer es mostrar
+estos enlaces condicionalmente, sólo
+
+00:03:23.406 --> 00:03:25.706 align:middle
+si hay una página anterior. Para ello,
+
+00:03:26.656 --> 00:03:31.226 align:middle
+di if voyages.hasPreviousPage, then
+render. Y, si hay una página siguiente,
+
+00:03:31.226 --> 00:03:38.356 align:middle
+renderízala: Para las URL, utiliza
+
+00:03:38.646 --> 00:03:41.446 align:middle
+un ayudante llamado
+pagerfanta_page_url(). Pásale
+
+00:03:42.166 --> 00:03:48.336 align:middle
+el paginador, voyages, y luego la página a la
+que queremos ir: voyages.previousPage. Cópialo
+
+00:03:49.886 --> 00:03:55.826 align:middle
+y repítelo a continuación con
+voyages.nextPage: ¡Estupendo! Vamos a
+
+00:03:56.426 --> 00:03:57.246 align:middle
+probarlo. Actualiza.
+
+00:03:58.096 --> 00:04:00.676 align:middle
+¡Me encanta!
+
+00:04:01.006 --> 00:04:04.976 align:middle
+Falta la página anterior, hacemos
+clic en siguiente y ya está.
+
+00:04:05.756 --> 00:04:06.616 align:middle
+Vuelve a hacer clic en
+siguiente. La página 3 es la
+
+00:04:07.386 --> 00:04:08.816 align:middle
+última. ¡ Ya está
+
+00:04:08.996 --> 00:04:10.266 align:middle
+! Para
+
+00:04:10.266 --> 00:04:14.146 align:middle
+obtener un crédito extra, imprimamos
+incluso la página actual. Añade
+
+00:04:14.556 --> 00:04:15.316 align:middle
+un div... luego imprime
+
+00:04:17.816 --> 00:04:24.416 align:middle
+voyages.currentPage, una barra y
+voyages.nbPages: ¡Buen trabajo, AI! Y...
+
+00:04:25.356 --> 00:04:27.266 align:middle
+ya está. Página
+
+00:04:27.436 --> 00:04:28.326 align:middle
+1 de 3. Página
+
+00:04:28.496 --> 00:04:29.516 align:middle
+2 de 3. ¿Y la
+
+00:04:30.266 --> 00:04:31.546 align:middle
+ordenación por columnas?
+
+00:04:31.996 --> 00:04:34.596 align:middle
+Quiero poder hacer clic en cada
+columna para ordenar por ella. Para
+
+00:04:34.596 --> 00:04:37.956 align:middle
+ello, necesitamos dos nuevos
+parámetros de consulta. Un
+
+00:04:38.356 --> 00:04:41.646 align:middle
+nombre de columnasort y
+sortDirection. ¡ Vuelve
+
+00:04:42.146 --> 00:04:43.806 align:middle
+a PHP! Añade
+
+00:04:43.806 --> 00:04:47.166 align:middle
+#[MapQueryParameter] a un argumento
+string llamado $sort . Pon por defecto
+
+00:04:47.166 --> 00:04:50.066 align:middle
+leaveAt. Ése es el nombre de la
+
+00:04:50.746 --> 00:04:53.196 align:middle
+propiedad de esta columna
+de salida. A continuación,
+
+00:04:54.056 --> 00:04:59.336 align:middle
+vuelve a hacer #[MapQueryParameter] para añadir
+una cadena $sortDirection que por defecto sea
+
+00:04:59.336 --> 00:05:04.436 align:middle
+ascendente: Dentro del método, pegaré
+2 líneas aburridas que validan que
+
+00:05:04.436 --> 00:05:10.536 align:middle
+sort es una columna real: Probablemente podríamos hacer
+lo mismo con $sortDirection, pero me lo saltaré y pasaré
+
+00:05:10.716 --> 00:05:13.086 align:middle
+a findBySearchQueryBuilder(). Esto
+
+00:05:13.966 --> 00:05:16.896 align:middle
+ya está configurado para esperar los
+argumentos de ordenación. Así que
+
+00:05:17.076 --> 00:05:19.606 align:middle
+pasa $sort y $sortDirection... ¡y
+
+00:05:19.886 --> 00:05:21.766 align:middle
+debería estar contento! Por último, vamos a
+
+00:05:21.836 --> 00:05:27.096 align:middle
+necesitar esta información en la plantilla para
+ayudar a mostrar los enlaces de ordenación. Pasa
+
+00:05:27.516 --> 00:05:31.606 align:middle
+sort ajustado a $sort y sortDirection
+ajustado a $sortDirection: La
+
+00:05:32.746 --> 00:05:37.796 align:middle
+parte más tediosa es transformar cada th
+en el enlace de ordenación adecuado. Añade
+
+00:05:38.226 --> 00:05:41.056 align:middle
+una etiqueta a y divídela
+en varias líneas. Establece
+
+00:05:44.226 --> 00:05:50.116 align:middle
+el href en esta página -la página
+principal- con un sort extra establecido en
+
+00:05:50.116 --> 00:05:52.626 align:middle
+purpose: el nombre de esta columna. Para
+
+00:05:52.736 --> 00:05:58.836 align:middle
+sortDirection, esto es más complejo:
+si sort es igual a purpose y
+
+00:05:59.056 --> 00:06:03.076 align:middle
+sortDirection es asc, entonces
+queremos desc. En caso contrario,
+
+00:06:03.406 --> 00:06:04.986 align:middle
+utiliza asc. Por último,
+
+00:06:06.486 --> 00:06:10.366 align:middle
+además de los parámetros de
+consulta sort y sortDirection,
+
+00:06:10.766 --> 00:06:16.086 align:middle
+necesitamos mantener cualquier parámetro de consulta existente
+que pueda estar presente, como la consulta de búsqueda. Y hay
+
+00:06:16.086 --> 00:06:19.436 align:middle
+una forma genial de hacerlo: ... y luego
+
+00:06:20.336 --> 00:06:24.806 align:middle
+app.request.query.all: ¡Listo! Ah,
+
+00:06:25.326 --> 00:06:29.566 align:middle
+pero después de la palabra Propósito, añadamos
+una bonita flecha hacia abajo o hacia arriba. Para
+
+00:06:30.356 --> 00:06:32.576 align:middle
+ayudarte, pegaré una macro Twig.
+
+00:06:33.076 --> 00:06:34.786 align:middle
+No suelo utilizar macros... pero
+
+00:06:34.896 --> 00:06:40.816 align:middle
+esto nos ayudará a averiguar la dirección, y luego
+imprimir el SVG correcto: una flecha abajo, una
+
+00:06:41.016 --> 00:06:47.786 align:middle
+flecha arriba, o una flecha arriba
+y abajo: Aquí abajo... utiliza
+
+00:06:48.176 --> 00:06:56.426 align:middle
+esto con {{ _self.sortArrow() }} pasando
+por 'purpose', sort y sortDirection: ¡Uf!
+
+00:06:57.006 --> 00:06:59.806 align:middle
+Repitamos todo esto para
+la columna de salida. Pega,
+
+00:07:02.216 --> 00:07:08.286 align:middle
+cambia purpose por leaveAt, el
+texto por Departing... luego
+
+00:07:09.666 --> 00:07:15.576 align:middle
+utiliza leaveAt en los otros dos puntos: Así
+pues, todo un código bastante aburrido, aunque ha
+
+00:07:16.256 --> 00:07:19.026 align:middle
+costado un poco de trabajo
+configurarlo. ¿Podríamos
+
+00:07:19.726 --> 00:07:23.716 align:middle
+tener algunas herramientas en el mundo Symfony para
+hacer todo esto más fácil de construir? Probablemente.
+
+00:07:24.316 --> 00:07:27.786 align:middle
+Sería genial que alguien
+trabajara en ello. ¡El momento de
+
+00:07:28.586 --> 00:07:30.156 align:middle
+la verdad! Actualiza.
+
+00:07:30.496 --> 00:07:33.466 align:middle
+Tiene buena pinta. Y
+
+00:07:33.796 --> 00:07:35.686 align:middle
+funciona de maravilla
+
+00:07:36.116 --> 00:07:37.516 align:middle
+Podemos ordenar por cada columna...
+
+00:07:37.696 --> 00:07:38.936 align:middle
+podemos paginar. El filtrado
+
+00:07:39.066 --> 00:07:40.756 align:middle
+mantiene nuestra página... y
+
+00:07:40.986 --> 00:07:42.746 align:middle
+mantiene el parámetro de búsqueda. ¡ Es
+
+00:07:43.286 --> 00:07:44.546 align:middle
+todo lo que quiero! ¡ Y
+
+00:07:44.546 --> 00:07:47.056 align:middle
+todo ocurre mediante Ajax! ¡ La vida
+
+00:07:47.316 --> 00:07:48.736 align:middle
+es buena! ¿El
+
+00:07:49.416 --> 00:07:51.156 align:middle
+único contratiempo ahora? Ese
+
+00:07:51.716 --> 00:07:54.656 align:middle
+incómodo desplazamiento
+cada vez que hacemos algo.
+
+00:07:54.656 --> 00:07:59.276 align:middle
+Quiero que parezca una aplicación independiente
+que no salta de un lado a otro. Mañana
+
+00:07:59.786 --> 00:08:03.226 align:middle
+puliremos esto gracias a Turbo Frames.

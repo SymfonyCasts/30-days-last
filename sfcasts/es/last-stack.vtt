@@ -1,0 +1,221 @@
+WEBVTT
+
+00:00:00.936 --> 00:00:03.776 align:middle
+¡Hola a todos!
+
+00:00:04.166 --> 00:00:06.446 align:middle
+¡Bienvenidos a 30 días de LAST Stack!
+
+00:00:06.446 --> 00:00:10.596 align:middle
+Tengo que decir que éste puede que
+sea mi tutorial favorito. Me lo he
+
+00:00:11.086 --> 00:00:15.776 align:middle
+pasado en grande construyéndolo, porque a diferencia
+de lo que es habitual por aquí, voy a centrarme un poco
+
+00:00:16.086 --> 00:00:20.506 align:middle
+menos en enseñar conceptos profundos y más
+
+00:00:20.506 --> 00:00:24.226 align:middle
+en crear un producto rico, pulido y bonito.
+
+00:00:24.496 --> 00:00:26.396 align:middle
+Y creo que te va a encantar.
+
+00:00:26.916 --> 00:00:30.376 align:middle
+Pero primero, LAST Stack,
+¿qué demonios es eso?
+
+00:00:31.196 --> 00:00:32.576 align:middle
+Es un acrónimo que...
+
+00:00:32.856 --> 00:00:33.486 align:middle
+Me inventé.
+
+00:00:33.946 --> 00:00:37.116 align:middle
+Quería algo divertido que encajara
+con un paradigma totalmente nuevo.
+
+00:00:37.116 --> 00:00:42.146 align:middle
+Son las siglas de Live Components,
+AssetMapper, Stimulus y Turbo. Es
+
+00:00:42.786 --> 00:00:47.296 align:middle
+una pila de front-end que nos permitirá
+construir una interfaz de usuario realmente rica
+
+00:00:47.516 --> 00:00:51.926 align:middle
+-como una aplicación de una sola página,
+con modales y AJAX por todas partes-
+
+00:00:52.296 --> 00:00:54.786 align:middle
+pero totalmente con Symfony, Twig...
+
+00:00:55.016 --> 00:00:57.336 align:middle
+y sólo un poco de JavaScript.
+
+00:00:58.086 --> 00:01:03.126 align:middle
+Ah, y esto no requerirá ningún
+paso de compilación ni Node.js.
+
+00:01:03.316 --> 00:01:08.866 align:middle
+¡Guau! Al final de este tutorial, vamos a tener
+patrones reutilizables que podemos aprovechar
+
+00:01:08.866 --> 00:01:15.096 align:middle
+en nuestros proyectos para hacer las cosas realmente rápido
+pero que funcionan y sientan increíblemente bien. El
+
+00:01:16.026 --> 00:01:19.666 align:middle
+núcleo de todo este sistema es
+Hotwire: una colección de bibliotecas
+
+00:01:19.666 --> 00:01:22.506 align:middle
+que incluye Turbo, Stimulus y Strada.
+
+00:01:22.956 --> 00:01:26.406 align:middle
+Strada es el nuevo chico
+del barrio y parece genial.
+
+00:01:26.926 --> 00:01:31.646 align:middle
+No tendremos tiempo de hablar de ella, pero
+promete permitirte tomar el mismo proyecto
+
+00:01:31.646 --> 00:01:34.916 align:middle
+que estamos a punto de construir y utilizarlo
+para impulsar una aplicación móvil.
+
+00:01:35.366 --> 00:01:38.816 align:middle
+Woh. Otra cosa guay de Hotwire es que...
+
+00:01:39.096 --> 00:01:40.656 align:middle
+no es exclusivo de Symfony.
+
+00:01:41.196 --> 00:01:44.956 align:middle
+Lo utiliza, por ejemplo,
+la comunidad Ruby on Rails.
+
+00:01:45.476 --> 00:01:47.706 align:middle
+Y muchas de las cosas que vamos a construir
+
+00:01:47.706 --> 00:01:51.056 align:middle
+provienen de patrones que aprendí
+de gente de esa comunidad.
+
+00:01:51.596 --> 00:01:57.046 align:middle
+El hecho de que todos utilicemos la misma herramienta
+significa que podemos compartir bibliotecas, compartir ideas
+
+00:01:57.166 --> 00:01:59.666 align:middle
+y construir sobre los hombros de los demás.
+
+00:02:00.016 --> 00:02:01.226 align:middle
+Eso es enorme.
+
+00:02:02.026 --> 00:02:03.626 align:middle
+Así que ¡manos a la obra!
+
+00:02:04.226 --> 00:02:07.566 align:middle
+Como es divertido hacer cosas
+bonitas que saltan en la pantalla,
+
+00:02:07.786 --> 00:02:11.576 align:middle
+deberías descargarte el código
+del curso y codificar conmigo.
+
+00:02:12.146 --> 00:02:16.586 align:middle
+Cuando descomprimas el archivo, encontrarás un
+directorio start/, que contiene los mismos archivos
+
+00:02:16.586 --> 00:02:21.096 align:middle
+que ves aquí, ¡incluido el
+importantísimo README.md!
+
+00:02:21.596 --> 00:02:24.626 align:middle
+Aquí se explica cómo configurar el proyecto.
+
+00:02:25.186 --> 00:02:29.326 align:middle
+El último paso será abrir un terminal,
+entrar en el proyecto y ejecutar:
+
+00:02:29.586 --> 00:02:33.396 align:middle
+symfony serve -d Para iniciar
+un servidor web local en ...
+
+00:02:33.926 --> 00:02:39.616 align:middle
+oh, en mi caso, 127.0.0.1:8001.
+
+00:02:40.106 --> 00:02:42.766 align:middle
+Ya debo tener algo
+funcionando en el puerto 8000.
+
+00:02:43.326 --> 00:02:47.266 align:middle
+Haré clic en el enlace para ver
+una página grande y fea de...
+
+00:02:47.266 --> 00:02:49.956 align:middle
+¡nada! ¡Eso es a propósito!
+
+00:02:50.766 --> 00:02:54.056 align:middle
+Vamos a empezar con un proyecto Symfony 6.4. He
+
+00:02:54.506 --> 00:03:00.046 align:middle
+preinstalado Twig y tenemos dos
+entidades diferentes - Planet y Voyage -
+
+00:03:00.456 --> 00:03:04.126 align:middle
+porque vamos a construir un sitio de
+planificación de viajes para extraterrestres.
+
+00:03:04.716 --> 00:03:10.136 align:middle
+También tengo algunos data fixtures y he utilizado
+MakerBundle para generar un CRUD para cada entidad.
+
+00:03:10.756 --> 00:03:15.596 align:middle
+Este PlanetController, VoyageController y
+estas plantillas provienen de MakerBundle,
+
+00:03:15.786 --> 00:03:18.286 align:middle
+con sólo unos pocos ajustes de estilo.
+
+00:03:18.806 --> 00:03:19.956 align:middle
+Pero básicamente...
+
+00:03:20.216 --> 00:03:22.126 align:middle
+¡no pasa nada especial!
+
+00:03:22.616 --> 00:03:26.086 align:middle
+Tenemos un MainController, que
+alimenta esta página de inicio:
+
+00:03:26.556 --> 00:03:28.886 align:middle
+Contiene una consulta que
+nos ayudará más adelante...
+
+00:03:29.326 --> 00:03:35.326 align:middle
+pero la plantilla, en este momento,
+no hace nada de nada: ni CSS,
+
+00:03:35.416 --> 00:03:38.076 align:middle
+ni JavaScript, ni activos de ningún tipo...
+
+00:03:38.076 --> 00:03:40.766 align:middle
+y el sitio no hace nada.
+
+00:03:41.326 --> 00:03:47.016 align:middle
+Pero en 30 breves lecciones, transformaremos
+esto en una pequeña obra maestra digital.
+
+00:03:47.786 --> 00:03:48.736 align:middle
+Eso es todo por el día 1.
+
+00:03:49.026 --> 00:03:54.216 align:middle
+Mañana, instalaremos AssetMapper: un
+sistema para manejar CSS, JavaScript
+
+00:03:54.216 --> 00:03:57.536 align:middle
+y otros activos frontend con pilas incluidas...
+
+00:03:57.926 --> 00:04:00.876 align:middle
+pero sin ningún paso de compilación.

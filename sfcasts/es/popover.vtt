@@ -1,0 +1,646 @@
+WEBVTT
+
+00:00:01.086 --> 00:00:07.346 align:middle
+En el menú del día 11 está nuestra primera característica
+grande, bonita y totalmente funcional: un popover.
+
+00:00:07.586 --> 00:00:11.796 align:middle
+Pero, ¡un popover precioso,
+reutilizable y de carga lenta!
+
+00:00:12.336 --> 00:00:16.766 align:middle
+Ya existen controladores Stimulus de código
+abierto para resolver muchos problemas diferentes.
+
+00:00:17.086 --> 00:00:22.686 align:middle
+Y una de las mejores fuentes de ellos es Stimulus
+Components: una rica colección de controladores.
+
+00:00:23.056 --> 00:00:24.846 align:middle
+Vamos a trabajar con uno llamado popover.
+
+00:00:24.846 --> 00:00:29.016 align:middle
+Por si no lo sabes, un popover es
+un simpático recuadro que aparece
+
+00:00:29.016 --> 00:00:31.586 align:middle
+para saludarte cuando pasas el
+ratón por encima de un elemento.
+
+00:00:31.946 --> 00:00:37.606 align:middle
+Es como un tooltip, excepto que suelen ser más grandes
+y puedes pasar el ratón por encima del propio cuadro.
+
+00:00:37.606 --> 00:00:39.846 align:middle
+Se trata de una biblioteca JavaScript pura.
+
+00:00:40.206 --> 00:00:42.536 align:middle
+Pero no vamos a instalarla con yarn o npm.
+
+00:00:42.536 --> 00:00:48.696 align:middle
+En lugar de eso, Ejecuta:: php bin/console
+importmap:require stimulus-popover
+
+00:00:48.746 --> 00:00:53.336 align:middle
+Como se trata de un paquete
+JavaScript puro, no hay receta Flex.
+
+00:00:53.786 --> 00:01:00.336 align:middle
+El único cambio que se hizo fue en importmap.php:
+Así que tenemos acceso al código, pero esta vez,
+
+00:01:00.456 --> 00:01:02.586 align:middle
+tenemos que registrar el
+controlador manualmente.
+
+00:01:03.126 --> 00:01:03.716 align:middle
+¡No pasa nada!
+
+00:01:04.216 --> 00:01:06.006 align:middle
+Copia estas líneas de la documentación...
+
+00:01:06.556 --> 00:01:09.366 align:middle
+y luego abre assets/bootstrap.js.
+
+00:01:10.386 --> 00:01:11.906 align:middle
+Pega esto encima.
+
+00:01:12.656 --> 00:01:14.386 align:middle
+No necesitamos Application.start()...
+
+00:01:14.876 --> 00:01:17.516 align:middle
+y mueve application.register() después...
+
+00:01:17.776 --> 00:01:20.416 align:middle
+y llámalo app: ¡Felicidades!
+
+00:01:20.576 --> 00:01:23.446 align:middle
+Tenemos un nuevo y brillante
+controlador llamado popover.
+
+00:01:24.236 --> 00:01:28.226 align:middle
+El objetivo es pasar el ratón por encima de este
+planeta y mostrar un popover con información extra.
+
+00:01:28.866 --> 00:01:31.576 align:middle
+Para conseguir que funcione,
+dirígete a la documentación.
+
+00:01:31.986 --> 00:01:35.216 align:middle
+Hay documentación de Rails sobre
+cosas del lado del servidor....
+
+00:01:35.216 --> 00:01:36.056 align:middle
+pero no la necesitamos.
+
+00:01:36.436 --> 00:01:36.896 align:middle
+Allá vamos.
+
+00:01:37.646 --> 00:01:42.126 align:middle
+Así que necesitamos un elemento con
+data-controller"popover" y, dentro,
+
+00:01:42.236 --> 00:01:48.396 align:middle
+un enlace que, en mouseenter llame a un
+método show y, en mouseleave llame a hide.
+
+00:01:49.216 --> 00:01:52.286 align:middle
+Debajo, este es el contenido
+que se mostrará en el popover.
+
+00:01:52.936 --> 00:01:58.306 align:middle
+Copia esto entonces, dirígete a
+homepage.html.twig, y busca planetas.
+
+00:01:58.306 --> 00:02:00.666 align:middle
+Aquí está el td y aquí
+está la imagen del planeta.
+
+00:02:01.556 --> 00:02:04.746 align:middle
+Pega... y luego moveré mi img dentro.
+
+00:02:07.386 --> 00:02:11.246 align:middle
+¡Estupendo! Luego tenemos que poner
+este data-action en algún sitio.
+
+00:02:11.606 --> 00:02:14.256 align:middle
+Es tentador ponerlo en el propio img.
+
+00:02:14.646 --> 00:02:19.296 align:middle
+Pero, la biblioteca añade el contenido del
+popover dentro del elemento que lo activa...
+
+00:02:19.636 --> 00:02:23.336 align:middle
+y como no puedes poner contenido
+dentro de un img, es un no-go.
+
+00:02:24.246 --> 00:02:31.286 align:middle
+En su lugar, ponlo directamente en el elemento padre div:
+Así que en mouseenter de este div , muestra el popover,
+
+00:02:31.566 --> 00:02:34.166 align:middle
+en mouseleave de este div, oculta el popover.
+
+00:02:34.766 --> 00:02:36.036 align:middle
+Esto debería funcionar
+
+00:02:36.526 --> 00:02:38.636 align:middle
+Puede parecer un poco alocado al principio...
+
+00:02:38.836 --> 00:02:41.116 align:middle
+pero vamos a ver qué pasa.
+
+00:02:42.276 --> 00:02:43.376 align:middle
+Y...
+
+00:02:43.376 --> 00:02:47.346 align:middle
+¡funciona! Es raro y
+saltarín, ¡pero funcional!
+
+00:02:48.036 --> 00:02:49.746 align:middle
+Es hora de darle un mejor aspecto.
+
+00:02:50.396 --> 00:02:55.206 align:middle
+Seleccionaré todo este div y lo
+pegaré: Eso no hizo nada del otro mundo:
+
+00:02:55.696 --> 00:02:57.926 align:middle
+Añadí una clase relative
+en el exterior de div...
+
+00:02:58.416 --> 00:03:03.386 align:middle
+y aquí abajo, hice que el popover se posicionara
+absolutamente e imprimí algo de información sobre el planeta.
+
+00:03:05.336 --> 00:03:07.146 align:middle
+Ahora... ¡mira eso!
+
+00:03:08.006 --> 00:03:08.846 align:middle
+¿Sabes qué estaría bien?
+
+00:03:09.016 --> 00:03:10.046 align:middle
+¡Una flechita!
+
+00:03:10.576 --> 00:03:16.186 align:middle
+Podemos añadir una en CSS puro con un pseudoelemento
+:after en el objetivo del popover card.
+
+00:03:16.866 --> 00:03:21.286 align:middle
+Esta es una estrategia CSS estándar para
+añadir flechas, y puedes encontrarla en la web,
+
+00:03:21.626 --> 00:03:23.496 align:middle
+o utilizar AI para ayudarte a generarla.
+
+00:03:24.396 --> 00:03:26.796 align:middle
+Abre app.css y pegaré algo de código.
+
+00:03:27.566 --> 00:03:32.406 align:middle
+También puedes hacer esto con las
+clases de Tailwind: ¡Ve a comprobarlo!
+
+00:03:33.686 --> 00:03:38.516 align:middle
+¡Me encanta! Llegados a este punto, el popover
+funciona de maravilla y tiene un aspecto estupendo.
+
+00:03:39.066 --> 00:03:40.336 align:middle
+¿Te apuntas a un reto?
+
+00:03:40.836 --> 00:03:43.676 align:middle
+En lugar de cargar todo este
+código al cargar la página,
+
+00:03:43.966 --> 00:03:48.226 align:middle
+quiero cargarlo mediante Ajax sólo cuando
+el usuario pase el ratón por encima.
+
+00:03:49.126 --> 00:03:51.996 align:middle
+La biblioteca de ventanas emergentes
+tiene una forma de hacerlo.
+
+00:03:52.316 --> 00:03:58.036 align:middle
+Pero como reto extra, quiero hacerlo
+con marcos normales ol' Turbo.
+
+00:03:58.496 --> 00:04:01.936 align:middle
+Porque, ¡los marcos son realmente
+buenos cargando cosas mediante AJAX!
+
+00:04:02.266 --> 00:04:06.196 align:middle
+Además, veremos un par de características extra
+de los frames de las que aún no hemos hablado.
+
+00:04:06.196 --> 00:04:10.176 align:middle
+Para empezar, necesitamos una ruta que
+muestre esta información del planeta.
+
+00:04:11.256 --> 00:04:17.446 align:middle
+En la plantilla de la página de inicio, copia
+ese código y bórralo: En templates/planet/,
+
+00:04:18.126 --> 00:04:26.056 align:middle
+crea un nuevo archivo llamado _card.html.twig, y
+pégalo: A continuación, crea una ruta para esto.
+
+00:04:26.536 --> 00:04:31.496 align:middle
+En src/Controller/PlanetController.php, en
+cualquier lugar, pega una ruta y un controlador:
+
+00:04:33.166 --> 00:04:37.716 align:middle
+Nada especial: consulta el
+Planet y pásalo a la plantilla.
+
+00:04:38.636 --> 00:04:41.086 align:middle
+En esa plantilla, ajusta las variables.
+
+00:04:41.596 --> 00:04:44.886 align:middle
+En lugar de voyage.planet,
+utiliza planet en cada lugar:
+
+00:04:47.216 --> 00:04:50.016 align:middle
+Ahora tenemos una ruta AJAX
+que devuelve el contenido.
+
+00:04:50.516 --> 00:04:52.316 align:middle
+Aquí está la parte mágica.
+
+00:04:52.766 --> 00:04:57.506 align:middle
+En homepage.html.twig, queremos
+cargar ese contenido justo aquí.
+
+00:04:58.136 --> 00:05:07.676 align:middle
+Hazlo añadiendo un turbo-frame con id ajustado
+a planet-card- y luego a {{ voyage.planet.id }}
+
+00:05:07.906 --> 00:05:13.606 align:middle
+para que sea único en la página: Añade
+este mismo marco en _card.html.twig...
+
+00:05:13.746 --> 00:05:21.366 align:middle
+con la etiqueta de cierre: Normalmente, un
+<turbo-frame> será una parte de una página entera.
+
+00:05:21.736 --> 00:05:25.716 align:middle
+Pero está perfectamente bien hacer una
+ruta que sólo devuelva un único fotograma.
+
+00:05:26.796 --> 00:05:31.136 align:middle
+Volviendo a homepage.html.twig,
+tenemos la configuración básica.
+
+00:05:31.586 --> 00:05:32.706 align:middle
+El truco está en que...
+
+00:05:33.076 --> 00:05:36.906 align:middle
+no estamos esperando a que alguien haga
+clic en un enlace dentro de este marco
+
+00:05:37.186 --> 00:05:39.016 align:middle
+que luego cargará la página de la tarjeta.
+
+00:05:39.466 --> 00:05:41.546 align:middle
+No, queremos que se cargue inmediatamente.
+
+00:05:41.796 --> 00:05:45.976 align:middle
+Para ello, añade un atributo src
+establecido en {{ path() }}...
+
+00:05:46.496 --> 00:05:48.656 align:middle
+y... eso es casi correcto.
+
+00:05:49.316 --> 00:05:54.916 align:middle
+La ruta es app_planet_show_card: ¡Listo!
+
+00:05:55.666 --> 00:06:01.096 align:middle
+Cuando aparezca un marco turbo que ya tenga
+un atributo src, hará la llamada AJAX
+
+00:06:01.096 --> 00:06:03.026 align:middle
+para cargar ese contenido inmediatamente.
+
+00:06:03.996 --> 00:06:06.506 align:middle
+Pruébalo. Actualiza y...
+
+00:06:06.906 --> 00:06:08.466 align:middle
+falta contenido.
+
+00:06:09.076 --> 00:06:10.586 align:middle
+He estropeado algo.
+
+00:06:11.476 --> 00:06:13.246 align:middle
+No pasa nada, ¡podemos depurar!
+
+00:06:14.186 --> 00:06:16.176 align:middle
+La llamada ha fallado con un error 500.
+
+00:06:16.586 --> 00:06:18.956 align:middle
+Aquí es donde la barra de herramientas
+de depuración web resulta útil.
+
+00:06:19.296 --> 00:06:21.176 align:middle
+No podemos ver el error fácilmente...
+
+00:06:21.176 --> 00:06:27.196 align:middle
+pero a través del elemento de la barra de herramientas Ajax,
+podemos hacer clic para ver la gran y bonita página de excepciones.
+
+00:06:27.626 --> 00:06:30.256 align:middle
+Ah: La variable voyage no existe.
+
+00:06:30.446 --> 00:06:34.976 align:middle
+Pues tengo que ajustarla
+a planet.id: De acuerdo.
+
+00:06:35.416 --> 00:06:36.136 align:middle
+Y ahora...
+
+00:06:37.486 --> 00:06:41.246 align:middle
+¡lo tengo! Hay un momento en
+que el popover está vacío...
+
+00:06:41.376 --> 00:06:42.446 align:middle
+pero lo arreglaremos pronto.
+
+00:06:43.326 --> 00:06:47.766 align:middle
+Por completo accidente, nuestro Marco
+Turbo incluso se carga perezosamente.
+
+00:06:48.586 --> 00:06:52.416 align:middle
+Lo que quiero decir es: cuando tenemos un
+<turbo-frame> con un atributo src,
+
+00:06:52.756 --> 00:06:55.566 align:middle
+la llamada AJAX se realiza inmediatamente.
+
+00:06:56.156 --> 00:07:01.906 align:middle
+Teniendo esto en cuenta, ¿no deberíamos
+ver 30 llamadas Ajax sucediendo a la vez?
+
+00:07:02.796 --> 00:07:05.086 align:middle
+Sí... ¡pero no es así!
+
+00:07:05.476 --> 00:07:07.646 align:middle
+Sólo ocurre cuando pasamos
+el ratón por encima.
+
+00:07:08.326 --> 00:07:11.236 align:middle
+¿Por qué? Inspecciona ese elemento.
+
+00:07:14.446 --> 00:07:18.166 align:middle
+Ah. Es por accidente,
+gracias al elemento template.
+
+00:07:18.996 --> 00:07:23.536 align:middle
+El elemento template es especial en tu navegador:
+cualquier cosa dentro de él se comporta...
+
+00:07:23.716 --> 00:07:28.946 align:middle
+como si no estuviera en la página: casi como
+si fuera una cadena en lugar de un elemento.
+
+00:07:28.946 --> 00:07:34.526 align:middle
+Así, cuando cargamos por primera vez, el <turbo-frame>
+técnicamente no forma parte de la página.
+
+00:07:34.896 --> 00:07:38.126 align:middle
+Pero en el momento en que pasamos el
+ratón por encima, lo copia en la página,
+
+00:07:38.306 --> 00:07:42.216 align:middle
+el turbo-frame cobra vida y
+se realiza la llamada Ajax.
+
+00:07:42.526 --> 00:07:43.406 align:middle
+¡Genial!
+
+00:07:43.906 --> 00:07:47.356 align:middle
+Pero habrá otras situaciones en
+las que queramos que un turbo-frame
+
+00:07:47.356 --> 00:07:50.926 align:middle
+cargue su contenido sólo cuando
+ese marco se haga visible.
+
+00:07:51.286 --> 00:07:52.206 align:middle
+¡Y podemos hacerlo!
+
+00:07:52.986 --> 00:07:58.986 align:middle
+Para demostrarlo, cambia temporalmente el template
+por un div: Esto va a tener un aspecto horrible...
+
+00:07:59.166 --> 00:08:02.096 align:middle
+porque todas las cartas
+serán visibles a la vez.
+
+00:08:03.216 --> 00:08:08.386 align:middle
+¡Sí! ¡Están todas en la página y ha
+hecho 30 llamadas Ajax inmediatamente!
+
+00:08:08.996 --> 00:08:13.716 align:middle
+¡Vaya! Para indicar a estos marcos que no se
+carguen hasta que sean visibles en la página
+
+00:08:13.716 --> 00:08:18.866 align:middle
+, añade loading="lazy": Actualizar ahora.
+
+00:08:20.546 --> 00:08:22.226 align:middle
+3 llamadas ajax...
+
+00:08:22.356 --> 00:08:24.836 align:middle
+¡porque sólo 3 marcos son visibles!
+
+00:08:25.806 --> 00:08:27.936 align:middle
+Los demás elementos están
+todos en la página...
+
+00:08:28.356 --> 00:08:29.966 align:middle
+pero por debajo del scroll.
+
+00:08:30.296 --> 00:08:31.706 align:middle
+Observa este número mientras me desplazo.
+
+00:08:32.016 --> 00:08:35.976 align:middle
+¿Lo ves? A medida que se hacen visibles,
+cada uno realiza su llamada AJAX.
+
+00:08:36.206 --> 00:08:40.196 align:middle
+Genial. Vuelve a cambiar el
+elemento a template para que
+
+00:08:40.406 --> 00:08:44.876 align:middle
+las cosas vuelvan a funcionar
+bien: Vale, estoy muy contento.
+
+00:08:45.326 --> 00:08:47.476 align:middle
+Pero quiero perfeccionar esta nueva función.
+
+00:08:48.136 --> 00:08:52.216 align:middle
+Una cosa que no me gusta es que esté
+vacío antes de que termine la llamada Ajax.
+
+00:08:52.606 --> 00:08:54.176 align:middle
+Me gustaría añadir algo
+de contenido de carga.
+
+00:08:54.226 --> 00:08:58.436 align:middle
+Esto es fácil: cuando tienes un
+turbo-frame con un atributo src,
+
+00:08:58.816 --> 00:09:02.756 align:middle
+cualquier contenido que haya dentro se
+mostrará por defecto mientras se carga.
+
+00:09:03.296 --> 00:09:09.426 align:middle
+Voy a pegar un div con un SVG:
+Este SVG procede de Tabler Icons.
+
+00:09:10.136 --> 00:09:13.996 align:middle
+Es una gran fuente para encontrar un
+icono que puedes copiar en tu proyecto.
+
+00:09:18.036 --> 00:09:21.176 align:middle
+Lo he unido a una clase
+animate-spin de Tailwind.
+
+00:09:22.636 --> 00:09:23.306 align:middle
+Vamos a comprobarlo.
+
+00:09:23.896 --> 00:09:26.286 align:middle
+¡Rápido, giratorio y encantador!
+
+00:09:27.426 --> 00:09:29.206 align:middle
+¿Tenemos tiempo para una cosa más?
+
+00:09:29.716 --> 00:09:32.386 align:middle
+Cuando pasamos el ratón por encima
+del elemento, hace la llamada AJAX.
+
+00:09:32.836 --> 00:09:35.796 align:middle
+Y... la repite cada vez que
+pasamos el ratón por encima.
+
+00:09:36.256 --> 00:09:38.556 align:middle
+No recuerda el contenido de la llamada AJAX.
+
+00:09:39.116 --> 00:09:41.746 align:middle
+Eso se debe a cómo funciona
+el controlador del popover...
+
+00:09:42.036 --> 00:09:45.496 align:middle
+y si hubiera sido menos cabezota
+y hubiera utilizado su forma
+
+00:09:45.496 --> 00:09:48.356 align:middle
+de cargar el contenido mediante
+Ajax, no habría ningún problema. De
+
+00:09:49.196 --> 00:09:54.246 align:middle
+todas formas, cada vez que pasamos el ratón, se crea
+el turbo-frame , se destruye, se crea uno nuevo, se
+
+00:09:54.456 --> 00:09:59.946 align:middle
+destruye, etc. Entonces: ¿cómo podemos hacer
+que el controlador recuerde el contenido?
+
+00:10:00.606 --> 00:10:01.566 align:middle
+¡No tengo ni idea!
+
+00:10:02.096 --> 00:10:03.846 align:middle
+Pero vamos a mirar dentro del código.
+
+00:10:04.806 --> 00:10:07.816 align:middle
+En assets/vendor/stimulus-popover/,
+abre este archivo.
+
+00:10:08.516 --> 00:10:09.856 align:middle
+El contenido está minificado...
+
+00:10:10.136 --> 00:10:13.896 align:middle
+pero un rápido Cmd+L para
+reformatear el código lo arregla.
+
+00:10:14.356 --> 00:10:15.396 align:middle
+¿No es genial?
+
+00:10:15.886 --> 00:10:21.446 align:middle
+Ahora podemos leer este archivo de proveedor, e incluso
+añadir código de depuración temporal si lo necesitamos.
+
+00:10:22.286 --> 00:10:25.046 align:middle
+Y... Creo que veo una forma
+de hacer que esto funcione.
+
+00:10:25.956 --> 00:10:29.846 align:middle
+Al igual que con los controladores Symfony,
+podemos anular los controladores Stimulus.
+
+00:10:30.886 --> 00:10:34.766 align:middle
+Dentro del directorio controllers/, crearemos
+nuestro propio popover_controller.js.
+
+00:10:36.256 --> 00:10:42.456 align:middle
+Luego pegaré algo de código: Normalmente
+importamos Controller de Stimulus y lo extendemos.
+
+00:10:42.456 --> 00:10:47.646 align:middle
+Pero en este caso, voy a importar directamente
+el controlador popover y a extenderlo.
+
+00:10:48.616 --> 00:10:51.396 align:middle
+Luego sobrescribimos el
+método show y el método hide
+
+00:10:51.446 --> 00:10:54.916 align:middle
+para activar una clase hidden en lugar
+de destruir completamente el elemento.
+
+00:10:55.806 --> 00:10:59.916 align:middle
+Y ahora que tenemos nuestro propio
+controlador llamado popover, en bootstrap.js,
+
+00:11:00.146 --> 00:11:03.056 align:middle
+no necesitamos registrar el
+de los componentes Stimulus.
+
+00:11:03.626 --> 00:11:06.096 align:middle
+El controlador de popover
+será nuestro controlador...
+
+00:11:06.576 --> 00:11:11.416 align:middle
+entonces aprovechamos el controlador de
+Stimulus components mediante herencia.
+
+00:11:11.416 --> 00:11:13.626 align:middle
+¡Momento de la verdad!
+
+00:11:13.626 --> 00:11:14.876 align:middle
+Se carga una vez...
+
+00:11:15.236 --> 00:11:17.646 align:middle
+¡y luego recuerda su contenido!
+
+00:11:18.496 --> 00:11:21.046 align:middle
+No sólo hemos creado el
+popover perfecto, sino que
+
+00:11:21.466 --> 00:11:24.416 align:middle
+ahora podemos repetirlo fácilmente
+en otras partes de nuestro sitio.
+
+00:11:24.416 --> 00:11:29.056 align:middle
+Si te estás preguntando si podríamos
+reutilizar parte del marcado del popover...
+
+00:11:29.356 --> 00:11:33.426 align:middle
+permanece atento al Día 23, en el que
+hablaremos de los Componentes Twig.
+
+00:11:34.326 --> 00:11:35.356 align:middle
+Esto es todo por hoy
+
+00:11:35.606 --> 00:11:41.216 align:middle
+Tómate un merecido descanso, porque mañana
+escribiremos un pequeño, pero poderoso,
+
+00:11:41.216 --> 00:11:43.646 align:middle
+controlador de Stimulus llamado auto-enviar.

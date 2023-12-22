@@ -35,7 +35,7 @@ you want it to.
 ## Modal: Control the Padding
 
 Anyway, I'm picky: this is more padding than I want. But that's ok! We can make
-our Modal component just a *bit* more flexible. In `components.Modal.html.twig`,
+our Modal component just a *bit* more flexible. In `components/Modal.html.twig`,
 the extra padding is this `p-5`. On top, add a third `prop`: `padding='p-5'`.
 Copy that. And down here, render `padding`.
 
@@ -52,7 +52,7 @@ autosubmit *into* that frame.
 Another option is to build this with a live component. But before we talk about that,
 let's *first* organize the modal contents into a *twig* component.
 
-In `templates/component/`, create a new file called `SearchSite.html.twig`. I'll
+In `templates/components/`, create a new file called `SearchSite.html.twig`. I'll
 add a div with `{{ attributes }}`. Then go steal the entire body of the modal,
 and paste it here.
 
@@ -65,7 +65,7 @@ At the browser, we get the same result.
 The site search is really going to be a *voyage* search. To render the results,
 we have two options. First, we could... *somehow* get the voyages that we want to
 show inside of `base.html.twig` and pass them into `SearchSite` as a prop.
-But... fetching data from our base layout is trick... we'd probably need a custom
+But... fetching data from our base layout is tricky... we'd probably need a custom
 Twig function.
 
 The second option is to leverage our Twig component! One of its superpowers is
@@ -143,7 +143,7 @@ called `#[ExposeInTemplate]`. I won't show it, but it's a quick change.
 ## Fixing the Modal to the Top
 
 So, I'm happy! But, this isn't *perfect*... and I want that. One thing that
-bothers me is the position: it looks a low when it's empty. And as we type,
+bothers me is the position: it looks low when it's empty. And as we type,
 it jumps around. That's the native `<dialog>` positioning, which is normally
 *great*, but not when our content is changing. So in this one case, let's fix
 the position near the top.
@@ -169,7 +169,7 @@ it's empty. It would be *really* cool if it *remembered* the search.
 And we can do that with a trick from Turbo. In `base.html.twig`,
 on the modal, add `data-turbo-permanent`.
 
-That tells Turbo to *keep* this on the page as it's navigating. When you use this,
+That tells Turbo to *keep* this on the page when it navigates. When you use this,
 it needs an id: `global-search`.
 
 Let's see how this feels. Open the search, type something, click off, go to the

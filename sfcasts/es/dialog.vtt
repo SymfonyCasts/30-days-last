@@ -184,12 +184,12 @@ Aquí, digamos this.dialogTarget.show():
 Éste es otro superpoder
 
 00:03:14.736 --> 00:03:18.056 align:middle
-del elemento <dialog>
+del elemento <dialog>:
 ¡tiene un método show()!
 
 00:03:18.666 --> 00:03:23.486 align:middle
-La idea central de mostrar y ocultar está
-integrada en el elemento <dialog>.
+Integrada en el elemento `<dialog>` 
+está esta idea central de mostrar y ocultar.
 
 00:03:24.286 --> 00:03:27.616 align:middle
 Para utilizar el nuevo

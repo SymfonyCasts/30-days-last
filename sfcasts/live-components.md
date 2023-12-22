@@ -1,7 +1,211 @@
 # Live Components
 
-Coming soon...
+Happy Day 27 of Last Stack! We've accomplished a lot during the first 26 days with
+just *three* letters of LAST Stack: Asset Mapper, Stimulus, and Turbo. Today
+we crack the code on the L of LAST Stack: Live components. Live components
+let us take a Twig component... then re-render it via Ajax as the user interacts
+with it.
 
-Happy Day 27 of Last Stack! We have accomplished a lot over the first 26 days with just three letters of Last Stack – asset mapper, stimulus, and turbo. Today we finally learn about the L – live components. Live components let us take a twig component, then automatically re-render it via Ajax as the user interacts with it. So today we're going to focus on this global search. When we click this right now, absolutely nothing happens. What I want to do is open up a modal with a search box, and as we type into it, we have a live search. So let's start inside of templates slash base dot html twig, and I will search for search. Perfect. Here we go. So here is that fake-looking input right there. So I'm going to add a twig modal. Let's do a close button equals true, and then a twig block name equals trigger, and we'll put this fake input inside of there as a trigger. And then to actually make this open, the modal will say data dash action equals modal open. Cool. So there's no modal content yet, but if we refresh, nothing changes. The only thing that's visible inside of our modal is the trigger. For the modal content, after the twig block, I'm just going to paste in a div. Nothing special here. It's just a search input. All right, so we go over here and try this on click. Nothing happens. And the way I debug this is I inspect element, open up my console, and when I click, notice there's no log here that says the action's being triggered. So I've got something wrong with my action. And the problem is that, you may have spotted it, we added our data action to a div. And unlike a button or a form, a div doesn't have a native action. So if we want to add a data action to a div, we need to specify the event. So click arrow. And now, got it. And notice, it auto-focuses the input. That's just a feature of dialogs. That's just one of the things that they do. But this is more padding than I want. So in components modal.html twig, it's okay, we just need to make our modal a little bit more flexible. What I'm looking at here is this P5. I usually want that.  I don't want it in this case. So let's add a third prop here called padding equals P5. I'll copy that. And down here, just curly, curly padding. And over in base.html twig on our modal, we can now say padding equals empty quotes. All right, let's check that result. Now awesome. It's a little bit tighter and neater looking. All right, to actually get the results in here, we could treat this just like our data tables set up behind. We could put a turbo frame with the results right here. And then make the input submit into that frame. But another option is to build this into a live component. So that's what we're gonna do. And before we actually talk about live components, we're first just going to move the modal contents into a twig component. So in templates component, create a new file called search site.html.twig. I'll add a div with curly, curly attributes. And inside, let's just go steal the entire body of the modal. I'll paste it in here. Perfect. Now over in base.html twig, it's easy, right? Base.html.twig, colon, search site, done. And over here, we've got the same results. Now to render the results themselves down here, this is where having a twig component is gonna come in handy. One thing we could do is somehow get the voyages that we wanna show instead of base.html twig, which is a little tricky, and then pass them into our search site as a prop. But one of the advantages of twig components is they can fetch their own data. They can be standalone. So to do that, we need a twig class for this. So in source twig components, create a new PHP class called search site. And the only thing this needs to become a twig component is an attribute called as twig component. So this is exactly what we saw inside of our button class. And as I mentioned earlier, one of the superpowers of twig components is their services, and they can auto-wire other services like voyage repository, voyage repository. Now to provide the data, I'm gonna create a new function down here called voyages, which is going to return an array. And really, it's going to return an array of voyages, so I'll use phpDoc for that.  And inside, I'll say return this arrow voyage repository or arrow find by search. It's the same method we're using on our homepage. And for the query, I'll pass null search planets, empty array, and limit about 10 results. So we don't have this. The search query is not dynamic yet, but we do have this voyage method, and we can use that inside of our template. So I'll start with a little bit of styling. And then it's just normal twig code for voyage in this, that's our component object, .voyages. Do an end for, and for the middle, I'll paste that in. Nothing special here though, just an anchor tag that links to it, an image tag, and some information. And when we refresh, ah, we've got it. Our standalone twig component is coming in handy, but it doesn't do anything yet. So this is where live components is going to come in handy. Let's get it installed at your terminal run composer, require symphony slash UX live components. To upgrade our twig component to a live component, we only need to do two things. First, it's as live components, and the second, you need to use this default action trait. It's an internal, not important detail. You just need to remember to have that use statement. Now at this point, nothing changes. It's still a twig component, and we haven't added any new superpowers to it.
+Our goal is this global search. When I click nothing happens! What I *want* to
+do is open a modal with a search box that, as we type, loads a live search.
 
-So one of the key concepts with a live component is that you can add a property and allow the user to change that property on the front end. So for example, let's create a public string query, which will be our search string. And then down here, we'll use that with this arrow query. Now to make the user able to modify this property, we need to give it an attribute called liveProp with writeable true. Finally, to attach this property to this input here so that it changes as the user types, we add data-model equals query. That's it. Check it out over here. Refresh. We get all the results. And when we type, it works. It even has built-in debouncing, which we had to build by hand earlier. And behind the scenes, it's making an AJAX request, populating the query property with this string, and just re-rendering the tweak template. And now that we have this working, I don't think we need to load all the results on page load anymore. So look, it's just PHP, so it's easy. If not this arrow query, then we'll return empty results. And in search site, we'll just put an if statement around this. If this.voyages is not empty, then we'll render that with the end if on the bottom. Now those of you that are sticklers for details, yes, this.voyages, we're calling that twice. So that's going to call that method twice. But there are ways around this. The way I like to use it is something called expose in template. I won't show it here, but there's an easy solution to avoid that double query. All right. So I want to make this perfect, as you know. So one thing that kind of bothers me is the position of this. It looks a little low down here when it's empty. And as we type into it, it kind of jumps around a little bit. Which is just kind of weird. So in this one case, I want to fix the position of this kind of near the top of the page. So in modal.html twig, let's add one last piece of flexibility to our modal components. Let's call it fixed top equals false. And for that fixed top, we'll go to the end of the class. And we'll call that fixed top.  And for that fixed top, we'll go to the end of the class list on the dialog. And we'll say if fixed top, then we'll give a specific mt-14, else we'll do nothing. Normally we let the margin of the dialog just be figured out. Then over in base.html twig, on our modal, let's actually break it down a little bit. And if we break this onto multiple lines as well, we'll say colon fixed top equals true. And now, ah, really nice. So no more jumping around as we get those results. All right, what else? Pressing up and down on my keyboard to have this kind of scroll up and down is something that we'll save for later. But I do want to make one thing, one change. So right now, if I search inside of here and then click out of here and then change pages, not surprisingly, when we open the search back up, it's empty. It doesn't need to be. It'd be really cool if it remembered the search. To do that, we can take advantage of a feature in Turbo. So over in base.html twig, on this modal, we're going to add data turbo temporary, permanent, that tells Turbo to keep this on the page as it's navigating and permanently. And when you use this, you also need an ID. So how about global search? All right, let's try this now. So I'm going to open the search. We're going to search for something, click off of it, go to the home page, click back again. How nice is that? All right, last thing. As you can see up here, I'm advertising. We can open this with a keyboard shortcut. That doesn't work yet, but this is something that just works with stimulus. It's easy. So on our modal, we're just going to add a data action. And stimulus has built in support for doing things on key down. So you can say key down dot, and then whatever the key is that you want, like hit K. Or in this case, what we want is control plus K. But if we just did this, it would only happen if the control plus K was on the right. So we're going to add a data action.  But if we just did this, it would only happen if the control K happened when this modal was focused. We want this to happen everywhere. So we're going to say at window. So we're listening to the key down event on control K globally, no matter where it's actually triggered. And then we'll say arrow modal consign open. And I'm going to copy that and do a space and paste it. And we'll also do key down meta dot plus K. Meta is the word for the Apple key, the special command key on Apple. All right, now check this out. Now move over and it works. Oh, I love that. Done. Live components can also be loaded lazily via AJAX. It's not really useful in this case, but it's called defer. So if we just add a defer attribute onto here, we won't notice any difference when we refresh the page. But actually the search site was not rendered on page load and instead was rendered via AJAX immediately. We can see that down here, there's already one AJAX call to go fetch that. So not particularly useful in our case because this search site is so lightweight. But if you have something that's a little heavier and you don't want it to sit on your page, add defer. All right, tomorrow we're going to use live components on a form to add real time validation and solve the age old pesky problem of dynamic or dependent form fields.
+## Opening the Search Modal
+
+Start inside `templates/base.html.twig`. Search for search! Perfect: this
+is the fake search input we just saw. Add a `<twig:Modal>` with `:closeButton="true"`,
+then a `<twig:block>` with `name="trigger"`. Put the fake input inside that.
+To make this open the modal, we need `data-action="modal#open"`.
+
+Cool! If we refresh, nothing changes: the only visible part of the modal is the
+trigger. For the modal content, after the Twig block, I'll paste in a div.
+Nothing special here: just a *real* search input.
+
+Back at the browser, when I click... uh oh. Nothing happens! Debugging always
+starts in the console. No errors, but when I click, watch: there's no log that
+says that the action is being triggered. We've got something wrong with that and
+maybe you saw my mistake? We added the `data-action` to a `div`. Unlike a `button`
+or a `form`, Stimulus doesn't have a default event for a `div`. Add `click->`...
+and now... got it!
+
+Oh, and it auto-focused the input! That's.... just a feature of dialogs! They work
+like a mini page within a page: it autofocuses the first tabbable element... or
+you can use the normal `autofocus` attribute for more control. It just works how
+you want it to.
+
+## Modal: Control the Padding
+
+Anyway, I'm picky: this is more padding than I want. But that's ok! We can make
+our Modal component just a *bit* more flexible. In `components.Modal.html.twig`,
+the extra padding is this `p-5`. On top, add a third `prop`: `padding='p-5'`.
+Copy that. And down here, render `padding`.
+
+Over in `base.html.twig`, on the modal, add `padding` equals empty quotes.
+
+Let's check it! And... much neater.
+
+## Creating the Twig Component
+
+To bring the results to life, we *could* repeat the data-tables setup from the homepage.
+We could add a `<turbo-frame>` with the results right here and make the input
+autosubmit *into* that frame.
+
+Another option is to build this with a live component. But before we talk about that,
+let's *first* organize the modal contents into a *twig* component.
+
+In `templates/component/`, create a new file called `SearchSite.html.twig`. I'll
+add a div with `{{ attributes }}`. Then go steal the entire body of the modal,
+and paste it here.
+
+Over in `base.html.twig`, it's easy, right? `<twig:SearchSite />` and done.
+
+At the browser, we get the same result.
+
+## Fetching Data with a Twig Component
+
+The site search is really going to be a *voyage* search. To render the results,
+we have two options. First, we could... *somehow* get the voyages that we want to
+show inside of `base.html.twig` and pass them into `SearchSite` as a prop.
+But... fetching data from our base layout is trick... we'd probably need a custom
+Twig function.
+
+The second option is to leverage our Twig component! One of its superpowers is
+the ability to fetch its own data: to be standalone.
+
+To do that, this Twig component now needs a PHP class. In `src/Twig/Components/`,
+create a new PHP class called `SearchSite`. The only thing that this needs to
+be recognized as a Twig component is an attribute: `#[AsTwigComponent]`.
+
+This is exactly what we saw inside the `Button` class. A few days ago, I quickly
+mentioned that Twig component classes are *services*, which means we can
+autowire *other* services like `VoyageRepository`, `$voyageRepository`.
+
+To provide the data to the template, create a new method called `voyages`!
+This will return an array... which will really be an array of `Voyage[]`. Inside
+`return $this->voyageRepository->findBySearch()`. That's the same method we're using
+on the homepage. Pass `null`, an empty array, and limit to 10 results.
+
+The search query isn't dynamic yet, but we *do* now have a `voyage()` method that
+we can use in the template. I'll start with a bit of styling, then it's
+normal twig code: `{% for voyage in this` - that's our component object -
+`.voyages`. Add `endfor`, and in the middle, I'll paste that in.
+
+Nothing special: an anchor tag, an image tag, and some info.
+
+Let's try it. Open! Sweet! Though, of course, when we type, nothing updates!
+Lame!
+
+## Installing & Upgrading to a LiveComponent
+
+*This* is where live components comes in handy. So let's get it installed!
+
+```terminal
+composer require symfony/ux-live-component
+```
+
+To upgrade our Twig component to a Live component, we only need to do two things.
+First, it's `#[AsLiveComponent]`. And second, use `DefaultActionTrait`. That's
+an internal detail... but needed.
+
+So far, nothing will change. It's still a Twig component... and we haven't added
+any *live* component superpowers.
+
+## Adding a Writable Prop
+
+One of the key concepts with a live component is that you can add a property and
+allow the user to *change* that property from the frontend. For example, create
+a `public string $query` to represent the search string.
+
+Below, use that when we call the repository.
+
+To allow the user to modify this property, we need to give it an attribute:
+`#[LiveProp]` with `writeable: true`.
+
+Finally, to *bind* this property to the input - so that the `query` property changes
+as the user types - add `data-model="query"`.
+
+That's it! Check out the result. We start with everything, but when we type...
+it filters! It even has built-in debouncing.
+
+Backstage, it makes an AJAX request, populates the `query` property with
+this string, re-renders the Twig template and pops it right here.
+
+Now that this is working, I don't think we need to load all the results at first.
+And, look, it's just PHP, so this is easy. If not `$this->query`, then return an
+empty array.
+
+And in `SearchSite.html.twig`, add an if statement around this: if
+`this.voyages` is not empty, render that... with the `endif` at the bottom.
+
+For those of you that are sticklers for details, yes, with `this.voyages`, we're
+calling the method *twice*. But there *are* ways around this - and my favorite is
+called `#[ExposeInTemplate]`. I won't show it, but it's a quick change.
+
+## Fixing the Modal to the Top
+
+So, I'm happy! But, this isn't *perfect*... and I want that. One thing that
+bothers me is the position: it looks a low when it's empty. And as we type,
+it jumps around. That's the native `<dialog>` positioning, which is normally
+*great*, but not when our content is changing. So in this one case, let's fix
+the position near the top.
+
+In `Modal.html.twig`, add one last piece of flexibility to our component: a prop
+called `fixedTop = false`.
+
+Then, at the end of the `dialog` classes, if `fixedTop`, render `mt-14` to
+set the top margin. Else do nothing.
+
+Over in `base.html.twig`, on the modal... it's time to break this onto multiple
+lines. Then pass `:fixedTop="true"`.
+
+And now, ah. Much nicer and no more jumping around.
+
+## Setting the Search as Turbo Permanent
+
+What else? Pressing up and down on my keyboard to go through the results *is* needed,
+though I'll save that for another time. But watch this. If I search, then click out
+and navigate to another page, not surprisingly, when we open the search modal,
+it's empty. It would be *really* cool if it *remembered* the search.
+
+And we can do that with a trick from Turbo. In `base.html.twig`,
+on the modal, add `data-turbo-permanent`.
+
+That tells Turbo to *keep* this on the page as it's navigating. When you use this,
+it needs an id: `global-search`.
+
+Let's see how this feels. Open the search, type something, click off, go to the
+homepage and open it again. So darn cool!
+
+## Opening Search on Ctrl+K
+
+Ok, *final* thing! Up here, I'm advertising that you open the search with a keyboard
+shortcut. That's a lie! But we *can* add this... and, again, it's easy.
+
+On the modal, add a `data-action`. Stimulus has built-in support for doing things
+on `keydown`. So we can say `keydown.`, then whatever key we want, like
+"K". Or in this case, `ctrl+k`.
+
+If we stopped now, this would only trigger if the modal were focused and then
+someone pressed ctrl+k. That's... not going to happen. Instead, we want this to
+open no matter *what* is focused. We want a *global* listener. Do that by adding
+`@window`.
+
+Copy that, add a space, paste and also trigger on `meta+k`. Meta is the command
+key on a Mac.
+
+Testing time! I'll move over and... keyboard! I love it! Done!
+
+## Lazy-Loading Live Component
+
+Oh, and live components can also be loaded lazily via AJAX! Watch: add a `defer`
+attribute. When we refresh, we won't *see* any difference... because that component
+is hidden on page load anyway. But in reality, it just loaded *empty* then
+immediately made an Ajax call to load for real. We can see that down here in the web
+debug toolbar! This is a great way to defer loading something heavy, so it doesn't
+slow down your page.
+
+It's not particularly useful in *our* case because the search site component is
+so lightweight, so I'll remove it.
+
+Tomorrow, we'll spend one more day with live components - this time to give a form
+real-time-validation superpowers *and* solve the age-old pesky problem of dynamic
+or dependent form fields.

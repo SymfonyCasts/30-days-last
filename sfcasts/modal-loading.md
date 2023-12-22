@@ -6,7 +6,7 @@ have a `<turbo-frame id="modal">`... which is odd, because *every* page now has 
 That's because... the response was an error. If we look down on the web debug toolbar,
 there was a 405 status code. Open that up. Interesting:
 
-> no route found for POST /voyage
+> No route found for `POST` /voyage/
 
 That's weird because we're submitting the new voyage form... so the URL should
 be `/voyage/new`.
@@ -20,15 +20,21 @@ as soon as we decide to embed our forms on other pages, we need to be responsibl
 and always set the `action` attribute.
 
 To do that, open up `src/Controller/VoyageController.php`. At the bottom, I'll
-paste in a simple private method. Hit Okay to add the `use` statement. We can pass
-a voyage or not... and this creates the form but sets the `action`. If the voyage
-has an id, it sets the action to the edit page, else it sets it to the new page.
+paste in a simple private method. Hit Okay to add the `use` statement:
+
+[[[ code('bdb5a2a001') ]]]
+
+We can pass a voyage or not... and this creates the form but sets the `action`.
+If the voyage has an id, it sets the action to the edit page, else it sets it to
+the new page.
 
 Thanks to this, up in the `new` action, we can say `this->createVoyageForm($voyage)`.
-Copy that... because we need the exact line down in `edit`.
+Copy that... because we need the exact line down in `edit`:
 
-Lovely. Back over, we don't even need to refresh. Open the modal, save and...
-that is *absolutely* lovely! It submitted and we got the response *right* back inside
+[[[ code('75ecaf0d60') ]]]
+
+Lovely. Back over, we don't even need to refresh. Open the modal, save and... Ah,
+that is *absolutely* lovely! It's submitted and we got the response *right* back inside
 the modal. Because... of course! That's the whole point of a Turbo frame. It keeps
 the navigation inside itself.
 
@@ -37,27 +43,36 @@ the navigation inside itself.
 Before we talk about what happens on success, I want to *perfect* this. My second
 requirement for opening the modal was that it needs to open immediately. Over
 in the `new` action, add a `sleep(2)`... to pretend our site is getting slammed
-by aliens planning their spring break trips.
+by aliens planning their spring break trips:
+
+[[[ code('de9b4cd4cb') ]]]
 
 When we click the button now... nothing happens. No user feedback at *all* until
 the Ajax request finishes. That is *not* good enough. Instead, I want the modal to
 open immediately with a loading animation.
 
-Over in the modal controller, add a new target called `loadingContent`. Here's my
-idea: if you want some loading content, you'll define what that looks like in
-Twig and set this target on it. We'll do that in a moment.
+Over in the modal controller, add a new target called `loadingContent`:
 
-At the bottom, create a new method called `showLoading`. If `this.dialogTarget.open`,
+[[[ code('a1cf36ab41') ]]]
+
+Here's my idea: if you want some loading content, you'll define what that looks
+like in Twig and set this target on it. We'll do that in a moment.
+
+At the bottom, create a new method called `showLoading()`. If `this.dialogTarget.open`,
 so if the dialog is already open, we don't need to show the loading, so return.
 Otherwise, say `this.dynamicContentTarget` - for us, that's the `<turbo-frame>`
 that the Ajax content will eventually be loaded into - `.innerHTML` equals
-`this.loadingContentTarget.innerHTML`.
+`this.loadingContentTarget.innerHTML`:
+
+[[[ code('dfe496d78b') ]]]
 
 Finally, add that target. In `base.html.twig`, after the `dialog`, I'll add a
 `template` element. Yes, my beloved `template` element: it's perfect for this
 situation because anything inside won't be visible or active on the page. It's
 a template we can steal from. Add a `data-modal-target="loadingContent"`. I'll
-paste some content inside.
+paste some content inside:
+
+[[[ code('aceedb2abb') ]]]
 
 Nothing special here: just some Tailwind classes with a cool pulse animation.
 
@@ -68,7 +83,9 @@ we want to call `showLoading()`. Fortunately, Turbo dispatches an event when it
 starts an AJAX request. And we can listen to that.
 
 Add a `data-action` to listen to `turbo:before-fetch-request` - that's the name of
-the event - then `->modal#showLoading`.
+the event - then `->modal#showLoading`:
+
+[[[ code('90fe9a9a9d') ]]]
 
 All right, let's check out the effect! Refresh the page and... oh, it's wonderful!
 It opens instantly, we see that loading content... and it's replaced when the
@@ -91,12 +108,16 @@ takes longer than, for example, 700ms. Do that by adding an `aria-busy:delay-700
 ***
 
 Lucky for us, we've been down this road before with a different Turbo frame. Add class
-`aria-busy:opacity-50`, and `transition-opacity`.
+`aria-busy:opacity-50`, and `transition-opacity`:
+
+[[[ code('1d00aaaa7c') ]]]
 
 I'll reload... click, loading animation and submit. Yes! The low opacity tells
 us that something is happening.
 
-And with that, I will happily remove our `sleep`.
+And with that, I will happily remove our `sleep`:
+
+[[[ code('2688d76016') ]]]
 
 ## Conditional Modal Styling
 
@@ -109,10 +130,14 @@ the modal has some padding... and then extra padding comes from that page.
 
 To help us do this, we're going to use a Tailwind trick. In `tailwind.config.js`,
 add one more variant. Call this `modal`, and activate it whenever we are inside
-a `dialog` element.
+a `dialog` element:
+
+[[[ code('ee00b26eb1') ]]]
 
 Now, in `new.html.twig`, keep the margin and padding for the normal situation.
-But if we're in a modal, use `modal:m-0`, and `modal:p-0`.
+But if we're in a modal, use `modal:m-0`, and `modal:p-0`:
+
+[[[ code('97c84dc302') ]]]
 
 Back on the new page, this shouldn't change. Looks good! But in the modal...
 *that* is what we want.

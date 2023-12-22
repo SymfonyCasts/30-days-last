@@ -1,0 +1,255 @@
+WEBVTT
+
+00:00:00.036 --> 00:00:04.456 align:middle
+Para el día 24, prepárate
+para una aventura rápida. Hemos
+
+00:00:04.956 --> 00:00:08.436 align:middle
+aprendido que los Turbo Streams
+son elementos HTML personalizados
+
+00:00:08.536 --> 00:00:10.856 align:middle
+que puedes lanzar a la
+página en cualquier lugar...
+
+00:00:11.036 --> 00:00:12.216 align:middle
+¡y se ejecutan!
+
+00:00:12.816 --> 00:00:17.626 align:middle
+Pero hay otra forma de utilizar las
+secuencias que está más documentada,
+
+00:00:17.626 --> 00:00:19.956 align:middle
+aunque yo la utilice menos últimamente.
+
+00:00:20.676 --> 00:00:23.596 align:middle
+En VoyageController, desplázate hacia
+arriba para encontrar la acción new().
+
+00:00:23.626 --> 00:00:29.906 align:middle
+En lugar de redirigir, como hacemos normalmente
+para el envío de un formulario, la otra opción es
+
+00:00:29.906 --> 00:00:34.216 align:middle
+devolver una respuesta totalmente
+llena de Turbo Streams.
+
+00:00:34.926 --> 00:00:39.546 align:middle
+Observa: elimina el flash y devuelve
+$this->renderBlockView()...
+
+00:00:39.886 --> 00:00:42.126 align:middle
+excepto cambiarlo por renderBlock().
+
+00:00:42.786 --> 00:00:46.576 align:middle
+Eso hace lo mismo, pero devuelve un
+objeto Response en lugar de una cadena.
+
+00:00:47.426 --> 00:00:54.596 align:middle
+El último detalle es $request->setRequestFormat()
+TurboBundle::STREAM_FORMAT : Es un poco técnico,
+
+00:00:54.596 --> 00:00:59.416 align:middle
+pero esto establecerá una cabecera Content-Type
+en la respuesta que le dirá a Turbo: ¡Eh!
+
+00:00:59.786 --> 00:01:02.066 align:middle
+Esto no es una respuesta
+normal de página completa.
+
+00:01:02.146 --> 00:01:06.746 align:middle
+Sólo devuelvo un conjunto de Turbo
+Streams que quiero que proceses.
+
+00:01:07.636 --> 00:01:09.346 align:middle
+Redoble de tambores, por favor.
+
+00:01:09.636 --> 00:01:11.576 align:middle
+Actualiza, ve a Nuevo Viaje...
+
+00:01:11.576 --> 00:01:13.346 align:middle
+rellena los campos...
+
+00:01:15.186 --> 00:01:18.166 align:middle
+y guarda. ¿Qué ha ocurrido?
+
+00:01:18.516 --> 00:01:21.796 align:middle
+El modal sigue abierto y
+no hay notificación Toast.
+
+00:01:22.206 --> 00:01:27.336 align:middle
+Pero si estabas observando atentamente,
+¡la fila de la tabla sí se ha añadido!
+
+00:01:27.966 --> 00:01:30.446 align:middle
+En las herramientas de red,
+busca la petición POST.
+
+00:01:32.186 --> 00:01:33.266 align:middle
+¡Fíjate!
+
+00:01:33.616 --> 00:01:36.336 align:middle
+La respuesta no es más que
+el <turbo-stream>:
+
+00:01:36.926 --> 00:01:38.806 align:middle
+que es lo único que devolvió
+nuestra aplicación. Las
+
+00:01:39.756 --> 00:01:43.366 align:middle
+conclusiones son: como no estamos
+redirigiendo a otra página,
+
+00:01:43.706 --> 00:01:48.426 align:middle
+ya no obtenemos el comportamiento normal de
+<turbo-frame>, en el que encuentra el marco
+
+00:01:48.426 --> 00:01:50.696 align:middle
+en la página siguiente y lo renderiza.
+
+00:01:51.266 --> 00:01:54.876 align:middle
+En nuestro caso, el <turbo-frame>
+vacío es lo que cerró el modal
+
+00:01:55.096 --> 00:01:57.066 align:middle
+y renderizó los mensajes flash.
+
+00:01:58.326 --> 00:02:03.506 align:middle
+Cuando decides devolver una respuesta
+de flujo, eres 100% responsable
+
+00:02:03.506 --> 00:02:05.766 align:middle
+de actualizar todo en la página.
+
+00:02:05.826 --> 00:02:11.596 align:middle
+Así que, en new.html.twig, aquí abajo,
+¡necesitamos un par de streams más!
+
+00:02:12.106 --> 00:02:16.406 align:middle
+Abre edit.html.twig y roba
+el que cierra el modal.
+
+00:02:17.616 --> 00:02:18.526 align:middle
+Ponlo aquí....
+
+00:02:19.146 --> 00:02:24.416 align:middle
+luego, desde _frameSuccessStreams.html.twig
+, roba el flujo que se anexa
+
+00:02:24.416 --> 00:02:28.006 align:middle
+al contenedor flash: ¡Creo que
+eso es todo lo que necesitamos!
+
+00:02:28.856 --> 00:02:30.246 align:middle
+Inténtalo de nuevo.
+
+00:02:31.066 --> 00:02:34.646 align:middle
+Aquí está por fin nuestra notificación
+tostada del envío anterior.
+
+00:02:35.286 --> 00:02:36.736 align:middle
+Crea un nuevo viaje...
+
+00:02:38.676 --> 00:02:40.006 align:middle
+y ... guarda.
+
+00:02:40.836 --> 00:02:41.416 align:middle
+¡Ya está!
+
+00:02:41.686 --> 00:02:45.286 align:middle
+Notificación tostada, modal
+cerrado, fila preañadida.
+
+00:02:46.106 --> 00:02:49.706 align:middle
+Esta idea de devolver sólo un
+<turbo-stream> es similar
+
+00:02:49.706 --> 00:02:52.686 align:middle
+a cómo funciona la
+integración de Turbo y Mercure.
+
+00:02:53.256 --> 00:02:55.776 align:middle
+Si no lo sabes, Mercure
+es una herramienta que te
+
+00:02:55.776 --> 00:02:58.456 align:middle
+permite obtener actualizaciones
+en tiempo real en tu front-end...
+
+00:02:58.646 --> 00:03:00.736 align:middle
+algo así como web sockets, pero más guay.
+
+00:03:01.206 --> 00:03:03.916 align:middle
+Y Mercure se complementa muy bien con Turbo.
+
+00:03:04.076 --> 00:03:07.986 align:middle
+Desde dentro de tu controlador,
+publicas un Update en Mercure...
+
+00:03:08.316 --> 00:03:13.126 align:middle
+que se enviará a los frontales de todos los
+navegadores que estén escuchando este tema chat.
+
+00:03:14.026 --> 00:03:18.036 align:middle
+El contenido de ese Update es
+un conjunto de Turbo Streams.
+
+00:03:18.556 --> 00:03:20.246 align:middle
+Me desplazaré hasta esa plantilla.
+
+00:03:20.776 --> 00:03:22.446 align:middle
+Así que publicamos streams...
+
+00:03:22.826 --> 00:03:27.426 align:middle
+esos streams se envían al frontend a
+través de Mercure, y Turbo los procesa.
+
+00:03:28.296 --> 00:03:30.766 align:middle
+En el frontend, podría tener este aspecto.
+
+00:03:31.096 --> 00:03:35.626 align:middle
+Editamos una travesía, añadimos unos cuantos
+signos de exclamación y le damos a guardar.
+
+00:03:36.456 --> 00:03:41.366 align:middle
+Por supuesto, nuestra página se actualiza gracias a los
+mecanismos normales de Turbo de los que hemos hablado.
+
+00:03:41.756 --> 00:03:46.256 align:middle
+Pero, si estuviéramos utilizando Mercure,
+podríamos hacer que cualquier otra persona
+
+00:03:46.256 --> 00:03:51.456 align:middle
+de esta página recibiera una actualización Stream
+que también dijera que preañadiera esta fila.
+
+00:03:52.136 --> 00:03:56.886 align:middle
+Así que añado los signos de exclamación,
+y de repente tú también los ves
+
+00:03:56.886 --> 00:03:58.956 align:middle
+en tu pantalla, sin refrescar.
+
+00:03:59.616 --> 00:04:02.466 align:middle
+Es superguay y funciona mediante Streams.
+
+00:04:03.476 --> 00:04:07.146 align:middle
+Vale, aunque esto funciona muy bien,
+volvamos a nuestra antigua forma...
+
+00:04:07.416 --> 00:04:09.056 align:middle
+que también funcionaba muy bien.
+
+00:04:09.996 --> 00:04:11.466 align:middle
+Elimina los nuevos Turbo Streams...
+
+00:04:11.786 --> 00:04:13.576 align:middle
+y deshaz el código en el controlador.
+
+00:04:15.346 --> 00:04:18.666 align:middle
+Mañana pasaremos a una de mis
+partes favoritas de LAST Stack,
+
+00:04:18.806 --> 00:04:23.716 align:middle
+y la clave para organizar tu sitio en
+trozos reutilizables: Los Componentes Twig.

@@ -10,16 +10,24 @@ easily open the edit form in a modal too, right?
 
 To opt into the modal system, the only thing we need to change - in
 `edit.html.twig` - is to extend `modalBase.html.twig`. And while we're here,
-take out the extra padding with `modal:m-0` and `modal:p-0`.
+take out the extra padding with `modal:m-0` and `modal:p-0`:
+
+[[[ code('1a40b34384') ]]]
 
 Next, make the edit link *target* the `modal` frame. This lives in `_row.html.twig`.
-I'll break this onto multiple lines.... then add `data-turbo-frame="modal"`.
+I'll break this onto multiple lines.... then add `data-turbo-frame="modal"`:
+
+[[[ code('aafce9baf2') ]]]
 
 Moment of truth. Refresh. And... darn it! It just works! Even if we save successfully,
 *that* works. We get the toast, the modal closes, my goodness!
 
 This works because, in `VoyageController`, the `edit` action, like `new`, redirects
-to the `index` page. That has an empty modal frame, so the modal closes.
+to the `index` page:
+
+[[[ code('654d1ad580') ]]]
+
+That has an empty modal frame, so the modal closes.
 
 ## When the Modal Doesn't Close
 
@@ -27,7 +35,9 @@ But... I want to be tricky. The edit form now appears in two contexts, the modal
 but also on its standalone page. What if, when we're on this page, on
 success, we want to redirect right back here so we can keep editing.
 
-Easy! Change the route to `app_voyage_edit` and set `id` to `$voyage->getId()`.
+Easy! Change the route to `app_voyage_edit` and set `id` to `$voyage->getId()`:
+
+[[[ code('98da2b7f5a') ]]]
 
 Cool. Now when we save, it works! But... how did that affect the form in the
 modal? When we edit and save... nothing happens. The modal is still here and
@@ -45,10 +55,15 @@ It turns out, these lines should really live inside *any* `<turbo-frame>` that
 might be rendered after a form submit.
 
 To help with that, copy this and, inside the `templates/` directory, create a new
-file called `_frameSuccessStream.html.twig`. Paste inside. But before we use
-this, I want to add one other detail: if
-`app.request.headers.get('turbo-frame')` equals a new `frame` variable, then
-render this, else, do nothing.
+file called `_frameSuccessStreams.html.twig`. Paste inside:
+
+[[[ code('54d4205c3b') ]]]
+
+But before we use this, I want to add one other detail:
+`if app.request.headers.get('turbo-frame')` equals a new `frame` variable,
+then render this, else, do nothing:
+
+[[[ code('05d675e2ca') ]]]
 
 I'm coding for an edge-case, so let me explain. Imagine we have *two*
 `<turbo-frame>` elements on the same page: `id="login"` and
@@ -57,11 +72,16 @@ the `<turbo-frame id="login">` would always render the flash messages...
 leaving nothing for the poor `registration` frame. And so, when we *are* submitting
 inside the `registration` Turbo Frame... we wouldn't see the toast notifications.
 
-To fix this, when we use this partial - `include('_frameSuccessStream.html.twig')` -
-pass the name of the frame you're inside: `modal`. That way, if the current
-frame is something *else*, this won't eat the flash messages.
+To fix this, when we use this partial - `include('_frameSuccessStreams.html.twig')` -
+pass the name of the frame you're inside: `modal`:
 
-Copy this, and in `modalFrame.html.twig`, paste that here too.
+[[[ code('67764ef71f') ]]]
+
+That way, if the current frame is something *else*, this won't eat the flash messages.
+
+Copy this, and in `modalFrame.html.twig`, paste that here too:
+
+[[[ code('df8b8a61fa') ]]]
 
 Let's do this! Refresh, Edit... and save. The modal still stays open, but look back
 there: we see the toast!
@@ -82,16 +102,23 @@ content after the redirect, we can *also* use streams to do anything extra.
 In `new.html.twig`, steal the `stream_success` from the bottom. In `edit.html.twig`,
 paste. This time, we want to update the `<turbo-frame id="modal">` element to *empty*
 its content so the modal will close. Do that with `action="update"`,
-`target="modal"`, and set the `<template>` to nothing.
+`target="modal"`, and set the `<template>` to nothing:
+
+[[[ code('956f47d38f') ]]]
 
 In the controller, to add the "extra stuff", copy the if statement from
 `new`... paste it down here, change the template to `edit.html.twig` and... we should
 be good!
 
+[[[ code('171686798f') ]]]
+
 Ok, hit "Edit" and save. Hmm, I saw the toast, but the modal didn't close. Let me
 look at the stream to make sure I have everything. Ah! With `targets`, you use
-a CSS selector. But with `target`, it's just the id. So the Turbo Stream was
-executing... but wasn't matching anything.
+a CSS selector. But with `target`, it's just the id:
+
+[[[ code('7cb25f38dd') ]]]
+
+So the Turbo Stream was executing... but wasn't matching anything.
 
 Let's try that again. When we hit save, that will redirect back to the edit page,
 and that *is* going have a `<turbo-frame id="modal">` *with* content:
@@ -106,12 +133,16 @@ Can I add one last polishing detail to edit? It would be *so* cool if, when
 we change a voyage, it updated the row instantly. This is another "extra",
 and... it's going to be easy.
 
-First, to target this, in `_row.html.twig`, add an `id`:
-`voyage-list-item-` `{{ voyage.id }}`.
+First, to target this, in `_row.html.twig`, add an `id`,
+`voyage-list-item-`, `{{ voyage.id }}`:
+
+[[[ code('fad88fa0e9') ]]]
 
 Copy that, head over to `edit.html.twig` and add one more Turbo Stream:
 `action="replace"` and `target="voyage-list-item-"` `voyage.id`. Add the
-`<template>` and then include `voyage/_row.html.twig`.
+`<template>` and then include `voyage/_row.html.twig`:
+
+[[[ code('61f7070fc4') ]]]
 
 This is where things *really* start to shine. Edit, remove those exclamation
 points and... the page updates instantly. Our edit modal - even with all the
@@ -133,7 +164,9 @@ But the delete action doesn't *need* to submit into a frame. We're never going
 to click "Delete" then want to *show* something in the modal. A full page
 navigation would be *fine*.
 
-To do that, in `_delete_form.html.twig`, on the frame, add `data-turbo-frame="_top"`.
+To do that, in `_delete_form.html.twig`, on the frame, add `data-turbo-frame="_top"`:
+
+[[[ code('6ea3edc122') ]]]
 
 Now, edit, delete, and... the redirect causes a full page navigation, which
 is *fine*.
@@ -144,7 +177,9 @@ Though, yes, it *could* be smoother. Scroll down a bit...
 and delete one. The page scrolls back to the top.
 
 Like with anything, if this is important to us, we can improve it. Remove
-the `data-turbo-frame="_top"`.
+the `data-turbo-frame="_top"`:
+
+[[[ code('a6b9d7bd31') ]]]
 
 When a form - even our delete form - exists inside a `<turbo-frame>`, we need to
 ask: where is this being used and what do I need to update to make the page
@@ -155,13 +190,17 @@ In `edit.html.twig`, steal the `stream_success` block. Then create a new templat
 called `delete.html.twig`. Delete doesn't normally have its own template... and we're
 going to use this just for the `stream_success`. Use this one,
 change `action` to `remove` and `target` `voyage-list-item-` but just
-use an `id` variable. And for remove, we don't need the `<template>` at all.
+use an `id` variable. And for remove, we don't need the `<template>` at all:
+
+[[[ code('bed5f9675d') ]]]
 
 In `VoyageController`, scroll up, steal the if statement.... and down in delete,
 paste that. Change the template to `delete.html.twig` and pass an `id` variable
 set to `$id`. We can't use `$voyage->getId()` because it'll already be empty since
 we deleted it. Instead, pass `$id`... and before we delete, set that:
-`$id = $voyage->getId()`.
+`$id = $voyage->getId()`:
+
+[[[ code('40c4ffb0a8') ]]]
 
 Let's do this! Scroll way down here and delete ID 22. Watch. Boom. The row
 is gone, we get the toast notification and the page doesn't budge.

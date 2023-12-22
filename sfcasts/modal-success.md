@@ -36,14 +36,21 @@ This is a super common need when a form submits inside a `<turbo-frame>`. So we'
 going to solve this, I think, in a cool and global way. When we redirect on success,
 this `<turbo-frame>` is ultimately loaded on the page, which causes the modal to
 close. Inside it, add a `<turbo-stream>` with `action="append"` and
-`target="flash-container"`.
+`target="flash-container"`:
 
-When we added the toast system, we added an element with
-`id="flash-container`. We didn't need that then, but now it's going to come in handy
-because we can target that to add flash messages into it. 
+[[[ code('8437d2a124') ]]]
+
+When we added the toast system, we added an element with `id="flash-container`:
+
+[[[ code('81c173a849') ]]]
+
+We didn't need that then, but now it's going to come in handy because we can
+target that to add flash messages into it. 
 
 Inside the stream, add the `template` tag, of course, then
-`{{ include('_flashes.html.twig') }}`.
+`{{ include('_flashes.html.twig') }}`:
+
+[[[ code('cbdb9032b9') ]]]
 
 This will render the flash messages... and the stream will append them into that
 container.
@@ -56,7 +63,9 @@ flash messages... which *removes* them from the flash system. So the flashes
 messages *are* in the HTML that we return from the Ajax call... but because they're
 not inside the `<turbo-frame>`, they don't make it onto the page.
 
-The fix is easy: make sure your flash container is *after* the modal.
+The fix is easy: make sure your flash container is *after* the modal:
+
+[[[ code('3984d10144') ]]]
 
 Give this a go. Refresh... and fill in the form. Got it! The Modal closes, then
 the `<turbo-stream>` triggers the toast!
@@ -76,7 +85,9 @@ For example, could we prepend the table with the new voyage? Because, right now 
 don't see it until after we refresh. Let's try!
 
 In `index.html.twig`, find the `table`. We need to prepend into the `tbody`.
-To target this, on the `table`, add an `id="voyage-list"`.
+To target this, on the `table`, add an `id="voyage-list"`:
+
+[[[ code('6a8ff202e6') ]]]
 
 Let's think: this is another case where we need to update something that lives
 outside the `<turbo-frame>`. So, we need a stream.
@@ -85,7 +96,9 @@ Open `new.html.twig` and after the `body` block, add a new block called `stream_
 then `endblock`. Inside, we'll add any Turbo streams we need to make the submit
 *really* shine. Add a `<turbo-stream>` `action="prepend"` then `targets=""`. The
 "s" on targets means we can use a CSS selector: `#voyage-list tbody`. Add the
-`<template>` element... and, for now, a `<tr><td>` `{{ voyage.purpose }}`.
+`<template>` element... and, for now, a `<tr><td>` `{{ voyage.purpose }}`:
+
+[[[ code('f1388b0cca') ]]]
 
 Ok, so we have a new block in our template... that nobody is using. Somehow,
 we need to grab this Turbo stream... and, after the redirect, render it on the
@@ -110,9 +123,15 @@ Better.
 Pass the template a `voyage` variable.
 
 To pass the `<turbo-stream>` string to the next page add it to a new flash called
-`stream`. Finally, when we redirect to the index page and this `<turbo-frame>` is
+`stream`:
+
+[[[ code('112be81da0') ]]]
+
+Finally, when we redirect to the index page and this `<turbo-frame>` is
 rendered, *output* that flash: `for stream in app.flashes('stream')`, `endfor`
-with `{{ stream|raw }}` so it renders the raw HTML elements.
+with `{{ stream|raw }}` so it renders the raw HTML elements:
+
+[[[ code('b4d4f9f925') ]]]
 
 I think we're ready! Refresh... add a new voyage and... that's incredible! 
 The Ajax call redirected to the index page, where the modal frame had 2 Turbo
@@ -122,10 +141,19 @@ streams: one to render the toast and the other to prepend the table.
 
 Last step, prepend the real content. What we want is this `tr`. To get that
 from inside of `new.html.twig`, we need to isolate it into its own template. Copy
-that, delete it, then include `voyage/_row.html.twig`. Go create that template...
-then paste. Easy.
+that, delete it, then include `voyage/_row.html.twig`:
 
-Copy the `include` statement and, in `new.html.twig`, use that for the stream.
+[[[ code('c6c1eeea3a') ]]]
+
+Go create that template... then paste:
+
+[[[ code('6458dbd91e') ]]]
+
+Easy.
+
+Copy the `include()` statement and, in `new.html.twig`, use that for the stream:
+
+[[[ code('cd87bdbe3b') ]]]
 
 Let's try this! Create another voyage and... beautiful! Modal closes, toast notification
 renders & the page updates. It's everything we want.

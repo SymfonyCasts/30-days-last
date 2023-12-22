@@ -1,0 +1,438 @@
+WEBVTT
+
+00:00:01.096 --> 00:00:03.106 align:middle
+Sigamos donde lo dejamos ayer.
+
+00:00:03.586 --> 00:00:06.476 align:middle
+¡El modal con tecnología Ajax se carga!
+
+00:00:06.846 --> 00:00:07.686 align:middle
+Intenta enviarlo.
+
+00:00:08.406 --> 00:00:10.246 align:middle
+Algo ha ido mal.
+
+00:00:11.166 --> 00:00:15.506 align:middle
+Ha ido a una página que no tenía
+<turbo-frame id="modal">...
+
+00:00:15.686 --> 00:00:19.396 align:middle
+lo cual es extraño, porque ahora
+todas las páginas tienen uno.
+
+00:00:20.196 --> 00:00:21.156 align:middle
+Eso es porque...
+
+00:00:21.376 --> 00:00:23.066 align:middle
+la respuesta era un error.
+
+00:00:23.686 --> 00:00:27.836 align:middle
+Si miramos abajo en la barra de herramientas de
+depuración web, había un código de estado 405.
+
+00:00:28.386 --> 00:00:29.166 align:middle
+Abre eso.
+
+00:00:30.386 --> 00:00:36.116 align:middle
+Interesante: No se ha encontrado ninguna
+ruta para POST /viaje/ Eso es raro
+
+00:00:36.116 --> 00:00:39.016 align:middle
+porque estamos enviando el
+formulario de nuevo viaje...
+
+00:00:39.166 --> 00:00:42.436 align:middle
+así que la URL debería
+ser /voyage/new. Éste es el
+
+00:00:43.436 --> 00:00:47.426 align:middle
+problema: cuando generé el
+formulario de viaje desde MakerBundle,
+
+00:00:47.796 --> 00:00:51.026 align:middle
+creó formularios que no
+tienen el atributo action.
+
+00:00:51.526 --> 00:00:55.056 align:middle
+Eso está bien cuando el
+formulario vive en /voyage/new
+
+00:00:55.426 --> 00:00:59.646 align:middle
+porque sin action significa que
+se devuelve a la URL actual.
+
+00:01:00.166 --> 00:01:04.976 align:middle
+Pero en cuanto decidimos incrustar nuestros formularios
+en otras páginas, tenemos que ser responsables
+
+00:01:05.056 --> 00:01:07.046 align:middle
+y establecer siempre el atributo action.
+
+00:01:07.646 --> 00:01:11.946 align:middle
+Para ello, abre
+src/Controller/VoyageController.php.
+
+00:01:11.946 --> 00:01:14.776 align:middle
+En la parte inferior, pegaré
+un simple método privado.
+
+00:01:16.356 --> 00:01:21.036 align:middle
+Pulsa Aceptar para añadir la declaración
+use: Podemos pasar un viaje o no...
+
+00:01:21.506 --> 00:01:24.816 align:middle
+y esto crea el formulario
+pero establece el action.
+
+00:01:25.846 --> 00:01:31.286 align:middle
+Si la travesía tiene un id, establece la acción en la
+página de edición, si no, la establece en la página nueva.
+
+00:01:32.916 --> 00:01:38.356 align:middle
+Gracias a esto, arriba en la acción new,
+podemos decir this->createVoyageForm($voyage).
+
+00:01:39.366 --> 00:01:39.866 align:middle
+Copia eso...
+
+00:01:40.286 --> 00:01:44.726 align:middle
+porque necesitamos la línea
+exacta abajo en edit: Encantador.
+
+00:01:45.666 --> 00:01:48.076 align:middle
+De vuelta, ni siquiera necesitamos actualizar.
+
+00:01:48.406 --> 00:01:51.026 align:middle
+Abrimos el modal, guardamos y...
+
+00:01:51.576 --> 00:01:54.686 align:middle
+Ah, ¡es absolutamente encantador!
+
+00:01:55.146 --> 00:01:58.776 align:middle
+Se ha enviado y tenemos la
+respuesta dentro del modal.
+
+00:01:59.306 --> 00:01:59.746 align:middle
+Porque...
+
+00:02:00.046 --> 00:02:00.686 align:middle
+¡por supuesto!
+
+00:02:00.906 --> 00:02:02.566 align:middle
+Ese es el objetivo de un marco Turbo.
+
+00:02:03.056 --> 00:02:05.736 align:middle
+Mantiene la navegación dentro de sí mismo.
+
+00:02:06.626 --> 00:02:11.106 align:middle
+Antes de hablar de lo que ocurre en caso
+de éxito, quiero perfeccionar esto.
+
+00:02:11.736 --> 00:02:16.466 align:middle
+Mi segundo requisito para abrir el modal
+es que debe abrirse inmediatamente.
+
+00:02:17.556 --> 00:02:20.566 align:middle
+En la acción new, añade un sleep(2)...
+
+00:02:20.626 --> 00:02:22.886 align:middle
+para simular que nuestro
+sitio está siendo bombardeado
+
+00:02:22.886 --> 00:02:27.816 align:middle
+por extraterrestres que planean sus viajes de vacaciones
+de primavera: Cuando hagamos clic en el botón ahora...
+
+00:02:28.236 --> 00:02:29.246 align:middle
+no pasa nada.
+
+00:02:29.456 --> 00:02:34.176 align:middle
+No hay respuesta del usuario en absoluto
+hasta que finaliza la petición Ajax.
+
+00:02:34.466 --> 00:02:36.126 align:middle
+Eso no es suficiente.
+
+00:02:36.606 --> 00:02:40.946 align:middle
+En lugar de eso, quiero que el modal se abra
+inmediatamente con una animación de carga.
+
+00:02:42.266 --> 00:02:48.286 align:middle
+En el controlador del modal, añade un nuevo
+objetivo llamado loadingContent: Ésta es mi idea:
+
+00:02:48.966 --> 00:02:52.576 align:middle
+si quieres contenido de carga,
+definirás qué aspecto tiene
+
+00:02:52.576 --> 00:02:55.836 align:middle
+en Twig y establecerás este objetivo en él.
+
+00:02:56.436 --> 00:02:57.566 align:middle
+Lo haremos dentro de un momento.
+
+00:02:58.436 --> 00:03:01.826 align:middle
+En la parte inferior, crea un nuevo
+método llamado showLoading().
+
+00:03:03.516 --> 00:03:08.896 align:middle
+Si this.dialogTarget.open, es decir,
+si el diálogo ya está abierto,
+
+00:03:09.156 --> 00:03:12.006 align:middle
+no necesitamos mostrar la carga,
+así que devuelve. Si no, di
+
+00:03:13.016 --> 00:03:18.976 align:middle
+this.dynamicContentTarget -para
+nosotros, ese es el <turbo-frame>
+
+00:03:19.116 --> 00:03:22.586 align:middle
+en el que se cargará
+finalmente el contenido Ajax-
+
+00:03:23.746 --> 00:03:28.786 align:middle
+.innerHTML igual a
+this.loadingContentTarget.innerHTML:
+
+00:03:29.766 --> 00:03:31.656 align:middle
+Por último, añade ese objetivo.
+
+00:03:32.076 --> 00:03:37.166 align:middle
+En base.html.twig, después de dialog,
+añadiré un elemento template.
+
+00:03:37.566 --> 00:03:42.346 align:middle
+Sí, mi querido elemento template:
+es perfecto para esta situación
+
+00:03:42.556 --> 00:03:46.906 align:middle
+porque todo lo que haya dentro no será
+visible ni estará activo en la página.
+
+00:03:47.176 --> 00:03:49.476 align:middle
+Es una plantilla que podemos robar.
+
+00:03:50.026 --> 00:03:53.116 align:middle
+Añade un elemento
+data-modal-target="loadingContent".
+
+00:03:54.016 --> 00:03:57.486 align:middle
+Voy a pegar algo de contenido
+dentro: Aquí no hay nada especial:
+
+00:03:57.756 --> 00:04:01.526 align:middle
+sólo algunas clases de Tailwind con
+una animación de pulso muy chula.
+
+00:04:02.596 --> 00:04:03.836 align:middle
+Si probamos esto ahora...
+
+00:04:04.456 --> 00:04:05.766 align:middle
+¡no se carga el contenido!
+
+00:04:06.286 --> 00:04:09.766 align:middle
+Eso es porque nada está llamando
+al nuevo método showLoading().
+
+00:04:10.656 --> 00:04:13.936 align:middle
+En base.html.twig, busca el fotograma.
+
+00:04:15.056 --> 00:04:17.116 align:middle
+Lo dividiré en varias líneas.
+
+00:04:17.736 --> 00:04:23.876 align:middle
+Pensemos: en cuanto turbo-frame empiece a
+cargarse, queremos llamar a showLoading().
+
+00:04:24.516 --> 00:04:29.366 align:middle
+Afortunadamente, Turbo envía un evento
+cuando inicia una petición AJAX.
+
+00:04:29.646 --> 00:04:30.946 align:middle
+Y podemos escucharlo.
+
+00:04:31.616 --> 00:04:35.896 align:middle
+Añade un data-action para
+escuchar turbo:before-fetch-request
+
+00:04:36.746 --> 00:04:41.136 align:middle
+-así se llama el evento- y
+luego ->modal#showLoading:
+
+00:04:41.136 --> 00:04:44.636 align:middle
+Muy bien, ¡comprobemos el efecto!
+
+00:04:45.496 --> 00:04:47.016 align:middle
+Actualiza la página y...
+
+00:04:47.496 --> 00:04:49.576 align:middle
+¡es maravilloso!
+
+00:04:49.806 --> 00:04:52.896 align:middle
+Se abre al instante, vemos
+que se carga el contenido...
+
+00:04:53.136 --> 00:04:55.606 align:middle
+¡y se sustituye cuando termina el marco!
+
+00:04:56.046 --> 00:04:58.076 align:middle
+Me encanta cómo funciona esto.
+
+00:04:59.116 --> 00:05:05.046 align:middle
+Cuando esto llama a showLoading(), ese método
+pone el contenido en dynamicContentTarget.
+
+00:05:05.586 --> 00:05:10.336 align:middle
+Y... ¿recuerdas qué ocurre en el
+momento en que cualquier HTML entra ahí?
+
+00:05:10.836 --> 00:05:14.036 align:middle
+Nuestro controlador se da
+cuenta y abre el diálogo.
+
+00:05:14.366 --> 00:05:16.286 align:middle
+¡Eso es un gran trabajo en equipo!
+
+00:05:17.096 --> 00:05:20.766 align:middle
+Ya casi lo tenemos perfecto,
+¡pero no estoy satisfecho!
+
+00:05:21.406 --> 00:05:23.656 align:middle
+Mientras todavía tenemos el
+sleep, envía el formulario.
+
+00:05:24.486 --> 00:05:25.406 align:middle
+¡No ocurre nada!
+
+00:05:25.666 --> 00:05:27.906 align:middle
+No hay respuesta mientras se carga.
+
+00:05:28.746 --> 00:05:32.926 align:middle
+Por suerte para nosotros, ya hemos pasado
+por esto antes con otro marco Turbo.
+
+00:05:33.576 --> 00:05:41.876 align:middle
+Añade la clase aria-busy:opacity-50, y
+transition-opacity: Vuelvo a cargar...
+
+00:05:42.816 --> 00:05:45.956 align:middle
+clic, animación de carga y enviar.
+
+00:05:46.766 --> 00:05:50.126 align:middle
+¡Sí! La baja opacidad nos
+indica que algo está pasando.
+
+00:05:50.816 --> 00:05:56.896 align:middle
+Y con eso, eliminaré felizmente nuestro
+sleep: Vale, un último detalle que quiero
+
+00:05:56.896 --> 00:05:59.546 align:middle
+que quede bien: este relleno extra.
+
+00:06:00.206 --> 00:06:05.576 align:middle
+Existe porque el contenido de la página
+new tiene un elemento con m-4 y p-4.
+
+00:06:06.526 --> 00:06:08.156 align:middle
+Así que el modal tiene algo de relleno...
+
+00:06:08.466 --> 00:06:11.226 align:middle
+y el relleno extra proviene de esa página.
+
+00:06:12.476 --> 00:06:15.246 align:middle
+En la página, el margen y
+el relleno tienen sentido.
+
+00:06:15.246 --> 00:06:18.636 align:middle
+Viene de aquí, de new.html.twig.
+
+00:06:19.926 --> 00:06:21.926 align:middle
+Así que queremos esto
+en la página completa...
+
+00:06:21.926 --> 00:06:23.256 align:middle
+pero no en el modal.
+
+00:06:24.626 --> 00:06:27.376 align:middle
+Para ayudarnos a hacerlo, vamos
+a utilizar un truco de Tailwind.
+
+00:06:28.256 --> 00:06:32.146 align:middle
+En tailwind.config.js,
+añade una variante más.
+
+00:06:33.316 --> 00:06:41.436 align:middle
+Llámala modal, y actívala siempre que estemos
+dentro de un elemento dialog: Ahora, en new.html.twig,
+
+00:06:41.786 --> 00:06:44.466 align:middle
+mantén el margen y el relleno
+para la situación normal.
+
+00:06:44.856 --> 00:06:50.306 align:middle
+Pero si estamos en un modal,
+utiliza modal:m-0, y modal:p-0:
+
+00:06:51.576 --> 00:06:53.736 align:middle
+En la nueva página, esto no debería cambiar.
+
+00:06:54.636 --> 00:06:55.556 align:middle
+¡Se ve bien!
+
+00:06:56.426 --> 00:06:57.486 align:middle
+Pero en el modal...
+
+00:06:58.516 --> 00:07:00.266 align:middle
+esto es lo que queremos.
+
+00:07:00.266 --> 00:07:06.416 align:middle
+Nuestro sistema modal ahora se abre instantáneamente,
+carga el contenido con AJAX, podemos enviarlo
+
+00:07:06.416 --> 00:07:09.336 align:middle
+¡e incluso se cierra solo si tiene éxito!
+
+00:07:09.766 --> 00:07:13.586 align:middle
+Observa: rellena un propósito,
+selecciona un planeta...
+
+00:07:16.586 --> 00:07:18.956 align:middle
+y... ¡el modal se cerró!
+
+00:07:19.526 --> 00:07:20.916 align:middle
+¿Cómo? ¡Es genial!
+
+00:07:21.346 --> 00:07:24.156 align:middle
+La acción new redirige a la página índice.
+
+00:07:24.156 --> 00:07:31.636 align:middle
+Y como index.html.twig amplía la normal
+base.html.twig, sí que tiene un marco modal...
+
+00:07:31.876 --> 00:07:34.046 align:middle
+pero es el que está vacío
+en la parte inferior.
+
+00:07:34.626 --> 00:07:37.896 align:middle
+Eso hace que el turbo-frame
+de la página quede vacío.
+
+00:07:38.236 --> 00:07:42.766 align:middle
+Y gracias a nuestro controlador modal,
+nos damos cuenta y cerramos el diálogo.
+
+00:07:43.536 --> 00:07:49.096 align:middle
+Lo único que nos falta ahora, si estabas
+atento, ¡es la notificación del brindis!
+
+00:07:49.926 --> 00:07:55.126 align:middle
+Mañana hablaremos de cómo manejar el éxito
+cuando se envía un formulario dentro de un marco...
+
+00:07:55.486 --> 00:08:01.476 align:middle
+incluyendo hacer cosas chulas como añadir
+automáticamente la nueva fila a la tabla de esta página.
+
+00:08:02.096 --> 00:08:02.756 align:middle
+Hasta mañana.

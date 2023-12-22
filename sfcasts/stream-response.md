@@ -14,9 +14,11 @@ that is *entirely* filled with Turbo streams.
 Watch: remove the flash and *return* `$this->renderBlockView()`... except change
 it to `renderBlock()`. That does the same thing, but returns a `Response` object
 instead of a string. The last detail is `$request->setRequestFormat()`
-`TurboBundle::STREAM_FORMAT`.
+`TurboBundle::STREAM_FORMAT`:
 
-It's a bit techy, but this will set a `content-type` header on the response that
+[[[ code('d8dd6bfcaa') ]]]
+
+It's a bit techy, but this will set a `Content-Type` header on the response that
 tells Turbo:
 
 > Hey! This is not a normal full page response. I'm returning *just* a set of
@@ -40,7 +42,9 @@ When you decide to return a stream response, you are 100% responsible for
 updating *everything* on the page. So, in `new.html.twig`, down here,
 we need a couple more streams! Open `edit.html.twig` and steal the one that closes
 the modal. Pop that here.... then, from `_frameSuccessStreams.html.twig`, steal the
-stream that appends to the flash container.
+stream that appends to the flash container:
+
+[[[ code('79afcfa8f1') ]]]
 
 I think that's all we need! Give this another shot. Here's our toast notification
 finally from the *previous* submit. Create a new voyage... and ... save. That's it!

@@ -204,6 +204,10 @@ So we want to make sure that Tailwind *sees* those and outputs the CSS for them.
 The last step over on the docs is to tell our system to *use* this form theme by default.
 This happens over in `config/packages/twig.yaml`. I'll paste... then fix the indentation:
 
+***TIP
+Starting in version 0.4.0, use `@TalesFromADevFlowbite/form/default.html.twig`.
+***
+
 [[[ code('53a05536d6') ]]]
 
 That's it. Go back, refresh and eureka! In just over 10 minutes, we installed

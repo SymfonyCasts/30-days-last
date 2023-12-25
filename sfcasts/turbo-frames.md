@@ -43,7 +43,7 @@ over here.
 This means that each link inside a `<turbo-frame>` - whatever page it goes
 to - that page *must* have a matching `<turbo-frame>`.
 
-Copy this `<turbo-frame id="planet-info>` and then open `planet/show.html.twig`.
+Copy this `<turbo-frame id="planet-info">` and then open `planet/show.html.twig`.
 Put this around the content that we want to load into the sidebar. I don't really
 want the `h1`... so put it around this table. Add the closing `</turbo-frame>`
 at the bottom:

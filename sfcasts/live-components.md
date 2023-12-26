@@ -84,7 +84,7 @@ This will return an array... which will really be an array of `Voyage[]`. Inside
 `return $this->voyageRepository->findBySearch()`. That's the same method we're using
 on the homepage. Pass `null`, an empty array, and limit to 10 results.
 
-The search query isn't dynamic yet, but we *do* now have a `voyage()` method that
+The search query isn't dynamic yet, but we *do* now have a `voyages()` method that
 we can use in the template. I'll start with a bit of styling, then it's
 normal twig code: `{% for voyage in this` - that's our component object -
 `.voyages`. Add `endfor`, and in the middle, I'll paste that in.

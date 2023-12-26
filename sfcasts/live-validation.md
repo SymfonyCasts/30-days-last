@@ -1,3 +1,0 @@
-# Live Validation
-
-Coming soon...

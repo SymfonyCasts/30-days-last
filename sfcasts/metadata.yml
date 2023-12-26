@@ -26,7 +26,6 @@ chapters:
     - twig-component
     - modal-component
     - live-components
-    - live-validation
-    - dynamic-forms
+    - live-forms
     - testing
     - performance

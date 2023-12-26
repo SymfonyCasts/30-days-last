@@ -170,7 +170,7 @@ And we can do that with a trick from Turbo. In `base.html.twig`,
 on the modal, add `data-turbo-permanent`.
 
 That tells Turbo to *keep* this on the page when it navigates. When you use this,
-it needs an id: `global-search`.
+it needs an id.
 
 Let's see how this feels. Open the search, type something, click off, go to the
 homepage and open it again. So darn cool!

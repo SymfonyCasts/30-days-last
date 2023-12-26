@@ -131,6 +131,16 @@ Though... if we close, I still can't scroll! We need to *remove* that class.
 To do that, copy the `open()` method, paste and name it `close()`. To close the
 dialog, call `close()`... then remove `overflow-hidden`:
 
+***TIP
+To code more defensively (Firefox may need this), use:
+
+```js
+if (this.hasDialogTarget) {
+    this.dialogTarget.close();
+}
+```
+***
+
 [[[ code('f41a52c94b') ]]]
 
 I like it! There's just one tiny problem: we're not *calling* the `close()` method!

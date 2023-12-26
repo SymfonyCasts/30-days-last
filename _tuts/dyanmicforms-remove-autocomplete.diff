@@ -1,0 +1,13 @@
+diff --git a/src/Form/VoyageType.php b/src/Form/VoyageType.php
+index 76b445fb..5e86fac3 100644
+--- a/src/Form/VoyageType.php
++++ b/src/Form/VoyageType.php
+@@ -20,7 +20,7 @@ class VoyageType extends AbstractType
+             ->add('planet', null, [
+                 'choice_label' => 'name',
+                 'placeholder' => 'Choose a planet',
+-                'autocomplete' => true,
++                //'autocomplete' => true,
+             ])
+         ;
+     }

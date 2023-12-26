@@ -1,5 +1,5 @@
 diff --git a/src/Form/VoyageType.php b/src/Form/VoyageType.php
-index 76b445fb..7adc8a8c 100644
+index 5e86fac3..4f464c91 100644
 --- a/src/Form/VoyageType.php
 +++ b/src/Form/VoyageType.php
 @@ -2,16 +2,21 @@
@@ -26,7 +26,7 @@ index 76b445fb..7adc8a8c 100644
              ->add('leaveAt', DateType::class, [
 @@ -22,6 +27,18 @@ class VoyageType extends AbstractType
                  'placeholder' => 'Choose a planet',
-                 'autocomplete' => true,
+                 //'autocomplete' => true,
              ])
 +            ->addDependent('wormholeUpgrade', ['planet'], function (DependentField $field, ?Planet $planet) {
 +                if (!$planet || $planet->isInMilkyWay()) {

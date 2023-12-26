@@ -42,7 +42,7 @@ So *if* we pass the block, render it inside the `<template>`.
 
 Back in `base.html.twig`, anywhere, define that block. But instead of the normal
 `{% block %}` tag - which *would* work - when you're inside a Twig component,
-you can use a special `<twig:block>` syntax with `name="loading_content"`.
+you can use a special `<twig:block>` syntax with `name="loading_template"`.
 Then, paste.
 
 We just moved around a *lot* of stuff. And yet... the existing modal still works!

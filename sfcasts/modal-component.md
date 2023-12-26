@@ -61,7 +61,7 @@ would load that page into the modal.
 
 But since we've done that before, let's try something different. Delete the `href`,
 change this to a `button`, remove the `data-turbo-frame` attribute... and change
-the red colors to yellow.
+the yellow colors to red.
 
 Let's go check out the look. Nice!
 

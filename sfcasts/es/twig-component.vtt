@@ -1,0 +1,605 @@
+WEBVTT
+
+00:00:01.086 --> 00:00:06.676 align:middle
+Hoy vamos a hablar de una de mis nuevas
+bibliotecas PHP favoritas: Twig Components.
+
+00:00:07.056 --> 00:00:09.486 align:middle
+Hacen más o menos lo que su nombre indica.
+
+00:00:09.486 --> 00:00:12.496 align:middle
+Pero vamos a sumergirnos y verlos en acción.
+
+00:00:12.496 --> 00:00:15.006 align:middle
+Busca tu terminal e instala el paquete con:
+
+00:00:15.006 --> 00:00:21.576 align:middle
+composer require symfony/ux-twig-component
+Twig Components es una biblioteca PHP pura...
+
+00:00:21.786 --> 00:00:28.166 align:middle
+y una forma fácil de pensar en ello es: una forma
+más elegante y potente de hacer un Twig include().
+
+00:00:29.006 --> 00:00:33.886 align:middle
+En nuestro navegador, abre la página de edición en una
+pestaña nueva para que podamos ver la página completa.
+
+00:00:34.526 --> 00:00:38.276 align:middle
+A continuación, abre el formulario
+para esto: _form.html.twig.
+
+00:00:39.326 --> 00:00:41.896 align:middle
+Cuando usas Tailwind, crear un botón es...
+
+00:00:42.156 --> 00:00:43.526 align:middle
+un montón de trabajo.
+
+00:00:43.986 --> 00:00:46.276 align:middle
+Los Componentes Twig nos
+ayudarán a centralizarlo.
+
+00:00:46.276 --> 00:00:51.276 align:middle
+Como éste es nuestro primer Componente
+Twig, seamos perezosos y generémoslo.
+
+00:00:51.916 --> 00:00:56.136 align:middle
+Ejecuta: php bin/console
+make:twig-component Llámalo Botón...
+
+00:00:56.596 --> 00:00:58.676 align:middle
+y di no a un componente vivo.
+
+00:00:59.036 --> 00:01:01.336 align:middle
+Hablaremos de eso dentro de 2 días.
+
+00:01:02.316 --> 00:01:03.596 align:middle
+Esto creó dos archivos.
+
+00:01:04.016 --> 00:01:08.436 align:middle
+El primero vive en
+src/Twig/Components/Button.php: Es...
+
+00:01:08.646 --> 00:01:10.276 align:middle
+una clase vacía.
+
+00:01:10.586 --> 00:01:12.066 align:middle
+¡Y ni siquiera se necesita todavía!
+
+00:01:12.506 --> 00:01:17.846 align:middle
+De hecho, podríamos borrarla y la primera
+mitad de hoy funcionaría bien sin ella.
+
+00:01:18.486 --> 00:01:19.956 align:middle
+Volveremos sobre esto más adelante.
+
+00:01:20.656 --> 00:01:24.396 align:middle
+Lo más importante es:
+templates/components/Button.html.twig.
+
+00:01:24.936 --> 00:01:27.026 align:middle
+Una plantilla Twig de
+aspecto bastante aburrido.
+
+00:01:27.656 --> 00:01:33.596 align:middle
+Cambia el div para que sea un <button>, y
+dentro diré: "¡Presióname!": Para usar esto,
+
+00:01:33.746 --> 00:01:38.356 align:middle
+en _form.html.twig, di {{
+component('Button') }}:
+
+00:01:39.636 --> 00:01:41.886 align:middle
+Si hiciéramos eso, funcionaría.
+
+00:01:42.316 --> 00:01:44.356 align:middle
+Obtendríamos un botón que
+diría: "¡Presióname!".
+
+00:01:45.076 --> 00:01:47.486 align:middle
+Una de las primeras cosas interesantes
+de los Componentes Twig es
+
+00:01:47.486 --> 00:01:50.086 align:middle
+que puedes pasarles atributos.
+
+00:01:50.796 --> 00:01:55.926 align:middle
+Como segundo argumento, pasa
+formnovalidate a true, luego class...
+
+00:01:56.386 --> 00:01:57.916 align:middle
+copia esta larga lista de clases...
+
+00:01:58.136 --> 00:02:03.816 align:middle
+y pégala: Cuando hacemos
+eso, obtenemos un error...
+
+00:02:03.816 --> 00:02:05.676 align:middle
+porque se me olvidó la coma de cierre.
+
+00:02:06.456 --> 00:02:09.736 align:middle
+Mejor. Como decía, cuando hacemos eso...
+
+00:02:10.016 --> 00:02:13.006 align:middle
+¡vemos un botón con esas clases de Tailwind!
+
+00:02:14.086 --> 00:02:19.226 align:middle
+Esto es gracias a una genial variable attributes que
+tenemos en cualquier plantilla de Componente Twig.
+
+00:02:19.666 --> 00:02:24.096 align:middle
+Recoge lo que pasamos al componente
+-llamado props - y lo renderiza.
+
+00:02:25.026 --> 00:02:27.226 align:middle
+Una de mis características
+favoritas de los Componentes Twig es
+
+00:02:27.226 --> 00:02:31.706 align:middle
+que tiene una sintaxis HTML
+opcional, pero maravillosa.
+
+00:02:31.706 --> 00:02:36.496 align:middle
+En lugar de la función Twig,
+podemos decir <twig:Button>.
+
+00:02:37.206 --> 00:02:40.946 align:middle
+Ahora los props se pasan
+como atributos HTML normales.
+
+00:02:41.476 --> 00:02:49.226 align:middle
+Los copiaré de la etiqueta real <button>
+y los pegaré: ¿Qué aspecto tiene?
+
+00:02:50.486 --> 00:02:51.996 align:middle
+¡Lo mismo de siempre!
+
+00:02:52.416 --> 00:02:57.206 align:middle
+Esta sintaxis especial proviene de los Componentes
+Twig y sirve para representar Componentes Twig.
+
+00:02:57.246 --> 00:03:01.906 align:middle
+A algunas personas no les gusta esta
+sintaxis, mientras que a otras les encanta.
+
+00:03:02.416 --> 00:03:03.346 align:middle
+Elige la que quieras.
+
+00:03:03.866 --> 00:03:07.606 align:middle
+A mí me gusta porque parece
+un elemento HTML nativo.
+
+00:03:07.886 --> 00:03:12.106 align:middle
+Y si alguna vez has utilizado un framework
+front-end como React, te parecerá natural.
+
+00:03:12.526 --> 00:03:15.386 align:middle
+Pero, todavía tenemos
+codificado "¡Presióname!
+
+00:03:15.386 --> 00:03:17.646 align:middle
+codificado. Eso no es muy útil.
+
+00:03:17.646 --> 00:03:21.226 align:middle
+Para hacerlo dinámico,
+podemos utilizar un bloque.
+
+00:03:21.586 --> 00:03:24.176 align:middle
+Así es, un bloque Twig a la antigua usanza A
+
+00:03:24.566 --> 00:03:30.446 align:middle
+éste lo he llamado content: Para pasar ese
+bloque, copia la etiqueta del botón de abajo,
+
+00:03:31.226 --> 00:03:35.226 align:middle
+cámbiala por una etiqueta
+de no autocierre, pégala...
+
+00:03:35.596 --> 00:03:38.516 align:middle
+y añade la etiqueta de cierre: Y...
+
+00:03:39.156 --> 00:03:41.176 align:middle
+¡funciona! ¿¡Qué!?
+
+00:03:42.006 --> 00:03:47.876 align:middle
+Cuando pones contenido entre las etiquetas HTML del
+componente Twig, se convierte en un bloque llamado content.
+
+00:03:48.296 --> 00:03:49.996 align:middle
+Eso ya está incorporado.
+
+00:03:50.596 --> 00:03:53.416 align:middle
+Si también tuvieras otros bloques
+en tu componente y necesitaras
+
+00:03:53.416 --> 00:03:56.226 align:middle
+pasarlos también, puedes hacerlo.
+
+00:03:56.226 --> 00:04:00.266 align:middle
+Y los especificarías utilizando la
+sintaxis normal de block, endblock.
+
+00:04:00.576 --> 00:04:04.666 align:middle
+Pero obtienes gratis este bloque content,
+que tiene un aspecto fantástico.
+
+00:04:04.776 --> 00:04:09.126 align:middle
+Celébralo eliminando nuestro
+antiguo botón HTML: Pero recuerda
+
+00:04:09.436 --> 00:04:12.136 align:middle
+el objetivo es que los botones
+sean más fáciles de crear.
+
+00:04:12.496 --> 00:04:15.396 align:middle
+Y tener que especificar
+todas estas clases es...
+
+00:04:15.636 --> 00:04:18.056 align:middle
+¡enteramente el problema
+que queremos solucionar!
+
+00:04:18.886 --> 00:04:23.566 align:middle
+Cópialos y elimina por completo el atributo
+class: En la plantilla del componente,
+
+00:04:23.776 --> 00:04:27.126 align:middle
+podríamos añadir un atributo
+class justo aquí y pegarlo.
+
+00:04:27.616 --> 00:04:35.216 align:middle
+Pero en lugar de eso, llama a attributes.defaults,
+pásale un array con class: y luego la cadena de clase:
+
+00:04:36.256 --> 00:04:39.846 align:middle
+Esto nos permitirá añadir más clases
+cuando utilicemos este componente.
+
+00:04:40.286 --> 00:04:41.286 align:middle
+Lo haremos en un minuto.
+
+00:04:41.836 --> 00:04:42.756 align:middle
+Sobre el sitio...
+
+00:04:43.166 --> 00:04:44.856 align:middle
+¡sigue teniendo un aspecto estupendo!
+
+00:04:45.656 --> 00:04:52.196 align:middle
+Ahora supongamos que, en esta situación,
+necesitamos una clase extra - hover:animate-wiggle -
+
+00:04:52.556 --> 00:04:57.206 align:middle
+para que nuestro botón sea más divertido: Se trata
+de una animación CSS personalizada que he inventado...
+
+00:04:57.516 --> 00:05:01.636 align:middle
+así que abajo en tailwind.config.js,
+pegaré el wiggle...
+
+00:05:01.986 --> 00:05:06.926 align:middle
+y su fotograma clave: Vale,
+¡actualiza y pasa el ratón!
+
+00:05:07.466 --> 00:05:08.276 align:middle
+Sin sentido...
+
+00:05:08.356 --> 00:05:09.396 align:middle
+¡pero tan divertido!
+
+00:05:09.856 --> 00:05:13.246 align:middle
+Lo importante es que vemos
+las clases normales que
+
+00:05:13.246 --> 00:05:16.366 align:middle
+vienen de la plantilla del
+componente y la clase extra al final.
+
+00:05:17.056 --> 00:05:20.066 align:middle
+¿Podríamos reutilizar ahora el
+componente para el botón de borrar?
+
+00:05:20.726 --> 00:05:21.306 align:middle
+¡Intentémoslo!
+
+00:05:21.946 --> 00:05:24.756 align:middle
+Éste vive en _delete_form.html.twig.
+
+00:05:25.926 --> 00:05:28.706 align:middle
+Cámbialo por <twig: gran "B" Button.
+
+00:05:29.456 --> 00:05:32.476 align:middle
+Entonces la mayoría de estas
+clases ya están en el componente.
+
+00:05:32.736 --> 00:05:36.376 align:middle
+Sólo necesitamos las
+relacionadas con el color: Y...
+
+00:05:37.216 --> 00:05:39.076 align:middle
+¡funciona! Pero...
+
+00:05:39.246 --> 00:05:40.996 align:middle
+un poco por accidente.
+
+00:05:41.686 --> 00:05:46.636 align:middle
+Si inspeccionamos ese
+elemento, tiene el bg-green-600
+
+00:05:46.636 --> 00:05:50.546 align:middle
+de la plantilla del componente
+Twig y el bg-red-600.
+
+00:05:51.076 --> 00:05:51.616 align:middle
+Podrías pensar...
+
+00:05:51.806 --> 00:05:52.606 align:middle
+¡que tiene sentido!
+
+00:05:53.026 --> 00:05:56.146 align:middle
+El último anula al anterior, ¿no?
+
+00:05:56.966 --> 00:05:58.356 align:middle
+En realidad, no.
+
+00:05:58.686 --> 00:06:02.556 align:middle
+No hay ninguna regla que diga
+que ésta deba ganar a ésta
+
+00:06:02.786 --> 00:06:04.686 align:middle
+o que la verde deba ganar a la roja.
+
+00:06:05.386 --> 00:06:07.306 align:middle
+La razón por la que gana el rojo es...
+
+00:06:07.556 --> 00:06:15.006 align:middle
+¡suerte! Por casualidad, cuando Tailwind
+generó el archivo CSS, el bg-red-600 se
+
+00:06:15.226 --> 00:06:18.176 align:middle
+generó, aparentemente,
+más tarde en el archivo.
+
+00:06:18.446 --> 00:06:19.726 align:middle
+Así que está ganando.
+
+00:06:20.636 --> 00:06:25.686 align:middle
+En Tailwind, debes evitar competir entre clases
+porque el resultado no está garantizado.
+
+00:06:26.426 --> 00:06:29.976 align:middle
+Lo que realmente queremos hacer es
+crear distintas variantes del botón.
+
+00:06:29.976 --> 00:06:35.286 align:middle
+Me gustaría poder decir algo
+como variant="danger": Y...
+
+00:06:35.286 --> 00:06:41.846 align:middle
+en la otra plantilla, variant="success":
+Ahora mismo, sin sorpresa,
+
+00:06:41.916 --> 00:06:44.836 align:middle
+eso añade un atributo variant="danger".
+
+00:06:45.016 --> 00:06:49.106 align:middle
+Eso no es lo que quiero: Quiero
+utilizar este valor en mi componente
+
+00:06:49.106 --> 00:06:51.296 align:middle
+para renderizar condicionalmente
+diferentes clases.
+
+00:06:51.856 --> 00:06:55.536 align:middle
+Aquí es donde finalmente
+nuestra clase PHP resulta útil.
+
+00:06:56.716 --> 00:07:01.866 align:middle
+Para convertir una proposición que pasamos a
+nuestro componente de un atributo a una variable,
+
+00:07:02.156 --> 00:07:07.476 align:middle
+podemos añadir una propiedad pública con el
+mismo nombre: public string $variant = 'default';:
+
+00:07:08.366 --> 00:07:10.976 align:middle
+Y ahora que tenemos una propiedad
+pública llamada variant,
+
+00:07:11.316 --> 00:07:14.206 align:middle
+obtenemos una variable local
+dentro de Twig llamada variant.
+
+00:07:14.636 --> 00:07:17.936 align:middle
+Mira {{ variant }}: Y ahora...
+
+00:07:18.456 --> 00:07:20.416 align:middle
+¡lo vemos en los dos sitios!
+
+00:07:20.676 --> 00:07:23.366 align:middle
+Peligro aquí arriba, éxito allí abajo.
+
+00:07:24.176 --> 00:07:29.446 align:middle
+Vale: ahora necesitamos utilizar la variable variant
+para renderizar condicionalmente diferentes clases.
+
+00:07:29.716 --> 00:07:30.246 align:middle
+Necesitamos...
+
+00:07:30.376 --> 00:07:35.106 align:middle
+una especie de sentencia switch-case para
+asignar cada variante a un conjunto de clases.
+
+00:07:35.766 --> 00:07:37.356 align:middle
+Escribir algo así en Twig...
+
+00:07:37.556 --> 00:07:38.626 align:middle
+no es muy divertido.
+
+00:07:39.196 --> 00:07:44.606 align:middle
+Pero recuerda: tenemos una clase PHP de
+componente Twig vinculada a esta plantilla.
+
+00:07:44.926 --> 00:07:46.696 align:middle
+¡Y podemos añadir métodos allí!
+
+00:07:47.456 --> 00:07:52.916 align:middle
+Pondré una nueva función pública llamada
+getVariantClasses(): Tiene una sentencia match...
+
+00:07:53.116 --> 00:07:56.966 align:middle
+que, basándose en $this->variant,
+devuelve un conjunto diferente de clases.
+
+00:07:58.096 --> 00:08:00.346 align:middle
+Uno de los superpoderes
+de los componentes Twig es
+
+00:08:00.346 --> 00:08:07.556 align:middle
+que este objeto Button está disponible dentro de la
+plantilla del componente como una variable llamada this.
+
+00:08:07.556 --> 00:08:12.786 align:middle
+Eso significa que podemos ir al final de la lista
+class, eliminar las específicas de color, y
+
+00:08:12.986 --> 00:08:20.156 align:middle
+luego concatenarlas con una ~ y
+this.variantClasses: Ve a comprobarlo.
+
+00:08:21.586 --> 00:08:23.666 align:middle
+¡Sí! Tenemos verde aquí abajo...
+
+00:08:23.936 --> 00:08:25.546 align:middle
+¡y rojo ahí arriba!
+
+00:08:26.386 --> 00:08:31.136 align:middle
+Para comprobar realmente que funciona, en el
+botón de borrar, elimina las clases adicionales:
+
+00:08:31.906 --> 00:08:33.526 align:middle
+Me encanta el aspecto que
+tiene en el código...
+
+00:08:34.026 --> 00:08:35.116 align:middle
+y en el sitio.
+
+00:08:36.236 --> 00:08:37.396 align:middle
+Aunque, un detalle.
+
+00:08:38.156 --> 00:08:42.566 align:middle
+Tailwind escanea nuestros archivos fuente, encuentra
+todas las clases Tailwind que estamos utilizando
+
+00:08:42.756 --> 00:08:45.206 align:middle
+y las incluye en el archivo CSS final.
+
+00:08:45.696 --> 00:08:50.706 align:middle
+Y como ahora estamos incluyendo clases dentro de
+PHP, tenemos que asegurarnos de que Tailwind las vea.
+
+00:08:51.246 --> 00:08:55.546 align:middle
+En tailwind.config.js, en la parte
+superior, pegaré una línea más
+
+00:08:55.546 --> 00:09:01.526 align:middle
+para que escanee las clases PHP de nuestro componente
+Twig: Vale, ya casi hemos terminado por hoy,
+
+00:09:01.756 --> 00:09:05.646 align:middle
+pero quiero celebrarlo y utilizar el
+nuevo componente en un punto más:
+
+00:09:05.966 --> 00:09:09.156 align:middle
+en la página de índice del viaje,
+para el botón "Nuevo viaje".
+
+00:09:10.126 --> 00:09:11.916 align:middle
+Abre index.html.twig...
+
+00:09:13.256 --> 00:09:15.076 align:middle
+cambia esto por un <twig:Button>...
+
+00:09:16.186 --> 00:09:18.546 align:middle
+entonces podremos eliminar
+la mayoría de estas clases.
+
+00:09:20.616 --> 00:09:25.446 align:middle
+Creo que la negrita es específica
+de este punto: Cuando actualizamos...
+
+00:09:25.846 --> 00:09:26.806 align:middle
+¡se renderiza!
+
+00:09:27.456 --> 00:09:28.656 align:middle
+Aunque... cuando hago clic...
+
+00:09:28.956 --> 00:09:29.856 align:middle
+¡no pasa nada!
+
+00:09:30.476 --> 00:09:36.036 align:middle
+Probablemente hayas visto por qué:
+ahora es un botón, no una etiqueta a.
+
+00:09:36.486 --> 00:09:40.666 align:middle
+No pasa nada: podemos hacer que nuestro
+componente sea un poco más flexible.
+
+00:09:41.796 --> 00:09:49.466 align:middle
+En Button.php, añade otra propiedad: string
+$tag por defecto button: Luego, en la plantilla,
+
+00:09:50.756 --> 00:09:54.296 align:middle
+utiliza {{ tag }} para la etiqueta
+inicial y la etiqueta final:
+
+00:09:54.356 --> 00:10:02.876 align:middle
+Termina en index.html.twig: pasa
+a tag="a": Ahora por aquí...
+
+00:10:03.346 --> 00:10:04.536 align:middle
+cuando hagamos clic...
+
+00:10:05.206 --> 00:10:07.096 align:middle
+¡ya está! ¡Ya está!
+
+00:10:07.246 --> 00:10:09.846 align:middle
+Espero que te gusten los
+componentes Twig tanto como a mí.
+
+00:10:10.246 --> 00:10:12.056 align:middle
+¡Pero pueden hacer aún más! No
+
+00:10:12.056 --> 00:10:16.366 align:middle
+te he contado cómo puedes
+prefijar cualquier atributo con :
+
+00:10:16.366 --> 00:10:20.366 align:middle
+para pasar variables o expresiones
+Twig dinámicas a un componente.
+
+00:10:21.326 --> 00:10:25.266 align:middle
+Tampoco hemos hablado de que las clases
+PHP de los componentes son servicios.
+
+00:10:25.646 --> 00:10:32.196 align:middle
+Sí, puedes añadir una función __construct(),
+autoconectar otros servicios, como VoyageRepository,
+
+00:10:32.486 --> 00:10:35.696 align:middle
+y luego utilizarlos para
+proporcionar datos a tu plantilla...
+
+00:10:36.116 --> 00:10:39.906 align:middle
+haciendo que todo el componente
+sea independiente y autosuficiente.
+
+00:10:40.236 --> 00:10:42.146 align:middle
+Es una de mis funciones favoritas.
+
+00:10:43.026 --> 00:10:47.636 align:middle
+Mañana vamos a seguir aprovechando los
+componentes Twig para crear un componente modal...
+
+00:10:47.986 --> 00:10:51.846 align:middle
+y veremos lo fácil que es
+utilizar modales cuando queramos.

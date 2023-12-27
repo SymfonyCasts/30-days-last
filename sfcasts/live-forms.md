@@ -1,7 +1,204 @@
 # Real-Time Validation & Dependent Form Fields
 
-Coming soon...
+For day 28, I want to show you one of the most common ways that people are using
+Live Components: forms. Because Live Components have this power to reload as
+you type, they give us interesting possibilities with forms, like real-time validation!
+So here's today's goal: convert the Voyage form into a Live Component and *see*
+some cool real-time validation for ourselves!
 
-For day 28, I want to show you one of the most common ways that people are using live components, forms. So because live components have this property of reloading as you type into them, gives us really interesting possibilities with forms. For example, real-time validation. So here's the goal. We are going to convert the Voyage form into a live component and see if we get real-time validation working. So first, before we think about the live component at all. So first, we already have a controller set up that takes care of creating our Voyage form and handling the submit. So what we're going to do is just wrap this form inside of a live component so that as we type into our form, it's going to re-render our form. But ultimately, when we save it, it's going to save like normal to our controller. So step one is forget about live components. Let's just convert the form into a twig component. So in this case, I know I am going to need a PHP class. So I'm going to create a new class here called Voyage form and make it a twig component by saying as twig components. Perfect. The form itself lives in templates Voyage underscore form dot HTML twig. And as you can see here, we already have a form variable, which is what we're rendering. So when we render our twig component, we're going to want to pass that into our component. So in the Voyage form class, add a public property for this public form view form, because form view is the type of object that your form variable is inside of a template. Then in templates components, let's create a, the template for this voyage form dot HTML dot twig. And I'll copy the entire form, paste it into here. And then the underscore form that HTML twig it's simple, right? Twig voyage form. Boom. And over here, when we, when we refresh, we get variable form does not exist. So let me check and see what I did wrong here. Because even though I have the property on my class, I forgot to pass it in my bad colon form equals form now got it. So it renders the exact same way. All right. Now inside of our template, I do want to remember to render my attributes variable.  The easiest way to do that is actually to wrap this in a div and say curly curly attributes right there. I'll put the closing tag and then we will indent the entire form inside of it. Awesome. So it's a twig component. It doesn't really do anything yet. It submits like normal. Awesome. Now the goal with the live component is that as I type into here, I want the live components to automatically take all the fields in my form, send them to the live component via an Ajax call. The live component will then submit these values into the form and then rerender the form. It's actually a little bit more of a complex use case than the normal use case of live components, which we saw when we built our search component. So to help this kind of complex form submitting stuff, we have a trait that we can use. So in our voyage form class, first, I'm going to convert this to a live component by saying as a live component, and then using the default action trait. Now because I wanted to bind this component to a form object, we can say use component with form trait. And when we do that, we don't need this public form property anymore because that lives inside the trait. Now the one requirement when you use this trait is we're going to need to implement a new method. So go to code generate, implement methods and generate the one we need called instantiate form. So this is a little strange at first, but remember, as we type into our form, it's going to take these values, send them back to our live component, and our live component actually needs to submit these into our form object so it can re-render it. So on the Ajax call, our live component needs to be able to get our form object and submit the values into it. To get the form object, it's going to call instantiate form. To get the logic for this, in voyage controller, all the way at the bottom, copy the guts of create voyage form, and then paste them here. I'll hit okay to add the two use statements. Awesome. Now there's just two, one problem here. There's no create form method inside of our class and there's no generate URL method.  However, it's kind of a crazy cool thing. Components are kind of actually symphony controllers behind the scenes. And so what we can do is extend abstract controller. That's totally allowed and that totally fixes our problems, gives us access to all those shortcut methods that we know and love. All right, check out the result here. I'm going to go over here. When I type, notice nothing happens. In this case, it's waiting for us to get off of the field. And as soon as we do, we'll see an Ajax request fire down here. Watch. Boom. See it right there. That actually sent the data back, submitted that form and re-rendered the form. I can prove this because if I clear out this field and hit tab, it triggers the validation error on that field. Type something in again, tab, it goes away. Now the really cool part is that our planet field down here, it's also required. I have validation inside of symphony to require this field, but the live component system is smart. It's smart enough to know that the user hasn't actually changed this field yet. So it shouldn't show the validation error for it. Watch as soon as I do select a field and then clear that field. Now, when it re-renders, it shows the error. And this also works for our edit form. I go over here and hit edit and clear out the field. That works as well. Now, one little thing I want to point out here is in instantiate form, we're always instantiating a new voyage object. There's never a voyage variable. So what this means is when we type into this field and it sends back an Ajax request, when it creates the form, it's creating the form with a brand new voyage object. And that's actually okay because it creates that new voyage object, but then it submits all this data onto it. So when it renders the form, it renders it correctly. However, one of the things you can do with live components is you can actually have this form submit directly into the live component. We're not going to do that but if we did do that in this case, the voyage object would always be a new object. And so it would always insert a new row into the database.  So even though this works, it's kind of a weird thing that when we're editing the form and then Ajax request is sent, it's always creating a form behind the scenes with a new voyage object instead of the existing voyage object. So what I want to do here is pass the voyage object into our components if there is one. So here's how we do this. We're going to get a public nullable voyage initial form data property. And then above this, to make the component system remember this value through all of its Ajax requests, we're going to add live prop that makes that data kind of persistent on this component. And then down here, if we'll change this to voyage equals this arrow initial form data else new voyage. Then finally we can pass in this initial form data by saying colon initial form data equals voyage, which is a twig variable that we already have in this case. So we won't notice a difference here, but behind the scenes when we hit edits and we change this field, when it sends that Ajax request, it's properly creating a form object now with this existing voyage object bound to it. It's the more proper way to set things up. So awesome though, right? Just by having our form class rendered inside of a live component, we get this real time validation for free. You can put that anywhere you want. All right, I'm going to tackle one more form problem today, a form problem that might be the most painful symphony form situation.
+We already have a controller that takes care of creating the Voyage form and
+handles the submit. What *we're* going to do is wrap the frontend part of the form
+inside a Live Component so that as we type, it re-renders. But ultimately,
+when we save, it'll save like normal through the controller.
 
-On this form, if the planet is not in the Milky Way, I want to render a new dropdown here for an optional wormhole upgrade. So this is the classic dependent form field problem. It's hard to set up inside of Symfony because you need a bunch of form events, and it's also hard to set up on the front end because when you change this field, you need to use Ajax to re-render the form and then render the field here if it's needed. So that second part though, that's taken care of. Symfony Live Components is really good at re-rendering the form when things happen. And for that first part, there's now a library that makes this much easier. This is created by us at SymfonyCast because this problem drove me crazy, and the solution is beautiful. And I do want to give a hat tip to Ben Davies who helped me figure this out. So copy the composer require line, spin over, and run that to get this installed. And using this is really nice. Find your form class, so source form, voyage type, and we're going to use decoration. So right at the top, say builder equals new dynamic form builder and pass in builder. This dynamic form builder has all the same methods, but it has one new method down here called add dependent. Now one other thing I'm going to do here before I fill that out is I'm going to comment out the autocomplete true. Right now there's a bug with the autocomplete system in Live Components where it doesn't always select the right value. We'll fix that soon, but I want to kind of get that out of the way here so we can see this system working properly. Now add dependent takes three arguments. The first is the name of your new field. For us it's going to be wormhole upgrade. The second argument is an array of all the fields that we're dependent on. So we're dependent on the planet field. So I'll press, I'll pass planet inside of an array. And the last argument here is going to be a callback function, and this is going to take a number of arguments. The first is always going to be a dependent field argument. We'll see how that's used in a second.  Now the rest of the arguments are going to be the values of all of the dependent fields. So because we depend only on the one planet field here, the callback, the next argument callback will be a nullable planet, planet argument. Inside of here, I'll code defensively. So if we don't have a planet because the user hasn't selected one yet, or the planet is in the Milky Way, just return. In this case, it means there won't be a wormhole upgrade field at all. Else we'll add one by saying field arrow add. Now this add method here is basically the same as this add method up here, except that you don't need to pass the name of the field because it's already, we already pass it here. So we can skip straight to the second argument, which is the type. So we'll pass choice type, colon colon class, and we'll pass the options to this. And we need choices with yes set to true and no set to false. That's it. All right, go check out the results. Back on our site, refresh, I'll edit. Let's change to a planet that has, that's not in our solar system. And there it is. You see that? It just pops right there. If we go back to another one, gone. If we go back to this one, it's there. We can hit save. When we edit it again, it's still there. It just works. All right, tomorrow, we've done a lot of really cool, fancy stuff in this tutorial. We need to talk about how we can test this stuff.
+## Moving the Form into a Twig Component
+
+For step one, forget about live components: let's just convert the form rendering
+into a Twig Component. In this case, I know we're going to need a PHP class, so
+create a new one called `VoyageForm` and make it a Twig Component with
+`#[AsTwigComponent]`.
+
+Perfect! The form itself lives in `templates/voyage/_form.html.twig` and uses
+a `form` variable, which we'll need to pass *into* the Twig component.
+
+In the `VoyageForm` class, add a public property for this: `public FormView $form`,
+because `FormView` is the object type for the `form` variable.
+
+Next, in `templates/components/`, create the component template: `VoyageForm.html.twig`.
+Copy the entire form, paste it here.... and then in `_form.html.twig`, it's simple:
+`<twig:VoyageForm />`.
+
+And over at the browser... bah! We get:
+
+> Variable `form` does not exist.
+
+Let's think about this. We *do* have a public property in the component class called
+`form`... so we *should* have a local variable with that name. *But*, the property
+is uninitialized because I forgot to pass in that value. My bad! Pass
+`:form="form"` - using `:` so that value - `form` - is Twig code: that's the
+`form` variable.
+
+And now... got it! Before we keep going, inside the template, remember to render
+the `attributes` variable. The easiest is to wrap this in a `div` and say
+`{{ attributes }}`. I'll put the closing tag... then indent the entire form.
+
+So the form rendering is now a Twig component. But to give it *behavior*, we
+need a Live Component.
+
+## LiveComponent & Symfony Forms
+
+Let's think. After changing any field, I want a Live Component to collect the value
+of every field and send them to the Live Component system via an Ajax call. The
+live component will then *submit* these values into the form object and rerender
+the template.
+
+Using Symfony forms with Live Components is a bit more of a complex use-case than
+the *normal* case of Live components: where we create some public properties and
+make them writable.
+
+Fortunately, Live Component ships with a trait to help. In `VoyageForm`, first,
+convert this to a Live Component by saying `#[AsLiveComponent]` then using the
+`DefaultActionTrait`.
+
+Next, because we want to bind this component to a form object, use
+`ComponentWithFormTrait`. When we do that, we don't need this public `form`
+property anymore because that lives inside the trait.
+
+However, this trait *does* require one new method. Go to Code -> Generate - or
+Cmd+N on a Mac - and implement the one we need: `instantiateForm()`.
+
+This might look strange at first. But remember, as we change fields in our form, the
+form values will be sent via Ajax back to our Live component... which then needs
+to *submit* them into the form object so it can re-render. This means that, during
+the Ajax call, our Live Component needs to be able to create our form object. To
+do that, it calls this method.
+
+To get the logic for this, in `VoyageController`, all the way at the bottom, copy
+the guts of `createVoyageForm()`... then paste them here. Hit okay to add
+the two `use` statements.
+
+There's... just one problem: the `createForm()` and `generateUrl()` methods don't
+exist here! But I haven't told you about a crazy, cool thing: live components
+are Symfony controllers in disguise! And this means we can extend
+`AbstractController`.
+
+That's totally allowed and gives us access to all the
+shortcuts we know and love.
+
+Ok, showtime! Move over. When I type, nothing happens. In
+this case, LiveComponents waits for the field to *change*... so it waits for us
+to move *off* of the field. As soon as we do, we'll see an Ajax request fire
+down here. Watch. Boom! See it? That sent the data back, submitted the form and
+*re-rendered* the form.
+
+To prove this, clear out the field and hit tab. A validation error! That's coming
+from Symfony and the normal form validation rendering! Type something again, tab,
+it goes away. The best part? The planet field down here is *also* required thanks
+to Symfony's validation constraints. But the Live Component system is smart: it
+knows that the user hasn't *changed* this field yet, so it shouldn't show the
+validation error. But if we *do* select a planet... then clear, when it re-renders,
+it shows the error.
+
+## Passing the Initial Form Data
+
+This also works fine for the edit form. Hit edit & clear out a field.
+
+Though, check out `instantiateForm()`. Hmm, we're always instantiating a
+*new* `Voyage` object: there's never a `$voyage` variable. We change a field,
+Live Components sends an Ajax request and, when it creates the form, it does it
+using a brand *new* `Voyage` object, not the *existing* `Voyage` object from
+the database.
+
+And... that's probably okay... because it submits all the data onto it, and it
+renders correctly.
+
+However, one thing you can do with Live components is submit the form directly
+*into* the Component object and handle the save logic there. We're not going to do
+that, but if we *did*, the `Voyage` object bound to the form would always be a *new*
+object... and it would always insert a new row into the database. 
+
+## Passing in the Initial Form Data
+
+So even though this works, it's a bit weird.
+
+To tighten this up, we can store the existing `Voyage` object on the component
+and use *that* during form creation. Add a public `?Voyage` `$initialFormData`
+property. Above this, to make the component system *remember* this value through
+all of its Ajax requests, add `#[LiveProp]`.
+
+This is now a non-writable prop that our component will keep track of. And yes,
+it's non-writable: the user changes the *form* data directly, not this property.
+This is *just* here to help us create the form object on each Ajax call.
+
+Below, change this to `$voyage` equals `$this->initialFormData`, else `new Voyage()`.
+
+Finally, pass in the `initialFormData` by saying `:initialFormData="voyage"`, which
+is a Twig variable that we already have.
+
+So we won't notice a difference, but when we hit edit and change a field,
+that Ajax request now creates a Form object bound to this existing `Voyage` object.
+
+That got a bit technical, but let's zoom out. By rendering out form through
+a Live Component, we get real-time validation for free! That's *cool*.
+
+## Dependent Form Fields
+
+We're almost out of time, but I think we can tackle one more form problem today.
+In fact, maybe *the* most *painful* form problem in all of Symfony.
+
+On this form, if the planet is *not* in our solar system, I want to render a new
+dropdown for an optional wormhole upgrade. This is the classic dependent form field
+problem. In Symfony, it's hard because we need to leverage form events. On
+the frontend it's hard too! Historically, we needed to write JavaScript
+to trigger an Ajax call to re-render the form.
+
+But... that second part is now taken care of! Live Components is great at
+re-rendering the form when fields change. And the first part? Yea, there's a new
+library that makes *that* easy too!
+
+It's called `symfonycasts/dynamic-forms`... created by us because this problem
+drove me absolutely crazy. Hat tip to Symfony dev Ben Davies who really
+cracked the code on this.
+
+Copy the composer require line, spin over, and run that:
+
+```terminal-silent
+composer require symfonycasts/dynamic-forms
+```
+
+Using this is really pleasant. Find the form class: `src/Form/VoyageType.php`.
+The library uses decoration. At the top, say `$builder` equals
+`new DynamicFormBuilder()` and pass in `$builder`.
+
+This `DynamicFormBuilder` has the same methods as the original, but one extra:
+`addDependent()`. But before we use it, comment-out the
+`'autocomplete' => true`. There's a bug with the autocomplete system and LiveComponents.
+It should be fixed soon, but I don't want it to get in the way.
+
+Anyway, the `addDependent()` method takes three arguments. The first is the name
+of the new field: `wormholeUpgrade`. The second is an array fields that
+this field *depends* on. In this case, that's only `planet`. The final
+argument is a callback function and *its* first argument will always be a
+`DependentField` object. We'll see how that's used in a minute. Then, this will
+receive the value of every field that it depends on. Because we depend only
+on `planet`, the callback will receive *that* as an argument: `?Planet` `$planet`.
+
+Inside, if we *don't* have a planet - because the user hasn't selected one yet
+*or* the planet is in the Milky Way, just return. And yes, I borked up my
+space science: I meant for this to be `isInOurSolarSystem()` - not the milky way.
+Forgive me Data!
+
+Anyway, because we're returning, there won't be a `wormholeUpgrade`
+field at all. Else, add one with `$field->add()`. This method is identical
+to the normal `add()` method except that we don't need to pass the *name* of the
+field... because we already pass it earlier. So skip straight to
+`ChoiceType::class`... then the options with `choices` set to an array of "Yes"
+for true, and "No" for false.
+
+Done! Go check out the result. Refresh, edit and change to a planet that's not in
+our system. There it is! The field popped into existence! If we go back to a planet
+that *is* in our solar system... gone! And... the field saves just fine. When we
+edit the voyage, the form starts with it. It just works!
+
+Ok, we're nearly at the end of our 30-day journey! Tomorrow, it's time to talk
+about how we can *test* our beautiful new frontend features.

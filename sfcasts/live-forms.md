@@ -35,7 +35,7 @@ And over at the browser... bah! We get:
 Let's think about this. We *do* have a public property in the component class called
 `form`... so we *should* have a local variable with that name. *But*, the property
 is uninitialized because I forgot to pass in that value. My bad! Pass
-`:form="form"` - using `:` so that value - `form` - is Twig code: that's the
+`:form="form"` - using `:` so that the value - `form` - is Twig code: that's the
 `form` variable.
 
 And now... got it! Before we keep going, inside the template, remember to render
@@ -176,7 +176,7 @@ This `DynamicFormBuilder` has the same methods as the original, but one extra:
 It should be fixed soon, but I don't want it to get in the way.
 
 Anyway, the `addDependent()` method takes three arguments. The first is the name
-of the new field: `wormholeUpgrade`. The second is an array fields that
+of the new field: `wormholeUpgrade`. The second is an array of fields that
 this field *depends* on. In this case, that's only `planet`. The final
 argument is a callback function and *its* first argument will always be a
 `DependentField` object. We'll see how that's used in a minute. Then, this will

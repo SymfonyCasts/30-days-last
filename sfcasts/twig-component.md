@@ -9,7 +9,7 @@ and *see* them in action.
 Find your terminal and install the package with:
 
 ```terminal
-compose require symfony/ux-twig-component
+composer require symfony/ux-twig-component
 ```
 
 Twig Components is a pure PHP library... and an easy way to think about it is: a

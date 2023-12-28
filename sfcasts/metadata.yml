@@ -27,5 +27,6 @@ chapters:
     - modal-component
     - live-components
     - live-forms
+    - testing-components
     - testing
     - performance

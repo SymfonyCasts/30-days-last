@@ -1,0 +1,235 @@
+diff --git a/composer.json b/composer.json
+index dfc699e0..53dfdc58 100644
+--- a/composer.json
++++ b/composer.json
+@@ -96,6 +96,7 @@
+         "symfony/css-selector": "6.4.*",
+         "symfony/debug-bundle": "6.4.x-dev",
+         "symfony/maker-bundle": "^1.51",
++        "symfony/panther": "^2.1",
+         "symfony/phpunit-bridge": "7.1.x-dev",
+         "symfony/stopwatch": "6.4.x-dev",
+         "symfony/web-profiler-bundle": "6.4.x-dev",
+diff --git a/composer.lock b/composer.lock
+index 6019c378..d6e241c9 100644
+--- a/composer.lock
++++ b/composer.lock
+@@ -4,7 +4,7 @@
+         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+         "This file is @generated automatically"
+     ],
+-    "content-hash": "2c03dea84aa1d86f377fa7eabe22475c",
++    "content-hash": "3fe36930f74d981d17f295c6bb001b3b",
+     "packages": [
+         {
+             "name": "babdev/pagerfanta-bundle",
+@@ -7702,6 +7702,72 @@
+             },
+             "time": "2022-02-21T01:04:05+00:00"
+         },
++        {
++            "name": "php-webdriver/webdriver",
++            "version": "1.15.1",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/php-webdriver/php-webdriver.git",
++                "reference": "cd52d9342c5aa738c2e75a67e47a1b6df97154e8"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/php-webdriver/php-webdriver/zipball/cd52d9342c5aa738c2e75a67e47a1b6df97154e8",
++                "reference": "cd52d9342c5aa738c2e75a67e47a1b6df97154e8",
++                "shasum": ""
++            },
++            "require": {
++                "ext-curl": "*",
++                "ext-json": "*",
++                "ext-zip": "*",
++                "php": "^7.3 || ^8.0",
++                "symfony/polyfill-mbstring": "^1.12",
++                "symfony/process": "^5.0 || ^6.0 || ^7.0"
++            },
++            "replace": {
++                "facebook/webdriver": "*"
++            },
++            "require-dev": {
++                "ergebnis/composer-normalize": "^2.20.0",
++                "ondram/ci-detector": "^4.0",
++                "php-coveralls/php-coveralls": "^2.4",
++                "php-mock/php-mock-phpunit": "^2.0",
++                "php-parallel-lint/php-parallel-lint": "^1.2",
++                "phpunit/phpunit": "^9.3",
++                "squizlabs/php_codesniffer": "^3.5",
++                "symfony/var-dumper": "^5.0 || ^6.0"
++            },
++            "suggest": {
++                "ext-SimpleXML": "For Firefox profile creation"
++            },
++            "type": "library",
++            "autoload": {
++                "files": [
++                    "lib/Exception/TimeoutException.php"
++                ],
++                "psr-4": {
++                    "Facebook\\WebDriver\\": "lib/"
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "description": "A PHP client for Selenium WebDriver. Previously facebook/webdriver.",
++            "homepage": "https://github.com/php-webdriver/php-webdriver",
++            "keywords": [
++                "Chromedriver",
++                "geckodriver",
++                "php",
++                "selenium",
++                "webdriver"
++            ],
++            "support": {
++                "issues": "https://github.com/php-webdriver/php-webdriver/issues",
++                "source": "https://github.com/php-webdriver/php-webdriver/tree/1.15.1"
++            },
++            "time": "2023-10-20T12:21:20+00:00"
++        },
+         {
+             "name": "phpunit/php-code-coverage",
+             "version": "9.2.x-dev",
+@@ -9455,6 +9521,95 @@
+             ],
+             "time": "2023-10-31T18:23:49+00:00"
+         },
++        {
++            "name": "symfony/panther",
++            "version": "v2.1.1",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/symfony/panther.git",
++                "reference": "ef9a6f2393ac9679af03a93d3f508e4aa65c15b5"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/symfony/panther/zipball/ef9a6f2393ac9679af03a93d3f508e4aa65c15b5",
++                "reference": "ef9a6f2393ac9679af03a93d3f508e4aa65c15b5",
++                "shasum": ""
++            },
++            "require": {
++                "ext-dom": "*",
++                "ext-libxml": "*",
++                "php": ">=8.0",
++                "php-webdriver/webdriver": "^1.8.2",
++                "symfony/browser-kit": "^5.3 || ^6.0 || ^7.0",
++                "symfony/dependency-injection": "^5.3 || ^6.0 || ^7.0",
++                "symfony/deprecation-contracts": "^2.4 || ^3",
++                "symfony/dom-crawler": "^5.3 || ^6.0 || ^7.0",
++                "symfony/http-client": "^5.3 || ^6.0 || ^7.0",
++                "symfony/http-kernel": "^5.3 || ^6.0 || ^7.0",
++                "symfony/process": "^5.3 || ^6.0 || ^7.0"
++            },
++            "require-dev": {
++                "symfony/css-selector": "^5.3 || ^6.0 || ^7.0",
++                "symfony/framework-bundle": "^5.3 || ^6.0 || ^7.0",
++                "symfony/mime": "^5.3 || ^6.0 || ^7.0",
++                "symfony/phpunit-bridge": "^5.3 || ^6.0 || ^7.0"
++            },
++            "type": "library",
++            "extra": {
++                "branch-alias": {
++                    "dev-main": "2.0.x-dev"
++                }
++            },
++            "autoload": {
++                "psr-4": {
++                    "Symfony\\Component\\Panther\\": "src/"
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "Kévin Dunglas",
++                    "email": "dunglas@gmail.com",
++                    "homepage": "https://dunglas.fr"
++                },
++                {
++                    "name": "Symfony Community",
++                    "homepage": "https://symfony.com/contributors"
++                }
++            ],
++            "description": "A browser testing and web scraping library for PHP and Symfony.",
++            "homepage": "https://dunglas.fr",
++            "keywords": [
++                "e2e",
++                "scraping",
++                "selenium",
++                "symfony",
++                "testing",
++                "webdriver"
++            ],
++            "support": {
++                "issues": "https://github.com/symfony/panther/issues",
++                "source": "https://github.com/symfony/panther/tree/v2.1.1"
++            },
++            "funding": [
++                {
++                    "url": "https://www.panthera.org/donate",
++                    "type": "custom"
++                },
++                {
++                    "url": "https://github.com/dunglas",
++                    "type": "github"
++                },
++                {
++                    "url": "https://tidelift.com/funding/github/packagist/symfony/panther",
++                    "type": "tidelift"
++                }
++            ],
++            "time": "2023-12-03T22:17:31+00:00"
++        },
+         {
+             "name": "symfony/phpunit-bridge",
+             "version": "7.1.x-dev",
+@@ -9981,7 +10136,8 @@
+         "symfony/debug-bundle": 20,
+         "symfony/phpunit-bridge": 20,
+         "symfony/stopwatch": 20,
+-        "symfony/web-profiler-bundle": 20
++        "symfony/web-profiler-bundle": 20,
++        "zenstruck/browser": 20
+     },
+     "prefer-stable": false,
+     "prefer-lowest": false,
+diff --git a/phpunit.xml.dist b/phpunit.xml.dist
+index c76a655a..0435becd 100644
+--- a/phpunit.xml.dist
++++ b/phpunit.xml.dist
+@@ -34,5 +34,6 @@
+     </listeners>
+ 
+     <extensions>
++        <extension class="Symfony\Component\Panther\ServerExtension" />
+     </extensions>
+ </phpunit>
+diff --git a/symfony.lock b/symfony.lock
+index adba8eda..6cad4d3c 100644
+--- a/symfony.lock
++++ b/symfony.lock
+@@ -149,6 +149,15 @@
+             "config/packages/monolog.yaml"
+         ]
+     },
++    "symfony/panther": {
++        "version": "2.1",
++        "recipe": {
++            "repo": "github.com/symfony/recipes",
++            "branch": "main",
++            "version": "1.0",
++            "ref": "292a3236e81f55b545b09b9954ab097248972ab3"
++        }
++    },
+     "symfony/phpunit-bridge": {
+         "version": "7.1",
+         "recipe": {

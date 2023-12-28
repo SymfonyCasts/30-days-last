@@ -1,0 +1,46 @@
+diff --git a/phpunit.xml.dist b/phpunit.xml.dist
+index 2a725ec5..4b45f304 100644
+--- a/phpunit.xml.dist
++++ b/phpunit.xml.dist
+@@ -18,6 +18,7 @@
+         <server name="SYMFONY_PROJECT_DEFAULT_ROUTE_URL" value="" />
+         <server name="PANTHER_APP_ENV" value="test" />
+         <server name="PANTHER_WEB_SERVER_ROUTER" value="../tests/router.php" />
++        <server name="PANTHER_BROWSER_CLASS" value="App\Tests\AppBrowser" />
+     </php>
+ 
+     <testsuites>
+diff --git a/tests/AppBrowser.php b/tests/AppBrowser.php
+new file mode 100644
+index 00000000..2b42b1da
+--- /dev/null
++++ b/tests/AppBrowser.php
+@@ -0,0 +1,16 @@
++<?php
++
++namespace App\Tests;
++
++use Zenstruck\Browser\PantherBrowser;
++
++class AppBrowser extends PantherBrowser
++{
++    public function waitForPageLoad(): self
++    {
++        $this->client()->waitFor('html[aria-busy="true"]');
++        $this->client()->waitFor('html:not([aria-busy])');
++
++        return $this;
++    }
++}
+diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
+index 24782602..87d64f9a 100644
+--- a/tests/Functional/VoyageControllerTest.php
++++ b/tests/Functional/VoyageControllerTest.php
+@@ -26,6 +26,7 @@ class VoyageControllerTest extends PantherTestCase
+             ->visit('/')
+             ->click('Voyages')
+         ;
++        dd($browser);
+         $browser->client()->waitFor('html[aria-busy="true"]');
+         $browser->client()->waitFor('html:not([aria-busy])');
+         $browser

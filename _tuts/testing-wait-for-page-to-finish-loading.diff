@@ -1,0 +1,19 @@
+diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
+index f21a06c3..24782602 100644
+--- a/tests/Functional/VoyageControllerTest.php
++++ b/tests/Functional/VoyageControllerTest.php
+@@ -22,9 +22,13 @@ class VoyageControllerTest extends PantherTestCase
+         ]);
+         VoyageFactory::createOne();
+ 
+-        $this->pantherBrowser()
++        $browser = $this->pantherBrowser()
+             ->visit('/')
+             ->click('Voyages')
++        ;
++        $browser->client()->waitFor('html[aria-busy="true"]');
++        $browser->client()->waitFor('html:not([aria-busy])');
++        $browser
+             ->ddScreenshot()
+             ->click('New Voyage')
+             ->fillField('Purpose', 'Test voyage')

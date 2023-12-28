@@ -1,0 +1,15 @@
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index 332fc09c..eeaa7078 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -4,7 +4,9 @@
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+         <title>{% block title %}Space Inviters!{% endblock %}</title>
+-        <meta name="view-transition">
++        {% if app.environment != 'test' %}
++            <meta name="view-transition">
++        {% endif %}
+         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+         {% block stylesheets %}
+         {% endblock %}

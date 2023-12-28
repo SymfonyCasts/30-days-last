@@ -1,11 +1,11 @@
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index b197a6de..9ed74272 100644
+index b197a6de..295f0137 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
-@@ -52,5 +52,15 @@
-         <div id="flash-container">
-             {{ include('_flashes.html.twig') }}
+@@ -49,6 +49,17 @@
+             </footer>
          </div>
+ 
 +        <twig:Modal>
 +            <turbo-frame
 +                id="modal"
@@ -16,8 +16,10 @@ index b197a6de..9ed74272 100644
 +                {{ include('_frameSuccessStreams.html.twig', { frame: 'modal' }) }}
 +            </turbo-frame>
 +        </twig:Modal>
-     </body>
- </html>
++
+         <div id="flash-container">
+             {{ include('_flashes.html.twig') }}
+         </div>
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
 index 08d29e96..0892c609 100644
 --- a/templates/components/Modal.html.twig

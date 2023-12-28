@@ -1,0 +1,12 @@
+diff --git a/tests/Integration/Twig/Components/ButtonTest.php b/tests/Integration/Twig/Components/ButtonTest.php
+index 0e4849eb..d0b731ef 100644
+--- a/tests/Integration/Twig/Components/ButtonTest.php
++++ b/tests/Integration/Twig/Components/ButtonTest.php
+@@ -21,6 +21,6 @@ class ButtonTest extends KernelTestCase
+         $rendered = $this->renderTwigComponent('Button', [
+             'variant' => 'success',
+         ], '<span>Click me!</span>');
+-        dump($rendered);
++        $this->assertSame('Click me!', $rendered->crawler()->filter('span')->text());
+     }
+ }

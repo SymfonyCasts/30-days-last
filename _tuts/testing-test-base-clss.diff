@@ -1,0 +1,65 @@
+diff --git a/tests/AppPantherTestCase.php b/tests/AppPantherTestCase.php
+new file mode 100644
+index 00000000..a3eb95b5
+--- /dev/null
++++ b/tests/AppPantherTestCase.php
+@@ -0,0 +1,18 @@
++<?php
++
++namespace App\Tests;
++
++use Symfony\Component\Panther\PantherTestCase;
++use Zenstruck\Browser\Test\HasBrowser;
++
++class AppPantherTestCase extends PantherTestCase
++{
++    use HasBrowser {
++        pantherBrowser as parentPantherBrowser;
++    }
++
++    protected function pantherBrowser(array $options = [], array $kernelOptions = [], array $managerOptions = []): AppBrowser
++    {
++        return $this->parentPantherBrowser($options, $kernelOptions, $managerOptions);
++    }
++}
+diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
+index 87d64f9a..7bee4b07 100644
+--- a/tests/Functional/VoyageControllerTest.php
++++ b/tests/Functional/VoyageControllerTest.php
+@@ -4,16 +4,14 @@ namespace App\Tests\Functional;
+ 
+ use App\Factory\PlanetFactory;
+ use App\Factory\VoyageFactory;
+-use Symfony\Component\Panther\PantherTestCase;
+-use Zenstruck\Browser\Test\HasBrowser;
++use App\Tests\AppPantherTestCase;
+ use Zenstruck\Foundry\Test\Factories;
+ use Zenstruck\Foundry\Test\ResetDatabase;
+ 
+-class VoyageControllerTest extends PantherTestCase
++class VoyageControllerTest extends AppPantherTestCase
+ {
+     use ResetDatabase;
+     use Factories;
+-    use HasBrowser;
+ 
+     public function testCreateVoyage()
+     {
+@@ -22,15 +20,11 @@ class VoyageControllerTest extends PantherTestCase
+         ]);
+         VoyageFactory::createOne();
+ 
+-        $browser = $this->pantherBrowser()
++        $this->pantherBrowser()
+             ->visit('/')
+             ->click('Voyages')
+-        ;
+-        dd($browser);
+-        $browser->client()->waitFor('html[aria-busy="true"]');
+-        $browser->client()->waitFor('html:not([aria-busy])');
+-        $browser
+             ->ddScreenshot()
++            ->waitForPageLoad()
+             ->click('New Voyage')
+             ->fillField('Purpose', 'Test voyage')
+             ->selectFieldOption('Planet', 'Earth')

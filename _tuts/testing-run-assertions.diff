@@ -1,0 +1,14 @@
+diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
+index 6a3e6451..5aba8818 100644
+--- a/tests/Functional/VoyageControllerTest.php
++++ b/tests/Functional/VoyageControllerTest.php
+@@ -29,7 +29,9 @@ class VoyageControllerTest extends AppPantherTestCase
+             ->fillField('Purpose', 'Test voyage')
+             ->selectFieldOption('Planet', 'Earth')
+             ->click('Save')
++            ->waitForTurboFrameLoad()
+             ->assertElementCount('table tbody tr', 2)
++            ->assertNotSeeElement('dialog[open]')
+             ->assertSee('Bon voyage')
+         ;
+     }

@@ -1,0 +1,52 @@
+diff --git a/tests/AppBrowser.php b/tests/AppBrowser.php
+index 2b42b1da..a6739c09 100644
+--- a/tests/AppBrowser.php
++++ b/tests/AppBrowser.php
+@@ -2,6 +2,7 @@
+ 
+ namespace App\Tests;
+ 
++use Facebook\WebDriver\WebDriverBy;
+ use Zenstruck\Browser\PantherBrowser;
+ 
+ class AppBrowser extends PantherBrowser
+@@ -13,4 +14,26 @@ class AppBrowser extends PantherBrowser
+ 
+         return $this;
+     }
++
++    public function waitForDialog(): self
++    {
++        $this->client()->wait()->until(function() {
++            return $this->crawler()->filter('dialog[open]')->count() > 0;
++        });
++
++        if ($this->crawler()->filter('dialog[open] turbo-frame')->count() > 0) {
++            $this->waitForTurboFrameLoad();
++        }
++
++        return $this;
++    }
++
++    public function waitForTurboFrameLoad(): self
++    {
++        $this->client()->wait()->until(function() {
++            return $this->crawler()->filter('turbo-frame[aria-busy="true"]')->count() === 0;
++        });
++
++        return $this;
++    }
+ }
+diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
+index 9b14bf95..6a3e6451 100644
+--- a/tests/Functional/VoyageControllerTest.php
++++ b/tests/Functional/VoyageControllerTest.php
+@@ -25,7 +25,7 @@ class VoyageControllerTest extends AppPantherTestCase
+             ->click('Voyages')
+             ->waitForPageLoad()
+             ->click('New Voyage')
+-            ->ddScreenshot()
++            ->waitForDialog()
+             ->fillField('Purpose', 'Test voyage')
+             ->selectFieldOption('Planet', 'Earth')
+             ->click('Save')

@@ -889,7 +889,132 @@
             "id": "dyanmicforms-add-a-dynamic-field",
             "name": "DyanmicForms: Add a dynamic field",
             "description": null
+        },
+        {
+            "id": "testing-install-test-pack",
+            "name": "Testing: install test pack",
+            "description": null
+        },
+        {
+            "id": "testing-test-button-component",
+            "name": "Testing: Test Button component",
+            "description": null
+        },
+        {
+            "id": "testing-adding-assertions",
+            "name": "Testing: Adding assertions",
+            "description": null
+        },
+        {
+            "id": "testing-assert-with-crawler",
+            "name": "Testing: Assert with crawler",
+            "description": null
+        },
+        {
+            "id": "testing-bootstrap-live-component-test",
+            "name": "Testing: Bootstrap live component test",
+            "description": null
+        },
+        {
+            "id": "testing-use-db-traits-in-test",
+            "name": "Testing: Use db traits in test",
+            "description": null
+        },
+        {
+            "id": "testing-change-query-and-assert",
+            "name": "Testing: Change query & assert",
+            "description": null
+        },
+        {
+            "id": "testing-install-browser",
+            "name": "Testing: install browser",
+            "description": null
+        },
+        {
+            "id": "testing-bootstrap-functional-test",
+            "name": "Testing: Bootstrap functional test",
+            "description": null
+        },
+        {
+            "id": "testing-try-the-panther-browser",
+            "name": "Testing: Try the panther browser",
+            "description": null
+        },
+        {
+            "id": "testing-install-panther",
+            "name": "Testing: Install panther",
+            "description": null
+        },
+        {
+            "id": "testing-extend-panthertestcase",
+            "name": "Testing: Extend PantherTestCase",
+            "description": null
+        },
+        {
+            "id": "testing-forcing-fresh-server",
+            "name": "Testing: Forcing fresh server",
+            "description": null
+        },
+        {
+            "id": "testing-debugging-missing-assets",
+            "name": "Testing: Debugging missing assets",
+            "description": null
+        },
+        {
+            "id": "testing-add-router-script",
+            "name": "Testing: Add router script",
+            "description": null
+        },
+        {
+            "id": "testing-remove-pause",
+            "name": "Testing: Remove pause",
+            "description": null
+        },
+        {
+            "id": "delete-me-4",
+            "name": "delete me 4",
+            "description": null
+        },
+        {
+            "id": "testing-wait-for-page-to-finish-loading",
+            "name": "Testing: Wait for page to finish loading",
+            "description": null
+        },
+        {
+            "id": "testing-custom-browser",
+            "name": "Testing: Custom browser",
+            "description": null
+        },
+        {
+            "id": "testing-test-base-clss",
+            "name": "Testing: Test base clss",
+            "description": null
+        },
+        {
+            "id": "testing-move-dd-later",
+            "name": "Testing: Move dd later",
+            "description": null
+        },
+        {
+            "id": "testing-remove-view-transitions",
+            "name": "Testing: remove view transitions",
+            "description": null
+        },
+        {
+            "id": "testing-move-dd-down-further",
+            "name": "Testing: move dd down further",
+            "description": null
+        },
+        {
+            "id": "testing-waitin-for-dialog-to-open",
+            "name": "Testing: Waitin for dialog to open",
+            "description": null
+        },
+        {
+            "id": "testing-run-assertions",
+            "name": "Testing: Run assertions",
+            "description": null
         }
     ],
-    "sha": "a7c1ef9fcd5fa3ac89922765a8981702db2c4d42"
+    "sha": "8954ec4adec25f0dad2b14805d48c9774cc7c48b"
 }

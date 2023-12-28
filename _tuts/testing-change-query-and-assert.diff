@@ -1,0 +1,15 @@
+diff --git a/tests/Integration/Twig/Components/SearchSiteTest.php b/tests/Integration/Twig/Components/SearchSiteTest.php
+index fb6590e4..e5a0f89b 100644
+--- a/tests/Integration/Twig/Components/SearchSiteTest.php
++++ b/tests/Integration/Twig/Components/SearchSiteTest.php
+@@ -22,6 +22,9 @@ class SearchSiteTest extends KernelTestCase
+         VoyageFactory::createOne();
+ 
+         $testComponent = $this->createLiveComponent('SearchSite');
+-        dd($testComponent);
++
++        $this->assertCount(0, $testComponent->render()->crawler()->filter('a'));
++        $testComponent->set('query', 'first 5');
++        $this->assertCount(5, $testComponent->render()->crawler()->filter('a'));
+     }
+ }

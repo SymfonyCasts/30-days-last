@@ -1,0 +1,14 @@
+diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
+index b10ebb14..9b14bf95 100644
+--- a/tests/Functional/VoyageControllerTest.php
++++ b/tests/Functional/VoyageControllerTest.php
+@@ -24,8 +24,8 @@ class VoyageControllerTest extends AppPantherTestCase
+             ->visit('/')
+             ->click('Voyages')
+             ->waitForPageLoad()
+-            ->ddScreenshot()
+             ->click('New Voyage')
++            ->ddScreenshot()
+             ->fillField('Purpose', 'Test voyage')
+             ->selectFieldOption('Planet', 'Earth')
+             ->click('Save')

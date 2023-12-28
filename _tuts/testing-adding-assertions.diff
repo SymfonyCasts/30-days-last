@@ -1,0 +1,18 @@
+diff --git a/tests/Integration/Twig/Components/ButtonTest.php b/tests/Integration/Twig/Components/ButtonTest.php
+index 1ff933b4..0e4849eb 100644
+--- a/tests/Integration/Twig/Components/ButtonTest.php
++++ b/tests/Integration/Twig/Components/ButtonTest.php
+@@ -15,8 +15,12 @@ class ButtonTest extends KernelTestCase
+         $component = $this->mountTwigComponent('Button', [
+             'variant' => 'success',
+         ]);
+-        dump($component);
+         $this->assertInstanceOf(Button::class, $component);
+         $this->assertSame('success', $component->variant);
++
++        $rendered = $this->renderTwigComponent('Button', [
++            'variant' => 'success',
++        ], '<span>Click me!</span>');
++        dump($rendered);
+     }
+ }

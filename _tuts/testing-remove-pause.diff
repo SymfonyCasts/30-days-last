@@ -1,0 +1,12 @@
+diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
+index aea45cb7..f21a06c3 100644
+--- a/tests/Functional/VoyageControllerTest.php
++++ b/tests/Functional/VoyageControllerTest.php
+@@ -24,7 +24,6 @@ class VoyageControllerTest extends PantherTestCase
+ 
+         $this->pantherBrowser()
+             ->visit('/')
+-            ->pause()
+             ->click('Voyages')
+             ->ddScreenshot()
+             ->click('New Voyage')

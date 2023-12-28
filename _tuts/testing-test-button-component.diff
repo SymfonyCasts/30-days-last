@@ -1,0 +1,28 @@
+diff --git a/tests/Integration/Twig/Components/ButtonTest.php b/tests/Integration/Twig/Components/ButtonTest.php
+new file mode 100644
+index 00000000..1ff933b4
+--- /dev/null
++++ b/tests/Integration/Twig/Components/ButtonTest.php
+@@ -0,0 +1,22 @@
++<?php
++
++namespace App\Tests\Integration\Twig\Components;
++
++use App\Twig\Components\Button;
++use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
++use Symfony\UX\TwigComponent\Test\InteractsWithTwigComponents;
++
++class ButtonTest extends KernelTestCase
++{
++    use InteractsWithTwigComponents;
++
++    public function testButtonRendersWithVariants()
++    {
++        $component = $this->mountTwigComponent('Button', [
++            'variant' => 'success',
++        ]);
++        dump($component);
++        $this->assertInstanceOf(Button::class, $component);
++        $this->assertSame('success', $component->variant);
++    }
++}

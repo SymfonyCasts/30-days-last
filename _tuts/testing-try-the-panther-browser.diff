@@ -1,0 +1,13 @@
+diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
+index 74e82e57..dd4c1e55 100644
+--- a/tests/Functional/VoyageControllerTest.php
++++ b/tests/Functional/VoyageControllerTest.php
+@@ -22,7 +22,7 @@ class VoyageControllerTest extends WebTestCase
+         ]);
+         VoyageFactory::createOne();
+ 
+-        $this->browser()
++        $this->pantherBrowser()
+             ->visit('/')
+             ->click('Voyages')
+             ->click('New Voyage')

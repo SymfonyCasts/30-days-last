@@ -1,0 +1,25 @@
+diff --git a/phpunit.xml.dist b/phpunit.xml.dist
+index 0435becd..22288cd9 100644
+--- a/phpunit.xml.dist
++++ b/phpunit.xml.dist
+@@ -15,6 +15,8 @@
+         <server name="SHELL_VERBOSITY" value="-1" />
+         <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
+         <server name="SYMFONY_PHPUNIT_VERSION" value="9.6" />
++        <server name="SYMFONY_PROJECT_DEFAULT_ROUTE_URL" value="" />
++        <server name="PANTHER_APP_ENV" value="test" />
+     </php>
+ 
+     <testsuites>
+diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
+index 8322e61b..f21a06c3 100644
+--- a/tests/Functional/VoyageControllerTest.php
++++ b/tests/Functional/VoyageControllerTest.php
+@@ -25,6 +25,7 @@ class VoyageControllerTest extends PantherTestCase
+         $this->pantherBrowser()
+             ->visit('/')
+             ->click('Voyages')
++            ->ddScreenshot()
+             ->click('New Voyage')
+             ->fillField('Purpose', 'Test voyage')
+             ->selectFieldOption('Planet', 'Earth')

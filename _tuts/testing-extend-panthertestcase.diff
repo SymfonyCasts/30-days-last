@@ -1,0 +1,19 @@
+diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
+index dd4c1e55..8322e61b 100644
+--- a/tests/Functional/VoyageControllerTest.php
++++ b/tests/Functional/VoyageControllerTest.php
+@@ -4,12 +4,12 @@ namespace App\Tests\Functional;
+ 
+ use App\Factory\PlanetFactory;
+ use App\Factory\VoyageFactory;
+-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
++use Symfony\Component\Panther\PantherTestCase;
+ use Zenstruck\Browser\Test\HasBrowser;
+ use Zenstruck\Foundry\Test\Factories;
+ use Zenstruck\Foundry\Test\ResetDatabase;
+ 
+-class VoyageControllerTest extends WebTestCase
++class VoyageControllerTest extends PantherTestCase
+ {
+     use ResetDatabase;
+     use Factories;

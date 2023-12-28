@@ -33,14 +33,14 @@ index 00000000..2b42b1da
 +    }
 +}
 diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
-index 24782602..87d64f9a 100644
+index 24782602..834c5e44 100644
 --- a/tests/Functional/VoyageControllerTest.php
 +++ b/tests/Functional/VoyageControllerTest.php
 @@ -26,6 +26,7 @@ class VoyageControllerTest extends PantherTestCase
              ->visit('/')
              ->click('Voyages')
          ;
-+        dd($browser);
++        dd(get_class($browser));
          $browser->client()->waitFor('html[aria-busy="true"]');
          $browser->client()->waitFor('html:not([aria-busy])');
          $browser

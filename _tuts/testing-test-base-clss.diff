@@ -23,7 +23,7 @@ index 00000000..a3eb95b5
 +    }
 +}
 diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
-index 87d64f9a..7bee4b07 100644
+index 834c5e44..7bee4b07 100644
 --- a/tests/Functional/VoyageControllerTest.php
 +++ b/tests/Functional/VoyageControllerTest.php
 @@ -4,16 +4,14 @@ namespace App\Tests\Functional;
@@ -54,7 +54,7 @@ index 87d64f9a..7bee4b07 100644
              ->visit('/')
              ->click('Voyages')
 -        ;
--        dd($browser);
+-        dd(get_class($browser));
 -        $browser->client()->waitFor('html[aria-busy="true"]');
 -        $browser->client()->waitFor('html:not([aria-busy])');
 -        $browser

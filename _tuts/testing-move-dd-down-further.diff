@@ -1,12 +1,10 @@
 diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
-index b10ebb14..9b14bf95 100644
+index 5b35f7bf..9b14bf95 100644
 --- a/tests/Functional/VoyageControllerTest.php
 +++ b/tests/Functional/VoyageControllerTest.php
-@@ -24,8 +24,8 @@ class VoyageControllerTest extends AppPantherTestCase
-             ->visit('/')
+@@ -25,6 +25,7 @@ class VoyageControllerTest extends AppPantherTestCase
              ->click('Voyages')
              ->waitForPageLoad()
--            ->ddScreenshot()
              ->click('New Voyage')
 +            ->ddScreenshot()
              ->fillField('Purpose', 'Test voyage')

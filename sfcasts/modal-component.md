@@ -7,17 +7,23 @@ to achieve a goal! I want to be able to quickly add a modal *anywhere* in our ap
 
 Start in `base.html.twig`. All the way at the bottom, copy the modal markup.
 You can see... it's quite a bit: not something we want to copy and
-paste somewhere else.
+paste somewhere else:
+
+[[[ code('e567dc63b8') ]]]
 
 Copy, then delete it. Let's craft a `Modal` component, this time by hand. Create
-a new file in `templates/components/` called `Modal.html.twig`, and paste.
+a new file in `templates/components/` called `Modal.html.twig`, and paste:
+
+[[[ code('b7bc621ebb') ]]]
 
 Like I said with the `Button`, we don't *need* a PHP class for a component.
 Because we don't have one, we call this an "anonymous component".
 
 On top, render `attributes`... then add `.defaults()` so we can move these two
 attributes *into* that. Paste... then each of these needs a makeover to fit as
-Twig keys and values instead of HTML attributes.
+Twig keys and values instead of HTML attributes:
+
+[[[ code('104a39aa15') ]]]
 
 I like it! Over in `base.html.twig`, render this with `<twig:Modal>`. Easy!
 
@@ -27,23 +33,31 @@ However, look closer at `Modal.html.twig`: there are some things that *shouldn't
 be here. For example, the `<turbo-frame>`! Not every modal needs a frame.
 A lot of times, we'll render a modal with simple, hardcoded content inside.
 
-Copy this, and replace it with, of course, `{% block content %}` and `{% endblock %}`.
+Copy this, and replace it with, of course, `{% block content %}` and `{% endblock %}`:
 
-In `base.html.twig`, paste the frame... and add a closing tag.
+[[[ code('3f7c683163') ]]]
 
-Let's keep going! The loading template down here? Yea, that's also something
+In `base.html.twig`, paste the frame... and add a closing tag:
+
+[[[ code('f809fc4c16') ]]]
+
+Let's keep going! The loading template down here? Yea, that's also something that
 *specific* to this *one* modal. If our modal is a hardcoded message, it
 won't need this at all!
 
 Copy the loading `div`, delete, then around the `<template>` add: if
-`block('loading_template')`.
+`block('loading_template')`:
+
+[[[ code('54eed16182') ]]]
 
 So *if* we pass the block, render it inside the `<template>`.
 
 Back in `base.html.twig`, anywhere, define that block. But instead of the normal
 `{% block %}` tag - which *would* work - when you're inside a Twig component,
 you can use a special `<twig:block>` syntax with `name="loading_template"`.
-Then, paste.
+Then, paste:
+
+[[[ code('ff5f0d21e5') ]]]
 
 We just moved around a *lot* of stuff. And yet... the existing modal still works!
 And now, we have a leaner, meaner modal component that we can *reuse* in other
@@ -53,7 +67,9 @@ places.
 
 Let's do exactly that. I want to add a delete link on each row that, on click,
 opens a modal with a confirmation. Open `_row.html.twig`. Copy the edit link,
-paste, and call it delete.
+paste, and call it delete:
+
+[[[ code('0afe531eed') ]]]
 
 To get this to work, one option is to create a new, standalone delete
 confirmation page, point to that and... done! The `data-turbo-frame="modal"`
@@ -61,11 +77,15 @@ would load that page into the modal.
 
 But since we've done that before, let's try something different. Delete the `href`,
 change this to a `button`, remove the `data-turbo-frame` attribute... and change
-the yellow colors to red.
+the yellow colors to red:
+
+[[[ code('6f6eee904c') ]]]
 
 Let's go check out the look. Nice!
 
-Back over, I'll paste in a modal.
+Back over, I'll paste in a modal:
+
+[[[ code('0cdedf2ec9') ]]]
 
 There's nothing special here. The big difference is, instead of a `<turbo-frame>`,
 the content we need is *right* here. When we refresh, *every* row now has a delete
@@ -79,29 +99,39 @@ make this happen, we need the button to physically live *inside* the
 Stimulus controller.
 
 To allow that, inside the modal template, add a new block called `trigger`,
-`endblock`.
+`endblock`:
+
+[[[ code('aac022e763') ]]]
 
 Now, if you have a button that triggers the modal to open, you can put that
 right here! Over in `_row.html.twig`, copy the button, remove it, say
 `<twig:block name="trigger">` and paste.
 
-And because we're inside the modal, add `data-action="modal#open"`.
+And because we're inside the modal, add `data-action="modal#open"`:
+
+[[[ code('9976180ff4') ]]]
 
 Let's try this! So excited! Refresh! The styling got weird. Before, we had
 three `a` tags, which are inline elements. Now we have two inline elements and
 a block element. So that *is* something that changes slightly, but it's an easy fix.
-Up on the `<td>`, add a `flex` class.
+Up on the `<td>`, add a `flex` class:
+
+[[[ code('11a66d8ecb') ]]]
 
 ## Modal Conditional Size & the props Tag
 
-And now... much better. Most importantly, when we hit delete, the modal opens!
+And now... much better. Most importantly, when we hit Delete, the modal opens!
 However, you know me, I want this to be *perfect*. And I'm not happy with how *big*
 this is. When I open the edit form, it makes sense to be half the screen width. But
 when I open the delete, we should let it shrink down to the size of the content
 inside.
 
 To do that, in this one case, I want to be pass a new flag called `allowSmallWidth`
-set to `true`. I added this `:` because, if I pass `allowSmallWidth="true"`, that
+set to `true`:
+
+[[[ code('d17fb3cb1e') ]]]
+
+I added this `:` because, if I pass `allowSmallWidth="true"`, that
 will pass the *string* `true`. By adding a colon, this becomes Twig code, so that
 will pass the *Boolean* `true`. They would both work... but I like being stricter.
 
@@ -112,23 +142,33 @@ create a new `Modal.php` file.
 But there's another way to convert from an attribute into a variable when
 using an anonymous component. At the top of `Modal.html.twig`, add a `props`
 tag that's special to Twig components. Add `allowSmallWidth` and default it to
-`false`.
+`false`:
+
+[[[ code('91d719b89f') ]]]
 
 Cool, huh? Below, we want to make this min-width conditional. Say
 `{{ allowSmallWidth }}` - if that is true, render nothing, else render the
-`md:min-w-[50%]`.
+`md:min-w-[50%]`:
+
+[[[ code('6d86576335') ]]]
 
 Back on the page, the edit link still opens with half width... but that delete link,
 ah, it's nice and small! Now it deserves some real content! In `_row.html.twig`,
 after the `<h3>`, I'll add some styling... then I want a cancel button that
 closes the modal. For that, we can go old-school. Add a `<form method="dialog">`,
 and inside a `<twig:Button>` that says Cancel. And I want the button to look like
-a link, so add `variant="link"`.
+a link, so add `variant="link"`:
+
+[[[ code('48eaf83992') ]]]
 
 That doesn't exist yet, so in the `Button` class, add it: `variant` and it just
-needs `text-white`.
+needs `text-white`:
 
-After the form, to render the delete button, include `voyage/_delete_form.html.twig`.
+[[[ code('06f33dc083') ]]]
+
+After the form, to render the delete button, include `voyage/_delete_form.html.twig`:
+
+[[[ code('76b482dc3e') ]]]
 
 Oh, and that template has a built-in `confirm`. Delete that because we have something
 *way* nicer now.
@@ -152,12 +192,17 @@ extra filtering options.
 
 Open up `main/homepage.html.twig` and find that input. Start by adding a
 `<div class="w-1/3 flex">`... add the closing on the other side of the input...
-then remove `w-1/3` *from* the input. We're making space for that link.
+then remove `w-1/3` *from* the input. We're making space for that link:
 
-But I'll paste in a full modal. This will be invisible except for the trigger.
-So we basically just added a button that says "options". But it's already set *up*
-to open the modal. Inside, to start, we have an `h3` and a `<twig:Button>` that
-closes the modal.
+[[[ code('a439553cea') ]]]
+
+But I'll paste in a full modal:
+
+[[[ code('9d5cd71d64') ]]]
+
+This will be invisible except for the trigger. So we basically just added a button
+that says "options". But it's already set *up* to open the modal. Inside, to start,
+we have an `h3` and a `<twig:Button>` that closes the modal.
 
 ## Adding a Modal Close Button
 
@@ -165,22 +210,33 @@ But the result when I click options... is nice! Though, it needs a close
 button on the upper right. We *could* add it to just this modal... but it might
 be nice if it were an *option* in the modal component.
 
-Let's do it! In `Modal.html.twig`, add one more prop called `closeButton` defaulting
-to `false`. If that's true, at the end of the `dialog`, I'll paste
-in a close button.
+Let's do it! In `Modal.html.twig`, add one more prop called `closeButton`
+defaulting to `false`:
+
+[[[ code('509a7675ca') ]]]
+
+If that's true, at the end of the `dialog`, I'll paste in a close button:
+
+[[[ code('3271046149') ]]]
 
 Again, nothing special here: some absolute styling, an icon... and the important
 part: it calls `modal#close`.
 
 In `homepage.html.twig` find that modal and add `closeButton="true"`... but
-with the `:` like last time.
+with the `:` like last time:
+
+[[[ code('dfbfdc9ff3') ]]]
 
 Let's check it out! I *love* that!
 
 *Finally*, let's frost this cake. Near the bottom of the content, I'll paste in
-the planet checkboxes. This is more boring code! I loop over the planets and
-render input check boxes. My Symfony controller is already set up to read the
-`planets` parameter and filter the query.
+the planet checkboxes:
+
+[[[ code('fc38d63acb') ]]]
+
+This is more boring code! I loop over the planets and render input check boxes.
+My Symfony controller is already set up to read the `planets` parameter and filter
+the query.
 
 Final test. Open it up. Lovely! Now watch: click a few. When I press "See Results",
 the table should update. Boom. It did!

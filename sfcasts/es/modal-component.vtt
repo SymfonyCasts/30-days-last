@@ -1,0 +1,609 @@
+WEBVTT
+
+00:00:01.066 --> 00:00:02.916 align:middle
+Hoy es un buen día.
+
+00:00:03.296 --> 00:00:08.146 align:middle
+Hoy vamos a combinar nuestro sistema modal con
+componentes Twig para conseguir un objetivo
+
+00:00:08.586 --> 00:00:12.106 align:middle
+Quiero poder añadir rápidamente un
+modal en cualquier parte de nuestra app.
+
+00:00:13.146 --> 00:00:15.106 align:middle
+Empieza en base.html.twig.
+
+00:00:15.826 --> 00:00:18.446 align:middle
+En la parte inferior, copia el marcado modal.
+
+00:00:18.956 --> 00:00:19.446 align:middle
+Puedes ver que...
+
+00:00:19.606 --> 00:00:26.146 align:middle
+es bastante: no es algo que queramos copiar y
+pegar en otro sitio: cópialo y luego bórralo.
+
+00:00:27.176 --> 00:00:30.376 align:middle
+Vamos a crear un componente
+Modal, esta vez a mano.
+
+00:00:30.966 --> 00:00:35.506 align:middle
+Crea un nuevo archivo en templates/components/
+llamado Modal.html.twig, y pégalo:
+
+00:00:36.666 --> 00:00:40.606 align:middle
+Como dije con el Button, no necesitamos
+una clase PHP para un componente.
+
+00:00:41.106 --> 00:00:44.686 align:middle
+Como no tenemos ninguna, lo
+llamaremos "componente anónimo".
+
+00:00:45.616 --> 00:00:47.566 align:middle
+Encima, renderiza attributes...
+
+00:00:47.966 --> 00:00:52.576 align:middle
+luego añade .defaults() para que podamos mover
+estos dos atributos dentro de él. Pega... luego
+
+00:00:53.196 --> 00:00:57.626 align:middle
+cada uno de ellos necesita un cambio de
+imagen para encajar como claves y valores Twig
+
+00:00:57.626 --> 00:01:02.126 align:middle
+en lugar de atributos HTML: ¡Me gusta!
+
+00:01:03.046 --> 00:01:07.646 align:middle
+En base.html.twig, renderiza
+esto con <twig:Modal>.
+
+00:01:08.386 --> 00:01:15.966 align:middle
+¡Qué fácil! Sin embargo, fíjate bien en Modal.html.twig:
+hay algunas cosas que no deberían estar aquí.
+
+00:01:16.486 --> 00:01:18.436 align:middle
+Por ejemplo, ¡el <turbo-frame>!
+
+00:01:18.996 --> 00:01:20.596 align:middle
+No todos los modales necesitan un marco.
+
+00:01:20.596 --> 00:01:25.836 align:middle
+Muchas veces, renderizaremos un modal con
+contenido simple, hardcodeado en su interior.
+
+00:01:26.556 --> 00:01:32.316 align:middle
+Copia esto y sustitúyelo, por supuesto,
+por {% block content %} y {% endblock %}:
+
+00:01:34.246 --> 00:01:36.766 align:middle
+En base.html.twig, pega el marco...
+
+00:01:37.166 --> 00:01:40.616 align:middle
+y añade una etiqueta de cierre: ¡Sigamos!
+
+00:01:41.376 --> 00:01:42.846 align:middle
+¿La plantilla de carga de aquí abajo?
+
+00:01:43.306 --> 00:01:47.366 align:middle
+Sí, también es algo
+específico de este modal.
+
+00:01:47.976 --> 00:01:52.076 align:middle
+Si nuestro modal es un mensaje hardcoded,
+¡no necesitará esto en absoluto!
+
+00:01:53.076 --> 00:01:59.386 align:middle
+Copia el div de carga , borra, luego alrededor del
+<template> añade: if block('loading_template'):
+
+00:01:59.476 --> 00:02:03.956 align:middle
+Así que si pasamos el bloque,
+renderízalo dentro de <template>.
+
+00:02:06.446 --> 00:02:10.806 align:middle
+De vuelta en base.html.twig, en
+cualquier lugar, define ese bloque.
+
+00:02:11.216 --> 00:02:15.136 align:middle
+Pero en lugar de la etiqueta normal
+{% block %} -que funcionaría-,
+
+00:02:15.506 --> 00:02:20.346 align:middle
+cuando estás dentro de un componente Twig, puedes
+utilizar una sintaxis especial <twig:block>
+
+00:02:20.456 --> 00:02:22.776 align:middle
+con name="loading_template".
+
+00:02:23.386 --> 00:02:28.666 align:middle
+Luego, pega: Acabamos de
+mover un montón de cosas.
+
+00:02:28.666 --> 00:02:29.466 align:middle
+Y sin embargo...
+
+00:02:29.796 --> 00:02:32.456 align:middle
+¡el modal existente sigue funcionando!
+
+00:02:32.836 --> 00:02:38.346 align:middle
+Y ahora tenemos un componente modal más esbelto
+y eficaz que podemos reutilizar en otros sitios.
+
+00:02:38.936 --> 00:02:40.446 align:middle
+Hagamos exactamente eso.
+
+00:02:41.186 --> 00:02:47.026 align:middle
+Quiero añadir un enlace de borrado en cada fila que,
+al hacer clic, abra un modal con una confirmación.
+
+00:02:47.636 --> 00:02:49.926 align:middle
+Abre _row.html.twig.
+
+00:02:50.736 --> 00:02:57.176 align:middle
+Copia el enlace de edición, pégalo y
+llámalo eliminar: Para que esto funcione,
+
+00:02:57.366 --> 00:03:04.476 align:middle
+una opción es crear una nueva página independiente
+de confirmación de eliminación, apuntar a ella y...
+
+00:03:04.896 --> 00:03:10.166 align:middle
+¡listo! El data-turbo-frame="modal"
+cargaría esa página en el modal.
+
+00:03:10.786 --> 00:03:14.096 align:middle
+Pero como ya hemos hecho eso antes,
+vamos a probar algo diferente.
+
+00:03:14.856 --> 00:03:20.356 align:middle
+Elimina el href, cambia éste por un button,
+elimina el atributo data-turbo-frame...
+
+00:03:20.686 --> 00:03:25.236 align:middle
+y cambia los colores amarillos por
+rojos: Vamos a comprobar el aspecto.
+
+00:03:26.206 --> 00:03:32.076 align:middle
+¡Qué bonito! De vuelta, pegaré un
+modal: Aquí no hay nada especial.
+
+00:03:32.426 --> 00:03:35.126 align:middle
+La gran diferencia es que, en
+lugar de un <turbo-frame>,
+
+00:03:35.356 --> 00:03:37.696 align:middle
+el contenido que necesitamos está justo aquí.
+
+00:03:38.766 --> 00:03:43.276 align:middle
+Cuando actualizamos, cada fila tiene ahora un
+cuadro de diálogo de borrado en su interior.
+
+00:03:43.596 --> 00:03:45.276 align:middle
+¡Pero no pasa nada!
+
+00:03:45.546 --> 00:03:48.026 align:middle
+No está abierto, así que es invisible.
+
+00:03:48.026 --> 00:03:50.126 align:middle
+Ahora viene la parte complicada.
+
+00:03:50.596 --> 00:03:53.466 align:middle
+Cuando hagamos clic en este botón,
+tenemos que abrir este modal. Para que
+
+00:03:53.936 --> 00:03:55.976 align:middle
+esto suceda, necesitamos que el botón
+
+00:03:55.976 --> 00:04:00.886 align:middle
+viva físicamente dentro del
+elemento data-controller="modal"
+
+00:04:01.046 --> 00:04:05.456 align:middle
+para que pueda llamar a la acción
+open en el controlador modal Stimulus.
+
+00:04:06.356 --> 00:04:14.576 align:middle
+Para ello, dentro de la plantilla del modal, añade
+un nuevo bloque llamado trigger, endblock: Ahora bien,
+
+00:04:14.826 --> 00:04:19.736 align:middle
+si tienes un botón que activa la apertura
+del modal, ¡puedes ponerlo justo aquí!
+
+00:04:20.566 --> 00:04:29.126 align:middle
+En _row.html.twig, copia el botón, quítalo,
+pon <twig:block name="trigger"> y pégalo.
+
+00:04:29.126 --> 00:04:37.236 align:middle
+Y como estamos dentro del modal, añade
+data-action="modal#open": ¡Probemos esto!
+
+00:04:37.526 --> 00:04:38.406 align:middle
+¡Qué emoción!
+
+00:04:39.076 --> 00:04:42.216 align:middle
+¡Actualiza! El estilo se ha vuelto raro.
+
+00:04:42.996 --> 00:04:47.446 align:middle
+Antes teníamos tres etiquetas
+a, que son elementos en línea.
+
+00:04:47.786 --> 00:04:51.606 align:middle
+Ahora tenemos dos elementos en
+línea y un elemento de bloque.
+
+00:04:52.016 --> 00:04:56.136 align:middle
+Así que es algo que cambia ligeramente,
+pero se arregla fácilmente.
+
+00:04:57.126 --> 00:05:01.256 align:middle
+Arriba, en <td>, añade
+una clase flex: Y ahora...
+
+00:05:01.666 --> 00:05:02.836 align:middle
+mucho mejor.
+
+00:05:03.456 --> 00:05:07.356 align:middle
+Y lo que es más importante, cuando
+pulsamos Suprimir, ¡se abre el modal!
+
+00:05:07.766 --> 00:05:11.426 align:middle
+Sin embargo, ya me conoces,
+quiero que esto sea perfecto.
+
+00:05:11.826 --> 00:05:14.276 align:middle
+Y no estoy contento con lo grande que es esto.
+
+00:05:14.836 --> 00:05:18.396 align:middle
+Cuando abro el formulario de edición, tiene
+sentido que ocupe la mitad del ancho de la pantalla.
+
+00:05:18.906 --> 00:05:23.946 align:middle
+Pero cuando abro el de borrar, deberíamos dejar que
+se redujera al tamaño del contenido que hay dentro.
+
+00:05:24.956 --> 00:05:32.186 align:middle
+Para ello, en este caso, quiero que se le pase una
+nueva bandera llamada allowSmallWidth ajustada a true:
+
+00:05:32.846 --> 00:05:34.616 align:middle
+He añadido este : porque,
+
+00:05:34.806 --> 00:05:39.486 align:middle
+si paso allowSmallWidth="true",
+pasará la cadena true.
+
+00:05:40.086 --> 00:05:45.506 align:middle
+Añadiendo dos puntos, esto se convierte en
+código Twig, por lo que pasará el booleano true.
+
+00:05:45.956 --> 00:05:47.406 align:middle
+Ambos funcionarían...
+
+00:05:47.406 --> 00:05:48.816 align:middle
+pero me gusta ser más estricto. Con el
+
+00:05:49.736 --> 00:05:53.886 align:middle
+Button, aprendimos que si quieres que
+esto se convierta en una variable en lugar
+
+00:05:53.886 --> 00:05:57.496 align:middle
+de un atributo, puedes añadir una
+propiedad pública con ese mismo nombre.
+
+00:05:57.826 --> 00:06:00.896 align:middle
+Y podríamos crear un nuevo archivo Modal.php.
+
+00:06:01.296 --> 00:06:04.596 align:middle
+Pero hay otra forma de convertir
+un atributo en una variable
+
+00:06:04.816 --> 00:06:06.826 align:middle
+cuando se utiliza un componente anónimo.
+
+00:06:07.806 --> 00:06:14.446 align:middle
+En la parte superior de Modal.html.twig, añade una
+etiqueta props que es especial para los componentes Twig.
+
+00:06:15.346 --> 00:06:19.896 align:middle
+Añade allowSmallWidth y conviértela
+por defecto en false: Genial, ¿eh?
+
+00:06:20.796 --> 00:06:24.006 align:middle
+A continuación, queremos hacer que
+este ancho mínimo sea condicional.
+
+00:06:24.916 --> 00:06:32.316 align:middle
+Digamos {{ allowSmallWidth }} - si es cierto, no
+renderiza nada, sino renderiza el md:min-w-[50%]:
+
+00:06:34.116 --> 00:06:38.006 align:middle
+De vuelta a la página, el enlace de edición
+sigue abriéndose con la mitad de ancho...
+
+00:06:38.456 --> 00:06:42.056 align:middle
+pero el enlace eliminar,
+¡ah, es bonito y pequeño!
+
+00:06:42.666 --> 00:06:44.756 align:middle
+¡Ahora se merece un contenido de verdad!
+
+00:06:45.126 --> 00:06:50.206 align:middle
+En _row.html.twig, después de
+<h3>, añadiré algo de estilo...
+
+00:06:51.326 --> 00:06:54.416 align:middle
+luego quiero un botón de
+cancelación que cierre el modal.
+
+00:06:54.416 --> 00:06:57.396 align:middle
+Para eso, podemos ir a la vieja escuela.
+
+00:06:57.726 --> 00:07:04.196 align:middle
+Añade un <form method="dialog">, y
+dentro un <twig:Button> que diga Cancelar.
+
+00:07:05.066 --> 00:07:12.116 align:middle
+Y quiero que el botón parezca un enlace, así
+que añade variant="link": Eso aún no existe,
+
+00:07:12.556 --> 00:07:20.626 align:middle
+así que en la clase Button, añádelo: variant y
+sólo necesita text-white: Después del formulario,
+
+00:07:21.116 --> 00:07:27.776 align:middle
+para renderizar el botón de cancelación,
+incluye voyage/_delete_form.html.twig: Ah,
+
+00:07:27.776 --> 00:07:30.076 align:middle
+y esa plantilla tiene incorporado confirm.
+
+00:07:30.966 --> 00:07:34.146 align:middle
+Elimínalo porque ahora
+tenemos algo mucho mejor.
+
+00:07:35.616 --> 00:07:37.156 align:middle
+¡Momento de la verdad!
+
+00:07:37.546 --> 00:07:39.346 align:middle
+Actualiza y borra.
+
+00:07:40.206 --> 00:07:41.136 align:middle
+¡Queda genial!
+
+00:07:41.636 --> 00:07:42.906 align:middle
+Cancelar cierra el modal...
+
+00:07:43.436 --> 00:07:45.306 align:middle
+y borrar funciona.
+
+00:07:45.656 --> 00:07:47.836 align:middle
+Y no debería sorprender que funcione.
+
+00:07:48.256 --> 00:07:51.016 align:middle
+El formulario de borrado no está
+dentro de un <turbo-frame>.
+
+00:07:51.396 --> 00:07:56.086 align:middle
+Así que cuando hacemos clic en eliminar, se
+activa un envío de formulario normal que redirige
+
+00:07:56.116 --> 00:07:58.856 align:middle
+y provoca una navegación
+normal por toda la página.
+
+00:07:59.926 --> 00:08:05.796 align:middle
+Vale, sé que esto ya es un día completo,
+pero quiero utilizar el modal en un punto más.
+
+00:08:06.016 --> 00:08:07.426 align:middle
+Y es un caso de uso genial.
+
+00:08:08.196 --> 00:08:14.436 align:middle
+En la página de inicio, en mi código PHP y
+Symfony, no lo mostraré, pero ya he añadido lógica
+
+00:08:14.526 --> 00:08:17.076 align:middle
+para filtrar esta lista por los planetas.
+
+00:08:17.476 --> 00:08:21.906 align:middle
+Sólo que no añadí ninguna casilla de
+verificación de planetas a la página porque...
+
+00:08:22.146 --> 00:08:24.056 align:middle
+realmente no tenemos espacio para ellas.
+
+00:08:24.056 --> 00:08:31.276 align:middle
+Así que ésta es mi idea: añade un enlace aquí que abra
+un modal que contenga las opciones de filtrado adicionales.
+
+00:08:32.166 --> 00:08:35.956 align:middle
+Abre main/homepage.html.twig
+y busca esa entrada.
+
+00:08:37.826 --> 00:08:41.516 align:middle
+Empieza por añadir un <div
+class="w-1/3 flex">...
+
+00:08:42.656 --> 00:08:44.886 align:middle
+añade el cierre al otro lado de la entrada...
+
+00:08:45.336 --> 00:08:48.146 align:middle
+luego elimina w-1/3 de la entrada.
+
+00:08:48.536 --> 00:08:53.106 align:middle
+Estamos haciendo espacio para ese
+enlace: Pero pegaré un modal completo:
+
+00:08:53.806 --> 00:08:56.726 align:middle
+Esto será invisible excepto
+por el desencadenante.
+
+00:08:56.726 --> 00:09:00.676 align:middle
+Así que básicamente acabamos de
+añadir un botón que dice "opciones".
+
+00:09:01.206 --> 00:09:03.766 align:middle
+Pero ya está configurado para abrir el modal.
+
+00:09:04.926 --> 00:09:09.946 align:middle
+Dentro, para empezar, tenemos un h3 y un
+<twig:Button> que cierra el modal.
+
+00:09:09.946 --> 00:09:12.946 align:middle
+Pero el resultado cuando
+hago clic en opciones...
+
+00:09:13.686 --> 00:09:17.906 align:middle
+¡es bonito! Aunque, necesita un botón
+de cierre en la parte superior derecha.
+
+00:09:18.506 --> 00:09:20.576 align:middle
+Podríamos añadirlo sólo a este modal...
+
+00:09:20.806 --> 00:09:24.316 align:middle
+pero estaría bien que fuera una
+opción del componente modal.
+
+00:09:25.116 --> 00:09:25.756 align:middle
+¡Hagámoslo!
+
+00:09:26.426 --> 00:09:34.546 align:middle
+En Modal.html.twig, añade una prop más llamada
+closeButton por defecto a false: Si es así,
+
+00:09:34.746 --> 00:09:40.486 align:middle
+al final de dialog, pegaré un botón de
+cierre: De nuevo, nada especial aquí:
+
+00:09:40.716 --> 00:09:43.166 align:middle
+algo de estilo absoluto, un icono...
+
+00:09:43.456 --> 00:09:46.646 align:middle
+y la parte importante: llama a modal#close.
+
+00:09:47.506 --> 00:09:52.786 align:middle
+En homepage.html.twig encuentra ese
+modal y añade closeButton="true"...
+
+00:09:53.286 --> 00:09:57.316 align:middle
+pero con el : como la última
+vez: ¡Vamos a comprobarlo!
+
+00:09:58.946 --> 00:10:00.436 align:middle
+¡Me encanta!
+
+00:10:00.436 --> 00:10:04.016 align:middle
+Por último, vamos a escarchar este pastel.
+
+00:10:04.916 --> 00:10:11.476 align:middle
+Cerca de la parte inferior del contenido, pegaré las casillas
+de verificación del planeta: ¡Esto es más código aburrido!
+
+00:10:11.906 --> 00:10:15.176 align:middle
+Hago un bucle sobre los planetas y muestro
+las casillas de verificación de entrada.
+
+00:10:15.886 --> 00:10:20.976 align:middle
+Mi controlador Symfony ya está configurado para
+leer el parámetro planets y filtrar la consulta.
+
+00:10:20.976 --> 00:10:23.016 align:middle
+Prueba final.
+
+00:10:23.776 --> 00:10:24.416 align:middle
+Ábrelo.
+
+00:10:25.126 --> 00:10:28.196 align:middle
+¡Precioso! Ahora observa: haz clic en algunos.
+
+00:10:29.196 --> 00:10:32.676 align:middle
+Cuando pulse "Ver resultados",
+la tabla debería actualizarse.
+
+00:10:33.336 --> 00:10:35.076 align:middle
+Bum. ¡Se ha actualizado!
+
+00:10:35.716 --> 00:10:36.956 align:middle
+Pero lo más guay es...
+
+00:10:37.086 --> 00:10:38.336 align:middle
+¡cómo ha funcionado!
+
+00:10:38.676 --> 00:10:41.396 align:middle
+Piénsalo: Hago clic en este botón...
+
+00:10:41.396 --> 00:10:43.756 align:middle
+y la tabla se recarga.
+
+00:10:44.286 --> 00:10:46.706 align:middle
+Eso significa que el
+formulario se está enviando.
+
+00:10:47.736 --> 00:10:49.476 align:middle
+Pero... ¿qué ha provocado eso?
+
+00:10:49.476 --> 00:10:53.446 align:middle
+Mira el botón: no hay código
+para enviar el formulario.
+
+00:10:53.626 --> 00:10:54.896 align:middle
+Entonces, ¿qué está pasando?
+
+00:10:56.106 --> 00:10:59.376 align:middle
+Recuerda: este button, las casillas
+de verificación del planeta
+
+00:10:59.536 --> 00:11:03.856 align:middle
+y este modal viven físicamente
+dentro del elemento <form>.
+
+00:11:04.296 --> 00:11:08.356 align:middle
+¿Y qué ocurre cuando pulsas un botón
+que vive dentro de un formulario?
+
+00:11:08.746 --> 00:11:09.996 align:middle
+¡Envía el formulario!
+
+00:11:10.556 --> 00:11:14.296 align:middle
+Ejecutamos el modal#close, pero
+también permitimos que el navegador
+
+00:11:14.296 --> 00:11:17.766 align:middle
+realice el comportamiento por
+defecto: enviar el formulario.
+
+00:11:18.246 --> 00:11:21.336 align:middle
+¡Esto es tecnología
+alienígena antigua en acción!
+
+00:11:22.246 --> 00:11:24.216 align:middle
+En cuanto al botón de cierre,
+he sido un poco astuto.
+
+00:11:24.686 --> 00:11:27.836 align:middle
+Cuando lo añadí, incluí un type="button".
+
+00:11:28.396 --> 00:11:32.966 align:middle
+Eso le dice al navegador que no envíe
+ningún formulario que pueda estar dentro.
+
+00:11:33.886 --> 00:11:36.706 align:middle
+Por eso, cuando hacemos clic
+en "X", no se actualiza nada.
+
+00:11:36.826 --> 00:11:40.016 align:middle
+Pero cuando hacemos clic en "ver
+resultados", el formulario se envía.
+
+00:11:40.986 --> 00:11:42.956 align:middle
+¡Woh! ¡El mejor día de todos!
+
+00:11:43.586 --> 00:11:48.556 align:middle
+Mañana veremos los componentes en vivo,
+en los que tomamos componentes Twig
+
+00:11:48.766 --> 00:11:53.706 align:middle
+y dejamos que se reproduzcan en la página mediante
+Ajax cuando el usuario interactúa con ellos.

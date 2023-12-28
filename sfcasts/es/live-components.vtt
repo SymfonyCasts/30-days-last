@@ -1,0 +1,616 @@
+WEBVTT
+
+00:00:01.076 --> 00:00:03.736 align:middle
+¡Feliz día 27 de LAST Stack!
+
+00:00:04.016 --> 00:00:08.846 align:middle
+Hemos conseguido mucho durante los primeros
+26 días con sólo tres letras de LAST Stack:
+
+00:00:09.056 --> 00:00:11.206 align:middle
+Mapeador de Activos, Stimulus y Turbo.
+
+00:00:11.516 --> 00:00:15.976 align:middle
+Hoy desciframos el código de la L
+de LAST Stack: Componentes en vivo.
+
+00:00:16.346 --> 00:00:18.866 align:middle
+Los componentes en vivo nos
+permiten tomar un componente Twig...
+
+00:00:18.946 --> 00:00:23.676 align:middle
+y luego volver a renderizarlo mediante Ajax
+a medida que el usuario interactúa con él.
+
+00:00:23.676 --> 00:00:25.746 align:middle
+Nuestro objetivo es esta búsqueda global.
+
+00:00:26.296 --> 00:00:28.446 align:middle
+Cuando hago clic, ¡no pasa nada!
+
+00:00:29.016 --> 00:00:35.096 align:middle
+Lo que quiero hacer es abrir un modal con un cuadro de búsqueda
+que, a medida que escribimos, cargue una búsqueda en vivo.
+
+00:00:35.166 --> 00:00:38.726 align:middle
+Empieza dentro de templates/base.html.twig.
+
+00:00:38.866 --> 00:00:41.086 align:middle
+¡Busca la búsqueda!
+
+00:00:42.086 --> 00:00:44.876 align:middle
+Perfecto: esta es la entrada de
+búsqueda falsa que acabamos de ver.
+
+00:00:45.906 --> 00:00:54.626 align:middle
+Añade un <twig:Modal> con :closeButton="true",
+luego un <twig:block> con name="trigger".
+
+00:00:55.526 --> 00:00:57.746 align:middle
+Pon la entrada falsa dentro de eso.
+
+00:01:00.046 --> 00:01:05.966 align:middle
+Para que esto abra el modal, necesitamos
+data-action="modal#open": ¡Genial!
+
+00:01:06.406 --> 00:01:12.096 align:middle
+Si actualizamos, no cambia nada: la única
+parte visible del modal es el activador.
+
+00:01:12.176 --> 00:01:16.836 align:middle
+Para el contenido del modal, después
+del bloque Twig, pegaré un div:
+
+00:01:17.346 --> 00:01:20.586 align:middle
+Aquí no hay nada especial: sólo
+una entrada de búsqueda real.
+
+00:01:21.916 --> 00:01:23.926 align:middle
+De vuelta al navegador, cuando haga clic...
+
+00:01:24.436 --> 00:01:26.626 align:middle
+oh oh. ¡no pasa nada!
+
+00:01:27.086 --> 00:01:29.216 align:middle
+La depuración se inicia siempre en la consola.
+
+00:01:30.606 --> 00:01:35.226 align:middle
+No hay errores, pero cuando hago clic,
+mira: no hay ningún registro que diga
+
+00:01:35.226 --> 00:01:36.936 align:middle
+que se está lanzando la acción.
+
+00:01:37.456 --> 00:01:41.276 align:middle
+¿Hay algo que no funciona y
+tal vez hayas visto mi error?
+
+00:01:41.966 --> 00:01:44.196 align:middle
+Añadimos el data-action a un div.
+
+00:01:44.686 --> 00:01:50.636 align:middle
+A diferencia de un button o un form, Stimulus
+no tiene un evento predeterminado para un div.
+
+00:01:51.516 --> 00:01:54.636 align:middle
+Añadimos click->: Y ahora...
+
+00:01:55.926 --> 00:01:59.856 align:middle
+¡ya está! Ah, ¡y autoenfocó la entrada!
+
+00:02:00.196 --> 00:02:00.586 align:middle
+Eso es....
+
+00:02:00.796 --> 00:02:02.836 align:middle
+¡una característica de los diálogos!
+
+00:02:03.086 --> 00:02:09.226 align:middle
+Funcionan como una minipágina dentro de una
+página: autoenfoca el primer elemento tabulable...
+
+00:02:09.556 --> 00:02:13.006 align:middle
+o puedes utilizar el atributo normal
+autofocus para tener más control.
+
+00:02:13.306 --> 00:02:15.226 align:middle
+Funciona como tú quieras.
+
+00:02:16.246 --> 00:02:20.356 align:middle
+En fin, soy quisquilloso: esto
+tiene más relleno del que quiero.
+
+00:02:20.696 --> 00:02:21.456 align:middle
+Pero ¡no pasa nada!
+
+00:02:21.796 --> 00:02:24.726 align:middle
+Podemos hacer que nuestro componente
+Modal sea un poco más flexible.
+
+00:02:25.766 --> 00:02:30.416 align:middle
+En components/Modal.html.twig,
+el relleno extra es este p-5.
+
+00:02:31.496 --> 00:02:35.756 align:middle
+Encima, añade un tercer prop: padding='p-5'.
+
+00:02:36.916 --> 00:02:37.386 align:middle
+Cópialo.
+
+00:02:38.306 --> 00:02:44.316 align:middle
+Y aquí abajo, renderiza padding: En
+base.html.twig, en el modal, añade
+
+00:02:44.526 --> 00:02:48.416 align:middle
+padding igual a las comillas
+vacías: ¡Vamos a comprobarlo!
+
+00:02:49.286 --> 00:02:51.166 align:middle
+Y... mucho más ordenado.
+
+00:02:52.256 --> 00:02:57.276 align:middle
+Para dar vida a los resultados, podríamos repetir la
+configuración de las tablas de datos de la página de inicio.
+
+00:02:57.726 --> 00:03:00.616 align:middle
+Podríamos añadir un <turbo-frame>
+con los resultados justo aquí
+
+00:03:01.036 --> 00:03:03.756 align:middle
+y hacer que la entrada se
+autoenvíe a ese marco.
+
+00:03:04.466 --> 00:03:07.126 align:middle
+Otra opción es construir esto
+con un componente en vivo.
+
+00:03:07.686 --> 00:03:11.176 align:middle
+Pero antes de hablar de eso, organicemos
+primero el contenido del modal
+
+00:03:11.176 --> 00:03:12.916 align:middle
+en un componente Twig.
+
+00:03:13.686 --> 00:03:17.806 align:middle
+En templates/components/, crea un nuevo
+archivo llamado SearchSite.html.twig.
+
+00:03:18.946 --> 00:03:21.566 align:middle
+Añadiré un div con {{ attributes }}.
+
+00:03:24.016 --> 00:03:29.076 align:middle
+Luego ve a robar todo el cuerpo
+del modal, y pégalo aquí:
+
+00:03:30.216 --> 00:03:33.036 align:middle
+En base.html.twig, es fácil, ¿verdad?
+
+00:03:33.716 --> 00:03:40.266 align:middle
+<twig:SearchSite /> y listo: En el
+navegador, obtenemos el mismo resultado.
+
+00:03:40.956 --> 00:03:43.836 align:middle
+La búsqueda del sitio va a ser
+realmente una búsqueda de viaje.
+
+00:03:44.486 --> 00:03:46.676 align:middle
+Para obtener los resultados,
+tenemos dos opciones.
+
+00:03:46.746 --> 00:03:48.376 align:middle
+Primero, podríamos...
+
+00:03:48.456 --> 00:03:54.366 align:middle
+obtener de alguna manera las travesías que
+queremos mostrar dentro de base.html.twig
+
+00:03:54.566 --> 00:03:57.426 align:middle
+y pasarlas a SearchSite como una prop.
+
+00:03:58.026 --> 00:04:01.066 align:middle
+Pero... obtener datos de nuestro
+diseño base es complicado...
+
+00:04:01.126 --> 00:04:03.776 align:middle
+probablemente necesitaríamos
+una función Twig personalizada.
+
+00:04:04.656 --> 00:04:07.166 align:middle
+La segunda opción es aprovechar
+nuestro componente Twig
+
+00:04:07.556 --> 00:04:12.266 align:middle
+Uno de sus superpoderes es la capacidad de
+obtener sus propios datos: ser autónomo.
+
+00:04:12.866 --> 00:04:16.606 align:middle
+Para ello, este componente Twig
+necesita ahora una clase PHP.
+
+00:04:16.976 --> 00:04:21.056 align:middle
+En src/Twig/Components/, crea una
+nueva clase PHP llamada SearchSite.
+
+00:04:22.546 --> 00:04:27.176 align:middle
+Lo único que necesita para ser reconocido
+como componente Twig es un atributo:
+
+00:04:27.486 --> 00:04:32.086 align:middle
+#[AsTwigComponent]: Esto es exactamente
+lo que vimos dentro de la clase Button.
+
+00:04:32.896 --> 00:04:37.506 align:middle
+Hace unos días, mencioné rápidamente que
+las clases de componentes Twig son servicios,
+
+00:04:37.716 --> 00:04:43.026 align:middle
+lo que significa que podemos autoconectar otros
+servicios como VoyageRepository, $voyageRepository:
+
+00:04:44.016 --> 00:04:47.976 align:middle
+¡Para proporcionar los datos a la plantilla,
+crea un nuevo método llamado voyages()!
+
+00:04:48.886 --> 00:04:50.506 align:middle
+Esto devolverá una matriz...
+
+00:04:50.776 --> 00:04:53.516 align:middle
+que en realidad será una matriz de Voyage[].
+
+00:04:54.356 --> 00:04:58.846 align:middle
+Dentro de return
+$this->voyageRepository->findBySearch().
+
+00:04:59.546 --> 00:05:01.906 align:middle
+Es el mismo método que usamos
+en la página de inicio.
+
+00:05:02.586 --> 00:05:09.166 align:middle
+Pasa null, un array vacío, y limita a 10 resultados:
+La consulta de búsqueda aún no es dinámica,
+
+00:05:09.226 --> 00:05:12.586 align:middle
+pero ahora tenemos un método voyages()
+que podemos utilizar en la plantilla.
+
+00:05:13.526 --> 00:05:20.866 align:middle
+Empezaré con un poco de estilo, luego es
+código Twig normal: {% for voyage in this -
+
+00:05:21.066 --> 00:05:23.936 align:middle
+ese es nuestro objeto componente - .voyages.
+
+00:05:24.996 --> 00:05:29.886 align:middle
+Añade endfor, y en el medio,
+pegaré eso: Nada especial:
+
+00:05:30.126 --> 00:05:32.936 align:middle
+una etiqueta de anclaje, una etiqueta
+de imagen y algo de información.
+
+00:05:34.416 --> 00:05:37.026 align:middle
+Vamos a probarlo.
+
+00:05:37.026 --> 00:05:38.856 align:middle
+¡Abre! ¡Genial!
+
+00:05:39.586 --> 00:05:42.806 align:middle
+Aunque, claro, cuando escribimos,
+¡no se actualiza nada!
+
+00:05:43.256 --> 00:05:47.116 align:middle
+¡Lamentable! Aquí es donde los
+componentes en vivo resultan útiles.
+
+00:05:47.406 --> 00:05:48.616 align:middle
+¡Así que vamos a instalarlo!
+
+00:05:49.186 --> 00:05:55.046 align:middle
+composer require symfony/ux-live-component
+Para actualizar nuestro componente Twig
+
+00:05:55.046 --> 00:05:58.246 align:middle
+a un componente Live, sólo
+tenemos que hacer dos cosas.
+
+00:05:58.306 --> 00:06:01.476 align:middle
+Primero, es #[AsLiveComponent].
+
+00:06:02.446 --> 00:06:07.376 align:middle
+Y segundo, utilizar DefaultActionTrait:
+Es un detalle interno...
+
+00:06:07.376 --> 00:06:08.196 align:middle
+pero necesario.
+
+00:06:08.196 --> 00:06:10.796 align:middle
+Hasta aquí, nada cambiará.
+
+00:06:11.086 --> 00:06:12.976 align:middle
+Sigue siendo un componente Twig...
+
+00:06:13.346 --> 00:06:16.826 align:middle
+y no hemos añadido ninguna
+superpotencia de componente en vivo.
+
+00:06:17.586 --> 00:06:22.516 align:middle
+Uno de los conceptos clave con un componente vivo es que
+puedes añadir una propiedad y permitir que el usuario
+
+00:06:22.516 --> 00:06:25.526 align:middle
+cambie esa propiedad desde el frontend.
+
+00:06:25.526 --> 00:06:32.886 align:middle
+Por ejemplo, crea un public string $query para
+representar la cadena de búsqueda: A continuación,
+
+00:06:33.256 --> 00:06:39.126 align:middle
+utilízala cuando llamemos al repositorio: Para
+permitir que el usuario modifique esta propiedad,
+
+00:06:39.246 --> 00:06:46.366 align:middle
+necesitamos darle un atributo: #[LiveProp]
+con writeable: true: Por último,
+
+00:06:46.476 --> 00:06:52.516 align:middle
+para vincular esta propiedad a la entrada -de modo que la
+propiedad query cambie a medida que el usuario escribe-
+
+00:06:53.026 --> 00:06:56.776 align:middle
+añade data-model="query": ¡Ya está!
+
+00:06:57.256 --> 00:06:58.646 align:middle
+Comprueba el resultado.
+
+00:06:59.426 --> 00:07:02.256 align:middle
+Empezamos con todo, pero cuando tecleamos...
+
+00:07:02.706 --> 00:07:03.796 align:middle
+¡filtra!
+
+00:07:03.956 --> 00:07:06.596 align:middle
+Incluso tiene depuración incorporada.
+
+00:07:07.446 --> 00:07:13.106 align:middle
+Entre bastidores, hace una petición AJAX,
+rellena la propiedad query con esta cadena,
+
+00:07:13.466 --> 00:07:16.896 align:middle
+vuelve a renderizar la plantilla
+Twig y la coloca justo aquí.
+
+00:07:17.686 --> 00:07:22.126 align:middle
+Ahora que esto funciona, no creo que necesitemos
+cargar todos los resultados al principio.
+
+00:07:22.506 --> 00:07:25.966 align:middle
+Y, mira, es sólo PHP, así que esto es fácil.
+
+00:07:26.496 --> 00:07:34.796 align:middle
+Si no $this->query, entonces devuelve un array vacío: Y en
+SearchSite.html.twig, añade una declaración if alrededor de
+
+00:07:34.796 --> 00:07:40.746 align:middle
+esto: if this.voyages no
+está vacío, devuelve que...
+
+00:07:41.026 --> 00:07:46.726 align:middle
+con el endif al final: Para los
+quisquillosos con los detalles, sí,
+
+00:07:46.816 --> 00:07:50.576 align:middle
+con this.voyages, estamos
+llamando al método dos veces.
+
+00:07:50.926 --> 00:07:55.796 align:middle
+Pero hay formas de evitarlo, y mi
+favorita se llama #[ExposeInTemplate].
+
+00:07:56.146 --> 00:07:58.276 align:middle
+No lo mostraré, pero es un cambio rápido.
+
+00:07:58.316 --> 00:08:00.936 align:middle
+Así que, ¡estoy contento!
+
+00:08:01.146 --> 00:08:03.316 align:middle
+Pero, esto no es perfecto...
+
+00:08:03.316 --> 00:08:04.346 align:middle
+y quiero eso.
+
+00:08:04.946 --> 00:08:09.526 align:middle
+Una cosa que me molesta es la posición:
+parece baja cuando está vacía.
+
+00:08:09.826 --> 00:08:12.146 align:middle
+Y cuando escribimos, salta
+de un lado a otro. Es
+
+00:08:12.676 --> 00:08:16.816 align:middle
+el posicionamiento nativo de <dialog>,
+que normalmente es estupendo,
+
+00:08:16.816 --> 00:08:18.776 align:middle
+pero no cuando nuestro contenido cambia.
+
+00:08:18.776 --> 00:08:22.546 align:middle
+Así que, en este caso, vamos a fijar
+la posición cerca de la parte superior.
+
+00:08:23.706 --> 00:08:28.686 align:middle
+En Modal.html.twig, añade una última
+pieza de flexibilidad a nuestro componente:
+
+00:08:29.756 --> 00:08:38.416 align:middle
+una prop llamada fixedTop = false : Entonces,
+al final de las clases dialog, si fixedTop,
+
+00:08:38.706 --> 00:08:41.956 align:middle
+renderiza mt-14 para fijar el margen superior.
+
+00:08:42.346 --> 00:08:47.286 align:middle
+Si no, no hagas nada: Sobre
+base.html.twig, en el modal...
+
+00:08:47.706 --> 00:08:50.246 align:middle
+es hora de dividirlo en varias líneas.
+
+00:08:51.656 --> 00:08:58.246 align:middle
+Entonces pasa a :fixedTop="true": Y ahora, ah.
+
+00:08:58.796 --> 00:09:01.676 align:middle
+Mucho más bonito y sin más saltos.
+
+00:09:02.586 --> 00:09:03.206 align:middle
+¿Qué más?
+
+00:09:03.776 --> 00:09:07.596 align:middle
+Es necesario pulsar arriba y abajo en
+el teclado para recorrer los resultados,
+
+00:09:07.696 --> 00:09:09.526 align:middle
+aunque eso lo dejaré para otra ocasión.
+
+00:09:09.956 --> 00:09:11.036 align:middle
+Pero fíjate en esto.
+
+00:09:11.516 --> 00:09:17.346 align:middle
+Si busco, luego hago clic fuera y
+navego a otra página, como es lógico,
+
+00:09:17.516 --> 00:09:19.616 align:middle
+al abrir el modal de búsqueda, está vacío.
+
+00:09:20.296 --> 00:09:23.386 align:middle
+Sería genial que recordara la búsqueda.
+
+00:09:23.566 --> 00:09:25.666 align:middle
+Y podemos hacerlo con un truco de Turbo.
+
+00:09:26.296 --> 00:09:31.436 align:middle
+En base.html.twig, en el modal,
+añade data-turbo-permanent:
+
+00:09:32.256 --> 00:09:35.926 align:middle
+Eso le dice a Turbo que mantenga
+esto en la página cuando navegue.
+
+00:09:36.696 --> 00:09:38.956 align:middle
+Cuando utilices esto, necesita un id.
+
+00:09:38.956 --> 00:09:41.446 align:middle
+Veamos cómo se siente esto.
+
+00:09:41.996 --> 00:09:48.026 align:middle
+Abre la búsqueda, escribe algo, pulsa fuera,
+ve a la página principal y ábrela de nuevo.
+
+00:09:48.026 --> 00:09:50.266 align:middle
+¡Qué guay!
+
+00:09:51.026 --> 00:09:52.456 align:middle
+Vale, ¡última cosa!
+
+00:09:53.006 --> 00:09:57.696 align:middle
+Aquí arriba anuncio que abres la
+búsqueda con un atajo de teclado.
+
+00:09:58.006 --> 00:09:59.056 align:middle
+¡Eso es mentira!
+
+00:09:59.456 --> 00:10:00.846 align:middle
+Pero podemos añadir esto...
+
+00:10:00.936 --> 00:10:02.316 align:middle
+y, de nuevo, es fácil.
+
+00:10:02.986 --> 00:10:05.136 align:middle
+En el modal, añade un data-action.
+
+00:10:05.246 --> 00:10:09.666 align:middle
+Stimulus tiene soporte incorporado
+para hacer cosas en keydown.
+
+00:10:10.056 --> 00:10:17.406 align:middle
+Así que podemos decir keydown., y luego la tecla
+que queramos, como K. O en este caso, Ctrl+K.
+
+00:10:17.406 --> 00:10:20.776 align:middle
+Si nos detuviéramos ahora,
+esto sólo se activaría
+
+00:10:20.776 --> 00:10:25.296 align:middle
+si el modal estuviera enfocado
+y luego alguien pulsara Ctrl+K.
+
+00:10:25.786 --> 00:10:27.246 align:middle
+Eso... no va a ocurrir.
+
+00:10:27.686 --> 00:10:31.686 align:middle
+En lugar de eso, queremos que se abra
+independientemente de lo que esté enfocado.
+
+00:10:31.846 --> 00:10:33.566 align:middle
+Queremos una escucha global.
+
+00:10:34.256 --> 00:10:36.236 align:middle
+Para ello, añade @window.
+
+00:10:38.146 --> 00:10:43.216 align:middle
+Cópialo, añade un espacio,
+pégalo y activa también meta+k.
+
+00:10:43.696 --> 00:10:47.316 align:middle
+Meta es la tecla comando en
+un Mac: ¡Hora de probar!
+
+00:10:47.616 --> 00:10:49.176 align:middle
+Me muevo y...
+
+00:10:49.496 --> 00:10:51.946 align:middle
+¡teclado! ¡Me encanta!
+
+00:10:52.126 --> 00:10:57.656 align:middle
+¡Listo! Ah, ¡y los Componentes Vivos también
+se pueden cargar perezosamente mediante AJAX!
+
+00:10:58.036 --> 00:11:00.636 align:middle
+Observa: añade un atributo defer.
+
+00:11:01.796 --> 00:11:04.936 align:middle
+Cuando actualicemos, no
+veremos ninguna diferencia...
+
+00:11:05.056 --> 00:11:08.136 align:middle
+porque, de todos modos, ese componente
+se oculta al cargar la página.
+
+00:11:08.396 --> 00:11:15.266 align:middle
+Pero en realidad, acaba de cargarse vacío y luego ha hecho
+inmediatamente una llamada Ajax para cargarse de verdad.
+
+00:11:15.826 --> 00:11:18.366 align:middle
+Podemos verlo aquí abajo, en la barra
+de herramientas de depuración web
+
+00:11:19.056 --> 00:11:24.206 align:middle
+Esta es una forma estupenda de aplazar la carga
+de algo pesado, para que no ralentice tu página.
+
+00:11:24.736 --> 00:11:29.196 align:middle
+No es especialmente útil en nuestro
+caso porque el componente SearchSite es
+
+00:11:29.196 --> 00:11:31.366 align:middle
+muy ligero, así que lo eliminaré.
+
+00:11:32.486 --> 00:11:35.686 align:middle
+Mañana pasaremos un día más
+con los Componentes Vivos,
+
+00:11:35.956 --> 00:11:43.426 align:middle
+esta vez para dotar a un formulario de superpoderes de
+validación en tiempo real y resolver el viejo y molesto problema
+
+00:11:43.496 --> 00:11:46.416 align:middle
+de los campos de formulario
+dinámicos o dependientes.

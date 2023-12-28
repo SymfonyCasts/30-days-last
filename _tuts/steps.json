@@ -706,16 +706,6 @@
             "description": null
         },
         {
-            "id": "delete-me-1",
-            "name": "delete me 1",
-            "description": null
-        },
-        {
-            "id": "delete-me-2",
-            "name": "delete me 2",
-            "description": null
-        },
-        {
             "id": "modalcomponent-copy-into-new-component-template",
             "name": "ModalComponent: Copy into new component template",
             "description": null
@@ -866,11 +856,6 @@
             "description": null
         },
         {
-            "id": "delete-me-3",
-            "name": "delete me 3",
-            "description": null
-        },
-        {
             "id": "autovalidation-pass-in-initial-data",
             "name": "AutoValidation: Pass in initial data",
             "description": null
@@ -968,11 +953,6 @@
         {
             "id": "testing-remove-pause",
             "name": "Testing: Remove pause",
-            "description": null
-        },
-        {
-            "id": "delete-me-4",
-            "name": "delete me 4",
             "description": null
         },
         {

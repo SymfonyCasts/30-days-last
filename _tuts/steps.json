@@ -994,7 +994,22 @@
             "id": "testing-run-assertions",
             "name": "Testing: Run assertions",
             "description": null
+        },
+        {
+            "id": "performance-comment-out-css-import",
+            "name": "Performance: comment out css import",
+            "description": null
+        },
+        {
+            "id": "performance-make-live-controller-lazy",
+            "name": "Performance: make live controller lazy",
+            "description": null
+        },
+        {
+            "id": "performance-install-weblink",
+            "name": "Performance: Install weblink",
+            "description": null
         }
     ],
-    "sha": "527ddbfa6ac87acf0932e1ea5391d6a2a37aec2e"
+    "sha": "14dad7aa6dd34b06a4340113ce62762f2e844726"
 }

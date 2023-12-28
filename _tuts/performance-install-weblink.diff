@@ -1,0 +1,179 @@
+diff --git a/composer.json b/composer.json
+index 53dfdc58..f71e63af 100644
+--- a/composer.json
++++ b/composer.json
+@@ -30,6 +30,7 @@
+         "symfony/ux-turbo": "2.x-dev",
+         "symfony/ux-twig-component": "2.x-dev",
+         "symfony/validator": "6.4.x-dev",
++        "symfony/web-link": "6.4.*",
+         "symfony/yaml": "6.4.x-dev",
+         "symfonycasts/dynamic-forms": "dev-main",
+         "symfonycasts/tailwind-bundle": "dev-main",
+diff --git a/composer.lock b/composer.lock
+index d6e241c9..d0deca1f 100644
+--- a/composer.lock
++++ b/composer.lock
+@@ -4,7 +4,7 @@
+         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+         "This file is @generated automatically"
+     ],
+-    "content-hash": "3fe36930f74d981d17f295c6bb001b3b",
++    "content-hash": "56390d5f4e9b9d08f3f62d735b6f5e3b",
+     "packages": [
+         {
+             "name": "babdev/pagerfanta-bundle",
+@@ -2044,6 +2044,63 @@
+             },
+             "time": "2023-09-22T11:10:57+00:00"
+         },
++        {
++            "name": "psr/link",
++            "version": "dev-master",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/php-fig/link.git",
++                "reference": "5b8d54ad01c46baa3bb13388640a62fdb34461a5"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/php-fig/link/zipball/5b8d54ad01c46baa3bb13388640a62fdb34461a5",
++                "reference": "5b8d54ad01c46baa3bb13388640a62fdb34461a5",
++                "shasum": ""
++            },
++            "require": {
++                "php": ">=8.0.0"
++            },
++            "suggest": {
++                "fig/link-util": "Provides some useful PSR-13 utilities"
++            },
++            "default-branch": true,
++            "type": "library",
++            "extra": {
++                "branch-alias": {
++                    "dev-master": "2.0.x-dev"
++                }
++            },
++            "autoload": {
++                "psr-4": {
++                    "Psr\\Link\\": "src/"
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "PHP-FIG",
++                    "homepage": "https://www.php-fig.org/"
++                }
++            ],
++            "description": "Common interfaces for HTTP links",
++            "homepage": "https://github.com/php-fig/link",
++            "keywords": [
++                "http",
++                "http-link",
++                "link",
++                "psr",
++                "psr-13",
++                "rest"
++            ],
++            "support": {
++                "source": "https://github.com/php-fig/link/tree/master"
++            },
++            "time": "2022-06-21T13:38:53+00:00"
++        },
+         {
+             "name": "psr/log",
+             "version": "dev-master",
+@@ -6645,6 +6702,89 @@
+             ],
+             "time": "2023-11-20T16:41:16+00:00"
+         },
++        {
++            "name": "symfony/web-link",
++            "version": "6.4.x-dev",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/symfony/web-link.git",
++                "reference": "c7e30b9b90c4a9b3c94cc5697c7b8046a6655a51"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/symfony/web-link/zipball/c7e30b9b90c4a9b3c94cc5697c7b8046a6655a51",
++                "reference": "c7e30b9b90c4a9b3c94cc5697c7b8046a6655a51",
++                "shasum": ""
++            },
++            "require": {
++                "php": ">=8.1",
++                "psr/link": "^1.1|^2.0"
++            },
++            "conflict": {
++                "symfony/http-kernel": "<5.4"
++            },
++            "provide": {
++                "psr/link-implementation": "1.0|2.0"
++            },
++            "require-dev": {
++                "symfony/http-kernel": "^5.4|^6.0|^7.0"
++            },
++            "type": "library",
++            "autoload": {
++                "psr-4": {
++                    "Symfony\\Component\\WebLink\\": ""
++                },
++                "exclude-from-classmap": [
++                    "/Tests/"
++                ]
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "Kévin Dunglas",
++                    "email": "dunglas@gmail.com"
++                },
++                {
++                    "name": "Symfony Community",
++                    "homepage": "https://symfony.com/contributors"
++                }
++            ],
++            "description": "Manages links between resources",
++            "homepage": "https://symfony.com",
++            "keywords": [
++                "dns-prefetch",
++                "http",
++                "http2",
++                "link",
++                "performance",
++                "prefetch",
++                "preload",
++                "prerender",
++                "psr13",
++                "push"
++            ],
++            "support": {
++                "source": "https://github.com/symfony/web-link/tree/6.4"
++            },
++            "funding": [
++                {
++                    "url": "https://symfony.com/sponsor",
++                    "type": "custom"
++                },
++                {
++                    "url": "https://github.com/fabpot",
++                    "type": "github"
++                },
++                {
++                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
++                    "type": "tidelift"
++                }
++            ],
++            "time": "2023-09-25T12:52:38+00:00"
++        },
+         {
+             "name": "symfony/yaml",
+             "version": "6.4.x-dev",

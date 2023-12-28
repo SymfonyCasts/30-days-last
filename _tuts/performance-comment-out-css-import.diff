@@ -1,0 +1,13 @@
+diff --git a/assets/lib/alien-greeting.js b/assets/lib/alien-greeting.js
+index 973516a0..fc30be83 100644
+--- a/assets/lib/alien-greeting.js
++++ b/assets/lib/alien-greeting.js
+@@ -1,7 +1,7 @@
+ export default function (message, inPeace = false) {
+     if (!inPeace) {
+         setTimeout(() => {
+-            import('../styles/alien-greeting.css');
++            //import('../styles/alien-greeting.css');
+         }, 4000);
+     }
+ 

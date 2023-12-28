@@ -1,0 +1,13 @@
+diff --git a/assets/controllers.json b/assets/controllers.json
+index 50bf1e2e..becc1e82 100644
+--- a/assets/controllers.json
++++ b/assets/controllers.json
+@@ -13,7 +13,7 @@
+         "@symfony/ux-live-component": {
+             "live": {
+                 "enabled": true,
+-                "fetch": "eager",
++                "fetch": "lazy",
+                 "autoimport": {
+                     "@symfony/ux-live-component/dist/live.min.css": true
+                 }

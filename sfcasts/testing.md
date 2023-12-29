@@ -1,8 +1,282 @@
 # Functional Testing
 
-Coming soon...
+Welcome back to part 2 of day 28. Yea, I cheated a bit today with two parts. We
+talked about testing Twig & Live components... but we *also* need to talk about
+functional - or end-to-end - testing in general. That's where we programmatically
+control a browser, have it click links, fill out forms, etc.
 
-It works! Okay, let's move on to the final and biggest tool for testing. That's going to be functional or end-to-end testing, where we programmatically control a browser, have it click links, and fill out forms. We're going to get an awesome setup, but I've got to admit, this takes way too much work, and it's something that we need to improve. So the library I like to use for functional testing is Zenstruck Browser. Run composer.require zenstruck-browser-dev. And then I'm going to bootstrap a functional test. So in the test directory, I'll create a directory called Functional. And inside of there, I'll create a new PHP class called VoyageControllerTest. And I guess I could create a controller directory also. And inside, I'm just going to paste over. Now what I want you to notice is we are using ResetDatabase and Factories. It extends the normal web test case. And then this has Browser comes from the Browser library, and it gives us the ability to call Browser and then use this really cool syntax for clicking through the site and filling out fields. So the flow we're going through here is the one that clicks voyages, clicks a new voyage, fills out the form, clicks save, and then we assert some results in the bottom. We're starting with a single voyage in the database. So after we create a new one, we're asserting that we see two voyages on the page. Now to run this, we're going to use the same command, but this time I'll target the Functional directory. And it actually passes, which is awesome. However, there's no JavaScript. And behind the scenes, it used a fake browser to do those things. If we want to test with JavaScript, we can by saying this AeroPanther browser. We're not going to see it, but that's going to cause a real browser like Chrome to run in the background, and it will actually execute JavaScript. However, when we try it, the first thing it's going to tell us is, hey, you need to install a Symfony slash Panther. So let's do that. Composer require Symfony slash Panther dash dash dev. And if we tried it now, it would tell us one other thing, and that's that we need to extend a Panther test case. All right. So if we try it now, it fails actually pretty early.  It says clickable element new voyage not found. So it didn't get very far. It clicked on voyages, but it didn't find the new voyage. And one of the cool things with browser when it's used with Panther is that it automatically takes a screenshot of the failure. So we can check it out inside the var directory and check it out. It's still on the first page. It's as if it never clicked voyages, though you can kind of see that voyages was clicked. So the problem is that because all of our page loads are happening via Ajax, our tests aren't waiting for them. It's just clicking voyages, then immediately trying to click new voyage. So that's gonna be the main thing we're gonna have to fix. But before that, it's kind of a bigger problem. Look at the data here. This is not coming from our test database. This is coming from our live. This is coming from our dev site. So Panther detected that we're using the Symfony web server, and instead of booting up a... Remember, Panther uses a real browser behind the scenes to make requests. It actually needs a real web server running. It detected that when we have one running and just use ours automatically. It's actually not what we want. I wanted to spin up a new web server that runs in the test environment so that it's pulling from the test database. To do that, open up phpunit.xml.dist, and I'm gonna paste in two environment variables. So the first, I think, is kind of a workaround. That tells Panther to not use our server. And the second one says, hey, when you do start your own web server, start it in the test environment. And then over in our controller, to make it even easier to find the screenshot, after we click voyages, I'm gonna do a DD screenshot, dump and die, take a screenshot, then dump and die. So it runs, it hits our DD, and it tells us where it saves the screenshot, which is cool. So it's over here in var. Browser, there's the screenshot. And okay, it's working, but it's missing all the styles. To help debug this, we can temporarily have that browser really open. So check this out. After we visit, I'm gonna say pause.  And then to get this to open the browser, I'm gonna add an environment variable called panther no headless equals one. Check this out. Boom. It fires open in a real browser. And then freezes. So now we can view the page source. Here's our CSS file. I'll open that. And it's a 404 not found. Why? Panther starts a web server using the PHP, the built-in PHP web server. And by default, and the way these assets work in the dev environment is they need to get proxied through symphony. So we need a rewrite rule that tells it to send these URLs through symphony. So it's kind of an annoying detail, honestly. So back to my terminal, I'll hit enter to close that. Now go back over here. And we're going to add a custom router in the tests directory. Create a new file called router.php. This is not a detail I want to have to worry about, but here we are. And I'll paste in the guts. This little code here fixes that problem. To tell Panther to use it in phpunit.xml.disk, it's one more environment variable, which I will paste in called panther-webserver-router with value equals dot dot slash tests. Well, it's relative to the slash router.php. It's relative to the public directory. And now it works. Love that. All right, I'll hit enter to have that continue. Perfect. So let's get rid of our pause. And now we're going to go ahead and create a new file called panther-webserver-router. So let's get rid of our pause. And I'll run the test one more time. I'll run the test again. Oh, sorry, my bad. Run the test again, but this time without the Panther headless. Cool. It hit our screenshot. Let's pop that open. And awesome. Cool. So you can see it is on the second page, which is fantastic. And though you can't see it here, a lot of times on these pages, I don't know. All right. No, it's the same problem we originally had. It's not waiting for the page to load. So this isn't going to be a problem because we need to wait for the AJAX call to finish. There's not an easy way to do that right now. I want to show you how you can do it. I'm going to say browser equals.  We'll close this off. I'm going to say browser down here. And in between, I'm going to paste in two lines of code. This is a little lower level, but it's going to wait for the area busy to get added to the HTML element. Then it's going to wait for that to go away. So I run the test again. Let's open our screenshot and interesting. So this is really cool. It is now waiting for the page load to happen. But remember, we also have view transition. So even though the page is loaded, there's still this view transition happening. So that is something we are going to worry about in a second. But before we do, we got to clean this up because I cannot have code that looks like this everywhere. This is way too much work to wait for the page load. So we're going to create a custom browser object. In the test directory, create a new piece of class. Let's call it app browser. This is going to extend. I'll add the namespace, which is mysteriously missing. And I'm going to paste that in. Notice it extends the normal pan the browser, and it adds a new method, which has those lines in it, which is cool. Our goal is that when we call pan the browser here, it's going to give us an instance of our app browser instead of the normal one. And to do that, it is one more environment variable called Panther browser class. And to make sure this is working, I am going to DD get class on the browser. So when we run that test, yes, awesome. So we can see we are getting our app browser. Unfortunately, we don't get autocomplete on that new method because our editor still thinks that Panther browser is returning the core Panther browser. So to get around this, we're going to do one last thing, which is create a custom base test class. So in that test directory, again, create a new class called app Panther test case.
+Now, two things about this. First, we're going to end up with a system that I
+*really* like. And second, the road to *get* there is going to be... honestly,
+a bit bumpy. It's *not* a smooth process and that's something we as a community
+need to work on.
 
-And I'll paste in the contents here as well. It extends the normal Panther test case, and all it does is override the Panther browser method called the parent one, but then it changes the return type so that we know that this is our app browser. So over in VoyageControllerTest, we'll change this to ExtendAppPantherTestCase, then make sure you get rid of the UseHasBrowser, and then we can tighten things up down here. We can reconnect all of these spots, and then use that, wait for page loaded, auto-complete, it's beautiful. All right, let's move this DD and see where we are. We're clicking Voyages, we're waiting for the page to load, let's try it. And okay, further look, now it says form field with purpose not found. So it clicked Voyages, it clicked New Voyage, it didn't find the form field. If you look down here in error screenshots, you can see why. It's still loading. For you, if you try this, you might see the form, because it might have loaded right before the screenshot was taken, but this is in fact the problem. Oh, and you know what, before we fix this, oh, and you know what, before we fix this, one other thing that I wanna get done before it bites us is in Templates, base.html twig. Remember the view transition that was happening? Let's get rid of that in the test environment by saying if app.environment does not equal test. That's just gonna get that out of the way so it doesn't cause problems. It's also gonna make our test run a little bit faster, because we don't have to wait for those. Anyway, back to our failure. When we click to open the modal, what we really need to do is wait for the modal to open, it already is, but we can do that just in case, and then we need to wait for the turbo frame inside of it to finish loading. To that, in App Browser, I'm gonna paste in two more methods here.  First one's called waitForDialog, and it just waits until it sees a dialog on the page with an open attribute, and the second says, okay, if that open dialog has a turbo frame, then wait for the turbo frame to load, which means wait until there, make sure there aren't any area busy turbo frames on the page. So in VoyageControllerTest, after clicking new Voyage, we'll say waitForDialog, and now, oh so close, check this out, table tbodytr expected two elements on the page, but only found one. That's coming from all the way down here, so we're really, really close. What's the problem this time? We'll go back to our error screenshots, and ah. We filled out the form, it looks like we even hit save, we're just checking, we're just doing the assertion too quickly. Remember, we're submitting it to a turbo frame, so we need to wait for that turbo frame to finish loading. And now we have a way to do this, so we can say waitForTurboFrameLoad, and then I'm also gonna add a little extra little thing here that says assert not C element, dialog open, to make sure that the dialog actually finished closing. And now finally, run it one more time. It passes. Okay, as I mentioned, especially with the functional testing, now that we have it set up, it's going to work great. It was too much to set up, something that we need to improve on. Tomorrow, we're gonna talk about performance, which unlike testing, is gonna come together way more automatically.
+## zenstruck/browser
 
+Symfony has built-in functional testing tools, but I like to use another library.
+At your terminal, install it with:
+
+```terminal
+composer require zenstruck/terminal --dev
+```
+
+Next, in the `tests/` folder, I'll create a new directory called `Functional/`...
+then a new class called `VoyageControllerTest`. And I guess I *could* put that
+into a `Controller/` directory also.
+
+For the guts, I'm going to paste in a finished test.
+
+Ok, we're using `ResetDatabase` and `Factories`... it extends the normal
+`WebTestCase` for functional tests... and then `HasBrowser` comes from the Browser
+library and gives us the ability to call `$this->browser()` to control a browser
+with this really smooth API. This goes through the flow of going to the voyage
+page, clicking "New voyage", filling out the form, saving and asserting at the bottom.
+The test starts with a single `Voyage` in the database, so after we create a new
+one, we assert that there are *two* on the page.
+
+To run this, use the same command, but target the `Functional/` directory:
+
+```terminal-silent
+symfony php vendor/bin/simple-phpunit tests/Functional
+```
+
+And... it actually passes! Sweet!
+
+## Testing JavaScript with Panther
+
+But... there's a catch. Behind the scenes, this is *not* using real browser: it's
+just making fake requests in PHP. That's fine, except that it doesn't execute
+JavaScript. We're testing the experience a user would have if they had JavaScript
+*disabled*. That's cool... but to *really* test the modal fanciness, we need to
+do better.
+
+To test execute the test using a *real* browser like Chrome that supports Javascript,
+change to `$this->pantherBrowser()`.
+
+Try it:
+
+```terminal-silent
+symfony php vendor/bin/simple-phpunit tests/Functional
+```
+
+No dice! But a nice error: we need to install `symfony/panther`. Let's do that!
+
+```terminal
+composer require symfony/panther --dev
+```
+
+Panther is a PHP library that uses an API to programmatically control *real*
+browsers on your machine. To use it, we *also* need to extend `PantherTestCase`.
+
+Try it again:
+
+```terminal-silent
+symfony php vendor/bin/simple-phpunit tests/Functional
+```
+
+We don't *see* the browser - it opens invisibly in the background - but it's now
+using Chrome! And the test fails - pretty early:
+
+> Clickable element "New Voyage" not found.
+
+Hmm. It clicked "Voyages", but didn't find the "New Voyage" button. And fantastic
+feature of `zenstruck/browser` with Panther is that, when a test fails, it takes
+a screenshot of the failure.
+
+Inside the `var/` directory... here it is. Huh, the screenshot shows that we're
+still on the homepage - as if we never clicked "Voyages"... though you can kind of
+see that the voyages link looks active.
+
+The problem is that our page loads happen via Ajax... and our tests don't know to
+*wait* for that to finish. It clicks "Voyages"... then immediately tries to click
+"New Voyage". This will be the *main* thing that we'll need to fix.
+
+## Loading a "test" Dev Server
+
+But before that, I see a bigger problem! Look at the data: this is *not* coming from
+our test database! This is coming from our dev site! 
+
+Even though we can't see it, Panther is controlling a *real* browser. And... a real
+browser needs to access our site using some real web server. Because we're using
+the `symfony` web server, Panther detected that and... used it!
+
+But... that's *not* what I want! The biggest problem is that our server is using
+the `dev` environment and the `dev` database. Our tests should use the `test`
+environment at the `test` database.
+
+To fix this, open up `phpunit.xml.dist`. I'll paste in two environment variables.
+The first... is kind of a hack. That tells Panther to *not* use our server. Instead,
+Panther will now silently start its *own* web server using the built-in PHP web
+server. And the second line tells Panther to use the `test` environment when it
+does that.
+
+Over in the test, to make it even easier to see if this is working, after we click
+voyages, call `ddScreenshot()`: take a screenshot, then dump and die.
+
+Run it:
+
+```terminal-silent
+symfony php vendor/bin/simple-phpunit tests/Functional
+```
+
+It hits that... and saved a screenshot! Cool! Find that in `var/`. And... ok.
+It looks like the new web server is being used... but it's missing all the styles!
+
+## Debugging by Opening the Browser
+
+To debug this, we can temporarily tell Panther to *actually* open the browser,
+like so we can see it and play with it.
+
+Watch: after we visit, say `->pause()`.
+
+Then, to open the browser, prefix the test command with an environment variable:
+`PANTHER_NO_HEADLESS=1`:
+
+```terminal-silent
+PANTHER_NO_HEADLESS=1 symfony php vendor/bin/simple-phpunit tests/Functional
+```
+
+And... woh! It popped up the browser then paused. *Now* I can view the page source.
+Here's the CSS file. Open that. It's a 404 not found. Why?
+
+In the dev environment, our assets are served through *Symfony*: they're not real,
+physical files. If you prefix the URL with `index.php`, it works. Panther uses
+the built-in PHP web server... and it needs a rewrite rule that tells it to send
+these URLs through Symfony. Honestly, it's an annoying detail, but we can fix it.
+
+Back at the terminal, hit enter to close the browser. Now, in `tests/`, create a
+new file called `router.php`. I'll paste in the code.
+
+This is a "router" file that will be used by the built-in web server. To tell Panther
+to use it, in `phpunit.xml.dist`, I'll paste in another env var:
+in called `PANTHER_WEB_SERVER_ROUTER` set to `../tests/router.php`.
+
+```terminal-silent
+PANTHER_NO_HEADLESS=1 symfony php vendor/bin/simple-phpunit tests/Functional
+```
+
+And now... it works! Yes! Hit enter to finish. Then remove the `pause()`.
+
+Run the test again, but without the env var:
+
+```terminal-silent
+symfony php vendor/bin/simple-phpunit tests/Functional
+```
+
+## Waiting for the Turbo Page Load
+
+Cool: it hit our screenshot line. Pop that open. Ok, we're back to the original
+problem: it's not waiting for the page to load after we click the link.
+
+Solving this... isn't as simple as it should be. Say `$browser =`, close that and
+start a new change with `$browser` below. In between, I'll paste in two lines.
+This is lower-level, but will wait for the `aria-busy` attribute to be added to the
+`html` element, which Turbo does when it's loading. Then it waits for it to go
+away.
+
+Try the test now:
+
+```terminal-silent
+symfony php vendor/bin/simple-phpunit tests/Functional
+```
+
+Then... pop open the screenshot. Woh! It *is* now waiting for the Ajax call to
+finish. But remember: we're also using view transitions. The page loaded... but
+it's still in the middle of the transition. We'll fix that in a minute.
+
+## Custom Browser & Base Test Class
+
+But first, we need to clean this up: this is *way* too much work. To do that, 
+we can create a custom browser class. In the `tests/` directory, create a new
+class called `AppBrowser`. I'll paste in the guts.
+
+This extends the normal `PantherBrowser` and adds a new method which those same
+two lines.
+
+When we call `$this->pantherBrowser()`, we now want browser to pass us *our*
+`AppBrowser` instead of the normal `PantherBrowser`. To do that, you guessed it,
+it's an environment variable: `PANTHER_BROWSER_CLASS` set to `App\Tests\AppBrowser`.
+
+To make sure this is working, `dd(get_class($browser));`. Run the test:
+
+```terminal-silent
+symfony php vendor/bin/simple-phpunit tests/Functional
+```
+
+And... yes! We get `AppBrowser`! Unfortunately, while the new method *would* work,
+we don't get autocompletion... because our editor doesn't know we swapped in a
+sub-class.
+
+To improve this, let's do one last thing: create a custom base test class. In the
+`tests/` directory, again, create a new class. Call it `AppPantherTestCase`. I'll
+paste in the content.
+
+It extends the normal `PantherTestCase`... then overrides the `pantherBrowser()`
+method, calls the parent one, but changes the return type to be *our* `AppBrowser`.
+
+Over in `VoyageControllerTest`, change this to `extend` `AppPantherTestCase`, then
+make sure to remove `use HasBrowser`. And then we can tighten things up:
+reconnect all of these spots... then use the new method: `->waitForPageLoad()`...
+with auto-complete! Remove the `ddScreenshot()`... and let's see where we are.
+
+```terminal-silent
+symfony php vendor/bin/simple-phpunit tests/Functional
+```
+
+Further!
+
+> Form field "Purpose" not found.
+
+So it clicked Voyages, clicked New Voyage... but couldn't find the form field. If
+we look down at the error screenshot, we can see why: the modal content is still
+loading! You *might* see the form in your screenshot - sometimes the screenshot
+happens *just* a moment later, so the form loads - but this *is* the problem.
+
+## Disabling View Transitions
+
+Oh, but before we fix this, I also want to disable the view transitions. In
+`templates/base.html.twig`, the easiest way to make sure view transitions to
+muck up our tests is to remove them. Say if `app.environment != 'test`, then
+render this `meta` tag.
+
+## Waiting for the Modal to Load
+
+Anyway, back to our failure. When we click to open the modal, what need wait for
+the modal to open - that's actually instant - but *also* wait for the `<turbo-frame>`
+inside to finish loading.
+
+Open `AppBrowser`. I'll paste in two more methods.
+
+The first - `waitForDialog()` waits until it sees a dialog on the page with an `open`
+attribute. And, *if* that open `dialog` has a `<turbo-frame>`, it waits for that
+to load: it waits until there aren't any `aria-busy` frames on the page.
+
+In `VoyageControllerTest`, after clicking "New Voyage", say `->waitForDialog()`.
+And now:
+
+```terminal-silent
+symfony php vendor/bin/simple-phpunit tests/Functional
+```
+
+So close!
+
+> table tbody tr expected two elements on the page but only found one.
+
+That comes from all the way down here! What's the problem this time? Go back to
+the error screenshot. Ah: we filled out the form, it looks like we even hit Save...
+we're just doing the assertion too quickly!
+
+Remember: we're submitting it to a `<turbo-frame>`, so we need to wait for that
+frame to finish loading. And we now have a way to do this:
+`->waitForTurboFrameLoad()`. I'll also add an line to assert that that we cannot
+see any open dialogs: to check that the modal closed.
+
+Run the test one more time:
+
+```terminal-silent
+symfony php vendor/bin/simple-phpunit tests/Functional
+```
+
+It passes. Woo! I admit, that was some work, but we now have things set up.
+
+Tomorrow - for our final day - we're going to talk about performance. And unlike
+today, performance is going to fall into place.

@@ -1,0 +1,12 @@
+diff --git a/tailwind.config.js b/tailwind.config.js
+index fa492af4..49570fad 100644
+--- a/tailwind.config.js
++++ b/tailwind.config.js
+@@ -28,7 +28,6 @@ module.exports = {
+     },
+   },
+   plugins: [
+-    require('flowbite/plugin'),
+     plugin(function({ addVariant }) {
+       addVariant('turbo-frame', 'turbo-frame[src] &');
+       addVariant('modal', 'dialog &');

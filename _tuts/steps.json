@@ -1009,7 +1009,57 @@
             "id": "performance-install-weblink",
             "name": "Performance: Install weblink",
             "description": null
+        },
+        {
+            "id": "flowbite-add-a-dropdown-in-the-header",
+            "name": "Flowbite: Add a dropdown in the header",
+            "description": null
+        },
+        {
+            "id": "flowbite-install-turbo-js-file",
+            "name": "Flowbite: Install turbo js file",
+            "description": null
+        },
+        {
+            "id": "flowbite-import-flowbite-file",
+            "name": "Flowbite: import flowbite file",
+            "description": null
+        },
+        {
+            "id": "flowbite-npm-init",
+            "name": "Flowbite: npm init",
+            "description": null
+        },
+        {
+            "id": "flowbite-require-plugin",
+            "name": "Flowbite: require plugin",
+            "description": null
+        },
+        {
+            "id": "flowbite-set-darkmode-back-to-media",
+            "name": "Flowbite: Set darkMode back to media",
+            "description": null
+        },
+        {
+            "id": "flowbite-add-date-field",
+            "name": "Flowbite: Add date field",
+            "description": null
+        },
+        {
+            "id": "flowbite-install-datepicker",
+            "name": "Flowbite: Install datepicker",
+            "description": null
+        },
+        {
+            "id": "flowbite-comment-out-plugin",
+            "name": "Flowbite: Comment-out plugin",
+            "description": null
+        },
+        {
+            "id": "flowbite-remove-files",
+            "name": "Flowbite: Remove files",
+            "description": null
         }
     ],
-    "sha": "14dad7aa6dd34b06a4340113ce62762f2e844726"
+    "sha": "feaa37fd9d2ade354b9114ab4aa9088e6f566228"
 }

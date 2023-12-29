@@ -1,0 +1,132 @@
+diff --git a/assets/app.js b/assets/app.js
+index 2c12c4d4..3dcc3bcf 100644
+--- a/assets/app.js
++++ b/assets/app.js
+@@ -3,7 +3,6 @@ import './bootstrap.js';
+ import './styles/app.css';
+ import alienGreeting from './lib/alien-greeting.js';
+ import { shouldPerformTransition, performTransition } from 'turbo-view-transitions';
+-import 'flowbite/dist/flowbite.turbo.js';
+ import 'flowbite/dist/datepicker.turbo.js';
+ 
+ //Turbo.session.drive = false;
+diff --git a/importmap.php b/importmap.php
+index c9b37ae9..4e6d9a67 100644
+--- a/importmap.php
++++ b/importmap.php
+@@ -49,9 +49,6 @@ return [
+     'stimulus-use' => [
+         'version' => '0.52.1',
+     ],
+-    'flowbite/dist/flowbite.turbo.js' => [
+-        'version' => '2.2.1',
+-    ],
+     'flowbite/dist/datepicker.turbo.js' => [
+         'version' => '2.2.1',
+     ],
+diff --git a/package-lock.json b/package-lock.json
+deleted file mode 100644
+index 5549434d..00000000
+--- a/package-lock.json
++++ /dev/null
+@@ -1,42 +0,0 @@
+-{
+-  "name": "last-stack-tutorial",
+-  "version": "1.0.0",
+-  "lockfileVersion": 3,
+-  "requires": true,
+-  "packages": {
+-    "": {
+-      "name": "last-stack-tutorial",
+-      "version": "1.0.0",
+-      "license": "ISC",
+-      "dependencies": {
+-        "flowbite": "^2.2.1"
+-      }
+-    },
+-    "node_modules/@popperjs/core": {
+-      "version": "2.11.8",
+-      "resolved": "https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz",
+-      "integrity": "sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==",
+-      "funding": {
+-        "type": "opencollective",
+-        "url": "https://opencollective.com/popperjs"
+-      }
+-    },
+-    "node_modules/flowbite": {
+-      "version": "2.2.1",
+-      "resolved": "https://registry.npmjs.org/flowbite/-/flowbite-2.2.1.tgz",
+-      "integrity": "sha512-iiZyBTtriEDRHrqXZgpKHaxl4B2J8HZUP8Yn1RXozUDKszWHDVj4GxQqMMB9AJHRWOgXV/4E/LJZ/zqQgBUhWA==",
+-      "dependencies": {
+-        "@popperjs/core": "^2.9.3",
+-        "mini-svg-data-uri": "^1.4.3"
+-      }
+-    },
+-    "node_modules/mini-svg-data-uri": {
+-      "version": "1.4.4",
+-      "resolved": "https://registry.npmjs.org/mini-svg-data-uri/-/mini-svg-data-uri-1.4.4.tgz",
+-      "integrity": "sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==",
+-      "bin": {
+-        "mini-svg-data-uri": "cli.js"
+-      }
+-    }
+-  }
+-}
+diff --git a/package.json b/package.json
+deleted file mode 100644
+index 5c4731ab..00000000
+--- a/package.json
++++ /dev/null
+@@ -1,17 +0,0 @@
+-{
+-  "name": "last-stack-tutorial",
+-  "version": "1.0.0",
+-  "description": "Well hi there! This repository holds the code and script for the [30 Days with LAST Stack](https://symfonycasts.com/screencast/30-days-last) course on SymfonyCasts.",
+-  "main": "tailwind.config.js",
+-  "directories": {
+-    "test": "tests"
+-  },
+-  "scripts": {
+-    "test": "echo \"Error: no test specified\" && exit 1"
+-  },
+-  "author": "Ryan Weaver <ryan@knpuniversity.com> (https://knpuniversity.com/)",
+-  "license": "ISC",
+-  "dependencies": {
+-    "flowbite": "^2.2.1"
+-  }
+-}
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+index 44e39010..eeaa7078 100644
+--- a/templates/base.html.twig
++++ b/templates/base.html.twig
+@@ -16,30 +16,6 @@
+         {% endblock %}
+     </head>
+     <body class="bg-black text-white font-mono">
+-
+-    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown button <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+-    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+-    </svg>
+-    </button>
+-
+-    <!-- Dropdown menu -->
+-    <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+-        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+-          <li>
+-            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+-          </li>
+-          <li>
+-            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+-          </li>
+-          <li>
+-            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+-          </li>
+-          <li>
+-            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+-          </li>
+-        </ul>
+-    </div>
+-
+         <div class="container mx-auto min-h-screen flex flex-col">
+             <header class="my-8 px-4">
+                 <nav class="flex items-center justify-between mb-4">

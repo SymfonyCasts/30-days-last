@@ -1,0 +1,12 @@
+diff --git a/tailwind.config.js b/tailwind.config.js
+index cd265fa8..fa492af4 100644
+--- a/tailwind.config.js
++++ b/tailwind.config.js
+@@ -8,6 +8,7 @@ module.exports = {
+     "./vendor/tales-from-a-dev/flowbite-bundle/templates/**/*.html.twig",
+     "./src/Twig/Components/**/*.php"
+   ],
++  darkMode: 'media',
+   theme: {
+     extend: {
+       animation: {

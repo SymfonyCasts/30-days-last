@@ -1,0 +1,71 @@
+diff --git a/package-lock.json b/package-lock.json
+new file mode 100644
+index 00000000..5549434d
+--- /dev/null
++++ b/package-lock.json
+@@ -0,0 +1,42 @@
++{
++  "name": "last-stack-tutorial",
++  "version": "1.0.0",
++  "lockfileVersion": 3,
++  "requires": true,
++  "packages": {
++    "": {
++      "name": "last-stack-tutorial",
++      "version": "1.0.0",
++      "license": "ISC",
++      "dependencies": {
++        "flowbite": "^2.2.1"
++      }
++    },
++    "node_modules/@popperjs/core": {
++      "version": "2.11.8",
++      "resolved": "https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz",
++      "integrity": "sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==",
++      "funding": {
++        "type": "opencollective",
++        "url": "https://opencollective.com/popperjs"
++      }
++    },
++    "node_modules/flowbite": {
++      "version": "2.2.1",
++      "resolved": "https://registry.npmjs.org/flowbite/-/flowbite-2.2.1.tgz",
++      "integrity": "sha512-iiZyBTtriEDRHrqXZgpKHaxl4B2J8HZUP8Yn1RXozUDKszWHDVj4GxQqMMB9AJHRWOgXV/4E/LJZ/zqQgBUhWA==",
++      "dependencies": {
++        "@popperjs/core": "^2.9.3",
++        "mini-svg-data-uri": "^1.4.3"
++      }
++    },
++    "node_modules/mini-svg-data-uri": {
++      "version": "1.4.4",
++      "resolved": "https://registry.npmjs.org/mini-svg-data-uri/-/mini-svg-data-uri-1.4.4.tgz",
++      "integrity": "sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==",
++      "bin": {
++        "mini-svg-data-uri": "cli.js"
++      }
++    }
++  }
++}
+diff --git a/package.json b/package.json
+new file mode 100644
+index 00000000..5c4731ab
+--- /dev/null
++++ b/package.json
+@@ -0,0 +1,17 @@
++{
++  "name": "last-stack-tutorial",
++  "version": "1.0.0",
++  "description": "Well hi there! This repository holds the code and script for the [30 Days with LAST Stack](https://symfonycasts.com/screencast/30-days-last) course on SymfonyCasts.",
++  "main": "tailwind.config.js",
++  "directories": {
++    "test": "tests"
++  },
++  "scripts": {
++    "test": "echo \"Error: no test specified\" && exit 1"
++  },
++  "author": "Ryan Weaver <ryan@knpuniversity.com> (https://knpuniversity.com/)",
++  "license": "ISC",
++  "dependencies": {
++    "flowbite": "^2.2.1"
++  }
++}

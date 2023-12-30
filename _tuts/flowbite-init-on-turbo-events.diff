@@ -1,0 +1,24 @@
+diff --git a/assets/app.js b/assets/app.js
+index 0906f474..9e9aac4b 100644
+--- a/assets/app.js
++++ b/assets/app.js
+@@ -3,7 +3,7 @@ import './bootstrap.js';
+ import './styles/app.css';
+ import alienGreeting from './lib/alien-greeting.js';
+ import { shouldPerformTransition, performTransition } from 'turbo-view-transitions';
+-import 'flowbite';
++import { initFlowbite } from 'flowbite';
+ 
+ //Turbo.session.drive = false;
+ alienGreeting('Give us all your candy!', false);
+@@ -40,3 +40,10 @@ document.addEventListener('turbo:before-frame-render', (event) => {
+         });
+     }
+ });
++
++document.addEventListener('turbo:render', () => {
++    initFlowbite();
++});
++document.addEventListener('turbo:frame-render', () => {
++    initFlowbite();
++});

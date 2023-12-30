@@ -1016,13 +1016,23 @@
             "description": null
         },
         {
-            "id": "flowbite-install-turbo-js-file",
-            "name": "Flowbite: Install turbo js file",
+            "id": "flowbite-install-js-file",
+            "name": "Flowbite: Install js file",
+            "description": null
+        },
+        {
+            "id": "flowbite-remove-css-from-importmap",
+            "name": "Flowbite: Remove CSS from importmap",
             "description": null
         },
         {
             "id": "flowbite-import-flowbite-file",
             "name": "Flowbite: import flowbite file",
+            "description": null
+        },
+        {
+            "id": "flowbite-init-on-turbo-events",
+            "name": "Flowbite: init on turbo events",
             "description": null
         },
         {
@@ -1041,13 +1051,28 @@
             "description": null
         },
         {
-            "id": "flowbite-add-date-field",
-            "name": "Flowbite: Add date field",
+            "id": "delete-me-2",
+            "name": "delete me 2",
             "description": null
         },
         {
             "id": "flowbite-install-datepicker",
             "name": "Flowbite: Install datepicker",
+            "description": null
+        },
+        {
+            "id": "flowbite-add-calendar-controller",
+            "name": "Flowbite: Add calendar controller",
+            "description": null
+        },
+        {
+            "id": "flowbite-set-container-into-dialog",
+            "name": "Flowbite: Set container into dialog",
+            "description": null
+        },
+        {
+            "id": "flowbite-better-click-outside",
+            "name": "Flowbite: Better click outside",
             "description": null
         },
         {
@@ -1061,5 +1086,5 @@
             "description": null
         }
     ],
-    "sha": "feaa37fd9d2ade354b9114ab4aa9088e6f566228"
+    "sha": "b68e9e07c2654ad6fee01a5f3272c775b54c9b1a"
 }

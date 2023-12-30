@@ -1,24 +1,12 @@
-diff --git a/assets/app.js b/assets/app.js
-index eb5eda99..2c12c4d4 100644
---- a/assets/app.js
-+++ b/assets/app.js
-@@ -4,6 +4,7 @@ import './styles/app.css';
- import alienGreeting from './lib/alien-greeting.js';
- import { shouldPerformTransition, performTransition } from 'turbo-view-transitions';
- import 'flowbite/dist/flowbite.turbo.js';
-+import 'flowbite/dist/datepicker.turbo.js';
- 
- //Turbo.session.drive = false;
- alienGreeting('Give us all your candy!', false);
 diff --git a/importmap.php b/importmap.php
-index 7511ed8b..c9b37ae9 100644
+index 50a6307e..abba4139 100644
 --- a/importmap.php
 +++ b/importmap.php
-@@ -52,4 +52,7 @@ return [
-     'flowbite/dist/flowbite.turbo.js' => [
-         'version' => '2.2.1',
+@@ -55,4 +55,7 @@ return [
+     '@popperjs/core' => [
+         'version' => '2.11.8',
      ],
-+    'flowbite/dist/datepicker.turbo.js' => [
-+        'version' => '2.2.1',
++    'flowbite-datepicker' => [
++        'version' => '1.2.6',
 +    ],
  ];

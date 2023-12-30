@@ -1,0 +1,16 @@
+diff --git a/assets/controllers/datepicker_controller.js b/assets/controllers/datepicker_controller.js
+index a5b557a3..9e634b64 100644
+--- a/assets/controllers/datepicker_controller.js
++++ b/assets/controllers/datepicker_controller.js
+@@ -7,9 +7,11 @@ export default class extends Controller {
+ 
+     connect() {
+         this.element.type = 'text';
++
+         this.datepicker = new Datepicker(this.element, {
+             format: 'yyyy-mm-dd',
+             autohide: true,
++            container: document.querySelector('dialog[open]') ? 'dialog[open] .overflow-auto' : 'body'
+         });
+     }
+ 

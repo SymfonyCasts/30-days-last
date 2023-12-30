@@ -1,0 +1,19 @@
+diff --git a/importmap.php b/importmap.php
+index a3b7838a..23ac6914 100644
+--- a/importmap.php
++++ b/importmap.php
+@@ -49,4 +49,14 @@ return [
+     'stimulus-use' => [
+         'version' => '0.52.1',
+     ],
++    'flowbite' => [
++        'version' => '2.2.1',
++    ],
++    '@popperjs/core' => [
++        'version' => '2.11.8',
++    ],
++    'flowbite/dist/flowbite.min.css' => [
++        'version' => '2.2.1',
++        'type' => 'css',
++    ],
+ ];

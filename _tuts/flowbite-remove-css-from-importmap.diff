@@ -1,0 +1,13 @@
+diff --git a/importmap.php b/importmap.php
+index 23ac6914..50a6307e 100644
+--- a/importmap.php
++++ b/importmap.php
+@@ -55,8 +55,4 @@ return [
+     '@popperjs/core' => [
+         'version' => '2.11.8',
+     ],
+-    'flowbite/dist/flowbite.min.css' => [
+-        'version' => '2.2.1',
+-        'type' => 'css',
+-    ],
+ ];

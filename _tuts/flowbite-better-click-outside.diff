@@ -1,0 +1,32 @@
+diff --git a/assets/controllers/modal_controller.js b/assets/controllers/modal_controller.js
+index 503f4807..a950741e 100644
+--- a/assets/controllers/modal_controller.js
++++ b/assets/controllers/modal_controller.js
+@@ -45,7 +45,11 @@ export default class extends Controller {
+     }
+ 
+     clickOutside(event) {
+-        if (event.target === this.dialogTarget) {
++        if (event.target !== this.dialogTarget) {
++            return;
++        }
++
++        if (!this.#isClickInElement(event, this.dialogTarget)) {
+             this.dialogTarget.close();
+         }
+     }
+@@ -58,4 +62,14 @@ export default class extends Controller {
+ 
+         this.dynamicContentTarget.innerHTML = this.loadingTemplateTarget.innerHTML;
+     }
++
++    #isClickInElement(event, element) {
++        const rect = element.getBoundingClientRect();
++        return (
++            rect.top <= event.clientY &&
++            event.clientY <= rect.top + rect.height &&
++            rect.left <= event.clientX &&
++            event.clientX <= rect.left + rect.width
++        );
++    }
+ }

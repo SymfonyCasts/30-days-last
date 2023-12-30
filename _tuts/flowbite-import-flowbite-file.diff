@@ -1,12 +1,12 @@
 diff --git a/assets/app.js b/assets/app.js
-index c8aa6f6a..eb5eda99 100644
+index c8aa6f6a..0906f474 100644
 --- a/assets/app.js
 +++ b/assets/app.js
 @@ -3,6 +3,7 @@ import './bootstrap.js';
  import './styles/app.css';
  import alienGreeting from './lib/alien-greeting.js';
  import { shouldPerformTransition, performTransition } from 'turbo-view-transitions';
-+import 'flowbite/dist/flowbite.turbo.js';
++import 'flowbite';
  
  //Turbo.session.drive = false;
  alienGreeting('Give us all your candy!', false);

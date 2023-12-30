@@ -43,7 +43,7 @@ And... it actually passes! Sweet!
 
 ## Testing JavaScript with Panther
 
-But hold your horses. Behind the scenes, this is *not* using real browser: it's
+But hold your horses. Behind the scenes, this is *not* using a real browser: it's
 just making fake requests in PHP. That means it doesn't execute JavaScript. We're
 testing the experience a user would have if they had JavaScript *disabled*.
 That's fine for many situations. However, *this* time, I want to test all the
@@ -268,7 +268,7 @@ So close!
 
 That comes from all the way down here! What's the problem this time? Back to
 the error screenshot! Ah: we filled out the form, it looks like we even hit Save...
-we're asserting too quickly!
+but we're asserting too quickly!
 
 Remember: this submits into to a `<turbo-frame>`, so we need to wait for that
 frame to finish loading. And we have a way to do this:

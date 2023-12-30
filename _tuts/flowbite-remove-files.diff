@@ -1,3 +1,26 @@
+diff --git a/assets/app.js b/assets/app.js
+index 9e9aac4b..c8aa6f6a 100644
+--- a/assets/app.js
++++ b/assets/app.js
+@@ -3,7 +3,6 @@ import './bootstrap.js';
+ import './styles/app.css';
+ import alienGreeting from './lib/alien-greeting.js';
+ import { shouldPerformTransition, performTransition } from 'turbo-view-transitions';
+-import { initFlowbite } from 'flowbite';
+ 
+ //Turbo.session.drive = false;
+ alienGreeting('Give us all your candy!', false);
+@@ -40,10 +39,3 @@ document.addEventListener('turbo:before-frame-render', (event) => {
+         });
+     }
+ });
+-
+-document.addEventListener('turbo:render', () => {
+-    initFlowbite();
+-});
+-document.addEventListener('turbo:frame-render', () => {
+-    initFlowbite();
+-});
 diff --git a/package-lock.json b/package-lock.json
 deleted file mode 100644
 index 5549434d..00000000

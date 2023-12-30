@@ -87,13 +87,13 @@ still on the homepage - as if we never clicked "Voyages"... though you can kind 
 see that the voyages link looks active.
 
 The problem is that the page navigation happens via Ajax... and our tests don't
-know to *wait* for that to finish. It clicks "Voyages"... then immediately tries 
+know to *wait* for that to finish. It clicks "Voyages"... then immediately tries
 to click "New Voyage". This will be the *main* thing that we need to fix.
 
 ## Loading a "test" Dev Server
 
 But before that, I see a bigger problem! Look at the data: this is *not* coming from
-our test database! This is coming from our dev site! 
+our test database! This is coming from our dev site!
 
 Even though we can't see it, Panther *is* controlling a *real* browser. And... a real
 browser needs to access our site using a real web server via a real web address.

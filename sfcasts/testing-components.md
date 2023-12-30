@@ -22,7 +22,7 @@ In the `tests/` directory, create an `Integration/` directory - because this wil
 be an integration test - then `Twig/Components/`. If you're new to integration tests,
 check our [Integration Testing tutorial](https://symfonycasts.com/screencast/phpunit-integration).
 
-Inside, create a new `Button` class... and extend the normal `KernelTestCase` for
+Inside, create a new `ButtonTest` class... and extend the normal `KernelTestCase` for
 integration tests. To help us work with the component, use a trait called
 `InteractsWithTwigComponents`, then add a new function:
 `testButtonRendersWithVariants()`.

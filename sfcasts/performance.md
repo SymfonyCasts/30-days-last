@@ -138,7 +138,7 @@ Find your terminal and run:
 composer require symfony/web-link
 ```
 
-This is small package that can help add hints to your browser about what
+This is a small package that can help add hints to your browser about what
 it needs to download. AssetMapper comes with special integration for it.
 
 Watch: *just* by installing that, go to the Network tab, filter all, refresh and
@@ -165,7 +165,7 @@ Get your real work done instead.
 
 And... we're finished! Thank you for spending these wild 30 days with me! It has been
 an absolute pleasure and a heck of a ride. Please, go build things and let us
-know what they are! And if you have any questions, comments, doubts or bad jokes, 
+know what they are! And if you have any questions, comments, doubts or bad jokes,
 we're always here for you down in the comments section.
 
 Alright friends, see ya next time!

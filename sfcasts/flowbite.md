@@ -1,7 +1,203 @@
 # Bonus: More on Flowbite
 
-Coming soon...
+A bonus topic! Yeah, because I started to get questions - good questions - about
+Flowbite. On day 5 we added Tailwind and I introduced Flowbite as a site where
+you can copy and paste visual components. For example, you copy this markup,
+paste, and boom! You have a dropdown. The classes are all standard Tailwind classes.
 
-A bonus topic, yeah, because I started to get some questions, good questions about Flow Byte. On day six we added Tailwind and we used Flow Byte, and I introduced Flow Byte as a site you can go to just copy and paste different things for your site. For example, you can go here and just copy this markup here, it's all Tailwind CSS, paste it, and boom, you have a dropdown like this. However, that's not the full story, I mentioned that you don't need to install anything, however, it's not the full story and so I confused people. Flow Byte has two other features. First it has an optional JavaScript library for powering things like tabs and dropdowns. For example, a little bit of JavaScript so that you can click this and it opens and closes. We are not using this at Symfony Casts and it doesn't play well with Turbo, at least not out of the box. At Symfony Casts we prefer to create tiny stimulus controllers to do things like this that we can control, but we can get it to work. Let's copy the markup for this dropdown and head over to templates-base.html.twig and just inside the body I'm going to paste this. If we go over now and refresh, you can see what I mean about it just works. We can see the dropdown, but if we click, nothing happens. To get the JavaScript for this, find your terminal and run bin console import map require flow byte. This installs Flow Byte and dependency popper.js.core and it also grabs the flow byte CSS file. This is only needed if you weren't using Tailwind, if you just wanted to download, if you weren't using Tailwind, you just needed a CSS file with all the styles. So it doesn't hurt anything by being inside of our import map.php, we're not using it, but I'm going to remove it just so we don't confuse ourselves. All right, to use the JavaScript, open assets app.js and on top we can just import Flow Byte and check this out, we'll refresh. It works. No, two little quirks about this. The first, if you inspect element is we have a bunch of errors about modal and popover.  It turns out that when you use the modal element, if you make a modal and you use the JavaScript, Flow Byte's JavaScript, one of the things it has you do is put a data modal target that kind of connects the button to the target. The problem is that we have a modal stimulus controller and we're using data modal target to leverage stimulus targets. Those two ideas are colliding, so that is a problem. You can't really combine those two things. You need to work around this or use Flow Byte's modal system. We actually have the same problem with the popover. It's not going to hurt anything right now, but I do want to point that out. The second big problem with the Flow Byte JavaScript is that it works right now, but as soon as I navigate, it breaks. It initializes the event listener we need on page load, but when we navigate and a new button is loaded on the page, it's not smart enough to reinitialize that JavaScript. That's why we write our JavaScript with stimulus controllers. Now Flow Byte does ship with a version of itself that is supposed to support Turbo, but it doesn't. It works for the most part, but as soon as you submit a form, all of your JavaScript is going to stop working. We will fix this ourselves. We can actually import, let's say init Flow Byte from Flow Byte, and then at the bottom of this, I'm going to paste in two event listeners. Flow Byte will initialize itself on page load, and then anytime we do a normal navigation, this method will be called, and we will reinitialize the listeners. Or if we do something inside of a Turbo frame, this will be called, and we will reinitialize our listeners. This seems to do the trick. If I refresh, it works on page load. Well, actually, it doesn't work on page load. Look at init Flow Byte. You probably saw my error there, init Flow Byte. There we go. Let's try that again. All right, on page load, it works, and if we navigate, it still works. Awesome. All right, so I mentioned Flow Byte has two things. The first is that JavaScript library. The second thing is a Tailwind plugin.  It adds some extra styles if you use tool tips, forms, and charts, as well as a few other things. On npmjs.com, I'm going to search for Flow Byte.
+And so, I mentioned that you don't need to install anything. However, depending
+on what you want, that's not the full story... and I confused people. So let's
+fix that!
 
-And if you go to code, you can actually look at Plugin.js and you can see what the plugin is doing right here. So you can see if we're using tooltips, it adds a bunch of kind of new styles for it. Same thing for forms. And then all the way at the bottom, you can also see that it tweaks a couple of styles, theme styles on the page. Not necessarily something that you're going to need, even if you're using some of the JavaScript from Flowbite. If you want to use this plugin, you need to install it with NPM. So far, we haven't had to do anything with NPM and that's been great. But if you do need to use NPM, that's okay too. It's a great tool for getting a couple of JavaScript libraries. The most important thing is that we don't have to have a giant build system, but grabbing a couple of packages with NPM, not the end of the world. So I'm going to find my terminal and run NPM init and hit enter on all the questions. This will give me a package.json file. Perfect. And then I'll run NPM add Flowbite. To use this, open at tailwind.config.js. Here it is. And down in the plugin section, we'll say require Flowbite slash plugin, straight from their documentation. Now if we refresh, it works, but you're not really going to see any difference. Like I said, it's not something that we're really using, though if you open a form, check this out, our labels are suddenly black. That's actually because Tailwind now thinks we're in light mode. I didn't really style my site for light mode, which is why that looks funny. So what happened here is by default, Tailwind reads whether you want light mode or dark mode based off of your operating system preferences. But Flowbite overrides that and changes it to read a class on your body element. And it has documentation on their site on how you can use this and even make like a little dark mode, light mode switcher. But I'm just going to change this back to the old setting. So we can say dark mode, media. And now if I go over and refresh, we're back to normal. So that's the JavaScript. So that's the Tailwind plugin.  The last thing I've seen people try to use, and I get it, it's cool, is a cool date picker plugin. So let's see if we can get this set up. And it actually is a little bit tricky and confusing. This date picker is actually part of the Flowbite library. But if you want to use it in a more, if you want to be able to kind of reference the date picker in JavaScript, then you're supposed to go down, here it is, and install a different library. So I'm going to copy that and I'll spin over and run bin console import map require Flowbite-date picker. Back at the top of this, here we go, it says that you can use the date picker just by taking an input and adding a date picker attribute. And that's true, except once again, it won't work with Turbo. It'll work at first. As soon as you click on a page, the date picker will stop working. So instead, we're going to initialize this with a stimulus controller, which is fine. It's going to work really well. So in assets controllers, I'm going to create a new file here called date picker underscore controller dot JS. And I'm just going to paste this in, nothing too complicated here. So we're going to attach this controller to our input element where we want to have the date picker. On connect, this just initializes the date picker and passes in this dot element. So that's going to be the input element. This format here is the default format that Symfony forms use for their dates and auto hide true makes it so that when you click on a date, it closes, which is just a little bit of a nicer experience. Notice I'm also changing the type attribute on the element to text. So that we don't have an input that has both the date picker from Flowbite and also your native browser date picker on top of it at the same time. In disconnect, I do a little cleanup and I change the type back to date. Now we're going to use this on the new voyage form right here on leave at. So an easy way to hook this up is to go to source form voyage type dot PHP. Here's the field right here, leave at.  So I'm going to pass an ATTR and then data dash controller set to date picker. All right, I'll refresh and it works. How nice is that? So there's a catch. If I go back and open this in the modal, it doesn't work. Well, it kind of does. You see it? It's hiding back here. The reason for this is that when you open the date picker, it actually appends a custom element at the bottom of your body, but because that's not inside the dialogue, it's behind the dialogue. It's kind of a shame that it doesn't work better with the beautiful native dialogue element, but we can fix this. Or in our date picker controller, we're going to add a new option here called container. So you can tell it what element it should add its date picker into. And here I'll say document dot query selector, and we're going to look for a dialogue open. So if there's a dialogue on the page that is open, then we are going to use that as the container, else we will use the normal body as the container. And that little detail takes care of our problem. But it doesn't do just one other little problem, so it seems to work nicely, right? Turns out that, you see how it kind of extended my dialogue? If I click here, technically I'm clicking on the dialogue, and that actually makes it think that we're clicking outside the dialogue. So to fix that, we're going to make our modal controller just a little bit smarter. At the bottom, I'm going to paste in a new method, a new private method called isClickInElement. So what you can do is you can pass this an event from a click event, and it's going to physically look at this element here and see if the click was inside of it or outside of it. So up in here and click outside, I'm going to change things up a bit. I'm going to copy this. We'll say if the event target is not the dialogue, then we're definitely not clicking outside. So I'll say return. If not, this.isClickInElement, we'll pass that event, and this.dialogueTarget. So if we didn't click inside of the dialogue target, then we definitely want to close. So this is just a little bit smarter of a system.  And we try it out. I'll open this up. Look, we can click down there, and the calendar closes, which is correct, but the modal doesn't close. So cool. That's Flowbite's JavaScript side right there. Now for me personally, I don't want a lot of this stuff, so I'm going to remove it. I'm going to start inside of Tailwind.config.js. I'm going to take out the plugin, and then I'm going to delete my package.json and package.lock.json files. Next up, I also don't want the JavaScript. So I'm going to, in importmap.php, remove Flowbite and popper.js.core. But that date picker, that is pretty cool, so I'm going to keep that. Now in app.js, let's remove the import from Flowbite, and also the two functions at the bottom that were using that. And finally, in base.html twig, let's remove that random dropdown that I had at the top. Check this out. No more JavaScript errors. Things are happy. But because that date picker was pretty cool, I still got that, so we can still keep that and not get the rest of the stuff. All right, so that's it. I hope that unconfused Flowbite for you. Sorry about that. And that's it. Thanks a lot.
+## Installing The Flowbite JavaScript
+
+Beyond being a source to copy HTML, Flowbite itself has two other features.
+First, it has an optional JavaScript library for powering things like tabs and
+dropdowns: a little JavaScript so that when we click, this opens and closes.
+
+We're *not* using this at Symfonycasts... and it doesn't play well with Turbo. At
+least not out of the box. We prefer to create tiny Stimulus controllers to power
+things like this. But, we *can* get the Flowbite JavaScript to work.
+
+Grab that dropdown markup and zip over to `templates/base.html.twig`. Just
+inside the `body`, paste. If we go over and refresh, you can see what I mean: it
+just works. Well, *visually*. But if we click, nothing happens.
+
+To get the Flowbite JavaScript, find your terminal and run:
+
+```terminal
+php bin/console importmap:require flowbite
+```
+
+This installs `flowbite` and it dependency `@popperjs/core` dependency. It also
+grabbed the Flowbite CSS file... which is only needed if you didn't have Tailwind
+properly installed. Having it hanging around in `importmap.php` is harmless, but
+let's kick it out before it confuses me.
+
+To use the JavaScript, open `assets/app.js`. On top `import 'flowbite'`.
+
+Ok, refresh and... it works!
+
+But there are two... quirks. Check out the console. We have a bunch of errors about
+modal and popover. If you use the modal component from Flowbite, it requires a
+`data-modal-target` attribute to connect the button to the target. The problem is
+that *we* have a modal *Stimulus* controller.... and we're using `data-modal-target`
+to leverage a *Stimulus* target. Those two ideas are colliding. You would need to
+work around this by using Flowbite's modal system or renaming your modal controller
+to something else. The same is true for popover.
+
+## Fixing Flowbite JS & Turbo
+
+The second quirk is that, though the Flowbite JavaScript works right now, as soon
+as we navigate, it breaks! Flowbite initializes the event listener on page load,
+but when we navigate and *new* HTML is loaded onto the page, it's not smart enough
+to reinitialize that JavaScript. That's why, in general, we write our JavaScript
+using Stimulus controllers.
+
+Flowbite *does* ship with a version of itself for Turbo... but it doesn't
+*quite* work: it doesn't reinitialize correctly on form submits.
+
+That's ok! We've got the skills to patch this up ourselves. Import
+`initFlowbite` from `flowbite`. Then at the bottom, I'll paste in two event
+listeners. Flowbite handles initializing on the first page load. Then
+anytime we navigate with Turbo, this method will be called and will reinitialize
+the listeners. Or if we do something inside a Turbo frame, *this* will be called.
+
+Let's try it. Refresh. And... it doesn't work: Look: `initFlobite`. Typo! Fix
+that then... ok. On page load, it works. And if we navigate, it *still* works.
+
+## The Flowbite Tailwind Plugin
+
+So the first installable feature of Flowbite is this JavaScript library. The
+second is a Tailwind plugin. It adds extra styles if you use tooltips, forms, and
+charts.... as well as a few other things. You can find the package on npmjs.com
+and navigate its files to find the plugin: `plugin.js`.
+
+If you're using tooltips, it adds new styles, same thing for forms... then *all* the
+way at the bottom, it tweaks some theme styles. This isn't necessarily something
+that you *need*, even if you're using some of the JavaScript from Flowbite.
+
+But if you *do* want this plugin, you need to install it with npm. So far, we haven't
+had to do *anything* with npm... and that's been great! But if you *do* need
+a few JavaScript libraries, that's ok: that's npm's job. The most important
+thing is that we don't have a giant build system: we're just grabbing a library
+here or there that we need.
+
+Find your terminal and run `npm init` to create a `package.json` file.
+
+```terminal-silent
+npm init
+```
+
+I'll hit enter for all the questions. Then run:
+
+```terminal
+npm add flowbite
+```
+
+To use this, open `tailwind.config.js`... here it is. Down in the `plugins` section,
+`require('flowbite/plugin')`. This is straight from their docs.
+
+Whe we refresh, it works... but we don't see any difference. Like I said, it's not
+something that we *necessarily* need. Though if you open a form, huh: our labels
+are suddenly black! That's because Tailwind now thinks we're in light mode... and
+I was a bit too lazy to style my site for light mode.
+
+By default, Tailwind reads whether you want light mode or dark mode from your
+operating system preferences. But Flowbite overrides that and changes it to read
+a `class` on your `body` element. It has documentation on their site on how you can
+use this and even make a dark mode, light mode switcher.
+
+But I'm going to change this back to the old setting. Say `darkMode`, `media`.
+
+Check it: refresh and... we're back to normal! So that's the Tailwind plugin.
+
+## The Datepicker
+
+In addition to these 2 Flowbite features, I've also seen people wanting to use
+their cool datepicker plugin. So let's see if we can get this set up!
+
+This datepicker is part of the main `flowbite` library. But if you want to import
+it directly form JavaScript... then, down here, you're supposed to install a different
+package. This confused me to be honest. But copy that, spin over and run:
+
+```terminal
+php bin/console importmap:require flowbite-datepicker
+```
+
+Back at the top of the docs, it says that you can use the datepicker simply by
+taking an input and giving it a `datepicker` attribute. And that's true... except
+once again, it won't work with Turbo. It'll work at first... but stop after the
+first click.
+
+Instead, we're going to initialize this with a Stimulus controller, and it's going
+to work great!
+
+In `assets/controllers/`, create a new `datepicker_controller.js`. I'll paste in
+the contents. We're going to attach this controller to an `input` element. On
+`connect()`, this initializes the date picker and passes `this.element`. The
+`format` matches the default format that the Symfony `DateType` uses. And
+`autohide` makes the date picker close when you choose a date, which I like.
+
+I'm also changing the `type` attribute on the `input` to `text` so that we don't
+have both the datepicker from Flowbite *and* the native browser date picker.
+In disconnect, we do some cleanup.
+
+We're going to use this on the voyage form: for "leave at". Open the form type
+for this class: `VoyageType`. Here's the field. Pass am `attr` with `data-controller`
+set to `datepicker`.
+
+Let's try this! Refresh and... that's fantastic!
+
+## Fixing the Datepicker in a Modal
+
+Though... there's a catch. Go back and open this form in the modal. It doesn't work!
+Well, it kind of does. See it? It's hiding back behind the modal. The datepicker
+works by appending some custom HTML at the bottom of the `body`. But because that's
+not inside the `dialog`, it correctly appears behind the modal. It's kind of a shame
+that it doesn't work better with the beautiful native `dialog` element, but we can
+fix this.
+
+In `datepicker_controller.js`, add a new option called container. This tells
+the datepicker which element it should add its custom HTML into. Say
+`document.querySelector` and look for a `dialog[open]`. So if there's a `dialog`
+on the page that'ss open, then use that as the container. Else use the normal
+`body`.
+
+## Making the Modal Click Outside Smarter
+
+And *that* little detail takes care of our problem! Though... it does expose one
+other minor issue. See how the datepicker extends the dialog vertically? If we
+click here, we're technically clicking on the `dialog` element directly... which
+triggers our click outside logic.
+
+To fix that, let's make our `modal` controller just a *little* bit smarter. At the
+bottom, I'll paste in a new private method called `isClickInElement()`. If you
+pass this a click event, it will look at the physical dimensions of this element
+and see if the click was inside.
+
+Up here in `clickOutside()`, let's change things a bit. Copy this, then if
+the `event.target` is *not* the `dialog`, then we're definitely not clicking outside.
+So, return.
+
+And if not, `this.isClickInElement()` - passing the `event` and `this.dialogTarget` -
+So if we did not click inside of the `dialogTarget`, then we definitely want to close.
+
+A little bit more logic, but a little bit smarter. Try it. Open the modal and if
+we click down here... the calendar closes - which is correct - but the modal stays
+open. Love that!
+
+So I hope that explains Flowbite a bit more. Personally, I don't want most of this
+stuff, so I'm going to remove it. Inside `tailwind.config.js`, remove the plugin...
+then delete `package.json` and `package-lock.json`.
+
+I also don't want the JavaScript. In `importmap.php`, remove `flowbite` and
+`@popperjs/core`. But that datepicker is pretty cool, so let's keep that.
+
+In `app.js`, remove the import from `flowbite` and the two functions at the bottom.
+Finally, in `base.html.twig`, get rid of that random dropdown.
+
+Now... no more JavaScript errors: things are happy! But because that datepicker
+was pretty cool, we still have it.
+
+Ok, bonus chapter done! Now back to work - seeya later!

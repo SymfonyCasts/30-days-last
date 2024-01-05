@@ -29,7 +29,7 @@ To get the Flowbite JavaScript, find your terminal and run:
 php bin/console importmap:require flowbite
 ```
 
-This installs `flowbite` and it dependency `@popperjs/core` dependency. It also
+This installs `flowbite` and it dependency `@popperjs/core`. It also
 grabbed the Flowbite CSS file... which is only needed if you didn't have Tailwind
 properly installed. Having it hanging around in `importmap.php` is harmless, but
 let's kick it out before it confuses me.
@@ -115,10 +115,10 @@ Check it: refresh and... we're back to normal! So that's the Tailwind plugin.
 ## The Datepicker
 
 In addition to these 2 Flowbite features, I've also seen people wanting to use
-their cool datepicker plugin. So let's see if we can get this set up!
+their cool datepicker plugin. So let's get that working!
 
 This datepicker is part of the main `flowbite` library. But if you want to import
-it directly form JavaScript... then, down here, you're supposed to install a different
+it directly from JavaScript... then, down here, you're supposed to install a different
 package. This confused me to be honest. But copy that, spin over and run:
 
 ```terminal
@@ -134,17 +134,17 @@ Instead, we're going to initialize this with a Stimulus controller, and it's goi
 to work great!
 
 In `assets/controllers/`, create a new `datepicker_controller.js`. I'll paste in
-the contents. We're going to attach this controller to an `input` element. On
+the contents. We're going to attach this controller to an `input` element. In
 `connect()`, this initializes the date picker and passes `this.element`. The
 `format` matches the default format that the Symfony `DateType` uses. And
 `autohide` makes the date picker close when you choose a date, which I like.
 
 I'm also changing the `type` attribute on the `input` to `text` so that we don't
 have both the datepicker from Flowbite *and* the native browser date picker.
-In disconnect, we do some cleanup.
+In `disconnect`, we do some cleanup.
 
 We're going to use this on the voyage form: for "leave at". Open the form type
-for this class: `VoyageType`. Here's the field. Pass am `attr` with `data-controller`
+for this: `VoyageType`. Here's the field. Pass an `attr` option with `data-controller`
 set to `datepicker`.
 
 Let's try this! Refresh and... that's fantastic!
@@ -152,38 +152,38 @@ Let's try this! Refresh and... that's fantastic!
 ## Fixing the Datepicker in a Modal
 
 Though... there's a catch. Go back and open this form in the modal. It doesn't work!
-Well, it kind of does. See it? It's hiding back behind the modal. The datepicker
-works by appending some custom HTML at the bottom of the `body`. But because that's
-not inside the `dialog`, it correctly appears behind the modal. It's kind of a shame
-that it doesn't work better with the beautiful native `dialog` element, but we can
-fix this.
+Well, it kind of does. See it? It's hiding behind the modal. The datepicker
+works by appending HTML at the bottom of the `body`. But because that's
+not inside the `dialog`, it correctly appears *behind* the modal. It's kind of a
+shame that it doesn't work better with the beautiful native `dialog` element, but
+we can fix this.
 
 In `datepicker_controller.js`, add a new option called container. This tells
-the datepicker which element it should add its custom HTML into. Say
-`document.querySelector` and look for a `dialog[open]`. So if there's a `dialog`
-on the page that'ss open, then use that as the container. Else use the normal
+the datepicker which element it should add its custom HTML *into*. Say
+`document.querySelector()` and look for a `dialog[open]`. So if there's a `dialog`
+on the page that's open, then use that as the container. Else use the normal
 `body`.
 
 ## Making the Modal Click Outside Smarter
 
 And *that* little detail takes care of our problem! Though... it does expose one
-other minor issue. See how the datepicker extends the dialog vertically? If we
+other small issue. See how the datepicker extends the dialog vertically? If we
 click here, we're technically clicking on the `dialog` element directly... which
 triggers our click outside logic.
 
-To fix that, let's make our `modal` controller just a *little* bit smarter. At the
+To fix that, let's make our `modal` controller just a *bit* smarter. At the
 bottom, I'll paste in a new private method called `isClickInElement()`. If you
 pass this a click event, it will look at the physical dimensions of this element
 and see if the click was inside.
 
-Up here in `clickOutside()`, let's change things a bit. Copy this, then if
-the `event.target` is *not* the `dialog`, then we're definitely not clicking outside.
+Up here in `clickOutside()`, let's change things. Copy this, then if
+the `event.target` is *not* the `dialog`, we're definitely not clicking outside.
 So, return.
 
-And if not, `this.isClickInElement()` - passing the `event` and `this.dialogTarget` -
-So if we did not click inside of the `dialogTarget`, then we definitely want to close.
+And if not, `this.isClickInElement()` - passing `event` and `this.dialogTarget` -
+so if we did not click inside the `dialogTarget` - then we definitely want to close.
 
-A little bit more logic, but a little bit smarter. Try it. Open the modal and if
+A bit more logic, but a bit smarter. Try it. Open the modal and if
 we click down here... the calendar closes - which is correct - but the modal stays
 open. Love that!
 
@@ -192,12 +192,12 @@ stuff, so I'm going to remove it. Inside `tailwind.config.js`, remove the plugin
 then delete `package.json` and `package-lock.json`.
 
 I also don't want the JavaScript. In `importmap.php`, remove `flowbite` and
-`@popperjs/core`. But that datepicker is pretty cool, so let's keep that.
+`@popperjs/core`. But that datepicker is cool, so let's keep that.
 
 In `app.js`, remove the import from `flowbite` and the two functions at the bottom.
 Finally, in `base.html.twig`, get rid of that random dropdown.
 
-Now... no more JavaScript errors: things are happy! But because that datepicker
-was pretty cool, we still have it.
+Now... no more JavaScript errors! But because that datepicker was pretty cool,
+we still have it.
 
 Ok, bonus chapter done! Now back to work - seeya later!

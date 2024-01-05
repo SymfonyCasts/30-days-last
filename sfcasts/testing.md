@@ -1,4 +1,4 @@
-# Functional Testing
+# Testing Part 2: Functional Testing
 
 Welcome back to part 2 of day 28. I bent the rules today and made it a double
 feature. We talked about testing Twig & Live components... but we *also* need to

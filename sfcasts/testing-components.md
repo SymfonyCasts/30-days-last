@@ -1,4 +1,4 @@
-# Testing Twig & Live Components
+# Testing Part 1: Twig & Live Components
 
 All these nifty gadgets that we've built are just toys, unless we can test them.
 So, that's today's mission! Tons to tackle, so let's jump right in!

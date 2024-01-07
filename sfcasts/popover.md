@@ -235,6 +235,8 @@ don't need to register the one from Stimulus components. The `popover` controlle
 will be *our* controller... then we leverage the Stimulus components controller
 via inheritance.
 
+[[[ code('006edbcb2e') ]]]
+
 Moment of truth! It loads once... then *remembers* its content! 
 
 Not *only* did we create the perfect popover, we can now easily repeat this on other

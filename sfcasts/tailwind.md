@@ -174,6 +174,11 @@ page with different markup to make great-looking alerts. And, you don't need to
 install anything with Flowbite. These classes are all native Tailwind. You can
 copy this markup into your project and refresh. Nothing special. And I *love* it.
 
+***TIP
+Flowbite *does* also come with some JavaScript & a Tailwind Plugin. Check out the
+[bonus chapter](https://symfonycasts.com/screencast/last-stack/flowbite) for the details!
+***
+
 This also has a forms section where it shows how we can make forms look really nice.
 In theory, if we could make our forms output like this, they would look great.
 

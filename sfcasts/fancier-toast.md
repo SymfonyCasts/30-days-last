@@ -18,13 +18,13 @@ So, we need a way to *activate* the auto-close on a case-by-case basis. The way
 to pass info into a controller is via values. Add `static values` equals... and I'll
 invent a new one called `autoClose`, which will be a `Number`:
 
-[[[ code('bbcf9c83d0') ]]]
+[[[ code('2913305863') ]]]
 
 Next, add a `connect()` method. The idea is that if we have `this.autoCloseValue` -
 that's how you reference that - then... that's actually perfect! We'll use
 `setTimeout` to close after that many milliseconds:
 
-[[[ code('db78dbfca0') ]]]
+[[[ code('cd6302039b') ]]]
 
 To finish, go to where we use this controller - `_flashes.html.twig` - to pass
 in the new `autoClose` value. We do that on the same element as the `data-controller`.

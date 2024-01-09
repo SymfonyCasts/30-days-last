@@ -14,7 +14,7 @@ them into `require-dev`.
 
 ## Testing a Twig Component
 
-For our first act, let's test a Twig component. This is pretty cool: we can create
+For our first act, let's test a Twig Component. This is pretty cool: we can create
 the component object, call methods on it and assert how it's rendered, all in isolation.
 It's simple, but we'll test the `Button` component.
 
@@ -23,9 +23,14 @@ be an integration test - then `Twig/Components/`. If you're new to integration t
 check our [Integration Testing tutorial](https://symfonycasts.com/screencast/phpunit-integration).
 
 Inside, create a new `ButtonTest` class... and extend the normal `KernelTestCase` for
-integration tests. To help us work with the component, use a trait called
-`InteractsWithTwigComponents`, then add a new function:
-`testButtonRendersWithVariants()`.
+integration tests:
+
+[[[ code('c492dbae7c') ]]]
+
+To help us work with the component, use a trait called `InteractsWithTwigComponents`,
+then add a new function: `testButtonRendersWithVariants()`:
+
+[[[ code('685ba6d0b8') ]]]
 
 ## Mounting the Component
 
@@ -34,7 +39,9 @@ Say `$this->mountTwigComponent()` passing the component name `Button` and any
 props, like `variant` set to `success`.
 
 This should give us a `Button`: `assertInstanceOf`, `Button::class`, `$component`.
-Dump `$component` then `assertSame` that `success` is equal to `$component->variant`.
+Dump `$component` then `assertSame` that `success` is equal to `$component->variant`:
+
+[[[ code('6104b0a083') ]]]
 
 Cool! To try this, run:
 
@@ -52,16 +59,22 @@ bottom, rename this to `$rendered` and call `renderTwigComponent()`. This has al
 the same arguments, but we can also pass blocks. The third argument is a shortcut
 to pass the `content` block.
 
-Dump `$rendered`... and let's see what this looks like!
+Dump `$rendered`:
+
+[[[ code('fda53550e5') ]]]
+
+And let's see what this looks like!
 
 ```terminal-silent
 ./vendor/bin/simple-phpunit tests/Integration
 ```
 
 Awesome! An object with the HTML inside. With this, we can get the raw string...
-*or* we can access a `Crawler` object. This is cool:
-`$this->assertSame()` that `Click Me!`, is equal to `$rendered->crawler()`
-`->filter()` - to find the `span` - then `->text()`.
+*or* we can access a `Crawler` object. This is cool: `$this->assertSame()` that
+`Click Me!`, is equal to `$rendered->crawler()->filter()` - to find the `span` - then
+`->text()`:
+
+[[[ code('a431f53132') ]]]
 
 Super sweet! My editor's yelling 'syntax error', but it's being dramatic.
 Watch:
@@ -77,11 +90,15 @@ It passes!
 So how about integration testing a live component... like our fancy `SearchSite`?
 In the same directory, create a new class called `SearchSiteTest`,
 extend `KernelTestCase` and... this time use `InteractsWithLiveComponents`.
-Create a method: `testCanRenderAndReload()`.
+Create a method: `testCanRenderAndReload()`:
+
+[[[ code('66880afdc1') ]]]
 
 With this trait, we can say `$testComponent` equals `$this->createLiveComponent()`.
 Pass the name - `SearchSite`... and we can also pass any props, but I won't. We'll
-let the `$query` start empty. `dd($testComponent)`.
+let the `$query` start empty. `dd($testComponent)`:
+
+[[[ code('a7e4a754fc') ]]]
 
 When we run this:
 
@@ -97,11 +114,15 @@ a model value, calling live actions, emitting events or even logging in.
 ## Test Database Setup
 
 To test the search, we need to add some voyages to the database. On top,
-`use ResetDatabase` and `use Factories`.
+`use ResetDatabase` and `use Factories`:
+
+[[[ code('ba291d937f') ]]]
 
 Down here, use `VoyageFactory::createMany()` to create 5 voyages... and give them
 all the same `purpose` so we can easily search for them. Then create one more
-`Voyage` with any other random `purpose`.
+`Voyage` with any other random `purpose`:
+
+[[[ code('6f61429b9c') ]]]
 
 Before we take advantage of these, try the test again:
 
@@ -129,7 +150,9 @@ In the test, `$this->assertCount()` that 0 is equal to
 tags.
 
 Here's the *really* cool part: call `$testComponent->set()` `query` to `first 5`
-to mimic the user typing into the search box. And now we should have 5 results.
+to mimic the user typing into the search box. And now we should have 5 results:
+
+[[[ code('9eb2693535') ]]]
 
 Do it!
 

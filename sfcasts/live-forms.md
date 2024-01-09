@@ -7,26 +7,35 @@ So here's today's goal: convert the Voyage form into a Live Component and *see*
 some cool real-time validation for ourselves!
 
 We already have a controller that takes care of creating the Voyage form and
-handles the submit. What *we're* going to do is wrap the frontend part of the form
+handles this submit. What *we're* going to do is wrap the frontend part of the form
 inside a Live Component so that as we type, it re-renders. But ultimately,
 when we save, it'll save like normal through the controller.
 
 ## Moving the Form into a Twig Component
 
-For step one, forget about live components: let's just convert the form rendering
+For step one, forget about Live Components: let's just convert the form rendering
 into a Twig Component. In this case, I know we're going to need a PHP class, so
 create a new one called `VoyageForm` and make it a Twig Component with
-`#[AsTwigComponent]`.
+`#[AsTwigComponent]`:
+
+[[[ code('a0318f8fba') ]]]
 
 Perfect! The form itself lives in `templates/voyage/_form.html.twig` and uses
 a `form` variable, which we'll need to pass *into* the Twig component.
 
 In the `VoyageForm` class, add a public property for this: `public FormView $form`,
-because `FormView` is the object type for the `form` variable.
+because `FormView` is the object type for the `form` variable:
+
+[[[ code('49ec130ec6') ]]]
 
 Next, in `templates/components/`, create the component template: `VoyageForm.html.twig`.
-Copy the entire form, paste it here.... and then in `_form.html.twig`, it's simple:
-`<twig:VoyageForm />`.
+Copy the entire form, paste it here:
+
+[[[ code('80ae1da5ac') ]]]
+
+And then in `_form.html.twig`, it's simple: `<twig:VoyageForm />`:
+
+[[[ code('6d264901ae') ]]]
 
 And over at the browser... bah! We get:
 
@@ -36,11 +45,15 @@ Let's think about this. We *do* have a public property in the component class ca
 `form`... so we *should* have a local variable with that name. *But*, the property
 is uninitialized because I forgot to pass in that value. My bad! Pass
 `:form="form"` - using `:` so that the value - `form` - is Twig code: that's the
-`form` variable.
+`form` variable:
+
+[[[ code('83053fc278') ]]]
 
 And now... got it! Before we keep going, inside the template, remember to render
 the `attributes` variable. The easiest is to wrap this in a `div` and say
-`{{ attributes }}`. I'll put the closing tag... then indent the entire form.
+`{{ attributes }}`. I'll put the closing tag... then indent the entire form:
+
+[[[ code('93d52858fe') ]]]
 
 So the form rendering is now a Twig component. But to give it *behavior*, we
 need a Live Component.
@@ -49,7 +62,7 @@ need a Live Component.
 
 Let's think. After changing any field, I want a Live Component to collect the value
 of every field and send them to the Live Component system via an Ajax call. The
-live component will then *submit* these values into the form object and rerender
+Live Component will then *submit* these values into the form object and rerender
 the template.
 
 Using Symfony forms with Live Components is a bit more of a complex use-case than
@@ -58,14 +71,20 @@ make them writable.
 
 Fortunately, Live Component ships with a trait to help. In `VoyageForm`, first,
 convert this to a Live Component by saying `#[AsLiveComponent]` then using the
-`DefaultActionTrait`.
+`DefaultActionTrait`:
+
+[[[ code('c9fcc6a6d2') ]]]
 
 Next, because we want to bind this component to a form object, use
 `ComponentWithFormTrait`. When we do that, we don't need this public `form`
-property anymore because that lives inside the trait.
+property anymore because that lives inside the trait:
 
-However, this trait *does* require one new method. Go to Code -> Generate - or
-Cmd+N on a Mac - and implement the one we need: `instantiateForm()`.
+[[[ code('0b8a4efa51') ]]]
+
+However, this trait *does* require one new method. Go to "Code"->"Generate" - or
+`Cmd`+`N` on a Mac - and implement the one we need: `instantiateForm()`:
+
+[[[ code('35b679eeed') ]]]
 
 This might look strange at first. But remember, as we change fields in our form, the
 form values will be sent via Ajax back to our Live component... which then needs
@@ -75,18 +94,21 @@ do that, it calls this method.
 
 To get the logic for this, in `VoyageController`, all the way at the bottom, copy
 the guts of `createVoyageForm()`... then paste them here. Hit okay to add
-the two `use` statements.
+the two `use` statements:
+
+[[[ code('408b1b9578') ]]]
 
 There's... just one problem: the `createForm()` and `generateUrl()` methods don't
-exist here! But I haven't told you about a crazy, cool thing: live components
+exist here! But I haven't told you about a crazy, cool thing: Live Components
 are Symfony controllers in disguise! And this means we can extend
-`AbstractController`.
+`AbstractController`:
 
-That's totally allowed and gives us access to all the
-shortcuts we know and love.
+[[[ code('ef0029f4fe') ]]]
+
+That's totally allowed and gives us access to all the shortcuts we know and love.
 
 Ok, showtime! Move over. When I type, nothing happens. In
-this case, LiveComponents waits for the field to *change*... so it waits for us
+this case, Live Components waits for the field to *change*... so it waits for us
 to move *off* of the field. As soon as we do, we'll see an Ajax request fire
 down here. Watch. Boom! See it? That sent the data back, submitted the form and
 *re-rendered* the form.
@@ -124,16 +146,22 @@ So even though this works, it's a bit weird.
 To tighten this up, we can store the existing `Voyage` object on the component
 and use *that* during form creation. Add a public `?Voyage` `$initialFormData`
 property. Above this, to make the component system *remember* this value through
-all of its Ajax requests, add `#[LiveProp]`.
+all of its Ajax requests, add `#[LiveProp]`:
+
+[[[ code('277ffc3369') ]]]
 
 This is now a non-writable prop that our component will keep track of. And yes,
 it's non-writable: the user changes the *form* data directly, not this property.
 This is *just* here to help us create the form object on each Ajax call.
 
-Below, change this to `$voyage` equals `$this->initialFormData`, else `new Voyage()`.
+Below, change this to `$voyage` equals `$this->initialFormData`, else `new Voyage()`:
+
+[[[ code('325c642e43') ]]]
 
 Finally, pass in the `initialFormData` by saying `:initialFormData="voyage"`, which
-is a Twig variable that we already have.
+is a Twig variable that we already have:
+
+[[[ code('37beb9eeb5') ]]]
 
 So we won't notice a difference, but when we hit edit and change a field,
 that Ajax request now creates a Form object bound to this existing `Voyage` object.
@@ -168,12 +196,18 @@ composer require symfonycasts/dynamic-forms
 
 Using this is really pleasant. Find the form class: `src/Form/VoyageType.php`.
 The library uses decoration. At the top, say `$builder` equals
-`new DynamicFormBuilder()` and pass in `$builder`.
+`new DynamicFormBuilder()` and pass in `$builder`:
+
+[[[ code('66069516ed') ]]]
 
 This `DynamicFormBuilder` has the same methods as the original, but one extra:
 `addDependent()`. But before we use it, comment-out the
-`'autocomplete' => true`. There's a bug with the autocomplete system and LiveComponents.
-It should be fixed soon, but I don't want it to get in the way.
+`'autocomplete' => true`:
+
+[[[ code('184956e151') ]]]
+
+There's a bug with the autocomplete system and Live Components. It should be fixed
+soon, but I don't want it to get in the way.
 
 Anyway, the `addDependent()` method takes three arguments. The first is the name
 of the new field: `wormholeUpgrade`. The second is an array of fields that
@@ -181,7 +215,9 @@ this field *depends* on. In this case, that's only `planet`. The final
 argument is a callback function and *its* first argument will always be a
 `DependentField` object. We'll see how that's used in a minute. Then, this will
 receive the value of every field that it depends on. Because we depend only
-on `planet`, the callback will receive *that* as an argument: `?Planet` `$planet`.
+on `planet`, the callback will receive *that* as an argument: `?Planet` `$planet`:
+
+[[[ code('a79a91f757') ]]]
 
 Inside, if we *don't* have a planet - because the user hasn't selected one yet
 *or* the planet is in the Milky Way, just return. And yes, I borked up my
@@ -193,7 +229,9 @@ field at all. Else, add one with `$field->add()`. This method is identical
 to the normal `add()` method except that we don't need to pass the *name* of the
 field... because we already pass it earlier. So skip straight to
 `ChoiceType::class`... then the options with `choices` set to an array of "Yes"
-for true, and "No" for false.
+for true, and "No" for false:
+
+[[[ code('685d418d03') ]]]
 
 Done! Go check out the result. Refresh, edit and change to a planet that's not in
 our system. There it is! The field popped into existence! If we go back to a planet

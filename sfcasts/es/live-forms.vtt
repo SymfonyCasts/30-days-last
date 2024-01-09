@@ -1,0 +1,628 @@
+WEBVTT
+
+00:00:00.036 --> 00:00:03.966 align:middle
+Para el día 28, quiero mostrarte
+una de las formas más comunes en
+
+00:00:03.966 --> 00:00:06.636 align:middle
+que la gente utiliza los
+Componentes Vivos: los formularios.
+
+00:00:07.016 --> 00:00:10.276 align:middle
+Dado que los Componentes Vivos tienen la
+capacidad de recargarse a medida que escribes,
+
+00:00:10.516 --> 00:00:15.446 align:middle
+nos ofrecen interesantes posibilidades con los
+formularios, ¡como la validación en tiempo real!
+
+00:00:15.446 --> 00:00:20.626 align:middle
+Así que éste es el objetivo de hoy: ¡convertir
+el formulario Voyage en un Componente LIVE
+
+00:00:20.626 --> 00:00:23.846 align:middle
+y ver por nosotros mismos una
+genial validación en tiempo real!
+
+00:00:24.666 --> 00:00:26.266 align:middle
+Ya tenemos un controlador que se encarga
+
+00:00:26.266 --> 00:00:28.946 align:middle
+de crear el formulario
+Voyage y gestiona el envío.
+
+00:00:29.646 --> 00:00:35.226 align:middle
+Lo que vamos a hacer es envolver la parte frontal
+del formulario dentro de un Componente LIVE para que,
+
+00:00:35.226 --> 00:00:37.556 align:middle
+a medida que escribimos,
+se vuelva a renderizar.
+
+00:00:38.066 --> 00:00:41.906 align:middle
+Pero al final, cuando guardemos, se guardará
+como siempre a través del controlador.
+
+00:00:41.906 --> 00:00:45.036 align:middle
+Para el primer paso, olvídate
+de los Live Components:
+
+00:00:45.166 --> 00:00:48.466 align:middle
+simplemente convirtamos la renderización
+del formulario en un Componente Twig.
+
+00:00:48.466 --> 00:00:53.986 align:middle
+En este caso, sé que vamos a necesitar una clase
+PHP, así que crea una nueva llamada VoyageForm
+
+00:00:55.326 --> 00:00:59.176 align:middle
+y conviértela en un Componente Twig
+con #[AsTwigComponent]: ¡Perfecto!
+
+00:00:59.176 --> 00:01:04.186 align:middle
+El formulario en sí vive en
+templates/voyage/_form.html.twig
+
+00:01:04.376 --> 00:01:09.246 align:middle
+y utiliza una variable form, que
+tendremos que pasar al componente Twig.
+
+00:01:10.006 --> 00:01:15.766 align:middle
+En la clase VoyageForm, añade una propiedad
+pública para esto: public FormView $form,
+
+00:01:16.116 --> 00:01:22.166 align:middle
+porque FormView es el tipo de objeto para la variable
+form: A continuación, en templates/components/,
+
+00:01:22.426 --> 00:01:26.416 align:middle
+crea la plantilla del
+componente: VoyageForm.html.twig.
+
+00:01:28.016 --> 00:01:34.636 align:middle
+Copia todo el formulario y pégalo aquí:
+Y luego en _form.html.twig, es sencillo:
+
+00:01:34.946 --> 00:01:38.946 align:middle
+<twig:VoyageForm />: Y en el navegador...
+
+00:01:39.816 --> 00:01:43.166 align:middle
+¡bah! Obtenemos La variable form no existe.
+
+00:01:43.746 --> 00:01:45.076 align:middle
+Pensemos en esto.
+
+00:01:45.486 --> 00:01:49.436 align:middle
+Tenemos una propiedad pública en
+la clase componente llamada form...
+
+00:01:49.706 --> 00:01:53.076 align:middle
+por lo que deberíamos tener una
+variable local con ese nombre.
+
+00:01:53.526 --> 00:01:59.096 align:middle
+Pero, la propiedad no está inicializada
+porque olvidé pasarle ese valor.
+
+00:01:59.596 --> 00:02:07.026 align:middle
+¡Culpa mía! Pasa :form="form" - utilizando
+: para que el valor - form - sea código Twig:
+
+00:02:07.296 --> 00:02:10.126 align:middle
+que es la variable form: Y ahora...
+
+00:02:10.566 --> 00:02:13.646 align:middle
+¡ya está! Antes de continuar,
+dentro de la plantilla,
+
+00:02:13.766 --> 00:02:16.026 align:middle
+recuerda renderizar la variable attributes.
+
+00:02:16.726 --> 00:02:20.546 align:middle
+Lo más fácil es envolverla en
+div y decir {{ attributes }}.
+
+00:02:21.536 --> 00:02:22.796 align:middle
+Pondré la etiqueta de cierre...
+
+00:02:22.956 --> 00:02:29.086 align:middle
+y luego sangraré todo el formulario: Así que la
+representación del formulario es ahora un componente Twig.
+
+00:02:29.216 --> 00:02:32.496 align:middle
+Pero para darle comportamiento,
+necesitamos un Componente Live.
+
+00:02:33.186 --> 00:02:34.046 align:middle
+Pensemos.
+
+00:02:34.046 --> 00:02:39.886 align:middle
+Después de cambiar cualquier campo, quiero que
+un Componente Vivo recoja el valor de cada campo
+
+00:02:40.066 --> 00:02:43.476 align:middle
+y lo envíe al sistema de Componentes
+Vivos mediante una llamada Ajax.
+
+00:02:43.846 --> 00:02:49.976 align:middle
+A continuación, el Live Component enviará estos valores
+al objeto formulario y volverá a renderizar la plantilla.
+
+00:02:50.516 --> 00:02:55.106 align:middle
+Utilizar formularios Symfony con Live Components
+es un caso de uso un poco más complejo
+
+00:02:55.106 --> 00:02:57.366 align:middle
+que el caso normal de los Live Components:
+
+00:02:57.596 --> 00:03:00.306 align:middle
+donde creamos algunas propiedades
+públicas y las hacemos escribibles.
+
+00:03:00.306 --> 00:03:03.986 align:middle
+Afortunadamente, Live Component
+incluye un trait para ayudarte.
+
+00:03:04.516 --> 00:03:07.646 align:middle
+En VoyageForm, primero,
+conviértelo en un Componente LIVE
+
+00:03:07.646 --> 00:03:13.556 align:middle
+diciendo #[AsLiveComponent] y luego utilizando
+DefaultActionTrait: A continuación,
+
+00:03:13.726 --> 00:03:19.136 align:middle
+como queremos vincular este componente a un
+objeto formulario, utiliza ComponentWithFormTrait.
+
+00:03:19.846 --> 00:03:22.986 align:middle
+Cuando lo hagamos, ya no necesitaremos
+esta propiedad pública form
+
+00:03:22.986 --> 00:03:28.206 align:middle
+porque vive dentro del rasgo: Sin embargo,
+este rasgo requiere un nuevo método.
+
+00:03:28.666 --> 00:03:33.006 align:middle
+Ve a "Código"->"Generar" -o Cmd+N en
+un Mac- e implementa el que necesitamos:
+
+00:03:33.216 --> 00:03:37.596 align:middle
+instantiateForm(): Esto puede
+parecer extraño al principio.
+
+00:03:37.826 --> 00:03:40.626 align:middle
+Pero recuerda que, a medida que cambiemos
+los campos de nuestro formulario,
+
+00:03:40.836 --> 00:03:45.406 align:middle
+los valores del formulario se enviarán a
+través de Ajax a nuestro componente Live...
+
+00:03:45.696 --> 00:03:50.886 align:middle
+que luego tendrá que enviarlos al objeto
+formulario para que pueda volver a renderizarse.
+
+00:03:51.386 --> 00:03:55.546 align:middle
+Esto significa que, durante la llamada
+Ajax, nuestro componente Live necesita
+
+00:03:55.546 --> 00:03:58.326 align:middle
+ser capaz de crear nuestro objeto formulario.
+
+00:03:58.786 --> 00:04:00.836 align:middle
+Para ello, llama a este método.
+
+00:04:01.556 --> 00:04:05.746 align:middle
+Para obtener la lógica de esto, en
+VoyageController , en la parte inferior,
+
+00:04:06.256 --> 00:04:08.486 align:middle
+copia las tripas de createVoyageForm()...
+
+00:04:09.026 --> 00:04:10.316 align:middle
+y pégalas aquí.
+
+00:04:10.986 --> 00:04:14.326 align:middle
+Pulsa OK para añadir las dos
+sentencias use: Sólo hay...
+
+00:04:14.536 --> 00:04:19.946 align:middle
+sólo un problema: ¡los métodos
+createForm() y generateUrl() no existen aquí!
+
+00:04:20.296 --> 00:04:23.026 align:middle
+Pero no te he hablado de
+una cosa loca y genial:
+
+00:04:23.396 --> 00:04:27.316 align:middle
+¡Los Componentes Live son
+controladores Symfony disfrazados!
+
+00:04:27.556 --> 00:04:33.416 align:middle
+Y esto significa que podemos extender AbstractController:
+Eso está totalmente permitido y nos da acceso
+
+00:04:33.416 --> 00:04:35.156 align:middle
+a todos los atajos que conocemos y amamos.
+
+00:04:36.196 --> 00:04:37.406 align:middle
+Vale, ¡hora del espectáculo!
+
+00:04:37.856 --> 00:04:38.796 align:middle
+Muévete.
+
+00:04:39.706 --> 00:04:41.616 align:middle
+Cuando tecleo, no pasa nada.
+
+00:04:42.086 --> 00:04:45.946 align:middle
+En este caso, Live Components
+espera a que cambie el campo...
+
+00:04:46.146 --> 00:04:48.656 align:middle
+así que espera a que nos movamos del campo.
+
+00:04:49.316 --> 00:04:53.116 align:middle
+En cuanto lo hagamos, veremos dispararse
+una petición Ajax aquí abajo.
+
+00:04:53.636 --> 00:04:55.886 align:middle
+Observa. ¡Bum!
+
+00:04:56.006 --> 00:05:00.806 align:middle
+¿Lo ves? Ha devuelto los datos, ha enviado
+el formulario y lo ha vuelto a renderizar.
+
+00:05:01.566 --> 00:05:04.526 align:middle
+Para comprobarlo, borra el
+campo y pulsa tabulador.
+
+00:05:05.126 --> 00:05:06.696 align:middle
+¡Un error de validación!
+
+00:05:06.996 --> 00:05:10.746 align:middle
+¡Eso viene de Symfony y de la renderización
+normal de validación del formulario!
+
+00:05:11.306 --> 00:05:14.816 align:middle
+Vuelve a escribir algo, pulsa
+tabulador y desaparecerá.
+
+00:05:15.406 --> 00:05:16.076 align:middle
+¿Lo mejor?
+
+00:05:16.296 --> 00:05:20.856 align:middle
+El campo planeta de aquí abajo también es obligatorio
+gracias a las restricciones de validación de Symfony.
+
+00:05:21.206 --> 00:05:27.106 align:middle
+Pero el sistema Live Component es inteligente:
+sabe que el usuario aún no ha cambiado este campo,
+
+00:05:27.446 --> 00:05:29.666 align:middle
+por lo que no debería mostrar
+el error de validación.
+
+00:05:30.156 --> 00:05:32.086 align:middle
+Pero si seleccionamos un planeta...
+
+00:05:32.326 --> 00:05:36.236 align:middle
+y luego borramos, cuando se vuelve
+a mostrar, aparece el error.
+
+00:05:36.756 --> 00:05:38.836 align:middle
+Esto también funciona bien
+para el formulario de edición.
+
+00:05:39.236 --> 00:05:41.746 align:middle
+Pulsa editar y borra un campo.
+
+00:05:43.146 --> 00:05:45.986 align:middle
+Aunque, echa un vistazo a instantiateForm().
+
+00:05:46.476 --> 00:05:53.216 align:middle
+Hmm, siempre estamos instanciando un nuevo
+objeto Voyage: nunca hay una variable $voyage.
+
+00:05:53.996 --> 00:05:59.846 align:middle
+Cambiamos un campo, Live Components envía una
+petición Ajax y, cuando crea el formulario, lo hace
+
+00:06:00.136 --> 00:06:06.726 align:middle
+utilizando un objeto Voyage completamente nuevo,
+no el objeto Voyage existente en la base de datos.
+
+00:06:06.726 --> 00:06:08.696 align:middle
+Y... eso probablemente esté bien...
+
+00:06:08.956 --> 00:06:12.426 align:middle
+porque envía todos los datos en
+él, y se renderiza correctamente.
+
+00:06:12.956 --> 00:06:18.086 align:middle
+Sin embargo, una cosa que puedes hacer con los
+componentes Live es enviar el formulario directamente
+
+00:06:18.206 --> 00:06:22.036 align:middle
+al objeto Componente y manejar
+allí la lógica de guardado.
+
+00:06:22.446 --> 00:06:27.766 align:middle
+No vamos a hacer eso, pero si
+lo hiciéramos, el objeto Voyage
+
+00:06:27.766 --> 00:06:30.626 align:middle
+vinculado al formulario sería
+siempre un objeto nuevo...
+
+00:06:31.006 --> 00:06:34.136 align:middle
+y siempre insertaría una
+nueva fila en la base de datos.
+
+00:06:34.136 --> 00:06:37.806 align:middle
+Así que, aunque esto
+funciona, es un poco raro.
+
+00:06:38.756 --> 00:06:43.016 align:middle
+Para ajustarlo, podemos almacenar el
+objeto Voyage existente en el componente
+
+00:06:43.016 --> 00:06:45.506 align:middle
+y utilizarlo durante la
+creación del formulario.
+
+00:06:45.956 --> 00:06:50.286 align:middle
+Añade una propiedad pública
+?Voyage $initialFormData .
+
+00:06:52.046 --> 00:06:56.146 align:middle
+Sobre ella, para que el sistema del componente
+recuerde este valor a través de todas
+
+00:06:56.146 --> 00:07:01.966 align:middle
+sus peticiones Ajax, añade #[LiveProp]:
+Ésta es ahora una propiedad no escribible
+
+00:07:01.966 --> 00:07:03.996 align:middle
+de la que nuestro componente
+hará un seguimiento.
+
+00:07:04.406 --> 00:07:10.846 align:middle
+Y sí, es no escribible: el usuario cambia directamente
+los datos del formulario, no esta propiedad.
+
+00:07:11.326 --> 00:07:15.826 align:middle
+Sólo está aquí para ayudarnos a crear
+el objeto formulario en cada llamada Ajax.
+
+00:07:16.886 --> 00:07:22.226 align:middle
+A continuación, cambia esto a $voyage igual a
+$this->initialFormData, si no new Voyage(): Por último, pasa
+
+00:07:22.276 --> 00:07:28.756 align:middle
+initialFormData diciendo
+:initialFormData="voyage",
+
+00:07:29.006 --> 00:07:33.736 align:middle
+que es una variable Twig que ya tenemos:
+Así que no notaremos ninguna diferencia,
+
+00:07:34.046 --> 00:07:36.116 align:middle
+pero cuando pulsemos editar
+y cambiemos un campo,
+
+00:07:36.916 --> 00:07:42.696 align:middle
+esa petición Ajax creará ahora un objeto
+Formulario vinculado a este objeto Voyage existente.
+
+00:07:43.396 --> 00:07:47.026 align:middle
+Esto es un poco técnico, pero ampliémoslo.
+
+00:07:47.706 --> 00:07:52.936 align:middle
+Al renderizar nuestro formulario a través de un Componente
+Vivo, ¡obtenemos validación en tiempo real gratis!
+
+00:07:53.226 --> 00:07:53.836 align:middle
+Eso es genial.
+
+00:07:53.836 --> 00:07:59.226 align:middle
+Casi no nos queda tiempo, pero creo que hoy
+podemos abordar otro problema de formularios.
+
+00:07:59.226 --> 00:08:04.896 align:middle
+De hecho, quizás el problema de
+formularios más doloroso de todo Symfony.
+
+00:08:05.616 --> 00:08:10.646 align:middle
+En este formulario, si el planeta no está en nuestro
+sistema solar, quiero mostrar un nuevo desplegable
+
+00:08:10.646 --> 00:08:12.946 align:middle
+para una mejora opcional del agujero de gusano.
+
+00:08:13.716 --> 00:08:17.036 align:middle
+Este es el clásico problema de
+campo de formulario dependiente.
+
+00:08:17.516 --> 00:08:22.056 align:middle
+En Symfony, es difícil porque necesitamos
+aprovechar los eventos del formulario.
+
+00:08:22.056 --> 00:08:24.166 align:middle
+En el frontend también es difícil
+
+00:08:24.546 --> 00:08:30.056 align:middle
+Históricamente, necesitábamos escribir JavaScript para
+activar una llamada Ajax para volver a renderizar el formulario.
+
+00:08:30.486 --> 00:08:32.886 align:middle
+Pero... ¡ahora ya no es necesario!
+
+00:08:33.356 --> 00:08:37.286 align:middle
+Live Components es genial para volver a mostrar
+el formulario cuando cambian los campos.
+
+00:08:37.896 --> 00:08:38.646 align:middle
+¿Y la primera parte?
+
+00:08:39.076 --> 00:08:42.566 align:middle
+Sí, ¡hay una nueva biblioteca
+que también lo hace fácil!
+
+00:08:42.566 --> 00:08:45.556 align:middle
+Se llama symfonycasts/dynamic-forms...
+
+00:08:45.976 --> 00:08:50.786 align:middle
+creada por nosotros porque este
+problema me volvía absolutamente loco.
+
+00:08:51.056 --> 00:08:55.486 align:middle
+Gracias a Ben Davies, desarrollador de
+Symfony, que ha descifrado el código.
+
+00:08:56.086 --> 00:09:02.446 align:middle
+Copia la línea "composer require", dale la vuelta
+y ejecútalo: Usar esto es realmente agradable.
+
+00:09:02.546 --> 00:09:07.576 align:middle
+Encuentra la clase de formulario:
+src/Form/VoyageType.php.
+
+00:09:07.576 --> 00:09:09.356 align:middle
+La biblioteca utiliza decoración.
+
+00:09:09.356 --> 00:09:15.306 align:middle
+En la parte superior, di que $builder es igual
+a new DynamicFormBuilder() y pasa a $builder:
+
+00:09:16.116 --> 00:09:23.146 align:middle
+Este DynamicFormBuilder tiene los mismos métodos
+que el original, pero uno extra: addDependent().
+
+00:09:23.526 --> 00:09:26.736 align:middle
+Pero antes de utilizarlo, comenta
+el 'autocomplete' => true:
+
+00:09:26.986 --> 00:09:30.516 align:middle
+Hay un error con el sistema de
+autocompletar y Live Components.
+
+00:09:30.616 --> 00:09:33.396 align:middle
+Debería arreglarse pronto,
+pero no quiero que estorbe.
+
+00:09:34.046 --> 00:09:37.396 align:middle
+De todos modos, el método
+addDependent() recibe tres argumentos.
+
+00:09:37.666 --> 00:09:41.096 align:middle
+El primero es el nombre del
+nuevo campo: wormholeUpgrade.
+
+00:09:42.106 --> 00:09:45.896 align:middle
+El segundo es una matriz de campos
+de los que depende este campo.
+
+00:09:46.686 --> 00:09:48.546 align:middle
+En este caso, sólo es planet.
+El último argumento es
+
+00:09:49.586 --> 00:09:51.916 align:middle
+una función de devolución de llamada
+
+00:09:52.176 --> 00:09:56.776 align:middle
+y su primer argumento será
+siempre un objeto DependentField.
+
+00:09:57.156 --> 00:09:58.876 align:middle
+Veremos cómo se utiliza en un minuto.
+
+00:09:59.626 --> 00:10:04.496 align:middle
+Entonces, ésta recibirá el valor
+de cada campo del que dependa.
+
+00:10:05.386 --> 00:10:10.416 align:middle
+Como sólo dependemos de planet, la llamada
+de retorno recibirá eso como argumento:
+
+00:10:10.816 --> 00:10:18.016 align:middle
+?Planet $planet en el interior, si no tenemos un
+planeta -porque el usuario aún no lo ha seleccionado
+
+00:10:18.016 --> 00:10:22.366 align:middle
+o el planeta está en la Vía
+Láctea-, simplemente devuelve.
+
+00:10:22.926 --> 00:10:25.896 align:middle
+Y sí, me he equivocado
+con la ciencia espacial:
+
+00:10:26.116 --> 00:10:30.566 align:middle
+Quería que fuera isInOurSolarSystem(),
+no la Vía Láctea.
+
+00:10:30.816 --> 00:10:31.926 align:middle
+¡Perdóname, Data!
+
+00:10:32.776 --> 00:10:37.926 align:middle
+De todos modos, como estamos regresando,
+no habrá ningún campo wormholeUpgrade.
+
+00:10:38.446 --> 00:10:41.256 align:middle
+Si no, añade uno con $field->add().
+
+00:10:42.156 --> 00:10:45.556 align:middle
+Este método es idéntico al
+método normal add(), salvo
+
+00:10:45.556 --> 00:10:48.106 align:middle
+que no necesitamos pasar el nombre del campo...
+
+00:10:48.476 --> 00:10:50.236 align:middle
+porque ya lo pasamos antes.
+
+00:10:50.306 --> 00:10:53.796 align:middle
+Así que salta directamente
+a ChoiceType::class...
+
+00:10:54.156 --> 00:11:02.656 align:middle
+y luego las opciones con choices establecidas en una
+matriz de "Sí" para verdadero, y "No" para falso: ¡Listo!
+
+00:11:03.306 --> 00:11:04.656 align:middle
+Comprueba el resultado.
+
+00:11:04.656 --> 00:11:10.446 align:middle
+Actualiza, edita y cambia a un planeta
+que no esté en nuestro sistema.
+
+00:11:11.586 --> 00:11:12.376 align:middle
+¡Ahí lo tienes!
+
+00:11:12.546 --> 00:11:15.296 align:middle
+¡El campo ha aparecido!
+
+00:11:15.296 --> 00:11:18.276 align:middle
+Si volvemos a un planeta que
+esté en nuestro sistema solar...
+
+00:11:18.626 --> 00:11:20.196 align:middle
+¡se ha ido! Y...
+
+00:11:20.536 --> 00:11:22.626 align:middle
+el campo se guarda perfectamente.
+
+00:11:23.526 --> 00:11:25.996 align:middle
+Cuando editamos el viaje, el
+formulario se inicia con él.
+
+00:11:26.206 --> 00:11:27.686 align:middle
+¡Funciona!
+
+00:11:28.266 --> 00:11:31.296 align:middle
+Vale, ¡ya casi hemos llegado al
+final de nuestro viaje de 30 días!
+
+00:11:31.646 --> 00:11:36.256 align:middle
+Mañana toca hablar de cómo podemos probar
+nuestras nuevas y bonitas funciones del frontend.

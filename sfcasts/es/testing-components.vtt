@@ -1,0 +1,291 @@
+WEBVTT
+
+00:00:01.056 --> 00:00:05.226 align:middle
+Todos estos ingeniosos artilugios que hemos construido
+no son más que juguetes, a menos que podamos probarlos.
+
+00:00:05.476 --> 00:00:06.656 align:middle
+Así que, ¡esa es la misión de hoy!
+
+00:00:07.026 --> 00:00:09.366 align:middle
+Hay mucho que hacer, así
+que ¡manos a la obra!
+
+00:00:09.826 --> 00:00:14.916 align:middle
+Ejecuta: composer require phpunit
+Eso instala el symfony/test-pack,
+
+00:00:15.286 --> 00:00:18.626 align:middle
+nos da todos los paquetes que
+necesitamos y los pone en require-dev.
+
+00:00:18.806 --> 00:00:22.546 align:middle
+Para nuestro primer acto, vamos
+a probar un Componente Twig.
+
+00:00:22.956 --> 00:00:27.166 align:middle
+Esto está muy bien: podemos crear el
+objeto componente, llamar a sus métodos
+
+00:00:27.166 --> 00:00:29.956 align:middle
+y comprobar cómo se representa,
+todo ello de forma aislada.
+
+00:00:30.556 --> 00:00:32.906 align:middle
+Es sencillo, pero vamos a
+probar el componente Button.
+
+00:00:32.906 --> 00:00:36.246 align:middle
+En el directorio tests/, crea
+un directorio Integration/
+
+00:00:36.406 --> 00:00:40.026 align:middle
+-porque esto será una prueba de
+integración- y luego Twig/Components/.
+
+00:00:40.456 --> 00:00:44.226 align:middle
+Si no conoces las pruebas de integración,
+consulta nuestro tutorial Pruebas de integración.
+
+00:00:44.966 --> 00:00:48.426 align:middle
+Dentro, crea una nueva clase ButtonTest...
+
+00:00:48.426 --> 00:00:52.536 align:middle
+y amplía la normal KernelTestCase
+para las pruebas de integración:
+
+00:00:52.586 --> 00:00:56.836 align:middle
+Para ayudarnos a trabajar con el componente, utiliza
+un rasgo llamado InteractsWithTwigComponents,
+
+00:00:57.216 --> 00:00:58.426 align:middle
+y añade una nueva función:
+
+00:00:58.426 --> 00:01:04.506 align:middle
+testButtonRendersWithVariants(): El
+trait nos proporciona dos métodos.
+
+00:01:04.856 --> 00:01:07.566 align:middle
+El primero nos permite
+crear el objeto componente.
+
+00:01:07.886 --> 00:01:12.126 align:middle
+Digamos $this->mountTwigComponent()
+pasando el nombre del componente Button
+
+00:01:12.516 --> 00:01:15.976 align:middle
+y cualquier props, como
+variant puesto en success.
+
+00:01:17.186 --> 00:01:22.296 align:middle
+Esto debería darnos un Button:
+assertInstanceOf, Button::class, $component.
+
+00:01:22.296 --> 00:01:32.016 align:middle
+Volcamos $component y luego assertSame que success
+es igual a $component->variant: ¡Genial!
+
+00:01:32.016 --> 00:01:33.926 align:middle
+Para probarlo, ejecuta:
+./vendor/bin/simple-phpunit
+
+00:01:34.016 --> 00:01:40.706 align:middle
+tests/Integration Eso descargará PHPUnit, y...
+
+00:01:41.296 --> 00:01:42.086 align:middle
+¡pasa!
+
+00:01:42.726 --> 00:01:45.456 align:middle
+Tenemos algunos avisos de
+desaprobación, pero ignóralos. Lo
+
+00:01:46.146 --> 00:01:48.376 align:middle
+segundo que podemos hacer es
+renderizar un componente. Copia
+
+00:01:49.456 --> 00:01:56.976 align:middle
+la parte superior, pégala en la parte inferior, cámbiale
+el nombre a $rendered y llama a renderTwigComponent(). Esto
+
+00:01:57.956 --> 00:02:01.806 align:middle
+tiene casi los mismos argumentos, pero
+también podemos pasar bloques. El
+
+00:02:02.396 --> 00:02:05.516 align:middle
+tercer argumento es un atajo para
+pasar el bloque content. Vuelca
+
+00:02:05.516 --> 00:02:09.596 align:middle
+$rendered: ¡Y veamos qué
+aspecto tiene esto! ¡Fantástico!
+
+00:02:10.186 --> 00:02:13.556 align:middle
+Un objeto con el HTML dentro. Con
+
+00:02:14.156 --> 00:02:16.786 align:middle
+esto, podemos obtener la cadena en bruto... o
+
+00:02:17.126 --> 00:02:19.926 align:middle
+podemos acceder a un objeto Crawler. Esto
+
+00:02:20.526 --> 00:02:24.776 align:middle
+es genial: $this->assertSame()
+que Click Me!, es igual
+
+00:02:24.776 --> 00:02:32.876 align:middle
+a $rendered->crawler()->filter() - para encontrar
+el span - entonces ->text(): ¡Super dulce! Mi
+
+00:02:33.476 --> 00:02:37.206 align:middle
+editor está gritando "error de sintaxis",
+pero está siendo dramático. Observa:
+
+00:02:37.496 --> 00:02:40.016 align:middle
+¡Pasa!
+
+00:02:40.046 --> 00:02:43.526 align:middle
+¿Qué tal si probamos la integración
+de un componente vivo... como
+
+00:02:43.776 --> 00:02:45.366 align:middle
+nuestro elegante SearchSite? En
+
+00:02:46.656 --> 00:02:54.636 align:middle
+el mismo directorio, crea una nueva clase llamada
+SearchSiteTest, extiende KernelTestCase y... esta
+
+00:02:54.636 --> 00:02:57.666 align:middle
+vez utiliza InteractsWithLiveComponents. Crea
+
+00:02:58.526 --> 00:03:03.516 align:middle
+un método: testCanRenderAndReload():
+Con este rasgo,
+
+00:03:03.516 --> 00:03:07.746 align:middle
+podemos decir que $testComponent es igual
+a $this->createLiveComponent(). Pasa
+
+00:03:08.366 --> 00:03:09.976 align:middle
+el nombre - SearchSite... y
+
+00:03:10.426 --> 00:03:13.666 align:middle
+también podemos pasar cualquier
+prop, pero no lo haré.
+
+00:03:14.036 --> 00:03:15.996 align:middle
+Dejaremos que $query empiece
+vacío. dd($testComponent):
+
+00:03:16.616 --> 00:03:24.396 align:middle
+Cuando lo ejecutemos: El
+objeto es enorme... pero es
+
+00:03:24.396 --> 00:03:26.886 align:middle
+un TestLiveComponent. Y
+
+00:03:27.186 --> 00:03:29.496 align:middle
+tiene un montón de cosas buenas.
+
+00:03:30.056 --> 00:03:34.486 align:middle
+Podemos decir $testComponent->component()
+para obtener el objeto componente subyacente,
+
+00:03:34.796 --> 00:03:40.616 align:middle
+podemos renderizarlo, e incluso podemos imitar el comportamiento
+del usuario, como cambiar un valor del modelo, llamar a
+
+00:03:40.836 --> 00:03:44.966 align:middle
+acciones en vivo, emitir eventos
+o incluso iniciar sesión. Para
+
+00:03:45.906 --> 00:03:49.606 align:middle
+probar la búsqueda, tenemos que añadir
+algunos viajes a la base de datos.
+
+00:03:50.356 --> 00:03:55.906 align:middle
+Arriba, use ResetDatabase y use
+Factories: Aquí abajo, utiliza
+
+00:03:56.496 --> 00:04:00.826 align:middle
+VoyageFactory::createMany()
+para crear 5 travesías... y
+
+00:04:01.116 --> 00:04:04.746 align:middle
+dales a todas la misma purpose para que podamos
+buscarlas fácilmente. A continuación, crea
+
+00:04:05.826 --> 00:04:11.646 align:middle
+otro Voyage con cualquier otro purpose
+aleatorio : Antes de aprovech arlos
+
+00:04:11.646 --> 00:04:16.636 align:middle
+, vuelve a hacer la prueba: ¡Un error
+de conexión a la base de datos! Estoy
+
+00:04:17.046 --> 00:04:20.726 align:middle
+ejecutando la base de datos a través de
+Docker y utilizando el binario symfony para
+
+00:04:20.726 --> 00:04:23.976 align:middle
+establecer la variable de
+entorno DATABASE_URL. Para
+
+00:04:24.896 --> 00:04:31.626 align:middle
+inyectar esa variable al ejecutar la prueba,
+antepone al comando symfony php: Y ... ¡hemos
+
+00:04:32.246 --> 00:04:33.286 align:middle
+vuelto! Una
+
+00:04:33.646 --> 00:04:36.536 align:middle
+prueba arriesgada porque no
+tenemos ninguna aserción. ¡
+
+00:04:36.956 --> 00:04:38.136 align:middle
+Añadámoslas! Recuerda
+
+00:04:39.346 --> 00:04:43.736 align:middle
+si no hay query, nuestro componente
+no devuelve ningún viaje. Y
+
+00:04:44.106 --> 00:04:48.136 align:middle
+en la plantilla
+templates/components/SearchSite.html.twig, cuando
+
+00:04:48.556 --> 00:04:51.746 align:middle
+tenemos resultados, cada
+uno es una etiqueta a. En la
+
+00:04:52.726 --> 00:04:58.976 align:middle
+prueba, $this->assertCount() que 0 es
+igual a $testComponent->render(), luego
+
+00:04:59.476 --> 00:05:02.946 align:middle
+utiliza ese mismo ->crawler() para
+filtrar las etiquetas a. Aquí está
+
+00:05:03.786 --> 00:05:08.686 align:middle
+la parte realmente guay: llama a
+$testComponent->set() query a first 5 para
+
+00:05:08.766 --> 00:05:12.526 align:middle
+imitar al usuario escribiendo
+en el cuadro de búsqueda. Y
+
+00:05:12.526 --> 00:05:16.916 align:middle
+ahora deberíamos tener 5
+resultados: ¡Hazlo! ¡Verde!
+
+00:05:18.116 --> 00:05:22.766 align:middle
+Vale, hoy es un día poco
+ortodoxo porque ... se nos ha
+
+00:05:22.996 --> 00:05:23.926 align:middle
+acabado el tiempo... ¡pero
+
+00:05:23.996 --> 00:05:25.176 align:middle
+tengo más cosas que decir! La próxima
+
+00:05:25.756 --> 00:05:31.556 align:middle
+será la segunda parte, en la que nos ocuparemos de las
+pruebas funcionales de nuestro frontend basado en JavaScript.

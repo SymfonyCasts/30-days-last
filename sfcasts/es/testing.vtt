@@ -1,0 +1,661 @@
+WEBVTT
+
+00:00:00.856 --> 00:00:03.466 align:middle
+Bienvenidos de nuevo a
+la 2ª parte del día 29.
+
+00:00:03.826 --> 00:00:06.526 align:middle
+Hoy me he saltado las
+normas y lo he hecho doble.
+
+00:00:06.906 --> 00:00:09.206 align:middle
+Hemos hablado de las pruebas de
+los componentes Twig y Live...
+
+00:00:09.206 --> 00:00:14.876 align:middle
+pero también tenemos que hablar de las pruebas
+funcionales -o de extremo a extremo- en general. Es
+
+00:00:15.286 --> 00:00:19.116 align:middle
+cuando controlamos mediante programación un
+navegador, hacemos que haga clic en enlaces, rellene
+
+00:00:19.316 --> 00:00:22.606 align:middle
+formularios, etc. Dos cosas sobre esto.
+
+00:00:22.856 --> 00:00:25.656 align:middle
+Primero, vamos a crear un
+sistema que me gusta mucho.
+
+00:00:25.956 --> 00:00:29.476 align:middle
+Y segundo, el camino para
+llegar ahí va a ser...
+
+00:00:29.596 --> 00:00:31.326 align:middle
+sinceramente, un poco accidentado.
+
+00:00:31.596 --> 00:00:36.116 align:middle
+No es un proceso suave y eso es algo en
+lo que debemos trabajar como comunidad.
+
+00:00:36.116 --> 00:00:41.066 align:middle
+Symfony tiene herramientas de pruebas funcionales
+integradas, pero a mí me gusta utilizar otra biblioteca.
+
+00:00:41.666 --> 00:00:45.656 align:middle
+En tu terminal, instálala con:
+composer require zenstruck/browser
+
+00:00:45.656 --> 00:00:53.516 align:middle
+--dev A continuación, en la carpeta tests/,
+crearé un nuevo directorio llamado Functional/...
+
+00:00:55.316 --> 00:00:58.226 align:middle
+y luego una nueva clase
+llamada VoyageControllerTest.
+
+00:00:58.726 --> 00:01:02.066 align:middle
+Y supongo que también podría
+ponerla en un directorio Controller/.
+
+00:01:02.066 --> 00:01:10.826 align:middle
+Para las tripas, pegaré una prueba terminada: Vale,
+estamos utilizando ResetDatabase y Factories...
+
+00:01:11.256 --> 00:01:14.556 align:middle
+amplía el WebTestCase normal
+para pruebas funcionales...
+
+00:01:14.756 --> 00:01:19.396 align:middle
+y luego HasBrowser viene de la biblioteca
+Browser y nos da la posibilidad
+
+00:01:19.396 --> 00:01:24.086 align:middle
+de llamar a $this->browser() para controlar
+un navegador con esta API realmente fluida.
+
+00:01:26.346 --> 00:01:30.106 align:middle
+Esto pasa por el flujo de ir a la página del
+viaje, hacer clic en "Nuevo viaje", rellenar
+
+00:01:30.226 --> 00:01:33.076 align:middle
+el formulario, guardar y aseverar al final.
+
+00:01:34.846 --> 00:01:39.196 align:middle
+La prueba comienza con un único Voyage en la base de
+datos, así que después de crear uno nuevo, afirmamos
+
+00:01:39.406 --> 00:01:41.666 align:middle
+que hay dos en la página.
+
+00:01:42.786 --> 00:01:49.356 align:middle
+Para ejecutarlo, utiliza el mismo comando,
+pero apunta al directorio Functional/: Y...
+
+00:01:49.636 --> 00:01:51.546 align:middle
+¡pasa!
+
+00:01:51.576 --> 00:01:54.816 align:middle
+¡Genial! Pero espera un momento.
+
+00:01:55.356 --> 00:02:01.726 align:middle
+Entre bastidores, esto no está utilizando un navegador
+real: sólo está haciendo peticiones falsas en PHP.
+
+00:02:01.726 --> 00:02:04.056 align:middle
+Eso significa que no ejecuta JavaScript.
+
+00:02:04.526 --> 00:02:08.836 align:middle
+Estamos probando la experiencia que tendría
+un usuario con JavaScript desactivado.
+
+00:02:09.456 --> 00:02:11.136 align:middle
+Eso está bien para muchas situaciones.
+
+00:02:11.326 --> 00:02:15.366 align:middle
+Sin embargo, esta vez quiero
+probar toda la fantasía modal.
+
+00:02:16.326 --> 00:02:20.476 align:middle
+Para ejecutar la prueba utilizando un navegador
+real que admita JavaScript -como Chrome-
+
+00:02:20.826 --> 00:02:27.776 align:middle
+cambia a $this->pantherBrowser():
+Pruébalo: ¡Nada!
+
+00:02:27.986 --> 00:02:31.786 align:middle
+Pero un bonito error: necesitamos
+instalar symfony/panther.
+
+00:02:32.236 --> 00:02:32.816 align:middle
+¡Hagámoslo!
+
+00:02:33.516 --> 00:02:38.676 align:middle
+composer require symfony/panther
+--dev Panther es una biblioteca PHP
+
+00:02:38.676 --> 00:02:42.216 align:middle
+que puede controlar mediante programación
+los navegadores reales de tu máquina.
+
+00:02:43.176 --> 00:02:48.196 align:middle
+Para utilizarla, también necesitamos
+ampliar PantherTestCase: Vuelve a intentarlo:
+
+00:02:49.846 --> 00:02:55.616 align:middle
+No vemos el navegador -se abre invisiblemente en
+segundo plano- ¡pero ahora está utilizando Chrome!
+
+00:02:55.946 --> 00:03:01.066 align:middle
+Y la prueba falla - muy pronto: Elemento
+clicable "Nuevo Viaje" no encontrado.
+
+00:03:01.606 --> 00:03:06.426 align:middle
+Hmmm. Ha hecho clic en "Viajes", pero no
+ha encontrado el botón "Nuevo viaje".
+
+00:03:07.006 --> 00:03:12.636 align:middle
+Una característica fantástica de zenstruck/browser
+con Panther es que, cuando falla una prueba,
+
+00:03:12.796 --> 00:03:15.156 align:middle
+hace una captura de pantalla del fallo.
+
+00:03:15.856 --> 00:03:17.316 align:middle
+Dentro del directorio var/...
+
+00:03:17.876 --> 00:03:18.476 align:middle
+aquí está.
+
+00:03:19.286 --> 00:03:23.476 align:middle
+Huh, la captura de pantalla muestra
+que seguimos en la página de inicio,
+
+00:03:23.796 --> 00:03:26.106 align:middle
+como si nunca hubiéramos
+hecho clic en "Viajes "...
+
+00:03:26.426 --> 00:03:30.276 align:middle
+aunque puedes ver que el
+enlace "Viajes" parece activo.
+
+00:03:30.956 --> 00:03:34.646 align:middle
+El problema es que la navegación por
+la página se realiza mediante Ajax...
+
+00:03:34.786 --> 00:03:38.346 align:middle
+y nuestras pruebas no saben
+esperar a que termine.
+
+00:03:38.676 --> 00:03:39.896 align:middle
+Hace clic en "Viajes"...
+
+00:03:40.086 --> 00:03:42.956 align:middle
+e inmediatamente intenta
+hacer clic en "Nuevo viaje".
+
+00:03:43.456 --> 00:03:45.626 align:middle
+Esto será lo principal
+que tendremos que arreglar.
+
+00:03:46.126 --> 00:03:48.636 align:middle
+Pero antes de eso, ¡veo un problema mayor!
+
+00:03:49.136 --> 00:03:53.086 align:middle
+Mira los datos: ¡no proceden de
+nuestra base de datos de pruebas!
+
+00:03:53.396 --> 00:03:54.916 align:middle
+Provienen de nuestro sitio de desarrollo
+
+00:03:55.516 --> 00:03:59.826 align:middle
+Aunque no podamos verlo, Panther
+está controlando un navegador real.
+
+00:04:00.156 --> 00:04:06.936 align:middle
+Y... un navegador real necesita acceder a nuestro sitio utilizando
+un servidor web real a través de una dirección web real.
+
+00:04:07.466 --> 00:04:11.406 align:middle
+Como estamos utilizando el servidor
+web Symfony, Panther lo detectó y...
+
+00:04:11.536 --> 00:04:13.046 align:middle
+¡lo utilizó! Pero...
+
+00:04:13.176 --> 00:04:14.496 align:middle
+¡eso no es lo que queremos!
+
+00:04:14.916 --> 00:04:19.826 align:middle
+¿Por qué? Nuestro servidor utiliza
+el entorno dev y la base de datos dev.
+
+00:04:20.296 --> 00:04:24.036 align:middle
+Nuestras pruebas deberían utilizar el
+entorno test y la base de datos test.
+
+00:04:24.036 --> 00:04:28.176 align:middle
+Para solucionarlo, abre phpunit.xml.dist.
+
+00:04:28.786 --> 00:04:32.716 align:middle
+Voy a pegar dos variables
+de entorno: La primera...
+
+00:04:32.816 --> 00:04:33.986 align:middle
+es una especie de hack.
+
+00:04:34.456 --> 00:04:37.366 align:middle
+Le dice a Panther que no
+utilice nuestro servidor.
+
+00:04:37.786 --> 00:04:44.586 align:middle
+En su lugar, Panther iniciará ahora silenciosamente su propio
+servidor web utilizando el servidor web PHP incorporado.
+
+00:04:45.186 --> 00:04:48.876 align:middle
+La segunda línea le dice a Panther que
+utilice el entorno test cuando haga eso.
+
+00:04:49.996 --> 00:04:55.746 align:middle
+En la prueba, para que sea aún más fácil ver si
+esto funciona, después de hacer clic en viajes,
+
+00:04:55.876 --> 00:05:00.276 align:middle
+llama a ddScreenshot(): Toma una captura
+de pantalla, luego vuelca y muere.
+
+00:05:01.186 --> 00:05:03.836 align:middle
+Ejecuta: Lo hace...
+
+00:05:04.176 --> 00:05:05.316 align:middle
+¡y guarda una captura de pantalla!
+
+00:05:05.586 --> 00:05:07.966 align:middle
+¡Genial! Encuentra eso en var/.
+
+00:05:09.416 --> 00:05:11.006 align:middle
+Y... ok.
+
+00:05:11.526 --> 00:05:14.436 align:middle
+Parece que se está utilizando
+el nuevo servidor web...
+
+00:05:14.436 --> 00:05:16.666 align:middle
+¡pero faltan todos los estilos!
+
+00:05:17.116 --> 00:05:18.956 align:middle
+¡Es hora de hacer un poco
+de trabajo detectivesco!
+
+00:05:19.786 --> 00:05:23.176 align:middle
+Para entender qué está pasando,
+podemos decirle temporalmente a Panther
+
+00:05:23.176 --> 00:05:27.636 align:middle
+que abra realmente el navegador, por ejemplo,
+para que podamos verlo y jugar con él.
+
+00:05:27.636 --> 00:05:35.276 align:middle
+Después de visitarlo, decimos ->pause(): A continuación,
+para abrir el navegador, anteponemos al comando de prueba
+
+00:05:35.276 --> 00:05:40.186 align:middle
+PANTHER_NO_HEADLESS=1: Y...
+
+00:05:40.426 --> 00:05:43.506 align:middle
+¡woh! Se abrió el
+navegador y luego se detuvo.
+
+00:05:43.936 --> 00:05:47.156 align:middle
+Ahora podemos ver el código
+fuente de la página.
+
+00:05:47.156 --> 00:05:48.496 align:middle
+Aquí está el archivo CSS.
+
+00:05:48.986 --> 00:05:49.476 align:middle
+Ábrelo.
+
+00:05:49.476 --> 00:05:52.166 align:middle
+Es un 404 no encontrado.
+
+00:05:52.426 --> 00:05:57.086 align:middle
+¿Por qué? En el entorno dev, nuestros
+activos se sirven a través de Symfony:
+
+00:05:57.326 --> 00:05:59.456 align:middle
+no son archivos reales, físicos.
+
+00:06:00.086 --> 00:06:05.546 align:middle
+Si antepones a la URL index.php, funciona.
+
+00:06:05.546 --> 00:06:08.546 align:middle
+Panther utiliza el servidor
+web PHP integrado...
+
+00:06:08.766 --> 00:06:14.056 align:middle
+y necesita una regla de reescritura que le
+diga que envíe estas URL a través de Symfony.
+
+00:06:14.666 --> 00:06:18.516 align:middle
+Sinceramente, es un detalle
+molesto, pero podemos arreglarlo.
+
+00:06:19.186 --> 00:06:21.896 align:middle
+De vuelta al terminal, pulsa
+intro para cerrar el navegador.
+
+00:06:23.356 --> 00:06:28.056 align:middle
+En tests/, crea un nuevo
+archivo llamado router.php.
+
+00:06:28.056 --> 00:06:33.826 align:middle
+Voy a pegar el código: Este es un archivo "enrutador"
+que utilizará el servidor web incorporado.
+
+00:06:33.826 --> 00:06:41.106 align:middle
+Para decirle a Panther que lo utilice, en
+phpunit.xml.dist, pegaré otra variable env:
+
+00:06:41.676 --> 00:06:43.696 align:middle
+PANTHER_WEB_SERVER_ROUTER
+en ../tests/router.php:
+
+00:06:43.896 --> 00:06:48.226 align:middle
+¡Pruébalo! Y
+
+00:06:50.196 --> 00:06:51.006 align:middle
+ahora...
+
+00:06:51.556 --> 00:06:55.026 align:middle
+¡funciona! Pulsa intro para
+terminar. A continuación,
+
+00:06:55.796 --> 00:06:57.016 align:middle
+elimina pause(). Ejecuta
+
+00:06:58.416 --> 00:07:04.266 align:middle
+de nuevo la prueba, pero sin la variable de entorno:
+Genial: llega a nuestra línea de captura de pantalla.
+
+00:07:04.526 --> 00:07:05.976 align:middle
+Ábrela. Vale,
+
+00:07:06.656 --> 00:07:09.106 align:middle
+volvemos al problema original:
+
+00:07:09.306 --> 00:07:12.506 align:middle
+no espera a que se cargue la página después
+de que hagamos clic en el enlace. Resolver
+
+00:07:12.506 --> 00:07:13.976 align:middle
+esto ... no es
+
+00:07:14.096 --> 00:07:16.106 align:middle
+tan sencillo como debería. Di
+
+00:07:16.786 --> 00:07:22.066 align:middle
+$browser =, ciérralo e inicia una
+nueva cadena con $browser debajo.
+
+00:07:22.966 --> 00:07:25.756 align:middle
+Entre medias, pegaré dos líneas. Esto
+
+00:07:26.206 --> 00:07:32.416 align:middle
+es de nivel inferior, pero espera a que el atributo
+aria-busy se añada al elemento html, cosa que
+
+00:07:32.696 --> 00:07:34.336 align:middle
+Turbo hace cuando se está cargando.
+Luego espera a que desaparezca
+
+00:07:34.986 --> 00:07:41.576 align:middle
+: Prueba ahora: Luego...
+
+00:07:41.576 --> 00:07:42.746 align:middle
+abre la captura de pantalla. ¡Woh!
+
+00:07:44.436 --> 00:07:48.666 align:middle
+Ahora está esperando a que
+termine la llamada Ajax. Pero
+
+00:07:48.946 --> 00:07:52.376 align:middle
+recuerda: también estamos
+utilizando transiciones de vista. La
+
+00:07:52.916 --> 00:07:53.976 align:middle
+página se ha cargado... pero
+
+00:07:53.976 --> 00:07:56.806 align:middle
+aún está en medio de la transición.
+
+00:07:57.106 --> 00:07:58.366 align:middle
+Lo arreglaremos en un minuto. Pero
+
+00:07:59.026 --> 00:08:02.976 align:middle
+antes, tenemos que limpiar esto:
+es demasiado trabajo. Lo que
+
+00:08:03.856 --> 00:08:08.976 align:middle
+me encantaría es un nuevo método en el
+propio navegador, como waitForPageLoad(). ¡ Y
+
+00:08:09.206 --> 00:08:11.696 align:middle
+podemos hacerlo con una clase
+de navegador personalizada! En
+
+00:08:12.326 --> 00:08:15.736 align:middle
+el directorio tests/, crea una nueva
+clase llamada AppBrowser. Voy a
+
+00:08:17.176 --> 00:08:21.476 align:middle
+pegar las tripas: Esto extiende
+la clase normal PantherBrowser y
+
+00:08:21.626 --> 00:08:24.536 align:middle
+añade un nuevo método que
+esas mismas dos líneas. Cuando
+
+00:08:25.226 --> 00:08:27.086 align:middle
+llamemos a $this->pantherBrowser(),
+
+00:08:27.336 --> 00:08:31.966 align:middle
+ahora queremos que devuelva nuestro AppBrowser
+en lugar del PantherBrowser normal. Para ello
+
+00:08:32.986 --> 00:08:39.096 align:middle
+, lo has adivinado, es una variable de
+entorno: PANTHER_BROWSER_CLASS ajustada a
+
+00:08:39.096 --> 00:08:44.226 align:middle
+App\Tests\AppBrowser: Para asegurarnos de
+que funciona, dd(get_class($browser));:
+
+00:08:44.226 --> 00:08:51.546 align:middle
+Ejecuta la prueba: Y... ¡sí!
+
+00:08:51.696 --> 00:08:54.136 align:middle
+¡Obtenemos AppBrowser! Por desgracia,
+
+00:08:54.136 --> 00:09:00.226 align:middle
+aunque el nuevo método funcionaría,
+no obtenemos autocompletado. Nuestro
+
+00:09:00.616 --> 00:09:04.736 align:middle
+editor no tiene ni idea de que hemos
+intercambiado una subclase. Para
+
+00:09:05.526 --> 00:09:09.096 align:middle
+mejorar esto, hagamos una
+última cosa: en tests/, crea
+
+00:09:09.096 --> 00:09:13.336 align:middle
+una nueva clase base de prueba:
+AppPantherTestCase. Voy a pegar
+
+00:09:13.336 --> 00:09:19.546 align:middle
+el contenido: Extiende la clase
+normal PantherTestCase... luego
+
+00:09:19.886 --> 00:09:23.956 align:middle
+anula el método pantherBrowser(),
+llama al padre, pero
+
+00:09:24.356 --> 00:09:27.876 align:middle
+cambia el tipo de retorno para
+que sea nuestro AppBrowser.
+
+00:09:29.226 --> 00:09:34.846 align:middle
+En VoyageControllerTest, cambia esto a
+extend AppPantherTestCase , luego asegúrate
+
+00:09:35.366 --> 00:09:38.006 align:middle
+de eliminar use HasBrowser : Luego
+
+00:09:38.926 --> 00:09:43.076 align:middle
+podemos ajustar las cosas: vuelve a
+conectar todos estos puntos... luego
+
+00:09:44.646 --> 00:09:48.326 align:middle
+utiliza el nuevo método:
+->waitForPageLoad()... ¡con
+
+00:09:48.516 --> 00:09:49.656 align:middle
+autocompletar! Elimina
+
+00:09:51.166 --> 00:09:54.966 align:middle
+el ddScreenshot(): ¡Y veamos
+dónde estamos! ¡Más lejos!
+
+00:09:58.146 --> 00:10:00.966 align:middle
+No se encuentra el campo de
+formulario "Propósito". Así que
+
+00:10:01.096 --> 00:10:05.126 align:middle
+hizo clic en Viajes, hizo clic en
+"Nuevo viaje"... pero no encontró
+
+00:10:05.236 --> 00:10:07.286 align:middle
+el campo de formulario. Si
+
+00:10:07.956 --> 00:10:14.566 align:middle
+miramos hacia abajo en la captura de pantalla del error, podemos
+ver por qué: ¡el contenido del modal todavía se está cargando!
+
+00:10:15.126 --> 00:10:17.646 align:middle
+Puede que veas el formulario en
+la captura de pantalla -a veces
+
+00:10:17.646 --> 00:10:21.066 align:middle
+la captura de pantalla se produce
+un momento después, por lo que
+
+00:10:21.206 --> 00:10:24.556 align:middle
+el formulario es visible-,
+pero éste es el problema. Ah,
+
+00:10:25.096 --> 00:10:29.746 align:middle
+pero antes de arreglar esto, también quiero
+desactivar las transiciones de vista. En
+
+00:10:30.356 --> 00:10:34.206 align:middle
+templates/base.html.twig,
+la forma más fácil de
+
+00:10:34.206 --> 00:10:38.616 align:middle
+asegurarse de que las transiciones de vista no
+estropean nuestras pruebas es eliminarlas. Digamos que
+
+00:10:38.616 --> 00:10:47.836 align:middle
+si app.environment != 'test, entonces renderiza esta
+etiqueta meta: En fin, volvamos a nuestro fallo. Cuando
+
+00:10:48.606 --> 00:10:52.236 align:middle
+hacemos clic para abrir el modal, lo que
+necesitamos es esperar a que el modal se abra -que
+
+00:10:52.436 --> 00:10:58.656 align:middle
+en realidad es instantáneo-, pero también esperar a que el
+<turbo-frame> que hay dentro termine de cargarse. Abre
+
+00:10:59.626 --> 00:11:00.776 align:middle
+AppBrowser. Voy a
+
+00:11:01.076 --> 00:11:08.166 align:middle
+pegar dos métodos más: El primero -
+waitForDialog() - espera hasta que ve un diálogo en
+
+00:11:08.166 --> 00:11:10.306 align:middle
+la página con un atributo open. Y,
+
+00:11:10.756 --> 00:11:15.666 align:middle
+si ese dialog abierto tiene un
+<turbo-frame>, espera a que se cargue:
+
+00:11:16.266 --> 00:11:20.066 align:middle
+espera hasta que no haya ningún
+marco aria-busy en la página. En
+
+00:11:21.486 --> 00:11:24.896 align:middle
+VoyageControllerTest, después de
+hacer clic en "Nuevo viaje", digamos
+
+00:11:24.896 --> 00:11:32.536 align:middle
+->waitForDialog(): Y
+ahora ¡Tan cerca! table
+
+00:11:32.956 --> 00:11:38.336 align:middle
+tbody tr esperaba 2 elementos en la
+página, pero sólo ha encontrado 1. ¡Eso
+
+00:11:39.296 --> 00:11:41.756 align:middle
+viene de muy abajo! ¿Cuál es
+
+00:11:42.176 --> 00:11:43.586 align:middle
+el problema esta vez? ¡ Vuelve
+
+00:11:44.296 --> 00:11:45.876 align:middle
+a la captura de pantalla de
+error! Ah: hemos rellenado
+
+00:11:47.016 --> 00:11:51.196 align:middle
+el formulario, parece que incluso
+hemos pulsado Guardar... ¡pero estamos
+
+00:11:51.466 --> 00:11:53.986 align:middle
+afirmando demasiado rápido! Recuerda
+
+00:11:54.656 --> 00:11:58.716 align:middle
+esto se envía a un <turbo-frame>,
+así que tenemos que esperar a que
+
+00:11:58.716 --> 00:12:00.586 align:middle
+ese fotograma termine de cargarse. Y
+
+00:12:00.876 --> 00:12:05.436 align:middle
+tenemos una forma de hacerlo:
+->waitForTurboFrameLoad().
+
+00:12:06.516 --> 00:12:10.866 align:middle
+También añadiré una línea para afirmar que
+no podemos ver ningún diálogo abierto: para
+
+00:12:11.016 --> 00:12:18.396 align:middle
+comprobar que el modal se cerró: Ejecuta
+la prueba una vez más: Pasa. ¡Guau!
+
+00:12:18.506 --> 00:12:23.026 align:middle
+Lo admito, ha sido mucho
+trabajo, ¡demasiado! Pero
+
+00:12:23.566 --> 00:12:25.276 align:middle
+me encanta el resultado final. Mañana , en
+
+00:12:26.086 --> 00:12:30.146 align:middle
+nuestro último día,
+hablaremos del rendimiento. Y
+
+00:12:30.376 --> 00:12:36.766 align:middle
+a diferencia de hoy, las cosas se pondrán
+rápidamente en su sitio, te lo prometo.

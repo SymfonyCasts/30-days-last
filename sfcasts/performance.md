@@ -21,18 +21,19 @@ Scroll down to see what we could improve. The number one problem is missing
 compression. There are two things that you need to think about when you
 deploy your app with AssetMapper.
 
-First: on your web server, enable compression, like
-gzip or Brotli. Or you can proxy your site through Cloudflare and it can do compression
-for you. That's what we do. This is why we don't need to worry about minification:
-if you just compress your CSS and JavaScript files, that does almost as good of a
-job as minification.
+First: on your web server, enable compression, like gzip or Brotli. Or you can proxy
+your site through Cloudflare and it can do compression for you. That's what we do.
+This is why we don't need to worry about minification: if you just compress your CSS
+and JavaScript files, that does almost as good of a job as minification.
 
 The second thing you need to do - which should be mentioned down here, ah yes:
-serve static assets with an efficient cache policy. Because all of our files have
-an automatic version hash in the filename, you should configure your web server to
-cache *everything* from your `assets/` directory... *forever*. This means that when
-your user downloads a file, they'll cache it forever: they'll never need to download
-it again. That's great for performance.
+
+> Serve static assets with an efficient cache policy.
+ 
+Because all of our files have an automatic version hash in the filename, you should
+configure your web server to cache *everything* from your `assets/` directory...
+*forever*. This means that when your user downloads a file, they'll cache it forever:
+they'll never need to download it again. That's great for performance.
 
 ## Unused CSS?
 
@@ -44,7 +45,7 @@ compression. On production, the difference would be much smaller.
 
 ## Unused JavaScript
 
-Under reduce unused JavaScript, there's one main item: it's the live components
+Under reduce unused JavaScript, there's one main item: it's the Live Components
 JavaScript, which *is* fairly big. We *are* using it, but it's true that we're
 not using a lot of its features yet. On production, due to compression, this would
 be smaller... and we *are* going to optimize it a bit.
@@ -84,16 +85,22 @@ execute.
 > You don't realize it yet, but you should start downloading these files immediately.
 
 The way these are generated is *really* cool. Open `templates/base.html.twig`. All
-of this is rendered thanks to `importmap('app')`. By passing `app`, the main
-effect is that it adds the script tag at the bottom that imports `app`.
+of this is rendered thanks to `importmap('app')`:
+
+[[[ code('50281e14d2') ]]]
+
+By passing `app`, the main effect is that it adds the script tag at the bottom
+that imports `app`.
 
 But this *also* tells AssetMapper to parse `app.js`, find all the files that *it*
 imports and add them as preloads. And it does it recursively: it goes into
 `bootstrap.js` and finds *its* import. It finds *all* the JavaScript that's
 needed on page load and makes sure that every file is preloaded. It just works.
 
-And we can see this visually. In `alien-greening.js`: comment-out the import for
-the CSS file: the delay just makes the waterfall harder to see.
+And we can see this visually. In `alien-greeting.js`: comment-out the import for
+the CSS file: the delay just makes the waterfall harder to see:
+
+[[[ code('9c5baa6162') ]]]
 
 Then go to the Network tab, look just at JavaScript and do a force refresh.
 Check it out! All the JavaScript files start at the same time! It's not waiting for
@@ -110,8 +117,10 @@ Sort this by filesize. The biggest file is the JavaScript for Live Components.
 This 123 kilobytes isn't compressed, so it'll be smaller on production. But since
 we only need this on the global search, we could choose to delay loading it.
 
-To do that, inside `assets/controllers.json`, find the live component controller
-and set `fetch` to `lazy`.
+To do that, inside `assets/controllers.json`, find the Live Component controller
+and set `fetch` to `lazy`:
+
+[[[ code('f12258ec44') ]]]
 
 Do a force refresh. It's still there, but check out the initiator: it's from
 a JavaScript file and starts much later. In the source, search for

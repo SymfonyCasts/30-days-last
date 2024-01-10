@@ -1,0 +1,629 @@
+WEBVTT
+
+00:00:01.056 --> 00:00:02.466 align:middle
+¡Un tema extra!
+
+00:00:02.866 --> 00:00:07.376 align:middle
+Sí, porque empecé a recibir preguntas
+-buenas preguntas- sobre Flowbite. El
+
+00:00:07.956 --> 00:00:11.916 align:middle
+día 5 añadimos Tailwind y
+presenté Flowbite como un sitio
+
+00:00:11.946 --> 00:00:14.646 align:middle
+en el que puedes copiar y
+pegar componentes visuales.
+
+00:00:15.476 --> 00:00:18.836 align:middle
+Por ejemplo, copias esta
+marca, la pegas y ¡boom!
+
+00:00:19.086 --> 00:00:20.156 align:middle
+Tienes un desplegable.
+
+00:00:20.686 --> 00:00:23.776 align:middle
+Las clases son todas clases
+estándar de Tailwind.
+
+00:00:24.436 --> 00:00:27.636 align:middle
+He mencionado que no necesitas instalar nada.
+
+00:00:27.986 --> 00:00:32.216 align:middle
+Sin embargo, dependiendo de lo que
+quieras, esa no es la historia completa...
+
+00:00:32.336 --> 00:00:33.446 align:middle
+y he confundido a la gente.
+
+00:00:34.196 --> 00:00:35.976 align:middle
+Así que ¡arreglémoslo!
+
+00:00:36.716 --> 00:00:41.536 align:middle
+Además de ser una fuente para copiar HTML,
+Flowbite tiene otras dos características.
+
+00:00:41.956 --> 00:00:47.026 align:middle
+En primer lugar, tiene una biblioteca JavaScript opcional
+para potenciar cosas como las pestañas y los desplegables:
+
+00:00:47.026 --> 00:00:50.706 align:middle
+un poco de JavaScript para que, cuando
+hagamos clic, esto se abra y se cierre.
+
+00:00:51.326 --> 00:00:53.886 align:middle
+Esto no lo utilizamos en SymfonyCasts...
+
+00:00:54.086 --> 00:00:56.226 align:middle
+y no funciona bien con Turbo.
+
+00:00:56.406 --> 00:00:58.336 align:middle
+Al menos no fuera de la caja.
+
+00:00:58.916 --> 00:01:02.646 align:middle
+Preferimos crear pequeños controladores
+Stimulus para hacer funcionar cosas como ésta.
+
+00:01:02.946 --> 00:01:05.296 align:middle
+Pero podemos hacer que funcione
+el JavaScript de Flowbite.
+
+00:01:05.946 --> 00:01:10.596 align:middle
+Coge el código desplegable y
+pásalo a templates/base.html.twig.
+
+00:01:11.316 --> 00:01:19.796 align:middle
+Justo dentro de body, pega: Si vamos y actualizamos,
+podrás ver lo que quiero decir: simplemente funciona.
+
+00:01:20.206 --> 00:01:21.406 align:middle
+Bueno, visualmente.
+
+00:01:21.896 --> 00:01:24.696 align:middle
+Pero si hacemos clic, no pasa nada.
+
+00:01:25.316 --> 00:01:28.556 align:middle
+Para obtener el JavaScript de
+Flowbite, busca tu terminal y ejecuta:
+
+00:01:28.556 --> 00:01:32.646 align:middle
+php bin/console importmap:require
+flowbite Esto instala flowbite
+
+00:01:32.816 --> 00:01:35.626 align:middle
+y depende de @popperjs/core.
+
+00:01:36.366 --> 00:01:38.636 align:middle
+También coge el archivo CSS de Flowbite...
+
+00:01:38.816 --> 00:01:42.646 align:middle
+que sólo es necesario si no tienes
+Tailwind correctamente instalado.
+
+00:01:43.186 --> 00:01:46.926 align:middle
+Tenerlo colgado en importmap.php
+es inofensivo, pero vamos a echarlo
+
+00:01:47.156 --> 00:01:49.306 align:middle
+antes de que me confunda.
+
+00:01:50.046 --> 00:01:53.366 align:middle
+Para utilizar el JavaScript,
+abre assets/app.js.
+
+00:01:54.216 --> 00:01:59.396 align:middle
+En la parte superior import
+'flowbite': Ok, actualiza y...
+
+00:02:00.336 --> 00:02:02.616 align:middle
+¡funciona! Pero hay dos...
+
+00:02:02.796 --> 00:02:04.956 align:middle
+peculiaridades. Echa un vistazo a la consola.
+
+00:02:05.586 --> 00:02:08.796 align:middle
+Tenemos un montón de errores
+sobre el modal y el popover.
+
+00:02:09.576 --> 00:02:14.646 align:middle
+Si utilizas el componente modal de Flowbite,
+requiere un atributo data-modal-target
+
+00:02:14.646 --> 00:02:16.446 align:middle
+para conectar el botón al objetivo.
+
+00:02:17.126 --> 00:02:21.166 align:middle
+El problema es que tenemos un
+controlador modal Stimulus....
+
+00:02:21.506 --> 00:02:25.936 align:middle
+y estamos utilizando data-modal-target
+para aprovechar un objetivo Stimulus.
+
+00:02:26.516 --> 00:02:28.666 align:middle
+Esas dos ideas están chocando.
+
+00:02:29.216 --> 00:02:32.596 align:middle
+Tendrías que solucionarlo utilizando
+el sistema modal de Flowbite
+
+00:02:32.936 --> 00:02:36.026 align:middle
+o cambiando el nombre de tu
+controlador modal por otro.
+
+00:02:36.726 --> 00:02:38.166 align:middle
+Lo mismo ocurre con Popover.
+
+00:02:39.086 --> 00:02:43.456 align:middle
+La segunda peculiaridad es que, aunque el
+JavaScript de Flowbite funciona ahora mismo, en
+
+00:02:43.856 --> 00:02:46.786 align:middle
+cuanto navegamos, ¡se rompe!
+
+00:02:47.506 --> 00:02:52.586 align:middle
+Flowbite inicializa el receptor de eventos
+al cargar la página, pero cuando navegamos
+
+00:02:52.586 --> 00:02:59.406 align:middle
+y se carga nuevo HTML en la página, no es lo suficientemente
+inteligente como para reinicializar ese JavaScript.
+
+00:03:00.086 --> 00:03:05.066 align:middle
+Por eso, en general, escribimos nuestro
+JavaScript utilizando controladores Stimulus.
+
+00:03:05.756 --> 00:03:08.766 align:middle
+Flowbite incluye una versión
+de sí mismo para Turbo...
+
+00:03:09.046 --> 00:03:14.366 align:middle
+pero no funciona del todo bien: no se reinicia
+correctamente al enviar el formulario.
+
+00:03:14.986 --> 00:03:16.016 align:middle
+¡No pasa nada!
+
+00:03:16.316 --> 00:03:18.576 align:middle
+Tenemos los conocimientos necesarios
+para arreglarlo nosotros mismos.
+
+00:03:19.296 --> 00:03:24.936 align:middle
+Importa initFlowbite desde flowbite: A continuación, en
+la parte inferior, pegaré dos escuchadores de eventos:
+
+00:03:25.456 --> 00:03:28.336 align:middle
+Flowbite se encarga de la inicialización
+en la primera carga de la página.
+
+00:03:28.846 --> 00:03:32.616 align:middle
+Luego, cada vez que naveguemos con
+Turbo, se llamará a este método
+
+00:03:32.616 --> 00:03:34.806 align:middle
+y reiniciará los escuchadores.
+
+00:03:35.156 --> 00:03:38.266 align:middle
+O si hacemos algo dentro de un
+marco Turbo, se llamará a esto.
+
+00:03:38.916 --> 00:03:39.626 align:middle
+Vamos a probarlo.
+
+00:03:40.096 --> 00:03:41.566 align:middle
+Actualizar. Y...
+
+00:03:41.956 --> 00:03:45.846 align:middle
+no funciona: Mira: initFlobite.
+
+00:03:46.326 --> 00:03:48.896 align:middle
+¡Error tipográfico! Arréglalo entonces...
+
+00:03:50.276 --> 00:03:52.756 align:middle
+ok. Al cargar la página, funciona.
+
+00:03:53.286 --> 00:03:56.356 align:middle
+Y si navegamos, sigue funcionando.
+
+00:03:57.156 --> 00:04:01.176 align:middle
+Así que la primera característica instalable
+de Flowbite es esta biblioteca JavaScript.
+
+00:04:01.916 --> 00:04:04.006 align:middle
+La segunda es un plugin de Tailwind.
+
+00:04:04.386 --> 00:04:08.316 align:middle
+Añade estilos adicionales si utilizas
+tooltips, formularios y charts....
+
+00:04:08.596 --> 00:04:10.436 align:middle
+y algunas cosas más.
+
+00:04:11.086 --> 00:04:13.426 align:middle
+Puedes encontrar el paquete en npmjs.com
+
+00:04:13.596 --> 00:04:16.996 align:middle
+y navegar por sus archivos para
+encontrar el plugin: plugin.js.
+
+00:04:17.706 --> 00:04:23.666 align:middle
+Si utilizas tooltips, añade nuevos
+estilos, lo mismo para los formularios...
+
+00:04:24.226 --> 00:04:28.006 align:middle
+y al final, modifica algunos estilos del tema.
+
+00:04:28.686 --> 00:04:31.666 align:middle
+Esto no es necesariamente algo que necesites,
+
+00:04:32.046 --> 00:04:34.846 align:middle
+incluso si utilizas parte
+del JavaScript de Flowbite.
+
+00:04:35.646 --> 00:04:38.896 align:middle
+Pero si quieres este plugin,
+tienes que instalarlo con npm.
+
+00:04:39.596 --> 00:04:42.236 align:middle
+Hasta ahora, no hemos tenido
+que hacer nada con npm...
+
+00:04:42.516 --> 00:04:44.136 align:middle
+¡y ha sido estupendo!
+
+00:04:44.546 --> 00:04:49.566 align:middle
+Pero si necesitas algunas bibliotecas JavaScript,
+no pasa nada: ese es el trabajo de npm.
+
+00:04:50.316 --> 00:04:53.896 align:middle
+Lo más importante es que no tenemos
+un sistema de compilación gigante:
+
+00:04:54.246 --> 00:04:57.136 align:middle
+simplemente cogemos aquí o allá
+una biblioteca que necesitamos.
+
+00:04:57.916 --> 00:05:01.906 align:middle
+Busca tu terminal y ejecuta npm init
+para crear un archivo package.json.
+
+00:05:02.496 --> 00:05:04.196 align:middle
+Yo ejecutaré Enter para todas las preguntas.
+
+00:05:05.086 --> 00:05:11.636 align:middle
+Luego ejecuta: npm add flowbite Para
+utilizar esto, abre tailwind.config.js...
+
+00:05:12.086 --> 00:05:12.596 align:middle
+aquí está.
+
+00:05:13.106 --> 00:05:17.066 align:middle
+Abajo en la sección plugins,
+require('flowbite/plugin'):
+
+00:05:17.616 --> 00:05:19.766 align:middle
+Esto está sacado directamente
+de su documentación.
+
+00:05:20.516 --> 00:05:23.226 align:middle
+Cuando actualizamos, funciona...
+
+00:05:23.296 --> 00:05:25.146 align:middle
+pero no vemos ninguna diferencia.
+
+00:05:25.656 --> 00:05:29.166 align:middle
+Como he dicho, no es algo que
+necesitemos necesariamente.
+
+00:05:30.006 --> 00:05:34.366 align:middle
+Aunque si abrimos un formulario, eh:
+¡nuestras etiquetas de repente son negras!
+
+00:05:35.086 --> 00:05:38.246 align:middle
+Eso es porque Tailwind piensa
+ahora que estamos en modo luz...
+
+00:05:38.636 --> 00:05:41.926 align:middle
+y a mí me daba un poco de pereza
+diseñar mi sitio para el modo ligero. Por
+
+00:05:42.726 --> 00:05:46.326 align:middle
+defecto, Tailwind lee de las preferencias de tu
+sistema operativo si quieres modo claro o modo oscuro.
+
+00:05:49.026 --> 00:05:54.516 align:middle
+Pero Flowbite anula eso y lo cambia
+para leer un class en tu elemento body.
+
+00:05:55.356 --> 00:05:58.286 align:middle
+Tiene documentación en su sitio
+sobre cómo puedes utilizar esto
+
+00:05:58.506 --> 00:06:01.266 align:middle
+e incluso hacer un conmutador
+de modo oscuro, modo claro.
+
+00:06:02.196 --> 00:06:03.996 align:middle
+Pero voy a cambiar esto a
+la configuración antigua.
+
+00:06:04.386 --> 00:06:10.126 align:middle
+Digamos darkMode, media:
+Compruébalo: actualizar y...
+
+00:06:10.816 --> 00:06:12.166 align:middle
+¡volvemos a la normalidad!
+
+00:06:12.586 --> 00:06:14.536 align:middle
+Así que ese es el plugin Tailwind.
+
+00:06:15.376 --> 00:06:19.266 align:middle
+Además de estas 2 funciones de
+Flowbite, también he visto gente que
+
+00:06:19.266 --> 00:06:21.266 align:middle
+quiere usar su genial plugin datepicker.
+
+00:06:21.766 --> 00:06:23.366 align:middle
+Así que vamos a ponerlo en marcha
+
+00:06:24.096 --> 00:06:27.136 align:middle
+Este datepicker forma parte de la
+biblioteca principal de flowbite.
+
+00:06:27.486 --> 00:06:30.666 align:middle
+Pero si quieres importarlo
+directamente desde JavaScript...
+
+00:06:30.926 --> 00:06:34.616 align:middle
+entonces, aquí abajo, se supone que
+debes instalar un paquete diferente.
+
+00:06:35.146 --> 00:06:36.966 align:middle
+Esto me confundió, la verdad.
+
+00:06:37.386 --> 00:06:39.986 align:middle
+Pero cópialo, gíralo y ejecútalo:
+
+00:06:39.986 --> 00:06:45.366 align:middle
+php bin/console importmap:require flowbite-datepicker
+De vuelta a la parte superior de la documentación,
+
+00:06:46.366 --> 00:06:49.966 align:middle
+dice que puedes utilizar el datepicker
+simplemente tomando una entrada
+
+00:06:50.266 --> 00:06:52.326 align:middle
+y dándole un atributo datepicker.
+
+00:06:52.896 --> 00:06:54.066 align:middle
+Y eso es cierto...
+
+00:06:54.386 --> 00:06:57.366 align:middle
+excepto que, una vez más,
+no funcionará con Turbo.
+
+00:06:57.986 --> 00:06:59.176 align:middle
+Funcionará al principio...
+
+00:06:59.316 --> 00:07:01.136 align:middle
+pero se detendrá tras el primer clic.
+
+00:07:01.726 --> 00:07:03.746 align:middle
+En lugar de eso, vamos a inicializarlo
+
+00:07:03.746 --> 00:07:07.796 align:middle
+con un controlador Stimulus,
+¡y funcionará de maravilla!
+
+00:07:08.496 --> 00:07:12.316 align:middle
+En assets/controllers/, crea un
+nuevo datepicker_controller.js.
+
+00:07:12.316 --> 00:07:16.966 align:middle
+Voy a pegar el contenido: Vamos a adjuntar
+este controlador a un elemento input.
+
+00:07:17.516 --> 00:07:21.886 align:middle
+En connect(), esto inicializa el
+selector de fecha y pasa a this.element.
+
+00:07:22.526 --> 00:07:27.166 align:middle
+El format coincide con el formato por
+defecto que utiliza el Symfony DateType.
+
+00:07:27.586 --> 00:07:32.286 align:middle
+Y autohide hace que el selector de fechas se
+cierre cuando eliges una fecha, lo cual me gusta.
+
+00:07:32.996 --> 00:07:36.166 align:middle
+También cambio el atributo
+type del input por text
+
+00:07:36.486 --> 00:07:41.866 align:middle
+para que no tengamos a la vez el datepicker de
+Flowbite y el selector de fecha nativo del navegador.
+
+00:07:42.456 --> 00:07:44.096 align:middle
+En disconnect(), hacemos algo de limpieza.
+
+00:07:44.916 --> 00:07:48.476 align:middle
+Vamos a utilizar esto en el formulario
+de viaje: para "Salir a las".
+
+00:07:49.406 --> 00:07:51.986 align:middle
+Abre el tipo de formulario
+para esto: VoyageType.
+
+00:07:54.516 --> 00:07:55.336 align:middle
+Aquí está el campo.
+
+00:07:55.856 --> 00:08:03.406 align:middle
+Pasa una opción attr con data-controller
+ajustado a datepicker: ¡Vamos a probarlo!
+
+00:08:03.756 --> 00:08:04.966 align:middle
+Actualiza y...
+
+00:08:05.286 --> 00:08:07.236 align:middle
+¡fantástico!
+
+00:08:07.856 --> 00:08:09.936 align:middle
+Aunque... hay una pega.
+
+00:08:10.616 --> 00:08:12.696 align:middle
+Vuelve atrás y abre este
+formulario en el modal.
+
+00:08:14.156 --> 00:08:15.366 align:middle
+¡No funciona!
+
+00:08:15.856 --> 00:08:17.336 align:middle
+Bueno, más o menos sí.
+
+00:08:17.696 --> 00:08:20.666 align:middle
+¿Lo ves? Se esconde detrás del modal.
+
+00:08:21.216 --> 00:08:25.666 align:middle
+El datepicker funciona añadiendo
+HTML en la parte inferior de body.
+
+00:08:26.126 --> 00:08:31.766 align:middle
+Pero como no está dentro del dialog,
+aparece correctamente detrás del modal. Es
+
+00:08:32.586 --> 00:08:34.596 align:middle
+una pena que no funcione mejor
+
+00:08:34.596 --> 00:08:38.906 align:middle
+con el bonito elemento nativo
+dialog, pero podemos solucionarlo.
+
+00:08:39.556 --> 00:08:44.026 align:middle
+En datepicker_controller.js, añade
+una nueva opción llamada contenedor.
+
+00:08:44.646 --> 00:08:49.136 align:middle
+Esto indica al datepicker en qué elemento
+debe añadir su HTML personalizado.
+
+00:08:49.766 --> 00:08:54.396 align:middle
+Digamos document.querySelector()
+y busca un dialog[open].
+
+00:08:54.906 --> 00:08:59.506 align:middle
+Así que si hay un dialog abierto en
+la página, úsalo como contenedor.
+
+00:08:59.996 --> 00:09:05.236 align:middle
+Si no, utiliza el body normal : ¡Y ese
+pequeño detalle resuelve nuestro problema!
+
+00:09:05.756 --> 00:09:08.626 align:middle
+Aunque... deja al descubierto
+otro pequeño problema.
+
+00:09:09.056 --> 00:09:12.266 align:middle
+¿Ves cómo el selector de fecha
+extiende el diálogo verticalmente?
+
+00:09:12.856 --> 00:09:17.706 align:middle
+Si hacemos clic aquí, técnicamente estamos
+haciendo clic directamente en el elemento dialog...
+
+00:09:17.886 --> 00:09:20.506 align:middle
+lo que desencadena nuestra
+lógica de clic fuera.
+
+00:09:21.286 --> 00:09:24.636 align:middle
+Para solucionarlo, hagamos nuestro
+controlador modal un poco más inteligente.
+
+00:09:25.186 --> 00:09:29.906 align:middle
+En la parte inferior, pegaré un nuevo
+método privado llamado isClickInElement():
+
+00:09:30.556 --> 00:09:34.346 align:middle
+Si le pasas un evento de clic,
+mirará las dimensiones físicas
+
+00:09:34.346 --> 00:09:38.006 align:middle
+de este elemento y verá si el clic fue dentro.
+
+00:09:38.726 --> 00:09:41.396 align:middle
+Aquí arriba, en clickOutside(),
+vamos a cambiar las cosas.
+
+00:09:41.846 --> 00:09:48.506 align:middle
+Copia esto, entonces si el event.target no es el
+dialog, definitivamente no estamos haciendo clic fuera.
+
+00:09:48.826 --> 00:09:49.766 align:middle
+Entonces, vuelve.
+
+00:09:50.646 --> 00:09:56.066 align:middle
+Y si no, this.isClickInElement()
+-pasando por event y this.dialogTarget
+
+00:09:56.506 --> 00:10:01.986 align:middle
+-así que si no hicimos clic dentro de dialogTarget
+- entonces definitivamente queremos cerrar:
+
+00:10:02.586 --> 00:10:04.666 align:middle
+Un poco más de lógica, pero
+un poco más inteligente.
+
+00:10:05.396 --> 00:10:09.246 align:middle
+Pruébalo. Abre el modal y si
+hacemos clic aquí abajo...
+
+00:10:10.286 --> 00:10:14.906 align:middle
+el calendario se cierra -lo cual es
+correcto- pero el modal permanece abierto.
+
+00:10:15.226 --> 00:10:15.966 align:middle
+¡Me encanta!
+
+00:10:16.716 --> 00:10:19.136 align:middle
+Así que espero que eso
+explique un poco más Flowbite.
+
+00:10:19.616 --> 00:10:23.446 align:middle
+Personalmente, no quiero la mayoría de
+estas cosas, así que voy a eliminarlas.
+
+00:10:24.056 --> 00:10:31.296 align:middle
+Dentro de tailwind.config.js, elimina el plugin:
+Luego elimina package.json y package-lock.json.
+
+00:10:32.056 --> 00:10:33.566 align:middle
+Tampoco quiero el JavaScript.
+
+00:10:33.986 --> 00:10:38.436 align:middle
+En importmap.php, elimina
+flowbite y @popperjs/core:
+
+00:10:38.976 --> 00:10:43.216 align:middle
+Pero ese datepicker mola,
+así que vamos a conservarlo.
+
+00:10:43.216 --> 00:10:49.866 align:middle
+En app.js, elimina la importación de flowbite y las
+dos funciones de la parte inferior: Por último, en
+
+00:10:49.976 --> 00:10:55.146 align:middle
+base.html.twig, deshazte de ese
+desplegable aleatorio: Ahora...
+
+00:10:56.156 --> 00:10:58.236 align:middle
+¡se acabaron los errores de JavaScript!
+
+00:10:58.656 --> 00:11:02.066 align:middle
+Pero como ese datepicker era
+bastante chulo, lo seguimos teniendo.
+
+00:11:02.976 --> 00:11:04.766 align:middle
+Bien, ¡capítulo extra terminado!
+
+00:11:05.286 --> 00:11:07.366 align:middle
+Ahora a trabajar, ¡hasta luego!

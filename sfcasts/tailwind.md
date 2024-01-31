@@ -49,6 +49,19 @@ To get things set up, run a command from the bundle:
 php bin/console tailwind:init
 ```
 
+***SEEALSO
+If using the Symfony CLI, you can add a build command as a worker to be started whenever
+you run the Symfony web server:
+```yaml
+# .symfony.local.yaml
+workers:
+    tailwind:
+        cmd: ['symfony', 'console', 'tailwind:build', '--watch']
+```
+See the [docs](https://symfony.com/bundles/TailwindBundle/current/index.html#symfony-cli)
+for more information.
+***
+
 This downloads the Tailwind binary in the background, which is awesome. That binary
 is standalone and doesn't require Node. It just works. The command also did two
 other things. First: it added the three lines needed inside of `app.css`:

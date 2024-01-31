@@ -49,7 +49,7 @@ To get things set up, run a command from the bundle:
 php bin/console tailwind:init
 ```
 
-***SEEALSO
+***TIP
 If using the Symfony CLI, you can add a build command as a worker to be started whenever
 you run the Symfony web server:
 ```yaml

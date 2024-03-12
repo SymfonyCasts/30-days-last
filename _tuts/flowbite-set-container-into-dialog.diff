@@ -1,5 +1,5 @@
 diff --git a/assets/controllers/datepicker_controller.js b/assets/controllers/datepicker_controller.js
-index a5b557a3..3a66df2b 100644
+index a5b557a..3a66df2 100644
 --- a/assets/controllers/datepicker_controller.js
 +++ b/assets/controllers/datepicker_controller.js
 @@ -7,9 +7,11 @@ export default class extends Controller {

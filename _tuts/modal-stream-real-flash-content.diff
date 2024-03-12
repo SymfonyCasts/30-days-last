@@ -1,6 +1,6 @@
 diff --git a/templates/voyage/_row.html.twig b/templates/voyage/_row.html.twig
 new file mode 100644
-index 00000000..1ba68b3e
+index 0000000..1ba68b3
 --- /dev/null
 +++ b/templates/voyage/_row.html.twig
 @@ -0,0 +1,9 @@
@@ -14,7 +14,7 @@ index 00000000..1ba68b3e
 +    </td>
 +</tr>
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index 5e1ef65f..11b3cbc1 100644
+index 5e1ef65..11b3cbc 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
 @@ -30,15 +30,7 @@
@@ -35,7 +35,7 @@ index 5e1ef65f..11b3cbc1 100644
                  <tr>
                      <td colspan="4" class="px-6 py-4 whitespace-nowrap text-center text-gray-400">No records found</td>
 diff --git a/templates/voyage/new.html.twig b/templates/voyage/new.html.twig
-index b4d39384..02e92800 100644
+index b4d3938..02e9280 100644
 --- a/templates/voyage/new.html.twig
 +++ b/templates/voyage/new.html.twig
 @@ -25,7 +25,7 @@

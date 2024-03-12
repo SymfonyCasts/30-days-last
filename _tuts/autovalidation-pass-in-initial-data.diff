@@ -1,5 +1,5 @@
 diff --git a/src/Twig/Components/VoyageForm.php b/src/Twig/Components/VoyageForm.php
-index 11f27bfb..9d0c1f52 100644
+index 11f27bf..9d0c1f5 100644
 --- a/src/Twig/Components/VoyageForm.php
 +++ b/src/Twig/Components/VoyageForm.php
 @@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +25,7 @@ index 11f27bfb..9d0c1f52 100644
          return $this->createForm(VoyageType::class, $voyage, [
              'action' => $voyage->getId() ? $this->generateUrl('app_voyage_edit', ['id' => $voyage->getId()]) : $this->generateUrl('app_voyage_new'),
 diff --git a/templates/voyage/_form.html.twig b/templates/voyage/_form.html.twig
-index 170cf3e2..50e790d1 100644
+index 170cf3e..50e790d 100644
 --- a/templates/voyage/_form.html.twig
 +++ b/templates/voyage/_form.html.twig
 @@ -1 +1 @@

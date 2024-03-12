@@ -1,6 +1,6 @@
 diff --git a/templates/_frameSuccessStreams.html.twig b/templates/_frameSuccessStreams.html.twig
 new file mode 100644
-index 00000000..f04d1f10
+index 0000000..f04d1f1
 --- /dev/null
 +++ b/templates/_frameSuccessStreams.html.twig
 @@ -0,0 +1,6 @@
@@ -11,7 +11,7 @@ index 00000000..f04d1f10
 +    {{ stream|raw }}
 +{% endfor %}
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index b2ec5df1..98de03b7 100644
+index 1197f00..770f757 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -66,12 +66,7 @@
@@ -29,7 +29,7 @@ index b2ec5df1..98de03b7 100644
                      </div>
                  </div>
 diff --git a/templates/modalFrame.html.twig b/templates/modalFrame.html.twig
-index 18750376..14433e63 100644
+index 1875037..14433e6 100644
 --- a/templates/modalFrame.html.twig
 +++ b/templates/modalFrame.html.twig
 @@ -1,3 +1,4 @@

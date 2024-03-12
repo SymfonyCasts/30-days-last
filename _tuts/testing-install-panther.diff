@@ -1,5 +1,5 @@
 diff --git a/composer.json b/composer.json
-index dfc699e0..53dfdc58 100644
+index dfc699e..53dfdc5 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -96,6 +96,7 @@
@@ -11,7 +11,7 @@ index dfc699e0..53dfdc58 100644
          "symfony/stopwatch": "6.4.x-dev",
          "symfony/web-profiler-bundle": "6.4.x-dev",
 diff --git a/composer.lock b/composer.lock
-index 6019c378..d6e241c9 100644
+index 6019c37..d6e241c 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
@@ -203,7 +203,7 @@ index 6019c378..d6e241c9 100644
      "prefer-stable": false,
      "prefer-lowest": false,
 diff --git a/phpunit.xml.dist b/phpunit.xml.dist
-index c76a655a..0435becd 100644
+index c76a655..0435bec 100644
 --- a/phpunit.xml.dist
 +++ b/phpunit.xml.dist
 @@ -34,5 +34,6 @@
@@ -214,7 +214,7 @@ index c76a655a..0435becd 100644
      </extensions>
  </phpunit>
 diff --git a/symfony.lock b/symfony.lock
-index adba8eda..6cad4d3c 100644
+index adba8ed..6cad4d3 100644
 --- a/symfony.lock
 +++ b/symfony.lock
 @@ -149,6 +149,15 @@

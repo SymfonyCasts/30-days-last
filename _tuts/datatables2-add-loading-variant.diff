@@ -1,5 +1,5 @@
 diff --git a/src/Controller/MainController.php b/src/Controller/MainController.php
-index 6cafa115..84cc01ce 100644
+index 6cafa11..84cc01c 100644
 --- a/src/Controller/MainController.php
 +++ b/src/Controller/MainController.php
 @@ -27,6 +27,7 @@ class MainController extends AbstractController
@@ -11,7 +11,7 @@ index 6cafa115..84cc01ce 100644
              new QueryAdapter($voyageRepository->findBySearchQueryBuilder($query, $searchPlanets, $sort, $sortDirection)),
              $page,
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 2efffe3e..0a2822ff 100644
+index 2efffe3..0a2822f 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -54,7 +54,7 @@

@@ -1,5 +1,5 @@
 diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
-index 74e82e57..dd4c1e55 100644
+index 74e82e5..dd4c1e5 100644
 --- a/tests/Functional/VoyageControllerTest.php
 +++ b/tests/Functional/VoyageControllerTest.php
 @@ -22,7 +22,7 @@ class VoyageControllerTest extends WebTestCase

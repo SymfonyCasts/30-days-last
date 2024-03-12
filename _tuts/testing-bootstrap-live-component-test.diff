@@ -1,6 +1,6 @@
 diff --git a/tests/Integration/Twig/Components/SearchSiteTest.php b/tests/Integration/Twig/Components/SearchSiteTest.php
 new file mode 100644
-index 00000000..372c8b42
+index 0000000..372c8b4
 --- /dev/null
 +++ b/tests/Integration/Twig/Components/SearchSiteTest.php
 @@ -0,0 +1,17 @@

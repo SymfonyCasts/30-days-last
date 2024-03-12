@@ -1,5 +1,5 @@
 diff --git a/src/Form/VoyageType.php b/src/Form/VoyageType.php
-index 5e86fac3..4f464c91 100644
+index 5e86fac..4f464c9 100644
 --- a/src/Form/VoyageType.php
 +++ b/src/Form/VoyageType.php
 @@ -2,16 +2,21 @@

@@ -1,6 +1,6 @@
 diff --git a/assets/controllers/datepicker_controller.js b/assets/controllers/datepicker_controller.js
 new file mode 100644
-index 00000000..a5b557a3
+index 0000000..a5b557a
 --- /dev/null
 +++ b/assets/controllers/datepicker_controller.js
 @@ -0,0 +1,24 @@
@@ -29,7 +29,7 @@ index 00000000..a5b557a3
 +}
 +
 diff --git a/src/Form/VoyageType.php b/src/Form/VoyageType.php
-index 4f464c91..b57f3976 100644
+index 4f464c9..b57f397 100644
 --- a/src/Form/VoyageType.php
 +++ b/src/Form/VoyageType.php
 @@ -21,6 +21,9 @@ class VoyageType extends AbstractType

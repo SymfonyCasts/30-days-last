@@ -1,5 +1,5 @@
 diff --git a/assets/app.js b/assets/app.js
-index 91c6f5bf..03295f96 100644
+index 91c6f5b..03295f9 100644
 --- a/assets/app.js
 +++ b/assets/app.js
 @@ -1,3 +1,4 @@
@@ -9,7 +9,7 @@ index 91c6f5bf..03295f96 100644
   *
 diff --git a/assets/bootstrap.js b/assets/bootstrap.js
 new file mode 100644
-index 00000000..d4e50c91
+index 0000000..d4e50c9
 --- /dev/null
 +++ b/assets/bootstrap.js
 @@ -0,0 +1,5 @@
@@ -20,7 +20,7 @@ index 00000000..d4e50c91
 +// app.register('some_controller_name', SomeImportedController);
 diff --git a/assets/controllers.json b/assets/controllers.json
 new file mode 100644
-index 00000000..a1c6e90c
+index 0000000..a1c6e90
 --- /dev/null
 +++ b/assets/controllers.json
 @@ -0,0 +1,4 @@
@@ -30,7 +30,7 @@ index 00000000..a1c6e90c
 +}
 diff --git a/assets/controllers/hello_controller.js b/assets/controllers/hello_controller.js
 new file mode 100644
-index 00000000..e847027b
+index 0000000..e847027
 --- /dev/null
 +++ b/assets/controllers/hello_controller.js
 @@ -0,0 +1,16 @@
@@ -51,7 +51,7 @@ index 00000000..e847027b
 +    }
 +}
 diff --git a/composer.json b/composer.json
-index cfc86bf6..efe409dc 100644
+index cfc86bf..efe409d 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -20,6 +20,7 @@
@@ -63,7 +63,7 @@ index cfc86bf6..efe409dc 100644
          "symfony/validator": "6.4.x-dev",
          "symfony/yaml": "6.4.x-dev",
 diff --git a/composer.lock b/composer.lock
-index 59bca020..9f346712 100644
+index 59bca02..9f34671 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
@@ -161,7 +161,7 @@ index 59bca020..9f346712 100644
          "symfony/validator": 20,
          "symfony/yaml": 20,
 diff --git a/config/bundles.php b/config/bundles.php
-index 1a07b4a9..b43215ca 100644
+index 1a07b4a..b43215c 100644
 --- a/config/bundles.php
 +++ b/config/bundles.php
 @@ -16,4 +16,5 @@ return [
@@ -171,7 +171,7 @@ index 1a07b4a9..b43215ca 100644
 +    Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
  ];
 diff --git a/importmap.php b/importmap.php
-index 0c489cca..6023f8e3 100644
+index 0c489cc..6023f8e 100644
 --- a/importmap.php
 +++ b/importmap.php
 @@ -21,4 +21,10 @@ return [
@@ -186,7 +186,7 @@ index 0c489cca..6023f8e3 100644
 +    ],
  ];
 diff --git a/symfony.lock b/symfony.lock
-index edbb0ff7..6270a914 100644
+index edbb0ff..6270a91 100644
 --- a/symfony.lock
 +++ b/symfony.lock
 @@ -145,6 +145,20 @@
@@ -211,7 +211,7 @@ index edbb0ff7..6270a914 100644
          "version": "6.4",
          "recipe": {
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 26fa7096..96d17132 100644
+index 26fa709..96d1713 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -6,6 +6,7 @@

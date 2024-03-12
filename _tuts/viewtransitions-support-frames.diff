@@ -1,5 +1,5 @@
 diff --git a/assets/app.js b/assets/app.js
-index 9258ed6a..65959540 100644
+index 9258ed6..6595954 100644
 --- a/assets/app.js
 +++ b/assets/app.js
 @@ -21,3 +21,13 @@ document.addEventListener('turbo:load', () => {

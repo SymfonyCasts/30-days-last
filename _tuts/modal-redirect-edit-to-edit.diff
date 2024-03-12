@@ -1,5 +1,5 @@
 diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
-index 63132f08..e6042988 100644
+index 63132f0..e604298 100644
 --- a/src/Controller/VoyageController.php
 +++ b/src/Controller/VoyageController.php
 @@ -72,7 +72,7 @@ class VoyageController extends AbstractController

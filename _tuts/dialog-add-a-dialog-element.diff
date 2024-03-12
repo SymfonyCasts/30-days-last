@@ -1,5 +1,5 @@
 diff --git a/templates/voyage/index.html.twig b/templates/voyage/index.html.twig
-index 50d97a94..29ccde25 100644
+index 50d97a9..29ccde2 100644
 --- a/templates/voyage/index.html.twig
 +++ b/templates/voyage/index.html.twig
 @@ -14,6 +14,10 @@

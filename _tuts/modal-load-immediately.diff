@@ -1,5 +1,5 @@
 diff --git a/assets/controllers/modal_controller.js b/assets/controllers/modal_controller.js
-index 62409eba..503f4807 100644
+index 62409eb..aa3a7fe 100644
 --- a/assets/controllers/modal_controller.js
 +++ b/assets/controllers/modal_controller.js
 @@ -1,7 +1,7 @@
@@ -7,7 +7,7 @@ index 62409eba..503f4807 100644
  
  export default class extends Controller {
 -    static targets = ['dialog', 'dynamicContent'];
-+    static targets = ['dialog', 'dynamicContent', 'loadingTemplate'];
++    static targets = ['dialog', 'dynamicContent', 'loadingContent'];
  
      observer = null;
  
@@ -22,11 +22,11 @@ index 62409eba..503f4807 100644
 +            return;
 +        }
 +
-+        this.dynamicContentTarget.innerHTML = this.loadingTemplateTarget.innerHTML;
++        this.dynamicContentTarget.innerHTML = this.loadingContentTarget.innerHTML;
 +    }
  }
 diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
-index 08be053d..0e9dc828 100644
+index 08be053..0e9dc82 100644
 --- a/src/Controller/VoyageController.php
 +++ b/src/Controller/VoyageController.php
 @@ -29,6 +29,7 @@ class VoyageController extends AbstractController
@@ -38,7 +38,7 @@ index 08be053d..0e9dc828 100644
          if ($form->isSubmitted() && $form->isValid()) {
              $entityManager->persist($voyage);
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index b0825425..08d9a933 100644
+index b082542..0b96a76 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -64,10 +64,30 @@
@@ -55,7 +55,7 @@ index b0825425..08d9a933 100644
                  </div>
              </dialog>
 +
-+            <template data-modal-target="loadingTemplate">
++            <template data-modal-target="loadingContent">
 +                <div class="bg-space-pattern bg-cover rounded-lg p-8">
 +                    <div class="space-y-2">
 +                        <div class="h-4 bg-gray-700 rounded w-3/4 animate-pulse"></div>

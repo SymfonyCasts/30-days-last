@@ -1,6 +1,6 @@
 diff --git a/tests/AppPantherTestCase.php b/tests/AppPantherTestCase.php
 new file mode 100644
-index 00000000..a3eb95b5
+index 0000000..a3eb95b
 --- /dev/null
 +++ b/tests/AppPantherTestCase.php
 @@ -0,0 +1,18 @@
@@ -23,7 +23,7 @@ index 00000000..a3eb95b5
 +    }
 +}
 diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
-index 834c5e44..7bee4b07 100644
+index 834c5e4..7bee4b0 100644
 --- a/tests/Functional/VoyageControllerTest.php
 +++ b/tests/Functional/VoyageControllerTest.php
 @@ -4,16 +4,14 @@ namespace App\Tests\Functional;

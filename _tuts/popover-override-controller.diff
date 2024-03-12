@@ -1,5 +1,5 @@
 diff --git a/assets/bootstrap.js b/assets/bootstrap.js
-index 6ec965ed..03c78429 100644
+index 6ec965e..03c7842 100644
 --- a/assets/bootstrap.js
 +++ b/assets/bootstrap.js
 @@ -1,5 +1,4 @@
@@ -11,7 +11,7 @@ index 6ec965ed..03c78429 100644
 +// app.register('popover', Popover);
 diff --git a/assets/controllers/popover_controller.js b/assets/controllers/popover_controller.js
 new file mode 100644
-index 00000000..e3271144
+index 0000000..e327114
 --- /dev/null
 +++ b/assets/controllers/popover_controller.js
 @@ -0,0 +1,16 @@

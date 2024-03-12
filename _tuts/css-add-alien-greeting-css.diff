@@ -1,5 +1,5 @@
 diff --git a/assets/lib/alien-greeting.js b/assets/lib/alien-greeting.js
-index c86e6ad2..7d2ffeca 100644
+index c86e6ad..7d2ffec 100644
 --- a/assets/lib/alien-greeting.js
 +++ b/assets/lib/alien-greeting.js
 @@ -1,3 +1,5 @@
@@ -10,7 +10,7 @@ index c86e6ad2..7d2ffeca 100644
  }
 diff --git a/assets/styles/alien-greeting.css b/assets/styles/alien-greeting.css
 new file mode 100644
-index 00000000..fdffdf8b
+index 0000000..fdffdf8
 --- /dev/null
 +++ b/assets/styles/alien-greeting.css
 @@ -0,0 +1,3 @@

@@ -1,5 +1,5 @@
 diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
-index dd4c1e55..8322e61b 100644
+index dd4c1e5..8322e61 100644
 --- a/tests/Functional/VoyageControllerTest.php
 +++ b/tests/Functional/VoyageControllerTest.php
 @@ -4,12 +4,12 @@ namespace App\Tests\Functional;

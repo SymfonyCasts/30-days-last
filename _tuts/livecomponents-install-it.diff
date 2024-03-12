@@ -1,5 +1,5 @@
 diff --git a/assets/controllers.json b/assets/controllers.json
-index c7e11e9f..50bf1e2e 100644
+index c7e11e9..50bf1e2 100644
 --- a/assets/controllers.json
 +++ b/assets/controllers.json
 @@ -10,6 +10,15 @@
@@ -19,7 +19,7 @@ index c7e11e9f..50bf1e2e 100644
              "turbo-core": {
                  "enabled": true,
 diff --git a/composer.json b/composer.json
-index 06592c8c..49f05db5 100644
+index 06592c8..49f05db 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -26,6 +26,7 @@
@@ -31,7 +31,7 @@ index 06592c8c..49f05db5 100644
          "symfony/ux-twig-component": "2.x-dev",
          "symfony/validator": "6.4.x-dev",
 diff --git a/composer.lock b/composer.lock
-index 86ac75f4..d5016636 100644
+index 86ac75f..d501663 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
@@ -257,7 +257,7 @@ index 86ac75f4..d5016636 100644
          "symfony/ux-twig-component": 20,
          "symfony/validator": 20,
 diff --git a/config/bundles.php b/config/bundles.php
-index d87510bb..6ae87843 100644
+index d87510b..6ae8784 100644
 --- a/config/bundles.php
 +++ b/config/bundles.php
 @@ -21,4 +21,5 @@ return [
@@ -268,7 +268,7 @@ index d87510bb..6ae87843 100644
  ];
 diff --git a/config/routes/ux_live_component.yaml b/config/routes/ux_live_component.yaml
 new file mode 100644
-index 00000000..e56523ab
+index 0000000..e56523a
 --- /dev/null
 +++ b/config/routes/ux_live_component.yaml
 @@ -0,0 +1,5 @@
@@ -278,7 +278,7 @@ index 00000000..e56523ab
 +    # adjust prefix to add localization to your components
 +    #prefix: '/{_locale}/_components'
 diff --git a/symfony.lock b/symfony.lock
-index a6000cdc..c8d72dfe 100644
+index a6000cd..c8d72df 100644
 --- a/symfony.lock
 +++ b/symfony.lock
 @@ -200,6 +200,18 @@

@@ -1,5 +1,5 @@
 diff --git a/.gitignore b/.gitignore
-index a67f91e2..4b484c6c 100644
+index a67f91e..4b484c6 100644
 --- a/.gitignore
 +++ b/.gitignore
 @@ -8,3 +8,8 @@
@@ -13,7 +13,7 @@ index a67f91e2..4b484c6c 100644
 +###< symfony/asset-mapper ###
 diff --git a/assets/app.js b/assets/app.js
 new file mode 100644
-index 00000000..e3b03ade
+index 0000000..e3b03ad
 --- /dev/null
 +++ b/assets/app.js
 @@ -0,0 +1,9 @@
@@ -28,7 +28,7 @@ index 00000000..e3b03ade
 +console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉')
 diff --git a/assets/styles/app.css b/assets/styles/app.css
 new file mode 100644
-index 00000000..dd6181a1
+index 0000000..dd6181a
 --- /dev/null
 +++ b/assets/styles/app.css
 @@ -0,0 +1,3 @@
@@ -36,7 +36,7 @@ index 00000000..dd6181a1
 +    background-color: skyblue;
 +}
 diff --git a/composer.json b/composer.json
-index a9c5a08f..a4d1f4dc 100644
+index a9c5a08..a4d1f4d 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -9,6 +9,7 @@
@@ -48,7 +48,7 @@ index a9c5a08f..a4d1f4dc 100644
          "symfony/dotenv": "6.4.x-dev",
          "symfony/flex": "^2",
 diff --git a/composer.lock b/composer.lock
-index ce27303f..733156fb 100644
+index ce27303..733156f 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,8 +4,90 @@
@@ -410,7 +410,7 @@ index ce27303f..733156fb 100644
              "version": "6.4.x-dev",
 diff --git a/config/packages/asset_mapper.yaml b/config/packages/asset_mapper.yaml
 new file mode 100644
-index 00000000..d1ac653b
+index 0000000..d1ac653
 --- /dev/null
 +++ b/config/packages/asset_mapper.yaml
 @@ -0,0 +1,5 @@
@@ -421,7 +421,7 @@ index 00000000..d1ac653b
 +            - assets/
 diff --git a/importmap.php b/importmap.php
 new file mode 100644
-index 00000000..6d298076
+index 0000000..6d29807
 --- /dev/null
 +++ b/importmap.php
 @@ -0,0 +1,21 @@
@@ -447,7 +447,7 @@ index 00000000..6d298076
 +    ],
 +];
 diff --git a/symfony.lock b/symfony.lock
-index b80ba6b5..e036ac9d 100644
+index b80ba6b..e036ac9 100644
 --- a/symfony.lock
 +++ b/symfony.lock
 @@ -38,6 +38,21 @@
@@ -473,7 +473,7 @@ index b80ba6b5..e036ac9d 100644
          "version": "6.3",
          "recipe": {
 diff --git a/templates/base.html.twig b/templates/base.html.twig
-index 047838a0..151e7e5e 100644
+index 047838a..151e7e5 100644
 --- a/templates/base.html.twig
 +++ b/templates/base.html.twig
 @@ -9,6 +9,7 @@

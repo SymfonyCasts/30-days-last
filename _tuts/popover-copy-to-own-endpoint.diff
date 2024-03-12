@@ -1,5 +1,5 @@
 diff --git a/src/Controller/PlanetController.php b/src/Controller/PlanetController.php
-index 1c5a760a..e1f85f7e 100644
+index 1c5a760..e1f85f7 100644
 --- a/src/Controller/PlanetController.php
 +++ b/src/Controller/PlanetController.php
 @@ -52,6 +52,14 @@ class PlanetController extends AbstractController
@@ -18,7 +18,7 @@ index 1c5a760a..e1f85f7e 100644
      public function edit(Request $request, Planet $planet, EntityManagerInterface $entityManager): Response
      {
 diff --git a/templates/main/homepage.html.twig b/templates/main/homepage.html.twig
-index 5177f235..7a62dc41 100644
+index 5177f23..7a62dc4 100644
 --- a/templates/main/homepage.html.twig
 +++ b/templates/main/homepage.html.twig
 @@ -57,14 +57,9 @@
@@ -41,7 +41,7 @@ index 5177f235..7a62dc41 100644
                                  </div>
 diff --git a/templates/planet/_card.html.twig b/templates/planet/_card.html.twig
 new file mode 100644
-index 00000000..0f2fecb3
+index 0000000..0f2fecb
 --- /dev/null
 +++ b/templates/planet/_card.html.twig
 @@ -0,0 +1,10 @@

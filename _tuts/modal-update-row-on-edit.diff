@@ -1,5 +1,5 @@
 diff --git a/templates/voyage/_row.html.twig b/templates/voyage/_row.html.twig
-index d376ea1d..beca337f 100644
+index d376ea1..beca337 100644
 --- a/templates/voyage/_row.html.twig
 +++ b/templates/voyage/_row.html.twig
 @@ -1,4 +1,4 @@
@@ -9,7 +9,7 @@ index d376ea1d..beca337f 100644
      <td class="px-6 py-4">{{ voyage.purpose }}</td>
      <td class="px-6 py-4 whitespace-nowrap">{{ voyage.leaveAt ? voyage.leaveAt|date('Y-m-d H:i:s') : '' }}</td>
 diff --git a/templates/voyage/edit.html.twig b/templates/voyage/edit.html.twig
-index 4d450562..258e81ef 100644
+index 4d45056..258e81e 100644
 --- a/templates/voyage/edit.html.twig
 +++ b/templates/voyage/edit.html.twig
 @@ -27,4 +27,7 @@

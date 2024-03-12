@@ -1,5 +1,5 @@
 diff --git a/importmap.php b/importmap.php
-index e3b3acdf..6f775ca3 100644
+index e3b3acd..6f775ca 100644
 --- a/importmap.php
 +++ b/importmap.php
 @@ -43,4 +43,7 @@ return [

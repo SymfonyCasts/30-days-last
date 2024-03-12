@@ -1,5 +1,5 @@
 diff --git a/composer.json b/composer.json
-index 49f05db5..65ef75fc 100644
+index 49f05db..65ef75f 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -31,6 +31,7 @@
@@ -11,7 +11,7 @@ index 49f05db5..65ef75fc 100644
          "tales-from-a-dev/flowbite-bundle": "dev-main",
          "twig/extra-bundle": "^2.12|^3.0",
 diff --git a/composer.lock b/composer.lock
-index d5016636..c82091f3 100644
+index d501663..c82091f 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -6717,6 +6717,61 @@

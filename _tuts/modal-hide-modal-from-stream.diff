@@ -1,5 +1,5 @@
 diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
-index e6042988..36159d74 100644
+index e604298..36159d7 100644
 --- a/src/Controller/VoyageController.php
 +++ b/src/Controller/VoyageController.php
 @@ -71,6 +71,13 @@ class VoyageController extends AbstractController
@@ -17,7 +17,7 @@ index e6042988..36159d74 100644
              return $this->redirectToRoute('app_voyage_edit', ['id' => $voyage->getId()], Response::HTTP_SEE_OTHER);
          }
 diff --git a/templates/voyage/edit.html.twig b/templates/voyage/edit.html.twig
-index ce7cd35b..4d450562 100644
+index ce7cd35..4d45056 100644
 --- a/templates/voyage/edit.html.twig
 +++ b/templates/voyage/edit.html.twig
 @@ -22,3 +22,9 @@

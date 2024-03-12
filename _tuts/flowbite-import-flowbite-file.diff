@@ -1,5 +1,5 @@
 diff --git a/assets/app.js b/assets/app.js
-index c8aa6f6a..0906f474 100644
+index c8aa6f6..0906f47 100644
 --- a/assets/app.js
 +++ b/assets/app.js
 @@ -3,6 +3,7 @@ import './bootstrap.js';

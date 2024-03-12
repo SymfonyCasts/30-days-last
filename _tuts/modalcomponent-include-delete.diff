@@ -1,5 +1,5 @@
 diff --git a/src/Twig/Components/Button.php b/src/Twig/Components/Button.php
-index 1fe4dabb..0316d9da 100644
+index 1fe4dab..0316d9d 100644
 --- a/src/Twig/Components/Button.php
 +++ b/src/Twig/Components/Button.php
 @@ -16,6 +16,7 @@ class Button
@@ -11,7 +11,7 @@ index 1fe4dabb..0316d9da 100644
          };
      }
 diff --git a/templates/voyage/_delete_form.html.twig b/templates/voyage/_delete_form.html.twig
-index 4fb61eb2..f48201cc 100644
+index 4fb61eb..f48201c 100644
 --- a/templates/voyage/_delete_form.html.twig
 +++ b/templates/voyage/_delete_form.html.twig
 @@ -1,4 +1,4 @@
@@ -21,7 +21,7 @@ index 4fb61eb2..f48201cc 100644
  
      <twig:Button variant="danger">
 diff --git a/templates/voyage/_row.html.twig b/templates/voyage/_row.html.twig
-index 2e3f3c3d..7b359e29 100644
+index 2e3f3c3..7b359e2 100644
 --- a/templates/voyage/_row.html.twig
 +++ b/templates/voyage/_row.html.twig
 @@ -23,6 +23,13 @@

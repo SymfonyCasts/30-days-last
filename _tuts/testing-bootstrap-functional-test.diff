@@ -1,6 +1,6 @@
 diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
 new file mode 100644
-index 00000000..74e82e57
+index 0000000..74e82e5
 --- /dev/null
 +++ b/tests/Functional/VoyageControllerTest.php
 @@ -0,0 +1,36 @@

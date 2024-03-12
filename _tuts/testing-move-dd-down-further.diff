@@ -1,5 +1,5 @@
 diff --git a/tests/Functional/VoyageControllerTest.php b/tests/Functional/VoyageControllerTest.php
-index 5b35f7bf..9b14bf95 100644
+index 5b35f7b..9b14bf9 100644
 --- a/tests/Functional/VoyageControllerTest.php
 +++ b/tests/Functional/VoyageControllerTest.php
 @@ -25,6 +25,7 @@ class VoyageControllerTest extends AppPantherTestCase

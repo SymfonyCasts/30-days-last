@@ -1,5 +1,5 @@
 diff --git a/phpunit.xml.dist b/phpunit.xml.dist
-index 22288cd9..2a725ec5 100644
+index 22288cd..2a725ec 100644
 --- a/phpunit.xml.dist
 +++ b/phpunit.xml.dist
 @@ -17,6 +17,7 @@
@@ -12,7 +12,7 @@ index 22288cd9..2a725ec5 100644
      <testsuites>
 diff --git a/tests/router.php b/tests/router.php
 new file mode 100644
-index 00000000..107993fc
+index 0000000..107993f
 --- /dev/null
 +++ b/tests/router.php
 @@ -0,0 +1,15 @@

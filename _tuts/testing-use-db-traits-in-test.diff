@@ -1,5 +1,5 @@
 diff --git a/tests/Integration/Twig/Components/SearchSiteTest.php b/tests/Integration/Twig/Components/SearchSiteTest.php
-index 372c8b42..fb6590e4 100644
+index 372c8b4..fb6590e 100644
 --- a/tests/Integration/Twig/Components/SearchSiteTest.php
 +++ b/tests/Integration/Twig/Components/SearchSiteTest.php
 @@ -2,15 +2,25 @@

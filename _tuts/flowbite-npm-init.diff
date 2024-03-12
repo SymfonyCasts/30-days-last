@@ -1,6 +1,6 @@
 diff --git a/package-lock.json b/package-lock.json
 new file mode 100644
-index 00000000..5549434d
+index 0000000..5549434
 --- /dev/null
 +++ b/package-lock.json
 @@ -0,0 +1,42 @@
@@ -48,7 +48,7 @@ index 00000000..5549434d
 +}
 diff --git a/package.json b/package.json
 new file mode 100644
-index 00000000..5c4731ab
+index 0000000..5c4731a
 --- /dev/null
 +++ b/package.json
 @@ -0,0 +1,17 @@

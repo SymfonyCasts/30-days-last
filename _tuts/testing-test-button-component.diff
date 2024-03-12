@@ -1,6 +1,6 @@
 diff --git a/tests/Integration/Twig/Components/ButtonTest.php b/tests/Integration/Twig/Components/ButtonTest.php
 new file mode 100644
-index 00000000..1ff933b4
+index 0000000..1ff933b
 --- /dev/null
 +++ b/tests/Integration/Twig/Components/ButtonTest.php
 @@ -0,0 +1,22 @@

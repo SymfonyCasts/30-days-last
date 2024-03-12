@@ -1,5 +1,5 @@
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index 60b8c659..1d34ae7c 100644
+index 60b8c65..1d34ae7 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
 @@ -4,6 +4,8 @@
@@ -12,7 +12,7 @@ index 60b8c659..1d34ae7c 100644
          class="open:flex bg-gray-800 rounded-lg shadow-xl inset-0 w-full md:w-fit md:max-w-[50%] md:min-w-[50%] animate-fade-in backdrop:bg-slate-600 backdrop:opacity-80"
          data-modal-target="dialog"
 diff --git a/templates/voyage/_row.html.twig b/templates/voyage/_row.html.twig
-index 19717bc5..aede6241 100644
+index 19717bc..aede624 100644
 --- a/templates/voyage/_row.html.twig
 +++ b/templates/voyage/_row.html.twig
 @@ -2,17 +2,22 @@

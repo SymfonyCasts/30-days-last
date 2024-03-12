@@ -14865,7 +14865,7 @@ literal 0
 HcmV?d00001
 
 diff --git a/templates/main/_planet_list.html.twig b/templates/main/_planet_list.html.twig
-index 52ca04ad..b60b1cbd 100644
+index 52ca04a..b60b1cb 100644
 --- a/templates/main/_planet_list.html.twig
 +++ b/templates/main/_planet_list.html.twig
 @@ -11,7 +11,7 @@

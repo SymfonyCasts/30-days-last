@@ -1,5 +1,5 @@
 diff --git a/assets/controllers.json b/assets/controllers.json
-index 06b78e28..c7e11e9f 100644
+index 06b78e2..c7e11e9 100644
 --- a/assets/controllers.json
 +++ b/assets/controllers.json
 @@ -9,6 +9,16 @@
@@ -20,7 +20,7 @@ index 06b78e28..c7e11e9f 100644
      },
      "entrypoints": []
 diff --git a/composer.json b/composer.json
-index c0beffa1..21fbf8cd 100644
+index c0beffa..21fbf8c 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -23,6 +23,7 @@
@@ -32,7 +32,7 @@ index c0beffa1..21fbf8cd 100644
          "symfony/yaml": "6.4.x-dev",
          "symfonycasts/tailwind-bundle": "dev-main",
 diff --git a/composer.lock b/composer.lock
-index e36c24d3..a1dbca7e 100644
+index e36c24d..a1dbca7 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
@@ -157,7 +157,7 @@ index e36c24d3..a1dbca7e 100644
          "symfony/yaml": 20,
          "symfonycasts/tailwind-bundle": 20,
 diff --git a/config/bundles.php b/config/bundles.php
-index 9a9710a8..46db4773 100644
+index 9a9710a..46db477 100644
 --- a/config/bundles.php
 +++ b/config/bundles.php
 @@ -18,4 +18,5 @@ return [
@@ -167,7 +167,7 @@ index 9a9710a8..46db4773 100644
 +    Symfony\UX\Turbo\TurboBundle::class => ['all' => true],
  ];
 diff --git a/importmap.php b/importmap.php
-index bd4624fb..a320f42b 100644
+index bd4624f..a320f42 100644
 --- a/importmap.php
 +++ b/importmap.php
 @@ -34,4 +34,7 @@ return [
@@ -179,7 +179,7 @@ index bd4624fb..a320f42b 100644
 +    ],
  ];
 diff --git a/symfony.lock b/symfony.lock
-index c15422d8..76cf0685 100644
+index c15422d..76cf068 100644
 --- a/symfony.lock
 +++ b/symfony.lock
 @@ -197,6 +197,9 @@

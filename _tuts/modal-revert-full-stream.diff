@@ -1,5 +1,5 @@
 diff --git a/src/Controller/VoyageController.php b/src/Controller/VoyageController.php
-index e772dfd5..f7d3fd4b 100644
+index e772dfd..f7d3fd4 100644
 --- a/src/Controller/VoyageController.php
 +++ b/src/Controller/VoyageController.php
 @@ -11,7 +11,6 @@ use Symfony\Component\Form\FormInterface;
@@ -26,7 +26,7 @@ index e772dfd5..f7d3fd4b 100644
  
              return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
 diff --git a/templates/voyage/new.html.twig b/templates/voyage/new.html.twig
-index c01fd915..02e92800 100644
+index c01fd91..02e9280 100644
 --- a/templates/voyage/new.html.twig
 +++ b/templates/voyage/new.html.twig
 @@ -28,10 +28,4 @@

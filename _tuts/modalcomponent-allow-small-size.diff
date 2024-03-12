@@ -1,5 +1,5 @@
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index 1d34ae7c..1720a736 100644
+index 1d34ae7..1720a73 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
 @@ -1,3 +1,4 @@
@@ -17,7 +17,7 @@ index 1d34ae7c..1720a736 100644
          data-action="close->modal#close click->modal#clickOutside"
      >
 diff --git a/templates/voyage/_row.html.twig b/templates/voyage/_row.html.twig
-index aede6241..2e3f3c3d 100644
+index aede624..2e3f3c3 100644
 --- a/templates/voyage/_row.html.twig
 +++ b/templates/voyage/_row.html.twig
 @@ -10,7 +10,7 @@

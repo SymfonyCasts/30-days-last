@@ -1,5 +1,5 @@
 diff --git a/composer.json b/composer.json
-index 2b297265..da2cc673 100644
+index 2b29726..da2cc67 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -22,6 +22,7 @@
@@ -11,7 +11,7 @@ index 2b297265..da2cc673 100644
          "twig/twig": "^2.12|^3.0"
      },
 diff --git a/composer.lock b/composer.lock
-index 445ed851..07d6f65a 100644
+index 445ed85..07d6f65 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,7 +4,7 @@
@@ -230,7 +230,7 @@ index 445ed851..07d6f65a 100644
          "symfony/stopwatch": 20,
          "symfony/web-profiler-bundle": 20
 diff --git a/config/bundles.php b/config/bundles.php
-index 5f0f85b1..d8894f22 100644
+index 5f0f85b..d8894f2 100644
 --- a/config/bundles.php
 +++ b/config/bundles.php
 @@ -12,4 +12,5 @@ return [
@@ -240,7 +240,7 @@ index 5f0f85b1..d8894f22 100644
 +    Symfonycasts\TailwindBundle\SymfonycastsTailwindBundle::class => ['all' => true],
  ];
 diff --git a/symfony.lock b/symfony.lock
-index e036ac9d..7064e793 100644
+index e036ac9..7064e79 100644
 --- a/symfony.lock
 +++ b/symfony.lock
 @@ -180,6 +180,9 @@

@@ -53,7 +53,7 @@ open immediately with a loading animation.
 
 Over in the modal controller, add a new target called `loadingContent`:
 
-[[[ code('a1cf36ab41') ]]]
+[[[ code('ff73d7894a') ]]]
 
 Here's my idea: if you want some loading content, you'll define what that looks
 like in Twig and set this target on it. We'll do that in a moment.
@@ -64,7 +64,7 @@ Otherwise, say `this.dynamicContentTarget` - for us, that's the `<turbo-frame>`
 that the Ajax content will eventually be loaded into - `.innerHTML` equals
 `this.loadingContentTarget.innerHTML`:
 
-[[[ code('dfe496d78b') ]]]
+[[[ code('eb4307609c') ]]]
 
 Finally, add that target. In `base.html.twig`, after the `dialog`, I'll add a
 `template` element. Yes, my beloved `template` element: it's perfect for this
@@ -72,7 +72,7 @@ situation because anything inside won't be visible or active on the page. It's
 a template we can steal from. Add a `data-modal-target="loadingContent"`. I'll
 paste some content inside:
 
-[[[ code('aceedb2abb') ]]]
+[[[ code('374c68423a') ]]]
 
 Nothing special here: just some Tailwind classes with a cool pulse animation.
 

@@ -32,17 +32,17 @@ Cuando pulsamos el botón ahora... no pasa nada. No hay respuesta del usuario en
 
 En el controlador modal, añade un nuevo objetivo llamado `loadingContent`:
 
-[[[ code('a1cf36ab41') ]]]
+[[[ code('ff73d7894a') ]]]
 
 Ésta es mi idea: si quieres que se cargue contenido, definirás qué aspecto tiene en Twig y establecerás este objetivo en él. Lo haremos dentro de un momento.
 
 En la parte inferior, crea un nuevo método llamado `showLoading()`. Si `this.dialogTarget.open`, es decir, si el diálogo ya está abierto, no necesitamos mostrar la carga, así que devuelve. Si no, digamos `this.dynamicContentTarget` -para nosotros, ese es el `<turbo-frame>`en el que se cargará finalmente el contenido Ajax- `.innerHTML` es igual a`this.loadingContentTarget.innerHTML`:
 
-[[[ code('dfe496d78b') ]]]
+[[[ code('eb4307609c') ]]]
 
 Por último, añade ese objetivo. En `base.html.twig`, después del `dialog`, añadiré un elemento`template`. Sí, mi querido elemento `template`: es perfecto para esta situación porque todo lo que haya dentro no será visible ni estará activo en la página. Es una plantilla que podemos robar. Añadiré un `data-modal-target="loadingContent"`. Pondré algo de contenido dentro:
 
-[[[ code('aceedb2abb') ]]]
+[[[ code('374c68423a') ]]]
 
 Aquí no hay nada especial: sólo algunas clases de Tailwind con una animación de pulso muy chula.
 

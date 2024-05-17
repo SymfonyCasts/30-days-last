@@ -30,7 +30,7 @@ is ignoring a `public/assets/` directory and `assets/vendor/`:
 
 We'll talk more about those later. But on production, this is where your assets will be
 written to and, when we install third-party JavaScript libraries, they'll live in
-that `vendor/` directory.
+that `vendor/` directory. 
 
 It also updated `base.html.twig` and added an `importmap.php` file. But put
 those on the back burner for now: we'll talk about them tomorrow.

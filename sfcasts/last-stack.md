@@ -67,7 +67,7 @@ is doing a whole lot of nothing:
 
 No CSS, no JavaScript, no assets of any kind... and the site doesn't *do*
 anything. But in 30 short lessons, we'll transform this into a small digital
-masterpiece.
+masterpiece. 
 
 That's it for day 1. Tomorrow, we'll install AssetMapper: a system for handling CSS,
 JavaScript and other frontend assets with batteries include... but absolutely

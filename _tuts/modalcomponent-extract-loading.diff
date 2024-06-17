@@ -25,14 +25,14 @@ index 295f013..969252a 100644
  
          <div id="flash-container">
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index 0892c60..60b8c65 100644
+index 02cfb0f..628d041 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
 @@ -16,19 +16,9 @@
          </div>
      </dialog>
  
--    <template data-modal-target="loadingTemplate">
+-    <template data-modal-target="loadingContent">
 -        <div class="bg-space-pattern bg-cover rounded-lg p-8">
 -            <div class="space-y-2">
 -                <div class="h-4 bg-gray-700 rounded w-3/4 animate-pulse"></div>
@@ -48,7 +48,7 @@ index 0892c60..60b8c65 100644
 -        </div>
 -    </template>
 +    {% if block('loading_template') %}
-+        <template data-modal-target="loadingTemplate">
++        <template data-modal-target="loadingContent">
 +            {% block loading_template %}{% endblock %}
 +        </template>
 +    {% endif %}

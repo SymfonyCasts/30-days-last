@@ -51,7 +51,7 @@ index e8f7515..b197a6d 100644
          </div>
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
 new file mode 100644
-index 0000000..5d43933
+index 0000000..be77bf6
 --- /dev/null
 +++ b/templates/components/Modal.html.twig
 @@ -0,0 +1,39 @@
@@ -78,7 +78,7 @@ index 0000000..5d43933
 +        </div>
 +    </dialog>
 +
-+    <template data-modal-target="loadingTemplate">
++    <template data-modal-target="loadingContent">
 +        <div class="bg-space-pattern bg-cover rounded-lg p-8">
 +            <div class="space-y-2">
 +                <div class="h-4 bg-gray-700 rounded w-3/4 animate-pulse"></div>

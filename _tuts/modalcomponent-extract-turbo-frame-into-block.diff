@@ -21,7 +21,7 @@ index b197a6d..295f013 100644
              {{ include('_flashes.html.twig') }}
          </div>
 diff --git a/templates/components/Modal.html.twig b/templates/components/Modal.html.twig
-index 08d29e9..0892c60 100644
+index 6a8724d..02cfb0f 100644
 --- a/templates/components/Modal.html.twig
 +++ b/templates/components/Modal.html.twig
 @@ -11,14 +11,7 @@

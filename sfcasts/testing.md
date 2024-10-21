@@ -113,6 +113,10 @@ To fix this, open up `phpunit.xml.dist`. I'll paste in two environment variables
 
 [[[ code('97266a4f53') ]]]
 
+***TIP
+As of `zenstruck/browser` 1.9.0, this _hack_ is no longer required. You can safely ignore adding these lines to your `phpunit.xml.dist`.
+***
+
 The first... is kind of a hack. That tells Panther to *not* use our server. Instead,
 Panther will now silently start its *own* web server using the built-in PHP web
 server. The second line tells Panther to use the `test` environment when it

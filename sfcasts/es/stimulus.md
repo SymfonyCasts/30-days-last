@@ -7,7 +7,7 @@ Bienvenido al día de suerte número 7. Hoy hablamos de Stimulus: una biblioteca
 Pero aunque Stimulus es una librería JavaScript... Symfony tiene un bundle para ayudarnos a cargarla, configurarla y utilizarla. Así que, busca tu terminal y ejecuta:
 
 ```terminal
-composer require symfony/stimulus-bundle
+composer require "symfony/stimulus-bundle:^2.0"
 ```
 
 Una de las cosas más importantes de StimulusBundle es su receta. Cuando termine, ejecuta:
@@ -94,7 +94,7 @@ Observa: borra temporalmente el `data-controller`. Luego vuelve, actualiza, y en
 
 Limpia tus herramientas de red. Luego ve al logo y hackea ese `data-controller`. Estamos imitando lo que ocurriría si cargáramos algo de HTML fresco vía AJAX y... ese HTML fresco incluye un elemento con `data-controller"celebrate"`.
 
-En cuanto eso aparezca en la página, vuelve a las herramientas de red. ¡Aparecieron dos elementos nuevos! Se dio cuenta del `data-controller` y descargó el controlador y `js-confetti`... ya que eso se importa desde el controlador. Y funciona de maravilla. Esto me encanta.
+En cuanto eso aparezca en la página, vuelve a las herramientas de red. ¡Aparecieron dos elementos nuevos! Se fijó en el `data-controller` y descargó el controlador y `js-confetti`... ya que eso se importa desde el controlador. Y funciona de maravilla. Esto me encanta.
 
 Mantén este controlador perezoso, pero vuelve a `base.html.twig`, vuelve a añadir `data-controller`.
 

@@ -66,7 +66,7 @@ Esto es exactamente lo que vimos dentro de la clase `Button`. Hace unos días, m
 
 [[[ code('f055aa7e33') ]]]
 
-Para proporcionar los datos a la plantilla, crea un nuevo método llamado `voyages()`. Éste devolverá una matriz... que en realidad será una matriz de `Voyage[]`. Dentro de`return $this->voyageRepository->findBySearch()`. Es el mismo método que utilizamos en la página de inicio. Pasa `null`, un array vacío, y limita a 10 resultados:
+Para proporcionar los datos a la plantilla, crea un nuevo método llamado `voyages()`. Éste devolverá una matriz... que en realidad será una matriz de `Voyage[]`. Dentro de`return $this->voyageRepository->findBySearch()`. Es el mismo método que usamos en la página de inicio. Pasa `null`, un array vacío, y limita a 10 resultados:
 
 [[[ code('ce79365f0b') ]]]
 
@@ -83,7 +83,7 @@ Vamos a probarlo. ¡Abre! ¡Genial! Aunque, por supuesto, cuando escribimos, ¡n
 Aquí es donde los componentes en vivo resultan útiles. ¡Así que vamos a instalarlo!
 
 ```terminal
-composer require symfony/ux-live-component
+composer require "symfony/ux-live-component:^2.0"
 ```
 
 Para actualizar nuestro componente Twig a un componente Live, sólo tenemos que hacer dos cosas. Primero, es `#[AsLiveComponent]`. Y segundo, utilizar `DefaultActionTrait`:

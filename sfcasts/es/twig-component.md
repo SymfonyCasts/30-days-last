@@ -7,7 +7,7 @@ Hoy vamos a hablar de una de mis nuevas librerías PHP favoritas: Twig Component
 Busca tu terminal e instala el paquete con:
 
 ```terminal
-composer require symfony/ux-twig-component
+composer require "symfony/ux-twig-component:^2.0"
 ```
 
 Twig Components es una biblioteca PHP pura... y una forma fácil de pensar en ella es: una forma más elegante y potente de hacer un Twig `include()`.
@@ -54,7 +54,7 @@ Una de mis características favoritas de los Componentes Twig es que tiene una s
 
 [[[ code('1d980585a4') ]]]
 
-¿Qué aspecto tiene? ¡Lo mismo de siempre! Esta sintaxis especial proviene de Twig Components y sirve para representar componentes Twig. A algunas personas no les gusta esta sintaxis, mientras que a otras les encanta. Elige la que quieras. A mí me gusta porque parece un elemento HTML nativo. Y si alguna vez has usado un framework front-end como React, te parecerá natural.
+¿Qué aspecto tiene? ¡Lo mismo de siempre! Esta sintaxis especial procede de Twig Components y sirve para representar componentes Twig. A algunas personas no les gusta esta sintaxis, mientras que a otras les encanta. Elige la que quieras. A mí me gusta porque se siente como un elemento HTML nativo. Y si alguna vez has usado un framework front-end como React, te parecerá natural.
 
 ## Pasar contenido al componente Twig
 
@@ -124,7 +124,7 @@ Y ahora que tenemos una propiedad pública llamada `variant`, obtenemos una vari
 
 Y ahora... ¡lo vemos en los dos sitios! Peligro aquí arriba, éxito allí abajo.
 
-## Añadir un método PHP de componente
+## Añadir un método PHP a un componente
 
 Bien: ahora necesitamos utilizar la variable `variant` para representar condicionalmente diferentes clases. Necesitamos... una especie de sentencia switch-case para asignar cada variante a un conjunto de clases. Escribir algo así en Twig... no es muy divertido.
 
@@ -178,4 +178,4 @@ Ahora por aquí... cuando hagamos clic... ¡ya está!
 
 ¡Ya está! Espero que te gusten los componentes Twig tanto como a mí. ¡Pero pueden hacer aún más! No te he contado cómo puedes anteponer a cualquier atributo el prefijo `:` para pasar variables o expresiones dinámicas Twig a un prop. Tampoco hemos hablado de que las clases PHP de los componentes son servicios. Sí, puedes añadir una función `__construct()`, autoconectar otros servicios, como `VoyageRepository`, y luego utilizarlos para proporcionar datos a tu plantilla... haciendo que todo el componente sea independiente y autosuficiente. Ésa es una de mis características favoritas.
 
-Mañana vamos a seguir aprovechando los componentes Twig para crear un componente modal... y ver con qué facilidad podemos utilizar modales cuando queramos.
+Mañana vamos a seguir aprovechando los componentes Twig para crear un componente modal... y ver con qué facilidad podemos utilizar los modales siempre que queramos.

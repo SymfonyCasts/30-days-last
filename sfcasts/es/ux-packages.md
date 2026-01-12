@@ -11,7 +11,7 @@ En nuestro sitio, dirígete a la sección de viajes y pulsa editar. El formulari
 Vamos a instalar este paquete. La librería UX Autocompletar es una mezcla de PHP con un controlador Stimulus en su interior. Copia la línea `composer require` y pégala:
 
 ```terminal-silent
-composer require symfony/ux-autocomplete
+composer require "symfony/ux-autocomplete:^2.0"
 ```
 
 Cuando termine... Ejecuta:
@@ -97,4 +97,4 @@ Ah, y ¿recuerdas que podemos hacer que nuestros controladores sean perezosos a�
 
 Compruébalo. Ve a la página de viajes. Voy a mis herramientas de red, actualizo y busco "autocompletar"... y "TomSelect". Nada Pero en cuanto vayamos a la página de edición donde se está utilizando: busca "autocompletar". ¡Ahí lo tienes! "TomSelect" y el archivo CSS también se cargaron perezosamente, sólo cuando los necesitábamos.
 
-¡Ya hemos terminado con el día 8! ¡Una semana y un día completos en la ÚLTIMA pila! Mañana, ¡vamos a darle caña y a transformar nuestra aplicación en una maravilla elegante de una sola página con Turbo! En los próximos 7 días... las cosas empezarán a volverse locas.
+¡Ya hemos terminado con el día 8! ¡Una semana y un día completos en LAST Stack! Mañana, ¡vamos a darle caña y a transformar nuestra aplicación en una maravilla elegante de una sola página con Turbo! En los próximos 7 días... las cosas empezarán a volverse locas.

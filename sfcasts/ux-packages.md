@@ -18,7 +18,7 @@ So let's get this package installed. The UX Autocomplete library is a mixture of
 PHP with a Stimulus controller inside. Copy the `composer require` line and paste:
 
 ```terminal-silent
-composer require symfony/ux-autocomplete
+composer require "symfony/ux-autocomplete:^2.0"
 ```
 
 When that finishes... run:

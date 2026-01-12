@@ -123,7 +123,7 @@ Lame!
 *This* is where live components comes in handy. So let's get it installed!
 
 ```terminal
-composer require symfony/ux-live-component
+composer require "symfony/ux-live-component:^2.0"
 ```
 
 To upgrade our Twig component to a Live component, we only need to do two things.

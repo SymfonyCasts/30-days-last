@@ -10,7 +10,7 @@ But even though Stimulus is a JavaScript library... Symfony has a bundle to help
 us load it, get it set up, and use it. So, find your terminal and run:
 
 ```terminal
-composer require symfony/stimulus-bundle
+composer require "symfony/stimulus-bundle:^2.0"
 ```
 
 One of the most important things about StimulusBundle is its *recipe*. After it
